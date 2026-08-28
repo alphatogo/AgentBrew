@@ -1,0 +1,14 @@
+{
+  "title": "Survey Insight Report",
+  "capability": [
+    "query_and_filter_database",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "compute_aggregates",
+    "query_existing_data",
+    "create_database",
+    "populate_rows"
+  ],
+  "question": "Go to my \"Research Insights Hub\" page, and then create a survey follow-up dashboard based on high-quality sessions and the existing research objectives.\n\n**Task Requirements:**\n1. Create a new page titled \"Survey Follow-up Dashboard\" as a child of the Research Insights Hub page. The new page should be located between the \"Why Follow-up Matters\" callout and the following divider line.\n\n2. Query the \"Survey Sessions\" database to find all sessions where:\n   - Response Quality is greater than 80% (0.8)\n   - At least one open issue is present in the Open Issues field\n\n3. Inside the \"Research Planning\" page you will find a sub-page named \"Survey Themes\". Extract every objective listed under the four groups - Product, Marketing, Sales, and Support.\n\n4. At the top of the new page, add a single callout block summarizing the number of qualifying survey sessions from step 2 and mentioning all four groups: Product, Marketing, Sales, and Support.\n\n5. Add four separate section headings (any heading level) - one for each group (Product, Marketing, Sales, Support). Under each heading list that group's objectives in a progress-tracking format (e.g. to-dos, check-box list). Each objective from the Survey Themes page must appear at least once.\n\n6. Add a database named \"Survey Follow-up Actions\" with the following properties exactly:\n   - Task Name - title\n   - Group - select (options: Product, Marketing, Sales, Support)\n   - Priority - select (options: High, Medium, Low)\n   - Status - status\n\n   Populate this database with at least 5 action-item pages derived from the objectives and qualifying survey sessions. Task Name and Group must correctly correspond to the underlying objective or issue. Priority and Status can be any allowed value, but they must not be left empty.\n\n**Structure Requirements:**\n- The page must have the exact title \"Survey Follow-up Dashboard\".\n- The callout must be at the top of the page before the group sections.\n- Every extracted objective must appear at least once."
+}

@@ -1,0 +1,74 @@
+notion:
+  stdio:
+    command: npx
+    args:
+    - -y
+    - '@notionhq/notion-mcp-server@1.9.1'
+  env:
+    OPENAPI_MCP_HEADERS: '{"Authorization": "Bearer {{NOTION_API_KEY}}", "Notion-Version":
+      "2022-06-28" }'
+notion_mcpmark:
+  stdio:
+    command: npx
+    args:
+    - -y
+    - '@notionhq/notion-mcp-server@1.9.1'
+  env:
+    OPENAPI_MCP_HEADERS: '{"Authorization": "Bearer {{EVAL_NOTION_API_KEY}}", "Notion-Version":
+      "2022-06-28" }'
+_notion:
+  source:
+    api_key: ""
+    parent_page_title: MCPMark Source Hub
+    state_file: notion_state.json
+    benchmark_parent_page_title: MCPMark Source Hub
+    sampling_parent_page_title: Data Sampling Source
+    sampling_api_key: ""
+  benchmark:
+    eval_api_key: ""
+    eval_parent_page_title: MCPMark Eval Hub
+  sampling:
+    workers:
+      '1':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 1
+      '2':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 2
+      '3':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 3
+      '4':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 4
+      '5':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 5
+      '6':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 6
+      '7':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 7
+      '8':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 8
+      '9':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 9
+      '10':
+        eval_api_key: ""
+        eval_parent_page_title: trajectory sampling 10
+  playwright:
+    browser: chromium
+    headless: 'True'
+  timeouts:
+    duplicate_timeout_ms: '180000'
+    move_timeout_ms: '600000'
+    database_ready_max_retries: '10'
+    database_ready_retry_delay: '2'
+    search_ready_max_retries: '30'
+    search_ready_retry_delay: '3'
+    search_ready_stable_attempts: '2'
+    search_index_wait_seconds: '60'
+    evaluation_settle_seconds: '15'

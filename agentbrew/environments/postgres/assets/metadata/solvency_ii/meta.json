@@ -1,0 +1,352 @@
+{
+  "db_id": "solvency_ii",
+  "source": "sparc",
+  "tables": 12,
+  "total_rows": 157,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#solvency_ii",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"Address_ID\" INTEGER [pk, not null]\n  \"address_details\" TEXT\n}\n\nTable \"Agreements\" {\n  \"Document_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [not null]\n}\n\nTable \"Assets\" {\n  \"Asset_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Assets_in_Events\" {\n  \"Asset_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [pk, not null]\n}\n\nTable \"Channels\" {\n  \"Channel_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Events\" {\n  \"Event_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER\n  \"Channel_ID\" INTEGER [not null]\n  \"Event_Type_Code\" TEXT\n  \"Finance_ID\" INTEGER [not null]\n  \"Location_ID\" INTEGER [not null]\n}\n\nTable \"Finances\" {\n  \"Finance_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Locations\" {\n  \"Location_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Parties\" {\n  \"Party_ID\" INTEGER [pk, not null]\n  \"Party_Details\" TEXT\n}\n\nTable \"Parties_in_Events\" {\n  \"Party_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [pk, not null]\n  \"Role_Code\" TEXT\n}\n\nTable \"Products\" {\n  \"Product_ID\" INTEGER [pk, not null]\n  \"Product_Type_Code\" TEXT\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n}\n\nTable \"Products_in_Events\" {\n  \"Product_in_Event_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n}\n\n\n\nRef: \"Events\".\"Finance_ID\" > \"Finances\".\"Finance_ID\"\n\nRef: \"Events\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Events\".\"Location_ID\" > \"Locations\".\"Location_ID\"\n\nRef: \"Products_in_Events\".\"Product_ID\" > \"Products\".\"Product_ID\"\n\nRef: \"Products_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Parties_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Parties_in_Events\".\"Party_ID\" > \"Parties\".\"Party_ID\"\n\nRef: \"Agreements\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Assets_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Assets_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"Address_ID\" INTEGER [pk, not null]\n  \"address_details\" TEXT\n}\n\nTable \"Agreements\" {\n  \"Document_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [not null]\n}\n\nTable \"Assets\" {\n  \"Asset_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Assets_in_Events\" {\n  \"Asset_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [pk, not null]\n}\n\nTable \"Channels\" {\n  \"Channel_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Events\" {\n  \"Event_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER\n  \"Channel_ID\" INTEGER [not null]\n  \"Event_Type_Code\" TEXT\n  \"Finance_ID\" INTEGER [not null]\n  \"Location_ID\" INTEGER [not null]\n}\n\nTable \"Finances\" {\n  \"Finance_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Locations\" {\n  \"Location_ID\" INTEGER [pk, not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Parties\" {\n  \"Party_ID\" INTEGER [pk, not null]\n  \"Party_Details\" TEXT\n}\n\nTable \"Parties_in_Events\" {\n  \"Party_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [pk, not null]\n  \"Role_Code\" TEXT\n}\n\nTable \"Products\" {\n  \"Product_ID\" INTEGER [pk, not null]\n  \"Product_Type_Code\" TEXT\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n}\n\nTable \"Products_in_Events\" {\n  \"Product_in_Event_ID\" INTEGER [pk, not null]\n  \"Event_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n}\n\nRef: \"Events\".\"Finance_ID\" > \"Finances\".\"Finance_ID\"\n\nRef: \"Events\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Events\".\"Location_ID\" > \"Locations\".\"Location_ID\"\n\nRef: \"Products_in_Events\".\"Product_ID\" > \"Products\".\"Product_ID\"\n\nRef: \"Products_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Parties_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Parties_in_Events\".\"Party_ID\" > \"Parties\".\"Party_ID\"\n\nRef: \"Agreements\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Assets_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\nRef: \"Assets_in_Events\".\"Event_ID\" > \"Events\".\"Event_ID\"\n\n## Table Stats & Sample Values\n\nAddresses: 0 rows\n\nAgreements: 15 rows\n  Event_ID: '13', '15', '9', ...\n  Document_ID: '1', '2', '3', ...\n\nAssets: 3 rows\n  Other_Details: 'Transportation Cars', 'Meeting Rooms', 'Dinning Tables'\n  Asset_ID: '1', '2', '3'\n\nAssets_in_Events: 12 rows\n  Asset_ID: '1', '2', '3'\n  Event_ID: '4', '5', '9', ...\n\nChannels: 15 rows\n  Other_Details: '145', '348', '933', ...\n  Channel_ID: '1', '2', '3', ...\n\nEvents: 15 rows\n  Event_Type_Code: 'Trade Show', 'Press Conferenc', 'Ceremonies', ...\n  Address_ID: '3', '15', '12', ...\n  Channel_ID: '12', '13', '1', ...\n\nFinances: 15 rows\n  Other_Details: 'Mutual', 'Good', 'Bad'\n  Finance_ID: '1', '2', '3', ...\n\nLocations: 15 rows\n  Other_Details: 'Rowe PLC', 'Ebert, Green and Bogisich', 'Prohaska LLC', ...\n  Location_ID: '1', '2', '3', ...\n\nParties: 7 rows\n  Party_Details: 'European People's Party', 'European Free Alliance', 'European Alliance for Freedom', ...\n  Party_ID: '3', '4', '5', ...\n\nParties_in_Events: 15 rows\n  Role_Code: 'Organizer', 'Participant'\n  Party_ID: '3', '4', '5', ...\n  Event_ID: '7', '8', '1', ...\n\nProducts: 15 rows\n  Product_Type_Code: 'Books', 'Food', 'Clothes', ...\n  Product_Name: 'Business Policy', 'Special Dinning', 'Men suits', ...\n  Product_Price: '1336.26', '2894.94', '3298.84', ...\n\nProducts_in_Events: 15 rows\n  Event_ID: '4', '8', '14', ...\n  Product_ID: '29', '3', '10', ...\n  Product_in_Event_ID: '13', '23', '32', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#solvency_ii",
+    "tableStats": {
+      "Addresses": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Agreements": {
+        "rows": 15,
+        "sample_values": {
+          "Document_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Event_ID": [
+            "13",
+            "15",
+            "9",
+            "11",
+            "8",
+            "10",
+            "6",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Assets": {
+        "rows": 3,
+        "sample_values": {
+          "Asset_ID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Other_Details": [
+            "Transportation Cars",
+            "Meeting Rooms",
+            "Dinning Tables"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Assets_in_Events": {
+        "rows": 12,
+        "sample_values": {
+          "Asset_ID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Event_ID": [
+            "4",
+            "5",
+            "9",
+            "10",
+            "8",
+            "14",
+            "2",
+            "12"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Channels": {
+        "rows": 15,
+        "sample_values": {
+          "Channel_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Other_Details": [
+            "145",
+            "348",
+            "933",
+            "631",
+            "681",
+            "993",
+            "249",
+            "644"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Events": {
+        "rows": 15,
+        "sample_values": {
+          "Event_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Address_ID": [
+            "3",
+            "15",
+            "12",
+            "13",
+            "9",
+            "10",
+            "14",
+            "2"
+          ],
+          "Channel_ID": [
+            "12",
+            "13",
+            "1",
+            "10",
+            "4",
+            "6",
+            "15",
+            "3"
+          ],
+          "Event_Type_Code": [
+            "Trade Show",
+            "Press Conferenc",
+            "Ceremonies",
+            "Seminar",
+            "Conference"
+          ],
+          "Finance_ID": [
+            "2",
+            "8",
+            "12",
+            "7",
+            "15",
+            "13",
+            "1",
+            "3"
+          ],
+          "Location_ID": [
+            "13",
+            "11",
+            "6",
+            "9",
+            "15",
+            "12",
+            "8",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Finances": {
+        "rows": 15,
+        "sample_values": {
+          "Finance_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Other_Details": [
+            "Mutual",
+            "Good",
+            "Bad"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Locations": {
+        "rows": 15,
+        "sample_values": {
+          "Location_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Other_Details": [
+            "Rowe PLC",
+            "Ebert, Green and Bogisich",
+            "Prohaska LLC",
+            "White, Kassulke and Barrows",
+            "Wintheiser-Sauer",
+            "Morar-Denesik",
+            "Rowe-Stoltenberg",
+            "Price-Lynch"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Parties": {
+        "rows": 7,
+        "sample_values": {
+          "Party_ID": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "Party_Details": [
+            "European People's Party",
+            "European Free Alliance",
+            "European Alliance for Freedom",
+            "European Christian Political Movement",
+            "Movement for a Europe of Nations and Freedom",
+            "Alliance of Liberals and Democrats for Europe",
+            "EUDemocrats"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Parties_in_Events": {
+        "rows": 15,
+        "sample_values": {
+          "Party_ID": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "9"
+          ],
+          "Event_ID": [
+            "7",
+            "8",
+            "1",
+            "3",
+            "9",
+            "10",
+            "15",
+            "6"
+          ],
+          "Role_Code": [
+            "Organizer",
+            "Participant"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "Product_ID": [
+            "1",
+            "3",
+            "5",
+            "6",
+            "7",
+            "10",
+            "11",
+            "18"
+          ],
+          "Product_Type_Code": [
+            "Books",
+            "Food",
+            "Clothes",
+            "Electronics"
+          ],
+          "Product_Name": [
+            "Business Policy",
+            "Special Dinning",
+            "Men suits",
+            "TV Equipments",
+            "Business Policy B",
+            "Conference Equipments",
+            "Trading Policy",
+            "Trading Policy B"
+          ],
+          "Product_Price": [
+            "1336.26",
+            "2894.94",
+            "3298.84",
+            "932.25",
+            "3215.66",
+            "4427.49",
+            "3289.47",
+            "3228.49"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products_in_Events": {
+        "rows": 15,
+        "sample_values": {
+          "Product_in_Event_ID": [
+            "13",
+            "23",
+            "32",
+            "33",
+            "43",
+            "46",
+            "50",
+            "61"
+          ],
+          "Event_ID": [
+            "4",
+            "8",
+            "14",
+            "5",
+            "7",
+            "6",
+            "15",
+            "1"
+          ],
+          "Product_ID": [
+            "29",
+            "3",
+            "10",
+            "18",
+            "45",
+            "6",
+            "34",
+            "20"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

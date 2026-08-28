@@ -1,0 +1,282 @@
+{
+  "db_id": "cs_semester",
+  "source": "bird",
+  "tables": 5,
+  "total_rows": 197,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#cs_semester",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"RA\" {\n  \"student_id\" INTEGER [pk]\n  \"capability\" INTEGER\n  \"prof_id\" INTEGER [pk]\n  \"salary\" TEXT\n}\n\nTable \"course\" {\n  \"course_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"credit\" INTEGER\n  \"diff\" INTEGER\n}\n\nTable \"prof\" {\n  \"prof_id\" INTEGER [pk]\n  \"gender\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"popularity\" INTEGER\n  \"teachingability\" INTEGER\n  \"graduate_from\" TEXT\n}\n\nTable \"registration\" {\n  \"course_id\" INTEGER [pk]\n  \"student_id\" INTEGER [pk]\n  \"grade\" TEXT\n  \"sat\" INTEGER\n}\n\nTable \"student\" {\n  \"student_id\" INTEGER [pk]\n  \"f_name\" TEXT\n  \"l_name\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"intelligence\" INTEGER\n  \"gpa\" REAL\n  \"type\" TEXT\n}\n\n\n\nRef: \"RA\".\"student_id\" > \"student\".\"student_id\"\n\nRef: \"RA\".\"prof_id\" > \"prof\".\"prof_id\"\n\nRef: \"registration\".\"student_id\" > \"student\".\"student_id\"\n\nRef: \"registration\".\"course_id\" > \"course\".\"course_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"RA\" {\n  \"student_id\" INTEGER [pk]\n  \"capability\" INTEGER\n  \"prof_id\" INTEGER [pk]\n  \"salary\" TEXT\n}\n\nTable \"course\" {\n  \"course_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"credit\" INTEGER\n  \"diff\" INTEGER\n}\n\nTable \"prof\" {\n  \"prof_id\" INTEGER [pk]\n  \"gender\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"popularity\" INTEGER\n  \"teachingability\" INTEGER\n  \"graduate_from\" TEXT\n}\n\nTable \"registration\" {\n  \"course_id\" INTEGER [pk]\n  \"student_id\" INTEGER [pk]\n  \"grade\" TEXT\n  \"sat\" INTEGER\n}\n\nTable \"student\" {\n  \"student_id\" INTEGER [pk]\n  \"f_name\" TEXT\n  \"l_name\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"intelligence\" INTEGER\n  \"gpa\" REAL\n  \"type\" TEXT\n}\n\nRef: \"RA\".\"student_id\" > \"student\".\"student_id\"\n\nRef: \"RA\".\"prof_id\" > \"prof\".\"prof_id\"\n\nRef: \"registration\".\"student_id\" > \"student\".\"student_id\"\n\nRef: \"registration\".\"course_id\" > \"course\".\"course_id\"\n\n## Table Stats & Sample Values\n\nRA: 35 rows\n  salary: 'med', 'high', 'low', ...\n  capability: '2', '5', '4', ...\n  student_id: '16', '23', '20', ...\n\ncourse: 13 rows\n  name: 'Machine Learning Theory', 'Intro to Database 1', 'Intro to Database 2', ...\n  credit: '3', '2'\n  diff: '3', '4', '1', ...\n\nprof: 10 rows\n  first_name: 'Nathaniel', 'Zhihua', 'Ogdon', ...\n  last_name: 'Pigford', 'Zhou', 'Zywicki', ...\n  gender: 'Male', 'Female'\n\nregistration: 101 rows\n  grade: 'A', 'B', 'C', ...\n  sat: '5', '4', '3', ...\n  course_id: '1', '2', '3', ...\n\nstudent: 38 rows\n  f_name: 'Kerry', 'Chrysa', 'Elsy', ...\n  l_name: 'Pryor', 'Dine-Hart', 'Shiril', ...\n  type: 'RPG', 'TPG', 'UG'",
+    "stateUrl": "https://bird-bench.github.io/#cs_semester",
+    "tableStats": {
+      "RA": {
+        "rows": 35,
+        "sample_values": {
+          "student_id": [
+            "16",
+            "23",
+            "20",
+            "31",
+            "36",
+            "6",
+            "30",
+            "13"
+          ],
+          "capability": [
+            "2",
+            "5",
+            "4",
+            "3"
+          ],
+          "prof_id": [
+            "11",
+            "6",
+            "10",
+            "9",
+            "1",
+            "5",
+            "2",
+            "7"
+          ],
+          "salary": [
+            "med",
+            "high",
+            "low",
+            "free"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "course": {
+        "rows": 13,
+        "sample_values": {
+          "course_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Machine Learning Theory",
+            "Intro to Database 1",
+            "Intro to Database 2",
+            "Natural Language Processing",
+            "Intro to BlockChain",
+            "Computer Network",
+            "Computer Vision",
+            "Advanced Operating System"
+          ],
+          "credit": [
+            "3",
+            "2"
+          ],
+          "diff": [
+            "3",
+            "4",
+            "1",
+            "5",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prof": {
+        "rows": 10,
+        "sample_values": {
+          "prof_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ],
+          "first_name": [
+            "Nathaniel",
+            "Zhihua",
+            "Ogdon",
+            "Merwyn",
+            "Bernhard",
+            "Sauveur",
+            "Millie",
+            "Rosamond"
+          ],
+          "last_name": [
+            "Pigford",
+            "Zhou",
+            "Zywicki",
+            "Conkay",
+            "Molen",
+            "Skyme",
+            "Cunningham",
+            "Ewenson"
+          ],
+          "email": [
+            "npigford0@hku.hk",
+            "zzhihua@hku.hk",
+            "ozywicki2@hku.hk",
+            "mconkay3@ucla.edu",
+            "bmolen4@hku.hk",
+            "sskyme5@columbia.edu",
+            "mcunningham6@stanford.edu",
+            "rewenson7@hku.hk"
+          ],
+          "popularity": [
+            "3",
+            "2"
+          ],
+          "teachingability": [
+            "5",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "graduate_from": [
+            "University of Washington",
+            "Beijing Polytechnic University",
+            "University of Boston",
+            "Carnegie Mellon University",
+            "Princeton University",
+            "University of Pennsylvania",
+            "Massachusetts Institute of Technology",
+            "Miyazaki Municipal University"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "registration": {
+        "rows": 101,
+        "sample_values": {
+          "course_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "student_id": [
+            "7",
+            "3",
+            "2",
+            "31",
+            "12",
+            "6",
+            "4",
+            "38"
+          ],
+          "grade": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "sat": [
+            "5",
+            "4",
+            "3",
+            "2",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "student": {
+        "rows": 38,
+        "sample_values": {
+          "student_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "f_name": [
+            "Kerry",
+            "Chrysa",
+            "Elsy",
+            "Dougie",
+            "Ahmed",
+            "Willie",
+            "Laughton",
+            "Logan"
+          ],
+          "l_name": [
+            "Pryor",
+            "Dine-Hart",
+            "Shiril",
+            "Happel",
+            "Sukbhans",
+            "Rechert",
+            "Antonio",
+            "McJarrow"
+          ],
+          "phone_number": [
+            "(243) 6836472",
+            "(672) 9245255",
+            "(521) 7680522",
+            "(192) 6371744",
+            "(805) 4273942",
+            "(781) 2506820",
+            "(483) 5375329",
+            "(191) 4249685"
+          ],
+          "email": [
+            "kpryor0@hku.hk",
+            "cdinehart1@hku.hk",
+            "eshiril2@hku.hk",
+            "dhappel3@hku.hk",
+            "asukbhans4@cuhk.edu.hk",
+            "wrechert5@columbia.edu",
+            "lantonio6@hku.hk",
+            "lmcjarrow7@cs.hku.hk"
+          ],
+          "intelligence": [
+            "5",
+            "2",
+            "1",
+            "3",
+            "4"
+          ],
+          "gpa": [
+            "2.4",
+            "2.7",
+            "3.5",
+            "2.8",
+            "3.9",
+            "2.9",
+            "3.7",
+            "3.8"
+          ],
+          "type": [
+            "RPG",
+            "TPG",
+            "UG"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

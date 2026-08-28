@@ -1,0 +1,577 @@
+{
+  "db_id": "forest_ecosystem_carbon_accounting_and_management",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/forest_ecosystem_carbon_accounting_and_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"analytics\" {\n  \"analytic_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"analytic_date\" TEXT\n  \"user_id\" INTEGER\n  \"analytic_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"public\".\"carbon_mass_aboveground_vegetation\" {\n  \"carbon_mass_aboveground_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"carbon_mass_belowground_vegetation\" {\n  \"carbon_mass_belowground_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"carbon_mass_litter_pool\" {\n  \"carbon_mass_litter_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"carbon_mass_soil_pool\" {\n  \"carbon_mass_soil_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"carbon_mass_vegetation\" {\n  \"carbon_mass_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"source_url\" TEXT\n  \"last_updated\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"data_validation\" {\n  \"validation_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"validation_date\" TEXT\n  \"validator_id\" INTEGER\n  \"validation_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"public\".\"forest_stands\" {\n  \"stand_id\" INTEGER [pk]\n  \"stand_name\" TEXT\n  \"location\" TEXT\n  \"area\" REAL\n  \"date_established\" TEXT\n  \"last_measured_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"modeling_outputs\" {\n  \"output_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"output_date\" TEXT\n  \"user_id\" INTEGER\n  \"output_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"public\".\"species\" {\n  \"species_id\" INTEGER [pk]\n  \"species_name\" TEXT\n  \"family\" TEXT\n  \"genus\" TEXT\n  \"common_name\" TEXT\n  \"growth_rate\" REAL\n  \"carbon_sequestration_rate\" REAL\n  \"description\" TEXT\n}\n\nTable \"public\".\"stand_volume\" {\n  \"stand_volume_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"volume\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"total_stand_volume\" {\n  \"total_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"volume\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"last_login\" TEXT\n  \"active_status\" TEXT\n}\n\nTable \"public\".\"versioning\" {\n  \"version_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"version_date\" TEXT\n  \"version_number\" INTEGER\n  \"user_id\" INTEGER\n  \"version_description\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"analytics\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"analytics\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"analytics\".\"source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_aboveground_vegetation\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"carbon_mass_aboveground_vegetation\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"carbon_mass_aboveground_vegetation\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_aboveground_vegetation\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"carbon_mass_belowground_vegetation\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"carbon_mass_belowground_vegetation\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"carbon_mass_belowground_vegetation\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"carbon_mass_belowground_vegetation\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_litter_pool\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"carbon_mass_litter_pool\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_litter_pool\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"carbon_mass_litter_pool\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"carbon_mass_soil_pool\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"carbon_mass_soil_pool\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_soil_pool\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"carbon_mass_soil_pool\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"carbon_mass_vegetation\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"carbon_mass_vegetation\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"carbon_mass_vegetation\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"carbon_mass_vegetation\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"data_validation\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"data_validation\".\"validator_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"data_validation\".\"source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"forest_stands\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"modeling_outputs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"modeling_outputs\".\"source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"modeling_outputs\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"stand_volume\".\"total_id\" > \"public\".\"total_stand_volume\".\"total_id\"\nRef: \"public\".\"stand_volume\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"stand_volume\".\"species_id\" > \"public\".\"species\".\"species_id\"\nRef: \"public\".\"stand_volume\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"total_stand_volume\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"total_stand_volume\".\"data_source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"versioning\".\"stand_id\" > \"public\".\"forest_stands\".\"stand_id\"\nRef: \"public\".\"versioning\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"versioning\".\"source_id\" > \"public\".\"data_sources\".\"source_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"analytics\" {\n  \"analytic_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"analytic_date\" TEXT\n  \"user_id\" INTEGER\n  \"analytic_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"carbon_mass_aboveground_vegetation\" {\n  \"carbon_mass_aboveground_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"carbon_mass_belowground_vegetation\" {\n  \"carbon_mass_belowground_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"carbon_mass_litter_pool\" {\n  \"carbon_mass_litter_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"carbon_mass_soil_pool\" {\n  \"carbon_mass_soil_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"carbon_mass_vegetation\" {\n  \"carbon_mass_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"mass\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"source_url\" TEXT\n  \"last_updated\" TEXT\n  \"description\" TEXT\n}\n\nTable \"data_validation\" {\n  \"validation_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"validation_date\" TEXT\n  \"validator_id\" INTEGER\n  \"validation_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"forest_stands\" {\n  \"stand_id\" INTEGER [pk]\n  \"stand_name\" TEXT\n  \"location\" TEXT\n  \"area\" REAL\n  \"date_established\" TEXT\n  \"last_measured_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"modeling_outputs\" {\n  \"output_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"output_date\" TEXT\n  \"user_id\" INTEGER\n  \"output_result\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"species\" {\n  \"species_id\" INTEGER [pk]\n  \"species_name\" TEXT\n  \"family\" TEXT\n  \"genus\" TEXT\n  \"common_name\" TEXT\n  \"growth_rate\" REAL\n  \"carbon_sequestration_rate\" REAL\n  \"description\" TEXT\n}\n\nTable \"stand_volume\" {\n  \"stand_volume_id\" INTEGER [pk]\n  \"species_id\" INTEGER\n  \"total_id\" INTEGER\n  \"stand_id\" INTEGER\n  \"volume\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"total_stand_volume\" {\n  \"total_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"volume\" REAL\n  \"unit\" TEXT\n  \"measurement_date\" TEXT\n  \"data_source_id\" INTEGER\n  \"description\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"last_login\" TEXT\n  \"active_status\" TEXT\n}\n\nTable \"versioning\" {\n  \"version_id\" INTEGER [pk]\n  \"stand_id\" INTEGER\n  \"source_id\" INTEGER\n  \"version_date\" TEXT\n  \"version_number\" INTEGER\n  \"user_id\" INTEGER\n  \"version_description\" TEXT\n}\n\nRef: \"access_logs\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"analytics\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"analytics\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"analytics\".\"source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_aboveground_vegetation\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"carbon_mass_aboveground_vegetation\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"carbon_mass_aboveground_vegetation\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_aboveground_vegetation\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"carbon_mass_belowground_vegetation\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"carbon_mass_belowground_vegetation\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"carbon_mass_belowground_vegetation\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"carbon_mass_belowground_vegetation\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_litter_pool\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"carbon_mass_litter_pool\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_litter_pool\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"carbon_mass_litter_pool\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"carbon_mass_soil_pool\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"carbon_mass_soil_pool\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_soil_pool\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"carbon_mass_soil_pool\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"carbon_mass_vegetation\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"carbon_mass_vegetation\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"carbon_mass_vegetation\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"carbon_mass_vegetation\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"data_validation\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"data_validation\".\"validator_id\" > \"users\".\"user_id\"\n\nRef: \"data_validation\".\"source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"forest_stands\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"modeling_outputs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"modeling_outputs\".\"source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"modeling_outputs\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"stand_volume\".\"total_id\" > \"total_stand_volume\".\"total_id\"\n\nRef: \"stand_volume\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"stand_volume\".\"species_id\" > \"species\".\"species_id\"\n\nRef: \"stand_volume\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"total_stand_volume\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"total_stand_volume\".\"data_source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"versioning\".\"stand_id\" > \"forest_stands\".\"stand_id\"\n\nRef: \"versioning\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"versioning\".\"source_id\" > \"data_sources\".\"source_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-01-01', '2023-01-02'\n\nanalytics: 2 rows\n  analytic_result: 'result 1', 'result 2'\n  notes: 'Initial analysis', 'Updated analysis'\n  analytic_date: '2023-01-01', '2023-01-02'\n\ncarbon_mass_aboveground_vegetation: 2 rows\n  description: 'Carbon mass in aboveground vegetation biomass for'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'kg/m2'\n\ncarbon_mass_belowground_vegetation: 2 rows\n  description: 'Carbon mass in belowground vegetation biomass for'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'kg/m2'\n\ncarbon_mass_litter_pool: 2 rows\n  description: 'Carbon mass in litter pool for species 101', 'Carbon mass in litter pool for species 102'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'kg/m2'\n\ncarbon_mass_soil_pool: 2 rows\n  description: 'Carbon mass in soil pool for species 101', 'Carbon mass in soil pool for species 102'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'kg/m2'\n\ncarbon_mass_vegetation: 2 rows\n  description: 'Carbon mass in vegetation biomass for species 101', 'Carbon mass in vegetation biomass for species 102'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'kg/m2'\n\ndata_sources: 2 rows\n  source_name: 'Source 1', 'Source 2'\n  source_type: 'field measurement', 'remote sensing'\n  description: 'Description of Source 1', 'Description of Source 2'\n\ndata_validation: 2 rows\n  notes: 'No issues found', 'Data discrepancies found'\n  validation_date: '2023-01-01', '2023-01-02'\n  validation_result: 'pass', 'fail'\n\nforest_stands: 2 rows\n  stand_name: 'Stand 1', 'Stand 2'\n  description: 'Description of Stand 1', 'Description of Stand 2'\n  location: 'Location 1', 'Location 2'\n\nmodeling_outputs: 2 rows\n  output_result: 'result 1', 'result 2'\n  notes: 'Initial model output', 'Updated model output'\n  output_date: '2023-01-01', '2023-01-02'\n\nspecies: 2 rows\n  species_name: 'Species A', 'Species B'\n  common_name: 'Common Name A', 'Common Name B'\n  description: 'Description of Species A', 'Description of Species B'\n\nstand_volume: 2 rows\n  description: 'Stand volume for species 101', 'Stand volume for species 102'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'm3/ha'\n\ntotal_stand_volume: 2 rows\n  description: 'Total stand volume for all species'\n  measurement_date: '2023-01-01', '2023-01-02'\n  unit: 'm3/ha'\n\nusers: 2 rows\n  user_name: 'User 1', 'User 2'\n  role: 'researcher', 'data analyst'\n  active_status: 'active'\n\nversioning: 2 rows\n  version_description: 'Initial version', 'Updated version'\n  version_date: '2023-01-01', '2023-01-02'\n  version_number: '1', '2'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "analytics": {
+        "rows": 2,
+        "sample_values": {
+          "analytic_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "1"
+          ],
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "analytic_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "analytic_result": [
+            "result 1",
+            "result 2"
+          ],
+          "notes": [
+            "Initial analysis",
+            "Updated analysis"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "carbon_mass_aboveground_vegetation": {
+        "rows": 2,
+        "sample_values": {
+          "carbon_mass_aboveground_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "0",
+            "1"
+          ],
+          "total_id": [
+            "1",
+            "0"
+          ],
+          "stand_id": [
+            "1"
+          ],
+          "mass": [
+            "50.0",
+            "60.0"
+          ],
+          "unit": [
+            "kg/m2"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1"
+          ],
+          "description": [
+            "Carbon mass in aboveground vegetation biomass for "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "carbon_mass_belowground_vegetation": {
+        "rows": 2,
+        "sample_values": {
+          "carbon_mass_belowground_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "1"
+          ],
+          "total_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "1"
+          ],
+          "mass": [
+            "50.0",
+            "60.0"
+          ],
+          "unit": [
+            "kg/m2"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1"
+          ],
+          "description": [
+            "Carbon mass in belowground vegetation biomass for "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "carbon_mass_litter_pool": {
+        "rows": 2,
+        "sample_values": {
+          "carbon_mass_litter_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "0",
+            "1"
+          ],
+          "total_id": [
+            "1",
+            "0"
+          ],
+          "stand_id": [
+            "1"
+          ],
+          "mass": [
+            "100.0",
+            "120.0"
+          ],
+          "unit": [
+            "kg/m2"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "0"
+          ],
+          "description": [
+            "Carbon mass in litter pool for species 101",
+            "Carbon mass in litter pool for species 102"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "carbon_mass_soil_pool": {
+        "rows": 2,
+        "sample_values": {
+          "carbon_mass_soil_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "1"
+          ],
+          "total_id": [
+            "1",
+            "0"
+          ],
+          "stand_id": [
+            "0"
+          ],
+          "mass": [
+            "1000.0",
+            "1200.0"
+          ],
+          "unit": [
+            "kg/m2"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1",
+            "0"
+          ],
+          "description": [
+            "Carbon mass in soil pool for species 101",
+            "Carbon mass in soil pool for species 102"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "carbon_mass_vegetation": {
+        "rows": 2,
+        "sample_values": {
+          "carbon_mass_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "0"
+          ],
+          "total_id": [
+            "1"
+          ],
+          "stand_id": [
+            "1",
+            "0"
+          ],
+          "mass": [
+            "100.0",
+            "120.0"
+          ],
+          "unit": [
+            "kg/m2"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1",
+            "0"
+          ],
+          "description": [
+            "Carbon mass in vegetation biomass for species 101",
+            "Carbon mass in vegetation biomass for species 102"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "source_name": [
+            "Source 1",
+            "Source 2"
+          ],
+          "source_type": [
+            "field measurement",
+            "remote sensing"
+          ],
+          "source_url": [
+            "http://example.com/source1",
+            "http://example.com/source2"
+          ],
+          "last_updated": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Description of Source 1",
+            "Description of Source 2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_validation": {
+        "rows": 2,
+        "sample_values": {
+          "validation_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "0"
+          ],
+          "source_id": [
+            "1",
+            "0"
+          ],
+          "validation_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "validator_id": [
+            "0",
+            "1"
+          ],
+          "validation_result": [
+            "pass",
+            "fail"
+          ],
+          "notes": [
+            "No issues found",
+            "Data discrepancies found"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "forest_stands": {
+        "rows": 2,
+        "sample_values": {
+          "stand_id": [
+            "0",
+            "1"
+          ],
+          "stand_name": [
+            "Stand 1",
+            "Stand 2"
+          ],
+          "location": [
+            "Location 1",
+            "Location 2"
+          ],
+          "area": [
+            "100.0",
+            "150.0"
+          ],
+          "date_established": [
+            "2020-01-01",
+            "2021-01-01"
+          ],
+          "last_measured_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1"
+          ],
+          "description": [
+            "Description of Stand 1",
+            "Description of Stand 2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "modeling_outputs": {
+        "rows": 2,
+        "sample_values": {
+          "output_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "1",
+            "0"
+          ],
+          "source_id": [
+            "1"
+          ],
+          "output_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "output_result": [
+            "result 1",
+            "result 2"
+          ],
+          "notes": [
+            "Initial model output",
+            "Updated model output"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "species": {
+        "rows": 2,
+        "sample_values": {
+          "species_id": [
+            "0",
+            "1"
+          ],
+          "species_name": [
+            "Species A",
+            "Species B"
+          ],
+          "family": [
+            "Family A",
+            "Family B"
+          ],
+          "genus": [
+            "Genus A",
+            "Genus B"
+          ],
+          "common_name": [
+            "Common Name A",
+            "Common Name B"
+          ],
+          "growth_rate": [
+            "0.1",
+            "0.15"
+          ],
+          "carbon_sequestration_rate": [
+            "0.05",
+            "0.07"
+          ],
+          "description": [
+            "Description of Species A",
+            "Description of Species B"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "stand_volume": {
+        "rows": 2,
+        "sample_values": {
+          "stand_volume_id": [
+            "0",
+            "1"
+          ],
+          "species_id": [
+            "0",
+            "1"
+          ],
+          "total_id": [
+            "0"
+          ],
+          "stand_id": [
+            "0"
+          ],
+          "volume": [
+            "100.0",
+            "120.0"
+          ],
+          "unit": [
+            "m3/ha"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "0"
+          ],
+          "description": [
+            "Stand volume for species 101",
+            "Stand volume for species 102"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "total_stand_volume": {
+        "rows": 2,
+        "sample_values": {
+          "total_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "1"
+          ],
+          "volume": [
+            "1000.0",
+            "1200.0"
+          ],
+          "unit": [
+            "m3/ha"
+          ],
+          "measurement_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "data_source_id": [
+            "1"
+          ],
+          "description": [
+            "Total stand volume for all species"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "User 1",
+            "User 2"
+          ],
+          "email": [
+            "user1@example.com",
+            "user2@example.com"
+          ],
+          "password": [
+            "password1",
+            "password2"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "last_login": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "active_status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "versioning": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "stand_id": [
+            "1",
+            "0"
+          ],
+          "source_id": [
+            "0"
+          ],
+          "version_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "version_description": [
+            "Initial version",
+            "Updated version"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

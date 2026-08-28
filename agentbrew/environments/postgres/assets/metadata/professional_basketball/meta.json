@@ -1,0 +1,1516 @@
+{
+  "db_id": "professional_basketball",
+  "source": "bird",
+  "tables": 9,
+  "total_rows": 44822,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#professional_basketball",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"awards_coaches\" {\n  \"id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"coachID\" TEXT\n  \"award\" TEXT\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"awards_players\" {\n  \"playerID\" TEXT [pk, not null]\n  \"award\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"note\" TEXT\n  \"pos\" TEXT\n}\n\nTable \"coaches\" {\n  \"coachID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT [pk, not null]\n  \"lgID\" TEXT\n  \"stint\" INTEGER [pk, not null]\n  \"won\" INTEGER\n  \"lost\" INTEGER\n  \"post_wins\" INTEGER\n  \"post_losses\" INTEGER\n}\n\nTable \"draft\" {\n  \"id\" INTEGER [pk, not null]\n  \"draftYear\" INTEGER\n  \"draftRound\" INTEGER\n  \"draftSelection\" INTEGER\n  \"draftOverall\" INTEGER\n  \"tmID\" TEXT\n  \"firstName\" TEXT\n  \"lastName\" TEXT\n  \"suffixName\" TEXT\n  \"playerID\" TEXT\n  \"draftFrom\" TEXT\n  \"lgID\" TEXT\n}\n\nTable \"player_allstar\" {\n  \"playerID\" TEXT [pk, not null]\n  \"last_name\" TEXT\n  \"first_name\" TEXT\n  \"season_id\" INTEGER [pk, not null]\n  \"conference\" TEXT\n  \"league_id\" TEXT\n  \"games_played\" INTEGER\n  \"minutes\" INTEGER\n  \"points\" INTEGER\n  \"o_rebounds\" INTEGER\n  \"d_rebounds\" INTEGER\n  \"rebounds\" INTEGER\n  \"assists\" INTEGER\n  \"steals\" INTEGER\n  \"blocks\" INTEGER\n  \"turnovers\" INTEGER\n  \"personal_fouls\" INTEGER\n  \"fg_attempted\" INTEGER\n  \"fg_made\" INTEGER\n  \"ft_attempted\" INTEGER\n  \"ft_made\" INTEGER\n  \"three_attempted\" INTEGER\n  \"three_made\" INTEGER\n}\n\nTable \"players\" {\n  \"playerID\" TEXT [pk, not null]\n  \"useFirst\" TEXT\n  \"firstName\" TEXT\n  \"middleName\" TEXT\n  \"lastName\" TEXT\n  \"nameGiven\" TEXT\n  \"fullGivenName\" TEXT\n  \"nameSuffix\" TEXT\n  \"nameNick\" TEXT\n  \"pos\" TEXT\n  \"firstseason\" INTEGER\n  \"lastseason\" INTEGER\n  \"height\" REAL\n  \"weight\" INTEGER\n  \"college\" TEXT\n  \"collegeOther\" TEXT\n  \"birthDate\" DATE\n  \"birthCity\" TEXT\n  \"birthState\" TEXT\n  \"birthCountry\" TEXT\n  \"highSchool\" TEXT\n  \"hsCity\" TEXT\n  \"hsState\" TEXT\n  \"hsCountry\" TEXT\n  \"deathDate\" DATE\n  \"race\" TEXT\n}\n\nTable \"players_teams\" {\n  \"id\" INTEGER [pk]\n  \"playerID\" TEXT [not null]\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" INTEGER\n  \"GS\" INTEGER\n  \"minutes\" INTEGER\n  \"points\" INTEGER\n  \"oRebounds\" INTEGER\n  \"dRebounds\" INTEGER\n  \"rebounds\" INTEGER\n  \"assists\" INTEGER\n  \"steals\" INTEGER\n  \"blocks\" INTEGER\n  \"turnovers\" INTEGER\n  \"PF\" INTEGER\n  \"fgAttempted\" INTEGER\n  \"fgMade\" INTEGER\n  \"ftAttempted\" INTEGER\n  \"ftMade\" INTEGER\n  \"threeAttempted\" INTEGER\n  \"threeMade\" INTEGER\n  \"PostGP\" INTEGER\n  \"PostGS\" INTEGER\n  \"PostMinutes\" INTEGER\n  \"PostPoints\" INTEGER\n  \"PostoRebounds\" INTEGER\n  \"PostdRebounds\" INTEGER\n  \"PostRebounds\" INTEGER\n  \"PostAssists\" INTEGER\n  \"PostSteals\" INTEGER\n  \"PostBlocks\" INTEGER\n  \"PostTurnovers\" INTEGER\n  \"PostPF\" INTEGER\n  \"PostfgAttempted\" INTEGER\n  \"PostfgMade\" INTEGER\n  \"PostftAttempted\" INTEGER\n  \"PostftMade\" INTEGER\n  \"PostthreeAttempted\" INTEGER\n  \"PostthreeMade\" INTEGER\n  \"note\" TEXT\n}\n\nTable \"series_post\" {\n  \"id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"series\" TEXT\n  \"tmIDWinner\" TEXT\n  \"lgIDWinner\" TEXT\n  \"tmIDLoser\" TEXT\n  \"lgIDLoser\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n}\n\nTable \"teams\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"franchID\" TEXT\n  \"confID\" TEXT\n  \"divID\" TEXT\n  \"rank\" INTEGER\n  \"confRank\" INTEGER\n  \"playoff\" TEXT\n  \"name\" TEXT\n  \"o_fgm\" INTEGER\n  \"o_ftm\" INTEGER\n  \"o_pts\" INTEGER\n  \"d_pts\" INTEGER\n  \"homeWon\" INTEGER\n  \"homeLost\" INTEGER\n  \"awayWon\" INTEGER\n  \"awayLost\" INTEGER\n  \"won\" INTEGER\n  \"lost\" INTEGER\n  \"games\" INTEGER\n  \"arena\" TEXT\n}\n\n\n\nRef: \"awards_players\".\"playerID\" > \"players\".\"playerID\"\n\nRef: \"coaches\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"coaches\".\"year\" > \"teams\".\"year\"\n\nRef: \"draft\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"draft\".\"draftYear\" > \"teams\".\"year\"\n\nRef: \"player_allstar\".\"playerID\" > \"players\".\"playerID\"\n\nRef: \"awards_coaches\".\"coachID\" > \"coaches\".\"coachID\"\n\nRef: \"awards_coaches\".\"year\" > \"coaches\".\"year\"\n\nRef: \"players_teams\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"players_teams\".\"year\" > \"teams\".\"year\"\n\nRef: \"series_post\".\"tmIDLoser\" > \"teams\".\"tmID\"\n\nRef: \"series_post\".\"year\" > \"teams\".\"year\"\n\nRef: \"series_post\".\"tmIDWinner\" > \"teams\".\"tmID\"\n\nRef: \"series_post\".\"year\" > \"teams\".\"year\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"awards_coaches\" {\n  \"id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"coachID\" TEXT\n  \"award\" TEXT\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"awards_players\" {\n  \"playerID\" TEXT [pk, not null]\n  \"award\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"note\" TEXT\n  \"pos\" TEXT\n}\n\nTable \"coaches\" {\n  \"coachID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT [pk, not null]\n  \"lgID\" TEXT\n  \"stint\" INTEGER [pk, not null]\n  \"won\" INTEGER\n  \"lost\" INTEGER\n  \"post_wins\" INTEGER\n  \"post_losses\" INTEGER\n}\n\nTable \"draft\" {\n  \"id\" INTEGER [pk, not null]\n  \"draftYear\" INTEGER\n  \"draftRound\" INTEGER\n  \"draftSelection\" INTEGER\n  \"draftOverall\" INTEGER\n  \"tmID\" TEXT\n  \"firstName\" TEXT\n  \"lastName\" TEXT\n  \"suffixName\" TEXT\n  \"playerID\" TEXT\n  \"draftFrom\" TEXT\n  \"lgID\" TEXT\n}\n\nTable \"player_allstar\" {\n  \"playerID\" TEXT [pk, not null]\n  \"last_name\" TEXT\n  \"first_name\" TEXT\n  \"season_id\" INTEGER [pk, not null]\n  \"conference\" TEXT\n  \"league_id\" TEXT\n  \"games_played\" INTEGER\n  \"minutes\" INTEGER\n  \"points\" INTEGER\n  \"o_rebounds\" INTEGER\n  \"d_rebounds\" INTEGER\n  \"rebounds\" INTEGER\n  \"assists\" INTEGER\n  \"steals\" INTEGER\n  \"blocks\" INTEGER\n  \"turnovers\" INTEGER\n  \"personal_fouls\" INTEGER\n  \"fg_attempted\" INTEGER\n  \"fg_made\" INTEGER\n  \"ft_attempted\" INTEGER\n  \"ft_made\" INTEGER\n  \"three_attempted\" INTEGER\n  \"three_made\" INTEGER\n}\n\nTable \"players\" {\n  \"playerID\" TEXT [pk, not null]\n  \"useFirst\" TEXT\n  \"firstName\" TEXT\n  \"middleName\" TEXT\n  \"lastName\" TEXT\n  \"nameGiven\" TEXT\n  \"fullGivenName\" TEXT\n  \"nameSuffix\" TEXT\n  \"nameNick\" TEXT\n  \"pos\" TEXT\n  \"firstseason\" INTEGER\n  \"lastseason\" INTEGER\n  \"height\" REAL\n  \"weight\" INTEGER\n  \"college\" TEXT\n  \"collegeOther\" TEXT\n  \"birthDate\" DATE\n  \"birthCity\" TEXT\n  \"birthState\" TEXT\n  \"birthCountry\" TEXT\n  \"highSchool\" TEXT\n  \"hsCity\" TEXT\n  \"hsState\" TEXT\n  \"hsCountry\" TEXT\n  \"deathDate\" DATE\n  \"race\" TEXT\n}\n\nTable \"players_teams\" {\n  \"id\" INTEGER [pk]\n  \"playerID\" TEXT [not null]\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" INTEGER\n  \"GS\" INTEGER\n  \"minutes\" INTEGER\n  \"points\" INTEGER\n  \"oRebounds\" INTEGER\n  \"dRebounds\" INTEGER\n  \"rebounds\" INTEGER\n  \"assists\" INTEGER\n  \"steals\" INTEGER\n  \"blocks\" INTEGER\n  \"turnovers\" INTEGER\n  \"PF\" INTEGER\n  \"fgAttempted\" INTEGER\n  \"fgMade\" INTEGER\n  \"ftAttempted\" INTEGER\n  \"ftMade\" INTEGER\n  \"threeAttempted\" INTEGER\n  \"threeMade\" INTEGER\n  \"PostGP\" INTEGER\n  \"PostGS\" INTEGER\n  \"PostMinutes\" INTEGER\n  \"PostPoints\" INTEGER\n  \"PostoRebounds\" INTEGER\n  \"PostdRebounds\" INTEGER\n  \"PostRebounds\" INTEGER\n  \"PostAssists\" INTEGER\n  \"PostSteals\" INTEGER\n  \"PostBlocks\" INTEGER\n  \"PostTurnovers\" INTEGER\n  \"PostPF\" INTEGER\n  \"PostfgAttempted\" INTEGER\n  \"PostfgMade\" INTEGER\n  \"PostftAttempted\" INTEGER\n  \"PostftMade\" INTEGER\n  \"PostthreeAttempted\" INTEGER\n  \"PostthreeMade\" INTEGER\n  \"note\" TEXT\n}\n\nTable \"series_post\" {\n  \"id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"series\" TEXT\n  \"tmIDWinner\" TEXT\n  \"lgIDWinner\" TEXT\n  \"tmIDLoser\" TEXT\n  \"lgIDLoser\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n}\n\nTable \"teams\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"franchID\" TEXT\n  \"confID\" TEXT\n  \"divID\" TEXT\n  \"rank\" INTEGER\n  \"confRank\" INTEGER\n  \"playoff\" TEXT\n  \"name\" TEXT\n  \"o_fgm\" INTEGER\n  \"o_ftm\" INTEGER\n  \"o_pts\" INTEGER\n  \"d_pts\" INTEGER\n  \"homeWon\" INTEGER\n  \"homeLost\" INTEGER\n  \"awayWon\" INTEGER\n  \"awayLost\" INTEGER\n  \"won\" INTEGER\n  \"lost\" INTEGER\n  \"games\" INTEGER\n  \"arena\" TEXT\n}\n\nRef: \"awards_players\".\"playerID\" > \"players\".\"playerID\"\n\nRef: \"coaches\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"coaches\".\"year\" > \"teams\".\"year\"\n\nRef: \"draft\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"draft\".\"draftYear\" > \"teams\".\"year\"\n\nRef: \"player_allstar\".\"playerID\" > \"players\".\"playerID\"\n\nRef: \"awards_coaches\".\"coachID\" > \"coaches\".\"coachID\"\n\nRef: \"awards_coaches\".\"year\" > \"coaches\".\"year\"\n\nRef: \"players_teams\".\"tmID\" > \"teams\".\"tmID\"\n\nRef: \"players_teams\".\"year\" > \"teams\".\"year\"\n\nRef: \"series_post\".\"tmIDLoser\" > \"teams\".\"tmID\"\n\nRef: \"series_post\".\"year\" > \"teams\".\"year\"\n\nRef: \"series_post\".\"tmIDWinner\" > \"teams\".\"tmID\"\n\nRef: \"series_post\".\"year\" > \"teams\".\"year\"\n\n## Table Stats & Sample Values\n\nawards_coaches: 61 rows\n  award: 'NBA Coach of the Year', 'ABA Coach of the Year'\n  coachID: 'gallaha01', 'hannual01', 'auerbre01', ...\n  lgID: 'NBA', 'ABA'\n\nawards_players: 1719 rows\n  pos: 'C', 'F', 'G', ...\n  lgID: 'NBA', 'ABA', 'NBL', ...\n  note: 'tie'\n\ncoaches: 1689 rows\n  lgID: 'NBA', 'ABA', 'ABL1', ...\n  won: '14', '59', '63', ...\n  lost: '21', '23', '19', ...\n\ndraft: 8621 rows\n  firstName: 'Darrell', 'Bob', 'Mike', ...\n  lastName: 'Hardy', 'Krulish', 'Lewis', ...\n  suffixName: 'Jr.'\n\nplayer_allstar: 1608 rows\n  last_name: 'Abdul-Jabbar', 'A-Rahim', 'Adams', ...\n  first_name: 'Kareem', 'Shareef', 'Alvan', ...\n  conference: 'East', 'West', 'Weset', ...\n\nplayers: 5062 rows\n  firstName: 'Alaa', 'Kareem', 'Mahdi', ...\n  lastName: 'Abdelnaby', 'Abdul-Jabbar', 'Abdul-Rahman', ...\n  nameGiven: 'nameGiven', 'Mort', 'Robert', ...\n\nplayers_teams: 10000 rows\n  playerID: 'abdelal01', 'abdulka01', 'abdulma01', ...\n  tmID: 'POR', 'MIL', 'BOS', ...\n  lgID: 'NBA', 'NBL', 'ABA', ...\n\nseries_post: 775 rows\n  round: 'F', 'QF', 'SF', ...\n  series: 'O', 'M', 'N', ...\n  tmIDWinner: 'PHW', 'NYK', 'CHS', ...\n\nteams: 1536 rows\n  name: 'Akron Firestone Non-Skids', 'Akron Goodyear Wingfoots', 'Buffalo Bisons', ...\n  playoff: 'CF', 'WC', 'LC', ...\n  arena: 'Boston Garden', 'Chicago Stadium', 'Cleveland Arena', ...",
+    "stateUrl": "https://bird-bench.github.io/#professional_basketball",
+    "tableStats": {
+      "awards_coaches": {
+        "rows": 61,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "year": [
+            "1962",
+            "1963",
+            "1964",
+            "1965",
+            "1966",
+            "1967",
+            "1968",
+            "1969"
+          ],
+          "coachID": [
+            "gallaha01",
+            "hannual01",
+            "auerbre01",
+            "schaydo01",
+            "kerrjo01",
+            "cazzevi01",
+            "gueriri01",
+            "shuege01"
+          ],
+          "award": [
+            "NBA Coach of the Year",
+            "ABA Coach of the Year"
+          ],
+          "lgID": [
+            "NBA",
+            "ABA"
+          ],
+          "note": [
+            "tie"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "awards_players": {
+        "rows": 1719,
+        "sample_values": {
+          "playerID": [
+            "abdulka01",
+            "abdulma02",
+            "adamsal01",
+            "aingeda01",
+            "aldrila01",
+            "allenra02",
+            "allento01",
+            "anderry01"
+          ],
+          "award": [
+            "All-Defensive Second Team",
+            "All-NBA Second Team",
+            "Rookie of the Year",
+            "All-NBA First Team",
+            "Finals MVP",
+            "Most Valuable Player",
+            "All-Defensive First Team",
+            "Most Improved Player"
+          ],
+          "year": [
+            "1969",
+            "1970",
+            "1971",
+            "1972",
+            "1973",
+            "1974",
+            "1975",
+            "1976"
+          ],
+          "lgID": [
+            "NBA",
+            "ABA",
+            "NBL",
+            "ABL1"
+          ],
+          "note": [
+            "tie"
+          ],
+          "pos": [
+            "C",
+            "F",
+            "G",
+            "F/G",
+            "F/C"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "coaches": {
+        "rows": 1689,
+        "sample_values": {
+          "coachID": [
+            "adelmri01",
+            "adubari01",
+            "aingeda01",
+            "albecst01",
+            "anderla01",
+            "ankerja01",
+            "armstcu01",
+            "attleal01"
+          ],
+          "year": [
+            "1988",
+            "1989",
+            "1990",
+            "1991",
+            "1992",
+            "1993",
+            "1995",
+            "1996"
+          ],
+          "tmID": [
+            "POR",
+            "GSW",
+            "SAC",
+            "HOU",
+            "MIN",
+            "DET",
+            "DAL",
+            "ORL"
+          ],
+          "lgID": [
+            "NBA",
+            "ABA",
+            "ABL1",
+            "PBLA",
+            "NPBL"
+          ],
+          "stint": [
+            "2",
+            "1",
+            "4",
+            "5",
+            "3"
+          ],
+          "won": [
+            "14",
+            "59",
+            "63",
+            "57",
+            "51",
+            "47",
+            "36",
+            "30"
+          ],
+          "lost": [
+            "21",
+            "23",
+            "19",
+            "25",
+            "31",
+            "35",
+            "46",
+            "52"
+          ],
+          "post_wins": [
+            "0",
+            "12",
+            "9",
+            "13",
+            "1",
+            "2",
+            "3",
+            "10"
+          ],
+          "post_losses": [
+            "3",
+            "9",
+            "7",
+            "8",
+            "0",
+            "5",
+            "6",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "draft": {
+        "rows": 8621,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "draftYear": [
+            "1967",
+            "1968",
+            "1969",
+            "1970",
+            "1971",
+            "1972",
+            "1973",
+            "1974"
+          ],
+          "draftRound": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "draftSelection": [
+            "0",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "draftOverall": [
+            "0",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "tmID": [
+            "ANA",
+            "DNR",
+            "DLC",
+            "HSM",
+            "INA",
+            "KEN",
+            "MNM",
+            "NJA"
+          ],
+          "firstName": [
+            "Darrell",
+            "Bob",
+            "Mike",
+            "Tom",
+            "Jim",
+            "Denny",
+            "Edgar",
+            "Les"
+          ],
+          "lastName": [
+            "Hardy",
+            "Krulish",
+            "Lewis",
+            "Lynn",
+            "Workman",
+            "Connolly",
+            "Holman",
+            "Lacy"
+          ],
+          "suffixName": [
+            "Jr."
+          ],
+          "playerID": [
+            "hardyda01",
+            "lewisbo01",
+            "lynnmi01",
+            "workmto01",
+            "holmade01",
+            "lacyed01",
+            "fraziwa01",
+            "rulebo01"
+          ],
+          "draftFrom": [
+            "Baylor",
+            "Pacific",
+            "North Carolina",
+            "UCLA",
+            "Seattle",
+            "Virginia",
+            "Southern Methodist",
+            "Utah State"
+          ],
+          "lgID": [
+            "ABA",
+            "NBA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_allstar": {
+        "rows": 1608,
+        "sample_values": {
+          "playerID": [
+            "abdulka01",
+            "abdursh01",
+            "adamsal01",
+            "adamsmi01",
+            "aguirma01",
+            "aingeda01",
+            "allenra02",
+            "anderke01"
+          ],
+          "last_name": [
+            "Abdul-Jabbar",
+            "A-Rahim",
+            "Adams",
+            "Aguirre",
+            "Ainge",
+            "Allen",
+            "Anderson",
+            "Anthony"
+          ],
+          "first_name": [
+            "Kareem",
+            "Shareef",
+            "Alvan",
+            "Michael",
+            "Mark",
+            "Danny",
+            "Ray",
+            "Kenny"
+          ],
+          "season_id": [
+            "1969",
+            "1970",
+            "1971",
+            "1972",
+            "1973",
+            "1974",
+            "1975",
+            "1976"
+          ],
+          "conference": [
+            "East",
+            "West",
+            "Weset",
+            "Allstars",
+            "Denver"
+          ],
+          "league_id": [
+            "NBA",
+            "ABA"
+          ],
+          "games_played": [
+            "1"
+          ],
+          "minutes": [
+            "18",
+            "30",
+            "19",
+            "98",
+            "23",
+            "36",
+            "28",
+            "22"
+          ],
+          "points": [
+            "10",
+            "19",
+            "12",
+            "14",
+            "7",
+            "22",
+            "21",
+            "11"
+          ],
+          "o_rebounds": [
+            "1",
+            "2",
+            "0",
+            "3",
+            "4",
+            "7",
+            "6",
+            "5"
+          ],
+          "d_rebounds": [
+            "2",
+            "5",
+            "0",
+            "1",
+            "4",
+            "6",
+            "8",
+            "3"
+          ],
+          "rebounds": [
+            "11",
+            "14",
+            "7",
+            "8",
+            "10",
+            "5",
+            "4",
+            "16"
+          ],
+          "assists": [
+            "4",
+            "1",
+            "2",
+            "6",
+            "3",
+            "9",
+            "5",
+            "0"
+          ],
+          "steals": [
+            "3",
+            "0",
+            "1",
+            "2",
+            "5",
+            "4",
+            "6"
+          ],
+          "blocks": [
+            "2",
+            "0",
+            "1",
+            "3",
+            "5",
+            "4"
+          ],
+          "turnovers": [
+            "1",
+            "0",
+            "3",
+            "2",
+            "4",
+            "7",
+            "5",
+            "6"
+          ],
+          "personal_fouls": [
+            "3",
+            "2",
+            "0",
+            "1",
+            "5",
+            "4",
+            "6",
+            "8"
+          ],
+          "fg_attempted": [
+            "8",
+            "16",
+            "10",
+            "11",
+            "14",
+            "12",
+            "17",
+            "9"
+          ],
+          "fg_made": [
+            "4",
+            "8",
+            "5",
+            "7",
+            "3",
+            "9",
+            "6",
+            "1"
+          ],
+          "ft_attempted": [
+            "2",
+            "4",
+            "0",
+            "6",
+            "3",
+            "5",
+            "1",
+            "8"
+          ],
+          "ft_made": [
+            "2",
+            "3",
+            "0",
+            "1",
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "three_attempted": [
+            "0",
+            "1",
+            "6",
+            "7",
+            "10",
+            "4",
+            "11",
+            "9"
+          ],
+          "three_made": [
+            "0",
+            "1",
+            "3",
+            "5",
+            "4",
+            "2",
+            "6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "players": {
+        "rows": 5062,
+        "sample_values": {
+          "playerID": [
+            "abdelal01",
+            "abdulka01",
+            "abdulma01",
+            "abdulma02",
+            "abdulta01",
+            "abdulza01",
+            "abdursh01",
+            "abernto01"
+          ],
+          "useFirst": [
+            "Alaa",
+            "Kareem",
+            "Mahdi",
+            "Mahmoud",
+            "Tariq",
+            "Zaid",
+            "Shareef",
+            "Tom"
+          ],
+          "firstName": [
+            "Alaa",
+            "Kareem",
+            "Mahdi",
+            "Mahmoud",
+            "Tariq",
+            "Zaid",
+            "Julius",
+            "Thomas"
+          ],
+          "middleName": [
+            "Shareef",
+            "Craig",
+            "Edward",
+            "D.",
+            "Richard",
+            "R.",
+            "Leigh",
+            "L."
+          ],
+          "lastName": [
+            "Abdelnaby",
+            "Abdul-Jabbar",
+            "Abdul-Rahman",
+            "Abdul-Rauf",
+            "Abdul-Wahad",
+            "Abdul-Aziz",
+            "Abdur-Rahim",
+            "Abernethy"
+          ],
+          "nameGiven": [
+            "nameGiven",
+            "Mort",
+            "Robert",
+            "Jim",
+            "Mike",
+            "Ed",
+            "Thomas",
+            "Dave"
+          ],
+          "fullGivenName": [
+            "Ferdinand Lewis Alcindor, Jr.",
+            "Walter Raphael Hazzard, Jr.",
+            "Chris Wayne Jackson",
+            "Olivier Michael Saint-Jean",
+            "Donald A. Smith",
+            "Robert L. Stacey",
+            "Ronald William Artest",
+            "fullGivenName"
+          ],
+          "nameSuffix": [
+            "Jr.",
+            "III",
+            "nameSuffix",
+            "II",
+            "IV",
+            "Sr."
+          ],
+          "nameNick": [
+            "Lew, Cap",
+            "Walt",
+            "Don, The Kangaroo",
+            "Shareef, Reef",
+            "Tom",
+            "Frosty",
+            "Brooms",
+            "Buddy"
+          ],
+          "pos": [
+            "F-C",
+            "C",
+            "G",
+            "G-F",
+            "C-F",
+            "F",
+            "F-G",
+            "C-F-G"
+          ],
+          "firstseason": [
+            "0",
+            "1951"
+          ],
+          "lastseason": [
+            "0",
+            "1951"
+          ],
+          "height": [
+            "82.0",
+            "85.0",
+            "74.0",
+            "73.0",
+            "78.0",
+            "81.0",
+            "79.0",
+            "75.0"
+          ],
+          "weight": [
+            "240",
+            "225",
+            "185",
+            "162",
+            "223",
+            "230",
+            "220",
+            "180"
+          ],
+          "college": [
+            "Duke",
+            "UCLA",
+            "Louisiana State",
+            "San Jose State",
+            "Iowa State",
+            "California",
+            "Indiana",
+            "Western Kentucky"
+          ],
+          "collegeOther": [
+            "Santa Monica City",
+            "Michigan",
+            "Louisville",
+            "Alma College",
+            "Kentucky (dnp) Ph.D",
+            "Moberly Area CC",
+            "William Carey (DNP)",
+            "Fresno City"
+          ],
+          "birthDate": [
+            "1968-06-24",
+            "1947-04-16",
+            "1942-04-15",
+            "1969-03-09",
+            "1974-11-03",
+            "1946-04-07",
+            "1976-12-11",
+            "1954-05-06"
+          ],
+          "birthCity": [
+            "Cairo",
+            "New York",
+            "Wilmington",
+            "Gulfport",
+            "Maisons Alfort",
+            "Brooklyn",
+            "Marietta",
+            "South Bend"
+          ],
+          "birthState": [
+            "NY",
+            "DE",
+            "MS",
+            "GA",
+            "IN",
+            "PA",
+            "CA",
+            "KS"
+          ],
+          "birthCountry": [
+            "EGY",
+            "USA",
+            "FRA",
+            "NGR",
+            "TAI",
+            "ARG",
+            "AUS",
+            "LTU"
+          ],
+          "highSchool": [
+            "Bloomfield Senior",
+            "Power Memorial",
+            "Overbrook / Moton",
+            "Gulfport",
+            "Lycee Aristide Briand",
+            "John Jay",
+            "Wheeler",
+            "St. Joseph"
+          ],
+          "hsCity": [
+            "Bloomfield",
+            "New York",
+            "Philadelphia / Easton",
+            "Gulfport",
+            "Evreux",
+            "Brooklyn",
+            "Marietta",
+            "South Bend"
+          ],
+          "hsState": [
+            "NJ",
+            "NY",
+            "PA / MD",
+            "MS",
+            "GA",
+            "IN",
+            "KY",
+            "PA"
+          ],
+          "hsCountry": [
+            "USA",
+            "FRA",
+            "NGR",
+            "AUS",
+            "CAN",
+            "BRA",
+            "USA / PUR",
+            "YUG"
+          ],
+          "deathDate": [
+            "0000-00-00",
+            "2011-11-18",
+            "2000-06-09",
+            "2011-07-09",
+            "1998-10-27",
+            "2011-03-31",
+            "2007-04-04",
+            "2004-12-19"
+          ],
+          "race": [
+            "B",
+            "W",
+            "O",
+            "1",
+            "r"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "players_teams": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "playerID": [
+            "abdelal01",
+            "abdulka01",
+            "abdulma01",
+            "abdulma02",
+            "abdulta01",
+            "abdulza01",
+            "abdursh01",
+            "abernto01"
+          ],
+          "year": [
+            "1990",
+            "1991",
+            "1992",
+            "1993",
+            "1994",
+            "1969",
+            "1970",
+            "1971"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "0",
+            "3",
+            "4"
+          ],
+          "tmID": [
+            "POR",
+            "MIL",
+            "BOS",
+            "SAC",
+            "PHI",
+            "LAL",
+            "SEA",
+            "ATL"
+          ],
+          "lgID": [
+            "NBA",
+            "NBL",
+            "ABA",
+            "ABL1",
+            "NPBL",
+            "PBLA"
+          ],
+          "GP": [
+            "43",
+            "71",
+            "12",
+            "63",
+            "13",
+            "51",
+            "3",
+            "82"
+          ],
+          "GS": [
+            "0",
+            "69",
+            "62",
+            "2",
+            "81",
+            "55",
+            "15",
+            "80"
+          ],
+          "minutes": [
+            "290",
+            "934",
+            "159",
+            "1152",
+            "476",
+            "30",
+            "3534",
+            "3288"
+          ],
+          "points": [
+            "135",
+            "432",
+            "64",
+            "514",
+            "254",
+            "2",
+            "2361",
+            "2596"
+          ],
+          "oRebounds": [
+            "27",
+            "81",
+            "12",
+            "114",
+            "34",
+            "3",
+            "0",
+            "287"
+          ],
+          "dRebounds": [
+            "62",
+            "179",
+            "25",
+            "186",
+            "34",
+            "72",
+            "5",
+            "0"
+          ],
+          "rebounds": [
+            "89",
+            "260",
+            "37",
+            "300",
+            "46",
+            "106",
+            "8",
+            "1190"
+          ],
+          "assists": [
+            "12",
+            "30",
+            "10",
+            "17",
+            "3",
+            "13",
+            "0",
+            "337"
+          ],
+          "steals": [
+            "4",
+            "25",
+            "6",
+            "19",
+            "2",
+            "15",
+            "0",
+            "112"
+          ],
+          "blocks": [
+            "12",
+            "17",
+            "4",
+            "22",
+            "3",
+            "0",
+            "283",
+            "212"
+          ],
+          "turnovers": [
+            "22",
+            "66",
+            "0",
+            "97",
+            "17",
+            "45",
+            "208",
+            "282"
+          ],
+          "PF": [
+            "39",
+            "132",
+            "24",
+            "165",
+            "20",
+            "102",
+            "2",
+            "283"
+          ],
+          "fgAttempted": [
+            "116",
+            "361",
+            "56",
+            "417",
+            "55",
+            "220",
+            "11",
+            "1810"
+          ],
+          "fgMade": [
+            "55",
+            "178",
+            "26",
+            "219",
+            "24",
+            "117",
+            "1",
+            "938"
+          ],
+          "ftAttempted": [
+            "44",
+            "101",
+            "16",
+            "100",
+            "25",
+            "35",
+            "0",
+            "743"
+          ],
+          "ftMade": [
+            "25",
+            "76",
+            "12",
+            "16",
+            "20",
+            "0",
+            "485",
+            "470"
+          ],
+          "threeAttempted": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "100",
+            "94",
+            "197",
+            "133"
+          ],
+          "threeMade": [
+            "0",
+            "1",
+            "24",
+            "31",
+            "70",
+            "42",
+            "83",
+            "121"
+          ],
+          "PostGP": [
+            "5",
+            "8",
+            "0",
+            "4",
+            "10",
+            "14",
+            "11",
+            "6"
+          ],
+          "PostGS": [
+            "0",
+            "6",
+            "3",
+            "7",
+            "1",
+            "14",
+            "24",
+            "9"
+          ],
+          "PostMinutes": [
+            "13",
+            "25",
+            "0",
+            "68",
+            "435",
+            "577",
+            "510",
+            "276"
+          ],
+          "PostPoints": [
+            "4",
+            "12",
+            "0",
+            "22",
+            "352",
+            "372",
+            "316",
+            "137"
+          ],
+          "PostoRebounds": [
+            "1",
+            "0",
+            "2",
+            "67",
+            "51",
+            "14",
+            "18",
+            "13"
+          ],
+          "PostdRebounds": [
+            "2",
+            "4",
+            "0",
+            "11",
+            "186",
+            "144",
+            "27",
+            "83"
+          ],
+          "PostRebounds": [
+            "3",
+            "4",
+            "0",
+            "13",
+            "168",
+            "238",
+            "200",
+            "97"
+          ],
+          "PostAssists": [
+            "0",
+            "2",
+            "1",
+            "41",
+            "35",
+            "56",
+            "17",
+            "78"
+          ],
+          "PostSteals": [
+            "0",
+            "20",
+            "19",
+            "2",
+            "8",
+            "17",
+            "3",
+            "14"
+          ],
+          "PostBlocks": [
+            "0",
+            "1",
+            "39",
+            "38",
+            "12",
+            "33",
+            "58",
+            "8"
+          ],
+          "PostTurnovers": [
+            "0",
+            "2",
+            "9",
+            "14",
+            "29",
+            "55",
+            "11",
+            "41"
+          ],
+          "PostPF": [
+            "0",
+            "4",
+            "7",
+            "25",
+            "35",
+            "26",
+            "41",
+            "42"
+          ],
+          "PostfgAttempted": [
+            "6",
+            "10",
+            "0",
+            "24",
+            "245",
+            "295",
+            "318",
+            "138"
+          ],
+          "PostfgMade": [
+            "2",
+            "5",
+            "0",
+            "11",
+            "139",
+            "152",
+            "59",
+            "224"
+          ],
+          "PostftAttempted": [
+            "0",
+            "4",
+            "101",
+            "54",
+            "35",
+            "91",
+            "120",
+            "9"
+          ],
+          "PostftMade": [
+            "0",
+            "2",
+            "74",
+            "68",
+            "38",
+            "19",
+            "67",
+            "87"
+          ],
+          "PostthreeAttempted": [
+            "0",
+            "1",
+            "2",
+            "37",
+            "12",
+            "3",
+            "9",
+            "54"
+          ],
+          "PostthreeMade": [
+            "0",
+            "12",
+            "2",
+            "17",
+            "10",
+            "6",
+            "1",
+            "3"
+          ],
+          "note": [
+            "C"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "series_post": {
+        "rows": 775,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "year": [
+            "1946",
+            "1947",
+            "1948",
+            "1949",
+            "1950",
+            "1951",
+            "1952",
+            "1953"
+          ],
+          "round": [
+            "F",
+            "QF",
+            "SF",
+            "DT",
+            "DF",
+            "DSF",
+            "RR",
+            "CF"
+          ],
+          "series": [
+            "O",
+            "M",
+            "N",
+            "A",
+            "K",
+            "J",
+            "I",
+            "L"
+          ],
+          "tmIDWinner": [
+            "PHW",
+            "NYK",
+            "CHS",
+            "BLB",
+            "WSC",
+            "MNL",
+            "ROC",
+            "FTW"
+          ],
+          "lgIDWinner": [
+            "NBA",
+            "ABA"
+          ],
+          "tmIDLoser": [
+            "CHS",
+            "CLR",
+            "STB",
+            "NYK",
+            "WSC",
+            "PHW",
+            "BOS",
+            "BLB"
+          ],
+          "lgIDLoser": [
+            "NBA",
+            "ABA"
+          ],
+          "W": [
+            "4",
+            "2",
+            "1",
+            "3",
+            "0"
+          ],
+          "L": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teams": {
+        "rows": 1536,
+        "sample_values": {
+          "year": [
+            "1937",
+            "1938",
+            "1939",
+            "1940",
+            "1941",
+            "1942",
+            "1943",
+            "1944"
+          ],
+          "lgID": [
+            "NBL",
+            "NBA",
+            "PBLA",
+            "NPBL",
+            "ABL1",
+            "ABA"
+          ],
+          "tmID": [
+            "AFS",
+            "AGW",
+            "BFB",
+            "CNC",
+            "COL",
+            "DYM",
+            "FWE",
+            "INK"
+          ],
+          "franchID": [
+            "AFS",
+            "AGW",
+            "BFB",
+            "CNC",
+            "COL",
+            "DYM",
+            "FWE",
+            "INJ"
+          ],
+          "confID": [
+            "EC",
+            "WC"
+          ],
+          "divID": [
+            "EA",
+            "WE",
+            "ED",
+            "WD",
+            "SO",
+            "NO",
+            "CD",
+            "AT"
+          ],
+          "rank": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "3",
+            "8"
+          ],
+          "confRank": [
+            "0",
+            "4",
+            "3",
+            "5",
+            "7",
+            "2",
+            "6",
+            "8"
+          ],
+          "playoff": [
+            "CF",
+            "WC",
+            "LC",
+            "CS",
+            "F",
+            "R1",
+            "SF",
+            "NC"
+          ],
+          "name": [
+            "Akron Firestone Non-Skids",
+            "Akron Goodyear Wingfoots",
+            "Buffalo Bisons",
+            "Richmond King Clothiers/Cincinnati Comellos",
+            "Columbus Athletic Supply",
+            "Dayton Metropolitans",
+            "Fort Wayne General Electrics",
+            "Indianapolis Kautskys"
+          ],
+          "o_fgm": [
+            "249",
+            "243",
+            "108",
+            "110",
+            "109",
+            "130",
+            "290",
+            "159"
+          ],
+          "o_ftm": [
+            "183",
+            "159",
+            "46",
+            "42",
+            "64",
+            "87",
+            "148",
+            "118"
+          ],
+          "o_pts": [
+            "681",
+            "645",
+            "262",
+            "282",
+            "347",
+            "728",
+            "436",
+            "400"
+          ],
+          "d_pts": [
+            "578",
+            "498",
+            "275",
+            "338",
+            "426",
+            "414",
+            "568",
+            "452"
+          ],
+          "homeWon": [
+            "8",
+            "2",
+            "3",
+            "1",
+            "9",
+            "4",
+            "5",
+            "7"
+          ],
+          "homeLost": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "0",
+            "7",
+            "5",
+            "10"
+          ],
+          "awayWon": [
+            "5",
+            "1",
+            "0",
+            "2",
+            "3",
+            "13",
+            "7",
+            "4"
+          ],
+          "awayLost": [
+            "3",
+            "4",
+            "5",
+            "7",
+            "6",
+            "1",
+            "9",
+            "14"
+          ],
+          "won": [
+            "14",
+            "13",
+            "3",
+            "1",
+            "2",
+            "4",
+            "12",
+            "8"
+          ],
+          "lost": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "12",
+            "11",
+            "9",
+            "2"
+          ],
+          "games": [
+            "18",
+            "9",
+            "10",
+            "13",
+            "20",
+            "14",
+            "12",
+            "15"
+          ],
+          "arena": [
+            "Boston Garden",
+            "Chicago Stadium",
+            "Cleveland Arena",
+            "Detroit Olympia",
+            "Madison Square Garden (III)",
+            "Philadelphia Arena",
+            "Duquesne Gardens",
+            "Rhode Island Auditorium"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

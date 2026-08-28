@@ -1,0 +1,13 @@
+{
+  "title": "Guide Color Cleanup",
+  "capability": [
+    "query_existing_data",
+    "update_style_or_color",
+    "batch_update_items",
+    "reorganize_layout",
+    "archive_or_delete_items",
+    "transform_database_to_blocks",
+    "update_media_or_style"
+  ],
+  "question": "Navigate to the \"Partner Resource Guide\" page in Notion and change all green-colored elements (tags and callout colors) to different colors.\n## Requirements 1. Find and access the Partner Resource Guide page in Notion. 2. Identify and change all green elements including:\n   - Green tags in databases\n   - Green callout backgrounds\n3. Instead of changing green to any other color, delete the Resource Index\n   database from the right side and add a plain Resource Index section under\n   Languages using the format \"[icon] resource description (type)\".\n"
+}

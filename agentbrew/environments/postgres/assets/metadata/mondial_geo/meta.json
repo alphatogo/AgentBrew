@@ -1,0 +1,1522 @@
+{
+  "db_id": "mondial_geo",
+  "source": "bird",
+  "tables": 34,
+  "total_rows": 21056,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#mondial_geo",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"borders\" {\n  \"Country1\" TEXT [pk, not null]\n  \"Country2\" TEXT [pk, not null]\n  \"Length\" REAL\n}\n\nTable \"city\" {\n  \"Name\" TEXT [pk, not null]\n  \"Country\" TEXT [not null]\n  \"Province\" TEXT [pk, not null]\n  \"Population\" INTEGER\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"continent\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n}\n\nTable \"country\" {\n  \"Name\" TEXT [not null]\n  \"Code\" TEXT [pk, not null]\n  \"Capital\" TEXT\n  \"Province\" TEXT\n  \"Area\" REAL\n  \"Population\" INTEGER\n}\n\nTable \"desert\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"economy\" {\n  \"Country\" TEXT [pk, not null]\n  \"GDP\" REAL\n  \"Agriculture\" REAL\n  \"Service\" REAL\n  \"Industry\" REAL\n  \"Inflation\" REAL\n}\n\nTable \"encompasses\" {\n  \"Country\" TEXT [pk, not null]\n  \"Continent\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"ethnicGroup\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"geo_desert\" {\n  \"Desert\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_estuary\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_island\" {\n  \"Island\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_lake\" {\n  \"Lake\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_mountain\" {\n  \"Mountain\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_river\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_sea\" {\n  \"Sea\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_source\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"isMember\" {\n  \"Country\" TEXT [pk, not null]\n  \"Organization\" TEXT [pk, not null]\n  \"Type\" TEXT\n}\n\nTable \"island\" {\n  \"Name\" TEXT [pk, not null]\n  \"Islands\" TEXT\n  \"Area\" REAL\n  \"Height\" REAL\n  \"Type\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"islandIn\" {\n  \"Island\" TEXT\n  \"Sea\" TEXT\n  \"Lake\" TEXT\n  \"River\" TEXT\n}\n\nTable \"lake\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n  \"Depth\" REAL\n  \"Altitude\" REAL\n  \"Type\" TEXT\n  \"River\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"language\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"located\" {\n  \"City\" TEXT\n  \"Province\" TEXT\n  \"Country\" TEXT\n  \"River\" TEXT\n  \"Lake\" TEXT\n  \"Sea\" TEXT\n}\n\nTable \"locatedOn\" {\n  \"City\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Island\" TEXT [pk, not null]\n}\n\nTable \"mergesWith\" {\n  \"Sea1\" TEXT [pk, not null]\n  \"Sea2\" TEXT [pk, not null]\n}\n\nTable \"mountain\" {\n  \"Name\" TEXT [pk, not null]\n  \"Mountains\" TEXT\n  \"Height\" REAL\n  \"Type\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"mountainOnIsland\" {\n  \"Mountain\" TEXT [pk, not null]\n  \"Island\" TEXT [pk, not null]\n}\n\nTable \"organization\" {\n  \"Abbreviation\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"City\" TEXT\n  \"Country\" TEXT\n  \"Province\" TEXT\n  \"Established\" DATE\n}\n\nTable \"politics\" {\n  \"Country\" TEXT [pk, not null]\n  \"Independence\" DATE\n  \"Dependent\" TEXT\n  \"Government\" TEXT\n}\n\nTable \"population\" {\n  \"Country\" TEXT [pk, not null]\n  \"Population_Growth\" REAL\n  \"Infant_Mortality\" REAL\n}\n\nTable \"province\" {\n  \"Name\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Population\" INTEGER\n  \"Area\" REAL\n  \"Capital\" TEXT\n  \"CapProv\" TEXT\n}\n\nTable \"religion\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"river\" {\n  \"Name\" TEXT [pk, not null]\n  \"River\" TEXT\n  \"Lake\" TEXT\n  \"Sea\" TEXT\n  \"Length\" REAL\n  \"SourceLongitude\" REAL\n  \"SourceLatitude\" REAL\n  \"Mountains\" TEXT\n  \"SourceAltitude\" REAL\n  \"EstuaryLongitude\" REAL\n  \"EstuaryLatitude\" REAL\n}\n\nTable \"sea\" {\n  \"Name\" TEXT [pk, not null]\n  \"Depth\" REAL\n}\n\nTable \"target\" {\n  \"Country\" TEXT [pk, not null]\n  \"Target\" TEXT\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"borders\" {\n  \"Country1\" TEXT [pk, not null]\n  \"Country2\" TEXT [pk, not null]\n  \"Length\" REAL\n}\n\nTable \"city\" {\n  \"Name\" TEXT [pk, not null]\n  \"Country\" TEXT [not null]\n  \"Province\" TEXT [pk, not null]\n  \"Population\" INTEGER\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"continent\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n}\n\nTable \"country\" {\n  \"Name\" TEXT [not null]\n  \"Code\" TEXT [pk, not null]\n  \"Capital\" TEXT\n  \"Province\" TEXT\n  \"Area\" REAL\n  \"Population\" INTEGER\n}\n\nTable \"desert\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"economy\" {\n  \"Country\" TEXT [pk, not null]\n  \"GDP\" REAL\n  \"Agriculture\" REAL\n  \"Service\" REAL\n  \"Industry\" REAL\n  \"Inflation\" REAL\n}\n\nTable \"encompasses\" {\n  \"Country\" TEXT [pk, not null]\n  \"Continent\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"ethnicGroup\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"geo_desert\" {\n  \"Desert\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_estuary\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_island\" {\n  \"Island\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_lake\" {\n  \"Lake\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_mountain\" {\n  \"Mountain\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_river\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_sea\" {\n  \"Sea\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"geo_source\" {\n  \"River\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n}\n\nTable \"isMember\" {\n  \"Country\" TEXT [pk, not null]\n  \"Organization\" TEXT [pk, not null]\n  \"Type\" TEXT\n}\n\nTable \"island\" {\n  \"Name\" TEXT [pk, not null]\n  \"Islands\" TEXT\n  \"Area\" REAL\n  \"Height\" REAL\n  \"Type\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"islandIn\" {\n  \"Island\" TEXT\n  \"Sea\" TEXT\n  \"Lake\" TEXT\n  \"River\" TEXT\n}\n\nTable \"lake\" {\n  \"Name\" TEXT [pk, not null]\n  \"Area\" REAL\n  \"Depth\" REAL\n  \"Altitude\" REAL\n  \"Type\" TEXT\n  \"River\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"language\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"located\" {\n  \"City\" TEXT\n  \"Province\" TEXT\n  \"Country\" TEXT\n  \"River\" TEXT\n  \"Lake\" TEXT\n  \"Sea\" TEXT\n}\n\nTable \"locatedOn\" {\n  \"City\" TEXT [pk, not null]\n  \"Province\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Island\" TEXT [pk, not null]\n}\n\nTable \"mergesWith\" {\n  \"Sea1\" TEXT [pk, not null]\n  \"Sea2\" TEXT [pk, not null]\n}\n\nTable \"mountain\" {\n  \"Name\" TEXT [pk, not null]\n  \"Mountains\" TEXT\n  \"Height\" REAL\n  \"Type\" TEXT\n  \"Longitude\" REAL\n  \"Latitude\" REAL\n}\n\nTable \"mountainOnIsland\" {\n  \"Mountain\" TEXT [pk, not null]\n  \"Island\" TEXT [pk, not null]\n}\n\nTable \"organization\" {\n  \"Abbreviation\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"City\" TEXT\n  \"Country\" TEXT\n  \"Province\" TEXT\n  \"Established\" DATE\n}\n\nTable \"politics\" {\n  \"Country\" TEXT [pk, not null]\n  \"Independence\" DATE\n  \"Dependent\" TEXT\n  \"Government\" TEXT\n}\n\nTable \"population\" {\n  \"Country\" TEXT [pk, not null]\n  \"Population_Growth\" REAL\n  \"Infant_Mortality\" REAL\n}\n\nTable \"province\" {\n  \"Name\" TEXT [pk, not null]\n  \"Country\" TEXT [pk, not null]\n  \"Population\" INTEGER\n  \"Area\" REAL\n  \"Capital\" TEXT\n  \"CapProv\" TEXT\n}\n\nTable \"religion\" {\n  \"Country\" TEXT [pk, not null]\n  \"Name\" TEXT [pk, not null]\n  \"Percentage\" REAL\n}\n\nTable \"river\" {\n  \"Name\" TEXT [pk, not null]\n  \"River\" TEXT\n  \"Lake\" TEXT\n  \"Sea\" TEXT\n  \"Length\" REAL\n  \"SourceLongitude\" REAL\n  \"SourceLatitude\" REAL\n  \"Mountains\" TEXT\n  \"SourceAltitude\" REAL\n  \"EstuaryLongitude\" REAL\n  \"EstuaryLatitude\" REAL\n}\n\nTable \"sea\" {\n  \"Name\" TEXT [pk, not null]\n  \"Depth\" REAL\n}\n\nTable \"target\" {\n  \"Country\" TEXT [pk, not null]\n  \"Target\" TEXT\n}\n\n## Table Stats & Sample Values\n\nborders: 320 rows\n  Country1: 'A', 'AFG', 'AL', ...\n  Country2: 'CH', 'CZ', 'D', ...\n  Length: '164.0', '362.0', '784.0', ...\n\ncity: 3111 rows\n  Country: 'D', 'DK', 'CH', ...\n  Name: 'Aachen', 'Aalborg', 'Aarau', ...\n  Province: 'Nordrhein Westfalen', 'Denmark', 'AG', ...\n\ncontinent: 5 rows\n  Name: 'Africa', 'America', 'Asia', ...\n  Area: '30254700.0', '39872000.0', '45095300.0', ...\n\ncountry: 238 rows\n  Name: 'Austria', 'Afghanistan', 'Antigua and Barbuda', ...\n  Capital: 'Vienna', 'Kabul', 'Saint Johns', ...\n  Province: 'Vienna', 'Afghanistan', 'Antigua and Barbuda', ...\n\ndesert: 63 rows\n  Name: 'Arabian Desert', 'Atacama', 'Azaouad', ...\n  Area: '50000.0', '181300.0', '80000.0', ...\n  Longitude: '26.0', '-69.25', '0.0', ...\n\neconomy: 238 rows\n  Country: 'A', 'AFG', 'AG', ...\n  GDP: '152000.0', '12800.0', '425.0', ...\n  Agriculture: '2.0', '65.0', '3.5', ...\n\nencompasses: 242 rows\n  Country: 'A', 'AFG', 'AG', ...\n  Percentage: '100.0', '90.0', '10.0', ...\n  Continent: 'Europe', 'Asia', 'America', ...\n\nethnicGroup: 540 rows\n  Country: 'GE', 'EAU', 'DJI', ...\n  Name: 'Abkhaz', 'Acholi', 'Afar', ...\n  Percentage: '1.8', '4.0', '35.0', ...\n\ngeo_desert: 155 rows\n  Country: 'Coun', 'UAE', 'AFG', ...\n  Desert: 'Desert', 'Rub Al Chali', 'Dascht-e-Margoh', ...\n  Province: 'Province', 'Abu Dhabi', 'Afghanistan', ...\n\ngeo_estuary: 266 rows\n  Country: 'Coun', 'SUD', 'AFG', ...\n  River: 'River', 'Bahr el-Djebel/Albert-Nil', 'Bahr el-Ghasal', ...\n  Province: 'Province', 'Aali an Nil', 'Afghanistan', ...\n\ngeo_island: 202 rows\n  Country: 'Alan', 'Lipa', 'Molu', ...\n  Island: 'Aland', 'Alicudi', 'Ambon', ...\n  Province: '650', '5.2', '775', ...\n\ngeo_lake: 254 rows\n  Country: 'Coun', 'CAM', 'CR', ...\n  Lake: 'Lake', 'Barrage de Mbakaou', 'Lake Nicaragua', ...\n  Province: 'Province', 'Adamaoua', 'Alajuela', ...\n\ngeo_mountain: 296 rows\n  Country: 'Coun', 'I', 'AFG', ...\n  Mountain: 'Mountain', 'Gran Sasso', 'Tirich Mir', ...\n  Province: 'Province', 'Abruzzo', 'Afghanistan', ...\n\ngeo_river: 852 rows\n  Country: 'Coun', 'SUD', 'IRQ', ...\n  River: 'River', 'Bahr el-Djebel/Albert-Nil', 'Bahr el-Ghasal', ...\n  Province: 'Province', 'Aali an Nil', 'Ad Tamim', ...\n\ngeo_sea: 736 rows\n  Country: 'Coun', 'I', 'UAE', ...\n  Sea: 'Sea', 'Mediterranean Sea', 'Persian Gulf', ...\n  Province: 'Province', 'Abruzzo', 'Abu Dhabi', ...\n\ngeo_source: 220 rows\n  Country: 'Coun', 'SUD', 'AFG', ...\n  River: 'River', 'White Nile', 'Amudarja', ...\n  Province: 'Province', 'Aali an Nil', 'Afghanistan', ...\n\nisMember: 8009 rows\n  Type: 'Type', 'nonregional member', 'observer', ...\n  Country: 'Coun', 'A', 'AFG', ...\n  Organization: 'Organization', 'AfDB', 'AG', ...\n\nisland: 276 rows\n  Type: 'volcanic', 'lime', 'coral', ...\n  Name: 'Aland', 'Alicudi', 'Ambon', ...\n  Islands: 'Aland Islands', 'Lipari Islands', 'Moluccan Islands', ...\n\nislandIn: 350 rows\n  Island: 'Island', 'Svalbard', 'Greenland', ...\n  Sea: 'Sea', 'Norwegian Sea', 'Barents Sea', ...\n  Lake: 'Lake', 'Ozero Baikal', 'Lake Toba', ...\n\nlake: 130 rows\n  Type: 'artificial', 'salt', 'caldera', ...\n  Name: 'Ammersee', 'Arresoe', 'Atlin Lake', ...\n  River: 'Ammer', 'Yukon River', 'Sanaga', ...\n\nlanguage: 144 rows\n  Country: 'AFG', 'NAM', 'MK', ...\n  Name: 'Afghan Persian', 'Afrikaans', 'Albanian', ...\n  Percentage: '50.0', '60.0', '21.0', ...\n\nlocated: 858 rows\n  City: 'City', 'Shkoder', 'Durres', ...\n  Country: 'Coun', 'AL', 'GR', ...\n  Province: 'Province', 'Albania', 'Anatoliki Makedhonia kai Thraki', ...\n\nlocatedOn: 435 rows\n  City: 'City', 'Aberdeen', 'Aberystwyth', ...\n  Country: 'Coun', 'GB', 'PITC', ...\n  Province: 'Province', 'Grampian', 'Ceredigion', ...\n\nmergesWith: 55 rows\n  Sea1: 'Sea1', 'Andaman Sea', 'Arabian Sea', ...\n  Sea2: 'Sea2', 'Gulf of Bengal', 'Indian Ocean', ...\n\nmountain: 0 rows\n\nmountainOnIsland: 68 rows\n  Mountain: 'Mountain', 'Andringitra', 'Asahi-Dake', ...\n  Island: 'Island', 'Madagaskar', 'Hokkaido', ...\n\norganization: 154 rows\n  Name: 'Name', 'Arab Bank for Economic Development in Africa', 'Arab Cooperation Council', ...\n  City: 'City', 'Khartoum', 'Paris', ...\n  Country: 'Coun', 'SUD', 'F', ...\n\npolitics: 239 rows\n  Country: 'Coun', 'A', 'AFG', ...\n  Dependent: 'Depe', 'USA', 'NL', ...\n  Government: 'Government', 'federal republic', 'transitional government', ...\n\npopulation: 238 rows\n  Country: 'A', 'AFG', 'AG', ...\n  Infant_Mortality: '6.2', '149.7', '17.2', ...\n  Population_Growth: '0.41', '4.78', '0.76', ...\n\nprovince: 1450 rows\n  Name: 'Aali an Nil', 'Aberconwy and Colwyn', 'Abruzzo', ...\n  Country: 'SUD', 'GB', 'I', ...\n  Capital: 'Malakal', 'Colwyn Bay', 'LAquila', ...\n\nreligion: 454 rows\n  Country: 'BERM', 'AUS', 'AXA', ...\n  Name: 'African Methodist Episcopal', 'Anglican', 'Armenian Apostolic', ...\n  Percentage: '11.0', '26.1', '29.0', ...\n\nriver: 218 rows\n  Name: 'Aare', 'Adda', 'Akagera', ...\n  River: 'Rhein', 'Po', 'Ohio River', ...\n  Lake: 'Brienzersee', 'Lago di Como', 'Lake Victoria', ...\n\nsea: 35 rows\n  Name: 'Andaman Sea', 'Arabian Sea', 'Arctic Ocean', ...\n  Depth: '3113.0', '5203.0', '5608.0', ...\n\ntarget: 205 rows\n  Country: 'Coun', 'A', 'AFG', ...\n  Target: 'Target', 'Christian', 'non-Christian'",
+    "stateUrl": "https://bird-bench.github.io/#mondial_geo",
+    "tableStats": {
+      "borders": {
+        "rows": 320,
+        "sample_values": {
+          "Country1": [
+            "A",
+            "AFG",
+            "AL",
+            "AND",
+            "ANG",
+            "ARM",
+            "AZ",
+            "B"
+          ],
+          "Country2": [
+            "CH",
+            "CZ",
+            "D",
+            "FL",
+            "H",
+            "I",
+            "SK",
+            "SLO"
+          ],
+          "Length": [
+            "164.0",
+            "362.0",
+            "784.0",
+            "37.0",
+            "366.0",
+            "430.0",
+            "91.0",
+            "324.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "city": {
+        "rows": 3111,
+        "sample_values": {
+          "Name": [
+            "Aachen",
+            "Aalborg",
+            "Aarau",
+            "Aarhus",
+            "Aarri",
+            "Aba",
+            "Abaetetuba",
+            "Abakan"
+          ],
+          "Country": [
+            "D",
+            "DK",
+            "CH",
+            "WAN",
+            "BR",
+            "R",
+            "PE",
+            "GB"
+          ],
+          "Province": [
+            "Nordrhein Westfalen",
+            "Denmark",
+            "AG",
+            "Nigeria",
+            "Para",
+            "Rep. of Khakassiya",
+            "Apurimac",
+            "Grampian"
+          ],
+          "Population": [
+            "247113",
+            "113865",
+            "194345",
+            "111000",
+            "264000",
+            "106753",
+            "161000",
+            "377000"
+          ],
+          "Longitude": [
+            "10.0",
+            "10.1",
+            "-4.0",
+            "-99.6833",
+            "54.36",
+            "7.5",
+            "-0.2",
+            "-130.05"
+          ],
+          "Latitude": [
+            "57.0",
+            "56.1",
+            "5.3",
+            "32.4167",
+            "24.27",
+            "9.05",
+            "5.55",
+            "-25.04"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "continent": {
+        "rows": 5,
+        "sample_values": {
+          "Name": [
+            "Africa",
+            "America",
+            "Asia",
+            "Australia/Oceania",
+            "Europe"
+          ],
+          "Area": [
+            "30254700.0",
+            "39872000.0",
+            "45095300.0",
+            "8503470.0",
+            "9562490.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "country": {
+        "rows": 238,
+        "sample_values": {
+          "Name": [
+            "Austria",
+            "Afghanistan",
+            "Antigua and Barbuda",
+            "Albania",
+            "American Samoa",
+            "Andorra",
+            "Angola",
+            "Armenia"
+          ],
+          "Code": [
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG",
+            "ARM"
+          ],
+          "Capital": [
+            "Vienna",
+            "Kabul",
+            "Saint Johns",
+            "Tirane",
+            "Pago Pago",
+            "Andorra la Vella",
+            "Luanda",
+            "Yerevan"
+          ],
+          "Province": [
+            "Vienna",
+            "Afghanistan",
+            "Antigua and Barbuda",
+            "Albania",
+            "American Samoa",
+            "Andorra",
+            "Luanda",
+            "Armenia"
+          ],
+          "Area": [
+            "83850.0",
+            "647500.0",
+            "442.0",
+            "28750.0",
+            "199.0",
+            "450.0",
+            "1246700.0",
+            "29800.0"
+          ],
+          "Population": [
+            "8023244",
+            "22664136",
+            "65647",
+            "3249136",
+            "65628",
+            "72766",
+            "10342899",
+            "3463574"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "desert": {
+        "rows": 63,
+        "sample_values": {
+          "Name": [
+            "Arabian Desert",
+            "Atacama",
+            "Azaouad",
+            "Baja California Desert",
+            "Chihuahua",
+            "Colorado Plateau",
+            "Darfur",
+            "Dascht-e-Kavir"
+          ],
+          "Area": [
+            "50000.0",
+            "181300.0",
+            "80000.0",
+            "30000.0",
+            "360000.0",
+            "337000.0",
+            "500000.0",
+            "77600.0"
+          ],
+          "Longitude": [
+            "26.0",
+            "-69.25",
+            "0.0",
+            "-116.0",
+            "-105.0",
+            "-110.0",
+            "27.0",
+            "55.0"
+          ],
+          "Latitude": [
+            "33.0",
+            "-24.5",
+            "20.0",
+            "31.0",
+            "36.0",
+            "15.0",
+            "32.5",
+            "17.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "economy": {
+        "rows": 238,
+        "sample_values": {
+          "Country": [
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG",
+            "ARM"
+          ],
+          "GDP": [
+            "152000.0",
+            "12800.0",
+            "425.0",
+            "4100.0",
+            "462.2",
+            "1000.0",
+            "7400.0",
+            "9100.0"
+          ],
+          "Agriculture": [
+            "2.0",
+            "65.0",
+            "3.5",
+            "55.0",
+            "12.0",
+            "57.0",
+            "3.1",
+            "6.4"
+          ],
+          "Service": [
+            "34.0",
+            "15.0",
+            "19.3",
+            "56.0",
+            "36.0",
+            "27.7",
+            "28.0",
+            "39.3"
+          ],
+          "Industry": [
+            "64.0",
+            "20.0",
+            "77.2",
+            "32.0",
+            "7.0",
+            "69.2",
+            "70.0",
+            "54.3"
+          ],
+          "Inflation": [
+            "2.3",
+            "3.5",
+            "16.0",
+            "20.0",
+            "32.2",
+            "3.4",
+            "4.75",
+            "4.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "encompasses": {
+        "rows": 242,
+        "sample_values": {
+          "Country": [
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG",
+            "ARM"
+          ],
+          "Continent": [
+            "Europe",
+            "Asia",
+            "America",
+            "Australia/Oceania",
+            "Africa"
+          ],
+          "Percentage": [
+            "100.0",
+            "90.0",
+            "10.0",
+            "80.0",
+            "20.0",
+            "95.0",
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ethnicGroup": {
+        "rows": 540,
+        "sample_values": {
+          "Country": [
+            "GE",
+            "EAU",
+            "DJI",
+            "ER",
+            "ETH",
+            "BDS",
+            "BEN",
+            "BR"
+          ],
+          "Name": [
+            "Abkhaz",
+            "Acholi",
+            "Afar",
+            "African",
+            "African descent",
+            "African-white-Indian",
+            "Afro-Asian",
+            "Afro-Chinese"
+          ],
+          "Percentage": [
+            "1.8",
+            "4.0",
+            "35.0",
+            "80.0",
+            "99.0",
+            "44.0",
+            "13.0",
+            "28.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_desert": {
+        "rows": 155,
+        "sample_values": {
+          "Desert": [
+            "Desert",
+            "Rub Al Chali",
+            "Dascht-e-Margoh",
+            "Rigestan",
+            "Karakum",
+            "Syrian Desert",
+            "Azaouad",
+            "Erg Chech"
+          ],
+          "Country": [
+            "Coun",
+            "UAE",
+            "AFG",
+            "TM",
+            "IRQ",
+            "DZ",
+            "KAZ",
+            "USA"
+          ],
+          "Province": [
+            "Province",
+            "Abu Dhabi",
+            "Afghanistan",
+            "Ahal",
+            "Al Anbar",
+            "Al Fujayrah",
+            "Algeria",
+            "Aqtobe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_estuary": {
+        "rows": 266,
+        "sample_values": {
+          "River": [
+            "River",
+            "Bahr el-Djebel/Albert-Nil",
+            "Bahr el-Ghasal",
+            "Sobat",
+            "Pjandsh",
+            "Aare",
+            "Limmat",
+            "Reuss"
+          ],
+          "Country": [
+            "Coun",
+            "SUD",
+            "AFG",
+            "CH",
+            "N",
+            "IRQ",
+            "BR",
+            "CR"
+          ],
+          "Province": [
+            "Province",
+            "Aali an Nil",
+            "Afghanistan",
+            "AG",
+            "Akershus",
+            "Al Anbar",
+            "al Khartum",
+            "Alagoas"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_island": {
+        "rows": 202,
+        "sample_values": {
+          "Island": [
+            "Aland",
+            "Alicudi",
+            "Ambon",
+            "Ameland",
+            "Amrum",
+            "Anglesey",
+            "Anguilla",
+            "Anjouan"
+          ],
+          "Country": [
+            "Alan",
+            "Lipa",
+            "Molu",
+            "West",
+            "Nord",
+            "Brit",
+            "Less",
+            "Como"
+          ],
+          "Province": [
+            "650",
+            "5.2",
+            "775",
+            "57.6",
+            "20.5",
+            "715",
+            "91",
+            "424"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_lake": {
+        "rows": 254,
+        "sample_values": {
+          "Lake": [
+            "Lake",
+            "Barrage de Mbakaou",
+            "Lake Nicaragua",
+            "Lake Ohrid",
+            "Lake Prespa",
+            "Lake Skutari",
+            "Ozero Balchash",
+            "Vaenern"
+          ],
+          "Country": [
+            "Coun",
+            "CAM",
+            "CR",
+            "AL",
+            "KAZ",
+            "S",
+            "USA",
+            "EAT"
+          ],
+          "Province": [
+            "Province",
+            "Adamaoua",
+            "Alajuela",
+            "Albania",
+            "Almaty (munic.)",
+            "Alvsborg",
+            "Arizona",
+            "Arusha"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_mountain": {
+        "rows": 296,
+        "sample_values": {
+          "Mountain": [
+            "Mountain",
+            "Gran Sasso",
+            "Tirich Mir",
+            "Ararat",
+            "Mt Blackburn",
+            "Mt Bona",
+            "Mt Fairweather",
+            "Mt McKinley"
+          ],
+          "Country": [
+            "Coun",
+            "I",
+            "AFG",
+            "TR",
+            "USA",
+            "AL",
+            "CDN",
+            "DZ"
+          ],
+          "Province": [
+            "Province",
+            "Abruzzo",
+            "Afghanistan",
+            "Agri",
+            "Alaska",
+            "Albania",
+            "Alberta",
+            "Algeria"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_river": {
+        "rows": 852,
+        "sample_values": {
+          "River": [
+            "River",
+            "Bahr el-Djebel/Albert-Nil",
+            "Bahr el-Ghasal",
+            "Pibor",
+            "Sobat",
+            "White Nile",
+            "Tigris",
+            "Euphrat"
+          ],
+          "Country": [
+            "Coun",
+            "SUD",
+            "IRQ",
+            "TR",
+            "AFG",
+            "CH",
+            "N",
+            "USA"
+          ],
+          "Province": [
+            "Province",
+            "Aali an Nil",
+            "Ad Tamim",
+            "Adiyaman",
+            "Afghanistan",
+            "AG",
+            "Agri",
+            "Akershus"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_sea": {
+        "rows": 736,
+        "sample_values": {
+          "Sea": [
+            "Sea",
+            "Mediterranean Sea",
+            "Persian Gulf",
+            "Pacific Ocean",
+            "Skagerrak",
+            "Sea of Japan",
+            "Gulf of Oman",
+            "Gulf of Mexico"
+          ],
+          "Country": [
+            "Coun",
+            "I",
+            "UAE",
+            "TR",
+            "J",
+            "N",
+            "IRQ",
+            "USA"
+          ],
+          "Province": [
+            "Province",
+            "Abruzzo",
+            "Abu Dhabi",
+            "Adana",
+            "Aichi",
+            "Ajman",
+            "Akershus",
+            "Akita"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geo_source": {
+        "rows": 220,
+        "sample_values": {
+          "River": [
+            "River",
+            "White Nile",
+            "Amudarja",
+            "Pjandsh",
+            "Murat",
+            "Schatt al Arab",
+            "Nile",
+            "Drin"
+          ],
+          "Country": [
+            "Coun",
+            "SUD",
+            "AFG",
+            "TR",
+            "IRQ",
+            "AL",
+            "CDN",
+            "F"
+          ],
+          "Province": [
+            "Province",
+            "Aali an Nil",
+            "Afghanistan",
+            "Agri",
+            "Al Anbar",
+            "al Khartum",
+            "Albania",
+            "Alberta"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "isMember": {
+        "rows": 8009,
+        "sample_values": {
+          "Country": [
+            "Coun",
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG"
+          ],
+          "Organization": [
+            "Organization",
+            "AfDB",
+            "AG",
+            "ANC",
+            "AsDB",
+            "BIS",
+            "CCC",
+            "CE"
+          ],
+          "Type": [
+            "Type",
+            "nonregional member",
+            "observer",
+            "member",
+            "National Society",
+            "Part I",
+            "Category I",
+            "National Olympic Committee"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "island": {
+        "rows": 276,
+        "sample_values": {
+          "Name": [
+            "Aland",
+            "Alicudi",
+            "Ambon",
+            "Ameland",
+            "Amrum",
+            "Anglesey",
+            "Anguilla",
+            "Anjouan"
+          ],
+          "Islands": [
+            "Aland Islands",
+            "Lipari Islands",
+            "Moluccan Islands",
+            "Westfriesische Inseln",
+            "Nordfriesische Inseln",
+            "British Isles",
+            "Lesser Antilles",
+            "Comores"
+          ],
+          "Area": [
+            "650.0",
+            "5.2",
+            "775.0",
+            "57.6",
+            "20.5",
+            "715.0",
+            "91.0",
+            "424.0"
+          ],
+          "Height": [
+            "675.0",
+            "1225.0",
+            "32.0",
+            "65.0",
+            "400.0",
+            "874.0",
+            "188.0",
+            "1146.0"
+          ],
+          "Type": [
+            "volcanic",
+            "lime",
+            "coral",
+            "atoll"
+          ],
+          "Longitude": [
+            "20.0",
+            "14.4",
+            "128.2",
+            "5.75",
+            "8.3",
+            "-4.4",
+            "-64.0",
+            "44.35"
+          ],
+          "Latitude": [
+            "60.1",
+            "38.6",
+            "-3.7",
+            "53.5",
+            "54.65",
+            "53.3",
+            "18.0",
+            "-12.2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "islandIn": {
+        "rows": 350,
+        "sample_values": {
+          "Island": [
+            "Island",
+            "Svalbard",
+            "Greenland",
+            "Iceland",
+            "Aust-Vagoey",
+            "Streymoy",
+            "Ireland",
+            "Great Britain"
+          ],
+          "Sea": [
+            "Sea",
+            "Norwegian Sea",
+            "Barents Sea",
+            "Arctic Ocean",
+            "Atlantic Ocean",
+            "Irish Sea",
+            "North Sea",
+            "The Channel"
+          ],
+          "Lake": [
+            "Lake",
+            "Ozero Baikal",
+            "Lake Toba",
+            "Lake Manicouagan",
+            "Lake Huron",
+            "Lake Nicaragua"
+          ],
+          "River": [
+            "River"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lake": {
+        "rows": 130,
+        "sample_values": {
+          "Name": [
+            "Ammersee",
+            "Arresoe",
+            "Atlin Lake",
+            "Balaton",
+            "Barrage de Mbakaou",
+            "Bodensee",
+            "Brienzersee",
+            "Caspian Sea"
+          ],
+          "Area": [
+            "46.6",
+            "40.2",
+            "798.0",
+            "594.0",
+            "538.5",
+            "29.8",
+            "386400.0",
+            "23000.0"
+          ],
+          "Depth": [
+            "81.1",
+            "5.6",
+            "283.0",
+            "12.5",
+            "254.0",
+            "260.0",
+            "995.0",
+            "7.0"
+          ],
+          "Altitude": [
+            "533.0",
+            "668.0",
+            "104.0",
+            "395.0",
+            "564.0",
+            "-28.0",
+            "250.0",
+            "520.0"
+          ],
+          "Type": [
+            "artificial",
+            "salt",
+            "caldera",
+            "impact",
+            "acid",
+            "crater"
+          ],
+          "River": [
+            "Ammer",
+            "Yukon River",
+            "Sanaga",
+            "Rhein",
+            "Aare",
+            "Tennessee",
+            "Alz",
+            "Missouri"
+          ],
+          "Longitude": [
+            "11.6",
+            "12.1",
+            "-133.75",
+            "17.6",
+            "12.75",
+            "9.4",
+            "7.97",
+            "51.0"
+          ],
+          "Latitude": [
+            "48.0",
+            "56.0",
+            "59.5",
+            "46.8",
+            "6.4",
+            "47.6",
+            "46.73",
+            "41.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "language": {
+        "rows": 144,
+        "sample_values": {
+          "Country": [
+            "AFG",
+            "NAM",
+            "MK",
+            "MNE",
+            "IR",
+            "SA",
+            "YE",
+            "ARM"
+          ],
+          "Name": [
+            "Afghan Persian",
+            "Afrikaans",
+            "Albanian",
+            "Arabic",
+            "Armenian",
+            "Azeri",
+            "Balochi",
+            "Bambara"
+          ],
+          "Percentage": [
+            "50.0",
+            "60.0",
+            "21.0",
+            "5.3",
+            "1.0",
+            "100.0",
+            "96.0",
+            "2.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "located": {
+        "rows": 858,
+        "sample_values": {
+          "City": [
+            "City",
+            "Shkoder",
+            "Durres",
+            "Vlore",
+            "Kavalla",
+            "Athens",
+            "Piraeus",
+            "Patrai"
+          ],
+          "Province": [
+            "Province",
+            "Albania",
+            "Anatoliki Makedhonia kai Thraki",
+            "Attiki",
+            "Dhytiki Ellas",
+            "Ionioi Nisoi",
+            "Kedriki Makedhonia",
+            "Kriti"
+          ],
+          "Country": [
+            "Coun",
+            "AL",
+            "GR",
+            "SRB",
+            "F",
+            "E",
+            "A",
+            "CZ"
+          ],
+          "River": [
+            "River",
+            "Donau",
+            "Save",
+            "Rhein",
+            "Garonne",
+            "Loire",
+            "Marne",
+            "Doubs"
+          ],
+          "Lake": [
+            "Lake",
+            "Lake Skutari",
+            "Bodensee",
+            "Lac Leman",
+            "Vierwaldstattersee",
+            "Zurichsee",
+            "Paeijaenne",
+            "Kallavesi"
+          ],
+          "Sea": [
+            "Sea",
+            "Mediterranean Sea",
+            "Atlantic Ocean",
+            "The Channel",
+            "North Sea",
+            "Baltic Sea",
+            "Barents Sea",
+            "Sea of Japan"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "locatedOn": {
+        "rows": 435,
+        "sample_values": {
+          "City": [
+            "City",
+            "Aberdeen",
+            "Aberystwyth",
+            "Adamstown",
+            "Agana",
+            "Ajaccio",
+            "Akita",
+            "Akureyri"
+          ],
+          "Province": [
+            "Province",
+            "Grampian",
+            "Ceredigion",
+            "Pitcairn Islands",
+            "Guam",
+            "Corse",
+            "Akita",
+            "Iceland"
+          ],
+          "Country": [
+            "Coun",
+            "GB",
+            "PITC",
+            "GUAM",
+            "F",
+            "J",
+            "IS",
+            "NIUE"
+          ],
+          "Island": [
+            "Island",
+            "Great Britain",
+            "Pitcairn",
+            "Guam",
+            "Corse",
+            "Honshu",
+            "Iceland",
+            "Niue"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "mergesWith": {
+        "rows": 55,
+        "sample_values": {
+          "Sea1": [
+            "Sea1",
+            "Andaman Sea",
+            "Arabian Sea",
+            "Arctic Ocean",
+            "Atlantic Ocean",
+            "Baltic Sea",
+            "Barents Sea",
+            "Bering Sea"
+          ],
+          "Sea2": [
+            "Sea2",
+            "Gulf of Bengal",
+            "Indian Ocean",
+            "Malakka Strait",
+            "Gulf of Aden",
+            "Gulf of Oman",
+            "Atlantic Ocean",
+            "Barents Sea"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "mountain": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "mountainOnIsland": {
+        "rows": 68,
+        "sample_values": {
+          "Mountain": [
+            "Mountain",
+            "Andringitra",
+            "Asahi-Dake",
+            "Barbeau Peak",
+            "Ben Nevis",
+            "Blue Mountain Peak",
+            "Cerro de Punta",
+            "Concepcion"
+          ],
+          "Island": [
+            "Island",
+            "Madagaskar",
+            "Hokkaido",
+            "Ellesmere Island",
+            "Great Britain",
+            "Jamaica",
+            "Puerto Rico",
+            "Isla da Ometepe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "organization": {
+        "rows": 154,
+        "sample_values": {
+          "Abbreviation": [
+            "Abbreviation",
+            "ABEDA",
+            "ACC",
+            "ACCT",
+            "ACP",
+            "AfDB",
+            "AFESD",
+            "AG"
+          ],
+          "Name": [
+            "Name",
+            "Arab Bank for Economic Development in Africa",
+            "Arab Cooperation Council",
+            "Agency for Cultural and Technical Cooperation",
+            "African, Caribbean, and Pacific Countries",
+            "African Development Bank",
+            "Arab Fund for Economic and Social Development",
+            "Andean Group"
+          ],
+          "City": [
+            "City",
+            "Khartoum",
+            "Paris",
+            "Brussels",
+            "Abidjan",
+            "Lima",
+            "Cairo",
+            "Abu Dhabi"
+          ],
+          "Country": [
+            "Coun",
+            "SUD",
+            "F",
+            "B",
+            "CI",
+            "PE",
+            "ET",
+            "UAE"
+          ],
+          "Province": [
+            "Province",
+            "al Khartum",
+            "Ile de France",
+            "Brabant",
+            "Cote dIvoire",
+            "Lima",
+            "El Qahira",
+            "Abu Dhabi"
+          ],
+          "Established": [
+            "Established",
+            "1974-02-18",
+            "1989-02-16",
+            "1970-03-21",
+            "1976-04-01",
+            "1963-08-04",
+            "1968-05-16",
+            "1969-05-26"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "politics": {
+        "rows": 239,
+        "sample_values": {
+          "Country": [
+            "Coun",
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG"
+          ],
+          "Independence": [
+            "Independence",
+            "1918-11-12",
+            "1919-08-19",
+            "1981-11-01",
+            "1912-11-28",
+            "1975-11-11",
+            "1918-05-28",
+            "1901-01-01"
+          ],
+          "Dependent": [
+            "Depe",
+            "USA",
+            "NL",
+            "GB",
+            "AUS",
+            "NZ",
+            "DK",
+            "F"
+          ],
+          "Government": [
+            "Government",
+            "federal republic",
+            "transitional government",
+            "parliamentary democracy",
+            "emerging democracy",
+            "unincorporated and unorganized territory of the US",
+            "parliamentary democracy that retains as its heads ",
+            "transitional government nominally a multiparty dem"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "population": {
+        "rows": 238,
+        "sample_values": {
+          "Country": [
+            "A",
+            "AFG",
+            "AG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG",
+            "ARM"
+          ],
+          "Population_Growth": [
+            "0.41",
+            "4.78",
+            "0.76",
+            "1.34",
+            "1.22",
+            "2.96",
+            "2.68",
+            "0.02"
+          ],
+          "Infant_Mortality": [
+            "6.2",
+            "149.7",
+            "17.2",
+            "49.2",
+            "10.18",
+            "2.2",
+            "138.9",
+            "38.9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "province": {
+        "rows": 1450,
+        "sample_values": {
+          "Name": [
+            "Aali an Nil",
+            "Aberconwy and Colwyn",
+            "Abruzzo",
+            "Abu Dhabi",
+            "Acre",
+            "Ad Tamim",
+            "Adamaoua",
+            "Adana"
+          ],
+          "Country": [
+            "SUD",
+            "GB",
+            "I",
+            "UAE",
+            "BR",
+            "IRQ",
+            "CAM",
+            "TR"
+          ],
+          "Population": [
+            "1599605",
+            "110700",
+            "1263000",
+            "670000",
+            "483483",
+            "592869",
+            "495200",
+            "1934907"
+          ],
+          "Area": [
+            "238792.0",
+            "1130.0",
+            "10794.0",
+            "67350.0",
+            "153149.0",
+            "10282.0",
+            "63691.0",
+            "17253.0"
+          ],
+          "Capital": [
+            "Malakal",
+            "Colwyn Bay",
+            "LAquila",
+            "Rio Branco",
+            "Kirkuk",
+            "Ngaoundere",
+            "Adana",
+            "Adiyaman"
+          ],
+          "CapProv": [
+            "Aali an Nil",
+            "Aberconwy and Colwyn",
+            "Abruzzo",
+            "Acre",
+            "Ad Tamim",
+            "Adamaoua",
+            "Adana",
+            "Adiyaman"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "religion": {
+        "rows": 454,
+        "sample_values": {
+          "Country": [
+            "BERM",
+            "AUS",
+            "AXA",
+            "BS",
+            "CAYM",
+            "CDN",
+            "IRL",
+            "NORF"
+          ],
+          "Name": [
+            "African Methodist Episcopal",
+            "Anglican",
+            "Armenian Apostolic",
+            "Bahai",
+            "Baptist",
+            "Buddhist",
+            "Chondogyo",
+            "Christian"
+          ],
+          "Percentage": [
+            "11.0",
+            "26.1",
+            "29.0",
+            "23.0",
+            "20.0",
+            "5.7",
+            "8.0",
+            "3.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "river": {
+        "rows": 218,
+        "sample_values": {
+          "Name": [
+            "Aare",
+            "Adda",
+            "Akagera",
+            "Allegheny River",
+            "Aller",
+            "Alz",
+            "Amazonas",
+            "Ammer"
+          ],
+          "River": [
+            "Rhein",
+            "Po",
+            "Ohio River",
+            "Weser",
+            "Inn",
+            "Isar",
+            "Jenissej",
+            "Amur"
+          ],
+          "Lake": [
+            "Brienzersee",
+            "Lago di Como",
+            "Lake Victoria",
+            "Chiemsee",
+            "Ammersee",
+            "Ozero Aral",
+            "Ozero Baikal",
+            "Lake Powell"
+          ],
+          "Sea": [
+            "Atlantic Ocean",
+            "Sea of Okhotsk",
+            "Mediterranean Sea",
+            "Malakka Strait",
+            "Ganges",
+            "Sibirian Sea",
+            "Pacific Ocean",
+            "Baltic Sea"
+          ],
+          "Length": [
+            "288.0",
+            "313.0",
+            "275.0",
+            "523.0",
+            "211.0",
+            "150.0",
+            "6448.0",
+            "168.0"
+          ],
+          "SourceLongitude": [
+            "8.2",
+            "10.3",
+            "29.3",
+            "-77.9",
+            "11.23",
+            "12.35",
+            "-71.7",
+            "11.05"
+          ],
+          "SourceLatitude": [
+            "46.55",
+            "-2.5",
+            "41.9",
+            "52.1",
+            "47.3",
+            "-15.5",
+            "47.57",
+            "37.1"
+          ],
+          "Mountains": [
+            "Alps",
+            "East African Rift",
+            "Appalachian Mountains",
+            "Andes",
+            "Apennin",
+            "Ethiopian Highlands",
+            "Black Forest",
+            "Great Dividing Range"
+          ],
+          "SourceAltitude": [
+            "2310.0",
+            "2235.0",
+            "2700.0",
+            "759.0",
+            "130.0",
+            "5170.0",
+            "850.0",
+            "310.0"
+          ],
+          "EstuaryLongitude": [
+            "8.22",
+            "9.88",
+            "33.0",
+            "-80.0",
+            "9.18",
+            "12.8",
+            "-50.0",
+            "11.96"
+          ],
+          "EstuaryLatitude": [
+            "47.61",
+            "45.13",
+            "-1.0",
+            "40.42",
+            "52.94",
+            "48.3",
+            "0.0",
+            "48.5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sea": {
+        "rows": 35,
+        "sample_values": {
+          "Name": [
+            "Andaman Sea",
+            "Arabian Sea",
+            "Arctic Ocean",
+            "Atlantic Ocean",
+            "Baltic Sea",
+            "Barents Sea",
+            "Bay of Bengal",
+            "Bering Sea"
+          ],
+          "Depth": [
+            "3113.0",
+            "5203.0",
+            "5608.0",
+            "9219.0",
+            "459.0",
+            "32.0",
+            "4694.0",
+            "4096.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "target": {
+        "rows": 205,
+        "sample_values": {
+          "Country": [
+            "Coun",
+            "A",
+            "AFG",
+            "AL",
+            "AMSA",
+            "AND",
+            "ANG",
+            "ARM"
+          ],
+          "Target": [
+            "Target",
+            "Christian",
+            "non-Christian"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

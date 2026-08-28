@@ -1,0 +1,703 @@
+{
+  "db_id": "protein_structure_analysis_and_management",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/protein_structure_analysis_and_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"query_params\" TEXT\n}\n\nTable \"public\".\"annotations\" {\n  \"annotation_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"annotation_type\" TEXT\n  \"annotation_text\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"grant_proposals\" {\n  \"proposal_id\" INTEGER [pk]\n  \"researcher_id\" INTEGER\n  \"grant_agency\" TEXT\n  \"grant_number\" TEXT\n  \"title\" TEXT\n  \"description\" TEXT\n  \"submitted_at\" TEXT\n  \"funding_status\" TEXT\n}\n\nTable \"public\".\"helices\" {\n  \"helix_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"helix_start\" INTEGER\n  \"helix_end\" INTEGER\n  \"kink_position\" INTEGER\n  \"helix_type\" TEXT\n  \"pitch\" REAL\n  \"rise\" REAL\n  \"angle\" REAL\n}\n\nTable \"public\".\"interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"protein_id_1\" INTEGER\n  \"protein_id_2\" INTEGER\n  \"interaction_type\" TEXT\n  \"details\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"kinks\" {\n  \"kink_id\" INTEGER [pk]\n  \"helix_id\" INTEGER\n  \"kink_start\" INTEGER\n  \"kink_end\" INTEGER\n  \"kink_angle\" REAL\n  \"kink_type\" TEXT\n}\n\nTable \"public\".\"lab_meetings\" {\n  \"meeting_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"date\" TEXT\n  \"attendees\" TEXT\n  \"notes\" TEXT\n  \"created_at\" TEXT\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"mutations\" {\n  \"mutation_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"position\" INTEGER\n  \"wild_type\" TEXT\n  \"mutant\" TEXT\n  \"effect\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"principal_investigator_id\" INTEGER\n  \"funding_agency\" TEXT\n  \"grant_number\" TEXT\n}\n\nTable \"public\".\"protein_images\" {\n  \"image_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"image_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"protein_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"proteins\" {\n  \"protein_id\" INTEGER [pk]\n  \"pdb_code\" TEXT\n  \"sequence\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"project_id\" INTEGER\n  \"researcher_id\" INTEGER\n  \"resolution\" REAL\n  \"method\" TEXT\n  \"source\" TEXT\n  \"expression_system\" TEXT\n}\n\nTable \"public\".\"publications\" {\n  \"publication_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"doi\" TEXT\n  \"title\" TEXT\n  \"authors\" TEXT\n  \"journal\" TEXT\n  \"year\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"references\" {\n  \"reference_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"reference_type\" TEXT\n  \"doi\" TEXT\n  \"title\" TEXT\n  \"authors\" TEXT\n  \"journal\" TEXT\n  \"year\" INTEGER\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"researchers\" {\n  \"researcher_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"affiliation\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"institution\" TEXT\n}\n\nTable \"public\".\"structural_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"helix_id\" INTEGER\n  \"n_radius\" REAL\n  \"n_rmsd\" REAL\n  \"c_radius\" REAL\n  \"c_rmsd\" REAL\n  \"estimated_error\" REAL\n  \"validation_score\" REAL\n}\n\nTable \"public\".\"structural_variants\" {\n  \"variant_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"variant_type\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"institution\" TEXT\n  \"department\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"annotations\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"annotations\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"grant_proposals\".\"researcher_id\" > \"public\".\"researchers\".\"researcher_id\"\nRef: \"public\".\"helices\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"interactions\".\"protein_id_1\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"interactions\".\"protein_id_2\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"interactions\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"kinks\".\"helix_id\" > \"public\".\"helices\".\"helix_id\"\nRef: \"public\".\"lab_meetings\".\"project_id\" > \"public\".\"projects\".\"project_id\"\nRef: \"public\".\"mutations\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"mutations\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"protein_images\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"protein_images\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"protein_versions\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"protein_versions\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"proteins\".\"project_id\" > \"public\".\"projects\".\"project_id\"\nRef: \"public\".\"proteins\".\"researcher_id\" > \"public\".\"researchers\".\"researcher_id\"\nRef: \"public\".\"publications\".\"project_id\" > \"public\".\"projects\".\"project_id\"\nRef: \"public\".\"references\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"references\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\"\nRef: \"public\".\"structural_metrics\".\"helix_id\" > \"public\".\"helices\".\"helix_id\"\nRef: \"public\".\"structural_variants\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"structural_variants\".\"protein_id\" > \"public\".\"proteins\".\"protein_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"query_params\" TEXT\n}\n\nTable \"annotations\" {\n  \"annotation_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"annotation_type\" TEXT\n  \"annotation_text\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"grant_proposals\" {\n  \"proposal_id\" INTEGER [pk]\n  \"researcher_id\" INTEGER\n  \"grant_agency\" TEXT\n  \"grant_number\" TEXT\n  \"title\" TEXT\n  \"description\" TEXT\n  \"submitted_at\" TEXT\n  \"funding_status\" TEXT\n}\n\nTable \"helices\" {\n  \"helix_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"helix_start\" INTEGER\n  \"helix_end\" INTEGER\n  \"kink_position\" INTEGER\n  \"helix_type\" TEXT\n  \"pitch\" REAL\n  \"rise\" REAL\n  \"angle\" REAL\n}\n\nTable \"interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"protein_id_1\" INTEGER\n  \"protein_id_2\" INTEGER\n  \"interaction_type\" TEXT\n  \"details\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"kinks\" {\n  \"kink_id\" INTEGER [pk]\n  \"helix_id\" INTEGER\n  \"kink_start\" INTEGER\n  \"kink_end\" INTEGER\n  \"kink_angle\" REAL\n  \"kink_type\" TEXT\n}\n\nTable \"lab_meetings\" {\n  \"meeting_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"date\" TEXT\n  \"attendees\" TEXT\n  \"notes\" TEXT\n  \"created_at\" TEXT\n  \"last_updated_at\" TEXT\n}\n\nTable \"mutations\" {\n  \"mutation_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"position\" INTEGER\n  \"wild_type\" TEXT\n  \"mutant\" TEXT\n  \"effect\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"principal_investigator_id\" INTEGER\n  \"funding_agency\" TEXT\n  \"grant_number\" TEXT\n}\n\nTable \"protein_images\" {\n  \"image_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"image_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"protein_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"proteins\" {\n  \"protein_id\" INTEGER [pk]\n  \"pdb_code\" TEXT\n  \"sequence\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"project_id\" INTEGER\n  \"researcher_id\" INTEGER\n  \"resolution\" REAL\n  \"method\" TEXT\n  \"source\" TEXT\n  \"expression_system\" TEXT\n}\n\nTable \"publications\" {\n  \"publication_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"doi\" TEXT\n  \"title\" TEXT\n  \"authors\" TEXT\n  \"journal\" TEXT\n  \"year\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_at\" TEXT\n}\n\nTable \"references\" {\n  \"reference_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"reference_type\" TEXT\n  \"doi\" TEXT\n  \"title\" TEXT\n  \"authors\" TEXT\n  \"journal\" TEXT\n  \"year\" INTEGER\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"researchers\" {\n  \"researcher_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"affiliation\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"institution\" TEXT\n}\n\nTable \"structural_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"helix_id\" INTEGER\n  \"n_radius\" REAL\n  \"n_rmsd\" REAL\n  \"c_radius\" REAL\n  \"c_rmsd\" REAL\n  \"estimated_error\" REAL\n  \"validation_score\" REAL\n}\n\nTable \"structural_variants\" {\n  \"variant_id\" INTEGER [pk]\n  \"protein_id\" INTEGER\n  \"variant_type\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"last_updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"institution\" TEXT\n  \"department\" TEXT\n}\n\nRef: \"access_logs\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"annotations\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"annotations\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"grant_proposals\".\"researcher_id\" > \"researchers\".\"researcher_id\"\n\nRef: \"helices\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"interactions\".\"protein_id_1\" > \"proteins\".\"protein_id\"\n\nRef: \"interactions\".\"protein_id_2\" > \"proteins\".\"protein_id\"\n\nRef: \"interactions\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"kinks\".\"helix_id\" > \"helices\".\"helix_id\"\n\nRef: \"lab_meetings\".\"project_id\" > \"projects\".\"project_id\"\n\nRef: \"mutations\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"mutations\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"protein_images\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"protein_images\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"protein_versions\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"protein_versions\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"proteins\".\"project_id\" > \"projects\".\"project_id\"\n\nRef: \"proteins\".\"researcher_id\" > \"researchers\".\"researcher_id\"\n\nRef: \"publications\".\"project_id\" > \"projects\".\"project_id\"\n\nRef: \"references\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"references\".\"protein_id\" > \"proteins\".\"protein_id\"\n\nRef: \"structural_metrics\".\"helix_id\" > \"helices\".\"helix_id\"\n\nRef: \"structural_variants\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"structural_variants\".\"protein_id\" > \"proteins\".\"protein_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'edit'\n  query_params: 'search_term=2ipcA', 'filter=helix_type=alpha'\n  access_date: '2023-05-01', '2023-05-02'\n\nannotations: 2 rows\n  annotation_type: 'functional', 'structural'\n  annotation_text: 'This helix is crucial for the protein's function', 'The kink at position 61 is a key structural featur'\n  created_at: '2023-01-01 12:00:00', '2023-01-02 13:00:00'\n\ngrant_proposals: 2 rows\n  title: 'Helix Analysis Project', 'Kink Analysis Project'\n  funding_status: 'approved', 'rejected'\n  grant_agency: 'NIH', 'NSF'\n\nhelices: 2 rows\n  helix_type: 'alpha', 'beta'\n  helix_start: '20', '56'\n  helix_end: '32', '68'\n\ninteractions: 2 rows\n  interaction_type: 'binding', 'dimerization'\n  details: 'Protein 2ipcA binds to protein 2ipcB', 'Protein 2ipcC dimerizes with protein 2ipcD'\n  created_at: '2023-01-01 14:00:00', '2023-01-02 15:00:00'\n\nkinks: 2 rows\n  kink_type: 'sharp', 'gradual'\n  kink_start: '21', '55'\n  kink_end: '33', '67'\n\nlab_meetings: 2 rows\n  notes: 'Discussion of helix analysis results.', 'Discussion of kink analysis results.'\n  date: '2023-01-01', '2023-01-02'\n  created_at: '2023-01-01 00:00:00', '2023-01-02 00:00:00'\n\nmutations: 2 rows\n  wild_type: 'A', 'L'\n  mutant: 'V', 'F'\n  effect: 'stabilizing', 'destabilizing'\n\nprojects: 2 rows\n  project_name: 'Helix Analysis Project', 'Kink Analysis Project'\n  description: 'Analyzing helix structures in proteins', 'Analyzing kink structures in proteins'\n  funding_agency: 'NIH', 'NSF'\n\nprotein_images: 2 rows\n  image_type: '3D model', '2D projection'\n  file_path: 'images/2ipcA_3D.png', 'images/2ipcB_2D.png'\n  created_at: '2023-01-01 23:30:00', '2023-01-02 00:30:00'\n\nprotein_versions: 2 rows\n  description: 'Initial version', 'Updated kink angle'\n  created_at: '2023-01-01 22:00:00', '2023-01-02 23:00:00'\n  last_updated_at: '2023-01-02 23:00:00', '2023-01-01 00:00:00'\n\nproteins: 2 rows\n  pdb_code: '2ipcA', '2ipcB'\n  method: 'X-ray diffraction', 'NMR'\n  source: 'E. coli', 'S. cerevisiae'\n\npublications: 2 rows\n  title: 'Structure and Function of Protein 2ipcA', 'Dataset for Protein 2ipcB'\n  doi: '10.1001/jama.2023.0001', '10.1001/jama.2023.0002'\n  journal: 'Nature', 'Nature Data'\n\nreferences: 2 rows\n  reference_type: 'publication', 'dataset'\n  title: 'Structure and Function of Protein 2ipcA', 'Dataset for Protein 2ipcB'\n  doi: '10.1001/jama.2023.0001', '10.1001/jama.2023.0002'\n\nresearchers: 2 rows\n  first_name: 'Alice', 'Bob'\n  last_name: 'Johnson', 'Williams'\n  role: 'principal investigator', 'researcher'\n\nstructural_metrics: 2 rows\n  n_radius: '2.197', '1.941'\n  n_rmsd: '0.444', '0.467'\n  c_radius: '1.839', '1.894'\n\nstructural_variants: 2 rows\n  variant_type: 'isoform', 'splice variant'\n  description: 'Variant with an additional helix', 'Variant with a different kink position'\n  created_at: '2023-01-01 20:00:00', '2023-01-02 21:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  institution: 'University of Illinois', 'Stanford University'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "0"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "edit"
+          ],
+          "query_params": [
+            "search_term=2ipcA",
+            "filter=helix_type=alpha"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "annotations": {
+        "rows": 2,
+        "sample_values": {
+          "annotation_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "1"
+          ],
+          "annotation_type": [
+            "functional",
+            "structural"
+          ],
+          "annotation_text": [
+            "This helix is crucial for the protein's function",
+            "The kink at position 61 is a key structural featur"
+          ],
+          "created_by": [
+            "0",
+            "1"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 13:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 13:00:00",
+            "2023-01-01 14:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "grant_proposals": {
+        "rows": 2,
+        "sample_values": {
+          "proposal_id": [
+            "0",
+            "1"
+          ],
+          "researcher_id": [
+            "0",
+            "1"
+          ],
+          "grant_agency": [
+            "NIH",
+            "NSF"
+          ],
+          "grant_number": [
+            "R01GM123456",
+            "MCB-2023-1234"
+          ],
+          "title": [
+            "Helix Analysis Project",
+            "Kink Analysis Project"
+          ],
+          "description": [
+            "This proposal aims to analyze the structure and fu"
+          ],
+          "submitted_at": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "funding_status": [
+            "approved",
+            "rejected"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "helices": {
+        "rows": 2,
+        "sample_values": {
+          "helix_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "1"
+          ],
+          "helix_start": [
+            "20",
+            "56"
+          ],
+          "helix_end": [
+            "32",
+            "68"
+          ],
+          "kink_position": [
+            "27",
+            "61"
+          ],
+          "helix_type": [
+            "alpha",
+            "beta"
+          ],
+          "pitch": [
+            "5.4",
+            "6.3"
+          ],
+          "rise": [
+            "1.5",
+            "2.0"
+          ],
+          "angle": [
+            "20.0",
+            "30.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "interactions": {
+        "rows": 2,
+        "sample_values": {
+          "interaction_id": [
+            "0",
+            "1"
+          ],
+          "protein_id_1": [
+            "1",
+            "0"
+          ],
+          "protein_id_2": [
+            "1"
+          ],
+          "interaction_type": [
+            "binding",
+            "dimerization"
+          ],
+          "details": [
+            "Protein 2ipcA binds to protein 2ipcB",
+            "Protein 2ipcC dimerizes with protein 2ipcD"
+          ],
+          "created_by": [
+            "1"
+          ],
+          "created_at": [
+            "2023-01-01 14:00:00",
+            "2023-01-02 15:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 15:00:00",
+            "2023-01-01 16:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "kinks": {
+        "rows": 2,
+        "sample_values": {
+          "kink_id": [
+            "0",
+            "1"
+          ],
+          "helix_id": [
+            "0",
+            "1"
+          ],
+          "kink_start": [
+            "21",
+            "55"
+          ],
+          "kink_end": [
+            "33",
+            "67"
+          ],
+          "kink_angle": [
+            "13.268",
+            "40.625"
+          ],
+          "kink_type": [
+            "sharp",
+            "gradual"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lab_meetings": {
+        "rows": 2,
+        "sample_values": {
+          "meeting_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "1"
+          ],
+          "date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "attendees": [
+            "Alice Johnson, Bob Williams"
+          ],
+          "notes": [
+            "Discussion of helix analysis results.",
+            "Discussion of kink analysis results."
+          ],
+          "created_at": [
+            "2023-01-01 00:00:00",
+            "2023-01-02 00:00:00"
+          ],
+          "last_updated_at": [
+            "2023-01-02 00:00:00",
+            "2023-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "mutations": {
+        "rows": 2,
+        "sample_values": {
+          "mutation_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "0"
+          ],
+          "position": [
+            "27",
+            "61"
+          ],
+          "wild_type": [
+            "A",
+            "L"
+          ],
+          "mutant": [
+            "V",
+            "F"
+          ],
+          "effect": [
+            "stabilizing",
+            "destabilizing"
+          ],
+          "created_by": [
+            "0"
+          ],
+          "created_at": [
+            "2023-01-01 16:00:00",
+            "2023-01-02 17:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 17:00:00",
+            "2023-01-01 18:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "projects": {
+        "rows": 2,
+        "sample_values": {
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "project_name": [
+            "Helix Analysis Project",
+            "Kink Analysis Project"
+          ],
+          "description": [
+            "Analyzing helix structures in proteins",
+            "Analyzing kink structures in proteins"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ],
+          "principal_investigator_id": [
+            "301",
+            "302"
+          ],
+          "funding_agency": [
+            "NIH",
+            "NSF"
+          ],
+          "grant_number": [
+            "R01GM123456",
+            "MCB-2023-1234"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "protein_images": {
+        "rows": 2,
+        "sample_values": {
+          "image_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "1",
+            "0"
+          ],
+          "image_type": [
+            "3D model",
+            "2D projection"
+          ],
+          "file_path": [
+            "images/2ipcA_3D.png",
+            "images/2ipcB_2D.png"
+          ],
+          "file_size": [
+            "1.2",
+            "0.8"
+          ],
+          "created_by": [
+            "1"
+          ],
+          "created_at": [
+            "2023-01-01 23:30:00",
+            "2023-01-02 00:30:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 00:30:00",
+            "2023-01-01 01:30:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "protein_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "0"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "description": [
+            "Initial version",
+            "Updated kink angle"
+          ],
+          "created_by": [
+            "0",
+            "1"
+          ],
+          "created_at": [
+            "2023-01-01 22:00:00",
+            "2023-01-02 23:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 23:00:00",
+            "2023-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "proteins": {
+        "rows": 2,
+        "sample_values": {
+          "protein_id": [
+            "0",
+            "1"
+          ],
+          "pdb_code": [
+            "2ipcA",
+            "2ipcB"
+          ],
+          "sequence": [
+            "KQVVEPVNRLEAE"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00",
+            "2023-01-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 10:00:00",
+            "2023-01-02 11:00:00"
+          ],
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "researcher_id": [
+            "0",
+            "1"
+          ],
+          "resolution": [
+            "2.5",
+            "3.0"
+          ],
+          "method": [
+            "X-ray diffraction",
+            "NMR"
+          ],
+          "source": [
+            "E. coli",
+            "S. cerevisiae"
+          ],
+          "expression_system": [
+            "BL21(DE3)",
+            "W303"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publications": {
+        "rows": 2,
+        "sample_values": {
+          "publication_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "1"
+          ],
+          "doi": [
+            "10.1001/jama.2023.0001",
+            "10.1001/jama.2023.0002"
+          ],
+          "title": [
+            "Structure and Function of Protein 2ipcA",
+            "Dataset for Protein 2ipcB"
+          ],
+          "authors": [
+            "Alice Johnson, Bob Williams"
+          ],
+          "journal": [
+            "Nature",
+            "Nature Data"
+          ],
+          "year": [
+            "2023"
+          ],
+          "created_at": [
+            "2023-01-01 00:00:00",
+            "2023-01-02 00:00:00"
+          ],
+          "last_updated_at": [
+            "2023-01-02 00:00:00",
+            "2023-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "references": {
+        "rows": 2,
+        "sample_values": {
+          "reference_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "1",
+            "2"
+          ],
+          "reference_type": [
+            "publication",
+            "dataset"
+          ],
+          "doi": [
+            "10.1001/jama.2023.0001",
+            "10.1001/jama.2023.0002"
+          ],
+          "title": [
+            "Structure and Function of Protein 2ipcA",
+            "Dataset for Protein 2ipcB"
+          ],
+          "authors": [
+            "Alice Johnson, Bob Williams"
+          ],
+          "journal": [
+            "Nature",
+            "Nature Data"
+          ],
+          "year": [
+            "2023"
+          ],
+          "created_by": [
+            "301",
+            "302"
+          ],
+          "created_at": [
+            "2023-01-01 18:00:00",
+            "2023-01-02 19:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 19:00:00",
+            "2023-01-01 20:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "researchers": {
+        "rows": 2,
+        "sample_values": {
+          "researcher_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alice",
+            "Bob"
+          ],
+          "last_name": [
+            "Johnson",
+            "Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "affiliation": [
+            "University of Illinois",
+            "Stanford University"
+          ],
+          "role": [
+            "principal investigator",
+            "researcher"
+          ],
+          "department": [
+            "Biochemistry",
+            "Biophysics"
+          ],
+          "institution": [
+            "College of Medicine",
+            "School of Medicine"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "structural_metrics": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "helix_id": [
+            "1",
+            "0"
+          ],
+          "n_radius": [
+            "2.197",
+            "1.941"
+          ],
+          "n_rmsd": [
+            "0.444",
+            "0.467"
+          ],
+          "c_radius": [
+            "1.839",
+            "1.894"
+          ],
+          "c_rmsd": [
+            "0.586",
+            "0.281"
+          ],
+          "estimated_error": [
+            "11.199",
+            "8.135"
+          ],
+          "validation_score": [
+            "0.85",
+            "0.9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "structural_variants": {
+        "rows": 2,
+        "sample_values": {
+          "variant_id": [
+            "0",
+            "1"
+          ],
+          "protein_id": [
+            "0"
+          ],
+          "variant_type": [
+            "isoform",
+            "splice variant"
+          ],
+          "description": [
+            "Variant with an additional helix",
+            "Variant with a different kink position"
+          ],
+          "created_by": [
+            "1"
+          ],
+          "created_at": [
+            "2023-01-01 20:00:00",
+            "2023-01-02 21:00:00"
+          ],
+          "last_updated_by": [
+            "302",
+            "301"
+          ],
+          "last_updated_at": [
+            "2023-01-02 21:00:00",
+            "2023-01-01 22:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "institution": [
+            "University of Illinois",
+            "Stanford University"
+          ],
+          "department": [
+            "Biochemistry",
+            "Biophysics"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

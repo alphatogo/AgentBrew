@@ -1,0 +1,259 @@
+{
+  "db_id": "authors",
+  "source": "bird",
+  "tables": 5,
+  "total_rows": 4837220,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#authors",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Author\" {\n  \"Id\" INTEGER [pk]\n  \"Name\" TEXT\n  \"Affiliation\" TEXT\n}\n\nTable \"Conference\" {\n  \"Id\" INTEGER [pk]\n  \"ShortName\" TEXT\n  \"FullName\" TEXT\n  \"HomePage\" TEXT\n}\n\nTable \"Journal\" {\n  \"Id\" INTEGER [pk]\n  \"ShortName\" TEXT\n  \"FullName\" TEXT\n  \"HomePage\" TEXT\n}\n\nTable \"Paper\" {\n  \"Id\" INTEGER [pk]\n  \"Title\" TEXT\n  \"Year\" INTEGER\n  \"ConferenceId\" INTEGER\n  \"JournalId\" INTEGER\n  \"Keyword\" TEXT\n}\n\nTable \"PaperAuthor\" {\n  \"PaperId\" INTEGER\n  \"AuthorId\" INTEGER\n  \"Name\" TEXT\n  \"Affiliation\" TEXT\n}\n\n\n\nRef: \"Paper\".\"JournalId\" > \"Journal\".\"Id\"\n\nRef: \"Paper\".\"ConferenceId\" > \"Conference\".\"Id\"\n\nRef: \"PaperAuthor\".\"AuthorId\" > \"Author\".\"Id\"\n\nRef: \"PaperAuthor\".\"PaperId\" > \"Paper\".\"Id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Author\" {\n  \"Id\" INTEGER [pk]\n  \"Name\" TEXT\n  \"Affiliation\" TEXT\n}\n\nTable \"Conference\" {\n  \"Id\" INTEGER [pk]\n  \"ShortName\" TEXT\n  \"FullName\" TEXT\n  \"HomePage\" TEXT\n}\n\nTable \"Journal\" {\n  \"Id\" INTEGER [pk]\n  \"ShortName\" TEXT\n  \"FullName\" TEXT\n  \"HomePage\" TEXT\n}\n\nTable \"Paper\" {\n  \"Id\" INTEGER [pk]\n  \"Title\" TEXT\n  \"Year\" INTEGER\n  \"ConferenceId\" INTEGER\n  \"JournalId\" INTEGER\n  \"Keyword\" TEXT\n}\n\nTable \"PaperAuthor\" {\n  \"PaperId\" INTEGER\n  \"AuthorId\" INTEGER\n  \"Name\" TEXT\n  \"Affiliation\" TEXT\n}\n\nRef: \"Paper\".\"JournalId\" > \"Journal\".\"Id\"\n\nRef: \"Paper\".\"ConferenceId\" > \"Conference\".\"Id\"\n\nRef: \"PaperAuthor\".\"AuthorId\" > \"Author\".\"Id\"\n\nRef: \"PaperAuthor\".\"PaperId\" > \"Paper\".\"Id\"\n\n## Table Stats & Sample Values\n\nAuthor: 10000 rows\n  Name: 'Ernest Jordan', 'K. MORIBE', 'D. Jakominich', ...\n  Affiliation: 'Cavendish Laboratory|Cambridge University', 'Department of Molecular Biology|School of Science|', 'HASLab / INESC TEC and Universidade do Minho', ...\n  Id: '9', '14', '15', ...\n\nConference: 4545 rows\n  ShortName: 'IADIS', 'IADT', 'ICOMP', ...\n  FullName: 'International Association for Development of the I', 'Issues and Applications of Database Technology', 'IBM Germany Scientific Symposium Series', ...\n  HomePage: 'http://www.informatik.uni-trier.de/~ley/db/conf/ia', 'http://www.informatik.uni-trier.de/~ley/db/conf/ib', 'http://www.informatik.uni-trier.de/~ley/db/conf/ic', ...\n\nJournal: 10000 rows\n  ShortName: 'ICOM', 'AEPIA', 'IBMRD', ...\n  FullName: 'Zeitschrift Für Interaktive Und Kooperative Medien', 'Inteligencia Artificial,revista Iberoamericana De', 'Ibm Journal of Research and Development', ...\n  HomePage: 'http://www.i-com-media.de', 'http://aepia.dsic.upv.es/revista/', 'http://www-tr.watson.ibm.com/journal/rdindex.html', ...\n\nPaper: 9962 rows\n  Title: 'Stitching videos streamed by mobile phones in real', 'A nonlocal convection–diffusion equation', 'Area Effects in Cepaea', ...\n  Keyword: 'mobile video capturing|real-time|video stitching', 'Nonlocal diffusion; Convection–diffusion; Asymptot', 'Keywords: methylation, epigenetic, metastasis, pro', ...\n  Year: '2009', '2007', '1963', ...\n\nPaperAuthor: 9999 rows\n  Name: 'ADAM G. JONES', 'Kazuo Iwama', 'Asgeir Finnseth', ...\n  Affiliation: 'Kyushu University 812 Fukuoka Japan 812 Fukuoka Ja', 'The french National Institute for Research in Comp', 'Nanjing University', ...\n  PaperId: '4', '5', '6', ...",
+    "stateUrl": "https://bird-bench.github.io/#authors",
+    "tableStats": {
+      "Author": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "9",
+            "14",
+            "15",
+            "25",
+            "37",
+            "44",
+            "55",
+            "59"
+          ],
+          "Name": [
+            "Ernest Jordan",
+            "K. MORIBE",
+            "D. Jakominich",
+            "William H. Nailon",
+            "P. B. Littlewood",
+            "A. Kuroiwa",
+            "Jose Pereira",
+            "Buzz Aldrin"
+          ],
+          "Affiliation": [
+            "Cavendish Laboratory|Cambridge University",
+            "Department of Molecular Biology|School of Science|",
+            "HASLab / INESC TEC and Universidade do Minho",
+            "Purdue University, West Lafayette, Indiana 47907-2",
+            "This project,is supported,by a Hong,Kong,Polytechn",
+            "Univ . of California at Berkeley",
+            "Department of Biological Sciences, University of S",
+            "Rijksuniversiteit.Utrecht"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Conference": {
+        "rows": 4545,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "ShortName": [
+            "IADIS",
+            "IADT",
+            "ICOMP",
+            "ICAC",
+            "IC-AI",
+            "ICAIL",
+            "ICALP",
+            "ICAPS(AIPS)"
+          ],
+          "FullName": [
+            "International Association for Development of the I",
+            "Issues and Applications of Database Technology",
+            "IBM Germany Scientific Symposium Series",
+            "International Conference on Internet Computing",
+            "International Conference on Autonomic Computing",
+            "International Conference on Artificial Intelligenc",
+            "International Colloquium on Automata, Languages an",
+            "International Conference on Automated Planning and"
+          ],
+          "HomePage": [
+            "http://www.informatik.uni-trier.de/~ley/db/conf/ia",
+            "http://www.informatik.uni-trier.de/~ley/db/conf/ib",
+            "http://www.informatik.uni-trier.de/~ley/db/conf/ic",
+            "http://www.autonomic-conference.org/",
+            "http://www.world-academy-of-science.org/worldcomp1",
+            "NULL",
+            "http://icalp11.inf.ethz.ch/",
+            "http://icaps11.informatik.uni-freiburg.de/"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Journal": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ShortName": [
+            "ICOM",
+            "AEPIA",
+            "IBMRD",
+            "IBMSJ",
+            "TCBB",
+            "TON",
+            "ANNALS",
+            "COMSUR"
+          ],
+          "FullName": [
+            "Zeitschrift Für Interaktive Und Kooperative Medien",
+            "Inteligencia Artificial,revista Iberoamericana De ",
+            "Ibm Journal of Research and Development",
+            "Ibm Systems Journal",
+            "Iet Software/iee Proceedings - Software",
+            "IEEE/ACM Transactions on Computational Biology and",
+            "IEEE/ACM Transactions on Networking",
+            "IEEE Annals of The History of Computing"
+          ],
+          "HomePage": [
+            "http://www.i-com-media.de",
+            "http://aepia.dsic.upv.es/revista/",
+            "http://www-tr.watson.ibm.com/journal/rdindex.html",
+            "http://researchweb.watson.ibm.com/journal/",
+            "http://www.ietdl.org/IET-SEN",
+            "http://ieeexplore.ieee.org/servlet/opac?punumber=8",
+            "http://www.ton.seas.upenn.edu/",
+            "http://www.comsoc.org/livepubs/surveys/index.html"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Paper": {
+        "rows": 9962,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Title": [
+            "Stitching videos streamed by mobile phones in real",
+            "A nonlocal convection–diffusion equation",
+            "Area Effects in Cepaea",
+            "Multiple paternity in a natural population of a sa",
+            "Complexity of Finding Short Resolution Proofs",
+            "A software system for large dynamic maps based on ",
+            "Natural History of the Psychoneuroses",
+            "145 GROWTH HORMONE RECEPTORS AND THE ONSET OF HYPE"
+          ],
+          "Year": [
+            "2009",
+            "2007",
+            "1963",
+            "2005",
+            "1997",
+            "2001",
+            "1959",
+            "1985"
+          ],
+          "ConferenceId": [
+            "167",
+            "0",
+            "158",
+            "341",
+            "2397",
+            "1231",
+            "1037",
+            "1389"
+          ],
+          "JournalId": [
+            "0",
+            "7234",
+            "16867",
+            "6130",
+            "17639",
+            "4084",
+            "3943",
+            "16666"
+          ],
+          "Keyword": [
+            "mobile video capturing|real-time|video stitching",
+            "Nonlocal diffusion; Convection–diffusion; Asymptot",
+            "Keywords: methylation, epigenetic, metastasis, pro",
+            "Optical properties, Organic materials, Polarizatio",
+            "Computational model; X-machine; Ants; Foraging pat",
+            "Keywords: Complex network, Sliding mode, Smart con",
+            "KEYWORDS banner, advertising, World Wide Web, adap",
+            "Capability approach; Entrepreneurship; Human devel"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PaperAuthor": {
+        "rows": 9999,
+        "sample_values": {
+          "PaperId": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "AuthorId": [
+            "1456512",
+            "1102257",
+            "1806301",
+            "2252569",
+            "1491002",
+            "146002",
+            "318484",
+            "1453825"
+          ],
+          "Name": [
+            "ADAM G. JONES",
+            "Kazuo Iwama",
+            "Asgeir Finnseth",
+            "Guðmundur Jökulsson",
+            "M. H. Friedman",
+            "M. C. POSTEL-VINAY",
+            "Patrick Durand",
+            "S. LOPEZ"
+          ],
+          "Affiliation": [
+            "Kyushu University 812 Fukuoka Japan 812 Fukuoka Ja",
+            "The french National Institute for Research in Comp",
+            "Nanjing University",
+            "NOAA|Forecast Systems Laboratory|Colorado State Un",
+            "Office of Naval Research",
+            "NOAA Forecast Systems Laboratory",
+            "Microsoft",
+            "Department of Informatics, Faculty of Sciences, Un"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

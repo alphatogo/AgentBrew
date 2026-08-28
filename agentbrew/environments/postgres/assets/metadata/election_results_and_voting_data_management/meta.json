@@ -1,0 +1,615 @@
+{
+  "db_id": "election_results_and_voting_data_management",
+  "source": "synsql",
+  "tables": 17,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/election_results_and_voting_data_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"absentee_ballots\" {\n  \"absentee_id\" INTEGER [pk]\n  \"voter_id\" INTEGER\n  \"election_id\" INTEGER\n  \"ballot_id\" INTEGER\n  \"status\" TEXT\n  \"request_date\" TEXT\n  \"return_date\" TEXT\n  \"reason_for_absentee\" TEXT\n}\n\nTable \"public\".\"audit_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action_time\" TEXT\n  \"action_type\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"ballots\" {\n  \"ballot_id\" INTEGER [pk]\n  \"election_id\" INTEGER\n  \"ballot_type\" TEXT\n  \"ballot_design\" TEXT\n  \"total_ballots_issued\" INTEGER\n  \"total_ballots_returned\" INTEGER\n  \"ballot_status\" TEXT\n}\n\nTable \"public\".\"candidates\" {\n  \"candidate_id\" INTEGER [pk]\n  \"candidate_name\" TEXT\n  \"office_id\" INTEGER\n  \"party_id\" INTEGER\n  \"bio\" TEXT\n  \"date_of_birth\" TEXT\n  \"contact_number\" TEXT\n  \"campaign_website\" TEXT\n  \"incumbent\" INTEGER\n}\n\nTable \"public\".\"counties\" {\n  \"county_id\" INTEGER [pk]\n  \"county_name\" TEXT\n  \"state_id\" INTEGER\n  \"contact_email\" TEXT\n  \"website\" TEXT\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"election_official\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"public\".\"districts\" {\n  \"district_id\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"district_type\" TEXT\n  \"county_id\" INTEGER\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"election_type\" TEXT\n}\n\nTable \"public\".\"early_voting\" {\n  \"early_vote_id\" INTEGER [pk]\n  \"voter_id\" INTEGER\n  \"election_id\" INTEGER\n  \"vote_date\" TEXT\n  \"precinct_id\" INTEGER\n  \"voting_method\" TEXT\n  \"reason_for_early_voting\" TEXT\n}\n\nTable \"public\".\"election_results\" {\n  \"result_id\" INTEGER [pk]\n  \"election_id\" INTEGER\n  \"office_id\" INTEGER\n  \"candidate_id\" INTEGER\n  \"total_votes\" INTEGER\n  \"percentage\" REAL\n  \"status\" TEXT\n  \"ballots_issued\" INTEGER\n  \"ballots_returned\" INTEGER\n  \"ballots_counted\" INTEGER\n}\n\nTable \"public\".\"elections\" {\n  \"election_id\" INTEGER [pk]\n  \"election_name\" TEXT\n  \"election_date\" TEXT\n  \"description\" TEXT\n  \"election_type\" TEXT\n  \"election_status\" TEXT\n  \"total_registered_voters\" INTEGER\n  \"total_voters_participated\" INTEGER\n}\n\nTable \"public\".\"offices\" {\n  \"office_id\" INTEGER [pk]\n  \"office_name\" TEXT\n  \"office_type\" TEXT\n  \"description\" TEXT\n  \"term_length\" INTEGER\n  \"term_start_date\" TEXT\n  \"term_end_date\" TEXT\n}\n\nTable \"public\".\"parties\" {\n  \"party_id\" INTEGER [pk]\n  \"party_name\" TEXT\n  \"abbreviation\" TEXT\n  \"description\" TEXT\n  \"leader\" TEXT\n  \"website\" TEXT\n  \"founded_date\" TEXT\n}\n\nTable \"public\".\"precincts\" {\n  \"precinct_id\" INTEGER [pk]\n  \"precinct_name\" TEXT\n  \"county_id\" INTEGER\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"total_voting_machines\" INTEGER\n  \"last_election_date\" TEXT\n}\n\nTable \"public\".\"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"ip_address\" TEXT\n  \"session_status\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"phone_number\" TEXT\n  \"last_login_date\" TEXT\n  \"account_status\" TEXT\n}\n\nTable \"public\".\"voter_registration\" {\n  \"voter_id\" INTEGER [pk]\n  \"voter_name\" TEXT\n  \"voter_address\" TEXT\n  \"registration_date\" TEXT\n  \"county_id\" INTEGER\n  \"date_of_birth\" TEXT\n  \"phone_number\" TEXT\n  \"voter_status\" TEXT\n  \"last_voted_date\" TEXT\n}\n\nTable \"public\".\"votes\" {\n  \"vote_id\" INTEGER [pk]\n  \"precinct_id\" INTEGER\n  \"candidate_id\" INTEGER\n  \"votes_count\" INTEGER\n  \"election_date\" TEXT\n  \"ballot_type\" TEXT\n  \"voting_method\" TEXT\n}\n\nTable \"public\".\"voting_machines\" {\n  \"machine_id\" INTEGER [pk]\n  \"machine_model\" TEXT\n  \"manufacturer\" TEXT\n  \"precinct_id\" INTEGER\n  \"serial_number\" TEXT\n  \"installation_date\" TEXT\n  \"last_maintenance_date\" TEXT\n}\n\nRef: \"public\".\"absentee_ballots\".\"ballot_id\" > \"public\".\"ballots\".\"ballot_id\"\nRef: \"public\".\"absentee_ballots\".\"voter_id\" > \"public\".\"voter_registration\".\"voter_id\"\nRef: \"public\".\"absentee_ballots\".\"election_id\" > \"public\".\"elections\".\"election_id\"\nRef: \"public\".\"audit_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"ballots\".\"election_id\" > \"public\".\"elections\".\"election_id\"\nRef: \"public\".\"candidates\".\"party_id\" > \"public\".\"parties\".\"party_id\"\nRef: \"public\".\"candidates\".\"office_id\" > \"public\".\"offices\".\"office_id\"\nRef: \"public\".\"districts\".\"county_id\" > \"public\".\"counties\".\"county_id\"\nRef: \"public\".\"early_voting\".\"precinct_id\" > \"public\".\"precincts\".\"precinct_id\"\nRef: \"public\".\"early_voting\".\"election_id\" > \"public\".\"elections\".\"election_id\"\nRef: \"public\".\"early_voting\".\"voter_id\" > \"public\".\"voter_registration\".\"voter_id\"\nRef: \"public\".\"election_results\".\"office_id\" > \"public\".\"offices\".\"office_id\"\nRef: \"public\".\"election_results\".\"candidate_id\" > \"public\".\"candidates\".\"candidate_id\"\nRef: \"public\".\"election_results\".\"election_id\" > \"public\".\"elections\".\"election_id\"\nRef: \"public\".\"precincts\".\"county_id\" > \"public\".\"counties\".\"county_id\"\nRef: \"public\".\"user_sessions\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"voter_registration\".\"county_id\" > \"public\".\"counties\".\"county_id\"\nRef: \"public\".\"votes\".\"precinct_id\" > \"public\".\"precincts\".\"precinct_id\"\nRef: \"public\".\"votes\".\"candidate_id\" > \"public\".\"candidates\".\"candidate_id\"\nRef: \"public\".\"voting_machines\".\"precinct_id\" > \"public\".\"precincts\".\"precinct_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"absentee_ballots\" {\n  \"absentee_id\" INTEGER [pk]\n  \"voter_id\" INTEGER\n  \"election_id\" INTEGER\n  \"ballot_id\" INTEGER\n  \"status\" TEXT\n  \"request_date\" TEXT\n  \"return_date\" TEXT\n  \"reason_for_absentee\" TEXT\n}\n\nTable \"audit_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action_time\" TEXT\n  \"action_type\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"ballots\" {\n  \"ballot_id\" INTEGER [pk]\n  \"election_id\" INTEGER\n  \"ballot_type\" TEXT\n  \"ballot_design\" TEXT\n  \"total_ballots_issued\" INTEGER\n  \"total_ballots_returned\" INTEGER\n  \"ballot_status\" TEXT\n}\n\nTable \"candidates\" {\n  \"candidate_id\" INTEGER [pk]\n  \"candidate_name\" TEXT\n  \"office_id\" INTEGER\n  \"party_id\" INTEGER\n  \"bio\" TEXT\n  \"date_of_birth\" TEXT\n  \"contact_number\" TEXT\n  \"campaign_website\" TEXT\n  \"incumbent\" INTEGER\n}\n\nTable \"counties\" {\n  \"county_id\" INTEGER [pk]\n  \"county_name\" TEXT\n  \"state_id\" INTEGER\n  \"contact_email\" TEXT\n  \"website\" TEXT\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"election_official\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"districts\" {\n  \"district_id\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"district_type\" TEXT\n  \"county_id\" INTEGER\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"election_type\" TEXT\n}\n\nTable \"early_voting\" {\n  \"early_vote_id\" INTEGER [pk]\n  \"voter_id\" INTEGER\n  \"election_id\" INTEGER\n  \"vote_date\" TEXT\n  \"precinct_id\" INTEGER\n  \"voting_method\" TEXT\n  \"reason_for_early_voting\" TEXT\n}\n\nTable \"election_results\" {\n  \"result_id\" INTEGER [pk]\n  \"election_id\" INTEGER\n  \"office_id\" INTEGER\n  \"candidate_id\" INTEGER\n  \"total_votes\" INTEGER\n  \"percentage\" REAL\n  \"status\" TEXT\n  \"ballots_issued\" INTEGER\n  \"ballots_returned\" INTEGER\n  \"ballots_counted\" INTEGER\n}\n\nTable \"elections\" {\n  \"election_id\" INTEGER [pk]\n  \"election_name\" TEXT\n  \"election_date\" TEXT\n  \"description\" TEXT\n  \"election_type\" TEXT\n  \"election_status\" TEXT\n  \"total_registered_voters\" INTEGER\n  \"total_voters_participated\" INTEGER\n}\n\nTable \"offices\" {\n  \"office_id\" INTEGER [pk]\n  \"office_name\" TEXT\n  \"office_type\" TEXT\n  \"description\" TEXT\n  \"term_length\" INTEGER\n  \"term_start_date\" TEXT\n  \"term_end_date\" TEXT\n}\n\nTable \"parties\" {\n  \"party_id\" INTEGER [pk]\n  \"party_name\" TEXT\n  \"abbreviation\" TEXT\n  \"description\" TEXT\n  \"leader\" TEXT\n  \"website\" TEXT\n  \"founded_date\" TEXT\n}\n\nTable \"precincts\" {\n  \"precinct_id\" INTEGER [pk]\n  \"precinct_name\" TEXT\n  \"county_id\" INTEGER\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"population\" INTEGER\n  \"registered_voters\" INTEGER\n  \"total_voting_machines\" INTEGER\n  \"last_election_date\" TEXT\n}\n\nTable \"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"ip_address\" TEXT\n  \"session_status\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"phone_number\" TEXT\n  \"last_login_date\" TEXT\n  \"account_status\" TEXT\n}\n\nTable \"voter_registration\" {\n  \"voter_id\" INTEGER [pk]\n  \"voter_name\" TEXT\n  \"voter_address\" TEXT\n  \"registration_date\" TEXT\n  \"county_id\" INTEGER\n  \"date_of_birth\" TEXT\n  \"phone_number\" TEXT\n  \"voter_status\" TEXT\n  \"last_voted_date\" TEXT\n}\n\nTable \"votes\" {\n  \"vote_id\" INTEGER [pk]\n  \"precinct_id\" INTEGER\n  \"candidate_id\" INTEGER\n  \"votes_count\" INTEGER\n  \"election_date\" TEXT\n  \"ballot_type\" TEXT\n  \"voting_method\" TEXT\n}\n\nTable \"voting_machines\" {\n  \"machine_id\" INTEGER [pk]\n  \"machine_model\" TEXT\n  \"manufacturer\" TEXT\n  \"precinct_id\" INTEGER\n  \"serial_number\" TEXT\n  \"installation_date\" TEXT\n  \"last_maintenance_date\" TEXT\n}\n\nRef: \"absentee_ballots\".\"ballot_id\" > \"ballots\".\"ballot_id\"\n\nRef: \"absentee_ballots\".\"voter_id\" > \"voter_registration\".\"voter_id\"\n\nRef: \"absentee_ballots\".\"election_id\" > \"elections\".\"election_id\"\n\nRef: \"audit_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"ballots\".\"election_id\" > \"elections\".\"election_id\"\n\nRef: \"candidates\".\"party_id\" > \"parties\".\"party_id\"\n\nRef: \"candidates\".\"office_id\" > \"offices\".\"office_id\"\n\nRef: \"districts\".\"county_id\" > \"counties\".\"county_id\"\n\nRef: \"early_voting\".\"precinct_id\" > \"precincts\".\"precinct_id\"\n\nRef: \"early_voting\".\"election_id\" > \"elections\".\"election_id\"\n\nRef: \"early_voting\".\"voter_id\" > \"voter_registration\".\"voter_id\"\n\nRef: \"election_results\".\"office_id\" > \"offices\".\"office_id\"\n\nRef: \"election_results\".\"candidate_id\" > \"candidates\".\"candidate_id\"\n\nRef: \"election_results\".\"election_id\" > \"elections\".\"election_id\"\n\nRef: \"precincts\".\"county_id\" > \"counties\".\"county_id\"\n\nRef: \"user_sessions\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"voter_registration\".\"county_id\" > \"counties\".\"county_id\"\n\nRef: \"votes\".\"precinct_id\" > \"precincts\".\"precinct_id\"\n\nRef: \"votes\".\"candidate_id\" > \"candidates\".\"candidate_id\"\n\nRef: \"voting_machines\".\"precinct_id\" > \"precincts\".\"precinct_id\"\n\n## Table Stats & Sample Values\n\nabsentee_ballots: 2 rows\n  status: 'counted'\n  reason_for_absentee: 'Travel', 'Illness'\n  request_date: '2020-10-01', '2020-10-02'\n\naudit_logs: 2 rows\n  action_type: 'data entry', 'report generation'\n  description: 'Entered results for precinct 1', 'Generated report for election 1'\n  ip_address: '192.168.1.1', '192.168.1.2'\n\nballots: 2 rows\n  ballot_type: 'paper', 'electronic'\n  ballot_status: 'counted'\n  ballot_design: 'Design A', 'Design B'\n\ncandidates: 2 rows\n  candidate_name: 'Donald J. Trump', 'Joe Biden'\n  contact_number: '123-456-7890', '234-567-8901'\n  campaign_website: 'www.donaldjtrump.com', 'www.joebiden.com'\n\ncounties: 2 rows\n  county_name: 'Madison', 'Harris'\n  website: 'www.madisonelections.com', 'www.harriselections.com'\n  election_official: 'John Doe', 'Jane Smith'\n\ndistricts: 2 rows\n  district_name: '1st Congressional District', '2nd Congressional District'\n  district_type: 'Congressional'\n  election_type: 'General'\n\nearly_voting: 2 rows\n  voting_method: 'in-person', 'mail'\n  reason_for_early_voting: 'Work', 'Travel'\n  vote_date: '2020-10-30', '2020-10-31'\n\nelection_results: 2 rows\n  status: 'certified'\n  total_votes: '1000'\n  percentage: '50.0'\n\nelections: 2 rows\n  election_name: '2020 General Election', '2022 Midterm Election'\n  description: 'General election for federal and state offices', 'Midterm election for state and local offices'\n  election_type: 'General'\n\noffices: 2 rows\n  office_name: 'President', 'Governor'\n  description: 'Head of the executive branch', 'Head of the state executive branch'\n  office_type: 'Executive'\n\nparties: 2 rows\n  party_name: 'Republican Party', 'Democratic Party'\n  description: 'Major political party in the United States'\n  abbreviation: 'REP', 'DEM'\n\nprecincts: 2 rows\n  precinct_name: 'Norfolk 1-1', 'Norfolk 1-2'\n  contact_email: 'norfolk1-1@example.com', 'norfolk1-2@example.com'\n  location: 'Norfolk, VA'\n\nuser_sessions: 2 rows\n  device_type: 'desktop', 'mobile'\n  session_status: 'expired'\n  ip_address: '192.168.1.1', '192.168.1.2'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'election official', 'data analyst'\n  account_status: 'active'\n\nvoter_registration: 2 rows\n  voter_name: 'John Doe', 'Jane Smith'\n  voter_status: 'active'\n  voter_address: '123 Main St, Norfolk, VA', '456 Elm St, Norfolk, VA'\n\nvotes: 2 rows\n  ballot_type: 'paper'\n  voting_method: 'in-person'\n  votes_count: '573', '420'\n\nvoting_machines: 2 rows\n  machine_model: 'VX-500', 'VX-600'\n  serial_number: '123456', '234567'\n  installation_date: '2020-01-01', '2020-02-01'",
+    "stateUrl": null,
+    "tableStats": {
+      "absentee_ballots": {
+        "rows": 2,
+        "sample_values": {
+          "absentee_id": [
+            "0",
+            "1"
+          ],
+          "voter_id": [
+            "0"
+          ],
+          "election_id": [
+            "0"
+          ],
+          "ballot_id": [
+            "1",
+            "0"
+          ],
+          "status": [
+            "counted"
+          ],
+          "request_date": [
+            "2020-10-01",
+            "2020-10-02"
+          ],
+          "return_date": [
+            "2020-10-30",
+            "2020-10-31"
+          ],
+          "reason_for_absentee": [
+            "Travel",
+            "Illness"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "action_time": [
+            "2023-05-01 08:05:00",
+            "2023-05-01 09:10:00"
+          ],
+          "action_type": [
+            "data entry",
+            "report generation"
+          ],
+          "description": [
+            "Entered results for precinct 1",
+            "Generated report for election 1"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ballots": {
+        "rows": 2,
+        "sample_values": {
+          "ballot_id": [
+            "0",
+            "1"
+          ],
+          "election_id": [
+            "0"
+          ],
+          "ballot_type": [
+            "paper",
+            "electronic"
+          ],
+          "ballot_design": [
+            "Design A",
+            "Design B"
+          ],
+          "total_ballots_issued": [
+            "100000",
+            "50000"
+          ],
+          "total_ballots_returned": [
+            "75000",
+            "40000"
+          ],
+          "ballot_status": [
+            "counted"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "candidates": {
+        "rows": 2,
+        "sample_values": {
+          "candidate_id": [
+            "0",
+            "1"
+          ],
+          "candidate_name": [
+            "Donald J. Trump",
+            "Joe Biden"
+          ],
+          "office_id": [
+            "1"
+          ],
+          "party_id": [
+            "1",
+            "0"
+          ],
+          "bio": [
+            "Former President of the United States",
+            "Current President of the United States"
+          ],
+          "date_of_birth": [
+            "1946-06-14",
+            "1942-11-20"
+          ],
+          "contact_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "campaign_website": [
+            "www.donaldjtrump.com",
+            "www.joebiden.com"
+          ],
+          "incumbent": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "counties": {
+        "rows": 2,
+        "sample_values": {
+          "county_id": [
+            "0",
+            "1"
+          ],
+          "county_name": [
+            "Madison",
+            "Harris"
+          ],
+          "state_id": [
+            "1"
+          ],
+          "contact_email": [
+            "madison-elections@example.com",
+            "harris-elections@example.com"
+          ],
+          "website": [
+            "www.madisonelections.com",
+            "www.harriselections.com"
+          ],
+          "population": [
+            "100000",
+            "200000"
+          ],
+          "registered_voters": [
+            "75000",
+            "150000"
+          ],
+          "election_official": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "districts": {
+        "rows": 2,
+        "sample_values": {
+          "district_id": [
+            "0",
+            "1"
+          ],
+          "district_name": [
+            "1st Congressional District",
+            "2nd Congressional District"
+          ],
+          "district_type": [
+            "Congressional"
+          ],
+          "county_id": [
+            "1",
+            "0"
+          ],
+          "population": [
+            "500000",
+            "600000"
+          ],
+          "registered_voters": [
+            "350000",
+            "400000"
+          ],
+          "election_type": [
+            "General"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "early_voting": {
+        "rows": 2,
+        "sample_values": {
+          "early_vote_id": [
+            "0",
+            "1"
+          ],
+          "voter_id": [
+            "1"
+          ],
+          "election_id": [
+            "1",
+            "0"
+          ],
+          "vote_date": [
+            "2020-10-30",
+            "2020-10-31"
+          ],
+          "precinct_id": [
+            "0"
+          ],
+          "voting_method": [
+            "in-person",
+            "mail"
+          ],
+          "reason_for_early_voting": [
+            "Work",
+            "Travel"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "election_results": {
+        "rows": 2,
+        "sample_values": {
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "election_id": [
+            "1",
+            "0"
+          ],
+          "office_id": [
+            "1"
+          ],
+          "candidate_id": [
+            "0",
+            "1"
+          ],
+          "total_votes": [
+            "1000"
+          ],
+          "percentage": [
+            "50.0"
+          ],
+          "status": [
+            "certified"
+          ],
+          "ballots_issued": [
+            "100000"
+          ],
+          "ballots_returned": [
+            "75000"
+          ],
+          "ballots_counted": [
+            "75000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "elections": {
+        "rows": 2,
+        "sample_values": {
+          "election_id": [
+            "0",
+            "1"
+          ],
+          "election_name": [
+            "2020 General Election",
+            "2022 Midterm Election"
+          ],
+          "election_date": [
+            "2020-11-03",
+            "2022-11-08"
+          ],
+          "description": [
+            "General election for federal and state offices",
+            "Midterm election for state and local offices"
+          ],
+          "election_type": [
+            "General"
+          ],
+          "election_status": [
+            "Completed"
+          ],
+          "total_registered_voters": [
+            "1000000",
+            "900000"
+          ],
+          "total_voters_participated": [
+            "750000",
+            "650000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "offices": {
+        "rows": 2,
+        "sample_values": {
+          "office_id": [
+            "0",
+            "1"
+          ],
+          "office_name": [
+            "President",
+            "Governor"
+          ],
+          "office_type": [
+            "Executive"
+          ],
+          "description": [
+            "Head of the executive branch",
+            "Head of the state executive branch"
+          ],
+          "term_length": [
+            "4"
+          ],
+          "term_start_date": [
+            "2021-01-20",
+            "2021-01-01"
+          ],
+          "term_end_date": [
+            "2025-01-20",
+            "2025-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "parties": {
+        "rows": 2,
+        "sample_values": {
+          "party_id": [
+            "0",
+            "1"
+          ],
+          "party_name": [
+            "Republican Party",
+            "Democratic Party"
+          ],
+          "abbreviation": [
+            "REP",
+            "DEM"
+          ],
+          "description": [
+            "Major political party in the United States"
+          ],
+          "leader": [
+            "Mitch McConnell",
+            "Chuck Schumer"
+          ],
+          "website": [
+            "www.republicanparty.com",
+            "www.democraticparty.com"
+          ],
+          "founded_date": [
+            "1854-01-01",
+            "1828-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "precincts": {
+        "rows": 2,
+        "sample_values": {
+          "precinct_id": [
+            "0",
+            "1"
+          ],
+          "precinct_name": [
+            "Norfolk 1-1",
+            "Norfolk 1-2"
+          ],
+          "county_id": [
+            "0",
+            "1"
+          ],
+          "location": [
+            "Norfolk, VA"
+          ],
+          "contact_email": [
+            "norfolk1-1@example.com",
+            "norfolk1-2@example.com"
+          ],
+          "population": [
+            "10000",
+            "12000"
+          ],
+          "registered_voters": [
+            "7000",
+            "8000"
+          ],
+          "total_voting_machines": [
+            "10",
+            "12"
+          ],
+          "last_election_date": [
+            "2020-11-03"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_sessions": {
+        "rows": 2,
+        "sample_values": {
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "login_time": [
+            "2023-05-01 08:00:00",
+            "2023-05-01 09:00:00"
+          ],
+          "logout_time": [
+            "2023-05-01 10:00:00",
+            "2023-05-01 11:00:00"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "session_status": [
+            "expired"
+          ],
+          "device_type": [
+            "desktop",
+            "mobile"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "election official",
+            "data analyst"
+          ],
+          "password_hash": [
+            "hash123",
+            "hash456"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "account_status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "voter_registration": {
+        "rows": 2,
+        "sample_values": {
+          "voter_id": [
+            "0",
+            "1"
+          ],
+          "voter_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "voter_address": [
+            "123 Main St, Norfolk, VA",
+            "456 Elm St, Norfolk, VA"
+          ],
+          "registration_date": [
+            "2020-01-01",
+            "2020-02-01"
+          ],
+          "county_id": [
+            "0"
+          ],
+          "date_of_birth": [
+            "1980-01-01",
+            "1990-02-01"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "voter_status": [
+            "active"
+          ],
+          "last_voted_date": [
+            "2020-11-03"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "votes": {
+        "rows": 2,
+        "sample_values": {
+          "vote_id": [
+            "0",
+            "1"
+          ],
+          "precinct_id": [
+            "0"
+          ],
+          "candidate_id": [
+            "1",
+            "0"
+          ],
+          "votes_count": [
+            "573",
+            "420"
+          ],
+          "election_date": [
+            "2020-11-03"
+          ],
+          "ballot_type": [
+            "paper"
+          ],
+          "voting_method": [
+            "in-person"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "voting_machines": {
+        "rows": 2,
+        "sample_values": {
+          "machine_id": [
+            "0",
+            "1"
+          ],
+          "machine_model": [
+            "VX-500",
+            "VX-600"
+          ],
+          "manufacturer": [
+            "Voting Systems Inc."
+          ],
+          "precinct_id": [
+            "1",
+            "0"
+          ],
+          "serial_number": [
+            "123456",
+            "234567"
+          ],
+          "installation_date": [
+            "2020-01-01",
+            "2020-02-01"
+          ],
+          "last_maintenance_date": [
+            "2022-06-01",
+            "2022-07-01"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

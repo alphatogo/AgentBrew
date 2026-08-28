@@ -1,0 +1,652 @@
+{
+  "db_id": "semiconductor_device_characterization_and_simulation",
+  "source": "synsql",
+  "tables": 19,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/semiconductor_device_characterization_and_simulation",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"duration\" REAL\n}\n\nTable \"public\".\"constant_variables\" {\n  \"const_var_id\" INTEGER [pk]\n  \"const_var_name\" TEXT\n  \"description\" TEXT\n  \"unit\" TEXT\n}\n\nTable \"public\".\"corners\" {\n  \"corner_id\" INTEGER [pk]\n  \"corner_name\" TEXT\n  \"description\" TEXT\n  \"voltage_level\" REAL\n}\n\nTable \"public\".\"device_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"approval_date\" TEXT\n  \"approval_status\" TEXT\n  \"approval_comments\" TEXT\n  \"rejection_reason\" TEXT\n}\n\nTable \"public\".\"device_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"comment_type\" TEXT\n}\n\nTable \"public\".\"device_files\" {\n  \"file_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"file_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_format\" TEXT\n  \"file_version\" TEXT\n}\n\nTable \"public\".\"device_issues\" {\n  \"issue_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"issue_date\" TEXT\n  \"issue_description\" TEXT\n  \"issue_status\" TEXT\n  \"resolution_date\" TEXT\n  \"resolution_comments\" TEXT\n  \"priority\" TEXT\n}\n\nTable \"public\".\"device_parameters\" {\n  \"param_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"width_um\" REAL\n  \"length_um\" REAL\n  \"num_fingers\" INTEGER\n  \"corner\" TEXT\n  \"temperature\" INTEGER\n  \"const_var\" TEXT\n  \"const_var_val\" REAL\n  \"fabrication_process\" TEXT\n  \"batch_number\" TEXT\n  \"test_date\" TEXT\n  \"test_operator\" TEXT\n}\n\nTable \"public\".\"device_sweeps\" {\n  \"sweep_id\" INTEGER [pk]\n  \"param_id\" INTEGER\n  \"vgs_range\" TEXT\n  \"vgs_step\" REAL\n  \"vbs_range\" TEXT\n  \"vbs_step\" REAL\n  \"sweep_type\" TEXT\n  \"sweep_duration\" REAL\n  \"sweep_frequency\" REAL\n}\n\nTable \"public\".\"device_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"material\" TEXT\n}\n\nTable \"public\".\"device_uploads\" {\n  \"upload_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"upload_date\" TEXT\n  \"upload_type\" TEXT\n  \"upload_file_path\" TEXT\n  \"upload_notes\" TEXT\n}\n\nTable \"public\".\"device_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"changes\" TEXT\n  \"version_comments\" TEXT\n  \"approved_by\" INTEGER\n  \"approval_date\" TEXT\n}\n\nTable \"public\".\"devices\" {\n  \"device_id\" INTEGER [pk]\n  \"device_name\" TEXT\n  \"device_type\" TEXT\n  \"description\" TEXT\n  \"manufacturer\" TEXT\n  \"fabrication_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"simulations\" {\n  \"sim_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"param_id\" INTEGER\n  \"sim_date\" TEXT\n  \"sim_tool\" TEXT\n  \"sim_results\" TEXT\n  \"simulation_duration\" REAL\n  \"simulation_notes\" TEXT\n}\n\nTable \"public\".\"temperatures\" {\n  \"temp_id\" INTEGER [pk]\n  \"temperature\" INTEGER\n  \"description\" TEXT\n  \"humidity\" REAL\n}\n\nTable \"public\".\"test_data\" {\n  \"data_id\" INTEGER [pk]\n  \"session_id\" INTEGER\n  \"param_id\" INTEGER\n  \"vgs\" REAL\n  \"vds\" REAL\n  \"vbs\" REAL\n  \"current\" REAL\n  \"voltage\" REAL\n  \"temperature\" INTEGER\n  \"test_duration\" REAL\n  \"test_environment\" TEXT\n}\n\nTable \"public\".\"test_rigs\" {\n  \"rig_id\" INTEGER [pk]\n  \"rig_name\" TEXT\n  \"description\" TEXT\n  \"location\" TEXT\n  \"model_number\" TEXT\n  \"calibration_date\" TEXT\n}\n\nTable \"public\".\"test_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"rig_id\" INTEGER\n  \"test_date\" TEXT\n  \"test_operator\" TEXT\n  \"test_comments\" TEXT\n  \"test_duration\" REAL\n  \"test_environment\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"phone_number\" TEXT\n  \"last_login\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_approvals\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"device_approvals\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_comments\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"device_files\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_issues\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_issues\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"device_parameters\".\"corner\" > \"public\".\"corners\".\"corner_id\"\nRef: \"public\".\"device_parameters\".\"temperature\" > \"public\".\"temperatures\".\"temp_id\"\nRef: \"public\".\"device_parameters\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_parameters\".\"const_var\" > \"public\".\"constant_variables\".\"const_var_id\"\nRef: \"public\".\"device_sweeps\".\"param_id\" > \"public\".\"device_parameters\".\"param_id\"\nRef: \"public\".\"device_uploads\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"device_uploads\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"device_versions\".\"approved_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"device_versions\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"devices\".\"device_type\" > \"public\".\"device_types\".\"type_id\"\nRef: \"public\".\"simulations\".\"param_id\" > \"public\".\"device_parameters\".\"param_id\"\nRef: \"public\".\"simulations\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"test_data\".\"param_id\" > \"public\".\"device_parameters\".\"param_id\"\nRef: \"public\".\"test_data\".\"session_id\" > \"public\".\"test_sessions\".\"session_id\"\nRef: \"public\".\"test_sessions\".\"device_id\" > \"public\".\"devices\".\"device_id\"\nRef: \"public\".\"test_sessions\".\"rig_id\" > \"public\".\"test_rigs\".\"rig_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"duration\" REAL\n}\n\nTable \"constant_variables\" {\n  \"const_var_id\" INTEGER [pk]\n  \"const_var_name\" TEXT\n  \"description\" TEXT\n  \"unit\" TEXT\n}\n\nTable \"corners\" {\n  \"corner_id\" INTEGER [pk]\n  \"corner_name\" TEXT\n  \"description\" TEXT\n  \"voltage_level\" REAL\n}\n\nTable \"device_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"approval_date\" TEXT\n  \"approval_status\" TEXT\n  \"approval_comments\" TEXT\n  \"rejection_reason\" TEXT\n}\n\nTable \"device_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"comment_type\" TEXT\n}\n\nTable \"device_files\" {\n  \"file_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"file_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_format\" TEXT\n  \"file_version\" TEXT\n}\n\nTable \"device_issues\" {\n  \"issue_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"issue_date\" TEXT\n  \"issue_description\" TEXT\n  \"issue_status\" TEXT\n  \"resolution_date\" TEXT\n  \"resolution_comments\" TEXT\n  \"priority\" TEXT\n}\n\nTable \"device_parameters\" {\n  \"param_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"width_um\" REAL\n  \"length_um\" REAL\n  \"num_fingers\" INTEGER\n  \"corner\" TEXT\n  \"temperature\" INTEGER\n  \"const_var\" TEXT\n  \"const_var_val\" REAL\n  \"fabrication_process\" TEXT\n  \"batch_number\" TEXT\n  \"test_date\" TEXT\n  \"test_operator\" TEXT\n}\n\nTable \"device_sweeps\" {\n  \"sweep_id\" INTEGER [pk]\n  \"param_id\" INTEGER\n  \"vgs_range\" TEXT\n  \"vgs_step\" REAL\n  \"vbs_range\" TEXT\n  \"vbs_step\" REAL\n  \"sweep_type\" TEXT\n  \"sweep_duration\" REAL\n  \"sweep_frequency\" REAL\n}\n\nTable \"device_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"material\" TEXT\n}\n\nTable \"device_uploads\" {\n  \"upload_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"user_id\" INTEGER\n  \"upload_date\" TEXT\n  \"upload_type\" TEXT\n  \"upload_file_path\" TEXT\n  \"upload_notes\" TEXT\n}\n\nTable \"device_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"changes\" TEXT\n  \"version_comments\" TEXT\n  \"approved_by\" INTEGER\n  \"approval_date\" TEXT\n}\n\nTable \"devices\" {\n  \"device_id\" INTEGER [pk]\n  \"device_name\" TEXT\n  \"device_type\" TEXT\n  \"description\" TEXT\n  \"manufacturer\" TEXT\n  \"fabrication_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"simulations\" {\n  \"sim_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"param_id\" INTEGER\n  \"sim_date\" TEXT\n  \"sim_tool\" TEXT\n  \"sim_results\" TEXT\n  \"simulation_duration\" REAL\n  \"simulation_notes\" TEXT\n}\n\nTable \"temperatures\" {\n  \"temp_id\" INTEGER [pk]\n  \"temperature\" INTEGER\n  \"description\" TEXT\n  \"humidity\" REAL\n}\n\nTable \"test_data\" {\n  \"data_id\" INTEGER [pk]\n  \"session_id\" INTEGER\n  \"param_id\" INTEGER\n  \"vgs\" REAL\n  \"vds\" REAL\n  \"vbs\" REAL\n  \"current\" REAL\n  \"voltage\" REAL\n  \"temperature\" INTEGER\n  \"test_duration\" REAL\n  \"test_environment\" TEXT\n}\n\nTable \"test_rigs\" {\n  \"rig_id\" INTEGER [pk]\n  \"rig_name\" TEXT\n  \"description\" TEXT\n  \"location\" TEXT\n  \"model_number\" TEXT\n  \"calibration_date\" TEXT\n}\n\nTable \"test_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"device_id\" INTEGER\n  \"rig_id\" INTEGER\n  \"test_date\" TEXT\n  \"test_operator\" TEXT\n  \"test_comments\" TEXT\n  \"test_duration\" REAL\n  \"test_environment\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"phone_number\" TEXT\n  \"last_login\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_approvals\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"device_approvals\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_comments\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"device_files\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_issues\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_issues\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"device_parameters\".\"corner\" > \"corners\".\"corner_id\"\n\nRef: \"device_parameters\".\"temperature\" > \"temperatures\".\"temp_id\"\n\nRef: \"device_parameters\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_parameters\".\"const_var\" > \"constant_variables\".\"const_var_id\"\n\nRef: \"device_sweeps\".\"param_id\" > \"device_parameters\".\"param_id\"\n\nRef: \"device_uploads\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"device_uploads\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"device_versions\".\"approved_by\" > \"users\".\"user_id\"\n\nRef: \"device_versions\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"devices\".\"device_type\" > \"device_types\".\"type_id\"\n\nRef: \"simulations\".\"param_id\" > \"device_parameters\".\"param_id\"\n\nRef: \"simulations\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"test_data\".\"param_id\" > \"device_parameters\".\"param_id\"\n\nRef: \"test_data\".\"session_id\" > \"test_sessions\".\"session_id\"\n\nRef: \"test_sessions\".\"device_id\" > \"devices\".\"device_id\"\n\nRef: \"test_sessions\".\"rig_id\" > \"test_rigs\".\"rig_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nconstant_variables: 2 rows\n  const_var_name: 'vds', 'vgs'\n  description: 'Drain-to-source voltage', 'Gate-to-source voltage'\n  unit: 'volts'\n\ncorners: 2 rows\n  corner_name: 'typical', 'fast'\n  description: 'Typical process corner', 'Fast process corner'\n  voltage_level: '1.0', '1.2'\n\ndevice_approvals: 2 rows\n  approval_status: 'approved', 'rejected'\n  approval_comments: 'Data meets all requirements', 'Further testing required'\n  approval_date: '2023-05-01', '2023-05-02'\n\ndevice_comments: 2 rows\n  comment_type: 'technical', 'administrative'\n  comment_text: 'Initial characterization looks good', 'Further testing required'\n  comment_date: '2023-05-01', '2023-05-02'\n\ndevice_files: 2 rows\n  file_type: 'datasheet', 'simulation results'\n  file_path: 'files/datasheet_1.pdf', 'files/sim_results_1.csv'\n  file_format: 'PDF', 'CSV'\n\ndevice_issues: 2 rows\n  issue_description: 'Inconsistent data in sweeps', 'Parameter set missing'\n  issue_status: 'open', 'closed'\n  priority: 'high', 'medium'\n\ndevice_parameters: 2 rows\n  corner: '1', '0'\n  const_var: '0', '1'\n  batch_number: 'batch1', 'batch2'\n\ndevice_sweeps: 2 rows\n  sweep_type: 'linear', 'logarithmic'\n  vgs_range: '-3.3 3.3'\n  vbs_range: '-3.3 0.0 0.825'\n\ndevice_types: 2 rows\n  type_name: 'nFET', 'pFET'\n  description: 'N-channel Field-Effect Transistor', 'P-channel Field-Effect Transistor'\n  material: 'silicon', 'gallium arsenide'\n\ndevice_uploads: 2 rows\n  upload_type: 'parameter set', 'test data'\n  upload_file_path: 'uploads/params_1.csv', 'uploads/test_data_1.csv'\n  upload_notes: 'Initial parameter set', 'Initial test data'\n\ndevice_versions: 2 rows\n  changes: 'Initial version', 'Updated parameters'\n  version_comments: 'First characterization', 'Revised characterization'\n  version_date: '2023-05-01', '2023-05-02'\n\ndevices: 2 rows\n  device_name: 'nfet_03v3_dss', 'pfet_03v3_dss'\n  status: 'in production', 'archived'\n  description: 'N-channel Field-Effect Transistor', 'P-channel Field-Effect Transistor'\n\nsimulations: 2 rows\n  sim_tool: 'HSPICE', 'LTSpice'\n  sim_results: 'sim_results/1.csv', 'sim_results/2.csv'\n  sim_date: '2023-05-01', '2023-05-02'\n\ntemperatures: 2 rows\n  description: 'Room temperature', 'High temperature'\n  temperature: '25', '125'\n  humidity: '50.0', '40.0'\n\ntest_data: 2 rows\n  test_environment: 'lab'\n  vgs: '1.5', '2.0'\n  current: '0.001', '0.002'\n\ntest_rigs: 2 rows\n  rig_name: 'Rig1', 'Rig2'\n  description: 'Primary test rig for nFETs', 'Secondary test rig for pFETs'\n  model_number: 'TR-1000', 'TR-2000'\n\ntest_sessions: 2 rows\n  test_operator: 'Alice Johnson', 'Bob Williams'\n  test_comments: 'Initial characterization', 'Follow-up characterization'\n  test_environment: 'lab', 'field'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'engineer', 'researcher'\n  department: 'R&D', 'Test Lab'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "duration": [
+            "10.0",
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "constant_variables": {
+        "rows": 2,
+        "sample_values": {
+          "const_var_id": [
+            "0",
+            "1"
+          ],
+          "const_var_name": [
+            "vds",
+            "vgs"
+          ],
+          "description": [
+            "Drain-to-source voltage",
+            "Gate-to-source voltage"
+          ],
+          "unit": [
+            "volts"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "corners": {
+        "rows": 2,
+        "sample_values": {
+          "corner_id": [
+            "0",
+            "1"
+          ],
+          "corner_name": [
+            "typical",
+            "fast"
+          ],
+          "description": [
+            "Typical process corner",
+            "Fast process corner"
+          ],
+          "voltage_level": [
+            "1.0",
+            "1.2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_approvals": {
+        "rows": 2,
+        "sample_values": {
+          "approval_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "approval_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "approval_status": [
+            "approved",
+            "rejected"
+          ],
+          "approval_comments": [
+            "Data meets all requirements",
+            "Further testing required"
+          ],
+          "rejection_reason": [
+            "Inconsistent data"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "comment_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "comment_text": [
+            "Initial characterization looks good",
+            "Further testing required"
+          ],
+          "comment_type": [
+            "technical",
+            "administrative"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1",
+            "0"
+          ],
+          "file_type": [
+            "datasheet",
+            "simulation results"
+          ],
+          "file_path": [
+            "files/datasheet_1.pdf",
+            "files/sim_results_1.csv"
+          ],
+          "file_size": [
+            "0.5",
+            "1.2"
+          ],
+          "upload_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "file_format": [
+            "PDF",
+            "CSV"
+          ],
+          "file_version": [
+            "v1.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_issues": {
+        "rows": 2,
+        "sample_values": {
+          "issue_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "issue_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "issue_description": [
+            "Inconsistent data in sweeps",
+            "Parameter set missing"
+          ],
+          "issue_status": [
+            "open",
+            "closed"
+          ],
+          "resolution_date": [
+            "2023-05-03"
+          ],
+          "resolution_comments": [
+            "Parameter set uploaded"
+          ],
+          "priority": [
+            "high",
+            "medium"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_parameters": {
+        "rows": 2,
+        "sample_values": {
+          "param_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "0",
+            "1"
+          ],
+          "width_um": [
+            "10.0"
+          ],
+          "length_um": [
+            "0.28",
+            "10.0"
+          ],
+          "num_fingers": [
+            "1"
+          ],
+          "corner": [
+            "1",
+            "0"
+          ],
+          "temperature": [
+            "1"
+          ],
+          "const_var": [
+            "0",
+            "1"
+          ],
+          "const_var_val": [
+            "0.0"
+          ],
+          "fabrication_process": [
+            "process1"
+          ],
+          "batch_number": [
+            "batch1",
+            "batch2"
+          ],
+          "test_date": [
+            "2023-03-01",
+            "2023-03-02"
+          ],
+          "test_operator": [
+            "Alice Johnson",
+            "Bob Williams"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_sweeps": {
+        "rows": 2,
+        "sample_values": {
+          "sweep_id": [
+            "0",
+            "1"
+          ],
+          "param_id": [
+            "1"
+          ],
+          "vgs_range": [
+            "-3.3 3.3"
+          ],
+          "vgs_step": [
+            "0.1"
+          ],
+          "vbs_range": [
+            "-3.3 0.0 0.825"
+          ],
+          "vbs_step": [
+            "0.1"
+          ],
+          "sweep_type": [
+            "linear",
+            "logarithmic"
+          ],
+          "sweep_duration": [
+            "30.0",
+            "60.0"
+          ],
+          "sweep_frequency": [
+            "1.0",
+            "0.5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "nFET",
+            "pFET"
+          ],
+          "description": [
+            "N-channel Field-Effect Transistor",
+            "P-channel Field-Effect Transistor"
+          ],
+          "material": [
+            "silicon",
+            "gallium arsenide"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_uploads": {
+        "rows": 2,
+        "sample_values": {
+          "upload_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "upload_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "upload_type": [
+            "parameter set",
+            "test data"
+          ],
+          "upload_file_path": [
+            "uploads/params_1.csv",
+            "uploads/test_data_1.csv"
+          ],
+          "upload_notes": [
+            "Initial parameter set",
+            "Initial test data"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "device_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "version_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "changes": [
+            "Initial version",
+            "Updated parameters"
+          ],
+          "version_comments": [
+            "First characterization",
+            "Revised characterization"
+          ],
+          "approved_by": [
+            "1"
+          ],
+          "approval_date": [
+            "2023-05-02",
+            "2023-05-03"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "devices": {
+        "rows": 2,
+        "sample_values": {
+          "device_id": [
+            "0",
+            "1"
+          ],
+          "device_name": [
+            "nfet_03v3_dss",
+            "pfet_03v3_dss"
+          ],
+          "device_type": [
+            "0"
+          ],
+          "description": [
+            "N-channel Field-Effect Transistor",
+            "P-channel Field-Effect Transistor"
+          ],
+          "manufacturer": [
+            "ABC Manufacturer",
+            "XYZ Manufacturer"
+          ],
+          "fabrication_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "status": [
+            "in production",
+            "archived"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "simulations": {
+        "rows": 2,
+        "sample_values": {
+          "sim_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "1"
+          ],
+          "param_id": [
+            "1"
+          ],
+          "sim_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "sim_tool": [
+            "HSPICE",
+            "LTSpice"
+          ],
+          "sim_results": [
+            "sim_results/1.csv",
+            "sim_results/2.csv"
+          ],
+          "simulation_duration": [
+            "30.0",
+            "60.0"
+          ],
+          "simulation_notes": [
+            "Initial simulation",
+            "Follow-up simulation"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "temperatures": {
+        "rows": 2,
+        "sample_values": {
+          "temp_id": [
+            "0",
+            "1"
+          ],
+          "temperature": [
+            "25",
+            "125"
+          ],
+          "description": [
+            "Room temperature",
+            "High temperature"
+          ],
+          "humidity": [
+            "50.0",
+            "40.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "param_id": [
+            "1",
+            "0"
+          ],
+          "vgs": [
+            "1.5",
+            "2.0"
+          ],
+          "vds": [
+            "0.5"
+          ],
+          "vbs": [
+            "0.0"
+          ],
+          "current": [
+            "0.001",
+            "0.002"
+          ],
+          "voltage": [
+            "1.5",
+            "2.0"
+          ],
+          "temperature": [
+            "25"
+          ],
+          "test_duration": [
+            "10.0",
+            "15.0"
+          ],
+          "test_environment": [
+            "lab"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_rigs": {
+        "rows": 2,
+        "sample_values": {
+          "rig_id": [
+            "0",
+            "1"
+          ],
+          "rig_name": [
+            "Rig1",
+            "Rig2"
+          ],
+          "description": [
+            "Primary test rig for nFETs",
+            "Secondary test rig for pFETs"
+          ],
+          "location": [
+            "Lab A",
+            "Lab B"
+          ],
+          "model_number": [
+            "TR-1000",
+            "TR-2000"
+          ],
+          "calibration_date": [
+            "2023-04-01",
+            "2023-04-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_sessions": {
+        "rows": 2,
+        "sample_values": {
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "device_id": [
+            "0"
+          ],
+          "rig_id": [
+            "0"
+          ],
+          "test_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "test_operator": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "test_comments": [
+            "Initial characterization",
+            "Follow-up characterization"
+          ],
+          "test_duration": [
+            "60.0",
+            "120.0"
+          ],
+          "test_environment": [
+            "lab",
+            "field"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "engineer",
+            "researcher"
+          ],
+          "department": [
+            "R&D",
+            "Test Lab"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "last_login": [
+            "2023-09-01",
+            "2023-09-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

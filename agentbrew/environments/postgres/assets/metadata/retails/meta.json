@@ -1,0 +1,627 @@
+{
+  "db_id": "retails",
+  "source": "bird",
+  "tables": 8,
+  "total_rows": 7083689,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#retails",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"customer\" {\n  \"c_custkey\" INTEGER [pk, not null]\n  \"c_mktsegment\" TEXT\n  \"c_nationkey\" INTEGER\n  \"c_name\" TEXT\n  \"c_address\" TEXT\n  \"c_phone\" TEXT\n  \"c_acctbal\" REAL\n  \"c_comment\" TEXT\n}\n\nTable \"lineitem\" {\n  \"l_shipdate\" DATE\n  \"l_orderkey\" INTEGER [pk, not null]\n  \"l_discount\" REAL [not null]\n  \"l_extendedprice\" REAL [not null]\n  \"l_suppkey\" INTEGER [not null]\n  \"l_quantity\" INTEGER [not null]\n  \"l_returnflag\" TEXT\n  \"l_partkey\" INTEGER [not null]\n  \"l_linestatus\" TEXT\n  \"l_tax\" REAL [not null]\n  \"l_commitdate\" DATE\n  \"l_receiptdate\" DATE\n  \"l_shipmode\" TEXT\n  \"l_linenumber\" INTEGER [pk, not null]\n  \"l_shipinstruct\" TEXT\n  \"l_comment\" TEXT\n}\n\nTable \"nation\" {\n  \"n_nationkey\" INTEGER [pk, not null]\n  \"n_name\" TEXT\n  \"n_regionkey\" INTEGER\n  \"n_comment\" TEXT\n}\n\nTable \"orders\" {\n  \"o_orderdate\" DATE\n  \"o_orderkey\" INTEGER [pk, not null]\n  \"o_custkey\" INTEGER [not null]\n  \"o_orderpriority\" TEXT\n  \"o_shippriority\" INTEGER\n  \"o_clerk\" TEXT\n  \"o_orderstatus\" TEXT\n  \"o_totalprice\" REAL\n  \"o_comment\" TEXT\n}\n\nTable \"part\" {\n  \"p_partkey\" INTEGER [pk, not null]\n  \"p_type\" TEXT\n  \"p_size\" INTEGER\n  \"p_brand\" TEXT\n  \"p_name\" TEXT\n  \"p_container\" TEXT\n  \"p_mfgr\" TEXT\n  \"p_retailprice\" REAL\n  \"p_comment\" TEXT\n}\n\nTable \"partsupp\" {\n  \"ps_partkey\" INTEGER [pk, not null]\n  \"ps_suppkey\" INTEGER [pk, not null]\n  \"ps_supplycost\" REAL [not null]\n  \"ps_availqty\" INTEGER\n  \"ps_comment\" TEXT\n}\n\nTable \"region\" {\n  \"r_regionkey\" INTEGER [pk, not null]\n  \"r_name\" TEXT\n  \"r_comment\" TEXT\n}\n\nTable \"supplier\" {\n  \"s_suppkey\" INTEGER [pk, not null]\n  \"s_nationkey\" INTEGER\n  \"s_comment\" TEXT\n  \"s_name\" TEXT\n  \"s_address\" TEXT\n  \"s_phone\" TEXT\n  \"s_acctbal\" REAL\n}\n\n\n\nRef: \"customer\".\"c_nationkey\" > \"nation\".\"n_nationkey\"\n\nRef: \"lineitem\".\"l_partkey\" > \"partsupp\".\"ps_partkey\"\n\nRef: \"lineitem\".\"l_suppkey\" > \"partsupp\".\"ps_suppkey\"\n\nRef: \"lineitem\".\"l_orderkey\" > \"orders\".\"o_orderkey\"\n\nRef: \"nation\".\"n_regionkey\" > \"region\".\"r_regionkey\"\n\nRef: \"orders\".\"o_custkey\" > \"customer\".\"c_custkey\"\n\nRef: \"partsupp\".\"ps_suppkey\" > \"supplier\".\"s_suppkey\"\n\nRef: \"partsupp\".\"ps_partkey\" > \"part\".\"p_partkey\"\n\nRef: \"supplier\".\"s_nationkey\" > \"nation\".\"n_nationkey\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"customer\" {\n  \"c_custkey\" INTEGER [pk, not null]\n  \"c_mktsegment\" TEXT\n  \"c_nationkey\" INTEGER\n  \"c_name\" TEXT\n  \"c_address\" TEXT\n  \"c_phone\" TEXT\n  \"c_acctbal\" REAL\n  \"c_comment\" TEXT\n}\n\nTable \"lineitem\" {\n  \"l_shipdate\" DATE\n  \"l_orderkey\" INTEGER [pk, not null]\n  \"l_discount\" REAL [not null]\n  \"l_extendedprice\" REAL [not null]\n  \"l_suppkey\" INTEGER [not null]\n  \"l_quantity\" INTEGER [not null]\n  \"l_returnflag\" TEXT\n  \"l_partkey\" INTEGER [not null]\n  \"l_linestatus\" TEXT\n  \"l_tax\" REAL [not null]\n  \"l_commitdate\" DATE\n  \"l_receiptdate\" DATE\n  \"l_shipmode\" TEXT\n  \"l_linenumber\" INTEGER [pk, not null]\n  \"l_shipinstruct\" TEXT\n  \"l_comment\" TEXT\n}\n\nTable \"nation\" {\n  \"n_nationkey\" INTEGER [pk, not null]\n  \"n_name\" TEXT\n  \"n_regionkey\" INTEGER\n  \"n_comment\" TEXT\n}\n\nTable \"orders\" {\n  \"o_orderdate\" DATE\n  \"o_orderkey\" INTEGER [pk, not null]\n  \"o_custkey\" INTEGER [not null]\n  \"o_orderpriority\" TEXT\n  \"o_shippriority\" INTEGER\n  \"o_clerk\" TEXT\n  \"o_orderstatus\" TEXT\n  \"o_totalprice\" REAL\n  \"o_comment\" TEXT\n}\n\nTable \"part\" {\n  \"p_partkey\" INTEGER [pk, not null]\n  \"p_type\" TEXT\n  \"p_size\" INTEGER\n  \"p_brand\" TEXT\n  \"p_name\" TEXT\n  \"p_container\" TEXT\n  \"p_mfgr\" TEXT\n  \"p_retailprice\" REAL\n  \"p_comment\" TEXT\n}\n\nTable \"partsupp\" {\n  \"ps_partkey\" INTEGER [pk, not null]\n  \"ps_suppkey\" INTEGER [pk, not null]\n  \"ps_supplycost\" REAL [not null]\n  \"ps_availqty\" INTEGER\n  \"ps_comment\" TEXT\n}\n\nTable \"region\" {\n  \"r_regionkey\" INTEGER [pk, not null]\n  \"r_name\" TEXT\n  \"r_comment\" TEXT\n}\n\nTable \"supplier\" {\n  \"s_suppkey\" INTEGER [pk, not null]\n  \"s_nationkey\" INTEGER\n  \"s_comment\" TEXT\n  \"s_name\" TEXT\n  \"s_address\" TEXT\n  \"s_phone\" TEXT\n  \"s_acctbal\" REAL\n}\n\nRef: \"customer\".\"c_nationkey\" > \"nation\".\"n_nationkey\"\n\nRef: \"lineitem\".\"l_partkey\" > \"partsupp\".\"ps_partkey\"\n\nRef: \"lineitem\".\"l_suppkey\" > \"partsupp\".\"ps_suppkey\"\n\nRef: \"lineitem\".\"l_orderkey\" > \"orders\".\"o_orderkey\"\n\nRef: \"nation\".\"n_regionkey\" > \"region\".\"r_regionkey\"\n\nRef: \"orders\".\"o_custkey\" > \"customer\".\"c_custkey\"\n\nRef: \"partsupp\".\"ps_suppkey\" > \"supplier\".\"s_suppkey\"\n\nRef: \"partsupp\".\"ps_partkey\" > \"part\".\"p_partkey\"\n\nRef: \"supplier\".\"s_nationkey\" > \"nation\".\"n_nationkey\"\n\n## Table Stats & Sample Values\n\ncustomer: 10000 rows\n  c_name: 'Customer#000000001', 'Customer#000000002', 'Customer#000000003', ...\n  c_mktsegment: 'BUILDING', 'MACHINERY', 'FURNITURE', ...\n  c_address: 'KwX3hMHjZ6', 'ioUn,eqTTXOdo', 'YddJqmIdouNT9Yj', ...\n\nlineitem: 10000 rows\n  l_linestatus: 'O', 'F'\n  l_returnflag: 'N', 'A', 'R'\n  l_shipmode: 'RAIL', 'TRUCK', 'SHIP', ...\n\nnation: 25 rows\n  n_name: 'ALGERIA', 'ARGENTINA', 'BRAZIL', ...\n  n_regionkey: '0', '1', '3', ...\n  n_comment: 'slyly express pinto beans cajole idly. deposits us', 'instructions detect blithely stealthily pending pa', 'blithely unusual deposits are quickly--', ...\n\norders: 10000 rows\n  o_orderstatus: 'P', 'O', 'F'\n  o_orderpriority: '4-NOT SPECIFIED', '1-URGENT', '5-LOW', ...\n  o_clerk: 'Clerk#000000916', 'Clerk#000000373', 'Clerk#000000485', ...\n\npart: 10000 rows\n  p_type: 'LARGE PLATED TIN', 'LARGE POLISHED STEEL', 'STANDARD PLATED COPPER', ...\n  p_brand: 'Brand#43', 'Brand#55', 'Brand#53', ...\n  p_name: 'burlywood plum powder puff mint', 'hot spring dodger dim light', 'dark slate grey steel misty', ...\n\npartsupp: 10000 rows\n  ps_comment: 'carefully ironic deposits use against the carefull', 'slyly regular accounts serve carefully. asymptotes', 'carefully special ideas are slyly. slyly ironic ep', ...\n  ps_supplycost: '400.75', '702.61', '383.95', ...\n  ps_availqty: '1111', '3999', '7411', ...\n\nregion: 5 rows\n  r_name: 'AFRICA', 'AMERICA', 'ASIA', ...\n  r_comment: 'asymptotes sublate after the r', 'requests affix quickly final tithes. blithely even', 'accounts cajole carefully according to the careful', ...\n  r_regionkey: '0', '1', '2', ...\n\nsupplier: 10000 rows\n  s_name: 'Supplier#000000001', 'Supplier#000000002', 'Supplier#000000003', ...\n  s_address: ',wWs4pnykQOFl8mgVCU8EZMXqZs1w', 'WkXT6MSAJrp4qWq3W9N', 'KjUqa42JEHaRDVQTHV6Yq2h', ...\n  s_comment: 'blithely final pearls are. instructions thra', 'requests integrate fluffily. fluffily ironic depos', 'carefully express ideas shall have to unwin', ...",
+    "stateUrl": "https://bird-bench.github.io/#retails",
+    "tableStats": {
+      "customer": {
+        "rows": 10000,
+        "sample_values": {
+          "c_custkey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "c_mktsegment": [
+            "BUILDING",
+            "MACHINERY",
+            "FURNITURE",
+            "AUTOMOBILE",
+            "HOUSEHOLD"
+          ],
+          "c_nationkey": [
+            "8",
+            "16",
+            "11",
+            "24",
+            "4",
+            "6",
+            "1",
+            "14"
+          ],
+          "c_name": [
+            "Customer#000000001",
+            "Customer#000000002",
+            "Customer#000000003",
+            "Customer#000000004",
+            "Customer#000000005",
+            "Customer#000000006",
+            "Customer#000000007",
+            "Customer#000000008"
+          ],
+          "c_address": [
+            "KwX3hMHjZ6",
+            "ioUn,eqTTXOdo",
+            "YddJqmIdouNT9Yj",
+            "iE7PADWuxr4pR5f9ewKqg",
+            "h3yhvBTVbF2IJPzTKLoUe4",
+            "Zhl0dFevhaCb0JBz5B3N519mB",
+            "RoJOXUJTtJiPOeLOevu2XraKnK8gc",
+            "eAtAkcVMh 7227UtcTi"
+          ],
+          "c_phone": [
+            "937-241-3198",
+            "906-965-7556",
+            "328-750-7603",
+            "127-505-7633",
+            "322-864-6707",
+            "906-987-4933",
+            "501-272-8293",
+            "457-420-9613"
+          ],
+          "c_acctbal": [
+            "3560.03",
+            "7550.21",
+            "-926.96",
+            "-78.75",
+            "7741.9",
+            "6016.22",
+            "4096.7",
+            "2888.93"
+          ],
+          "c_comment": [
+            "ironic excuses detect slyly silent requests. reque",
+            "final express accounts mold slyly. ironic accounts",
+            "carefully express foxes sleep carefully. pending p",
+            "silent packages sleep. even re",
+            "slyly special frays nag quietly bl",
+            "bold ideas cajole furiously furiously express acco",
+            "pending theodolites above the ironic",
+            "accounts boost closely. theodolites after the requ"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lineitem": {
+        "rows": 10000,
+        "sample_values": {
+          "l_shipdate": [
+            "1995-08-16",
+            "1995-08-13",
+            "1995-06-17",
+            "1995-07-16",
+            "1995-04-29",
+            "1995-06-30",
+            "1995-07-04",
+            "1996-11-26"
+          ],
+          "l_orderkey": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "32",
+            "33"
+          ],
+          "l_discount": [
+            "0.1",
+            "0.09",
+            "0.02",
+            "0.08",
+            "0.07",
+            "0.0",
+            "0.04",
+            "0.05"
+          ],
+          "l_extendedprice": [
+            "58303.08",
+            "16947.7",
+            "63642.9",
+            "22521.96",
+            "4081.08",
+            "18752.36",
+            "18988.06",
+            "73824.66"
+          ],
+          "l_suppkey": [
+            "6296",
+            "8776",
+            "3859",
+            "7225",
+            "5890",
+            "6266",
+            "1813",
+            "8740"
+          ],
+          "l_quantity": [
+            "33",
+            "10",
+            "34",
+            "18",
+            "3",
+            "11",
+            "14",
+            "42"
+          ],
+          "l_returnflag": [
+            "N",
+            "A",
+            "R"
+          ],
+          "l_partkey": [
+            "98768",
+            "23771",
+            "113858",
+            "127224",
+            "98362",
+            "43761",
+            "159297",
+            "118739"
+          ],
+          "l_linestatus": [
+            "O",
+            "F"
+          ],
+          "l_tax": [
+            "0.06",
+            "0.08",
+            "0.07",
+            "0.02",
+            "0.01",
+            "0.0",
+            "0.03",
+            "0.05"
+          ],
+          "l_commitdate": [
+            "1995-07-12",
+            "1995-07-09",
+            "1995-05-22",
+            "1995-06-28",
+            "1995-06-27",
+            "1995-05-24",
+            "1995-06-23",
+            "1996-12-15"
+          ],
+          "l_receiptdate": [
+            "1995-09-14",
+            "1995-08-27",
+            "1995-06-30",
+            "1995-07-18",
+            "1995-05-19",
+            "1995-07-12",
+            "1996-12-12",
+            "1997-01-26"
+          ],
+          "l_shipmode": [
+            "RAIL",
+            "TRUCK",
+            "SHIP",
+            "MAIL",
+            "AIR",
+            "FOB",
+            "REG AIR"
+          ],
+          "l_linenumber": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "l_shipinstruct": [
+            "NONE",
+            "TAKE BACK RETURN",
+            "COLLECT COD",
+            "DELIVER IN PERSON"
+          ],
+          "l_comment": [
+            "carefully bo",
+            "blithely regular pac",
+            "ironic accounts sleep furiously silen",
+            "idly even platelets acr",
+            "unusual speci",
+            "slyly silent instructions alon",
+            "always regular frays ea",
+            "bold accounts haggle furiously a"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "nation": {
+        "rows": 25,
+        "sample_values": {
+          "n_nationkey": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "n_name": [
+            "ALGERIA",
+            "ARGENTINA",
+            "BRAZIL",
+            "CANADA",
+            "EGYPT",
+            "ETHIOPIA",
+            "FRANCE",
+            "GERMANY"
+          ],
+          "n_regionkey": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4"
+          ],
+          "n_comment": [
+            "slyly express pinto beans cajole idly. deposits us",
+            "instructions detect blithely stealthily pending pa",
+            "blithely unusual deposits are quickly--",
+            "carefully pending packages haggle blithely. blithe",
+            "slyly express deposits haggle furiously. slyly fin",
+            "quickly special pinto beans nag quickly blithely c",
+            "even idle instructions haggle evenly carefully eve",
+            "carefully regular dependencies was regular depende"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orders": {
+        "rows": 10000,
+        "sample_values": {
+          "o_orderdate": [
+            "1995-04-19",
+            "1996-11-04",
+            "1992-02-15",
+            "1997-07-03",
+            "1994-01-03",
+            "1994-08-26",
+            "1998-03-06",
+            "1998-04-17"
+          ],
+          "o_orderkey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "32"
+          ],
+          "o_custkey": [
+            "73100",
+            "92861",
+            "44875",
+            "72076",
+            "93697",
+            "69929",
+            "149698",
+            "96512"
+          ],
+          "o_orderpriority": [
+            "4-NOT SPECIFIED",
+            "1-URGENT",
+            "5-LOW",
+            "3-MEDIUM",
+            "2-HIGH"
+          ],
+          "o_shippriority": [
+            "0"
+          ],
+          "o_clerk": [
+            "Clerk#000000916",
+            "Clerk#000000373",
+            "Clerk#000000485",
+            "Clerk#000000426",
+            "Clerk#000000944",
+            "Clerk#000000771",
+            "Clerk#000000141",
+            "Clerk#000000716"
+          ],
+          "o_orderstatus": [
+            "P",
+            "O",
+            "F"
+          ],
+          "o_totalprice": [
+            "203198.56",
+            "317719.99",
+            "146674.98",
+            "317595.77",
+            "191918.92",
+            "199180.63",
+            "236921.96",
+            "170301.18"
+          ],
+          "o_comment": [
+            "final packages sleep blithely packa",
+            "final excuses about the ironic even deposits detec",
+            "final final deposits cajole foxes. blithely pendin",
+            "deposits hang slyly across the en",
+            "slowly even requests detect fluffily alongs",
+            "regular express deposits boost ca",
+            "carefully bold requests boost. deposits after the ",
+            "never ironic instructions wake above the ironic sp"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "part": {
+        "rows": 10000,
+        "sample_values": {
+          "p_partkey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "p_type": [
+            "LARGE PLATED TIN",
+            "LARGE POLISHED STEEL",
+            "STANDARD PLATED COPPER",
+            "STANDARD BURNISHED BRASS",
+            "ECONOMY BRUSHED BRASS",
+            "STANDARD POLISHED BRASS",
+            "PROMO POLISHED NICKEL",
+            "STANDARD PLATED BRASS"
+          ],
+          "p_size": [
+            "31",
+            "4",
+            "30",
+            "3",
+            "7",
+            "19",
+            "6",
+            "33"
+          ],
+          "p_brand": [
+            "Brand#43",
+            "Brand#55",
+            "Brand#53",
+            "Brand#13",
+            "Brand#14",
+            "Brand#33",
+            "Brand#35",
+            "Brand#51"
+          ],
+          "p_name": [
+            "burlywood plum powder puff mint",
+            "hot spring dodger dim light",
+            "dark slate grey steel misty",
+            "cream turquoise dark thistle light",
+            "drab papaya lemon orange yellow",
+            "puff pink lavender azure violet",
+            "cornsilk lawn forest turquoise royal",
+            "linen dodger papaya lemon tomato"
+          ],
+          "p_container": [
+            "LG BAG",
+            "LG CASE",
+            "WRAP CASE",
+            "LG PKG",
+            "MED PACK",
+            "MED CASE",
+            "LG CAN",
+            "SM BOX"
+          ],
+          "p_mfgr": [
+            "Manufacturer#4",
+            "Manufacturer#5",
+            "Manufacturer#1",
+            "Manufacturer#3",
+            "Manufacturer#2"
+          ],
+          "p_retailprice": [
+            "901.0",
+            "902.0",
+            "903.0",
+            "904.0",
+            "905.0",
+            "906.0",
+            "907.0",
+            "908.0"
+          ],
+          "p_comment": [
+            "blithely busy reque",
+            "even ironic requests s",
+            "slyly ironic fox",
+            "even silent pla",
+            "regular accounts",
+            "doggedly",
+            "even requests sleep fu",
+            "final packages sl"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "partsupp": {
+        "rows": 10000,
+        "sample_values": {
+          "ps_partkey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ps_suppkey": [
+            "2",
+            "2502",
+            "5002",
+            "7502",
+            "3",
+            "2503",
+            "5003",
+            "7503"
+          ],
+          "ps_supplycost": [
+            "400.75",
+            "702.61",
+            "383.95",
+            "682.18",
+            "42.67",
+            "401.67",
+            "128.31",
+            "664.47"
+          ],
+          "ps_availqty": [
+            "1111",
+            "3999",
+            "7411",
+            "5795",
+            "4360",
+            "8091",
+            "9971",
+            "706"
+          ],
+          "ps_comment": [
+            "carefully ironic deposits use against the carefull",
+            "slyly regular accounts serve carefully. asymptotes",
+            "carefully special ideas are slyly. slyly ironic ep",
+            "deposits along the ironic pinto beans boost fluffi",
+            "regular pending foxes affix carefully furiously pe",
+            "carefully silent ideas hinder slyly. theodolites n",
+            "deposits wake. ironic deposits cajole slyly pinto ",
+            "bold pinto beans grow about the fluffily regular d"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "region": {
+        "rows": 5,
+        "sample_values": {
+          "r_regionkey": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "r_name": [
+            "AFRICA",
+            "AMERICA",
+            "ASIA",
+            "EUROPE",
+            "MIDDLE EAST"
+          ],
+          "r_comment": [
+            "asymptotes sublate after the r",
+            "requests affix quickly final tithes. blithely even",
+            "accounts cajole carefully according to the careful",
+            "slyly even theodolites are carefully ironic pinto ",
+            "furiously express accounts wake sly"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "supplier": {
+        "rows": 10000,
+        "sample_values": {
+          "s_suppkey": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "s_nationkey": [
+            "13",
+            "5",
+            "22",
+            "9",
+            "2",
+            "0",
+            "15",
+            "8"
+          ],
+          "s_comment": [
+            "blithely final pearls are. instructions thra",
+            "requests integrate fluffily. fluffily ironic depos",
+            "carefully express ideas shall have to unwin",
+            "quickly ironic instructions snooze? express deposi",
+            "regular requests haggle. final deposits according ",
+            "furiously regular pinto beans detect. quickly fina",
+            "carefully even packages affix furiously pending pi",
+            "regular ironic theodolites wake blithely pending t"
+          ],
+          "s_name": [
+            "Supplier#000000001",
+            "Supplier#000000002",
+            "Supplier#000000003",
+            "Supplier#000000004",
+            "Supplier#000000005",
+            "Supplier#000000006",
+            "Supplier#000000007",
+            "Supplier#000000008"
+          ],
+          "s_address": [
+            ",wWs4pnykQOFl8mgVCU8EZMXqZs1w",
+            "WkXT6MSAJrp4qWq3W9N",
+            "KjUqa42JEHaRDVQTHV6Yq2h",
+            "dxp8WejdtFKFPKa Q7Emf0RjnKx3gR3",
+            "W9VO4vl4dfoDYZ RhawP8xLoc",
+            "UehnPL54frpEmHoH",
+            "P5YDcLfpLaVkJcPnqeMv",
+            "rPMo3 1Xbp"
+          ],
+          "s_phone": [
+            "800-807-9579",
+            "348-617-6055",
+            "471-986-9888",
+            "893-133-4384",
+            "752-877-4449",
+            "308-113-4748",
+            "400-485-7616",
+            "893-918-3335"
+          ],
+          "s_acctbal": [
+            "3082.86",
+            "3009.73",
+            "9159.78",
+            "9846.01",
+            "-74.94",
+            "7349.96",
+            "1680.44",
+            "-276.13"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

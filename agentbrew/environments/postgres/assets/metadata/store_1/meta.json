@@ -1,0 +1,663 @@
+{
+  "db_id": "store_1",
+  "source": "sparc",
+  "tables": 11,
+  "total_rows": 15607,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#store_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"albums\" {\n  \"id\" INTEGER [pk]\n  \"title\" TEXT [not null]\n  \"artist_id\" INTEGER [not null]\n}\n\nTable \"artists\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"customers\" {\n  \"id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"company\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n  \"postal_code\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"email\" TEXT [not null]\n  \"support_rep_id\" INTEGER\n}\n\nTable \"employees\" {\n  \"id\" INTEGER [pk]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT [not null]\n  \"title\" TEXT\n  \"reports_to\" INTEGER\n  \"birth_date\" TEXT\n  \"hire_date\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n  \"postal_code\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"email\" TEXT\n}\n\nTable \"genres\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"invoice_lines\" {\n  \"id\" INTEGER [pk]\n  \"invoice_id\" INTEGER [not null]\n  \"track_id\" INTEGER [not null]\n  \"unit_price\" TEXT [not null]\n  \"quantity\" INTEGER [not null]\n}\n\nTable \"invoices\" {\n  \"id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"invoice_date\" TEXT [not null]\n  \"billing_address\" TEXT\n  \"billing_city\" TEXT\n  \"billing_state\" TEXT\n  \"billing_country\" TEXT\n  \"billing_postal_code\" TEXT\n  \"total\" TEXT [not null]\n}\n\nTable \"media_types\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"playlist_tracks\" {\n  \"playlist_id\" INTEGER [pk, not null]\n  \"track_id\" INTEGER [pk, not null]\n}\n\nTable \"playlists\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"tracks\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"album_id\" INTEGER\n  \"media_type_id\" INTEGER [not null]\n  \"genre_id\" INTEGER\n  \"composer\" TEXT\n  \"milliseconds\" INTEGER [not null]\n  \"bytes\" INTEGER\n  \"unit_price\" TEXT [not null]\n}\n\n\n\nRef: \"albums\".\"artist_id\" > \"artists\".\"id\"\n\nRef: \"employees\".\"reports_to\" > \"employees\".\"id\"\n\nRef: \"customers\".\"support_rep_id\" > \"employees\".\"id\"\n\nRef: \"invoices\".\"customer_id\" > \"customers\".\"id\"\n\nRef: \"tracks\".\"media_type_id\" > \"media_types\".\"id\"\n\nRef: \"tracks\".\"genre_id\" > \"genres\".\"id\"\n\nRef: \"tracks\".\"album_id\" > \"albums\".\"id\"\n\nRef: \"invoice_lines\".\"track_id\" > \"tracks\".\"id\"\n\nRef: \"invoice_lines\".\"invoice_id\" > \"invoices\".\"id\"\n\nRef: \"playlist_tracks\".\"track_id\" > \"tracks\".\"id\"\n\nRef: \"playlist_tracks\".\"playlist_id\" > \"playlists\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"albums\" {\n  \"id\" INTEGER [pk]\n  \"title\" TEXT [not null]\n  \"artist_id\" INTEGER [not null]\n}\n\nTable \"artists\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"customers\" {\n  \"id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"company\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n  \"postal_code\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"email\" TEXT [not null]\n  \"support_rep_id\" INTEGER\n}\n\nTable \"employees\" {\n  \"id\" INTEGER [pk]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT [not null]\n  \"title\" TEXT\n  \"reports_to\" INTEGER\n  \"birth_date\" TEXT\n  \"hire_date\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n  \"postal_code\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"email\" TEXT\n}\n\nTable \"genres\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"invoice_lines\" {\n  \"id\" INTEGER [pk]\n  \"invoice_id\" INTEGER [not null]\n  \"track_id\" INTEGER [not null]\n  \"unit_price\" TEXT [not null]\n  \"quantity\" INTEGER [not null]\n}\n\nTable \"invoices\" {\n  \"id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"invoice_date\" TEXT [not null]\n  \"billing_address\" TEXT\n  \"billing_city\" TEXT\n  \"billing_state\" TEXT\n  \"billing_country\" TEXT\n  \"billing_postal_code\" TEXT\n  \"total\" TEXT [not null]\n}\n\nTable \"media_types\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"playlist_tracks\" {\n  \"playlist_id\" INTEGER [pk, not null]\n  \"track_id\" INTEGER [pk, not null]\n}\n\nTable \"playlists\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"tracks\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"album_id\" INTEGER\n  \"media_type_id\" INTEGER [not null]\n  \"genre_id\" INTEGER\n  \"composer\" TEXT\n  \"milliseconds\" INTEGER [not null]\n  \"bytes\" INTEGER\n  \"unit_price\" TEXT [not null]\n}\n\nRef: \"albums\".\"artist_id\" > \"artists\".\"id\"\n\nRef: \"employees\".\"reports_to\" > \"employees\".\"id\"\n\nRef: \"customers\".\"support_rep_id\" > \"employees\".\"id\"\n\nRef: \"invoices\".\"customer_id\" > \"customers\".\"id\"\n\nRef: \"tracks\".\"media_type_id\" > \"media_types\".\"id\"\n\nRef: \"tracks\".\"genre_id\" > \"genres\".\"id\"\n\nRef: \"tracks\".\"album_id\" > \"albums\".\"id\"\n\nRef: \"invoice_lines\".\"track_id\" > \"tracks\".\"id\"\n\nRef: \"invoice_lines\".\"invoice_id\" > \"invoices\".\"id\"\n\nRef: \"playlist_tracks\".\"track_id\" > \"tracks\".\"id\"\n\nRef: \"playlist_tracks\".\"playlist_id\" > \"playlists\".\"id\"\n\n## Table Stats & Sample Values\n\nalbums: 347 rows\n  title: 'For Those About To Rock We Salute You', 'Balls to the Wall', 'Restless and Wild', ...\n  artist_id: '1', '2', '3', ...\n  id: '1', '2', '3', ...\n\nartists: 275 rows\n  name: 'AC/DC', 'Accept', 'Aerosmith', ...\n  id: '1', '2', '3', ...\n\ncustomers: 59 rows\n  first_name: 'Luís', 'Leonie', 'François', ...\n  last_name: 'Gonçalves', 'Köhler', 'Tremblay', ...\n  city: 'São José dos Campos', 'Stuttgart', 'Montréal', ...\n\nemployees: 8 rows\n  last_name: 'Adams', 'Edwards', 'Peacock', ...\n  first_name: 'Andrew', 'Nancy', 'Jane', ...\n  title: 'General Manager', 'Sales Manager', 'Sales Support Agent', ...\n\ngenres: 25 rows\n  name: 'Rock', 'Jazz', 'Metal', ...\n  id: '1', '2', '3', ...\n\ninvoice_lines: 2240 rows\n  unit_price: '0.99', '1.99'\n  quantity: '1'\n  invoice_id: '1', '2', '3', ...\n\ninvoices: 412 rows\n  billing_city: 'Stuttgart', 'Oslo', 'Brussels', ...\n  billing_state: 'AB', 'MA', 'Dublin', ...\n  billing_country: 'Germany', 'Norway', 'Belgium', ...\n\nmedia_types: 5 rows\n  name: 'MPEG audio file', 'Protected AAC audio file', 'Protected MPEG-4 video file', ...\n  id: '1', '2', '3', ...\n\nplaylist_tracks: 8715 rows\n  playlist_id: '1', '3', '5', ...\n  track_id: '3402', '3389', '3390', ...\n\nplaylists: 18 rows\n  name: 'Music', 'Movies', 'TV Shows', ...\n  id: '1', '2', '3', ...\n\ntracks: 3503 rows\n  name: 'For Those About To Rock (We Salute You)', 'Balls to the Wall', 'Fast As a Shark', ...\n  unit_price: '0.99', '1.99'\n  composer: 'Angus Young, Malcolm Young, Brian Johnson', 'F. Baltes, S. Kaufman, U. Dirkscneider & W. Hoffma', 'F. Baltes, R.A. Smith-Diesel, S. Kaufman, U. Dirks', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#store_1",
+    "tableStats": {
+      "albums": {
+        "rows": 347,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "title": [
+            "For Those About To Rock We Salute You",
+            "Balls to the Wall",
+            "Restless and Wild",
+            "Let There Be Rock",
+            "Big Ones",
+            "Jagged Little Pill",
+            "Facelift",
+            "Warner 25 Anos"
+          ],
+          "artist_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "artists": {
+        "rows": 275,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "AC/DC",
+            "Accept",
+            "Aerosmith",
+            "Alanis Morissette",
+            "Alice In Chains",
+            "Antônio Carlos Jobim",
+            "Apocalyptica",
+            "Audioslave"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 59,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "first_name": [
+            "Luís",
+            "Leonie",
+            "François",
+            "Bjørn",
+            "František",
+            "Helena",
+            "Astrid",
+            "Daan"
+          ],
+          "last_name": [
+            "Gonçalves",
+            "Köhler",
+            "Tremblay",
+            "Hansen",
+            "Wichterlová",
+            "Holý",
+            "Gruber",
+            "Peeters"
+          ],
+          "company": [
+            "Embraer - Empresa Brasileira de Aeronáutica S.A.",
+            "JetBrains s.r.o.",
+            "Woodstock Discos",
+            "Banco do Brasil S.A.",
+            "Riotur",
+            "Telus",
+            "Rogers Canada",
+            "Google Inc."
+          ],
+          "address": [
+            "Av. Brigadeiro Faria Lima, 2170",
+            "Theodor-Heuss-Straße 34",
+            "1498 rue Bélanger",
+            "Ullevålsveien 14",
+            "Klanova 9/506",
+            "Rilská 3174/6",
+            "Rotenturmstraße 4, 1010 Innere Stadt",
+            "Grétrystraat 63"
+          ],
+          "city": [
+            "São José dos Campos",
+            "Stuttgart",
+            "Montréal",
+            "Oslo",
+            "Prague",
+            "Vienne",
+            "Brussels",
+            "Copenhagen"
+          ],
+          "state": [
+            "SP",
+            "QC",
+            "RJ",
+            "DF",
+            "AB",
+            "BC",
+            "CA",
+            "WA"
+          ],
+          "country": [
+            "Brazil",
+            "Germany",
+            "Canada",
+            "Norway",
+            "Czech Republic",
+            "Austria",
+            "Belgium",
+            "Denmark"
+          ],
+          "postal_code": [
+            "12227-000",
+            "70174",
+            "H2G 1A7",
+            "0171",
+            "14700",
+            "14300",
+            "1010",
+            "1000"
+          ],
+          "phone": [
+            "+55 (12) 3923-5555",
+            "+49 0711 2842222",
+            "+1 (514) 721-4711",
+            "+47 22 44 22 22",
+            "+420 2 4172 5555",
+            "+420 2 4177 0449",
+            "+43 01 5134505",
+            "+32 02 219 03 03"
+          ],
+          "fax": [
+            "+55 (12) 3923-5566",
+            "+420 2 4172 5555",
+            "+55 (11) 3033-4564",
+            "+55 (11) 3055-8131",
+            "+55 (21) 2271-7070",
+            "+55 (61) 3363-7855",
+            "+1 (780) 434-5565",
+            "+1 (604) 688-8756"
+          ],
+          "email": [
+            "luisg@embraer.com.br",
+            "leonekohler@surfeu.de",
+            "ftremblay@gmail.com",
+            "bjorn.hansen@yahoo.no",
+            "frantisekw@jetbrains.com",
+            "hholy@gmail.com",
+            "astrid.gruber@apple.at",
+            "daan_peeters@apple.be"
+          ],
+          "support_rep_id": [
+            "3",
+            "5",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employees": {
+        "rows": 8,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "last_name": [
+            "Adams",
+            "Edwards",
+            "Peacock",
+            "Park",
+            "Johnson",
+            "Mitchell",
+            "King",
+            "Callahan"
+          ],
+          "first_name": [
+            "Andrew",
+            "Nancy",
+            "Jane",
+            "Margaret",
+            "Steve",
+            "Michael",
+            "Robert",
+            "Laura"
+          ],
+          "title": [
+            "General Manager",
+            "Sales Manager",
+            "Sales Support Agent",
+            "IT Manager",
+            "IT Staff"
+          ],
+          "reports_to": [
+            "1",
+            "2",
+            "6"
+          ],
+          "birth_date": [
+            "1962-02-18 00:00:00",
+            "1958-12-08 00:00:00",
+            "1973-08-29 00:00:00",
+            "1947-09-19 00:00:00",
+            "1965-03-03 00:00:00",
+            "1973-07-01 00:00:00",
+            "1970-05-29 00:00:00",
+            "1968-01-09 00:00:00"
+          ],
+          "hire_date": [
+            "2002-08-14 00:00:00",
+            "2002-05-01 00:00:00",
+            "2002-04-01 00:00:00",
+            "2003-05-03 00:00:00",
+            "2003-10-17 00:00:00",
+            "2004-01-02 00:00:00",
+            "2004-03-04 00:00:00"
+          ],
+          "address": [
+            "11120 Jasper Ave NW",
+            "825 8 Ave SW",
+            "1111 6 Ave SW",
+            "683 10 Street SW",
+            "7727B 41 Ave",
+            "5827 Bowness Road NW",
+            "590 Columbia Boulevard West",
+            "923 7 ST NW"
+          ],
+          "city": [
+            "Edmonton",
+            "Calgary",
+            "Lethbridge"
+          ],
+          "state": [
+            "AB"
+          ],
+          "country": [
+            "Canada"
+          ],
+          "postal_code": [
+            "T5K 2N1",
+            "T2P 2T3",
+            "T2P 5M5",
+            "T2P 5G3",
+            "T3B 1Y7",
+            "T3B 0C5",
+            "T1K 5N8",
+            "T1H 1Y8"
+          ],
+          "phone": [
+            "+1 (780) 428-9482",
+            "+1 (403) 262-3443",
+            "+1 (403) 263-4423",
+            "1 (780) 836-9987",
+            "+1 (403) 246-9887",
+            "+1 (403) 456-9986",
+            "+1 (403) 467-3351"
+          ],
+          "fax": [
+            "+1 (780) 428-3457",
+            "+1 (403) 262-3322",
+            "+1 (403) 262-6712",
+            "+1 (403) 263-4289",
+            "1 (780) 836-9543",
+            "+1 (403) 246-9899",
+            "+1 (403) 456-8485",
+            "+1 (403) 467-8772"
+          ],
+          "email": [
+            "andrew@chinookcorp.com",
+            "nancy@chinookcorp.com",
+            "jane@chinookcorp.com",
+            "margaret@chinookcorp.com",
+            "steve@chinookcorp.com",
+            "michael@chinookcorp.com",
+            "robert@chinookcorp.com",
+            "laura@chinookcorp.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "genres": {
+        "rows": 25,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Rock",
+            "Jazz",
+            "Metal",
+            "Alternative & Punk",
+            "Rock And Roll",
+            "Blues",
+            "Latin",
+            "Reggae"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "invoice_lines": {
+        "rows": 2240,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "invoice_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "track_id": [
+            "2",
+            "4",
+            "6",
+            "8",
+            "10",
+            "12",
+            "16",
+            "20"
+          ],
+          "unit_price": [
+            "0.99",
+            "1.99"
+          ],
+          "quantity": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "invoices": {
+        "rows": 412,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "2",
+            "4",
+            "8",
+            "14",
+            "23",
+            "37",
+            "38",
+            "40"
+          ],
+          "invoice_date": [
+            "2007-01-01 00:00:00",
+            "2007-01-02 00:00:00",
+            "2007-01-03 00:00:00",
+            "2007-01-06 00:00:00",
+            "2007-01-11 00:00:00",
+            "2007-01-19 00:00:00",
+            "2007-02-01 00:00:00",
+            "2007-02-02 00:00:00"
+          ],
+          "billing_address": [
+            "Theodor-Heuss-Straße 34",
+            "Ullevålsveien 14",
+            "Grétrystraat 63",
+            "8210 111 ST NW",
+            "69 Salem Street",
+            "Berger Straße 10",
+            "Barbarossastraße 19",
+            "8, Rue Hanovre"
+          ],
+          "billing_city": [
+            "Stuttgart",
+            "Oslo",
+            "Brussels",
+            "Edmonton",
+            "Boston",
+            "Frankfurt",
+            "Berlin",
+            "Paris"
+          ],
+          "billing_state": [
+            "AB",
+            "MA",
+            "Dublin",
+            "CA",
+            "WA",
+            "NV",
+            "WI",
+            "NS"
+          ],
+          "billing_country": [
+            "Germany",
+            "Norway",
+            "Belgium",
+            "Canada",
+            "USA",
+            "France",
+            "Ireland",
+            "United Kingdom"
+          ],
+          "billing_postal_code": [
+            "70174",
+            "0171",
+            "1000",
+            "T6G 2C7",
+            "2113",
+            "60316",
+            "10779",
+            "75002"
+          ],
+          "total": [
+            "1.98",
+            "3.96",
+            "5.94",
+            "8.91",
+            "13.86",
+            "0.99",
+            "6.94",
+            "17.91"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "media_types": {
+        "rows": 5,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "name": [
+            "MPEG audio file",
+            "Protected AAC audio file",
+            "Protected MPEG-4 video file",
+            "Purchased AAC audio file",
+            "AAC audio file"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "playlist_tracks": {
+        "rows": 8715,
+        "sample_values": {
+          "playlist_id": [
+            "1",
+            "3",
+            "5",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "track_id": [
+            "3402",
+            "3389",
+            "3390",
+            "3391",
+            "3392",
+            "3393",
+            "3394",
+            "3395"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "playlists": {
+        "rows": 18,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Music",
+            "Movies",
+            "TV Shows",
+            "Audiobooks",
+            "90’s Music",
+            "Music Videos",
+            "Brazilian Music",
+            "Classical"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "tracks": {
+        "rows": 3503,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "For Those About To Rock (We Salute You)",
+            "Balls to the Wall",
+            "Fast As a Shark",
+            "Restless and Wild",
+            "Princess of the Dawn",
+            "Put The Finger On You",
+            "Let's Get It Up",
+            "Inject The Venom"
+          ],
+          "album_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "media_type_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "genre_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "composer": [
+            "Angus Young, Malcolm Young, Brian Johnson",
+            "F. Baltes, S. Kaufman, U. Dirkscneider & W. Hoffma",
+            "F. Baltes, R.A. Smith-Diesel, S. Kaufman, U. Dirks",
+            "Deaffy & R.A. Smith-Diesel",
+            "AC/DC",
+            "Steven Tyler, Joe Perry, Jack Blades, Tommy Shaw",
+            "Steven Tyler, Joe Perry",
+            "Steven Tyler, Joe Perry, Jim Vallance, Holly Knigh"
+          ],
+          "milliseconds": [
+            "343719",
+            "342562",
+            "230619",
+            "252051",
+            "375418",
+            "205662",
+            "233926",
+            "210834"
+          ],
+          "bytes": [
+            "11170334",
+            "5510424",
+            "3990994",
+            "4331779",
+            "6290521",
+            "6713451",
+            "7636561",
+            "6852860"
+          ],
+          "unit_price": [
+            "0.99",
+            "1.99"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

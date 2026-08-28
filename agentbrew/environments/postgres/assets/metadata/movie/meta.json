@@ -1,0 +1,297 @@
+{
+  "db_id": "movie",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 7659,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#movie",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"actor\" {\n  \"ActorID\" INTEGER [pk]\n  \"Name\" TEXT\n  \"Date of Birth\" DATE\n  \"Birth City\" TEXT\n  \"Birth Country\" TEXT\n  \"Height (Inches)\" INTEGER\n  \"Biography\" TEXT\n  \"Gender\" TEXT\n  \"Ethnicity\" TEXT\n  \"NetWorth\" TEXT\n}\n\nTable \"characters\" {\n  \"MovieID\" INTEGER [pk]\n  \"ActorID\" INTEGER [pk]\n  \"Character Name\" TEXT\n  \"creditOrder\" INTEGER\n  \"pay\" TEXT\n  \"screentime\" TEXT\n}\n\nTable \"movie\" {\n  \"MovieID\" INTEGER [pk]\n  \"Title\" TEXT\n  \"MPAA Rating\" TEXT\n  \"Budget\" INTEGER\n  \"Gross\" INTEGER\n  \"Release Date\" TEXT\n  \"Genre\" TEXT\n  \"Runtime\" INTEGER\n  \"Rating\" REAL\n  \"Rating Count\" INTEGER\n  \"Summary\" TEXT\n}\n\n\n\nRef: \"characters\".\"MovieID\" > \"movie\".\"MovieID\"\n\nRef: \"characters\".\"ActorID\" > \"actor\".\"ActorID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"actor\" {\n  \"ActorID\" INTEGER [pk]\n  \"Name\" TEXT\n  \"Date of Birth\" DATE\n  \"Birth City\" TEXT\n  \"Birth Country\" TEXT\n  \"Height (Inches)\" INTEGER\n  \"Biography\" TEXT\n  \"Gender\" TEXT\n  \"Ethnicity\" TEXT\n  \"NetWorth\" TEXT\n}\n\nTable \"characters\" {\n  \"MovieID\" INTEGER [pk]\n  \"ActorID\" INTEGER [pk]\n  \"Character Name\" TEXT\n  \"creditOrder\" INTEGER\n  \"pay\" TEXT\n  \"screentime\" TEXT\n}\n\nTable \"movie\" {\n  \"MovieID\" INTEGER [pk]\n  \"Title\" TEXT\n  \"MPAA Rating\" TEXT\n  \"Budget\" INTEGER\n  \"Gross\" INTEGER\n  \"Release Date\" TEXT\n  \"Genre\" TEXT\n  \"Runtime\" INTEGER\n  \"Rating\" REAL\n  \"Rating Count\" INTEGER\n  \"Summary\" TEXT\n}\n\nRef: \"characters\".\"MovieID\" > \"movie\".\"MovieID\"\n\nRef: \"characters\".\"ActorID\" > \"actor\".\"ActorID\"\n\n## Table Stats & Sample Values\n\nactor: 2713 rows\n  Name: 'John Travolta', 'Kirstie Alley', 'Olympia Dukakis', ...\n  Birth City: 'Englewood', 'Wichita', 'Lowell', ...\n  Birth Country: 'USA', 'West Germany', 'UK', ...\n\ncharacters: 4312 rows\n  Character Name: 'James', 'Mollie', 'Rosie', ...\n  pay: '$5,000,000.00', '$60,000,000.00', '$29,000,000.00', ...\n  screentime: '0:32:30', '0:32:15', '0:29:00', ...\n\nmovie: 634 rows\n  Title: 'Look Who's Talking', 'Driving Miss Daisy', 'Turner & Hooch', ...\n  Genre: 'Romance', 'Comedy', 'Crime', ...\n  MPAA Rating: 'PG-13', 'PG', 'R', ...",
+    "stateUrl": "https://bird-bench.github.io/#movie",
+    "tableStats": {
+      "actor": {
+        "rows": 2713,
+        "sample_values": {
+          "ActorID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "John Travolta",
+            "Kirstie Alley",
+            "Olympia Dukakis",
+            "George Segal",
+            "Abe Vigoda",
+            "Bruce Willis",
+            "Twink Caplan",
+            "Jason Schaller"
+          ],
+          "Date of Birth": [
+            "1954-02-18",
+            "1951-01-12",
+            "1931-06-20",
+            "1934-02-13",
+            "1921-02-24",
+            "1955-03-19",
+            "1947-12-25",
+            "1937-06-01"
+          ],
+          "Birth City": [
+            "Englewood",
+            "Wichita",
+            "Lowell",
+            "Great Neck",
+            "Brooklyn",
+            "Idar-Oberstein",
+            "Pittsburgh",
+            "Memphis"
+          ],
+          "Birth Country": [
+            "USA",
+            "West Germany",
+            "UK",
+            "Canada",
+            "Scotland",
+            "Lebanon",
+            "Ireland",
+            "Unite Kingdom"
+          ],
+          "Height (Inches)": [
+            "74",
+            "67",
+            "63",
+            "71",
+            "73",
+            "72",
+            "62",
+            "64"
+          ],
+          "Biography": [
+            "John Joseph Travolta was born in Englewood, New Je",
+            "Long a vital, respected lady of the classic and co",
+            "Actor and musician Bruce Willis is well known for ",
+            "With an authoritative voice and calm demeanor, thi",
+            "A beloved, twinkly blue-eyed doyenne of stage and ",
+            "Daniel Edward Aykroyd was born on July 1, 1952 in ",
+            "Patti Ann LuPone (born April 21, 1949) is an Ameri",
+            "Esther Rolle (November 8, 1920 – November 17, 1998"
+          ],
+          "Gender": [
+            "Male",
+            "Female"
+          ],
+          "Ethnicity": [
+            "White",
+            "African American",
+            "Lebanese",
+            "Armenian",
+            "Asian",
+            "Latino",
+            "Native American",
+            "Asian American"
+          ],
+          "NetWorth": [
+            "$250,000,000.00",
+            "$40,000,000.00",
+            "$6,000,000.00",
+            "$10,000,000.00",
+            "$20,000,000.00",
+            "$8,000,000.00",
+            "$3,000,000.00",
+            "$600,000,000.00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "characters": {
+        "rows": 4312,
+        "sample_values": {
+          "MovieID": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "ActorID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Character Name": [
+            "James",
+            "Mollie",
+            "Rosie",
+            "Albert",
+            "Grandpa",
+            "Mikey",
+            "Rona",
+            "Hoke Colburn"
+          ],
+          "creditOrder": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "pay": [
+            "$5,000,000.00",
+            "$60,000,000.00",
+            "$29,000,000.00",
+            "$65,000,000.00",
+            "$50,000,000.00",
+            "$68,000,000.00",
+            "$75,000,000.00",
+            "$55,000,000.00"
+          ],
+          "screentime": [
+            "0:32:30",
+            "0:32:15",
+            "0:29:00",
+            "0:08:45",
+            "0:04:30",
+            "0:02:45",
+            "0:04:15",
+            "0:03:30"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie": {
+        "rows": 634,
+        "sample_values": {
+          "MovieID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Title": [
+            "Look Who's Talking",
+            "Driving Miss Daisy",
+            "Turner & Hooch",
+            "Born on the Fourth of July",
+            "Field of Dreams",
+            "Uncle Buck",
+            "When Harry Met Sally...",
+            "Dead Poets Society"
+          ],
+          "MPAA Rating": [
+            "PG-13",
+            "PG",
+            "R",
+            "G"
+          ],
+          "Budget": [
+            "7500000",
+            "13000000",
+            "14000000",
+            "15000000",
+            "16000000",
+            "16400000",
+            "20000000",
+            "25000000"
+          ],
+          "Gross": [
+            "296000000",
+            "145793296",
+            "71079915",
+            "161001698",
+            "84431625",
+            "79258538",
+            "92800000",
+            "235860116"
+          ],
+          "Release Date": [
+            "1989-10-12",
+            "1989-12-13",
+            "1989-07-28",
+            "1989-12-20",
+            "1989-04-21",
+            "1989-08-16",
+            "1989-07-21",
+            "1989-06-02"
+          ],
+          "Genre": [
+            "Romance",
+            "Comedy",
+            "Crime",
+            "War",
+            "Drama",
+            "Family",
+            "Action",
+            "Animation"
+          ],
+          "Runtime": [
+            "93",
+            "99",
+            "100",
+            "145",
+            "107",
+            "96",
+            "129",
+            "124"
+          ],
+          "Rating": [
+            "5.9",
+            "7.4",
+            "7.2",
+            "7.5",
+            "7.0",
+            "7.6",
+            "8.1",
+            "6.8"
+          ],
+          "Rating Count": [
+            "73638",
+            "91075",
+            "91415",
+            "101702",
+            "77659",
+            "180871",
+            "382002",
+            "41866"
+          ],
+          "Summary": [
+            "After a single, career-minded woman is left on her",
+            "An old Jewish woman and her African-American chauf",
+            "Det. Scott Turner (Tom Hanks) is an uptight, by-th",
+            "The biography of Ron Kovic. Paralyzed in the Vietn",
+            "An Iowa corn farmer, hearing voices, interprets th",
+            "Bachelor and all-round slob Buck babysits his brot",
+            "Harry and Sally have known each other for years, a",
+            "English teacher John Keating inspires his students"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

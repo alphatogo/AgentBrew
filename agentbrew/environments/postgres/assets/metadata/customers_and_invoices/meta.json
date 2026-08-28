@@ -1,0 +1,524 @@
+{
+  "db_id": "customers_and_invoices",
+  "source": "sparc",
+  "tables": 9,
+  "total_rows": 124,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#customers_and_invoices",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"date_account_opened\" TIMESTAMP\n  \"account_name\" TEXT\n  \"other_account_details\" TEXT\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_first_name\" TEXT\n  \"customer_middle_initial\" TEXT\n  \"customer_last_name\" TEXT\n  \"gender\" TEXT\n  \"email_address\" TEXT\n  \"login_name\" TEXT\n  \"login_password\" TEXT\n  \"phone_number\" TEXT\n  \"town_city\" TEXT\n  \"state_county_province\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Financial_Transactions\" {\n  \"transaction_id\" INTEGER [not null]\n  \"account_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER\n  \"transaction_type\" TEXT [not null]\n  \"transaction_date\" TIMESTAMP\n  \"transaction_amount\" TEXT\n  \"transaction_comment\" TEXT\n  \"other_transaction_details\" TEXT\n}\n\nTable \"Invoice_Line_Items\" {\n  \"order_item_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"product_title\" TEXT\n  \"product_quantity\" TEXT\n  \"product_price\" TEXT\n  \"derived_product_cost\" TEXT\n  \"derived_vat_payable\" TEXT\n  \"derived_total_cost\" TEXT\n}\n\nTable \"Invoices\" {\n  \"invoice_number\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"invoice_date\" TIMESTAMP\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"product_quantity\" TEXT\n  \"other_order_item_details\" TEXT\n}\n\nTable \"Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"date_order_placed\" TIMESTAMP [not null]\n  \"order_details\" TEXT\n}\n\nTable \"Product_Categories\" {\n  \"production_type_code\" TEXT [pk]\n  \"product_type_description\" TEXT\n  \"vat_rating\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"parent_product_id\" INTEGER\n  \"production_type_code\" TEXT [not null]\n  \"unit_price\" TEXT\n  \"product_name\" TEXT\n  \"product_color\" TEXT\n  \"product_size\" TEXT\n}\n\n\n\nRef: \"Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Invoices\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Accounts\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Products\".\"production_type_code\" > \"Product_Categories\".\"production_type_code\"\n\nRef: \"Financial_Transactions\".\"account_id\" > \"Accounts\".\"account_id\"\n\nRef: \"Financial_Transactions\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Order_Items\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Invoice_Line_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Invoice_Line_Items\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Invoice_Line_Items\".\"order_item_id\" > \"Order_Items\".\"order_item_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"date_account_opened\" TIMESTAMP\n  \"account_name\" TEXT\n  \"other_account_details\" TEXT\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_first_name\" TEXT\n  \"customer_middle_initial\" TEXT\n  \"customer_last_name\" TEXT\n  \"gender\" TEXT\n  \"email_address\" TEXT\n  \"login_name\" TEXT\n  \"login_password\" TEXT\n  \"phone_number\" TEXT\n  \"town_city\" TEXT\n  \"state_county_province\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Financial_Transactions\" {\n  \"transaction_id\" INTEGER [not null]\n  \"account_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER\n  \"transaction_type\" TEXT [not null]\n  \"transaction_date\" TIMESTAMP\n  \"transaction_amount\" TEXT\n  \"transaction_comment\" TEXT\n  \"other_transaction_details\" TEXT\n}\n\nTable \"Invoice_Line_Items\" {\n  \"order_item_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"product_title\" TEXT\n  \"product_quantity\" TEXT\n  \"product_price\" TEXT\n  \"derived_product_cost\" TEXT\n  \"derived_vat_payable\" TEXT\n  \"derived_total_cost\" TEXT\n}\n\nTable \"Invoices\" {\n  \"invoice_number\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"invoice_date\" TIMESTAMP\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"product_quantity\" TEXT\n  \"other_order_item_details\" TEXT\n}\n\nTable \"Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"date_order_placed\" TIMESTAMP [not null]\n  \"order_details\" TEXT\n}\n\nTable \"Product_Categories\" {\n  \"production_type_code\" TEXT [pk]\n  \"product_type_description\" TEXT\n  \"vat_rating\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"parent_product_id\" INTEGER\n  \"production_type_code\" TEXT [not null]\n  \"unit_price\" TEXT\n  \"product_name\" TEXT\n  \"product_color\" TEXT\n  \"product_size\" TEXT\n}\n\nRef: \"Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Invoices\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Accounts\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Products\".\"production_type_code\" > \"Product_Categories\".\"production_type_code\"\n\nRef: \"Financial_Transactions\".\"account_id\" > \"Accounts\".\"account_id\"\n\nRef: \"Financial_Transactions\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Order_Items\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Invoice_Line_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Invoice_Line_Items\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Invoice_Line_Items\".\"order_item_id\" > \"Order_Items\".\"order_item_id\"\n\n## Table Stats & Sample Values\n\nAccounts: 15 rows\n  account_name: '900', '520', '323', ...\n  other_account_details: 'Regular', 'VIP'\n  date_account_opened: '2016-07-30 22:22:24', '2017-05-29 16:45:17', '2012-05-04 18:50:32', ...\n\nCustomers: 15 rows\n  customer_first_name: 'Dee', 'Brennon', 'Joesph', ...\n  customer_last_name: 'Larkin', 'Weimann', 'Schaefer', ...\n  login_name: 'xhartmann', 'shayne.lesch', 'feeney.lauriane', ...\n\nFinancial_Transactions: 15 rows\n  transaction_type: 'Payment', 'Refund'\n  transaction_amount: '613.96', '368.46', '1598.25', ...\n  invoice_number: '12', '1', '2', ...\n\nInvoice_Line_Items: 15 rows\n  product_title: 'prod_name'\n  product_quantity: '4', '1', '8', ...\n  product_price: '742.37', '814.87', '943.07', ...\n\nInvoices: 15 rows\n  invoice_date: '2018-03-01 16:40:48', '2018-03-20 00:21:41', '2018-03-05 08:47:33', ...\n  invoice_number: '1', '2', '3', ...\n  order_id: '9', '3', '13', ...\n\nOrder_Items: 15 rows\n  product_quantity: '6', '7', '4', ...\n  order_id: '4', '15', '1', ...\n  product_id: '4', '10', '5', ...\n\nOrders: 15 rows\n  date_order_placed: '2012-06-27 20:49:56', '2012-08-25 07:51:54', '2017-11-05 15:32:38', ...\n  customer_id: '12', '8', '5', ...\n  order_id: '1', '2', '3', ...\n\nProduct_Categories: 4 rows\n  product_type_description: 'Food', 'Dvd products', 'Books', ...\n  production_type_code: 'Food', 'DVDs', 'Books', ...\n  vat_rating: '15.84', '11.4', '13.95', ...\n\nProducts: 15 rows\n  production_type_code: 'Food', 'Books', 'Electronics', ...\n  product_name: 'Coffee Bean', 'Learning French', 'Fans', ...\n  unit_price: '617.95', '558.49', '563.58', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#customers_and_invoices",
+    "tableStats": {
+      "Accounts": {
+        "rows": 15,
+        "sample_values": {
+          "account_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "8",
+            "3",
+            "15",
+            "12",
+            "13",
+            "9",
+            "6"
+          ],
+          "date_account_opened": [
+            "2016-07-30 22:22:24",
+            "2017-05-29 16:45:17",
+            "2012-05-04 18:50:32",
+            "2011-03-29 15:06:59",
+            "2014-08-11 18:15:14",
+            "2014-05-30 12:16:52",
+            "2015-11-03 08:04:15",
+            "2009-06-13 11:41:52"
+          ],
+          "account_name": [
+            "900",
+            "520",
+            "323",
+            "390",
+            "935",
+            "371",
+            "398",
+            "710"
+          ],
+          "other_account_details": [
+            "Regular",
+            "VIP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 15,
+        "sample_values": {
+          "customer_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_first_name": [
+            "Dee",
+            "Brennon",
+            "Joesph",
+            "Zita",
+            "Murl",
+            "Vesta",
+            "Dangelo",
+            "Meaghan"
+          ],
+          "customer_middle_initial": [
+            "A",
+            "H",
+            "K",
+            "L",
+            "B",
+            "E",
+            "M",
+            "V"
+          ],
+          "customer_last_name": [
+            "Larkin",
+            "Weimann",
+            "Schaefer",
+            "Trantow",
+            "Shanahan",
+            "Leuschke",
+            "Spinka",
+            "Keeling"
+          ],
+          "gender": [
+            "1",
+            "0"
+          ],
+          "email_address": [
+            "thora.torphy@example.org",
+            "roosevelt.collier@example.org",
+            "homenick.ambrose@example.net",
+            "destinee06@example.com",
+            "jovani64@example.com",
+            "philip94@example.org",
+            "zullrich@example.net",
+            "pyundt@example.org"
+          ],
+          "login_name": [
+            "xhartmann",
+            "shayne.lesch",
+            "feeney.lauriane",
+            "rubye.padberg",
+            "jankunding",
+            "zdeckow",
+            "camilla.dubuque",
+            "lowe.wilber"
+          ],
+          "login_password": [
+            "77789d292604ea04406f",
+            "ce97a3e4539347daab96",
+            "a6c7a7064c36b038d402",
+            "eb32d2933362d38faff7",
+            "398c1603aec3e9de2684",
+            "bdbc3c18cf28303c4f6a",
+            "180a37476c537e78d3de",
+            "e67856613cd71f1b2884"
+          ],
+          "phone_number": [
+            "241.796.1219x37862",
+            "(943)219-4234x415",
+            "(488)524-5345",
+            "(193)465-6674x4952",
+            "1-546-447-9843x13741",
+            "+69(0)7149212554",
+            "1-904-787-7320",
+            "06015518212"
+          ],
+          "town_city": [
+            "North Nellie",
+            "South Isabell",
+            "New Nikolas",
+            "Ellaburgh",
+            "North Helmerbury",
+            "North Devonte",
+            "West Khaliltown",
+            "Kenshire"
+          ],
+          "state_county_province": [
+            "WestVirginia",
+            "Oklahoma",
+            "Arkansas",
+            "Colorado",
+            "Idaho",
+            "Mississippi",
+            "Kansas",
+            "California"
+          ],
+          "country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Financial_Transactions": {
+        "rows": 15,
+        "sample_values": {
+          "transaction_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "account_id": [
+            "13",
+            "9",
+            "6",
+            "12",
+            "14",
+            "8",
+            "11",
+            "4"
+          ],
+          "invoice_number": [
+            "12",
+            "1",
+            "2",
+            "3",
+            "14",
+            "15",
+            "13",
+            "6"
+          ],
+          "transaction_type": [
+            "Payment",
+            "Refund"
+          ],
+          "transaction_date": [
+            "2018-03-15 21:13:57",
+            "2018-03-13 13:27:46",
+            "2018-03-03 01:50:25",
+            "2018-03-10 13:46:48",
+            "2018-03-23 04:56:12",
+            "2018-03-22 21:58:37",
+            "2018-03-12 03:06:52",
+            "2018-03-11 21:57:47"
+          ],
+          "transaction_amount": [
+            "613.96",
+            "368.46",
+            "1598.25",
+            "540.73",
+            "1214.22",
+            "1903.41",
+            "1585.03",
+            "1425.41"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Invoice_Line_Items": {
+        "rows": 15,
+        "sample_values": {
+          "order_item_id": [
+            "14",
+            "3",
+            "4",
+            "6",
+            "8",
+            "9",
+            "11",
+            "15"
+          ],
+          "invoice_number": [
+            "9",
+            "10",
+            "15",
+            "11",
+            "14",
+            "1",
+            "7",
+            "5"
+          ],
+          "product_id": [
+            "5",
+            "15",
+            "14",
+            "10",
+            "9",
+            "3",
+            "6",
+            "8"
+          ],
+          "product_title": [
+            "prod_name"
+          ],
+          "product_quantity": [
+            "4",
+            "1",
+            "8",
+            "2",
+            "6",
+            "3",
+            "9",
+            "7"
+          ],
+          "product_price": [
+            "742.37",
+            "814.87",
+            "943.07",
+            "749.6",
+            "942.99",
+            "486.69",
+            "995.34",
+            "429.05"
+          ],
+          "derived_product_cost": [
+            "191.11",
+            "176.29",
+            "73.14",
+            "197.06",
+            "88.43",
+            "64.67",
+            "28.18",
+            "254.08"
+          ],
+          "derived_total_cost": [
+            "69.82",
+            "59.56",
+            "59.93",
+            "82.77",
+            "86.56",
+            "83.4",
+            "58.24",
+            "79.48"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Invoices": {
+        "rows": 15,
+        "sample_values": {
+          "invoice_number": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "order_id": [
+            "9",
+            "3",
+            "13",
+            "8",
+            "10",
+            "12",
+            "11",
+            "5"
+          ],
+          "invoice_date": [
+            "2018-03-01 16:40:48",
+            "2018-03-20 00:21:41",
+            "2018-03-05 08:47:33",
+            "2018-02-28 19:01:06",
+            "2018-03-07 02:04:32",
+            "2018-03-16 21:57:43",
+            "2018-03-13 07:27:38",
+            "2018-03-19 17:06:30"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Order_Items": {
+        "rows": 15,
+        "sample_values": {
+          "order_item_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "order_id": [
+            "4",
+            "15",
+            "1",
+            "2",
+            "13",
+            "10",
+            "14",
+            "12"
+          ],
+          "product_id": [
+            "4",
+            "10",
+            "5",
+            "3",
+            "14",
+            "12",
+            "15",
+            "9"
+          ],
+          "product_quantity": [
+            "6",
+            "7",
+            "4",
+            "9",
+            "3",
+            "8",
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Orders": {
+        "rows": 15,
+        "sample_values": {
+          "order_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "12",
+            "8",
+            "5",
+            "15",
+            "3",
+            "2",
+            "11",
+            "14"
+          ],
+          "date_order_placed": [
+            "2012-06-27 20:49:56",
+            "2012-08-25 07:51:54",
+            "2017-11-05 15:32:38",
+            "2017-11-27 21:50:58",
+            "2015-05-17 03:05:32",
+            "2015-11-25 22:55:41",
+            "2016-04-15 03:33:59",
+            "2010-01-28 03:43:26"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Product_Categories": {
+        "rows": 4,
+        "sample_values": {
+          "production_type_code": [
+            "Food",
+            "DVDs",
+            "Books",
+            "Electronics"
+          ],
+          "product_type_description": [
+            "Food",
+            "Dvd products",
+            "Books",
+            "Electrical devices"
+          ],
+          "vat_rating": [
+            "15.84",
+            "11.4",
+            "13.95",
+            "17.9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "product_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "parent_product_id": [
+            "4",
+            "8",
+            "7",
+            "5",
+            "1",
+            "9",
+            "6",
+            "2"
+          ],
+          "production_type_code": [
+            "Food",
+            "Books",
+            "Electronics",
+            "DVDs"
+          ],
+          "unit_price": [
+            "617.95",
+            "558.49",
+            "563.58",
+            "985.78",
+            "682.06",
+            "469.71",
+            "409.83",
+            "49.62"
+          ],
+          "product_name": [
+            "Coffee Bean",
+            "Learning French",
+            "Fans",
+            "Hard Drive",
+            "Arts",
+            "Art History",
+            "Learning English",
+            "Menus"
+          ],
+          "product_color": [
+            "Red",
+            "Yellow",
+            "Black"
+          ],
+          "product_size": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,701 @@
+{
+  "db_id": "automotive_data_management_and_analysis_31676",
+  "source": "synsql",
+  "tables": 22,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/automotive_data_management_and_analysis_31676",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"accessed_resource\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"public\".\"car_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"trim_level\" TEXT\n  \"package\" TEXT\n  \"price\" TEXT\n  \"description\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n}\n\nTable \"public\".\"car_models\" {\n  \"model_id\" INTEGER [pk]\n  \"make\" TEXT\n  \"model_name\" TEXT\n  \"model_year\" INTEGER\n  \"msrp\" TEXT\n  \"description\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n  \"discontinued\" INTEGER\n}\n\nTable \"public\".\"car_options\" {\n  \"option_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"option_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"availability\" TEXT\n  \"compatibility\" TEXT\n}\n\nTable \"public\".\"customer_data\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"zip_code\" TEXT\n  \"loyalty_program\" INTEGER\n}\n\nTable \"public\".\"customer_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"feedback_date\" TEXT\n  \"rating\" INTEGER\n  \"comments\" TEXT\n  \"feedback_type\" TEXT\n}\n\nTable \"public\".\"dealers\" {\n  \"dealer_id\" INTEGER [pk]\n  \"dealer_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"public\".\"depreciation\" {\n  \"depreciation_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"year\" INTEGER\n  \"depreciation_amount\" TEXT\n}\n\nTable \"public\".\"engine_specifications\" {\n  \"spec_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"engine_size\" TEXT\n  \"cylinders\" INTEGER\n  \"horsepower\" INTEGER\n  \"torque\" INTEGER\n  \"engine_type\" TEXT\n  \"transmission_type\" TEXT\n}\n\nTable \"public\".\"fuel_efficiency\" {\n  \"efficiency_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"mpg_city\" INTEGER\n  \"mpg_highway\" INTEGER\n  \"mpg_combined\" INTEGER\n  \"fuel_type\" TEXT\n}\n\nTable \"public\".\"incentives\" {\n  \"incentive_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"incentive_name\" TEXT\n  \"description\" TEXT\n  \"amount\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n}\n\nTable \"public\".\"market_research\" {\n  \"research_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"research_date\" TEXT\n  \"source\" TEXT\n  \"summary\" TEXT\n  \"report_file\" TEXT\n  \"research_type\" TEXT\n}\n\nTable \"public\".\"model_variations\" {\n  \"variation_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"variation_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n}\n\nTable \"public\".\"physical_dimensions\" {\n  \"dimension_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"length\" INTEGER\n  \"width\" INTEGER\n  \"height\" INTEGER\n  \"wheelbase\" INTEGER\n  \"weight\" INTEGER\n  \"ground_clearance\" INTEGER\n  \"cargo_capacity\" INTEGER\n}\n\nTable \"public\".\"purchases\" {\n  \"purchase_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"sale_id\" INTEGER\n  \"purchase_date\" TEXT\n  \"total_amount\" TEXT\n  \"payment_method\" TEXT\n}\n\nTable \"public\".\"recall_notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"recall_date\" TEXT\n  \"recall_description\" TEXT\n  \"recall_status\" TEXT\n}\n\nTable \"public\".\"sales_data\" {\n  \"sale_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"dealer_id\" INTEGER\n  \"sale_date\" TEXT\n  \"quantity\" INTEGER\n  \"total_revenue\" TEXT\n  \"region\" TEXT\n}\n\nTable \"public\".\"service_records\" {\n  \"service_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"service_date\" TEXT\n  \"service_description\" TEXT\n  \"service_cost\" TEXT\n  \"dealer_id\" INTEGER\n  \"technician\" TEXT\n}\n\nTable \"public\".\"software_updates\" {\n  \"update_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"update_date\" TEXT\n  \"update_description\" TEXT\n  \"update_version\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"last_login_date\" TEXT\n}\n\nTable \"public\".\"warranty_claims\" {\n  \"claim_id\" INTEGER [pk]\n  \"purchase_id\" INTEGER\n  \"claim_date\" TEXT\n  \"issue_description\" TEXT\n  \"claim_status\" TEXT\n  \"claim_amount\" TEXT\n  \"resolution_date\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"car_configurations\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"car_options\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"customer_feedback\".\"customer_id\" > \"public\".\"customer_data\".\"customer_id\"\nRef: \"public\".\"customer_feedback\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"depreciation\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"engine_specifications\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"fuel_efficiency\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"incentives\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"market_research\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"model_variations\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"physical_dimensions\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"purchases\".\"customer_id\" > \"public\".\"customer_data\".\"customer_id\"\nRef: \"public\".\"purchases\".\"sale_id\" > \"public\".\"sales_data\".\"sale_id\"\nRef: \"public\".\"recall_notifications\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"sales_data\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"sales_data\".\"dealer_id\" > \"public\".\"dealers\".\"dealer_id\"\nRef: \"public\".\"service_records\".\"dealer_id\" > \"public\".\"dealers\".\"dealer_id\"\nRef: \"public\".\"service_records\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"software_updates\".\"model_id\" > \"public\".\"car_models\".\"model_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\"\nRef: \"public\".\"warranty_claims\".\"purchase_id\" > \"public\".\"purchases\".\"purchase_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"accessed_resource\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"car_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"trim_level\" TEXT\n  \"package\" TEXT\n  \"price\" TEXT\n  \"description\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n}\n\nTable \"car_models\" {\n  \"model_id\" INTEGER [pk]\n  \"make\" TEXT\n  \"model_name\" TEXT\n  \"model_year\" INTEGER\n  \"msrp\" TEXT\n  \"description\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n  \"discontinued\" INTEGER\n}\n\nTable \"car_options\" {\n  \"option_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"option_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"availability\" TEXT\n  \"compatibility\" TEXT\n}\n\nTable \"customer_data\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"zip_code\" TEXT\n  \"loyalty_program\" INTEGER\n}\n\nTable \"customer_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"feedback_date\" TEXT\n  \"rating\" INTEGER\n  \"comments\" TEXT\n  \"feedback_type\" TEXT\n}\n\nTable \"dealers\" {\n  \"dealer_id\" INTEGER [pk]\n  \"dealer_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"depreciation\" {\n  \"depreciation_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"year\" INTEGER\n  \"depreciation_amount\" TEXT\n}\n\nTable \"engine_specifications\" {\n  \"spec_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"engine_size\" TEXT\n  \"cylinders\" INTEGER\n  \"horsepower\" INTEGER\n  \"torque\" INTEGER\n  \"engine_type\" TEXT\n  \"transmission_type\" TEXT\n}\n\nTable \"fuel_efficiency\" {\n  \"efficiency_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"mpg_city\" INTEGER\n  \"mpg_highway\" INTEGER\n  \"mpg_combined\" INTEGER\n  \"fuel_type\" TEXT\n}\n\nTable \"incentives\" {\n  \"incentive_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"incentive_name\" TEXT\n  \"description\" TEXT\n  \"amount\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n}\n\nTable \"market_research\" {\n  \"research_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"research_date\" TEXT\n  \"source\" TEXT\n  \"summary\" TEXT\n  \"report_file\" TEXT\n  \"research_type\" TEXT\n}\n\nTable \"model_variations\" {\n  \"variation_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"variation_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"production_start_date\" TEXT\n  \"production_end_date\" TEXT\n}\n\nTable \"physical_dimensions\" {\n  \"dimension_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"length\" INTEGER\n  \"width\" INTEGER\n  \"height\" INTEGER\n  \"wheelbase\" INTEGER\n  \"weight\" INTEGER\n  \"ground_clearance\" INTEGER\n  \"cargo_capacity\" INTEGER\n}\n\nTable \"purchases\" {\n  \"purchase_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"sale_id\" INTEGER\n  \"purchase_date\" TEXT\n  \"total_amount\" TEXT\n  \"payment_method\" TEXT\n}\n\nTable \"recall_notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"recall_date\" TEXT\n  \"recall_description\" TEXT\n  \"recall_status\" TEXT\n}\n\nTable \"sales_data\" {\n  \"sale_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"dealer_id\" INTEGER\n  \"sale_date\" TEXT\n  \"quantity\" INTEGER\n  \"total_revenue\" TEXT\n  \"region\" TEXT\n}\n\nTable \"service_records\" {\n  \"service_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"service_date\" TEXT\n  \"service_description\" TEXT\n  \"service_cost\" TEXT\n  \"dealer_id\" INTEGER\n  \"technician\" TEXT\n}\n\nTable \"software_updates\" {\n  \"update_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"update_date\" TEXT\n  \"update_description\" TEXT\n  \"update_version\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"last_login_date\" TEXT\n}\n\nTable \"warranty_claims\" {\n  \"claim_id\" INTEGER [pk]\n  \"purchase_id\" INTEGER\n  \"claim_date\" TEXT\n  \"issue_description\" TEXT\n  \"claim_status\" TEXT\n  \"claim_amount\" TEXT\n  \"resolution_date\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"car_configurations\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"car_options\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"customer_feedback\".\"customer_id\" > \"customer_data\".\"customer_id\"\n\nRef: \"customer_feedback\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"depreciation\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"engine_specifications\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"fuel_efficiency\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"incentives\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"market_research\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"model_variations\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"physical_dimensions\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"purchases\".\"customer_id\" > \"customer_data\".\"customer_id\"\n\nRef: \"purchases\".\"sale_id\" > \"sales_data\".\"sale_id\"\n\nRef: \"recall_notifications\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"sales_data\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"sales_data\".\"dealer_id\" > \"dealers\".\"dealer_id\"\n\nRef: \"service_records\".\"dealer_id\" > \"dealers\".\"dealer_id\"\n\nRef: \"service_records\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"software_updates\".\"model_id\" > \"car_models\".\"model_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\nRef: \"warranty_claims\".\"purchase_id\" > \"purchases\".\"purchase_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'Login', 'View'\n  accessed_resource: 'System', 'Car Model'\n  ip_address: '192.168.1.100', '192.168.1.101'\n\ncar_configurations: 2 rows\n  trim_level: 'Touring', 'Elite'\n  description: 'Sport-themed configuration with enhanced performan', 'Configuration with advanced technology features'\n  package: 'Sport Package', 'Technology Package'\n\ncar_models: 2 rows\n  model_name: 'TL', 'ILX'\n  description: 'Luxury sedan with advanced features', 'Compact luxury sedan'\n  msrp: '36945.0', '23820.0'\n\ncar_options: 2 rows\n  option_name: 'Sunroof', 'Navigation System'\n  description: 'Electrically operated sunroof', 'Integrated navigation system with GPS'\n  price: '1000.0', '1500.0'\n\ncustomer_data: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  address: '123 Main St', '456 Elm St'\n\ncustomer_feedback: 2 rows\n  feedback_type: 'Positive', 'Suggestions'\n  feedback_date: '2023-06-01', '2023-06-02'\n  comments: 'Great car! Very satisfied with the performance and', 'Good car, but could use better fuel efficiency.'\n\ndealers: 2 rows\n  dealer_name: 'Acura of West Hollywood', 'Acura of Beverly Hills'\n  location: 'West Hollywood, CA', 'Beverly Hills, CA'\n  website: 'https://acurawesthollywood.com', 'https://acurabeverlyhills.com'\n\ndepreciation: 2 rows\n  depreciation_amount: '5000.0', '6000.0'\n  year: '2022', '2023'\n  model_id: '1', '0'\n\nengine_specifications: 2 rows\n  transmission_type: 'Automatic', 'Manual'\n  engine_type: 'Gasoline'\n  engine_size: '3.5', '2.0'\n\nfuel_efficiency: 2 rows\n  fuel_type: 'Gasoline'\n  mpg_city: '17', '24'\n  mpg_highway: '23', '31'\n\nincentives: 2 rows\n  incentive_name: 'Discount', 'Low Interest Rate'\n  description: '10% discount on the MSRP', '0% APR financing for 60 months'\n  amount: '3694.5', '0.0'\n\nmarket_research: 2 rows\n  research_type: 'Customer Survey', 'Market Analysis'\n  source: 'Survey', 'Report'\n  report_file: 'reports/1.pdf', 'reports/2.pdf'\n\nmodel_variations: 2 rows\n  variation_name: 'Limited Edition', 'Sport Edition'\n  description: 'Special edition with exclusive features', 'Sport-themed variation with enhanced performance'\n  price: '40000.0', '25000.0'\n\nphysical_dimensions: 2 rows\n  cargo_capacity: '12', '10'\n  length: '189', '172'\n  height: '57', '55'\n\npurchases: 2 rows\n  total_amount: '110835.0', '119100.0'\n  payment_method: 'Cash', 'Credit Card'\n  purchase_date: '2023-05-01', '2023-05-02'\n\nrecall_notifications: 2 rows\n  recall_description: 'Airbag recall', 'Fuel pump recall'\n  recall_status: 'Open', 'Closed'\n  recall_date: '2022-01-01', '2022-02-01'\n\nsales_data: 2 rows\n  region: 'North America', 'Europe'\n  total_revenue: '110835.0', '119100.0'\n  sale_date: '2023-05-01', '2023-05-02'\n\nservice_records: 2 rows\n  service_description: 'Oil change and filter replacement', 'Tire rotation and alignment'\n  service_cost: '50.0', '75.0'\n  technician: 'John Smith', 'Jane Doe'\n\nsoftware_updates: 2 rows\n  update_description: 'Infotainment system update', 'Navigation system update'\n  update_date: '2022-01-01', '2022-02-01'\n  update_version: 'v1.2.3', 'v2.1.4'\n\nuser_roles: 2 rows\n  role_name: 'Admin', 'Sales Rep'\n  description: 'Full access to all system features', 'Access to sales and customer data'\n  permissions: 'CREATE, READ, UPDATE, DELETE', 'READ, UPDATE'\n\nusers: 2 rows\n  username: 'admin', 'salesrep'\n  email: 'admin@example.com', 'salesrep@example.com'\n  last_login_date: '2023-05-01', '2023-05-02'\n\nwarranty_claims: 2 rows\n  issue_description: 'Engine failure', 'Brake issues'\n  claim_status: 'Open', 'Closed'\n  claim_amount: '5000.0', '2000.0'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "Login",
+            "View"
+          ],
+          "accessed_resource": [
+            "System",
+            "Car Model"
+          ],
+          "ip_address": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "car_configurations": {
+        "rows": 2,
+        "sample_values": {
+          "config_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0"
+          ],
+          "trim_level": [
+            "Touring",
+            "Elite"
+          ],
+          "package": [
+            "Sport Package",
+            "Technology Package"
+          ],
+          "price": [
+            "1500.0",
+            "2000.0"
+          ],
+          "description": [
+            "Sport-themed configuration with enhanced performan",
+            "Configuration with advanced technology features"
+          ],
+          "production_start_date": [
+            "2022-01-01",
+            "2021-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "car_models": {
+        "rows": 2,
+        "sample_values": {
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "make": [
+            "Acura"
+          ],
+          "model_name": [
+            "TL",
+            "ILX"
+          ],
+          "model_year": [
+            "2023"
+          ],
+          "msrp": [
+            "36945.0",
+            "23820.0"
+          ],
+          "description": [
+            "Luxury sedan with advanced features",
+            "Compact luxury sedan"
+          ],
+          "production_start_date": [
+            "2022-01-01",
+            "2021-06-01"
+          ],
+          "discontinued": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "car_options": {
+        "rows": 2,
+        "sample_values": {
+          "option_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "option_name": [
+            "Sunroof",
+            "Navigation System"
+          ],
+          "description": [
+            "Electrically operated sunroof",
+            "Integrated navigation system with GPS"
+          ],
+          "price": [
+            "1000.0",
+            "1500.0"
+          ],
+          "availability": [
+            "Available"
+          ],
+          "compatibility": [
+            "Compatible with all configurations",
+            "Compatible with Technology Package"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_data": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "zip_code": [
+            "90210"
+          ],
+          "loyalty_program": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "feedback_date": [
+            "2023-06-01",
+            "2023-06-02"
+          ],
+          "rating": [
+            "5",
+            "4"
+          ],
+          "comments": [
+            "Great car! Very satisfied with the performance and",
+            "Good car, but could use better fuel efficiency."
+          ],
+          "feedback_type": [
+            "Positive",
+            "Suggestions"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dealers": {
+        "rows": 2,
+        "sample_values": {
+          "dealer_id": [
+            "0",
+            "1"
+          ],
+          "dealer_name": [
+            "Acura of West Hollywood",
+            "Acura of Beverly Hills"
+          ],
+          "location": [
+            "West Hollywood, CA",
+            "Beverly Hills, CA"
+          ],
+          "contact_email": [
+            "info@acurawesthollywood.com",
+            "info@acurabeverlyhills.com"
+          ],
+          "contact_phone": [
+            "310-657-1234",
+            "310-657-5678"
+          ],
+          "website": [
+            "https://acurawesthollywood.com",
+            "https://acurabeverlyhills.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "depreciation": {
+        "rows": 2,
+        "sample_values": {
+          "depreciation_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2022",
+            "2023"
+          ],
+          "depreciation_amount": [
+            "5000.0",
+            "6000.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "engine_specifications": {
+        "rows": 2,
+        "sample_values": {
+          "spec_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0"
+          ],
+          "engine_size": [
+            "3.5",
+            "2.0"
+          ],
+          "cylinders": [
+            "6",
+            "4"
+          ],
+          "horsepower": [
+            "265",
+            "200"
+          ],
+          "torque": [
+            "250",
+            "180"
+          ],
+          "engine_type": [
+            "Gasoline"
+          ],
+          "transmission_type": [
+            "Automatic",
+            "Manual"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fuel_efficiency": {
+        "rows": 2,
+        "sample_values": {
+          "efficiency_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1"
+          ],
+          "mpg_city": [
+            "17",
+            "24"
+          ],
+          "mpg_highway": [
+            "23",
+            "31"
+          ],
+          "mpg_combined": [
+            "19",
+            "27"
+          ],
+          "fuel_type": [
+            "Gasoline"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incentives": {
+        "rows": 2,
+        "sample_values": {
+          "incentive_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "incentive_name": [
+            "Discount",
+            "Low Interest Rate"
+          ],
+          "description": [
+            "10% discount on the MSRP",
+            "0% APR financing for 60 months"
+          ],
+          "amount": [
+            "3694.5",
+            "0.0"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "market_research": {
+        "rows": 2,
+        "sample_values": {
+          "research_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1"
+          ],
+          "research_date": [
+            "2023-04-01",
+            "2023-04-02"
+          ],
+          "source": [
+            "Survey",
+            "Report"
+          ],
+          "summary": [
+            "High demand for luxury sedans in urban areas",
+            "Increasing interest in compact sedans among young "
+          ],
+          "report_file": [
+            "reports/1.pdf",
+            "reports/2.pdf"
+          ],
+          "research_type": [
+            "Customer Survey",
+            "Market Analysis"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_variations": {
+        "rows": 2,
+        "sample_values": {
+          "variation_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "variation_name": [
+            "Limited Edition",
+            "Sport Edition"
+          ],
+          "description": [
+            "Special edition with exclusive features",
+            "Sport-themed variation with enhanced performance"
+          ],
+          "price": [
+            "40000.0",
+            "25000.0"
+          ],
+          "production_start_date": [
+            "2022-01-01",
+            "2021-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "physical_dimensions": {
+        "rows": 2,
+        "sample_values": {
+          "dimension_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "length": [
+            "189",
+            "172"
+          ],
+          "width": [
+            "73",
+            "70"
+          ],
+          "height": [
+            "57",
+            "55"
+          ],
+          "wheelbase": [
+            "106",
+            "101"
+          ],
+          "weight": [
+            "4451",
+            "2778"
+          ],
+          "ground_clearance": [
+            "5"
+          ],
+          "cargo_capacity": [
+            "12",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "purchases": {
+        "rows": 2,
+        "sample_values": {
+          "purchase_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "sale_id": [
+            "1",
+            "0"
+          ],
+          "purchase_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "total_amount": [
+            "110835.0",
+            "119100.0"
+          ],
+          "payment_method": [
+            "Cash",
+            "Credit Card"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "recall_notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0"
+          ],
+          "recall_date": [
+            "2022-01-01",
+            "2022-02-01"
+          ],
+          "recall_description": [
+            "Airbag recall",
+            "Fuel pump recall"
+          ],
+          "recall_status": [
+            "Open",
+            "Closed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sales_data": {
+        "rows": 2,
+        "sample_values": {
+          "sale_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0"
+          ],
+          "dealer_id": [
+            "0"
+          ],
+          "sale_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "quantity": [
+            "3",
+            "5"
+          ],
+          "total_revenue": [
+            "110835.0",
+            "119100.0"
+          ],
+          "region": [
+            "North America",
+            "Europe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "service_records": {
+        "rows": 2,
+        "sample_values": {
+          "service_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "service_date": [
+            "2023-06-01",
+            "2023-06-02"
+          ],
+          "service_description": [
+            "Oil change and filter replacement",
+            "Tire rotation and alignment"
+          ],
+          "service_cost": [
+            "50.0",
+            "75.0"
+          ],
+          "dealer_id": [
+            "1",
+            "0"
+          ],
+          "technician": [
+            "John Smith",
+            "Jane Doe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "software_updates": {
+        "rows": 2,
+        "sample_values": {
+          "update_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "update_date": [
+            "2022-01-01",
+            "2022-02-01"
+          ],
+          "update_description": [
+            "Infotainment system update",
+            "Navigation system update"
+          ],
+          "update_version": [
+            "v1.2.3",
+            "v2.1.4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "Admin",
+            "Sales Rep"
+          ],
+          "description": [
+            "Full access to all system features",
+            "Access to sales and customer data"
+          ],
+          "permissions": [
+            "CREATE, READ, UPDATE, DELETE",
+            "READ, UPDATE"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "admin",
+            "salesrep"
+          ],
+          "password": [
+            "password123"
+          ],
+          "email": [
+            "admin@example.com",
+            "salesrep@example.com"
+          ],
+          "role_id": [
+            "1"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "warranty_claims": {
+        "rows": 2,
+        "sample_values": {
+          "claim_id": [
+            "0",
+            "1"
+          ],
+          "purchase_id": [
+            "0",
+            "1"
+          ],
+          "claim_date": [
+            "2023-06-01",
+            "2023-06-02"
+          ],
+          "issue_description": [
+            "Engine failure",
+            "Brake issues"
+          ],
+          "claim_status": [
+            "Open",
+            "Closed"
+          ],
+          "claim_amount": [
+            "5000.0",
+            "2000.0"
+          ],
+          "resolution_date": [
+            "2023-07-01"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

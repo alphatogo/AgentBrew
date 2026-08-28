@@ -1,0 +1,267 @@
+{
+  "db_id": "csu_1",
+  "source": "sparc",
+  "tables": 6,
+  "total_rows": 1943,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#csu_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Campuses\" {\n  \"Id\" INTEGER [pk]\n  \"Campus\" TEXT\n  \"Location\" TEXT\n  \"County\" TEXT\n  \"Year\" INTEGER\n}\n\nTable \"csu_fees\" {\n  \"Campus\" INTEGER [pk]\n  \"Year\" INTEGER\n  \"CampusFee\" INTEGER\n}\n\nTable \"degrees\" {\n  \"Year\" INTEGER [pk]\n  \"Campus\" INTEGER [pk]\n  \"Degrees\" INTEGER\n}\n\nTable \"discipline_enrollments\" {\n  \"Campus\" INTEGER [pk]\n  \"Discipline\" INTEGER [pk]\n  \"Year\" INTEGER\n  \"Undergraduate\" INTEGER\n  \"Graduate\" INTEGER\n}\n\nTable \"enrollments\" {\n  \"Campus\" INTEGER [pk]\n  \"Year\" INTEGER [pk]\n  \"TotalEnrollment_AY\" INTEGER\n  \"FTE_AY\" INTEGER\n}\n\nTable \"faculty\" {\n  \"Campus\" INTEGER\n  \"Year\" INTEGER\n  \"Faculty\" REAL\n}\n\n\n\nRef: \"csu_fees\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"degrees\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"discipline_enrollments\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"enrollments\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"faculty\".\"Campus\" > \"Campuses\".\"Id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Campuses\" {\n  \"Id\" INTEGER [pk]\n  \"Campus\" TEXT\n  \"Location\" TEXT\n  \"County\" TEXT\n  \"Year\" INTEGER\n}\n\nTable \"csu_fees\" {\n  \"Campus\" INTEGER [pk]\n  \"Year\" INTEGER\n  \"CampusFee\" INTEGER\n}\n\nTable \"degrees\" {\n  \"Year\" INTEGER [pk]\n  \"Campus\" INTEGER [pk]\n  \"Degrees\" INTEGER\n}\n\nTable \"discipline_enrollments\" {\n  \"Campus\" INTEGER [pk]\n  \"Discipline\" INTEGER [pk]\n  \"Year\" INTEGER\n  \"Undergraduate\" INTEGER\n  \"Graduate\" INTEGER\n}\n\nTable \"enrollments\" {\n  \"Campus\" INTEGER [pk]\n  \"Year\" INTEGER [pk]\n  \"TotalEnrollment_AY\" INTEGER\n  \"FTE_AY\" INTEGER\n}\n\nTable \"faculty\" {\n  \"Campus\" INTEGER\n  \"Year\" INTEGER\n  \"Faculty\" REAL\n}\n\nRef: \"csu_fees\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"degrees\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"discipline_enrollments\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"enrollments\".\"Campus\" > \"Campuses\".\"Id\"\n\nRef: \"faculty\".\"Campus\" > \"Campuses\".\"Id\"\n\n## Table Stats & Sample Values\n\nCampuses: 23 rows\n  Location: 'Bakersfield', 'Camarillo', 'Chico', ...\n  County: 'Kern', 'Ventura', 'Butte', ...\n  Campus: 'California State University-Bakersfield', 'California State University-Channel Islands', 'California State University-Chico', ...\n\ncsu_fees: 23 rows\n  Year: '1996', '2003'\n  CampusFee: '1951', '1868', '2042', ...\n  Campus: '1', '2', '3', ...\n\ndegrees: 320 rows\n  Degrees: '701', '681', '791', ...\n  Year: '1990', '1991', '1992', ...\n  Campus: '1', '2', '3', ...\n\ndiscipline_enrollments: 395 rows\n  Undergraduate: '248', '811', '199', ...\n  Graduate: '0', '73', '422', ...\n  Year: '2004'\n\nenrollments: 1113 rows\n  TotalEnrollment_AY: '384', '432', '422', ...\n  FTE_AY: '123', '151', '178', ...\n  Campus: '1', '2', '3', ...\n\nfaculty: 69 rows\n  Campus: '1', '2', '3', ...\n  Year: '2002', '2003', '2004'\n  Faculty: '357.1', '48.4', '742.8', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#csu_1",
+    "tableStats": {
+      "Campuses": {
+        "rows": 23,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Campus": [
+            "California State University-Bakersfield",
+            "California State University-Channel Islands",
+            "California State University-Chico",
+            "California State University-Dominguez Hills",
+            "California State University-East Bay",
+            "Fresno State University",
+            "California State University-Fullerton",
+            "Humboldt State University"
+          ],
+          "Location": [
+            "Bakersfield",
+            "Camarillo",
+            "Chico",
+            "Carson",
+            "Hayward",
+            "Fresno",
+            "Fullerton",
+            "Arcata"
+          ],
+          "County": [
+            "Kern",
+            "Ventura",
+            "Butte",
+            "Los Angeles",
+            "Alameida",
+            "Fresno",
+            "Orange",
+            "Humboldt"
+          ],
+          "Year": [
+            "1965",
+            "2002",
+            "1887",
+            "1960",
+            "1957",
+            "1911",
+            "1913",
+            "1949"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "csu_fees": {
+        "rows": 23,
+        "sample_values": {
+          "Campus": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Year": [
+            "1996",
+            "2003"
+          ],
+          "CampusFee": [
+            "1951",
+            "1868",
+            "2042",
+            "1816",
+            "1818",
+            "1916",
+            "1797",
+            "1884"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "degrees": {
+        "rows": 320,
+        "sample_values": {
+          "Year": [
+            "1990",
+            "1991",
+            "1992",
+            "1993",
+            "1994",
+            "1995",
+            "1996",
+            "1997"
+          ],
+          "Campus": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Degrees": [
+            "701",
+            "681",
+            "791",
+            "801",
+            "849",
+            "818",
+            "804",
+            "928"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "discipline_enrollments": {
+        "rows": 395,
+        "sample_values": {
+          "Campus": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Discipline": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11",
+            "12"
+          ],
+          "Year": [
+            "2004"
+          ],
+          "Undergraduate": [
+            "248",
+            "811",
+            "199",
+            "179",
+            "293",
+            "164",
+            "60",
+            "457"
+          ],
+          "Graduate": [
+            "0",
+            "73",
+            "422",
+            "6",
+            "35",
+            "23",
+            "8",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "enrollments": {
+        "rows": 1113,
+        "sample_values": {
+          "Campus": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Year": [
+            "1956",
+            "1957",
+            "1958",
+            "1959",
+            "1960",
+            "1961",
+            "1962",
+            "1963"
+          ],
+          "TotalEnrollment_AY": [
+            "384",
+            "432",
+            "422",
+            "443",
+            "414",
+            "434",
+            "495",
+            "533"
+          ],
+          "FTE_AY": [
+            "123",
+            "151",
+            "178",
+            "184",
+            "191",
+            "203",
+            "230",
+            "262"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "faculty": {
+        "rows": 69,
+        "sample_values": {
+          "Campus": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Year": [
+            "2002",
+            "2003",
+            "2004"
+          ],
+          "Faculty": [
+            "357.1",
+            "48.4",
+            "742.8",
+            "449.8",
+            "552.0",
+            "694.6",
+            "1257.3",
+            "435.4"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

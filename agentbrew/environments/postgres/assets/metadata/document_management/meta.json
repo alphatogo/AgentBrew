@@ -1,0 +1,313 @@
+{
+  "db_id": "document_management",
+  "source": "sparc",
+  "tables": 9,
+  "total_rows": 105,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#document_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Document_Functional_Areas\" {\n  \"document_code\" TEXT [not null]\n  \"functional_area_code\" TEXT [not null]\n}\n\nTable \"Document_Sections\" {\n  \"section_id\" INTEGER [pk]\n  \"document_code\" TEXT [not null]\n  \"section_sequence\" INTEGER\n  \"section_code\" TEXT\n  \"section_title\" TEXT\n}\n\nTable \"Document_Sections_Images\" {\n  \"section_id\" INTEGER [pk, not null]\n  \"image_id\" INTEGER [pk, not null]\n}\n\nTable \"Document_Structures\" {\n  \"document_structure_code\" TEXT [pk]\n  \"parent_document_structure_code\" TEXT\n  \"document_structure_description\" TEXT\n}\n\nTable \"Documents\" {\n  \"document_code\" TEXT [pk]\n  \"document_structure_code\" TEXT [not null]\n  \"document_type_code\" TEXT [not null]\n  \"access_count\" INTEGER\n  \"document_name\" TEXT\n}\n\nTable \"Functional_Areas\" {\n  \"functional_area_code\" TEXT [pk]\n  \"parent_functional_area_code\" TEXT\n  \"functional_area_description\" TEXT [not null]\n}\n\nTable \"Images\" {\n  \"image_id\" INTEGER [pk]\n  \"image_alt_text\" TEXT\n  \"image_name\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"Roles\" {\n  \"role_code\" TEXT [pk]\n  \"role_description\" TEXT\n}\n\nTable \"Users\" {\n  \"user_id\" INTEGER [pk]\n  \"role_code\" TEXT [not null]\n  \"user_name\" TEXT\n  \"user_login\" TEXT\n  \"password\" TEXT\n}\n\n\n\nRef: \"Users\".\"role_code\" > \"Roles\".\"role_code\"\n\nRef: \"Documents\".\"document_structure_code\" > \"Document_Structures\".\"document_structure_code\"\n\nRef: \"Document_Functional_Areas\".\"functional_area_code\" > \"Functional_Areas\".\"functional_area_code\"\n\nRef: \"Document_Functional_Areas\".\"document_code\" > \"Documents\".\"document_code\"\n\nRef: \"Document_Sections\".\"document_code\" > \"Documents\".\"document_code\"\n\nRef: \"Document_Sections_Images\".\"image_id\" > \"Images\".\"image_id\"\n\nRef: \"Document_Sections_Images\".\"section_id\" > \"Document_Sections\".\"section_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Document_Functional_Areas\" {\n  \"document_code\" TEXT [not null]\n  \"functional_area_code\" TEXT [not null]\n}\n\nTable \"Document_Sections\" {\n  \"section_id\" INTEGER [pk]\n  \"document_code\" TEXT [not null]\n  \"section_sequence\" INTEGER\n  \"section_code\" TEXT\n  \"section_title\" TEXT\n}\n\nTable \"Document_Sections_Images\" {\n  \"section_id\" INTEGER [pk, not null]\n  \"image_id\" INTEGER [pk, not null]\n}\n\nTable \"Document_Structures\" {\n  \"document_structure_code\" TEXT [pk]\n  \"parent_document_structure_code\" TEXT\n  \"document_structure_description\" TEXT\n}\n\nTable \"Documents\" {\n  \"document_code\" TEXT [pk]\n  \"document_structure_code\" TEXT [not null]\n  \"document_type_code\" TEXT [not null]\n  \"access_count\" INTEGER\n  \"document_name\" TEXT\n}\n\nTable \"Functional_Areas\" {\n  \"functional_area_code\" TEXT [pk]\n  \"parent_functional_area_code\" TEXT\n  \"functional_area_description\" TEXT [not null]\n}\n\nTable \"Images\" {\n  \"image_id\" INTEGER [pk]\n  \"image_alt_text\" TEXT\n  \"image_name\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"Roles\" {\n  \"role_code\" TEXT [pk]\n  \"role_description\" TEXT\n}\n\nTable \"Users\" {\n  \"user_id\" INTEGER [pk]\n  \"role_code\" TEXT [not null]\n  \"user_name\" TEXT\n  \"user_login\" TEXT\n  \"password\" TEXT\n}\n\nRef: \"Users\".\"role_code\" > \"Roles\".\"role_code\"\n\nRef: \"Documents\".\"document_structure_code\" > \"Document_Structures\".\"document_structure_code\"\n\nRef: \"Document_Functional_Areas\".\"functional_area_code\" > \"Functional_Areas\".\"functional_area_code\"\n\nRef: \"Document_Functional_Areas\".\"document_code\" > \"Documents\".\"document_code\"\n\nRef: \"Document_Sections\".\"document_code\" > \"Documents\".\"document_code\"\n\nRef: \"Document_Sections_Images\".\"image_id\" > \"Images\".\"image_id\"\n\nRef: \"Document_Sections_Images\".\"section_id\" > \"Document_Sections\".\"section_id\"\n\n## Table Stats & Sample Values\n\nDocument_Functional_Areas: 15 rows\n  document_code: '675', '930', '217', ...\n  functional_area_code: '9', '1', '8'\n\nDocument_Sections: 15 rows\n  section_title: 'after', 'before'\n  document_code: '714', '217', '675', ...\n  section_code: '70', '14', '90', ...\n\nDocument_Sections_Images: 20 rows\n  section_id: '93', '86', '27', ...\n  image_id: '6', '2', '3', ...\n\nDocument_Structures: 5 rows\n  document_structure_description: 'Header', 'Main section', 'Bib', ...\n  parent_document_structure_code: '1', '6', '8'\n  document_structure_code: '1', '6', '8', ...\n\nDocuments: 15 rows\n  document_type_code: 'Book', 'Paper', 'Advertisement', ...\n  document_name: 'Learning English', 'Research about Art history', 'Learning Database', ...\n  document_structure_code: '8', '1', '5', ...\n\nFunctional_Areas: 3 rows\n  functional_area_description: 'Signature', 'Acknowledgement', 'Keep blank'\n  parent_functional_area_code: '8'\n  functional_area_code: '8', '1', '9'\n\nImages: 15 rows\n  image_name: 'top1', 'top2', 'top3', ...\n  image_alt_text: 'Lea', 'Arden', 'Mohamed', ...\n  image_url: 'http://www.rempelnader.com/1.jpg', 'http://connellykertzmann.org/1.jpg', 'http://www.bernierconnelly.com/1.jpg', ...\n\nRoles: 2 rows\n  role_description: 'Database Administrator', 'Project Manager'\n  role_code: 'DBA', 'PROJ-MGR'\n\nUsers: 15 rows\n  role_code: 'PROJ-MGR', 'DBA'\n  user_name: 'dickens.elta', 'tremblay.raheem', 'lynn.haley', ...\n  user_login: '0', '1'",
+    "stateUrl": "https://github.com/taoyds/sparc#document_management",
+    "tableStats": {
+      "Document_Functional_Areas": {
+        "rows": 15,
+        "sample_values": {
+          "document_code": [
+            "675",
+            "930",
+            "217",
+            "465",
+            "958",
+            "961",
+            "928",
+            "349"
+          ],
+          "functional_area_code": [
+            "9",
+            "1",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Document_Sections": {
+        "rows": 15,
+        "sample_values": {
+          "section_id": [
+            "12",
+            "15",
+            "19",
+            "21",
+            "23",
+            "27",
+            "38",
+            "40"
+          ],
+          "document_code": [
+            "714",
+            "217",
+            "675",
+            "465",
+            "566",
+            "930",
+            "961",
+            "989"
+          ],
+          "section_sequence": [
+            "6072",
+            "4510",
+            "7236",
+            "9847",
+            "8548",
+            "6016",
+            "6521",
+            "4964"
+          ],
+          "section_code": [
+            "70",
+            "14",
+            "90",
+            "72",
+            "49",
+            "18",
+            "58",
+            "93"
+          ],
+          "section_title": [
+            "after",
+            "before"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Document_Sections_Images": {
+        "rows": 20,
+        "sample_values": {
+          "section_id": [
+            "93",
+            "86",
+            "27",
+            "12",
+            "19",
+            "38",
+            "89",
+            "23"
+          ],
+          "image_id": [
+            "6",
+            "2",
+            "3",
+            "12",
+            "8",
+            "5",
+            "14",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Document_Structures": {
+        "rows": 5,
+        "sample_values": {
+          "document_structure_code": [
+            "1",
+            "6",
+            "8",
+            "5",
+            "9"
+          ],
+          "parent_document_structure_code": [
+            "1",
+            "6",
+            "8"
+          ],
+          "document_structure_description": [
+            "Header",
+            "Main section",
+            "Bib",
+            "Image section",
+            "Author section"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Documents": {
+        "rows": 15,
+        "sample_values": {
+          "document_code": [
+            "217",
+            "621",
+            "958",
+            "961",
+            "989",
+            "930",
+            "928",
+            "510"
+          ],
+          "document_structure_code": [
+            "8",
+            "1",
+            "5",
+            "9",
+            "6"
+          ],
+          "document_type_code": [
+            "Book",
+            "Paper",
+            "Advertisement",
+            "CV"
+          ],
+          "access_count": [
+            "1864",
+            "8208",
+            "3769",
+            "6661",
+            "2910",
+            "6345",
+            "2045",
+            "3479"
+          ],
+          "document_name": [
+            "Learning English",
+            "Research about Art history",
+            "Learning Database",
+            "Summer Sails",
+            "Learning Japanese",
+            "David CV",
+            "How to cook pasta",
+            "Humanity: a fact"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Functional_Areas": {
+        "rows": 3,
+        "sample_values": {
+          "functional_area_code": [
+            "8",
+            "1",
+            "9"
+          ],
+          "parent_functional_area_code": [
+            "8"
+          ],
+          "functional_area_description": [
+            "Signature",
+            "Acknowledgement",
+            "Keep blank"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Images": {
+        "rows": 15,
+        "sample_values": {
+          "image_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "image_alt_text": [
+            "Lea",
+            "Arden",
+            "Mohamed",
+            "Chaya",
+            "Percival",
+            "Lincoln",
+            "Camylle",
+            "Ashtyn"
+          ],
+          "image_name": [
+            "top1",
+            "top2",
+            "top3",
+            "top4",
+            "chapter1",
+            "chapter2",
+            "chapter3",
+            "chapter4"
+          ],
+          "image_url": [
+            "http://www.rempelnader.com/1.jpg",
+            "http://connellykertzmann.org/1.jpg",
+            "http://www.bernierconnelly.com/1.jpg",
+            "http://abernathyboehm.com/1.jpg",
+            "http://gaylord.info/1.jpg",
+            "http://www.hellerreinger.com/1.jpg",
+            "http://faycummerata.net/1.jpg",
+            "http://haleychamplin.net/1.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_code": [
+            "DBA",
+            "PROJ-MGR"
+          ],
+          "role_description": [
+            "Database Administrator",
+            "Project Manager"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Users": {
+        "rows": 15,
+        "sample_values": {
+          "user_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "role_code": [
+            "PROJ-MGR",
+            "DBA"
+          ],
+          "user_name": [
+            "dickens.elta",
+            "tremblay.raheem",
+            "lynn.haley",
+            "ycremin",
+            "larson.vesta",
+            "amelie53",
+            "jacklyn.schmitt",
+            "joanne.deckow"
+          ],
+          "user_login": [
+            "0",
+            "1"
+          ],
+          "password": [
+            "e72b5a2d50b39a8760764a5f7a9d68ca2f076877",
+            "9bc25a040d5647ced5ec32e1a455e90fafc10bcb",
+            "90db8f51449e6c39e2a01f0b649d5a92fe76bbbb",
+            "f6977378f409f5d2d230016a6678a582e14f43b0",
+            "da383455a05a824606c54e99f671c4d6a2ddae26",
+            "6aa66440864ff8143fe7dee5940a6af3460bad07",
+            "3f6affa583bfdf7fac6faeb2ca418431909d4b39",
+            "20241478f890508ac47870cfba472e1db04a71ca"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

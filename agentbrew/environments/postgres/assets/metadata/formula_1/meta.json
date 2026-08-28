@@ -1,0 +1,1018 @@
+{
+  "db_id": "formula_1",
+  "source": "bird_dev",
+  "tables": 13,
+  "total_rows": 514287,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#formula_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"circuits\" {\n  \"circuitId\" INTEGER [pk]\n  \"circuitRef\" TEXT [not null]\n  \"name\" TEXT [not null]\n  \"location\" TEXT\n  \"country\" TEXT\n  \"lat\" REAL\n  \"lng\" REAL\n  \"alt\" INTEGER\n  \"url\" TEXT [not null]\n}\n\nTable \"constructorResults\" {\n  \"constructorResultsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"points\" REAL\n  \"status\" TEXT\n}\n\nTable \"constructorStandings\" {\n  \"constructorStandingsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT\n  \"wins\" INTEGER [not null]\n}\n\nTable \"constructors\" {\n  \"constructorId\" INTEGER [pk]\n  \"constructorRef\" TEXT [not null]\n  \"name\" TEXT [not null]\n  \"nationality\" TEXT\n  \"url\" TEXT [not null]\n}\n\nTable \"driverStandings\" {\n  \"driverStandingsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT\n  \"wins\" INTEGER [not null]\n}\n\nTable \"drivers\" {\n  \"driverId\" INTEGER [pk]\n  \"driverRef\" TEXT [not null]\n  \"number\" INTEGER\n  \"code\" TEXT\n  \"forename\" TEXT [not null]\n  \"surname\" TEXT [not null]\n  \"dob\" DATE\n  \"nationality\" TEXT\n  \"url\" TEXT [not null]\n}\n\nTable \"lapTimes\" {\n  \"raceId\" INTEGER [pk, not null]\n  \"driverId\" INTEGER [pk, not null]\n  \"lap\" INTEGER [pk, not null]\n  \"position\" INTEGER\n  \"time\" TEXT\n  \"milliseconds\" INTEGER\n}\n\nTable \"pitStops\" {\n  \"raceId\" INTEGER [pk, not null]\n  \"driverId\" INTEGER [pk, not null]\n  \"stop\" INTEGER [pk, not null]\n  \"lap\" INTEGER [not null]\n  \"time\" TEXT [not null]\n  \"duration\" TEXT\n  \"milliseconds\" INTEGER\n}\n\nTable \"qualifying\" {\n  \"qualifyId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"number\" INTEGER [not null]\n  \"position\" INTEGER\n  \"q1\" TEXT\n  \"q2\" TEXT\n  \"q3\" TEXT\n}\n\nTable \"races\" {\n  \"raceId\" INTEGER [pk]\n  \"year\" INTEGER [not null]\n  \"round\" INTEGER [not null]\n  \"circuitId\" INTEGER [not null]\n  \"name\" TEXT [not null]\n  \"date\" DATE [not null]\n  \"time\" TEXT\n  \"url\" TEXT\n}\n\nTable \"results\" {\n  \"resultId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"number\" INTEGER\n  \"grid\" INTEGER [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT [not null]\n  \"positionOrder\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"laps\" INTEGER [not null]\n  \"time\" TEXT\n  \"milliseconds\" INTEGER\n  \"fastestLap\" INTEGER\n  \"rank\" INTEGER\n  \"fastestLapTime\" TEXT\n  \"fastestLapSpeed\" TEXT\n  \"statusId\" INTEGER [not null]\n}\n\nTable \"seasons\" {\n  \"year\" INTEGER [pk, not null]\n  \"url\" TEXT [not null]\n}\n\nTable \"status\" {\n  \"statusId\" INTEGER [pk]\n  \"status\" TEXT [not null]\n}\n\n\n\nRef: \"races\".\"circuitId\" > \"circuits\".\"circuitId\"\n\nRef: \"races\".\"year\" > \"seasons\".\"year\"\n\nRef: \"constructorResults\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"constructorResults\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"constructorStandings\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"constructorStandings\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"driverStandings\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"driverStandings\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"lapTimes\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"lapTimes\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"pitStops\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"pitStops\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"qualifying\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"qualifying\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"qualifying\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"results\".\"statusId\" > \"status\".\"statusId\"\n\nRef: \"results\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"results\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"results\".\"raceId\" > \"races\".\"raceId\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"circuits\" {\n  \"circuitId\" INTEGER [pk]\n  \"circuitRef\" TEXT [not null]\n  \"name\" TEXT [not null]\n  \"location\" TEXT\n  \"country\" TEXT\n  \"lat\" REAL\n  \"lng\" REAL\n  \"alt\" INTEGER\n  \"url\" TEXT [not null]\n}\n\nTable \"constructorResults\" {\n  \"constructorResultsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"points\" REAL\n  \"status\" TEXT\n}\n\nTable \"constructorStandings\" {\n  \"constructorStandingsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT\n  \"wins\" INTEGER [not null]\n}\n\nTable \"constructors\" {\n  \"constructorId\" INTEGER [pk]\n  \"constructorRef\" TEXT [not null]\n  \"name\" TEXT [not null]\n  \"nationality\" TEXT\n  \"url\" TEXT [not null]\n}\n\nTable \"driverStandings\" {\n  \"driverStandingsId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT\n  \"wins\" INTEGER [not null]\n}\n\nTable \"drivers\" {\n  \"driverId\" INTEGER [pk]\n  \"driverRef\" TEXT [not null]\n  \"number\" INTEGER\n  \"code\" TEXT\n  \"forename\" TEXT [not null]\n  \"surname\" TEXT [not null]\n  \"dob\" DATE\n  \"nationality\" TEXT\n  \"url\" TEXT [not null]\n}\n\nTable \"lapTimes\" {\n  \"raceId\" INTEGER [pk, not null]\n  \"driverId\" INTEGER [pk, not null]\n  \"lap\" INTEGER [pk, not null]\n  \"position\" INTEGER\n  \"time\" TEXT\n  \"milliseconds\" INTEGER\n}\n\nTable \"pitStops\" {\n  \"raceId\" INTEGER [pk, not null]\n  \"driverId\" INTEGER [pk, not null]\n  \"stop\" INTEGER [pk, not null]\n  \"lap\" INTEGER [not null]\n  \"time\" TEXT [not null]\n  \"duration\" TEXT\n  \"milliseconds\" INTEGER\n}\n\nTable \"qualifying\" {\n  \"qualifyId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"number\" INTEGER [not null]\n  \"position\" INTEGER\n  \"q1\" TEXT\n  \"q2\" TEXT\n  \"q3\" TEXT\n}\n\nTable \"races\" {\n  \"raceId\" INTEGER [pk]\n  \"year\" INTEGER [not null]\n  \"round\" INTEGER [not null]\n  \"circuitId\" INTEGER [not null]\n  \"name\" TEXT [not null]\n  \"date\" DATE [not null]\n  \"time\" TEXT\n  \"url\" TEXT\n}\n\nTable \"results\" {\n  \"resultId\" INTEGER [pk]\n  \"raceId\" INTEGER [not null]\n  \"driverId\" INTEGER [not null]\n  \"constructorId\" INTEGER [not null]\n  \"number\" INTEGER\n  \"grid\" INTEGER [not null]\n  \"position\" INTEGER\n  \"positionText\" TEXT [not null]\n  \"positionOrder\" INTEGER [not null]\n  \"points\" REAL [not null]\n  \"laps\" INTEGER [not null]\n  \"time\" TEXT\n  \"milliseconds\" INTEGER\n  \"fastestLap\" INTEGER\n  \"rank\" INTEGER\n  \"fastestLapTime\" TEXT\n  \"fastestLapSpeed\" TEXT\n  \"statusId\" INTEGER [not null]\n}\n\nTable \"seasons\" {\n  \"year\" INTEGER [pk, not null]\n  \"url\" TEXT [not null]\n}\n\nTable \"status\" {\n  \"statusId\" INTEGER [pk]\n  \"status\" TEXT [not null]\n}\n\nRef: \"races\".\"circuitId\" > \"circuits\".\"circuitId\"\n\nRef: \"races\".\"year\" > \"seasons\".\"year\"\n\nRef: \"constructorResults\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"constructorResults\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"constructorStandings\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"constructorStandings\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"driverStandings\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"driverStandings\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"lapTimes\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"lapTimes\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"pitStops\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"pitStops\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"qualifying\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"qualifying\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"qualifying\".\"raceId\" > \"races\".\"raceId\"\n\nRef: \"results\".\"statusId\" > \"status\".\"statusId\"\n\nRef: \"results\".\"constructorId\" > \"constructors\".\"constructorId\"\n\nRef: \"results\".\"driverId\" > \"drivers\".\"driverId\"\n\nRef: \"results\".\"raceId\" > \"races\".\"raceId\"\n\n## Table Stats & Sample Values\n\ncircuits: 72 rows\n  name: 'Sepang International Circuit', 'Bahrain International Circuit', 'Circuit de Barcelona-Catalunya', ...\n  country: 'Malaysia', 'Bahrain', 'Spain', ...\n  circuitRef: 'sepang', 'bahrain', 'catalunya', ...\n\nconstructorResults: 10000 rows\n  status: 'D'\n  points: '14.0', '8.0', '9.0', ...\n  raceId: '18', '19', '20', ...\n\nconstructorStandings: 10000 rows\n  positionText: '1', '3', '2', ...\n  points: '14.0', '8.0', '9.0', ...\n  position: '1', '3', '2', ...\n\nconstructors: 208 rows\n  name: 'McLaren', 'BMW Sauber', 'Williams', ...\n  constructorRef: 'mclaren', 'bmw_sauber', 'williams', ...\n  nationality: 'British', 'German', 'French', ...\n\ndriverStandings: 10000 rows\n  positionText: '1', '2', '3', ...\n  points: '10.0', '8.0', '6.0', ...\n  position: '1', '2', '3', ...\n\ndrivers: 840 rows\n  forename: 'Lewis', 'Nick', 'Nico', ...\n  surname: 'Hamilton', 'Heidfeld', 'Rosberg', ...\n  driverRef: 'hamilton', 'heidfeld', 'rosberg', ...\n\nlapTimes: 10000 rows\n  time: '1:49.088', '1:33.740', '1:31.600', ...\n  position: '13', '12', '11', ...\n  milliseconds: '109088', '93740', '91600', ...\n\npitStops: 6070 rows\n  duration: '23.227', '23.199', '22.994', ...\n  time: '17:28:24', '17:59:29', '17:27:41', ...\n  lap: '16', '36', '15', ...\n\nqualifying: 7397 rows\n  q1: '1:26.572', '1:26.103', '1:25.664', ...\n  q2: '1:25.187', '1:25.315', '1:25.452', ...\n  q3: '1:26.714', '1:26.869', '1:27.079', ...\n\nraces: 976 rows\n  name: 'Australian Grand Prix', 'Malaysian Grand Prix', 'Chinese Grand Prix', ...\n  time: '06:00:00', '09:00:00', '07:00:00', ...\n  year: '2009', '2008', '2007', ...\n\nresults: 10000 rows\n  positionText: '1', '2', '3', ...\n  fastestLapSpeed: '218.300', '217.586', '216.719', ...\n  statusId: '1', '11', '5', ...\n\nseasons: 68 rows\n  url: 'http://en.wikipedia.org/wiki/1950_Formula_One_seas', 'http://en.wikipedia.org/wiki/1951_Formula_One_seas', 'http://en.wikipedia.org/wiki/1952_Formula_One_seas', ...\n  year: '1950', '1951', '1952', ...\n\nstatus: 134 rows\n  status: 'Finished', 'Disqualified', 'Accident', ...\n  statusId: '1', '2', '3', ...",
+    "stateUrl": "https://bird-bench.github.io/#formula_1",
+    "tableStats": {
+      "circuits": {
+        "rows": 72,
+        "sample_values": {
+          "circuitId": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "circuitRef": [
+            "sepang",
+            "bahrain",
+            "catalunya",
+            "istanbul",
+            "monaco",
+            "villeneuve",
+            "magny_cours",
+            "silverstone"
+          ],
+          "name": [
+            "Sepang International Circuit",
+            "Bahrain International Circuit",
+            "Circuit de Barcelona-Catalunya",
+            "Istanbul Park",
+            "Circuit de Monaco",
+            "Circuit Gilles Villeneuve",
+            "Circuit de Nevers Magny-Cours",
+            "Silverstone Circuit"
+          ],
+          "location": [
+            "Kuala Lumpur",
+            "Sakhir",
+            "Montmeló",
+            "Istanbul",
+            "Monte-Carlo",
+            "Montreal",
+            "Magny Cours",
+            "Silverstone"
+          ],
+          "country": [
+            "Malaysia",
+            "Bahrain",
+            "Spain",
+            "Turkey",
+            "Monaco",
+            "Canada",
+            "France",
+            "UK"
+          ],
+          "lat": [
+            "2.76083",
+            "26.0325",
+            "41.57",
+            "40.9517",
+            "43.7347",
+            "45.5",
+            "46.8642",
+            "52.0786"
+          ],
+          "lng": [
+            "101.738",
+            "50.5106",
+            "2.26111",
+            "29.405",
+            "7.42056",
+            "-73.5228",
+            "3.16361",
+            "-1.01694"
+          ],
+          "url": [
+            "http://en.wikipedia.org/wiki/Sepang_International_",
+            "http://en.wikipedia.org/wiki/Bahrain_International",
+            "http://en.wikipedia.org/wiki/Circuit_de_Barcelona-",
+            "http://en.wikipedia.org/wiki/Istanbul_Park",
+            "http://en.wikipedia.org/wiki/Circuit_de_Monaco",
+            "http://en.wikipedia.org/wiki/Circuit_Gilles_Villen",
+            "http://en.wikipedia.org/wiki/Circuit_de_Nevers_Mag",
+            "http://en.wikipedia.org/wiki/Silverstone_Circuit"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "constructorResults": {
+        "rows": 10000,
+        "sample_values": {
+          "constructorResultsId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "raceId": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25"
+          ],
+          "constructorId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "points": [
+            "14.0",
+            "8.0",
+            "9.0",
+            "5.0",
+            "2.0",
+            "1.0",
+            "0.0",
+            "10.0"
+          ],
+          "status": [
+            "D"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "constructorStandings": {
+        "rows": 10000,
+        "sample_values": {
+          "constructorStandingsId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "raceId": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25"
+          ],
+          "constructorId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9"
+          ],
+          "points": [
+            "14.0",
+            "8.0",
+            "9.0",
+            "5.0",
+            "2.0",
+            "1.0",
+            "24.0",
+            "19.0"
+          ],
+          "position": [
+            "1",
+            "3",
+            "2",
+            "4",
+            "5",
+            "6",
+            "8",
+            "7"
+          ],
+          "positionText": [
+            "1",
+            "3",
+            "2",
+            "4",
+            "5",
+            "6",
+            "8",
+            "7"
+          ],
+          "wins": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "constructors": {
+        "rows": 208,
+        "sample_values": {
+          "constructorId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "constructorRef": [
+            "mclaren",
+            "bmw_sauber",
+            "williams",
+            "renault",
+            "toro_rosso",
+            "ferrari",
+            "toyota",
+            "super_aguri"
+          ],
+          "name": [
+            "McLaren",
+            "BMW Sauber",
+            "Williams",
+            "Renault",
+            "Toro Rosso",
+            "Ferrari",
+            "Toyota",
+            "Super Aguri"
+          ],
+          "nationality": [
+            "British",
+            "German",
+            "French",
+            "Italian",
+            "Japanese",
+            "Austrian",
+            "Indian",
+            "Dutch"
+          ],
+          "url": [
+            "http://en.wikipedia.org/wiki/McLaren",
+            "http://en.wikipedia.org/wiki/BMW_Sauber",
+            "http://en.wikipedia.org/wiki/Williams_Grand_Prix_E",
+            "http://en.wikipedia.org/wiki/Renault_F1",
+            "http://en.wikipedia.org/wiki/Scuderia_Toro_Rosso",
+            "http://en.wikipedia.org/wiki/Scuderia_Ferrari",
+            "http://en.wikipedia.org/wiki/Toyota_Racing",
+            "http://en.wikipedia.org/wiki/Super_Aguri_F1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "driverStandings": {
+        "rows": 10000,
+        "sample_values": {
+          "driverStandingsId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "raceId": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25"
+          ],
+          "driverId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "points": [
+            "10.0",
+            "8.0",
+            "6.0",
+            "5.0",
+            "4.0",
+            "3.0",
+            "2.0",
+            "1.0"
+          ],
+          "position": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "positionText": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "wins": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "drivers": {
+        "rows": 840,
+        "sample_values": {
+          "driverId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "driverRef": [
+            "hamilton",
+            "heidfeld",
+            "rosberg",
+            "alonso",
+            "kovalainen",
+            "nakajima",
+            "bourdais",
+            "raikkonen"
+          ],
+          "number": [
+            "44",
+            "6",
+            "14",
+            "7",
+            "19",
+            "99",
+            "22",
+            "5"
+          ],
+          "code": [
+            "HAM",
+            "HEI",
+            "ROS",
+            "ALO",
+            "KOV",
+            "NAK",
+            "BOU",
+            "RAI"
+          ],
+          "forename": [
+            "Lewis",
+            "Nick",
+            "Nico",
+            "Fernando",
+            "Heikki",
+            "Kazuki",
+            "Sébastien",
+            "Kimi"
+          ],
+          "surname": [
+            "Hamilton",
+            "Heidfeld",
+            "Rosberg",
+            "Alonso",
+            "Kovalainen",
+            "Nakajima",
+            "Bourdais",
+            "Räikkönen"
+          ],
+          "dob": [
+            "1985-01-07",
+            "1977-05-10",
+            "1985-06-27",
+            "1981-07-29",
+            "1981-10-19",
+            "1985-01-11",
+            "1979-02-28",
+            "1979-10-17"
+          ],
+          "nationality": [
+            "British",
+            "German",
+            "Spanish",
+            "Finnish",
+            "Japanese",
+            "French",
+            "Polish",
+            "Brazilian"
+          ],
+          "url": [
+            "http://en.wikipedia.org/wiki/Lewis_Hamilton",
+            "http://en.wikipedia.org/wiki/Nick_Heidfeld",
+            "http://en.wikipedia.org/wiki/Nico_Rosberg",
+            "http://en.wikipedia.org/wiki/Fernando_Alonso",
+            "http://en.wikipedia.org/wiki/Heikki_Kovalainen",
+            "http://en.wikipedia.org/wiki/Kazuki_Nakajima",
+            "http://en.wikipedia.org/wiki/S%C3%A9bastien_Bourda",
+            "http://en.wikipedia.org/wiki/Kimi_R%C3%A4ikk%C3%B6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lapTimes": {
+        "rows": 10000,
+        "sample_values": {
+          "raceId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "driverId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "lap": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "position": [
+            "13",
+            "12",
+            "11",
+            "10",
+            "9",
+            "8",
+            "14",
+            "15"
+          ],
+          "time": [
+            "1:49.088",
+            "1:33.740",
+            "1:31.600",
+            "1:31.067",
+            "1:32.129",
+            "1:30.469",
+            "1:29.488",
+            "1:30.302"
+          ],
+          "milliseconds": [
+            "109088",
+            "93740",
+            "91600",
+            "91067",
+            "92129",
+            "90469",
+            "89488",
+            "90302"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pitStops": {
+        "rows": 6070,
+        "sample_values": {
+          "raceId": [
+            "841",
+            "842",
+            "843",
+            "844",
+            "845",
+            "846",
+            "847",
+            "848"
+          ],
+          "driverId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "13",
+            "15"
+          ],
+          "stop": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "lap": [
+            "16",
+            "36",
+            "15",
+            "30",
+            "12",
+            "27",
+            "42",
+            "17"
+          ],
+          "time": [
+            "17:28:24",
+            "17:59:29",
+            "17:27:41",
+            "17:51:32",
+            "17:29:00",
+            "17:22:34",
+            "17:46:04",
+            "18:09:08"
+          ],
+          "duration": [
+            "23.227",
+            "23.199",
+            "22.994",
+            "25.098",
+            "23.716",
+            "23.251",
+            "24.733",
+            "24.181"
+          ],
+          "milliseconds": [
+            "23227",
+            "23199",
+            "22994",
+            "25098",
+            "23716",
+            "23251",
+            "24733",
+            "24181"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "qualifying": {
+        "rows": 7397,
+        "sample_values": {
+          "qualifyId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "raceId": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25"
+          ],
+          "driverId": [
+            "1",
+            "9",
+            "5",
+            "13",
+            "2",
+            "15",
+            "3",
+            "14"
+          ],
+          "constructorId": [
+            "1",
+            "2",
+            "6",
+            "7",
+            "3",
+            "9",
+            "5",
+            "11"
+          ],
+          "number": [
+            "22",
+            "4",
+            "23",
+            "2",
+            "3",
+            "11",
+            "7",
+            "9"
+          ],
+          "position": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "q1": [
+            "1:26.572",
+            "1:26.103",
+            "1:25.664",
+            "1:25.994",
+            "1:25.960",
+            "1:26.427",
+            "1:26.295",
+            "1:26.381"
+          ],
+          "q2": [
+            "1:25.187",
+            "1:25.315",
+            "1:25.452",
+            "1:25.691",
+            "1:25.518",
+            "1:26.101",
+            "1:26.059",
+            "1:26.063"
+          ],
+          "q3": [
+            "1:26.714",
+            "1:26.869",
+            "1:27.079",
+            "1:27.178",
+            "1:27.236",
+            "1:28.527",
+            "1:28.687",
+            "1:29.041"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "races": {
+        "rows": 976,
+        "sample_values": {
+          "raceId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "year": [
+            "2009",
+            "2008",
+            "2007",
+            "2006",
+            "2005",
+            "2004",
+            "2003",
+            "2002"
+          ],
+          "round": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "circuitId": [
+            "1",
+            "2",
+            "17",
+            "3",
+            "4",
+            "6",
+            "5",
+            "9"
+          ],
+          "name": [
+            "Australian Grand Prix",
+            "Malaysian Grand Prix",
+            "Chinese Grand Prix",
+            "Bahrain Grand Prix",
+            "Spanish Grand Prix",
+            "Monaco Grand Prix",
+            "Turkish Grand Prix",
+            "British Grand Prix"
+          ],
+          "date": [
+            "2009-03-29",
+            "2009-04-05",
+            "2009-04-19",
+            "2009-04-26",
+            "2009-05-10",
+            "2009-05-24",
+            "2009-06-07",
+            "2009-06-21"
+          ],
+          "time": [
+            "06:00:00",
+            "09:00:00",
+            "07:00:00",
+            "12:00:00",
+            "05:00:00",
+            "16:00:00",
+            "11:00:00",
+            "04:30:00"
+          ],
+          "url": [
+            "http://en.wikipedia.org/wiki/2009_Australian_Grand",
+            "http://en.wikipedia.org/wiki/2009_Malaysian_Grand_",
+            "http://en.wikipedia.org/wiki/2009_Chinese_Grand_Pr",
+            "http://en.wikipedia.org/wiki/2009_Bahrain_Grand_Pr",
+            "http://en.wikipedia.org/wiki/2009_Spanish_Grand_Pr",
+            "http://en.wikipedia.org/wiki/2009_Monaco_Grand_Pri",
+            "http://en.wikipedia.org/wiki/2009_Turkish_Grand_Pr",
+            "http://en.wikipedia.org/wiki/2009_British_Grand_Pr"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "results": {
+        "rows": 10000,
+        "sample_values": {
+          "resultId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "raceId": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25"
+          ],
+          "driverId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "constructorId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "number": [
+            "22",
+            "3",
+            "7",
+            "5",
+            "23",
+            "8",
+            "14",
+            "1"
+          ],
+          "grid": [
+            "1",
+            "5",
+            "7",
+            "11",
+            "3",
+            "13",
+            "17",
+            "15"
+          ],
+          "position": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "positionText": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "positionOrder": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "points": [
+            "10.0",
+            "8.0",
+            "6.0",
+            "5.0",
+            "4.0",
+            "3.0",
+            "2.0",
+            "1.0"
+          ],
+          "laps": [
+            "58",
+            "57",
+            "55",
+            "53",
+            "47",
+            "43",
+            "32",
+            "30"
+          ],
+          "time": [
+            "1:34:50.616",
+            "+5.478",
+            "+8.163",
+            "+17.181",
+            "+18.014",
+            "1:31:18.555",
+            "+19.570",
+            "+38.450"
+          ],
+          "milliseconds": [
+            "5690616",
+            "5696094",
+            "5698779",
+            "5707797",
+            "5708630",
+            "5478555",
+            "5498125",
+            "5517005"
+          ],
+          "fastestLap": [
+            "39",
+            "41",
+            "58",
+            "43",
+            "50",
+            "22",
+            "20",
+            "15"
+          ],
+          "rank": [
+            "2",
+            "3",
+            "5",
+            "7",
+            "1",
+            "14",
+            "12",
+            "4"
+          ],
+          "fastestLapTime": [
+            "1:27.452",
+            "1:27.739",
+            "1:28.090",
+            "1:28.603",
+            "1:27.418",
+            "1:29.639",
+            "1:29.534",
+            "1:27.903"
+          ],
+          "fastestLapSpeed": [
+            "218.300",
+            "217.586",
+            "216.719",
+            "215.464",
+            "218.385",
+            "212.974",
+            "213.224",
+            "217.180"
+          ],
+          "statusId": [
+            "1",
+            "11",
+            "5",
+            "4",
+            "3",
+            "7",
+            "8",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "seasons": {
+        "rows": 68,
+        "sample_values": {
+          "year": [
+            "1950",
+            "1951",
+            "1952",
+            "1953",
+            "1954",
+            "1955",
+            "1956",
+            "1957"
+          ],
+          "url": [
+            "http://en.wikipedia.org/wiki/1950_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1951_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1952_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1953_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1954_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1955_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1956_Formula_One_seas",
+            "http://en.wikipedia.org/wiki/1957_Formula_One_seas"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "status": {
+        "rows": 134,
+        "sample_values": {
+          "statusId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": [
+            "Finished",
+            "Disqualified",
+            "Accident",
+            "Collision",
+            "Engine",
+            "Gearbox",
+            "Transmission",
+            "Clutch"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

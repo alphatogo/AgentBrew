@@ -1,0 +1,655 @@
+{
+  "db_id": "financial_risk_assessment_and_credit_approval_management",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/financial_risk_assessment_and_credit_approval_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"applicants\" {\n  \"applicant_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"date_of_birth\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" TEXT\n  \"income\" REAL\n  \"marital_status\" TEXT\n  \"education_level\" TEXT\n  \"employment_status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"application_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"officer_id\" INTEGER\n  \"review_date\" TEXT\n  \"comments\" TEXT\n  \"rating\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"applications\" {\n  \"application_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"application_date\" TEXT\n  \"loan_amount\" REAL\n  \"loan_purpose\" TEXT\n  \"status\" TEXT\n  \"loan_term\" INTEGER\n  \"interest_rate\" REAL\n  \"fee_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"approval_criteria\" {\n  \"criteria_id\" INTEGER [pk]\n  \"criteria_name\" TEXT\n  \"criteria_description\" TEXT\n  \"min_credit_score\" INTEGER\n  \"max_debt_to_income\" REAL\n  \"min_income\" REAL\n  \"min_employment_duration\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"audit_logs\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"action_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"branches\" {\n  \"branch_id\" INTEGER [pk]\n  \"branch_name\" TEXT\n  \"branch_location\" TEXT\n  \"contact_number\" TEXT\n  \"fax_number\" TEXT\n  \"email\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"credit_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"score\" INTEGER\n  \"score_date\" TEXT\n  \"credit_agency\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"defaults\" {\n  \"default_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"loan_id\" INTEGER\n  \"default_date\" TEXT\n  \"default_amount\" REAL\n  \"default_reason\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"employment_history\" {\n  \"employment_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"company_name\" TEXT\n  \"position\" TEXT\n  \"years_employed\" REAL\n  \"monthly_income\" REAL\n  \"job_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"loan_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"officer_id\" INTEGER\n  \"approval_date\" TEXT\n  \"approved_amount\" REAL\n  \"approval_comments\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"loan_officers\" {\n  \"officer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"branch_id\" INTEGER\n  \"job_title\" TEXT\n  \"years_of_experience\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"loan_purposes\" {\n  \"purpose_id\" INTEGER [pk]\n  \"purpose_name\" TEXT\n  \"purpose_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"loan_terms\" {\n  \"term_id\" INTEGER [pk]\n  \"term_duration\" INTEGER\n  \"interest_rate\" REAL\n  \"fee_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"rejections\" {\n  \"rejection_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"rejection_date\" TEXT\n  \"reason\" TEXT\n  \"rejection_comments\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"report_data\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"branch_id\" INTEGER\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"application_reviews\".\"application_id\" > \"public\".\"applications\".\"application_id\"\nRef: \"public\".\"application_reviews\".\"officer_id\" > \"public\".\"loan_officers\".\"officer_id\"\nRef: \"public\".\"applications\".\"applicant_id\" > \"public\".\"applicants\".\"applicant_id\"\nRef: \"public\".\"audit_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"credit_scores\".\"applicant_id\" > \"public\".\"applicants\".\"applicant_id\"\nRef: \"public\".\"defaults\".\"applicant_id\" > \"public\".\"applicants\".\"applicant_id\"\nRef: \"public\".\"employment_history\".\"applicant_id\" > \"public\".\"applicants\".\"applicant_id\"\nRef: \"public\".\"loan_approvals\".\"officer_id\" > \"public\".\"loan_officers\".\"officer_id\"\nRef: \"public\".\"loan_approvals\".\"application_id\" > \"public\".\"applications\".\"application_id\"\nRef: \"public\".\"loan_officers\".\"branch_id\" > \"public\".\"branches\".\"branch_id\"\nRef: \"public\".\"rejections\".\"application_id\" > \"public\".\"applications\".\"application_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"applicants\" {\n  \"applicant_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"date_of_birth\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" TEXT\n  \"income\" REAL\n  \"marital_status\" TEXT\n  \"education_level\" TEXT\n  \"employment_status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"application_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"officer_id\" INTEGER\n  \"review_date\" TEXT\n  \"comments\" TEXT\n  \"rating\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"applications\" {\n  \"application_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"application_date\" TEXT\n  \"loan_amount\" REAL\n  \"loan_purpose\" TEXT\n  \"status\" TEXT\n  \"loan_term\" INTEGER\n  \"interest_rate\" REAL\n  \"fee_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"approval_criteria\" {\n  \"criteria_id\" INTEGER [pk]\n  \"criteria_name\" TEXT\n  \"criteria_description\" TEXT\n  \"min_credit_score\" INTEGER\n  \"max_debt_to_income\" REAL\n  \"min_income\" REAL\n  \"min_employment_duration\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"audit_logs\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"action_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"branches\" {\n  \"branch_id\" INTEGER [pk]\n  \"branch_name\" TEXT\n  \"branch_location\" TEXT\n  \"contact_number\" TEXT\n  \"fax_number\" TEXT\n  \"email\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"credit_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"score\" INTEGER\n  \"score_date\" TEXT\n  \"credit_agency\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"defaults\" {\n  \"default_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"loan_id\" INTEGER\n  \"default_date\" TEXT\n  \"default_amount\" REAL\n  \"default_reason\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"employment_history\" {\n  \"employment_id\" INTEGER [pk]\n  \"applicant_id\" INTEGER\n  \"company_name\" TEXT\n  \"position\" TEXT\n  \"years_employed\" REAL\n  \"monthly_income\" REAL\n  \"job_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"loan_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"officer_id\" INTEGER\n  \"approval_date\" TEXT\n  \"approved_amount\" REAL\n  \"approval_comments\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"loan_officers\" {\n  \"officer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"branch_id\" INTEGER\n  \"job_title\" TEXT\n  \"years_of_experience\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"loan_purposes\" {\n  \"purpose_id\" INTEGER [pk]\n  \"purpose_name\" TEXT\n  \"purpose_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"loan_terms\" {\n  \"term_id\" INTEGER [pk]\n  \"term_duration\" INTEGER\n  \"interest_rate\" REAL\n  \"fee_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"rejections\" {\n  \"rejection_id\" INTEGER [pk]\n  \"application_id\" INTEGER\n  \"rejection_date\" TEXT\n  \"reason\" TEXT\n  \"rejection_comments\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"report_data\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"branch_id\" INTEGER\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"application_reviews\".\"application_id\" > \"applications\".\"application_id\"\n\nRef: \"application_reviews\".\"officer_id\" > \"loan_officers\".\"officer_id\"\n\nRef: \"applications\".\"applicant_id\" > \"applicants\".\"applicant_id\"\n\nRef: \"audit_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"credit_scores\".\"applicant_id\" > \"applicants\".\"applicant_id\"\n\nRef: \"defaults\".\"applicant_id\" > \"applicants\".\"applicant_id\"\n\nRef: \"employment_history\".\"applicant_id\" > \"applicants\".\"applicant_id\"\n\nRef: \"loan_approvals\".\"officer_id\" > \"loan_officers\".\"officer_id\"\n\nRef: \"loan_approvals\".\"application_id\" > \"applications\".\"application_id\"\n\nRef: \"loan_officers\".\"branch_id\" > \"branches\".\"branch_id\"\n\nRef: \"rejections\".\"application_id\" > \"applications\".\"application_id\"\n\n## Table Stats & Sample Values\n\napplicants: 2 rows\n  first_name: 'Alice', 'Bob'\n  last_name: 'Johnson', 'Williams'\n  city: 'New York', 'Los Angeles'\n\napplication_reviews: 2 rows\n  comments: 'Good credit history', 'Needs further verification'\n  review_date: '2023-05-01', '2023-05-02'\n  created_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n\napplications: 2 rows\n  status: 'pending', 'approved'\n  loan_purpose: 'Home Improvement', 'Debt Consolidation'\n  application_date: '2023-05-01', '2023-05-02'\n\napproval_criteria: 2 rows\n  criteria_name: 'Good Credit', 'Steady Income'\n  criteria_description: 'Applicant must have a good credit score.', 'Applicant must have a reliable income.'\n  created_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n\naudit_logs: 2 rows\n  action_description: 'Created new loan application', 'Approved loan application'\n  action: 'Created application', 'Approved loan'\n  action_date: '2023-05-01', '2023-05-03'\n\nbranches: 2 rows\n  branch_name: 'Main Branch', 'Westside Branch'\n  branch_location: 'New York', 'Los Angeles'\n  contact_number: '555-0001', '555-0003'\n\ncredit_scores: 2 rows\n  credit_agency: 'Experian', 'TransUnion'\n  score_date: '2023-04-01', '2023-04-15'\n  created_at: '2023-04-01 10:00:00', '2023-04-15 11:00:00'\n\ndefaults: 2 rows\n  default_reason: 'Job loss', 'Medical emergency'\n  default_date: '2022-03-01', '2021-06-15'\n  created_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n\nemployment_history: 2 rows\n  company_name: 'Tech Solutions', 'Finance Corp'\n  job_type: 'Full-time'\n  position: 'Software Engineer', 'Financial Analyst'\n\nloan_approvals: 2 rows\n  approval_comments: 'Approved after careful review', 'Approved with conditions'\n  approval_date: '2023-05-03', '2023-05-04'\n  created_at: '2023-05-03 10:00:00', '2023-05-04 11:00:00'\n\nloan_officers: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  job_title: 'Senior Loan Officer', 'Loan Officer'\n\nloan_purposes: 2 rows\n  purpose_name: 'Home Improvement', 'Debt Consolidation'\n  purpose_description: 'For improving or renovating a home', 'For consolidating existing debts'\n  created_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n\nloan_terms: 2 rows\n  created_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n  updated_at: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n  term_duration: '36', '60'\n\nrejections: 2 rows\n  reason: 'Income too low', 'Previous default'\n  rejection_comments: 'Insufficient income to support loan payments', 'Default on previous loan'\n  rejection_date: '2023-05-01', '2023-05-02'\n\nreports: 2 rows\n  report_name: 'Loan Applications', 'Approval Rate'\n  report_type: 'Application Report', 'Approval Report'\n  report_data: '{\"applications\": 100, \"approvals\": 80}', '{\"approval_rate\": 0.8}'\n\nusers: 2 rows\n  username: 'johndoe', 'janesmith'\n  role: 'loan_officer', 'admin'\n  first_name: 'John', 'Jane'",
+    "stateUrl": null,
+    "tableStats": {
+      "applicants": {
+        "rows": 2,
+        "sample_values": {
+          "applicant_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alice",
+            "Bob"
+          ],
+          "last_name": [
+            "Johnson",
+            "Williams"
+          ],
+          "email": [
+            "alice.j@example.com",
+            "bob.w@example.com"
+          ],
+          "phone": [
+            "555-1234",
+            "555-5678"
+          ],
+          "date_of_birth": [
+            "1985-02-15",
+            "1990-06-20"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "New York",
+            "Los Angeles"
+          ],
+          "state": [
+            "NY",
+            "CA"
+          ],
+          "zip": [
+            "10001",
+            "90001"
+          ],
+          "income": [
+            "60000.0",
+            "80000.0"
+          ],
+          "marital_status": [
+            "Single",
+            "Married"
+          ],
+          "education_level": [
+            "Bachelor's",
+            "Master's"
+          ],
+          "employment_status": [
+            "Employed"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "application_reviews": {
+        "rows": 2,
+        "sample_values": {
+          "review_id": [
+            "0",
+            "1"
+          ],
+          "application_id": [
+            "0",
+            "1"
+          ],
+          "officer_id": [
+            "0",
+            "1"
+          ],
+          "review_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "comments": [
+            "Good credit history",
+            "Needs further verification"
+          ],
+          "rating": [
+            "4.0",
+            "3.0"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "applications": {
+        "rows": 2,
+        "sample_values": {
+          "application_id": [
+            "0",
+            "1"
+          ],
+          "applicant_id": [
+            "0",
+            "1"
+          ],
+          "application_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "loan_amount": [
+            "10000.0",
+            "5000.0"
+          ],
+          "loan_purpose": [
+            "Home Improvement",
+            "Debt Consolidation"
+          ],
+          "status": [
+            "pending",
+            "approved"
+          ],
+          "loan_term": [
+            "60",
+            "36"
+          ],
+          "interest_rate": [
+            "0.06",
+            "0.08"
+          ],
+          "fee_amount": [
+            "500.0",
+            "200.0"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "approval_criteria": {
+        "rows": 2,
+        "sample_values": {
+          "criteria_id": [
+            "0",
+            "1"
+          ],
+          "criteria_name": [
+            "Good Credit",
+            "Steady Income"
+          ],
+          "criteria_description": [
+            "Applicant must have a good credit score.",
+            "Applicant must have a reliable income."
+          ],
+          "min_credit_score": [
+            "650",
+            "600"
+          ],
+          "max_debt_to_income": [
+            "0.4",
+            "0.5"
+          ],
+          "min_income": [
+            "40000.0",
+            "50000.0"
+          ],
+          "min_employment_duration": [
+            "2.0",
+            "1.0"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_logs": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "action": [
+            "Created application",
+            "Approved loan"
+          ],
+          "action_date": [
+            "2023-05-01",
+            "2023-05-03"
+          ],
+          "action_description": [
+            "Created new loan application",
+            "Approved loan application"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-03 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-03 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "branches": {
+        "rows": 2,
+        "sample_values": {
+          "branch_id": [
+            "0",
+            "1"
+          ],
+          "branch_name": [
+            "Main Branch",
+            "Westside Branch"
+          ],
+          "branch_location": [
+            "New York",
+            "Los Angeles"
+          ],
+          "contact_number": [
+            "555-0001",
+            "555-0003"
+          ],
+          "fax_number": [
+            "555-0002",
+            "555-0004"
+          ],
+          "email": [
+            "mainbranch@bank.com",
+            "westsidebranch@bank.com"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "credit_scores": {
+        "rows": 2,
+        "sample_values": {
+          "score_id": [
+            "0",
+            "1"
+          ],
+          "applicant_id": [
+            "1"
+          ],
+          "score": [
+            "720",
+            "680"
+          ],
+          "score_date": [
+            "2023-04-01",
+            "2023-04-15"
+          ],
+          "credit_agency": [
+            "Experian",
+            "TransUnion"
+          ],
+          "created_at": [
+            "2023-04-01 10:00:00",
+            "2023-04-15 11:00:00"
+          ],
+          "updated_at": [
+            "2023-04-01 10:00:00",
+            "2023-04-15 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "defaults": {
+        "rows": 2,
+        "sample_values": {
+          "default_id": [
+            "0",
+            "1"
+          ],
+          "applicant_id": [
+            "1",
+            "0"
+          ],
+          "loan_id": [
+            "501",
+            "502"
+          ],
+          "default_date": [
+            "2022-03-01",
+            "2021-06-15"
+          ],
+          "default_amount": [
+            "2000.0",
+            "1500.0"
+          ],
+          "default_reason": [
+            "Job loss",
+            "Medical emergency"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employment_history": {
+        "rows": 2,
+        "sample_values": {
+          "employment_id": [
+            "0",
+            "1"
+          ],
+          "applicant_id": [
+            "1"
+          ],
+          "company_name": [
+            "Tech Solutions",
+            "Finance Corp"
+          ],
+          "position": [
+            "Software Engineer",
+            "Financial Analyst"
+          ],
+          "years_employed": [
+            "3.5",
+            "2.0"
+          ],
+          "monthly_income": [
+            "6000.0",
+            "7000.0"
+          ],
+          "job_type": [
+            "Full-time"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "loan_approvals": {
+        "rows": 2,
+        "sample_values": {
+          "approval_id": [
+            "0",
+            "1"
+          ],
+          "application_id": [
+            "1"
+          ],
+          "officer_id": [
+            "0",
+            "1"
+          ],
+          "approval_date": [
+            "2023-05-03",
+            "2023-05-04"
+          ],
+          "approved_amount": [
+            "5000.0",
+            "10000.0"
+          ],
+          "approval_comments": [
+            "Approved after careful review",
+            "Approved with conditions"
+          ],
+          "created_at": [
+            "2023-05-03 10:00:00",
+            "2023-05-04 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-03 10:00:00",
+            "2023-05-04 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "loan_officers": {
+        "rows": 2,
+        "sample_values": {
+          "officer_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "email": [
+            "john.doe@bank.com",
+            "jane.smith@bank.com"
+          ],
+          "phone": [
+            "555-0011",
+            "555-0012"
+          ],
+          "branch_id": [
+            "1"
+          ],
+          "job_title": [
+            "Senior Loan Officer",
+            "Loan Officer"
+          ],
+          "years_of_experience": [
+            "5.0",
+            "2.0"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "loan_purposes": {
+        "rows": 2,
+        "sample_values": {
+          "purpose_id": [
+            "0",
+            "1"
+          ],
+          "purpose_name": [
+            "Home Improvement",
+            "Debt Consolidation"
+          ],
+          "purpose_description": [
+            "For improving or renovating a home",
+            "For consolidating existing debts"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "loan_terms": {
+        "rows": 2,
+        "sample_values": {
+          "term_id": [
+            "0",
+            "1"
+          ],
+          "term_duration": [
+            "36",
+            "60"
+          ],
+          "interest_rate": [
+            "0.06",
+            "0.08"
+          ],
+          "fee_amount": [
+            "500.0",
+            "1000.0"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rejections": {
+        "rows": 2,
+        "sample_values": {
+          "rejection_id": [
+            "0",
+            "1"
+          ],
+          "application_id": [
+            "0"
+          ],
+          "rejection_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "reason": [
+            "Income too low",
+            "Previous default"
+          ],
+          "rejection_comments": [
+            "Insufficient income to support loan payments",
+            "Default on previous loan"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "report_name": [
+            "Loan Applications",
+            "Approval Rate"
+          ],
+          "report_type": [
+            "Application Report",
+            "Approval Report"
+          ],
+          "report_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "report_data": [
+            "{\"applications\": 100, \"approvals\": 80}",
+            "{\"approval_rate\": 0.8}"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "johndoe",
+            "janesmith"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "role": [
+            "loan_officer",
+            "admin"
+          ],
+          "branch_id": [
+            "1",
+            "2"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "email": [
+            "john.doe@bank.com",
+            "jane.smith@bank.com"
+          ],
+          "phone": [
+            "555-0011",
+            "555-0012"
+          ],
+          "created_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

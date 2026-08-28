@@ -1,0 +1,15 @@
+{
+  "title": "Creator Portfolio Launch Audit",
+  "capability": [
+    "archive_or_delete_items",
+    "populate_rows",
+    "field_mapping",
+    "insert_block_at_position",
+    "summarize_from_records",
+    "create_database",
+    "define_schema",
+    "build_relations",
+    "rollup_formula_schema"
+  ],
+  "question": "Find the page named \"Creator Portfolio\" and update the launch projects and skill planning sections.\n\n**Task Requirements:**\n1. In the Launch Projects database, delete the project named \"Archive Site Refresh\" because it is outdated. Do not delete or modify any other Launch Projects database records.\n\n2. Create a new database named \"Creator Skill Growth Tracker\" as a child database in the main Creator Portfolio page with the following properties:\n   - Name (title property)\n   - Current Skill (relation to Skills database)\n   - Current Proficiency (rollup from related skill's \"Skill Level\" property)\n   - Target Proficiency (number property with format \"percent\")\n   - Gap (formula: Target Proficiency - Current Proficiency)\n   - Learning Resources (rich text property)\n   - Progress Notes (rich text property)\n\n3. Populate the Creator Skill Growth Tracker database with entries for all skills that have a Skill Level below 70% (0.7):\n   - Name: \"[Skill Name] Launch Plan\"\n   - Link to the corresponding skill in Skills database\n   - Target Proficiency: Set to Current + 25% (capped at 95%)\n   - Learning Resources: \"Creator launch workshops and portfolio practice\"\n   - Progress Notes: \"Initial launch readiness assessment completed\"\n\n4. After the Launch Projects database block, add the following blocks in sequence:\n   - A divider block\n   - A heading_2 block with text \"Launch Skill Focus\"\n   - A paragraph block with content that dynamically references the 3 skills with the lowest Skill Level and includes the exact phrase \"These skill gaps should guide the next portfolio launch sprint.\""
+}

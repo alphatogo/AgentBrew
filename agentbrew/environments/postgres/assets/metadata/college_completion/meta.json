@@ -1,0 +1,969 @@
+{
+  "db_id": "college_completion",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 1391154,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#college_completion",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"institution_details\" {\n  \"unitid\" INTEGER [pk]\n  \"chronname\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"level\" TEXT\n  \"control\" TEXT\n  \"basic\" TEXT\n  \"hbcu\" TEXT\n  \"flagship\" TEXT\n  \"long_x\" REAL\n  \"lat_y\" REAL\n  \"site\" TEXT\n  \"student_count\" INTEGER\n  \"awards_per_value\" REAL\n  \"awards_per_state_value\" REAL\n  \"awards_per_natl_value\" REAL\n  \"exp_award_value\" INTEGER\n  \"exp_award_state_value\" INTEGER\n  \"exp_award_natl_value\" INTEGER\n  \"exp_award_percentile\" INTEGER\n  \"ft_pct\" REAL\n  \"fte_value\" INTEGER\n  \"fte_percentile\" INTEGER\n  \"med_sat_value\" TEXT\n  \"med_sat_percentile\" TEXT\n  \"aid_value\" INTEGER\n  \"aid_percentile\" INTEGER\n  \"endow_value\" TEXT\n  \"endow_percentile\" TEXT\n  \"grad_100_value\" REAL\n  \"grad_100_percentile\" INTEGER\n  \"grad_150_value\" REAL\n  \"grad_150_percentile\" INTEGER\n  \"pell_value\" REAL\n  \"pell_percentile\" INTEGER\n  \"retain_value\" REAL\n  \"retain_percentile\" INTEGER\n  \"ft_fac_value\" REAL\n  \"ft_fac_percentile\" INTEGER\n  \"vsa_year\" TEXT\n  \"vsa_grad_after4_first\" TEXT\n  \"vsa_grad_elsewhere_after4_first\" TEXT\n  \"vsa_enroll_after4_first\" TEXT\n  \"vsa_enroll_elsewhere_after4_first\" TEXT\n  \"vsa_grad_after6_first\" TEXT\n  \"vsa_grad_elsewhere_after6_first\" TEXT\n  \"vsa_enroll_after6_first\" TEXT\n  \"vsa_enroll_elsewhere_after6_first\" TEXT\n  \"vsa_grad_after4_transfer\" TEXT\n  \"vsa_grad_elsewhere_after4_transfer\" TEXT\n  \"vsa_enroll_after4_transfer\" TEXT\n  \"vsa_enroll_elsewhere_after4_transfer\" TEXT\n  \"vsa_grad_after6_transfer\" TEXT\n  \"vsa_grad_elsewhere_after6_transfer\" TEXT\n  \"vsa_enroll_after6_transfer\" TEXT\n  \"vsa_enroll_elsewhere_after6_transfer\" TEXT\n  \"similar\" TEXT\n  \"state_sector_ct\" INTEGER\n  \"carnegie_ct\" INTEGER\n  \"counted_pct\" TEXT\n  \"nicknames\" TEXT\n  \"cohort_size\" INTEGER\n}\n\nTable \"institution_grads\" {\n  \"unitid\" INTEGER\n  \"year\" INTEGER\n  \"gender\" TEXT\n  \"race\" TEXT\n  \"cohort\" TEXT\n  \"grad_cohort\" TEXT\n  \"grad_100\" TEXT\n  \"grad_150\" TEXT\n  \"grad_100_rate\" TEXT\n  \"grad_150_rate\" TEXT\n}\n\nTable \"state_sector_details\" {\n  \"stateid\" INTEGER [pk]\n  \"state\" TEXT\n  \"state_post\" TEXT\n  \"level\" TEXT [pk]\n  \"control\" TEXT [pk]\n  \"schools_count\" INTEGER\n  \"counted_pct\" TEXT\n  \"awards_per_state_value\" TEXT\n  \"awards_per_natl_value\" REAL\n  \"exp_award_state_value\" TEXT\n  \"exp_award_natl_value\" INTEGER\n  \"state_appr_value\" TEXT\n  \"state_appr_rank\" TEXT\n  \"grad_rate_rank\" TEXT\n  \"awards_per_rank\" TEXT\n}\n\nTable \"state_sector_grads\" {\n  \"stateid\" INTEGER\n  \"state\" TEXT\n  \"state_abbr\" TEXT\n  \"control\" TEXT\n  \"level\" TEXT\n  \"year\" INTEGER\n  \"gender\" TEXT\n  \"race\" TEXT\n  \"cohort\" TEXT\n  \"grad_cohort\" TEXT\n  \"grad_100\" TEXT\n  \"grad_150\" TEXT\n  \"grad_100_rate\" TEXT\n  \"grad_150_rate\" TEXT\n  \"grad_cohort_ct\" INTEGER\n}\n\n\n\nRef: \"institution_grads\".\"unitid\" > \"institution_details\".\"unitid\"\n\nRef: \"state_sector_grads\".\"stateid\" > \"state_sector_details\".\"stateid\"\n\nRef: \"state_sector_grads\".\"state\" > \"institution_details\".\"state\"\n\nRef: \"state_sector_details\".\"state\" > \"institution_details\".\"state\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"institution_details\" {\n  \"unitid\" INTEGER [pk]\n  \"chronname\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"level\" TEXT\n  \"control\" TEXT\n  \"basic\" TEXT\n  \"hbcu\" TEXT\n  \"flagship\" TEXT\n  \"long_x\" REAL\n  \"lat_y\" REAL\n  \"site\" TEXT\n  \"student_count\" INTEGER\n  \"awards_per_value\" REAL\n  \"awards_per_state_value\" REAL\n  \"awards_per_natl_value\" REAL\n  \"exp_award_value\" INTEGER\n  \"exp_award_state_value\" INTEGER\n  \"exp_award_natl_value\" INTEGER\n  \"exp_award_percentile\" INTEGER\n  \"ft_pct\" REAL\n  \"fte_value\" INTEGER\n  \"fte_percentile\" INTEGER\n  \"med_sat_value\" TEXT\n  \"med_sat_percentile\" TEXT\n  \"aid_value\" INTEGER\n  \"aid_percentile\" INTEGER\n  \"endow_value\" TEXT\n  \"endow_percentile\" TEXT\n  \"grad_100_value\" REAL\n  \"grad_100_percentile\" INTEGER\n  \"grad_150_value\" REAL\n  \"grad_150_percentile\" INTEGER\n  \"pell_value\" REAL\n  \"pell_percentile\" INTEGER\n  \"retain_value\" REAL\n  \"retain_percentile\" INTEGER\n  \"ft_fac_value\" REAL\n  \"ft_fac_percentile\" INTEGER\n  \"vsa_year\" TEXT\n  \"vsa_grad_after4_first\" TEXT\n  \"vsa_grad_elsewhere_after4_first\" TEXT\n  \"vsa_enroll_after4_first\" TEXT\n  \"vsa_enroll_elsewhere_after4_first\" TEXT\n  \"vsa_grad_after6_first\" TEXT\n  \"vsa_grad_elsewhere_after6_first\" TEXT\n  \"vsa_enroll_after6_first\" TEXT\n  \"vsa_enroll_elsewhere_after6_first\" TEXT\n  \"vsa_grad_after4_transfer\" TEXT\n  \"vsa_grad_elsewhere_after4_transfer\" TEXT\n  \"vsa_enroll_after4_transfer\" TEXT\n  \"vsa_enroll_elsewhere_after4_transfer\" TEXT\n  \"vsa_grad_after6_transfer\" TEXT\n  \"vsa_grad_elsewhere_after6_transfer\" TEXT\n  \"vsa_enroll_after6_transfer\" TEXT\n  \"vsa_enroll_elsewhere_after6_transfer\" TEXT\n  \"similar\" TEXT\n  \"state_sector_ct\" INTEGER\n  \"carnegie_ct\" INTEGER\n  \"counted_pct\" TEXT\n  \"nicknames\" TEXT\n  \"cohort_size\" INTEGER\n}\n\nTable \"institution_grads\" {\n  \"unitid\" INTEGER\n  \"year\" INTEGER\n  \"gender\" TEXT\n  \"race\" TEXT\n  \"cohort\" TEXT\n  \"grad_cohort\" TEXT\n  \"grad_100\" TEXT\n  \"grad_150\" TEXT\n  \"grad_100_rate\" TEXT\n  \"grad_150_rate\" TEXT\n}\n\nTable \"state_sector_details\" {\n  \"stateid\" INTEGER [pk]\n  \"state\" TEXT\n  \"state_post\" TEXT\n  \"level\" TEXT [pk]\n  \"control\" TEXT [pk]\n  \"schools_count\" INTEGER\n  \"counted_pct\" TEXT\n  \"awards_per_state_value\" TEXT\n  \"awards_per_natl_value\" REAL\n  \"exp_award_state_value\" TEXT\n  \"exp_award_natl_value\" INTEGER\n  \"state_appr_value\" TEXT\n  \"state_appr_rank\" TEXT\n  \"grad_rate_rank\" TEXT\n  \"awards_per_rank\" TEXT\n}\n\nTable \"state_sector_grads\" {\n  \"stateid\" INTEGER\n  \"state\" TEXT\n  \"state_abbr\" TEXT\n  \"control\" TEXT\n  \"level\" TEXT\n  \"year\" INTEGER\n  \"gender\" TEXT\n  \"race\" TEXT\n  \"cohort\" TEXT\n  \"grad_cohort\" TEXT\n  \"grad_100\" TEXT\n  \"grad_150\" TEXT\n  \"grad_100_rate\" TEXT\n  \"grad_150_rate\" TEXT\n  \"grad_cohort_ct\" INTEGER\n}\n\nRef: \"institution_grads\".\"unitid\" > \"institution_details\".\"unitid\"\n\nRef: \"state_sector_grads\".\"stateid\" > \"state_sector_details\".\"stateid\"\n\nRef: \"state_sector_grads\".\"state\" > \"institution_details\".\"state\"\n\nRef: \"state_sector_details\".\"state\" > \"institution_details\".\"state\"\n\n## Table Stats & Sample Values\n\ninstitution_details: 3798 rows\n  chronname: 'Alabama A&M University', 'University of Alabama at Birmingham', 'Amridge University', ...\n  city: 'Normal', 'Birmingham', 'Montgomery', ...\n  state: 'Alabama', 'Alaska', 'Arizona', ...\n\ninstitution_grads: 10000 rows\n  gender: 'B', 'M', 'F'\n  race: 'X', 'W', 'B', ...\n  grad_cohort: '446', '185', '261', ...\n\nstate_sector_details: 312 rows\n  state: 'United States', 'Alabama', 'Alaska', ...\n  state_post: 'U.S.', 'Ala.', 'Alaska', ...\n  awards_per_state_value: 'NULL', '18.8', '17.8', ...\n\nstate_sector_grads: 10000 rows\n  state: 'Alabama', 'Alaska', 'Arizona', ...\n  state_abbr: 'AL', 'AK', 'AZ', ...\n  level: '4-year'",
+    "stateUrl": "https://bird-bench.github.io/#college_completion",
+    "tableStats": {
+      "institution_details": {
+        "rows": 3798,
+        "sample_values": {
+          "unitid": [
+            "100654",
+            "100663",
+            "100690",
+            "100706",
+            "100724",
+            "100751",
+            "100760",
+            "100830"
+          ],
+          "chronname": [
+            "Alabama A&M University",
+            "University of Alabama at Birmingham",
+            "Amridge University",
+            "University of Alabama at Huntsville",
+            "Alabama State University",
+            "University of Alabama at Tuscaloosa",
+            "Central Alabama Community College",
+            "Auburn University at Montgomery"
+          ],
+          "city": [
+            "Normal",
+            "Birmingham",
+            "Montgomery",
+            "Huntsville",
+            "Tuscaloosa",
+            "Alexander City",
+            "Auburn University",
+            "Phenix City"
+          ],
+          "state": [
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "New Mexico",
+            "Arkansas",
+            "California",
+            "Minnesota",
+            "Colorado"
+          ],
+          "level": [
+            "4-year",
+            "2-year"
+          ],
+          "control": [
+            "Public",
+            "Private not-for-profit",
+            "Private for-profit"
+          ],
+          "basic": [
+            "Masters Colleges and Universities--larger programs",
+            "Research Universities--very high research activity",
+            "Baccalaureate Colleges--Arts & Sciences",
+            "Research Universities--high research activity",
+            "Associates--Public Rural-serving Medium",
+            "Baccalaureate Colleges--Diverse Fields",
+            "Baccalaureate/Associates Colleges",
+            "Associates--Public Suburban-serving Multicampus"
+          ],
+          "hbcu": [
+            "X",
+            "NULL"
+          ],
+          "flagship": [
+            "NULL",
+            "X"
+          ],
+          "long_x": [
+            "-86.568502",
+            "-86.80917",
+            "-86.17401",
+            "-86.63842",
+            "-86.295677",
+            "-87.545766",
+            "-85.94653",
+            "-86.177351"
+          ],
+          "lat_y": [
+            "34.783368",
+            "33.50223",
+            "32.362609",
+            "34.722818",
+            "32.364317",
+            "33.2144",
+            "32.924429",
+            "32.369939"
+          ],
+          "site": [
+            "www.aamu.edu/",
+            "www.uab.edu",
+            "www.amridgeuniversity.edu",
+            "www.uah.edu",
+            "www.alasu.edu/email/index.aspx",
+            "www.ua.edu/",
+            "www.cacc.edu",
+            "www.aum.edu"
+          ],
+          "student_count": [
+            "4051",
+            "11502",
+            "322",
+            "5696",
+            "5356",
+            "29440",
+            "1906",
+            "4322"
+          ],
+          "awards_per_value": [
+            "14.2",
+            "20.9",
+            "29.9",
+            "11.6",
+            "18.3",
+            "15.9",
+            "15.4",
+            "21.5"
+          ],
+          "awards_per_state_value": [
+            "18.8",
+            "17.8",
+            "15.9",
+            "29.1",
+            "3.2",
+            "16.3",
+            "22.9",
+            "34.2"
+          ],
+          "awards_per_natl_value": [
+            "21.5",
+            "22.5",
+            "16.5",
+            "24.6",
+            "32.8",
+            "25.9"
+          ],
+          "exp_award_value": [
+            "105331",
+            "136546",
+            "58414",
+            "64418",
+            "132407",
+            "75350",
+            "57572",
+            "58541"
+          ],
+          "exp_award_state_value": [
+            "75743",
+            "92268",
+            "42194",
+            "17406",
+            "24274",
+            "103823",
+            "97275",
+            "30416"
+          ],
+          "exp_award_natl_value": [
+            "66436",
+            "101725",
+            "37780",
+            "38763",
+            "24795",
+            "34510"
+          ],
+          "exp_award_percentile": [
+            "90",
+            "97",
+            "30",
+            "61",
+            "96",
+            "75",
+            "83",
+            "51"
+          ],
+          "ft_pct": [
+            "93.8",
+            "72.7",
+            "62.7",
+            "74.4",
+            "91.0",
+            "90.2",
+            "50.0",
+            "69.4"
+          ],
+          "fte_value": [
+            "3906",
+            "10032",
+            "294",
+            "5000",
+            "5035",
+            "27148",
+            "1489",
+            "3571"
+          ],
+          "fte_percentile": [
+            "33",
+            "67",
+            "12",
+            "40",
+            "41",
+            "96",
+            "21",
+            "30"
+          ],
+          "med_sat_value": [
+            "823",
+            "1146",
+            "NULL",
+            "1180",
+            "830",
+            "1171",
+            "970",
+            "1215"
+          ],
+          "med_sat_percentile": [
+            "0",
+            "84",
+            "NULL",
+            "89",
+            "1",
+            "88",
+            "26",
+            "93"
+          ],
+          "aid_value": [
+            "7142",
+            "6088",
+            "2540",
+            "6647",
+            "7256",
+            "10390",
+            "5057",
+            "4327"
+          ],
+          "aid_percentile": [
+            "72",
+            "50",
+            "1",
+            "63",
+            "74",
+            "94",
+            "82",
+            "10"
+          ],
+          "endow_value": [
+            "NULL",
+            "24136",
+            "302",
+            "11502",
+            "13202",
+            "19469",
+            "229",
+            "10736"
+          ],
+          "endow_percentile": [
+            "NULL",
+            "93",
+            "1",
+            "81",
+            "84",
+            "90",
+            "22",
+            "79"
+          ],
+          "grad_100_value": [
+            "10.0",
+            "29.4",
+            "0.0",
+            "16.5",
+            "8.8",
+            "42.7",
+            "7.7",
+            "9.9"
+          ],
+          "grad_100_percentile": [
+            "15",
+            "67",
+            "0",
+            "34",
+            "11",
+            "86",
+            "39",
+            "80"
+          ],
+          "grad_150_value": [
+            "29.1",
+            "53.5",
+            "66.7",
+            "48.4",
+            "25.2",
+            "9.1",
+            "27.1",
+            "67.9"
+          ],
+          "grad_150_percentile": [
+            "14",
+            "66",
+            "72",
+            "54",
+            "9",
+            "85",
+            "8",
+            "12"
+          ],
+          "pell_value": [
+            "71.2",
+            "35.1",
+            "68.4",
+            "32.8",
+            "82.7",
+            "21.1",
+            "65.1",
+            "40.1"
+          ],
+          "pell_percentile": [
+            "98",
+            "39",
+            "91",
+            "32",
+            "100",
+            "7",
+            "93",
+            "56"
+          ],
+          "retain_value": [
+            "63.1",
+            "80.2",
+            "37.5",
+            "81.0",
+            "62.2",
+            "87.0",
+            "42.7",
+            "63.2"
+          ],
+          "retain_percentile": [
+            "17",
+            "70",
+            "2",
+            "72",
+            "15",
+            "87",
+            "5",
+            "92"
+          ],
+          "ft_fac_value": [
+            "82.8",
+            "92.4",
+            "67.2",
+            "65.5",
+            "67.0",
+            "69.5",
+            "38.3",
+            "60.1"
+          ],
+          "ft_fac_percentile": [
+            "89",
+            "98",
+            "71",
+            "56",
+            "58",
+            "64",
+            "66",
+            "44"
+          ],
+          "vsa_year": [
+            "2010",
+            "2011",
+            "NULL",
+            "2008",
+            "2009"
+          ],
+          "vsa_grad_after4_first": [
+            "14.7",
+            "22.3",
+            "NULL",
+            "12.8",
+            "4.1",
+            "35.5",
+            "8.5",
+            "17.2"
+          ],
+          "vsa_grad_elsewhere_after4_first": [
+            "2",
+            "2.9",
+            "NULL",
+            "4.7",
+            "1.3",
+            "3.1",
+            "2.6",
+            "3.2"
+          ],
+          "vsa_enroll_after4_first": [
+            "36.5",
+            "34.2",
+            "NULL",
+            "42.8",
+            "67.8",
+            "39.7",
+            "42.1",
+            "37.4"
+          ],
+          "vsa_enroll_elsewhere_after4_first": [
+            "16.1",
+            "19.2",
+            "NULL",
+            "18.3",
+            "13.2",
+            "12.1",
+            "16.4",
+            "15.2"
+          ],
+          "vsa_grad_after6_first": [
+            "33",
+            "42.6",
+            "NULL",
+            "43",
+            "60.6",
+            "66.4",
+            "32",
+            "37.8"
+          ],
+          "vsa_grad_elsewhere_after6_first": [
+            "5.3",
+            "10.5",
+            "NULL",
+            "14.5",
+            "8",
+            "9.6",
+            "9.5",
+            "8.1"
+          ],
+          "vsa_enroll_after6_first": [
+            "12.5",
+            "7.9",
+            "NULL",
+            "10.2",
+            "9.9",
+            "5",
+            "11.3",
+            "11.1"
+          ],
+          "vsa_enroll_elsewhere_after6_first": [
+            "14.6",
+            "13.1",
+            "NULL",
+            "11.7",
+            "8",
+            "7.6",
+            "13.8",
+            "11.3"
+          ],
+          "vsa_grad_after4_transfer": [
+            "15.7",
+            "NULL",
+            "0",
+            "45.8",
+            "64.2",
+            "46.4",
+            "35.9",
+            "24.7"
+          ],
+          "vsa_grad_elsewhere_after4_transfer": [
+            "1.5",
+            "NULL",
+            "0",
+            "5.2",
+            "6.3",
+            "4.3",
+            "6.4",
+            "6"
+          ],
+          "vsa_enroll_after4_transfer": [
+            "40.9",
+            "NULL",
+            "0",
+            "23",
+            "11.6",
+            "16.1",
+            "16.2",
+            "15.9"
+          ],
+          "vsa_enroll_elsewhere_after4_transfer": [
+            "17.2",
+            "NULL",
+            "0",
+            "7.9",
+            "7.6",
+            "8.9",
+            "11.5",
+            "9.5"
+          ],
+          "vsa_grad_after6_transfer": [
+            "36.4",
+            "NULL",
+            "0",
+            "61.5",
+            "72.2",
+            "54.2",
+            "44",
+            "32.9"
+          ],
+          "vsa_grad_elsewhere_after6_transfer": [
+            "5.6",
+            "NULL",
+            "0",
+            "8.5",
+            "9.7",
+            "7.1",
+            "9.9",
+            "10.6"
+          ],
+          "vsa_enroll_after6_transfer": [
+            "17.2",
+            "NULL",
+            "0",
+            "6.3",
+            "2",
+            "6.7",
+            "4.8",
+            "4.9"
+          ],
+          "vsa_enroll_elsewhere_after6_transfer": [
+            "11.1",
+            "NULL",
+            "0",
+            "5.5",
+            "4.6",
+            "7.6",
+            "9.5",
+            "7.4"
+          ],
+          "similar": [
+            "232937|100724|405997|113607|139533|144005|228501|1",
+            "196060|180461|201885|145600|209542|236939|126818|2",
+            "217925|441511|205124|247825|197647|221856|135364|1",
+            "232186|133881|196103|196413|207388|171128|190044|1",
+            "100654|232937|242617|243197|144005|241739|235422|2",
+            "183044|209551|240727|207388|178402|185828|238032|1",
+            "217712|227225|198491|175935|107460|206923|240745|1",
+            "229814|210429|160038|176965|169798|207263|102368|2"
+          ],
+          "state_sector_ct": [
+            "13",
+            "16",
+            "25",
+            "9",
+            "5",
+            "3",
+            "1",
+            "2"
+          ],
+          "carnegie_ct": [
+            "386",
+            "106",
+            "252",
+            "96",
+            "289",
+            "343",
+            "124",
+            "99"
+          ],
+          "counted_pct": [
+            "99.7|07",
+            "56.0|07",
+            "100.0|07",
+            "43.1|07",
+            "88.0|07",
+            "75.9|07",
+            "66.7|10",
+            "43.8|07"
+          ],
+          "nicknames": [
+            "NULL",
+            "UAB",
+            "UAH",
+            "ASU",
+            "AUM",
+            "BSC",
+            "UNA",
+            "USA"
+          ],
+          "cohort_size": [
+            "882",
+            "1376",
+            "3",
+            "759",
+            "1351",
+            "4438",
+            "594",
+            "536"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "institution_grads": {
+        "rows": 10000,
+        "sample_values": {
+          "unitid": [
+            "100760",
+            "101028",
+            "101143",
+            "101161",
+            "101240",
+            "101286",
+            "101295",
+            "101301"
+          ],
+          "year": [
+            "2011",
+            "2012",
+            "2013"
+          ],
+          "gender": [
+            "B",
+            "M",
+            "F"
+          ],
+          "race": [
+            "X",
+            "W",
+            "B",
+            "H",
+            "Ai",
+            "A"
+          ],
+          "cohort": [
+            "2y all"
+          ],
+          "grad_cohort": [
+            "446",
+            "185",
+            "261",
+            "348",
+            "162",
+            "186",
+            "89",
+            "21"
+          ],
+          "grad_100": [
+            "73",
+            "NULL",
+            "40",
+            "46",
+            "25",
+            "41",
+            "20",
+            "126"
+          ],
+          "grad_150": [
+            "105",
+            "40",
+            "65",
+            "86",
+            "35",
+            "51",
+            "18",
+            "5"
+          ],
+          "grad_100_rate": [
+            "16.4",
+            "NULL",
+            "6.7",
+            "7.7",
+            "9.6",
+            "14.6",
+            "7.2",
+            "27.3"
+          ],
+          "grad_150_rate": [
+            "23.5",
+            "21.6",
+            "24.9",
+            "24.7",
+            "27.4",
+            "20.2",
+            "23.8",
+            "19.1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_sector_details": {
+        "rows": 312,
+        "sample_values": {
+          "stateid": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "state": [
+            "United States",
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkansas",
+            "California",
+            "Colorado",
+            "Connecticut"
+          ],
+          "state_post": [
+            "U.S.",
+            "Ala.",
+            "Alaska",
+            "Ariz.",
+            "Ark.",
+            "Calif.",
+            "Colo.",
+            "Conn."
+          ],
+          "level": [
+            "4-year",
+            "2-year"
+          ],
+          "control": [
+            "Public",
+            "Private not-for-profit",
+            "Private for-profit"
+          ],
+          "schools_count": [
+            "632",
+            "1180",
+            "527",
+            "926",
+            "68",
+            "465",
+            "13",
+            "16"
+          ],
+          "counted_pct": [
+            "NULL",
+            "61",
+            "62",
+            "37.8",
+            "49",
+            "79.6",
+            "51.7",
+            "21.8"
+          ],
+          "awards_per_state_value": [
+            "NULL",
+            "18.8",
+            "17.8",
+            "29.1",
+            "15.9",
+            "17.1",
+            "3.2",
+            "16.3"
+          ],
+          "awards_per_natl_value": [
+            "21.5",
+            "22.5",
+            "24.6",
+            "16.5",
+            "25.9",
+            "32.8"
+          ],
+          "exp_award_state_value": [
+            "NULL",
+            "75743",
+            "92268",
+            "17406",
+            "42194",
+            "16852",
+            "24274",
+            "103823"
+          ],
+          "exp_award_natl_value": [
+            "66436",
+            "101725",
+            "38763",
+            "37780",
+            "34510",
+            "24795"
+          ],
+          "state_appr_value": [
+            "NULL",
+            "290.68",
+            "496.78",
+            "126.81",
+            "306.32",
+            "230.7",
+            "121.6",
+            "266.19"
+          ],
+          "state_appr_rank": [
+            "NULL",
+            "11",
+            "2",
+            "47",
+            "9",
+            "26",
+            "48",
+            "16"
+          ],
+          "grad_rate_rank": [
+            "23",
+            "18",
+            "8",
+            "25",
+            "12",
+            "19",
+            "38",
+            "47"
+          ],
+          "awards_per_rank": [
+            "NULL",
+            "42",
+            "49",
+            "9",
+            "39",
+            "19",
+            "40",
+            "51"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_sector_grads": {
+        "rows": 10000,
+        "sample_values": {
+          "stateid": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "state": [
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkansas",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "Delaware"
+          ],
+          "state_abbr": [
+            "AL",
+            "AK",
+            "AZ",
+            "AR",
+            "CA",
+            "CO",
+            "CT",
+            "DE"
+          ],
+          "control": [
+            "Private for-profit",
+            "Private not-for-profit",
+            "Public"
+          ],
+          "level": [
+            "4-year"
+          ],
+          "year": [
+            "2011",
+            "2012",
+            "2013"
+          ],
+          "gender": [
+            "B",
+            "F",
+            "M"
+          ],
+          "race": [
+            "A",
+            "Ai",
+            "B",
+            "H",
+            "W",
+            "X"
+          ],
+          "cohort": [
+            "4y bach",
+            "4y other"
+          ],
+          "grad_cohort": [
+            "0",
+            "1",
+            "51",
+            "66",
+            "209",
+            "26",
+            "21",
+            "25"
+          ],
+          "grad_100": [
+            "0",
+            "2",
+            "15",
+            "39",
+            "6",
+            "9",
+            "30",
+            "1"
+          ],
+          "grad_150": [
+            "0",
+            "3",
+            "18",
+            "49",
+            "6",
+            "10",
+            "12",
+            "39"
+          ],
+          "grad_100_rate": [
+            "NULL",
+            "0",
+            "3.9",
+            "22.7",
+            "18.7",
+            "28.6",
+            "13.6",
+            "8"
+          ],
+          "grad_150_rate": [
+            "NULL",
+            "0",
+            "5.9",
+            "27.3",
+            "23.4",
+            "28.6",
+            "15.2",
+            "12"
+          ],
+          "grad_cohort_ct": [
+            "9",
+            "16",
+            "13",
+            "1",
+            "3",
+            "23",
+            "4",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

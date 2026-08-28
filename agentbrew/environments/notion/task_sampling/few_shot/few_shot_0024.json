@@ -1,0 +1,11 @@
+{
+  "title": "Ops Manual Section Swap",
+  "capability": [
+    "reorganize_layout",
+    "move_existing_blocks",
+    "create_columns",
+    "reference_existing_object",
+    "preserve_format"
+  ],
+  "question": "# Task: Reorganize Operations Manual Page Sections\n## Objective Modify the structure of the Operations Manual page in Notion by reorganizing sections through swapping and replacing the usual column layout step with a support FAQ cleanup.\n## Requirements\n### Step 1: Swap Sections - Navigate to the Operations Manual page. - Swap the positions of the \"Escalation Rules\" and \"Response Standards\"\n  sections.\n- Preserve all content within each section exactly as is. - Maintain the original formatting and structure of each section.\n### Step 2: Reorganize the Support FAQ Toggle 1. Add a column list with two columns inside the Support FAQ toggle. 2. Move the first two existing Q&A pairs from the FAQ to the left column. 3. Move the third existing Q&A pair to the right column. 4. Add one additional Q&A pair in the right column to match the format, so\n   both columns have exactly 2 Q&A pairs.\n5. Ensure all Q&A pairs maintain consistent formatting (heading_3 for\n   questions, paragraph for answers).\n"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Consultant Profile Visual Refresh",
+  "capability": [
+    "reorganize_layout",
+    "archive_or_delete_items",
+    "transform_database_to_blocks",
+    "update_media_or_style",
+    "insert_block_at_position",
+    "match_existing_format",
+    "reuse_existing_asset"
+  ],
+  "question": "Please go to my Consultant Profile page and adjust the Expertise display with the following requirements:\n## Expertise Section Adjustment 1. Delete the Expertise database from the right side of the page 2. Add a new Expertise section on the left side, under the Languages section 3. Format expertise items as \"[icon] expertise description (type)\", for example \"✨✨ Stakeholder Interviews (Research Method)\"\n   - Use ✨✨ icon for expertise items with level >= 60%\n   - Use ✨ icon for expertise items with level < 60%\n\n## Project History and Education Layout Adjustment 1. Instead of replacing all images with placeholders, add a new Project History entry titled \"Strategy Research Consultant\" dated February to October 2024. 2. Use the logo from the Education section for the new entry and make its formatting, font style, image placement, and layout match the existing Project History entries. 3. Use this description exactly: \"Led qualitative research and service-design workshops for enterprise transformation teams, synthesizing stakeholder interviews, mapping operational friction, and preparing executive-ready recommendations.\"\n"
+}

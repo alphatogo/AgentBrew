@@ -1,0 +1,406 @@
+{
+  "db_id": "wta_1",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 531377,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#wta_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"matches\" {\n  \"best_of\" INTEGER\n  \"draw_size\" INTEGER\n  \"loser_age\" REAL\n  \"loser_entry\" TEXT\n  \"loser_hand\" TEXT\n  \"loser_ht\" INTEGER\n  \"loser_id\" INTEGER\n  \"loser_ioc\" TEXT\n  \"loser_name\" TEXT\n  \"loser_rank\" INTEGER\n  \"loser_rank_points\" INTEGER\n  \"loser_seed\" INTEGER\n  \"match_num\" INTEGER\n  \"minutes\" INTEGER\n  \"round\" TEXT\n  \"score\" TEXT\n  \"surface\" TEXT\n  \"tourney_date\" DATE\n  \"tourney_id\" TEXT\n  \"tourney_level\" TEXT\n  \"tourney_name\" TEXT\n  \"winner_age\" REAL\n  \"winner_entry\" TEXT\n  \"winner_hand\" TEXT\n  \"winner_ht\" INTEGER\n  \"winner_id\" INTEGER\n  \"winner_ioc\" TEXT\n  \"winner_name\" TEXT\n  \"winner_rank\" INTEGER\n  \"winner_rank_points\" INTEGER\n  \"winner_seed\" INTEGER\n  \"year\" INTEGER\n}\n\nTable \"players\" {\n  \"player_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"hand\" TEXT\n  \"birth_date\" DATE\n  \"country_code\" TEXT\n}\n\nTable \"rankings\" {\n  \"ranking_date\" DATE\n  \"ranking\" INTEGER\n  \"player_id\" INTEGER\n  \"ranking_points\" INTEGER\n  \"tours\" INTEGER\n}\n\n\n\nRef: \"matches\".\"winner_id\" > \"players\".\"player_id\"\n\nRef: \"matches\".\"loser_id\" > \"players\".\"player_id\"\n\nRef: \"rankings\".\"player_id\" > \"players\".\"player_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"matches\" {\n  \"best_of\" INTEGER\n  \"draw_size\" INTEGER\n  \"loser_age\" REAL\n  \"loser_entry\" TEXT\n  \"loser_hand\" TEXT\n  \"loser_ht\" INTEGER\n  \"loser_id\" INTEGER\n  \"loser_ioc\" TEXT\n  \"loser_name\" TEXT\n  \"loser_rank\" INTEGER\n  \"loser_rank_points\" INTEGER\n  \"loser_seed\" INTEGER\n  \"match_num\" INTEGER\n  \"minutes\" INTEGER\n  \"round\" TEXT\n  \"score\" TEXT\n  \"surface\" TEXT\n  \"tourney_date\" DATE\n  \"tourney_id\" TEXT\n  \"tourney_level\" TEXT\n  \"tourney_name\" TEXT\n  \"winner_age\" REAL\n  \"winner_entry\" TEXT\n  \"winner_hand\" TEXT\n  \"winner_ht\" INTEGER\n  \"winner_id\" INTEGER\n  \"winner_ioc\" TEXT\n  \"winner_name\" TEXT\n  \"winner_rank\" INTEGER\n  \"winner_rank_points\" INTEGER\n  \"winner_seed\" INTEGER\n  \"year\" INTEGER\n}\n\nTable \"players\" {\n  \"player_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"hand\" TEXT\n  \"birth_date\" DATE\n  \"country_code\" TEXT\n}\n\nTable \"rankings\" {\n  \"ranking_date\" DATE\n  \"ranking\" INTEGER\n  \"player_id\" INTEGER\n  \"ranking_points\" INTEGER\n  \"tours\" INTEGER\n}\n\nRef: \"matches\".\"winner_id\" > \"players\".\"player_id\"\n\nRef: \"matches\".\"loser_id\" > \"players\".\"player_id\"\n\nRef: \"rankings\".\"player_id\" > \"players\".\"player_id\"\n\n## Table Stats & Sample Values\n\nmatches: 278 rows\n  loser_name: 'Agnieszka Radwanska', 'Petra Kvitova', 'Angelique Kerber', ...\n  tourney_level: 'W', 'I', 'G', ...\n  tourney_name: 'WTA Championships', 'Auckland', 'Brisbane', ...\n\nplayers: 10000 rows\n  first_name: 'Martina', 'Mirjana', 'Justine', ...\n  last_name: 'Hingis', 'Lucic', 'Henin', ...\n  country_code: 'SUI', 'CRO', 'BEL', ...\n\nrankings: 10000 rows\n  ranking_date: '20000101', '20000103', '20000110', ...\n  ranking: '3', '4', '28', ...\n  ranking_points: '4378', '3021', '960', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#wta_1",
+    "tableStats": {
+      "matches": {
+        "rows": 278,
+        "sample_values": {
+          "best_of": [
+            "3"
+          ],
+          "draw_size": [
+            "4",
+            "32",
+            "128",
+            "64",
+            "8",
+            "12"
+          ],
+          "loser_age": [
+            "24.626967830300003",
+            "23.6221765914",
+            "25.7577002053",
+            "24.2245037645",
+            "26.4804928131",
+            "28.643394935",
+            "25.4839151266",
+            "27.3347022587"
+          ],
+          "loser_hand": [
+            "R",
+            "L"
+          ],
+          "loser_ht": [
+            "170",
+            "183",
+            "173",
+            "180",
+            "164",
+            "177",
+            "162",
+            "185"
+          ],
+          "loser_id": [
+            "201474",
+            "201520",
+            "201493",
+            "201458",
+            "201506",
+            "201347",
+            "201496",
+            "201521"
+          ],
+          "loser_ioc": [
+            "POL",
+            "CZE",
+            "GER",
+            "BLR",
+            "ITA",
+            "SRB",
+            "DEN",
+            "ESP"
+          ],
+          "loser_name": [
+            "Agnieszka Radwanska",
+            "Petra Kvitova",
+            "Angelique Kerber",
+            "Victoria Azarenka",
+            "Sara Errani",
+            "Jelena Jankovic",
+            "Caroline Wozniacki",
+            "Carla Suarez Navarro"
+          ],
+          "loser_rank": [
+            "4",
+            "6",
+            "9",
+            "2",
+            "7",
+            "8",
+            "17",
+            "13"
+          ],
+          "loser_rank_points": [
+            "5890",
+            "4370",
+            "3715",
+            "7676",
+            "4190",
+            "3860",
+            "2641",
+            "3090"
+          ],
+          "loser_seed": [
+            "3",
+            "5",
+            "8",
+            "2",
+            "6",
+            "7",
+            "9",
+            "20"
+          ],
+          "match_num": [
+            "297",
+            "296",
+            "295",
+            "294",
+            "293",
+            "292",
+            "291",
+            "290"
+          ],
+          "minutes": [
+            "82",
+            "72",
+            "64",
+            "84",
+            "58",
+            "127",
+            "77",
+            "134"
+          ],
+          "round": [
+            "RR",
+            "SF",
+            "QF",
+            "R32",
+            "F",
+            "R16",
+            "BR"
+          ],
+          "score": [
+            "6-2 6-4",
+            "6-2 6-3",
+            "6-3 6-1",
+            "6-4 6-4",
+            "6-2 6-2",
+            "6-7(3) 6-2 6-3",
+            "6-2 6-1",
+            "7-6(4) 6-2"
+          ],
+          "surface": [
+            "Hard",
+            "Clay",
+            "Grass"
+          ],
+          "tourney_date": [
+            "20131021",
+            "20160104",
+            "20160111",
+            "20160118",
+            "20160208",
+            "20160222",
+            "20160307",
+            "20160321"
+          ],
+          "tourney_id": [
+            "2013-W-WT-TUR-01A-2013",
+            "2016-1049",
+            "2016-M020",
+            "2016-1050",
+            "2016-M001",
+            "2016-580",
+            "2016-1087",
+            "2016-1086"
+          ],
+          "tourney_level": [
+            "W",
+            "I",
+            "G",
+            "P"
+          ],
+          "tourney_name": [
+            "WTA Championships",
+            "Auckland",
+            "Brisbane",
+            "Hobart",
+            "Sydney",
+            "Australian Open",
+            "Kaohsiung",
+            "St. Petersburg"
+          ],
+          "winner_age": [
+            "32.0684462697",
+            "23.6221765914",
+            "25.7577002053",
+            "31.6495550992",
+            "24.2245037645",
+            "28.643394935",
+            "26.4804928131",
+            "22.7926078029"
+          ],
+          "winner_hand": [
+            "R",
+            "L"
+          ],
+          "winner_ht": [
+            "175",
+            "183",
+            "173",
+            "172",
+            "180",
+            "177",
+            "164",
+            "170"
+          ],
+          "winner_id": [
+            "200033",
+            "201520",
+            "201493",
+            "201419",
+            "201458",
+            "201347",
+            "201506",
+            "201585"
+          ],
+          "winner_ioc": [
+            "USA",
+            "CZE",
+            "GER",
+            "CHN",
+            "BLR",
+            "SRB",
+            "ITA",
+            "FRA"
+          ],
+          "winner_name": [
+            "Serena Williams",
+            "Petra Kvitova",
+            "Angelique Kerber",
+            "Na Li",
+            "Victoria Azarenka",
+            "Jelena Jankovic",
+            "Sara Errani",
+            "Sloane Stephens"
+          ],
+          "winner_rank": [
+            "1",
+            "6",
+            "9",
+            "5",
+            "2",
+            "8",
+            "7",
+            "30"
+          ],
+          "winner_rank_points": [
+            "12040",
+            "4370",
+            "3715",
+            "5120",
+            "7676",
+            "3860",
+            "4190",
+            "1715"
+          ],
+          "winner_seed": [
+            "1",
+            "5",
+            "8",
+            "4",
+            "2",
+            "7",
+            "6",
+            "21"
+          ],
+          "year": [
+            "2013",
+            "2016",
+            "2017"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "players": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "200001",
+            "200002",
+            "200003",
+            "200004",
+            "200005",
+            "200006",
+            "200007",
+            "200008"
+          ],
+          "first_name": [
+            "Martina",
+            "Mirjana",
+            "Justine",
+            "Kerry Anne",
+            "Jolene",
+            "Karina",
+            "Silvija",
+            "Alicia"
+          ],
+          "last_name": [
+            "Hingis",
+            "Lucic",
+            "Henin",
+            "Guse",
+            "Watanabe Giltz",
+            "Habsudova",
+            "Talaja",
+            "Molik"
+          ],
+          "hand": [
+            "R",
+            "L",
+            "U"
+          ],
+          "birth_date": [
+            "19800930",
+            "19820309",
+            "19820601",
+            "19721204",
+            "19680831",
+            "19730802",
+            "19780114",
+            "19810127"
+          ],
+          "country_code": [
+            "SUI",
+            "CRO",
+            "BEL",
+            "AUS",
+            "USA",
+            "SVK",
+            "THA",
+            "ITA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rankings": {
+        "rows": 10000,
+        "sample_values": {
+          "ranking_date": [
+            "20000101",
+            "20000103",
+            "20000110",
+            "20000117",
+            "20000124",
+            "20000131",
+            "20000207",
+            "20000214"
+          ],
+          "ranking": [
+            "3",
+            "4",
+            "28",
+            "31",
+            "43",
+            "44",
+            "45",
+            "48"
+          ],
+          "player_id": [
+            "200748",
+            "200033",
+            "200020",
+            "200124",
+            "200120",
+            "200117",
+            "200083",
+            "200002"
+          ],
+          "ranking_points": [
+            "4378",
+            "3021",
+            "960",
+            "834",
+            "698",
+            "671",
+            "669",
+            "640"
+          ],
+          "tours": [
+            "13",
+            "15",
+            "0",
+            "8",
+            "6",
+            "16",
+            "27",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

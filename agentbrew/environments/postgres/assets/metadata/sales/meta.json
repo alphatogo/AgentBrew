@@ -1,0 +1,203 @@
+{
+  "db_id": "sales",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 6735506,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#sales",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Customers\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"FirstName\" TEXT [not null]\n  \"MiddleInitial\" TEXT\n  \"LastName\" TEXT [not null]\n}\n\nTable \"Employees\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"FirstName\" TEXT [not null]\n  \"MiddleInitial\" TEXT\n  \"LastName\" TEXT [not null]\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Price\" REAL\n}\n\nTable \"Sales\" {\n  \"SalesID\" INTEGER [pk, not null]\n  \"SalesPersonID\" INTEGER [not null]\n  \"CustomerID\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"Quantity\" INTEGER [not null]\n}\n\n\n\nRef: \"Sales\".\"ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"Sales\".\"CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Sales\".\"SalesPersonID\" > \"Employees\".\"EmployeeID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Customers\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"FirstName\" TEXT [not null]\n  \"MiddleInitial\" TEXT\n  \"LastName\" TEXT [not null]\n}\n\nTable \"Employees\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"FirstName\" TEXT [not null]\n  \"MiddleInitial\" TEXT\n  \"LastName\" TEXT [not null]\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Price\" REAL\n}\n\nTable \"Sales\" {\n  \"SalesID\" INTEGER [pk, not null]\n  \"SalesPersonID\" INTEGER [not null]\n  \"CustomerID\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"Quantity\" INTEGER [not null]\n}\n\nRef: \"Sales\".\"ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"Sales\".\"CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Sales\".\"SalesPersonID\" > \"Employees\".\"EmployeeID\"\n\n## Table Stats & Sample Values\n\nCustomers: 10000 rows\n  FirstName: 'Aaron', 'Abby', 'Abe', ...\n  LastName: 'Alexander', 'Bryant', 'Butler', ...\n  MiddleInitial: 'A', 'B', 'C', ...\n\nEmployees: 22 rows\n  FirstName: 'Abraham', 'Reginald', 'Cheryl', ...\n  LastName: 'Bennet', 'Blotchet-Halls', 'Carson', ...\n  MiddleInitial: 'e', 'l', 'a', ...\n\nProducts: 504 rows\n  Name: 'Adjustable Race', 'Bearing Ball', 'BB Ball Bearing', ...\n  Price: '1.6', '0.8', '2.4', ...\n  ProductID: '1', '2', '3', ...\n\nSales: 10000 rows\n  Quantity: '500', '810', '123', ...\n  SalesPersonID: '17', '5', '8', ...\n  CustomerID: '10482', '1964', '12300', ...",
+    "stateUrl": "https://bird-bench.github.io/#sales",
+    "tableStats": {
+      "Customers": {
+        "rows": 10000,
+        "sample_values": {
+          "CustomerID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "FirstName": [
+            "Aaron",
+            "Abby",
+            "Abe",
+            "Abhijit",
+            "Abigail",
+            "Abraham",
+            "Adam",
+            "Adina"
+          ],
+          "MiddleInitial": [
+            "A",
+            "B",
+            "C",
+            "E",
+            "J",
+            "K",
+            "L",
+            "M"
+          ],
+          "LastName": [
+            "Alexander",
+            "Bryant",
+            "Butler",
+            "Chen",
+            "Coleman",
+            "Con",
+            "Edwards",
+            "Flores"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Employees": {
+        "rows": 22,
+        "sample_values": {
+          "EmployeeID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "FirstName": [
+            "Abraham",
+            "Reginald",
+            "Cheryl",
+            "Michel",
+            "Innes",
+            "Ann",
+            "Marjorie",
+            "Morningstar"
+          ],
+          "MiddleInitial": [
+            "e",
+            "l",
+            "a",
+            "u",
+            "r",
+            "o",
+            "c",
+            "i"
+          ],
+          "LastName": [
+            "Bennet",
+            "Blotchet-Halls",
+            "Carson",
+            "DeFrance",
+            "del Castillo",
+            "Dull",
+            "Green",
+            "Greene"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 504,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Adjustable Race",
+            "Bearing Ball",
+            "BB Ball Bearing",
+            "Headset Ball Bearings",
+            "Blade",
+            "LL Crankarm",
+            "ML Crankarm",
+            "HL Crankarm"
+          ],
+          "Price": [
+            "1.6",
+            "0.8",
+            "2.4",
+            "0.0",
+            "189.6",
+            "380.4",
+            "190.8",
+            "319.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Sales": {
+        "rows": 10000,
+        "sample_values": {
+          "SalesID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "SalesPersonID": [
+            "17",
+            "5",
+            "8",
+            "1",
+            "14",
+            "20",
+            "11",
+            "2"
+          ],
+          "CustomerID": [
+            "10482",
+            "1964",
+            "12300",
+            "4182",
+            "15723",
+            "6000",
+            "17541",
+            "9423"
+          ],
+          "ProductID": [
+            "500",
+            "306",
+            "123",
+            "437",
+            "246",
+            "60",
+            "373",
+            "183"
+          ],
+          "Quantity": [
+            "500",
+            "810",
+            "123",
+            "437",
+            "750",
+            "60",
+            "373",
+            "687"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

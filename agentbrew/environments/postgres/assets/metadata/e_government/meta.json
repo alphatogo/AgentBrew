@@ -1,0 +1,510 @@
+{
+  "db_id": "e_government",
+  "source": "sparc",
+  "tables": 10,
+  "total_rows": 129,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#e_government",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1_number_building\" TEXT\n  \"town_city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Forms\" {\n  \"form_id\" INTEGER [pk]\n  \"form_type_code\" TEXT [not null]\n  \"service_id\" INTEGER\n  \"form_number\" TEXT\n  \"form_name\" TEXT\n  \"form_description\" TEXT\n}\n\nTable \"Individuals\" {\n  \"individual_id\" INTEGER [pk]\n  \"individual_first_name\" TEXT\n  \"individual_middle_name\" TEXT\n  \"inidividual_phone\" TEXT\n  \"individual_email\" TEXT\n  \"individual_address\" TEXT\n  \"individual_last_name\" TEXT\n}\n\nTable \"Organization_Contact_Individuals\" {\n  \"individual_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [pk, not null]\n  \"date_contact_from\" TIMESTAMP [not null]\n  \"date_contact_to\" TIMESTAMP\n}\n\nTable \"Organizations\" {\n  \"organization_id\" INTEGER [pk]\n  \"date_formed\" TIMESTAMP\n  \"organization_name\" TEXT\n  \"uk_vat_number\" TEXT\n}\n\nTable \"Parties\" {\n  \"party_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT [not null]\n  \"party_phone\" TEXT\n  \"party_email\" TEXT\n}\n\nTable \"Party_Addresses\" {\n  \"party_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_address_from\" TIMESTAMP [not null]\n  \"address_type_code\" TEXT [not null]\n  \"date_address_to\" TIMESTAMP\n}\n\nTable \"Party_Forms\" {\n  \"party_id\" INTEGER [pk, not null]\n  \"form_id\" INTEGER [pk, not null]\n  \"date_completion_started\" TIMESTAMP [not null]\n  \"form_status_code\" TEXT [not null]\n  \"date_fully_completed\" TIMESTAMP\n}\n\nTable \"Party_Services\" {\n  \"booking_id\" INTEGER [not null]\n  \"customer_id\" INTEGER [not null]\n  \"service_id\" INTEGER [not null]\n  \"service_datetime\" TIMESTAMP [not null]\n  \"booking_made_date\" TIMESTAMP\n}\n\nTable \"Services\" {\n  \"service_id\" INTEGER [pk]\n  \"service_type_code\" TEXT [not null]\n  \"service_name\" TEXT\n  \"service_descriptio\" TEXT\n}\n\n\n\nRef: \"Forms\".\"service_id\" > \"Services\".\"service_id\"\n\nRef: \"Organization_Contact_Individuals\".\"individual_id\" > \"Individuals\".\"individual_id\"\n\nRef: \"Organization_Contact_Individuals\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Party_Addresses\".\"party_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Party_Forms\".\"form_id\" > \"Forms\".\"form_id\"\n\nRef: \"Party_Forms\".\"party_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Services\".\"customer_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Services\".\"service_id\" > \"Services\".\"service_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1_number_building\" TEXT\n  \"town_city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Forms\" {\n  \"form_id\" INTEGER [pk]\n  \"form_type_code\" TEXT [not null]\n  \"service_id\" INTEGER\n  \"form_number\" TEXT\n  \"form_name\" TEXT\n  \"form_description\" TEXT\n}\n\nTable \"Individuals\" {\n  \"individual_id\" INTEGER [pk]\n  \"individual_first_name\" TEXT\n  \"individual_middle_name\" TEXT\n  \"inidividual_phone\" TEXT\n  \"individual_email\" TEXT\n  \"individual_address\" TEXT\n  \"individual_last_name\" TEXT\n}\n\nTable \"Organization_Contact_Individuals\" {\n  \"individual_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [pk, not null]\n  \"date_contact_from\" TIMESTAMP [not null]\n  \"date_contact_to\" TIMESTAMP\n}\n\nTable \"Organizations\" {\n  \"organization_id\" INTEGER [pk]\n  \"date_formed\" TIMESTAMP\n  \"organization_name\" TEXT\n  \"uk_vat_number\" TEXT\n}\n\nTable \"Parties\" {\n  \"party_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT [not null]\n  \"party_phone\" TEXT\n  \"party_email\" TEXT\n}\n\nTable \"Party_Addresses\" {\n  \"party_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_address_from\" TIMESTAMP [not null]\n  \"address_type_code\" TEXT [not null]\n  \"date_address_to\" TIMESTAMP\n}\n\nTable \"Party_Forms\" {\n  \"party_id\" INTEGER [pk, not null]\n  \"form_id\" INTEGER [pk, not null]\n  \"date_completion_started\" TIMESTAMP [not null]\n  \"form_status_code\" TEXT [not null]\n  \"date_fully_completed\" TIMESTAMP\n}\n\nTable \"Party_Services\" {\n  \"booking_id\" INTEGER [not null]\n  \"customer_id\" INTEGER [not null]\n  \"service_id\" INTEGER [not null]\n  \"service_datetime\" TIMESTAMP [not null]\n  \"booking_made_date\" TIMESTAMP\n}\n\nTable \"Services\" {\n  \"service_id\" INTEGER [pk]\n  \"service_type_code\" TEXT [not null]\n  \"service_name\" TEXT\n  \"service_descriptio\" TEXT\n}\n\nRef: \"Forms\".\"service_id\" > \"Services\".\"service_id\"\n\nRef: \"Organization_Contact_Individuals\".\"individual_id\" > \"Individuals\".\"individual_id\"\n\nRef: \"Organization_Contact_Individuals\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Party_Addresses\".\"party_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Party_Forms\".\"form_id\" > \"Forms\".\"form_id\"\n\nRef: \"Party_Forms\".\"party_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Services\".\"customer_id\" > \"Parties\".\"party_id\"\n\nRef: \"Party_Services\".\"service_id\" > \"Services\".\"service_id\"\n\n## Table Stats & Sample Values\n\nAddresses: 15 rows\n  town_city: 'West Stacy', 'Lake Meaghan', 'Breanneberg', ...\n  state_province_county: 'NorthCarolina', 'Colorado', 'NewHampshire', ...\n  country: 'USA'\n\nForms: 6 rows\n  form_type_code: 'Basic', 'Complex'\n  form_name: 'SSN Application', 'Marriage Certificate', 'Divorce Certificate', ...\n  form_description: 'Form for SSN Application', 'Marriage Certificate', 'Divorce Certificate', ...\n\nIndividuals: 15 rows\n  individual_first_name: 'Oscar', 'Geovanny', 'Casper', ...\n  individual_middle_name: 'Hosea', 'Antonia', 'Mitchell', ...\n  individual_last_name: 'Maggio', 'Kerluke', 'Kutch', ...\n\nOrganization_Contact_Individuals: 15 rows\n  date_contact_from: '2016-08-16 22:09:11', '2017-03-02 00:00:16', '2016-08-23 03:24:24', ...\n  date_contact_to: '2018-03-25 10:27:18', '2018-03-06 05:39:43', '2018-03-12 07:55:28', ...\n  individual_id: '13', '11', '10', ...\n\nOrganizations: 5 rows\n  organization_name: 'Labour Party', 'Plaid Cymru', 'Conservative', ...\n  uk_vat_number: '2157', '7459', '1211', ...\n  date_formed: '2016-08-24 23:52:48', '2016-10-01 12:42:01', '2016-10-09 07:22:53', ...\n\nParties: 15 rows\n  party_phone: '05374656172', '1-525-947-7867x51521', '1-606-232-3728x3568', ...\n  party_email: 'enrico09@example.com', 'brakus.aliya@example.com', 'frida57@example.org', ...\n  payment_method_code: 'Cheque', 'Credit Card', 'Cash', ...\n\nParty_Addresses: 15 rows\n  address_type_code: 'Residence', 'Billing', 'Delivery'\n  date_address_from: '2016-04-08 22:40:02', '2016-05-20 23:22:06', '2016-05-14 15:13:30', ...\n  date_address_to: '2018-02-28 23:14:41', '2018-01-29 16:48:01', '2018-02-25 19:39:16', ...\n\nParty_Forms: 13 rows\n  form_status_code: 'Completed', 'Partially Completed', 'Not Started', ...\n  date_completion_started: '2017-12-17 11:29:47', '2017-12-16 15:25:48', '2017-12-09 21:26:11', ...\n  date_fully_completed: '2018-02-11 16:46:10', '2018-02-18 16:09:04', '2018-02-05 16:16:58', ...\n\nParty_Services: 15 rows\n  service_datetime: '2018-03-10 22:43:12', '2018-03-05 15:06:23', '2018-03-08 10:39:29', ...\n  booking_made_date: '2018-03-23 23:56:51', '2018-03-25 11:08:29', '2018-03-24 11:09:52', ...\n  booking_id: '1', '2', '3', ...\n\nServices: 15 rows\n  service_type_code: 'Education', 'Welfare', 'Health'\n  service_name: 'Education', 'Health', 'Welfare'\n  service_descriptio: 'Education', 'Welfare', 'Health'",
+    "stateUrl": "https://github.com/taoyds/sparc#e_government",
+    "tableStats": {
+      "Addresses": {
+        "rows": 15,
+        "sample_values": {
+          "address_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "line_1_number_building": [
+            "25518 Ortiz Centers",
+            "033 Stracke Parkways",
+            "269 Flatley Port Suite 062",
+            "90928 Garret Mall",
+            "0399 Colby Extensions",
+            "538 Schaefer Highway Apt. 472",
+            "34580 Mireille Crescent Suite 776",
+            "6862 Kaitlyn Knolls Suite 309"
+          ],
+          "town_city": [
+            "West Stacy",
+            "Lake Meaghan",
+            "Breanneberg",
+            "New Gabe",
+            "Carrollland",
+            "East Lamonttown",
+            "Cletusbury",
+            "New Katlyn"
+          ],
+          "zip_postcode": [
+            "193",
+            "227",
+            "527",
+            "993",
+            "250",
+            "202",
+            "215",
+            "021"
+          ],
+          "state_province_county": [
+            "NorthCarolina",
+            "Colorado",
+            "NewHampshire",
+            "Missouri",
+            "Kentucky",
+            "Louisiana",
+            "Georgia",
+            "Pennsylvania"
+          ],
+          "country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Forms": {
+        "rows": 6,
+        "sample_values": {
+          "form_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "form_type_code": [
+            "Basic",
+            "Complex"
+          ],
+          "service_id": [
+            "13",
+            "9",
+            "2",
+            "14",
+            "3",
+            "7"
+          ],
+          "form_number": [
+            "8069",
+            "2675",
+            "9837",
+            "9173",
+            "6673",
+            "9130"
+          ],
+          "form_name": [
+            "SSN Application",
+            "Marriage Certificate",
+            "Divorce Certificate",
+            "Moving Form",
+            "Account Application",
+            "Property Change"
+          ],
+          "form_description": [
+            "Form for SSN Application",
+            "Marriage Certificate",
+            "Divorce Certificate",
+            "Form for moving house",
+            "Form for Account Application",
+            "Form for Property Change"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Individuals": {
+        "rows": 15,
+        "sample_values": {
+          "individual_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "individual_first_name": [
+            "Oscar",
+            "Geovanny",
+            "Casper",
+            "Guy",
+            "Matteo",
+            "Nella",
+            "Jeffery",
+            "Shany"
+          ],
+          "individual_middle_name": [
+            "Hosea",
+            "Antonia",
+            "Mitchell",
+            "Erick",
+            "Rene",
+            "Tommie",
+            "Alberto",
+            "Colleen"
+          ],
+          "inidividual_phone": [
+            "1-925-696-5232",
+            "075.012.6775x409",
+            "1-818-062-2837",
+            "1-014-109-1968x40778",
+            "634.660.8469",
+            "892.154.8492",
+            "317.382.4425x7924",
+            "(030)939-8437x6141"
+          ],
+          "individual_email": [
+            "amie.okuneva@example.org",
+            "jamey.effertz@example.net",
+            "brandon.hermiston@example.com",
+            "reinger.leola@example.net",
+            "strosin.conor@example.org",
+            "austyn.effertz@example.org",
+            "august78@example.net",
+            "mbahringer@example.com"
+          ],
+          "individual_address": [
+            "6956 Lia Plaza",
+            "69578 Baylee Prairie",
+            "4555 Hane Orchard",
+            "919 Cummerata Burgs Apt. 063",
+            "13223 Torphy Point",
+            "640 Johns Branch",
+            "384 Carter Flat Suite 896",
+            "407 Sofia Knoll Suite 591"
+          ],
+          "individual_last_name": [
+            "Maggio",
+            "Kerluke",
+            "Kutch",
+            "Wunsch",
+            "Schuster",
+            "Kertzmann",
+            "Jacobs",
+            "D'Amore"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Organization_Contact_Individuals": {
+        "rows": 15,
+        "sample_values": {
+          "individual_id": [
+            "13",
+            "11",
+            "10",
+            "5",
+            "9",
+            "6",
+            "7",
+            "14"
+          ],
+          "organization_id": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "2"
+          ],
+          "date_contact_from": [
+            "2016-08-16 22:09:11",
+            "2017-03-02 00:00:16",
+            "2016-08-23 03:24:24",
+            "2017-08-08 12:05:25",
+            "2016-04-21 03:55:35",
+            "2016-08-27 16:55:59",
+            "2017-01-06 09:38:54",
+            "2017-09-14 08:24:22"
+          ],
+          "date_contact_to": [
+            "2018-03-25 10:27:18",
+            "2018-03-06 05:39:43",
+            "2018-03-12 07:55:28",
+            "2018-03-04 09:30:20",
+            "2018-03-06 21:22:49",
+            "2018-03-18 05:47:36",
+            "2018-02-27 09:20:42",
+            "2018-03-24 16:54:36"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Organizations": {
+        "rows": 5,
+        "sample_values": {
+          "organization_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "date_formed": [
+            "2016-08-24 23:52:48",
+            "2016-10-01 12:42:01",
+            "2016-10-09 07:22:53",
+            "2017-04-06 23:59:16",
+            "2016-07-28 01:45:10"
+          ],
+          "organization_name": [
+            "Labour Party",
+            "Plaid Cymru",
+            "Conservative",
+            "Liberal Democrats",
+            "Green Party"
+          ],
+          "uk_vat_number": [
+            "2157",
+            "7459",
+            "1211",
+            "7237",
+            "4271"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Parties": {
+        "rows": 15,
+        "sample_values": {
+          "party_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "payment_method_code": [
+            "Cheque",
+            "Credit Card",
+            "Cash",
+            "Direct Debit"
+          ],
+          "party_phone": [
+            "05374656172",
+            "1-525-947-7867x51521",
+            "1-606-232-3728x3568",
+            "019-302-5166",
+            "529-074-5348",
+            "1-950-874-1693x65923",
+            "112-477-4433x137",
+            "(919)169-1514x55820"
+          ],
+          "party_email": [
+            "enrico09@example.com",
+            "brakus.aliya@example.com",
+            "frida57@example.org",
+            "wuckert.misty@example.com",
+            "alanna.boehm@example.net",
+            "daniel.charity@example.net",
+            "lucinda83@example.org",
+            "erick.mills@example.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Party_Addresses": {
+        "rows": 15,
+        "sample_values": {
+          "party_id": [
+            "10",
+            "15",
+            "4",
+            "5",
+            "11",
+            "3",
+            "8",
+            "6"
+          ],
+          "address_id": [
+            "8",
+            "5",
+            "4",
+            "10",
+            "2",
+            "7",
+            "1",
+            "9"
+          ],
+          "date_address_from": [
+            "2016-04-08 22:40:02",
+            "2016-05-20 23:22:06",
+            "2016-05-14 15:13:30",
+            "2017-02-21 12:12:50",
+            "2016-04-04 03:57:02",
+            "2016-07-21 08:39:50",
+            "2016-06-09 00:48:07",
+            "2016-09-05 11:53:36"
+          ],
+          "address_type_code": [
+            "Residence",
+            "Billing",
+            "Delivery"
+          ],
+          "date_address_to": [
+            "2018-02-28 23:14:41",
+            "2018-01-29 16:48:01",
+            "2018-02-25 19:39:16",
+            "2018-03-11 12:12:52",
+            "2018-02-11 06:11:11",
+            "2018-03-03 22:17:09",
+            "2018-03-11 00:08:16",
+            "2018-03-07 13:28:44"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Party_Forms": {
+        "rows": 13,
+        "sample_values": {
+          "party_id": [
+            "2",
+            "15",
+            "8",
+            "6",
+            "7",
+            "11",
+            "5",
+            "13"
+          ],
+          "form_id": [
+            "4",
+            "5",
+            "2",
+            "3",
+            "6"
+          ],
+          "date_completion_started": [
+            "2017-12-17 11:29:47",
+            "2017-12-16 15:25:48",
+            "2017-12-09 21:26:11",
+            "2017-12-04 16:57:31",
+            "2017-11-30 18:49:37",
+            "2017-12-20 01:10:33",
+            "2017-12-18 01:32:49",
+            "2017-12-07 18:17:01"
+          ],
+          "form_status_code": [
+            "Completed",
+            "Partially Completed",
+            "Not Started",
+            "Work In Progress"
+          ],
+          "date_fully_completed": [
+            "2018-02-11 16:46:10",
+            "2018-02-18 16:09:04",
+            "2018-02-05 16:16:58",
+            "2018-01-28 22:29:07",
+            "2018-02-21 17:59:08",
+            "2018-02-10 14:07:46",
+            "2018-02-04 05:57:01",
+            "2018-02-15 23:09:42"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Party_Services": {
+        "rows": 15,
+        "sample_values": {
+          "booking_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "10",
+            "14",
+            "4",
+            "13",
+            "2",
+            "6",
+            "3",
+            "5"
+          ],
+          "service_id": [
+            "12",
+            "11",
+            "7",
+            "3",
+            "6",
+            "13",
+            "1",
+            "5"
+          ],
+          "service_datetime": [
+            "2018-03-10 22:43:12",
+            "2018-03-05 15:06:23",
+            "2018-03-08 10:39:29",
+            "2018-03-08 23:52:44",
+            "2018-03-17 18:35:26",
+            "2018-03-17 08:16:30",
+            "2018-03-15 09:48:27",
+            "2018-03-01 18:31:32"
+          ],
+          "booking_made_date": [
+            "2018-03-23 23:56:51",
+            "2018-03-25 11:08:29",
+            "2018-03-24 11:09:52",
+            "2018-03-25 12:56:09",
+            "2018-03-25 02:57:32",
+            "2018-03-24 06:50:50",
+            "2018-03-25 11:52:29",
+            "2018-03-24 07:55:33"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Services": {
+        "rows": 15,
+        "sample_values": {
+          "service_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "service_type_code": [
+            "Education",
+            "Welfare",
+            "Health"
+          ],
+          "service_name": [
+            "Education",
+            "Health",
+            "Welfare"
+          ],
+          "service_descriptio": [
+            "Education",
+            "Welfare",
+            "Health"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

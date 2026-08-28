@@ -1,0 +1,228 @@
+{
+  "db_id": "shakespeare",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 37380,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#shakespeare",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"chapters\" {\n  \"id\" INTEGER [pk]\n  \"Act\" INTEGER [not null]\n  \"Scene\" INTEGER [not null]\n  \"Description\" TEXT [not null]\n  \"work_id\" INTEGER [not null]\n}\n\nTable \"characters\" {\n  \"id\" INTEGER [pk]\n  \"CharName\" TEXT [not null]\n  \"Abbrev\" TEXT [not null]\n  \"Description\" TEXT [not null]\n}\n\nTable \"paragraphs\" {\n  \"id\" INTEGER [pk]\n  \"ParagraphNum\" INTEGER [not null]\n  \"PlainText\" TEXT [not null]\n  \"character_id\" INTEGER [not null]\n  \"chapter_id\" INTEGER [not null]\n}\n\nTable \"works\" {\n  \"id\" INTEGER [pk]\n  \"Title\" TEXT [not null]\n  \"LongTitle\" TEXT [not null]\n  \"Date\" INTEGER [not null]\n  \"GenreType\" TEXT [not null]\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"chapters\" {\n  \"id\" INTEGER [pk]\n  \"Act\" INTEGER [not null]\n  \"Scene\" INTEGER [not null]\n  \"Description\" TEXT [not null]\n  \"work_id\" INTEGER [not null]\n}\n\nTable \"characters\" {\n  \"id\" INTEGER [pk]\n  \"CharName\" TEXT [not null]\n  \"Abbrev\" TEXT [not null]\n  \"Description\" TEXT [not null]\n}\n\nTable \"paragraphs\" {\n  \"id\" INTEGER [pk]\n  \"ParagraphNum\" INTEGER [not null]\n  \"PlainText\" TEXT [not null]\n  \"character_id\" INTEGER [not null]\n  \"chapter_id\" INTEGER [not null]\n}\n\nTable \"works\" {\n  \"id\" INTEGER [pk]\n  \"Title\" TEXT [not null]\n  \"LongTitle\" TEXT [not null]\n  \"Date\" INTEGER [not null]\n  \"GenreType\" TEXT [not null]\n}\n\n## Table Stats & Sample Values\n\nchapters: 775 rows\n  Description: 'DUKE ORSINO’s palace.', 'The sea-coast.', 'OLIVIA’S house.', ...\n  Act: '1', '2', '3', ...\n  Scene: '1', '2', '3', ...\n\ncharacters: 1265 rows\n  CharName: 'First Apparition', 'First Citizen', 'First Conspirator', ...\n  Description: 'A senator of Venice', 'a Moor, beloved by Tamora', 'an executioner', ...\n  Abbrev: 'First Apparition', 'First Citizen', 'First Conspirator', ...\n\nparagraphs: 5027 rows\n  PlainText: '[Enter DUKE ORSINO, CURIO, and other Lords; Musici', 'Will you go hunt, my lord?', 'What, Curio?', ...\n  ParagraphNum: '3', '19', '20', ...\n  character_id: '1261', '297', '840', ...\n\nworks: 43 rows\n  Title: 'Twelfth Night', 'All's Well That Ends Well', 'Antony and Cleopatra', ...\n  GenreType: 'Comedy', 'Tragedy', 'History', ...\n  LongTitle: 'Twelfth Night, Or What You Will', 'All's Well That Ends Well', 'Antony and Cleopatra', ...",
+    "stateUrl": "https://bird-bench.github.io/#shakespeare",
+    "tableStats": {
+      "chapters": {
+        "rows": 775,
+        "sample_values": {
+          "id": [
+            "18704",
+            "18705",
+            "18706",
+            "18707",
+            "18708",
+            "18709",
+            "18710",
+            "18711"
+          ],
+          "Act": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "0"
+          ],
+          "Scene": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Description": [
+            "DUKE ORSINO’s palace.",
+            "The sea-coast.",
+            "OLIVIA’S house.",
+            "A street.",
+            "OLIVIA’s house.",
+            "OLIVIA’s garden.",
+            "Before OLIVIA’s house.",
+            "Rousillon. The COUNT’s palace."
+          ],
+          "work_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "characters": {
+        "rows": 1265,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CharName": [
+            "First Apparition",
+            "First Citizen",
+            "First Conspirator",
+            "First Gentleman",
+            "First Goth",
+            "First Murderer",
+            "First Musician",
+            "First Officer"
+          ],
+          "Abbrev": [
+            "First Apparition",
+            "First Citizen",
+            "First Conspirator",
+            "First Gentleman",
+            "First Goth",
+            "First Murderer",
+            "First Musician",
+            "First Officer"
+          ],
+          "Description": [
+            "A senator of Venice",
+            "a Moor, beloved by Tamora",
+            "an executioner",
+            "Servant to Montague",
+            "a Greek prince",
+            "servant to Oliver",
+            "wife to Antipholus of Ephesus",
+            "a lord"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "paragraphs": {
+        "rows": 5027,
+        "sample_values": {
+          "id": [
+            "630863",
+            "630865",
+            "630866",
+            "630867",
+            "630871",
+            "630872",
+            "630873",
+            "630874"
+          ],
+          "ParagraphNum": [
+            "3",
+            "19",
+            "20",
+            "21",
+            "48",
+            "50",
+            "51",
+            "52"
+          ],
+          "PlainText": [
+            "[Enter DUKE ORSINO, CURIO, and other Lords; Musici",
+            "Will you go hunt, my lord?",
+            "What, Curio?",
+            "The hart.",
+            "[Exeunt]",
+            "[Enter VIOLA, a Captain, and Sailors]",
+            "What country, friends, is this?",
+            "This is Illyria, lady."
+          ],
+          "character_id": [
+            "1261",
+            "297",
+            "840",
+            "1238",
+            "975",
+            "159",
+            "738",
+            "60"
+          ],
+          "chapter_id": [
+            "18704",
+            "18705",
+            "18706",
+            "18707",
+            "18708",
+            "18709",
+            "18710",
+            "18711"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "works": {
+        "rows": 43,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Title": [
+            "Twelfth Night",
+            "All's Well That Ends Well",
+            "Antony and Cleopatra",
+            "As You Like It",
+            "Comedy of Errors",
+            "Coriolanus",
+            "Cymbeline",
+            "Hamlet"
+          ],
+          "LongTitle": [
+            "Twelfth Night, Or What You Will",
+            "All's Well That Ends Well",
+            "Antony and Cleopatra",
+            "As You Like It",
+            "The Comedy of Errors",
+            "Coriolanus",
+            "Cymbeline, King of Britain",
+            "Tragedy of Hamlet, Prince of Denmark, The"
+          ],
+          "Date": [
+            "1599",
+            "1602",
+            "1606",
+            "1589",
+            "1607",
+            "1609",
+            "1600",
+            "1597"
+          ],
+          "GenreType": [
+            "Comedy",
+            "Tragedy",
+            "History",
+            "Poem",
+            "Sonnet"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "db_id": "social_media",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 205372,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#social_media",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"location\" {\n  \"LocationID\" INTEGER [pk]\n  \"Country\" TEXT\n  \"State\" TEXT\n  \"StateCode\" TEXT\n  \"City\" TEXT\n}\n\nTable \"twitter\" {\n  \"TweetID\" TEXT [pk]\n  \"Weekday\" TEXT\n  \"Hour\" INTEGER\n  \"Day\" INTEGER\n  \"Lang\" TEXT\n  \"IsReshare\" TEXT\n  \"Reach\" INTEGER\n  \"RetweetCount\" INTEGER\n  \"Likes\" INTEGER\n  \"Klout\" INTEGER\n  \"Sentiment\" REAL\n  \"text\" TEXT\n  \"LocationID\" INTEGER\n  \"UserID\" TEXT\n}\n\nTable \"user\" {\n  \"UserID\" TEXT [pk]\n  \"Gender\" TEXT\n}\n\n\n\nRef: \"twitter\".\"UserID\" > \"user\".\"UserID\"\n\nRef: \"twitter\".\"LocationID\" > \"location\".\"LocationID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"location\" {\n  \"LocationID\" INTEGER [pk]\n  \"Country\" TEXT\n  \"State\" TEXT\n  \"StateCode\" TEXT\n  \"City\" TEXT\n}\n\nTable \"twitter\" {\n  \"TweetID\" TEXT [pk]\n  \"Weekday\" TEXT\n  \"Hour\" INTEGER\n  \"Day\" INTEGER\n  \"Lang\" TEXT\n  \"IsReshare\" TEXT\n  \"Reach\" INTEGER\n  \"RetweetCount\" INTEGER\n  \"Likes\" INTEGER\n  \"Klout\" INTEGER\n  \"Sentiment\" REAL\n  \"text\" TEXT\n  \"LocationID\" INTEGER\n  \"UserID\" TEXT\n}\n\nTable \"user\" {\n  \"UserID\" TEXT [pk]\n  \"Gender\" TEXT\n}\n\nRef: \"twitter\".\"UserID\" > \"user\".\"UserID\"\n\nRef: \"twitter\".\"LocationID\" > \"location\".\"LocationID\"\n\n## Table Stats & Sample Values\n\nlocation: 6211 rows\n  Country: 'Albania', 'Algeria', 'Andorra', ...\n  State: 'Elbasan', 'Tirane', 'Souk Ahras', ...\n  StateCode: 'AL', 'DZ', 'AD', ...\n\ntwitter: 10000 rows\n  Weekday: 'Thursday', 'Friday', 'Saturday', ...\n  Lang: 'en', '_u'\n  IsReshare: 'FALSE', 'TRUE'\n\nuser: 10000 rows\n  Gender: 'Unknown', 'Male', 'Unisex', ...\n  UserID: 'tw-1267804344', 'tw-27229880', 'tw-199664730', ...",
+    "stateUrl": "https://bird-bench.github.io/#social_media",
+    "tableStats": {
+      "location": {
+        "rows": 6211,
+        "sample_values": {
+          "LocationID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Country": [
+            "Albania",
+            "Algeria",
+            "Andorra",
+            "Angola",
+            "Anguilla",
+            "Antigua and Barbuda",
+            "Argentina",
+            "Armenia"
+          ],
+          "State": [
+            "Elbasan",
+            "Tirane",
+            "Souk Ahras",
+            "Alger",
+            "Constantine",
+            "El Oued",
+            "Oran",
+            "Parroquia d'Andorra la Vella"
+          ],
+          "StateCode": [
+            "AL",
+            "DZ",
+            "AD",
+            "AO",
+            "AI",
+            "AR",
+            "AM",
+            "AU-04"
+          ],
+          "City": [
+            "Elbasan",
+            "Tirana",
+            "Souk Ahras",
+            "Algiers",
+            "Constantine",
+            "El Oued",
+            "Oran",
+            "Andorra la Vella"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "twitter": {
+        "rows": 10000,
+        "sample_values": {
+          "TweetID": [
+            "tw-682712873332805633",
+            "tw-682713045357998080",
+            "tw-682713219375476736",
+            "tw-682713436967579648",
+            "tw-682714048199311366",
+            "tw-682714583044243456",
+            "tw-682715526435454977",
+            "tw-682717209043402753"
+          ],
+          "Weekday": [
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday"
+          ],
+          "Hour": [
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "0"
+          ],
+          "Day": [
+            "31",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "Lang": [
+            "en",
+            "_u"
+          ],
+          "IsReshare": [
+            "FALSE",
+            "TRUE"
+          ],
+          "Reach": [
+            "44",
+            "1810",
+            "282",
+            "2087",
+            "953",
+            "113",
+            "4893",
+            "2868"
+          ],
+          "RetweetCount": [
+            "0",
+            "5",
+            "4",
+            "1",
+            "6",
+            "51",
+            "3",
+            "2"
+          ],
+          "Likes": [
+            "0",
+            "131",
+            "40",
+            "4",
+            "70",
+            "22",
+            "26",
+            "72"
+          ],
+          "Klout": [
+            "35",
+            "53",
+            "47",
+            "31",
+            "49",
+            "51",
+            "16",
+            "23"
+          ],
+          "Sentiment": [
+            "0.0",
+            "2.0",
+            "-1.0",
+            "-2.0",
+            "1.0",
+            "3.0",
+            "1.333333373",
+            "4.0"
+          ],
+          "text": [
+            "We are hiring: Senior Software Engineer - Proto ht",
+            "RT @CodeMineStatus: This is true Amazon Web Servic",
+            "Devops Engineer Aws Ansible Cassandra Mysql Ubuntu",
+            "Happy New Year to all those AWS instances of ours!",
+            "Amazon is hiring! #Sr. #International Tax Manager ",
+            "#AWS bc of per-region limits test/prod should be i",
+            "Isolating dev/prod #aws envs like that is difficul",
+            "Isolation at account level would work. #aws allude"
+          ],
+          "LocationID": [
+            "3751",
+            "3989",
+            "3741",
+            "3753",
+            "3744",
+            "3764",
+            "211",
+            "80"
+          ],
+          "UserID": [
+            "tw-40932430",
+            "tw-3179389829",
+            "tw-4624808414",
+            "tw-356447127",
+            "tw-3172686669",
+            "tw-14502901",
+            "tw-202281478",
+            "tw-1544327005"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user": {
+        "rows": 10000,
+        "sample_values": {
+          "UserID": [
+            "tw-1267804344",
+            "tw-27229880",
+            "tw-199664730",
+            "tw-99958381",
+            "tw-126745533",
+            "tw-4598715683",
+            "tw-330939742",
+            "tw-9108612"
+          ],
+          "Gender": [
+            "Unknown",
+            "Male",
+            "Unisex",
+            "Female"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

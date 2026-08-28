@@ -1,0 +1,865 @@
+{
+  "db_id": "cre_Drama_Workshop_Groups",
+  "source": "sparc",
+  "tables": 18,
+  "total_rows": 237,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#cre_Drama_Workshop_Groups",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"Address_ID\" TEXT [pk, not null]\n  \"Line_1\" TEXT\n  \"Line_2\" TEXT\n  \"City_Town\" TEXT\n  \"State_County\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Bookings\" {\n  \"Booking_ID\" INTEGER [pk, not null]\n  \"Customer_ID\" INTEGER [not null]\n  \"Workshop_Group_ID\" TEXT [not null]\n  \"Status_Code\" TEXT [not null]\n  \"Store_ID\" INTEGER [not null]\n  \"Order_Date\" TIMESTAMP [not null]\n  \"Planned_Delivery_Date\" TIMESTAMP [not null]\n  \"Actual_Delivery_Date\" TIMESTAMP [not null]\n  \"Other_Order_Details\" TEXT\n}\n\nTable \"Bookings_Services\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Product_ID\" INTEGER [pk, not null]\n}\n\nTable \"Clients\" {\n  \"Client_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Email_Address\" TEXT\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Customer_Orders\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Customer_ID\" INTEGER [not null]\n  \"Store_ID\" INTEGER [not null]\n  \"Order_Date\" TIMESTAMP [not null]\n  \"Planned_Delivery_Date\" TIMESTAMP [not null]\n  \"Actual_Delivery_Date\" TIMESTAMP [not null]\n  \"Other_Order_Details\" TEXT\n}\n\nTable \"Customers\" {\n  \"Customer_ID\" TEXT [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Customer_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Drama_Workshop_Groups\" {\n  \"Workshop_Group_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Currency_Code\" TEXT [not null]\n  \"Marketing_Region_Code\" TEXT [not null]\n  \"Store_Name\" TEXT\n  \"Store_Phone\" TEXT\n  \"Store_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Invoice_Items\" {\n  \"Invoice_Item_ID\" INTEGER [pk, not null]\n  \"Invoice_ID\" INTEGER [not null]\n  \"Order_ID\" INTEGER [not null]\n  \"Order_Item_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" INTEGER\n  \"Other_Item_Details\" TEXT\n}\n\nTable \"Invoices\" {\n  \"Invoice_ID\" INTEGER [pk, not null]\n  \"Order_ID\" INTEGER [not null]\n  \"payment_method_code\" TEXT\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" TEXT\n  \"Other_Item_Details\" TEXT\n  \"Order_Item_ID\" INTEGER [not null]\n}\n\nTable \"Marketing_Regions\" {\n  \"Marketing_Region_Code\" TEXT [pk, not null]\n  \"Marketing_Region_Name\" TEXT [not null]\n  \"Marketing_Region_Descriptrion\" TEXT [not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"Order_Item_ID\" INTEGER [pk, not null]\n  \"Order_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" TEXT\n  \"Other_Item_Details\" TEXT\n}\n\nTable \"Performers\" {\n  \"Performer_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Customer_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Performers_in_Bookings\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Performer_ID\" INTEGER [pk, not null]\n}\n\nTable \"Products\" {\n  \"Product_ID\" TEXT [pk, not null]\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n  \"Product_Description\" TEXT\n  \"Other_Product_Service_Details\" TEXT\n}\n\nTable \"Ref_Payment_Methods\" {\n  \"payment_method_code\" TEXT [pk, not null]\n  \"payment_method_description\" TEXT\n}\n\nTable \"Ref_Service_Types\" {\n  \"Service_Type_Code\" TEXT [pk, not null]\n  \"Parent_Service_Type_Code\" TEXT\n  \"Service_Type_Description\" TEXT\n}\n\nTable \"Services\" {\n  \"Service_ID\" INTEGER [pk, not null]\n  \"Service_Type_Code\" TEXT\n  \"Workshop_Group_ID\" INTEGER [not null]\n  \"Product_Description\" TEXT\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n  \"Other_Product_Service_Details\" TEXT\n}\n\nTable \"Stores\" {\n  \"Store_ID\" TEXT [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Marketing_Region_Code\" TEXT [not null]\n  \"Store_Name\" TEXT\n  \"Store_Phone\" TEXT\n  \"Store_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\n\n\nRef: \"Clients\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Drama_Workshop_Groups\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Performers\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Customers\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Stores\".\"Marketing_Region_Code\" > \"Marketing_Regions\".\"Marketing_Region_Code\"\n\nRef: \"Stores\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Bookings\".\"Workshop_Group_ID\" > \"Drama_Workshop_Groups\".\"Workshop_Group_ID\"\n\nRef: \"Bookings\".\"Customer_ID\" > \"Clients\".\"Client_ID\"\n\nRef: \"Performers_in_Bookings\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Performers_in_Bookings\".\"Performer_ID\" > \"Performers\".\"Performer_ID\"\n\nRef: \"Customer_Orders\".\"Store_ID\" > \"Stores\".\"Store_ID\"\n\nRef: \"Customer_Orders\".\"Customer_ID\" > \"Customers\".\"Customer_ID\"\n\nRef: \"Order_Items\".\"Product_ID\" > \"Products\".\"Product_ID\"\n\nRef: \"Order_Items\".\"Order_ID\" > \"Customer_Orders\".\"Order_ID\"\n\nRef: \"Invoices\".\"payment_method_code\" > \"Ref_Payment_Methods\".\"payment_method_code\"\n\nRef: \"Invoices\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Invoices\".\"Order_ID\" > \"Customer_Orders\".\"Order_ID\"\n\nRef: \"Services\".\"Service_Type_Code\" > \"Ref_Service_Types\".\"Service_Type_Code\"\n\nRef: \"Services\".\"Workshop_Group_ID\" > \"Drama_Workshop_Groups\".\"Workshop_Group_ID\"\n\nRef: \"Bookings_Services\".\"Product_ID\" > \"Services\".\"Service_ID\"\n\nRef: \"Bookings_Services\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Invoice_Items\".\"Order_ID\" > \"Bookings_Services\".\"Order_ID\"\n\nRef: \"Invoice_Items\".\"Product_ID\" > \"Bookings_Services\".\"Product_ID\"\n\nRef: \"Invoice_Items\".\"Invoice_ID\" > \"Invoices\".\"Invoice_ID\"\n\nRef: \"Invoice_Items\".\"Order_Item_ID\" > \"Order_Items\".\"Order_Item_ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"Address_ID\" TEXT [pk, not null]\n  \"Line_1\" TEXT\n  \"Line_2\" TEXT\n  \"City_Town\" TEXT\n  \"State_County\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Bookings\" {\n  \"Booking_ID\" INTEGER [pk, not null]\n  \"Customer_ID\" INTEGER [not null]\n  \"Workshop_Group_ID\" TEXT [not null]\n  \"Status_Code\" TEXT [not null]\n  \"Store_ID\" INTEGER [not null]\n  \"Order_Date\" TIMESTAMP [not null]\n  \"Planned_Delivery_Date\" TIMESTAMP [not null]\n  \"Actual_Delivery_Date\" TIMESTAMP [not null]\n  \"Other_Order_Details\" TEXT\n}\n\nTable \"Bookings_Services\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Product_ID\" INTEGER [pk, not null]\n}\n\nTable \"Clients\" {\n  \"Client_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Email_Address\" TEXT\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Customer_Orders\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Customer_ID\" INTEGER [not null]\n  \"Store_ID\" INTEGER [not null]\n  \"Order_Date\" TIMESTAMP [not null]\n  \"Planned_Delivery_Date\" TIMESTAMP [not null]\n  \"Actual_Delivery_Date\" TIMESTAMP [not null]\n  \"Other_Order_Details\" TEXT\n}\n\nTable \"Customers\" {\n  \"Customer_ID\" TEXT [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Customer_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Drama_Workshop_Groups\" {\n  \"Workshop_Group_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Currency_Code\" TEXT [not null]\n  \"Marketing_Region_Code\" TEXT [not null]\n  \"Store_Name\" TEXT\n  \"Store_Phone\" TEXT\n  \"Store_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Invoice_Items\" {\n  \"Invoice_Item_ID\" INTEGER [pk, not null]\n  \"Invoice_ID\" INTEGER [not null]\n  \"Order_ID\" INTEGER [not null]\n  \"Order_Item_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" INTEGER\n  \"Other_Item_Details\" TEXT\n}\n\nTable \"Invoices\" {\n  \"Invoice_ID\" INTEGER [pk, not null]\n  \"Order_ID\" INTEGER [not null]\n  \"payment_method_code\" TEXT\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" TEXT\n  \"Other_Item_Details\" TEXT\n  \"Order_Item_ID\" INTEGER [not null]\n}\n\nTable \"Marketing_Regions\" {\n  \"Marketing_Region_Code\" TEXT [pk, not null]\n  \"Marketing_Region_Name\" TEXT [not null]\n  \"Marketing_Region_Descriptrion\" TEXT [not null]\n  \"Other_Details\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"Order_Item_ID\" INTEGER [pk, not null]\n  \"Order_ID\" INTEGER [not null]\n  \"Product_ID\" INTEGER [not null]\n  \"Order_Quantity\" TEXT\n  \"Other_Item_Details\" TEXT\n}\n\nTable \"Performers\" {\n  \"Performer_ID\" INTEGER [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Customer_Name\" TEXT\n  \"Customer_Phone\" TEXT\n  \"Customer_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Performers_in_Bookings\" {\n  \"Order_ID\" INTEGER [pk, not null]\n  \"Performer_ID\" INTEGER [pk, not null]\n}\n\nTable \"Products\" {\n  \"Product_ID\" TEXT [pk, not null]\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n  \"Product_Description\" TEXT\n  \"Other_Product_Service_Details\" TEXT\n}\n\nTable \"Ref_Payment_Methods\" {\n  \"payment_method_code\" TEXT [pk, not null]\n  \"payment_method_description\" TEXT\n}\n\nTable \"Ref_Service_Types\" {\n  \"Service_Type_Code\" TEXT [pk, not null]\n  \"Parent_Service_Type_Code\" TEXT\n  \"Service_Type_Description\" TEXT\n}\n\nTable \"Services\" {\n  \"Service_ID\" INTEGER [pk, not null]\n  \"Service_Type_Code\" TEXT\n  \"Workshop_Group_ID\" INTEGER [not null]\n  \"Product_Description\" TEXT\n  \"Product_Name\" TEXT\n  \"Product_Price\" TEXT\n  \"Other_Product_Service_Details\" TEXT\n}\n\nTable \"Stores\" {\n  \"Store_ID\" TEXT [pk, not null]\n  \"Address_ID\" INTEGER [not null]\n  \"Marketing_Region_Code\" TEXT [not null]\n  \"Store_Name\" TEXT\n  \"Store_Phone\" TEXT\n  \"Store_Email_Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nRef: \"Clients\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Drama_Workshop_Groups\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Performers\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Customers\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Stores\".\"Marketing_Region_Code\" > \"Marketing_Regions\".\"Marketing_Region_Code\"\n\nRef: \"Stores\".\"Address_ID\" > \"Addresses\".\"Address_ID\"\n\nRef: \"Bookings\".\"Workshop_Group_ID\" > \"Drama_Workshop_Groups\".\"Workshop_Group_ID\"\n\nRef: \"Bookings\".\"Customer_ID\" > \"Clients\".\"Client_ID\"\n\nRef: \"Performers_in_Bookings\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Performers_in_Bookings\".\"Performer_ID\" > \"Performers\".\"Performer_ID\"\n\nRef: \"Customer_Orders\".\"Store_ID\" > \"Stores\".\"Store_ID\"\n\nRef: \"Customer_Orders\".\"Customer_ID\" > \"Customers\".\"Customer_ID\"\n\nRef: \"Order_Items\".\"Product_ID\" > \"Products\".\"Product_ID\"\n\nRef: \"Order_Items\".\"Order_ID\" > \"Customer_Orders\".\"Order_ID\"\n\nRef: \"Invoices\".\"payment_method_code\" > \"Ref_Payment_Methods\".\"payment_method_code\"\n\nRef: \"Invoices\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Invoices\".\"Order_ID\" > \"Customer_Orders\".\"Order_ID\"\n\nRef: \"Services\".\"Service_Type_Code\" > \"Ref_Service_Types\".\"Service_Type_Code\"\n\nRef: \"Services\".\"Workshop_Group_ID\" > \"Drama_Workshop_Groups\".\"Workshop_Group_ID\"\n\nRef: \"Bookings_Services\".\"Product_ID\" > \"Services\".\"Service_ID\"\n\nRef: \"Bookings_Services\".\"Order_ID\" > \"Bookings\".\"Booking_ID\"\n\nRef: \"Invoice_Items\".\"Order_ID\" > \"Bookings_Services\".\"Order_ID\"\n\nRef: \"Invoice_Items\".\"Product_ID\" > \"Bookings_Services\".\"Product_ID\"\n\nRef: \"Invoice_Items\".\"Invoice_ID\" > \"Invoices\".\"Invoice_ID\"\n\nRef: \"Invoice_Items\".\"Order_Item_ID\" > \"Order_Items\".\"Order_Item_ID\"\n\n## Table Stats & Sample Values\n\nAddresses: 20 rows\n  City_Town: 'Feliciaberg', 'West Sherwoodstad', 'Schadenville', ...\n  State_County: 'Florida', 'Indiana', 'Ohio', ...\n  Line_1: '4753 Dach Highway', '391 Vandervort Fall Apt. 446', '809 Izabella Islands', ...\n\nBookings: 15 rows\n  Status_Code: 'good', 'stop'\n  Order_Date: '2016-12-12 10:43:01', '1976-08-20 00:33:08', '1975-11-23 06:28:47', ...\n  Planned_Delivery_Date: '2013-03-10 18:47:05', '2009-07-09 09:18:38', '1989-01-05 19:24:45', ...\n\nBookings_Services: 12 rows\n  Order_ID: '1', '4', '5', ...\n  Product_ID: '396', '779', '191', ...\n\nClients: 20 rows\n  Customer_Name: 'Clifford', 'Bettye', 'Reinhold', ...\n  Other_Details: 'VIP', 'Super VIP'\n  Customer_Email_Address: 'branson94@example.net', 'alba04@example.com', 'westley30@example.net', ...\n\nCustomer_Orders: 15 rows\n  Order_Date: '1994-08-03 12:34:58', '2014-07-10 10:56:01', '1981-06-20 16:29:43', ...\n  Planned_Delivery_Date: '1977-03-11 03:58:19', '1996-08-26 19:19:59', '1980-12-19 05:49:35', ...\n  Actual_Delivery_Date: '1992-07-21 22:11:11', '1998-08-22 17:57:32', '2011-04-13 07:15:35', ...\n\nCustomers: 15 rows\n  Customer_Name: 'Harold', 'Federico', 'Samson', ...\n  Customer_Phone: '624-096-7791', '914-915-7483', '1-463-121-4086x655', ...\n  Customer_Email_Address: 'jerde.harmon@example.com', 'johnson27@example.com', 'dalton75@example.com', ...\n\nDrama_Workshop_Groups: 15 rows\n  Marketing_Region_Code: 'FR', 'DE', 'RU', ...\n  Store_Name: 'Amely Cafe', 'Veda Film', 'Queen Art', ...\n  Currency_Code: 'EU', 'USD'\n\nInvoice_Items: 2 rows\n  Other_Item_Details: 'Good quality'\n  Order_Quantity: '2', '6'\n  Invoice_ID: '128', '162'\n\nInvoices: 15 rows\n  payment_method_code: 'MasterCard', 'Visa', 'American E'\n  Order_Quantity: '2', '1'\n  Order_ID: '14', '13', '7', ...\n\nMarketing_Regions: 8 rows\n  Marketing_Region_Name: 'Canada', 'China', 'Spain', ...\n  Marketing_Region_Descriptrion: 'Our target market', 'Our largest market', 'Our main market'\n  Marketing_Region_Code: 'CA', 'CN', 'ES', ...\n\nOrder_Items: 15 rows\n  Order_Quantity: '1', '2'\n  Order_ID: '3', '15', '12', ...\n  Product_ID: '233', '300', '273', ...\n\nPerformers: 20 rows\n  Customer_Name: 'Shawna', 'Ashley', 'Oren', ...\n  Other_Details: 'Did not pay', 'Pay good tips'\n  Customer_Phone: '664.495.1939', '893-536-8857', '1-952-052-6685x28082', ...\n\nPerformers_in_Bookings: 18 rows\n  Order_ID: '1', '2', '3', ...\n  Performer_ID: '153', '341', '466', ...\n\nProducts: 15 rows\n  Product_Name: 'photo', 'film', 'dinning'\n  Product_Price: '4448536', '2302', '17622723', ...\n  Product_ID: '11', '154', '156', ...\n\nRef_Payment_Methods: 3 rows\n  payment_method_description: 'credit', 'debit', 'Visa'\n  payment_method_code: 'American E', 'MasterCard', 'Visa'\n\nRef_Service_Types: 4 rows\n  Service_Type_Description: 'provide photo service', 'provide dinning service', 'provide filming service', ...\n  Parent_Service_Type_Code: '1'\n  Service_Type_Code: '1', '2', '3', ...\n\nServices: 15 rows\n  Service_Type_Code: '1', '2', '3', ...\n  Product_Name: 'film', 'dinning', 'photo'\n  Product_Price: '58932775.8822', '2704.4719', '6888.8306', ...\n\nStores: 10 rows\n  Marketing_Region_Code: 'IN', 'CA', 'ES', ...\n  Store_Name: 'FJA Filming', 'Rob Dinning', 'Adan Dinning', ...\n  Other_Details: '5 stars', '4 stars', '3 stars'",
+    "stateUrl": "https://github.com/taoyds/sparc#cre_Drama_Workshop_Groups",
+    "tableStats": {
+      "Addresses": {
+        "rows": 20,
+        "sample_values": {
+          "Address_ID": [
+            "110",
+            "124",
+            "148",
+            "15",
+            "180",
+            "19",
+            "192",
+            "201"
+          ],
+          "Line_1": [
+            "4753 Dach Highway",
+            "391 Vandervort Fall Apt. 446",
+            "809 Izabella Islands",
+            "3720 Vito View Apt. 148",
+            "8835 Boehm Greens",
+            "77667 Nathan Union Apt. 606",
+            "545 Lula Mission",
+            "2893 Jenkins Station Suite 815"
+          ],
+          "Line_2": [
+            "Suite 846",
+            "Apt. 107",
+            "Suite 271",
+            "Apt. 584",
+            "Apt. 741",
+            "Apt. 114",
+            "Suite 311",
+            "Suite 570"
+          ],
+          "City_Town": [
+            "Feliciaberg",
+            "West Sherwoodstad",
+            "Schadenville",
+            "New Jaquelinmouth",
+            "Chrisside",
+            "Desireefort",
+            "East Aracely",
+            "Monahanshire"
+          ],
+          "State_County": [
+            "Florida",
+            "Indiana",
+            "Ohio",
+            "Maryland",
+            "WestVirginia",
+            "Oklahoma",
+            "Kentucky",
+            "SouthCarolina"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Bookings": {
+        "rows": 15,
+        "sample_values": {
+          "Booking_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Customer_ID": [
+            "938",
+            "868",
+            "735",
+            "527",
+            "591",
+            "953",
+            "605",
+            "508"
+          ],
+          "Workshop_Group_ID": [
+            "140",
+            "838",
+            "176",
+            "708",
+            "735",
+            "954",
+            "405",
+            "136"
+          ],
+          "Status_Code": [
+            "good",
+            "stop"
+          ],
+          "Store_ID": [
+            "8",
+            "7",
+            "9",
+            "6",
+            "1",
+            "4",
+            "2",
+            "5"
+          ],
+          "Order_Date": [
+            "2016-12-12 10:43:01",
+            "1976-08-20 00:33:08",
+            "1975-11-23 06:28:47",
+            "1995-02-02 15:52:57",
+            "1995-05-10 14:49:47",
+            "1992-11-26 18:11:10",
+            "1975-12-30 14:12:32",
+            "1992-05-11 23:22:41"
+          ],
+          "Planned_Delivery_Date": [
+            "2013-03-10 18:47:05",
+            "2009-07-09 09:18:38",
+            "1989-01-05 19:24:45",
+            "2017-04-27 00:16:00",
+            "1979-07-19 19:44:01",
+            "2016-06-06 20:35:14",
+            "2008-07-18 18:15:40",
+            "1973-04-02 03:10:21"
+          ],
+          "Actual_Delivery_Date": [
+            "1997-11-21 10:07:40",
+            "1976-01-08 07:19:23",
+            "1990-03-16 19:38:47",
+            "1996-10-24 21:15:27",
+            "1971-01-13 13:24:52",
+            "2016-04-30 11:45:39",
+            "1983-10-09 10:48:48",
+            "1983-07-01 22:10:19"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Bookings_Services": {
+        "rows": 12,
+        "sample_values": {
+          "Order_ID": [
+            "1",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "12",
+            "13"
+          ],
+          "Product_ID": [
+            "396",
+            "779",
+            "191",
+            "414",
+            "773",
+            "640",
+            "630",
+            "597"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Clients": {
+        "rows": 20,
+        "sample_values": {
+          "Client_ID": [
+            "423",
+            "426",
+            "478",
+            "508",
+            "509",
+            "527",
+            "591",
+            "605"
+          ],
+          "Address_ID": [
+            "201",
+            "383",
+            "15",
+            "98",
+            "286",
+            "74",
+            "374",
+            "110"
+          ],
+          "Customer_Email_Address": [
+            "branson94@example.net",
+            "alba04@example.com",
+            "westley30@example.net",
+            "hudson.kristina@example.net",
+            "white.alysa@example.com",
+            "buddy98@example.org",
+            "considine.shyanne@example.net",
+            "strosin.keara@example.com"
+          ],
+          "Customer_Name": [
+            "Clifford",
+            "Bettye",
+            "Reinhold",
+            "Jack",
+            "Rosanna",
+            "Kelton",
+            "Connor",
+            "Garfield"
+          ],
+          "Customer_Phone": [
+            "(042)912-3404x5135",
+            "(604)849-0214",
+            "1-048-214-4640x64380",
+            "(966)022-6448x3428",
+            "(651)611-6111x61144",
+            "581.457.6800",
+            "1-479-550-1510x89172",
+            "+63(3)8897932425"
+          ],
+          "Other_Details": [
+            "VIP",
+            "Super VIP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer_Orders": {
+        "rows": 15,
+        "sample_values": {
+          "Order_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Customer_ID": [
+            "516",
+            "418",
+            "712",
+            "240",
+            "556",
+            "546",
+            "304"
+          ],
+          "Store_ID": [
+            "231",
+            "229",
+            "150",
+            "344",
+            "291",
+            "518",
+            "421",
+            "512"
+          ],
+          "Order_Date": [
+            "1994-08-03 12:34:58",
+            "2014-07-10 10:56:01",
+            "1981-06-20 16:29:43",
+            "1999-11-20 18:48:05",
+            "1973-02-16 19:28:34",
+            "1988-11-13 15:42:13",
+            "1998-03-10 14:01:00",
+            "1979-09-01 06:29:01"
+          ],
+          "Planned_Delivery_Date": [
+            "1977-03-11 03:58:19",
+            "1996-08-26 19:19:59",
+            "1980-12-19 05:49:35",
+            "1973-08-20 08:52:39",
+            "1990-09-25 07:14:01",
+            "2012-05-19 00:38:52",
+            "2014-06-18 09:42:23",
+            "1996-05-17 09:10:57"
+          ],
+          "Actual_Delivery_Date": [
+            "1992-07-21 22:11:11",
+            "1998-08-22 17:57:32",
+            "2011-04-13 07:15:35",
+            "2004-03-27 23:30:12",
+            "2004-04-23 21:19:39",
+            "2015-06-20 20:51:17",
+            "1972-08-15 19:12:14",
+            "1996-02-16 04:20:17"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 15,
+        "sample_values": {
+          "Customer_ID": [
+            "240",
+            "267",
+            "304",
+            "418",
+            "516",
+            "518",
+            "546",
+            "556"
+          ],
+          "Address_ID": [
+            "286",
+            "98",
+            "369",
+            "110",
+            "180",
+            "266",
+            "19",
+            "148"
+          ],
+          "Customer_Name": [
+            "Harold",
+            "Federico",
+            "Samson",
+            "Daryl",
+            "Robert",
+            "Jacques",
+            "Davonte",
+            "Blake"
+          ],
+          "Customer_Phone": [
+            "624-096-7791",
+            "914-915-7483",
+            "1-463-121-4086x655",
+            "(191)727-6065x6351",
+            "903.657.6967x467",
+            "02902266118",
+            "(941)313-1839x94608",
+            "056.568.7725"
+          ],
+          "Customer_Email_Address": [
+            "jerde.harmon@example.com",
+            "johnson27@example.com",
+            "dalton75@example.com",
+            "hickle.jazmyn@example.org",
+            "fheathcote@example.com",
+            "eleannon@example.org",
+            "keanu70@example.net",
+            "clemens43@example.org"
+          ],
+          "Other_Details": [
+            "VIP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Drama_Workshop_Groups": {
+        "rows": 15,
+        "sample_values": {
+          "Workshop_Group_ID": [
+            "136",
+            "140",
+            "176",
+            "314",
+            "382",
+            "405",
+            "415",
+            "431"
+          ],
+          "Address_ID": [
+            "383",
+            "180",
+            "286",
+            "369",
+            "266",
+            "207",
+            "110",
+            "201"
+          ],
+          "Currency_Code": [
+            "EU",
+            "USD"
+          ],
+          "Marketing_Region_Code": [
+            "FR",
+            "DE",
+            "RU",
+            "US",
+            "ES",
+            "MX",
+            "IE",
+            "PT"
+          ],
+          "Store_Name": [
+            "Amely Cafe",
+            "Veda Film",
+            "Queen Art",
+            "Kole Photo",
+            "WAT Food",
+            "Hansen Print",
+            "Roo Place",
+            "Uhuels Fruit"
+          ],
+          "Store_Phone": [
+            "122-084-8029",
+            "793-966-9311x5303",
+            "492-463-5967",
+            "(256)743-0310",
+            "(411)133-9128",
+            "1-764-337-3453",
+            "(422)705-5633",
+            "(636)443-4067"
+          ],
+          "Store_Email_Address": [
+            "amely.ruecker@example.com",
+            "breitenberg.veda@example.com",
+            "quigley.queen@example.org",
+            "kole.torp@example.org",
+            "watsica.hettie@example.com",
+            "hansen.krista@example.net",
+            "roosevelt61@example.com",
+            "uhuels@example.net"
+          ],
+          "Other_Details": [
+            "Good",
+            "Bad"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Invoice_Items": {
+        "rows": 2,
+        "sample_values": {
+          "Invoice_Item_ID": [
+            "1",
+            "2"
+          ],
+          "Invoice_ID": [
+            "128",
+            "162"
+          ],
+          "Order_ID": [
+            "1",
+            "4"
+          ],
+          "Order_Item_ID": [
+            "5",
+            "6"
+          ],
+          "Product_ID": [
+            "396",
+            "191"
+          ],
+          "Order_Quantity": [
+            "2",
+            "6"
+          ],
+          "Other_Item_Details": [
+            "Good quality"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Invoices": {
+        "rows": 15,
+        "sample_values": {
+          "Invoice_ID": [
+            "128",
+            "162",
+            "164",
+            "212",
+            "272",
+            "398",
+            "406",
+            "483"
+          ],
+          "Order_ID": [
+            "14",
+            "13",
+            "7",
+            "8",
+            "10",
+            "3",
+            "4",
+            "1"
+          ],
+          "payment_method_code": [
+            "MasterCard",
+            "Visa",
+            "American E"
+          ],
+          "Product_ID": [
+            "4",
+            "9",
+            "7",
+            "3",
+            "8",
+            "2",
+            "6"
+          ],
+          "Order_Quantity": [
+            "2",
+            "1"
+          ],
+          "Order_Item_ID": [
+            "1",
+            "9",
+            "8",
+            "5",
+            "3",
+            "7",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Marketing_Regions": {
+        "rows": 8,
+        "sample_values": {
+          "Marketing_Region_Code": [
+            "CA",
+            "CN",
+            "ES",
+            "FR",
+            "IN",
+            "MX",
+            "RU",
+            "US"
+          ],
+          "Marketing_Region_Name": [
+            "Canada",
+            "China",
+            "Spain",
+            "France",
+            "India",
+            "Mexico",
+            "Russia",
+            "United States"
+          ],
+          "Marketing_Region_Descriptrion": [
+            "Our target market",
+            "Our largest market",
+            "Our main market"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Order_Items": {
+        "rows": 15,
+        "sample_values": {
+          "Order_Item_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Order_ID": [
+            "3",
+            "15",
+            "12",
+            "4",
+            "5",
+            "10",
+            "11",
+            "2"
+          ],
+          "Product_ID": [
+            "233",
+            "300",
+            "273",
+            "46",
+            "83",
+            "179",
+            "156",
+            "216"
+          ],
+          "Order_Quantity": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Performers": {
+        "rows": 20,
+        "sample_values": {
+          "Performer_ID": [
+            "153",
+            "211",
+            "313",
+            "341",
+            "360",
+            "376",
+            "379",
+            "415"
+          ],
+          "Address_ID": [
+            "124",
+            "39",
+            "110",
+            "207",
+            "180",
+            "192",
+            "374",
+            "15"
+          ],
+          "Customer_Name": [
+            "Shawna",
+            "Ashley",
+            "Oren",
+            "Issac",
+            "Shaniya",
+            "Peyton",
+            "Trudie",
+            "Gwen"
+          ],
+          "Customer_Phone": [
+            "664.495.1939",
+            "893-536-8857",
+            "1-952-052-6685x28082",
+            "08639382978",
+            "472.072.6649x4161",
+            "905.705.9514",
+            "782-118-0067",
+            "342-389-0010x682"
+          ],
+          "Customer_Email_Address": [
+            "krogahn@example.com",
+            "preston45@example.net",
+            "ferry.carolina@example.net",
+            "wisozk.john@example.org",
+            "wschroeder@example.org",
+            "clotilde04@example.net",
+            "trey88@example.net",
+            "okub@example.org"
+          ],
+          "Other_Details": [
+            "Did not pay",
+            "Pay good tips"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Performers_in_Bookings": {
+        "rows": 18,
+        "sample_values": {
+          "Order_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "8",
+            "9",
+            "11"
+          ],
+          "Performer_ID": [
+            "153",
+            "341",
+            "466",
+            "798",
+            "313",
+            "882",
+            "650",
+            "976"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "Product_ID": [
+            "11",
+            "154",
+            "156",
+            "179",
+            "188",
+            "21",
+            "216",
+            "232"
+          ],
+          "Product_Name": [
+            "photo",
+            "film",
+            "dinning"
+          ],
+          "Product_Price": [
+            "4448536",
+            "2302",
+            "17622723",
+            "1432324",
+            "49097627",
+            "22082866",
+            "157216",
+            "22"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Payment_Methods": {
+        "rows": 3,
+        "sample_values": {
+          "payment_method_code": [
+            "American E",
+            "MasterCard",
+            "Visa"
+          ],
+          "payment_method_description": [
+            "credit",
+            "debit",
+            "Visa"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Service_Types": {
+        "rows": 4,
+        "sample_values": {
+          "Service_Type_Code": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Parent_Service_Type_Code": [
+            "1"
+          ],
+          "Service_Type_Description": [
+            "provide photo service",
+            "provide dinning service",
+            "provide filming service",
+            "provide adv promoting service"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Services": {
+        "rows": 15,
+        "sample_values": {
+          "Service_ID": [
+            "191",
+            "219",
+            "220",
+            "396",
+            "414",
+            "421",
+            "525",
+            "597"
+          ],
+          "Service_Type_Code": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Workshop_Group_ID": [
+            "415",
+            "838",
+            "708",
+            "735",
+            "954",
+            "470",
+            "176",
+            "382"
+          ],
+          "Product_Name": [
+            "film",
+            "dinning",
+            "photo"
+          ],
+          "Product_Price": [
+            "58932775.8822",
+            "2704.4719",
+            "6888.8306",
+            "31862.0853",
+            "213.9459",
+            "8004.988",
+            "3499362.8145",
+            "5396.2935"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Stores": {
+        "rows": 10,
+        "sample_values": {
+          "Store_ID": [
+            "150",
+            "229",
+            "231",
+            "236",
+            "291",
+            "344",
+            "421",
+            "444"
+          ],
+          "Address_ID": [
+            "286",
+            "266",
+            "230",
+            "74",
+            "369",
+            "192",
+            "110"
+          ],
+          "Marketing_Region_Code": [
+            "IN",
+            "CA",
+            "ES",
+            "RU",
+            "FR",
+            "CN"
+          ],
+          "Store_Name": [
+            "FJA Filming",
+            "Rob Dinning",
+            "Adan Dinning",
+            "Fred Dinning",
+            "Ewi Filming",
+            "Shery Photo",
+            "Carmol Photo",
+            "FK Filming"
+          ],
+          "Store_Phone": [
+            "+65(1)3590790358",
+            "1-327-185-9368",
+            "896-931-9633x869",
+            "893-457-3102x4293",
+            "+46(1)1411714927",
+            "1-678-902-9434x1148",
+            "(941)444-7666x7089",
+            "086-705-8793"
+          ],
+          "Store_Email_Address": [
+            "fjacobson@example.com",
+            "rborer@example.org",
+            "adan93@example.com",
+            "frederik37@example.org",
+            "ewisoky@example.org",
+            "shirley07@example.net",
+            "carmel04@example.com",
+            "fkuvalis@example.net"
+          ],
+          "Other_Details": [
+            "5 stars",
+            "4 stars",
+            "3 stars"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

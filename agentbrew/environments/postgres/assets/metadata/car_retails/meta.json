@@ -1,0 +1,609 @@
+{
+  "db_id": "car_retails",
+  "source": "bird",
+  "tables": 8,
+  "total_rows": 3864,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#car_retails",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"customers\" {\n  \"customerNumber\" INTEGER [pk, not null]\n  \"customerName\" TEXT [not null]\n  \"contactLastName\" TEXT [not null]\n  \"contactFirstName\" TEXT [not null]\n  \"phone\" TEXT [not null]\n  \"addressLine1\" TEXT [not null]\n  \"addressLine2\" TEXT\n  \"city\" TEXT [not null]\n  \"state\" TEXT\n  \"postalCode\" TEXT\n  \"country\" TEXT [not null]\n  \"salesRepEmployeeNumber\" INTEGER\n  \"creditLimit\" REAL\n}\n\nTable \"employees\" {\n  \"employeeNumber\" INTEGER [pk, not null]\n  \"lastName\" TEXT [not null]\n  \"firstName\" TEXT [not null]\n  \"extension\" TEXT [not null]\n  \"email\" TEXT [not null]\n  \"officeCode\" TEXT [not null]\n  \"reportsTo\" INTEGER\n  \"jobTitle\" TEXT [not null]\n}\n\nTable \"offices\" {\n  \"officeCode\" TEXT [pk, not null]\n  \"city\" TEXT [not null]\n  \"phone\" TEXT [not null]\n  \"addressLine1\" TEXT [not null]\n  \"addressLine2\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT [not null]\n  \"postalCode\" TEXT [not null]\n  \"territory\" TEXT [not null]\n}\n\nTable \"orderdetails\" {\n  \"orderNumber\" INTEGER [pk, not null]\n  \"productCode\" TEXT [pk, not null]\n  \"quantityOrdered\" INTEGER [not null]\n  \"priceEach\" REAL [not null]\n  \"orderLineNumber\" INTEGER [not null]\n}\n\nTable \"orders\" {\n  \"orderNumber\" INTEGER [pk, not null]\n  \"orderDate\" DATE [not null]\n  \"requiredDate\" DATE [not null]\n  \"shippedDate\" DATE\n  \"status\" TEXT [not null]\n  \"comments\" TEXT\n  \"customerNumber\" INTEGER [not null]\n}\n\nTable \"payments\" {\n  \"customerNumber\" INTEGER [pk, not null]\n  \"checkNumber\" TEXT [pk, not null]\n  \"paymentDate\" DATE [not null]\n  \"amount\" REAL [not null]\n}\n\nTable \"productlines\" {\n  \"productLine\" TEXT [pk, not null]\n  \"textDescription\" TEXT\n  \"htmlDescription\" TEXT\n  \"image\" BYTEA\n}\n\nTable \"products\" {\n  \"productCode\" TEXT [pk, not null]\n  \"productName\" TEXT [not null]\n  \"productLine\" TEXT [not null]\n  \"productScale\" TEXT [not null]\n  \"productVendor\" TEXT [not null]\n  \"productDescription\" TEXT [not null]\n  \"quantityInStock\" INTEGER [not null]\n  \"buyPrice\" REAL [not null]\n  \"MSRP\" REAL [not null]\n}\n\n\n\nRef: \"employees\".\"reportsTo\" > \"employees\".\"employeeNumber\"\n\nRef: \"employees\".\"officeCode\" > \"offices\".\"officeCode\"\n\nRef: \"customers\".\"salesRepEmployeeNumber\" > \"employees\".\"employeeNumber\"\n\nRef: \"orders\".\"customerNumber\" > \"customers\".\"customerNumber\"\n\nRef: \"payments\".\"customerNumber\" > \"customers\".\"customerNumber\"\n\nRef: \"products\".\"productLine\" > \"productlines\".\"productLine\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"customers\" {\n  \"customerNumber\" INTEGER [pk, not null]\n  \"customerName\" TEXT [not null]\n  \"contactLastName\" TEXT [not null]\n  \"contactFirstName\" TEXT [not null]\n  \"phone\" TEXT [not null]\n  \"addressLine1\" TEXT [not null]\n  \"addressLine2\" TEXT\n  \"city\" TEXT [not null]\n  \"state\" TEXT\n  \"postalCode\" TEXT\n  \"country\" TEXT [not null]\n  \"salesRepEmployeeNumber\" INTEGER\n  \"creditLimit\" REAL\n}\n\nTable \"employees\" {\n  \"employeeNumber\" INTEGER [pk, not null]\n  \"lastName\" TEXT [not null]\n  \"firstName\" TEXT [not null]\n  \"extension\" TEXT [not null]\n  \"email\" TEXT [not null]\n  \"officeCode\" TEXT [not null]\n  \"reportsTo\" INTEGER\n  \"jobTitle\" TEXT [not null]\n}\n\nTable \"offices\" {\n  \"officeCode\" TEXT [pk, not null]\n  \"city\" TEXT [not null]\n  \"phone\" TEXT [not null]\n  \"addressLine1\" TEXT [not null]\n  \"addressLine2\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT [not null]\n  \"postalCode\" TEXT [not null]\n  \"territory\" TEXT [not null]\n}\n\nTable \"orderdetails\" {\n  \"orderNumber\" INTEGER [pk, not null]\n  \"productCode\" TEXT [pk, not null]\n  \"quantityOrdered\" INTEGER [not null]\n  \"priceEach\" REAL [not null]\n  \"orderLineNumber\" INTEGER [not null]\n}\n\nTable \"orders\" {\n  \"orderNumber\" INTEGER [pk, not null]\n  \"orderDate\" DATE [not null]\n  \"requiredDate\" DATE [not null]\n  \"shippedDate\" DATE\n  \"status\" TEXT [not null]\n  \"comments\" TEXT\n  \"customerNumber\" INTEGER [not null]\n}\n\nTable \"payments\" {\n  \"customerNumber\" INTEGER [pk, not null]\n  \"checkNumber\" TEXT [pk, not null]\n  \"paymentDate\" DATE [not null]\n  \"amount\" REAL [not null]\n}\n\nTable \"productlines\" {\n  \"productLine\" TEXT [pk, not null]\n  \"textDescription\" TEXT\n  \"htmlDescription\" TEXT\n  \"image\" BYTEA\n}\n\nTable \"products\" {\n  \"productCode\" TEXT [pk, not null]\n  \"productName\" TEXT [not null]\n  \"productLine\" TEXT [not null]\n  \"productScale\" TEXT [not null]\n  \"productVendor\" TEXT [not null]\n  \"productDescription\" TEXT [not null]\n  \"quantityInStock\" INTEGER [not null]\n  \"buyPrice\" REAL [not null]\n  \"MSRP\" REAL [not null]\n}\n\nRef: \"employees\".\"reportsTo\" > \"employees\".\"employeeNumber\"\n\nRef: \"employees\".\"officeCode\" > \"offices\".\"officeCode\"\n\nRef: \"customers\".\"salesRepEmployeeNumber\" > \"employees\".\"employeeNumber\"\n\nRef: \"orders\".\"customerNumber\" > \"customers\".\"customerNumber\"\n\nRef: \"payments\".\"customerNumber\" > \"customers\".\"customerNumber\"\n\nRef: \"products\".\"productLine\" > \"productlines\".\"productLine\"\n\n## Table Stats & Sample Values\n\ncustomers: 122 rows\n  customerName: 'Atelier graphique', 'Signal Gift Stores', 'Australian Collectors, Co.', ...\n  contactLastName: 'Schmitt', 'King', 'Ferguson', ...\n  contactFirstName: 'Carine', 'Jean', 'Peter', ...\n\nemployees: 23 rows\n  lastName: 'Murphy', 'Patterson', 'Firrelli', ...\n  firstName: 'Diane', 'Mary', 'Jeff', ...\n  jobTitle: 'President', 'VP Sales', 'VP Marketing', ...\n\noffices: 7 rows\n  city: 'San Francisco', 'Boston', 'NYC', ...\n  state: 'CA', 'MA', 'NY', ...\n  country: 'USA', 'France', 'Japan', ...\n\norderdetails: 2996 rows\n  quantityOrdered: '30', '50', '22', ...\n  priceEach: '136.0', '55.09', '75.46', ...\n  orderLineNumber: '3', '2', '4', ...\n\norders: 326 rows\n  status: 'Shipped', 'Resolved', 'Cancelled', ...\n  comments: 'Check on availability.', 'Difficult to negotiate with customer. We need more', 'Customer requested that FedEx Ground is used for t', ...\n  orderDate: '2003-01-06', '2003-01-09', '2003-01-10', ...\n\npayments: 273 rows\n  paymentDate: '2004-10-19', '2003-06-05', '2004-12-18', ...\n  amount: '6066.78', '14571.44', '1676.14', ...\n  checkNumber: 'HQ336336', 'JM555205', 'OM314933', ...\n\nproductlines: 7 rows\n  textDescription: 'Attention car enthusiasts: Make your wildest car o', 'Our motorcycles are state of the art replicas of c', 'Unique, diecast airplane and helicopter replicas s', ...\n  productLine: 'Classic Cars', 'Motorcycles', 'Planes', ...\n\nproducts: 103 rows\n  productName: '1969 Harley Davidson Ultimate Chopper', '1952 Alpine Renault 1300', '1996 Moto Guzzi 1100i', ...\n  productDescription: 'This replica features working kickstand, front sus', 'Turnable front wheels; steering function; detailed', 'Official Moto Guzzi logos and insignias, saddle ba', ...\n  productLine: 'Motorcycles', 'Classic Cars', 'Trucks and Buses', ...",
+    "stateUrl": "https://bird-bench.github.io/#car_retails",
+    "tableStats": {
+      "customers": {
+        "rows": 122,
+        "sample_values": {
+          "customerNumber": [
+            "103",
+            "112",
+            "114",
+            "119",
+            "121",
+            "124",
+            "125",
+            "128"
+          ],
+          "customerName": [
+            "Atelier graphique",
+            "Signal Gift Stores",
+            "Australian Collectors, Co.",
+            "La Rochelle Gifts",
+            "Baane Mini Imports",
+            "Mini Gifts Distributors Ltd.",
+            "Havel & Zbyszek Co",
+            "Blauer See Auto, Co."
+          ],
+          "contactLastName": [
+            "Schmitt",
+            "King",
+            "Ferguson",
+            "Labrune",
+            "Bergulfsen",
+            "Nelson",
+            "Piestrzeniewicz",
+            "Keitel"
+          ],
+          "contactFirstName": [
+            "Carine",
+            "Jean",
+            "Peter",
+            "Janine",
+            "Jonas",
+            "Susan",
+            "Zbyszek",
+            "Roland"
+          ],
+          "phone": [
+            "40.32.2555",
+            "7025551838",
+            "03 9520 4555",
+            "40.67.8555",
+            "07-98 9555",
+            "4155551450",
+            "(26) 642-7555",
+            "+49 69 66 90 2555"
+          ],
+          "addressLine1": [
+            "54, rue Royale",
+            "8489 Strong St.",
+            "636 St Kilda Road",
+            "67, rue des Cinquante Otages",
+            "Erling Skakkes gate 78",
+            "5677 Strong St.",
+            "ul. Filtrowa 68",
+            "Lyonerstr. 34"
+          ],
+          "addressLine2": [
+            "Level 3",
+            "Bronz Apt. 3/6 Tesvikiye",
+            "Suite 400",
+            "2nd Floor",
+            "PR 334 Sentrum",
+            "Suite 101",
+            "Floor No. 4",
+            "8 Temasek"
+          ],
+          "city": [
+            "Nantes",
+            "Las Vegas",
+            "Melbourne",
+            "Stavern",
+            "San Rafael",
+            "Warszawa",
+            "Frankfurt",
+            "San Francisco"
+          ],
+          "state": [
+            "NV",
+            "Victoria",
+            "CA",
+            "NY",
+            "PA",
+            "CT",
+            "MA",
+            "Osaka"
+          ],
+          "postalCode": [
+            "44000",
+            "83030",
+            "3004",
+            "4110",
+            "97562",
+            "01-012",
+            "60528",
+            "94217"
+          ],
+          "country": [
+            "France",
+            "USA",
+            "Australia",
+            "Norway",
+            "Poland",
+            "Germany",
+            "Spain",
+            "Sweden"
+          ],
+          "salesRepEmployeeNumber": [
+            "1370",
+            "1166",
+            "1611",
+            "1504",
+            "1165",
+            "1323",
+            "1401",
+            "1337"
+          ],
+          "creditLimit": [
+            "21000.0",
+            "71800.0",
+            "117300.0",
+            "118200.0",
+            "81700.0",
+            "210500.0",
+            "0.0",
+            "59700.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employees": {
+        "rows": 23,
+        "sample_values": {
+          "employeeNumber": [
+            "1002",
+            "1056",
+            "1076",
+            "1088",
+            "1102",
+            "1143",
+            "1165",
+            "1166"
+          ],
+          "lastName": [
+            "Murphy",
+            "Patterson",
+            "Firrelli",
+            "Bondur",
+            "Bow",
+            "Jennings",
+            "Thompson",
+            "Tseng"
+          ],
+          "firstName": [
+            "Diane",
+            "Mary",
+            "Jeff",
+            "William",
+            "Gerard",
+            "Anthony",
+            "Leslie",
+            "Julie"
+          ],
+          "extension": [
+            "x5800",
+            "x4611",
+            "x9273",
+            "x4871",
+            "x5408",
+            "x5428",
+            "x3291",
+            "x4065"
+          ],
+          "email": [
+            "dmurphy@classicmodelcars.com",
+            "mpatterso@classicmodelcars.com",
+            "jfirrelli@classicmodelcars.com",
+            "wpatterson@classicmodelcars.com",
+            "gbondur@classicmodelcars.com",
+            "abow@classicmodelcars.com",
+            "ljennings@classicmodelcars.com",
+            "lthompson@classicmodelcars.com"
+          ],
+          "officeCode": [
+            "1",
+            "6",
+            "4",
+            "2",
+            "3",
+            "7",
+            "5"
+          ],
+          "reportsTo": [
+            "1002",
+            "1056",
+            "1143",
+            "1102",
+            "1088",
+            "1621"
+          ],
+          "jobTitle": [
+            "President",
+            "VP Sales",
+            "VP Marketing",
+            "Sales Manager (APAC)",
+            "Sale Manager (EMEA)",
+            "Sales Manager (NA)",
+            "Sales Rep"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "offices": {
+        "rows": 7,
+        "sample_values": {
+          "officeCode": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "city": [
+            "San Francisco",
+            "Boston",
+            "NYC",
+            "Paris",
+            "Tokyo",
+            "Sydney",
+            "London"
+          ],
+          "phone": [
+            "+1 650 219 4782",
+            "+1 215 837 0825",
+            "+1 212 555 3000",
+            "+33 14 723 4404",
+            "+81 33 224 5000",
+            "+61 2 9264 2451",
+            "+44 20 7877 2041"
+          ],
+          "addressLine1": [
+            "100 Market Street",
+            "1550 Court Place",
+            "523 East 53rd Street",
+            "43 Rue Jouffroy D'abbans",
+            "4-1 Kioicho",
+            "5-11 Wentworth Avenue",
+            "25 Old Broad Street"
+          ],
+          "addressLine2": [
+            "Suite 300",
+            "Suite 102",
+            "apt. 5A",
+            "Floor #2",
+            "Level 7"
+          ],
+          "state": [
+            "CA",
+            "MA",
+            "NY",
+            "Chiyoda-Ku"
+          ],
+          "country": [
+            "USA",
+            "France",
+            "Japan",
+            "Australia",
+            "UK"
+          ],
+          "postalCode": [
+            "94080",
+            "02107",
+            "10022",
+            "75017",
+            "102-8578",
+            "NSW 2010",
+            "EC2N 1HN"
+          ],
+          "territory": [
+            "NA",
+            "EMEA",
+            "Japan",
+            "APAC"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orderdetails": {
+        "rows": 2996,
+        "sample_values": {
+          "orderNumber": [
+            "10100",
+            "10101",
+            "10102",
+            "10103",
+            "10104",
+            "10105",
+            "10106",
+            "10107"
+          ],
+          "productCode": [
+            "S18_1749",
+            "S18_2248",
+            "S18_4409",
+            "S24_3969",
+            "S18_2325",
+            "S18_2795",
+            "S24_1937",
+            "S24_2022"
+          ],
+          "quantityOrdered": [
+            "30",
+            "50",
+            "22",
+            "49",
+            "25",
+            "26",
+            "45",
+            "46"
+          ],
+          "priceEach": [
+            "136.0",
+            "55.09",
+            "75.46",
+            "35.29",
+            "108.06",
+            "167.06",
+            "32.53",
+            "44.35"
+          ],
+          "orderLineNumber": [
+            "3",
+            "2",
+            "4",
+            "1",
+            "11",
+            "8",
+            "10",
+            "12"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orders": {
+        "rows": 326,
+        "sample_values": {
+          "orderNumber": [
+            "10100",
+            "10101",
+            "10102",
+            "10103",
+            "10104",
+            "10105",
+            "10106",
+            "10107"
+          ],
+          "orderDate": [
+            "2003-01-06",
+            "2003-01-09",
+            "2003-01-10",
+            "2003-01-29",
+            "2003-01-31",
+            "2003-02-11",
+            "2003-02-17",
+            "2003-02-24"
+          ],
+          "requiredDate": [
+            "2003-01-13",
+            "2003-01-18",
+            "2003-02-07",
+            "2003-02-09",
+            "2003-02-21",
+            "2003-02-24",
+            "2003-03-03",
+            "2003-03-12"
+          ],
+          "shippedDate": [
+            "2003-01-10",
+            "2003-01-11",
+            "2003-01-14",
+            "2003-02-02",
+            "2003-02-01",
+            "2003-02-12",
+            "2003-02-21",
+            "2003-02-26"
+          ],
+          "status": [
+            "Shipped",
+            "Resolved",
+            "Cancelled",
+            "On Hold",
+            "Disputed",
+            "In Process"
+          ],
+          "comments": [
+            "Check on availability.",
+            "Difficult to negotiate with customer. We need more",
+            "Customer requested that FedEx Ground is used for t",
+            "Customer requested that ad materials (such as post",
+            "Customer has worked with some of our vendors in th",
+            "Customer very concerned about the exact color of t",
+            "Customer requested special shippment. The instruct",
+            "Customer is interested in buying more Ferrari mode"
+          ],
+          "customerNumber": [
+            "363",
+            "128",
+            "181",
+            "121",
+            "141",
+            "145",
+            "278",
+            "131"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payments": {
+        "rows": 273,
+        "sample_values": {
+          "customerNumber": [
+            "103",
+            "112",
+            "114",
+            "119",
+            "121",
+            "124",
+            "128",
+            "129"
+          ],
+          "checkNumber": [
+            "HQ336336",
+            "JM555205",
+            "OM314933",
+            "BO864823",
+            "HQ55022",
+            "ND748579",
+            "GG31455",
+            "MA765515"
+          ],
+          "paymentDate": [
+            "2004-10-19",
+            "2003-06-05",
+            "2004-12-18",
+            "2004-12-17",
+            "2003-06-06",
+            "2004-08-20",
+            "2003-05-20",
+            "2004-12-15"
+          ],
+          "amount": [
+            "6066.78",
+            "14571.44",
+            "1676.14",
+            "14191.12",
+            "32641.98",
+            "33347.88",
+            "45864.03",
+            "82261.22"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "productlines": {
+        "rows": 7,
+        "sample_values": {
+          "productLine": [
+            "Classic Cars",
+            "Motorcycles",
+            "Planes",
+            "Ships",
+            "Trains",
+            "Trucks and Buses",
+            "Vintage Cars"
+          ],
+          "textDescription": [
+            "Attention car enthusiasts: Make your wildest car o",
+            "Our motorcycles are state of the art replicas of c",
+            "Unique, diecast airplane and helicopter replicas s",
+            "The perfect holiday or anniversary gift for execut",
+            "Model trains are a rewarding hobby for enthusiasts",
+            "The Truck and Bus models are realistic replicas of",
+            "Our Vintage Car models realistically portray autom"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 103,
+        "sample_values": {
+          "productCode": [
+            "S10_1678",
+            "S10_1949",
+            "S10_2016",
+            "S10_4757",
+            "S10_4962",
+            "S12_1099",
+            "S12_1108",
+            "S12_1666"
+          ],
+          "productName": [
+            "1969 Harley Davidson Ultimate Chopper",
+            "1952 Alpine Renault 1300",
+            "1996 Moto Guzzi 1100i",
+            "1972 Alfa Romeo GTA",
+            "1962 LanciaA Delta 16V",
+            "1968 Ford Mustang",
+            "2001 Ferrari Enzo",
+            "1958 Setra Bus"
+          ],
+          "productLine": [
+            "Motorcycles",
+            "Classic Cars",
+            "Trucks and Buses",
+            "Vintage Cars",
+            "Planes",
+            "Ships",
+            "Trains"
+          ],
+          "productScale": [
+            "1:10",
+            "1:12",
+            "1:18",
+            "1:72",
+            "1:24",
+            "1:32",
+            "1:50",
+            "1:700"
+          ],
+          "productVendor": [
+            "Min Lin Diecast",
+            "Classic Metal Creations",
+            "Highway 66 Mini Classics",
+            "Motor City Art Classics",
+            "Second Gear Diecast",
+            "Autoart Studio Design",
+            "Welly Diecast Productions",
+            "Unimax Art Galleries"
+          ],
+          "productDescription": [
+            "This replica features working kickstand, front sus",
+            "Turnable front wheels; steering function; detailed",
+            "Official Moto Guzzi logos and insignias, saddle ba",
+            "Features include: Turnable front wheels; steering ",
+            "Hood, doors and trunk all open to reveal highly de",
+            "Model features 30 windows, skylights & glare resis",
+            "Official logos and insignias, saddle bags located ",
+            "1:18 scale die-cast about 10\" long doors open, hoo"
+          ],
+          "quantityInStock": [
+            "7933",
+            "7305",
+            "6625",
+            "3252",
+            "6791",
+            "68",
+            "3619",
+            "1579"
+          ],
+          "buyPrice": [
+            "48.81",
+            "98.58",
+            "68.99",
+            "85.68",
+            "103.42",
+            "95.34",
+            "95.59",
+            "77.9"
+          ],
+          "MSRP": [
+            "95.7",
+            "214.3",
+            "118.94",
+            "136.0",
+            "147.74",
+            "194.57",
+            "207.8",
+            "136.67"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

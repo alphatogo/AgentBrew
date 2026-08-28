@@ -1,0 +1,15 @@
+{
+  "title": "Capability Gap Tracker",
+  "capability": [
+    "create_database",
+    "define_schema",
+    "build_relations",
+    "rollup_formula_schema",
+    "populate_rows",
+    "summarize_from_records",
+    "archive_or_delete_items",
+    "field_mapping",
+    "insert_block_at_position"
+  ],
+  "question": "Find the page named \"Analyst Portfolio\" and create a comprehensive capability audit system while refreshing the featured projects section.\n**Task Requirements:** 1. Create a new database named \"Capability Development Tracker\" as a child\n   database in the main Analyst Portfolio page with the following\n   properties:\n   - Name (title property)\n   - Current Capability (relation to Capabilities database)\n   - Current Confidence (rollup from related capability's \"Confidence\"\n     property)\n   - Target Confidence (number property with format \"percent\")\n   - Gap (formula: Target Confidence - Current Confidence)\n   - Learning Resources (rich text property)\n   - Progress Notes (rich text property)\n\n2. Populate the Capability Development Tracker database with entries for\n   all capabilities that have a confidence level below 70% (0.7):\n   - For each qualifying capability, create an entry with:\n     - Name: \"[Capability Name] Development Plan\"\n     - Link to the corresponding capability in Capabilities database\n     - Target Confidence: Set to Current + 25% (capped at 95%)\n     - Learning Resources: \"Practice projects and expert review\"\n     - Progress Notes: \"Initial gap assessment complete\"\n\n3. Replace the usual focus callout with the following blocks immediately\n   after the Projects database:\n   - A divider block\n   - A heading_2 block with text \"Current Focus\"\n   - A paragraph block with content that dynamically references:\n     - The highest confidence value from your Capabilities database (find\n       the capability with the highest Confidence percentage)\n     - Incorporate this into the text: \"The Executive Metrics Workspace\n       represents my most impactful recent work, leveraging my expertise in\n       [highest capability name] ([confidence]%) to deliver\n       executive-grade reporting that prioritizes both clarity and\n       decision quality.\"\n"
+}

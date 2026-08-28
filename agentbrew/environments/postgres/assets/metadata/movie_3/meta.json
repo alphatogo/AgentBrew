@@ -1,0 +1,741 @@
+{
+  "db_id": "movie_3",
+  "source": "bird",
+  "tables": 16,
+  "total_rows": 47273,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#movie_3",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"actor\" {\n  \"actor_id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"address\" {\n  \"address_id\" INTEGER [pk]\n  \"address\" TEXT [not null]\n  \"address2\" TEXT\n  \"district\" TEXT [not null]\n  \"city_id\" INTEGER [not null]\n  \"postal_code\" TEXT\n  \"phone\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"category\" {\n  \"category_id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"city\" {\n  \"city_id\" INTEGER [pk]\n  \"city\" TEXT [not null]\n  \"country_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"country\" {\n  \"country_id\" INTEGER [pk]\n  \"country\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"customer\" {\n  \"customer_id\" INTEGER [pk]\n  \"store_id\" INTEGER [not null]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"email\" TEXT\n  \"address_id\" INTEGER [not null]\n  \"active\" INTEGER [not null]\n  \"create_date\" TIMESTAMP [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film\" {\n  \"film_id\" INTEGER [pk]\n  \"title\" TEXT [not null]\n  \"description\" TEXT\n  \"release_year\" TEXT\n  \"language_id\" INTEGER [not null]\n  \"original_language_id\" INTEGER\n  \"rental_duration\" INTEGER [not null]\n  \"rental_rate\" REAL [not null]\n  \"length\" INTEGER\n  \"replacement_cost\" REAL [not null]\n  \"rating\" TEXT\n  \"special_features\" TEXT\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_actor\" {\n  \"actor_id\" INTEGER [pk, not null]\n  \"film_id\" INTEGER [pk, not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_category\" {\n  \"film_id\" INTEGER [pk, not null]\n  \"category_id\" INTEGER [pk, not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_text\" {\n  \"film_id\" INTEGER [pk, not null]\n  \"title\" TEXT [not null]\n  \"description\" TEXT\n}\n\nTable \"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"film_id\" INTEGER [not null]\n  \"store_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"language\" {\n  \"language_id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"payment\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"staff_id\" INTEGER [not null]\n  \"rental_id\" INTEGER\n  \"amount\" REAL [not null]\n  \"payment_date\" TIMESTAMP [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"rental\" {\n  \"rental_id\" INTEGER [pk]\n  \"rental_date\" TIMESTAMP [not null]\n  \"inventory_id\" INTEGER [not null]\n  \"customer_id\" INTEGER [not null]\n  \"return_date\" TIMESTAMP\n  \"staff_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"address_id\" INTEGER [not null]\n  \"picture\" BYTEA\n  \"email\" TEXT\n  \"store_id\" INTEGER [not null]\n  \"active\" INTEGER [not null]\n  \"username\" TEXT [not null]\n  \"password\" TEXT\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"store\" {\n  \"store_id\" INTEGER [pk]\n  \"manager_staff_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"actor\" {\n  \"actor_id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"address\" {\n  \"address_id\" INTEGER [pk]\n  \"address\" TEXT [not null]\n  \"address2\" TEXT\n  \"district\" TEXT [not null]\n  \"city_id\" INTEGER [not null]\n  \"postal_code\" TEXT\n  \"phone\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"category\" {\n  \"category_id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"city\" {\n  \"city_id\" INTEGER [pk]\n  \"city\" TEXT [not null]\n  \"country_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"country\" {\n  \"country_id\" INTEGER [pk]\n  \"country\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"customer\" {\n  \"customer_id\" INTEGER [pk]\n  \"store_id\" INTEGER [not null]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"email\" TEXT\n  \"address_id\" INTEGER [not null]\n  \"active\" INTEGER [not null]\n  \"create_date\" TIMESTAMP [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film\" {\n  \"film_id\" INTEGER [pk]\n  \"title\" TEXT [not null]\n  \"description\" TEXT\n  \"release_year\" TEXT\n  \"language_id\" INTEGER [not null]\n  \"original_language_id\" INTEGER\n  \"rental_duration\" INTEGER [not null]\n  \"rental_rate\" REAL [not null]\n  \"length\" INTEGER\n  \"replacement_cost\" REAL [not null]\n  \"rating\" TEXT\n  \"special_features\" TEXT\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_actor\" {\n  \"actor_id\" INTEGER [pk, not null]\n  \"film_id\" INTEGER [pk, not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_category\" {\n  \"film_id\" INTEGER [pk, not null]\n  \"category_id\" INTEGER [pk, not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"film_text\" {\n  \"film_id\" INTEGER [pk, not null]\n  \"title\" TEXT [not null]\n  \"description\" TEXT\n}\n\nTable \"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"film_id\" INTEGER [not null]\n  \"store_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"language\" {\n  \"language_id\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"payment\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"staff_id\" INTEGER [not null]\n  \"rental_id\" INTEGER\n  \"amount\" REAL [not null]\n  \"payment_date\" TIMESTAMP [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"rental\" {\n  \"rental_id\" INTEGER [pk]\n  \"rental_date\" TIMESTAMP [not null]\n  \"inventory_id\" INTEGER [not null]\n  \"customer_id\" INTEGER [not null]\n  \"return_date\" TIMESTAMP\n  \"staff_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"first_name\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"address_id\" INTEGER [not null]\n  \"picture\" BYTEA\n  \"email\" TEXT\n  \"store_id\" INTEGER [not null]\n  \"active\" INTEGER [not null]\n  \"username\" TEXT [not null]\n  \"password\" TEXT\n  \"last_update\" TIMESTAMP [not null]\n}\n\nTable \"store\" {\n  \"store_id\" INTEGER [pk]\n  \"manager_staff_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"last_update\" TIMESTAMP [not null]\n}\n\n## Table Stats & Sample Values\n\nactor: 200 rows\n  first_name: 'PENELOPE', 'NICK', 'ED', ...\n  last_name: 'GUINESS', 'WAHLBERG', 'CHASE', ...\n  last_update: '2006-02-15 04:34:33.0'\n\naddress: 603 rows\n  address: '47 MySakila Drive', '28 MySQL Boulevard', '23 Workhaven Lane', ...\n  district: 'Alberta', 'QLD', 'Nagasaki', ...\n  postal_code: '35200', '17886', '83579', ...\n\ncategory: 16 rows\n  name: 'Action', 'Animation', 'Children', ...\n  last_update: '2006-02-15 04:46:27.0'\n  category_id: '1', '2', '3', ...\n\ncity: 600 rows\n  city: 'A Corua (La Corua)', 'Abha', 'Abu Dhabi', ...\n  country_id: '87', '82', '101', ...\n  last_update: '2006-02-15 04:45:25.0'\n\ncountry: 109 rows\n  country: 'Afghanistan', 'Algeria', 'American Samoa', ...\n  last_update: '2006-02-15 04:44:00.0'\n  country_id: '1', '2', '3', ...\n\ncustomer: 599 rows\n  first_name: 'MARY', 'PATRICIA', 'LINDA', ...\n  last_name: 'SMITH', 'JOHNSON', 'WILLIAMS', ...\n  email: 'MARY.SMITH@sakilacustomer.org', 'PATRICIA.JOHNSON@sakilacustomer.org', 'LINDA.WILLIAMS@sakilacustomer.org', ...\n\nfilm: 1000 rows\n  title: 'ACADEMY DINOSAUR', 'ACE GOLDFINGER', 'ADAPTATION HOLES', ...\n  description: 'A Epic Drama of a Feminist And a Mad Scientist who', 'A Astounding Epistle of a Database Administrator A', 'A Astounding Reflection of a Lumberjack And a Car', ...\n  rating: 'PG', 'G', 'NC-17', ...\n\nfilm_actor: 5462 rows\n  last_update: '2006-02-15 05:05:03.0'\n  actor_id: '1', '2', '3', ...\n  film_id: '1', '23', '25', ...\n\nfilm_category: 1000 rows\n  last_update: '2006-02-15 05:07:09.0'\n  category_id: '6', '11', '8', ...\n  film_id: '1', '2', '3', ...\n\nfilm_text: 1000 rows\n  title: 'ACADEMY DINOSAUR', 'ACE GOLDFINGER', 'ADAPTATION HOLES', ...\n  description: 'A Epic Drama of a Feminist And a Mad Scientist who', 'A Astounding Epistle of a Database Administrator A', 'A Astounding Reflection of a Lumberjack And a Car', ...\n  film_id: '1', '2', '3', ...\n\ninventory: 4581 rows\n  last_update: '2006-02-15 05:09:17.0'\n  film_id: '1', '2', '3', ...\n  store_id: '1', '2'\n\nlanguage: 6 rows\n  name: 'English', 'Italian', 'Japanese', ...\n  last_update: '2006-02-15 05:02:19.0'\n  language_id: '1', '2', '3', ...\n\npayment: 10000 rows\n  amount: '2.99', '0.99', '5.99', ...\n  payment_date: '2005-05-25 11:30:37.0', '2005-05-28 10:35:23.0', '2005-06-15 00:54:12.0', ...\n  last_update: '2006-02-15 22:12:30.0', '2006-02-15 22:12:31.0', '2006-02-15 22:12:32.0', ...\n\nrental: 10000 rows\n  rental_date: '2005-05-24 22:53:30.0', '2005-05-24 22:54:33.0', '2005-05-24 23:03:39.0', ...\n  return_date: '2005-05-26 22:04:30.0', '2005-05-28 19:40:33.0', '2005-06-01 22:12:39.0', ...\n  last_update: '2006-02-15 21:30:53.0'\n\nstaff: 2 rows\n  first_name: 'Mike', 'Jon'\n  last_name: 'Hillyer', 'Stephens'\n  username: 'Mike', 'Jon'\n\nstore: 2 rows\n  last_update: '2006-02-15 04:57:12.0'\n  manager_staff_id: '1', '2'\n  address_id: '1', '2'",
+    "stateUrl": "https://bird-bench.github.io/#movie_3",
+    "tableStats": {
+      "actor": {
+        "rows": 200,
+        "sample_values": {
+          "actor_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "first_name": [
+            "PENELOPE",
+            "NICK",
+            "ED",
+            "JENNIFER",
+            "JOHNNY",
+            "BETTE",
+            "GRACE",
+            "MATTHEW"
+          ],
+          "last_name": [
+            "GUINESS",
+            "WAHLBERG",
+            "CHASE",
+            "DAVIS",
+            "LOLLOBRIGIDA",
+            "NICHOLSON",
+            "MOSTEL",
+            "JOHANSSON"
+          ],
+          "last_update": [
+            "2006-02-15 04:34:33.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "address": {
+        "rows": 603,
+        "sample_values": {
+          "address_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "address": [
+            "47 MySakila Drive",
+            "28 MySQL Boulevard",
+            "23 Workhaven Lane",
+            "1411 Lillydale Drive",
+            "1913 Hanoi Way",
+            "1121 Loja Avenue",
+            "692 Joliet Street",
+            "1566 Inegl Manor"
+          ],
+          "district": [
+            "Alberta",
+            "QLD",
+            "Nagasaki",
+            "California",
+            "Attika",
+            "Mandalay",
+            "Nantou",
+            "Texas"
+          ],
+          "city_id": [
+            "300",
+            "576",
+            "463",
+            "449",
+            "38",
+            "349",
+            "361",
+            "295"
+          ],
+          "postal_code": [
+            "35200",
+            "17886",
+            "83579",
+            "53561",
+            "42399",
+            "18743",
+            "93896",
+            "77948"
+          ],
+          "phone": [
+            "14033335568",
+            "6172235589",
+            "28303384290",
+            "838635286649",
+            "448477190408",
+            "705814003527",
+            "10655648674",
+            "860452626434"
+          ],
+          "last_update": [
+            "2006-02-15 04:45:30.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "category": {
+        "rows": 16,
+        "sample_values": {
+          "category_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Action",
+            "Animation",
+            "Children",
+            "Classics",
+            "Comedy",
+            "Documentary",
+            "Drama",
+            "Family"
+          ],
+          "last_update": [
+            "2006-02-15 04:46:27.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "city": {
+        "rows": 600,
+        "sample_values": {
+          "city_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "city": [
+            "A Corua (La Corua)",
+            "Abha",
+            "Abu Dhabi",
+            "Acua",
+            "Adana",
+            "Addis Abeba",
+            "Aden",
+            "Adoni"
+          ],
+          "country_id": [
+            "87",
+            "82",
+            "101",
+            "60",
+            "97",
+            "31",
+            "107",
+            "44"
+          ],
+          "last_update": [
+            "2006-02-15 04:45:25.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "country": {
+        "rows": 109,
+        "sample_values": {
+          "country_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "country": [
+            "Afghanistan",
+            "Algeria",
+            "American Samoa",
+            "Angola",
+            "Anguilla",
+            "Argentina",
+            "Armenia",
+            "Australia"
+          ],
+          "last_update": [
+            "2006-02-15 04:44:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer": {
+        "rows": 599,
+        "sample_values": {
+          "customer_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "store_id": [
+            "1",
+            "2"
+          ],
+          "first_name": [
+            "MARY",
+            "PATRICIA",
+            "LINDA",
+            "BARBARA",
+            "ELIZABETH",
+            "JENNIFER",
+            "MARIA",
+            "SUSAN"
+          ],
+          "last_name": [
+            "SMITH",
+            "JOHNSON",
+            "WILLIAMS",
+            "JONES",
+            "BROWN",
+            "DAVIS",
+            "MILLER",
+            "WILSON"
+          ],
+          "email": [
+            "MARY.SMITH@sakilacustomer.org",
+            "PATRICIA.JOHNSON@sakilacustomer.org",
+            "LINDA.WILLIAMS@sakilacustomer.org",
+            "BARBARA.JONES@sakilacustomer.org",
+            "ELIZABETH.BROWN@sakilacustomer.org",
+            "JENNIFER.DAVIS@sakilacustomer.org",
+            "MARIA.MILLER@sakilacustomer.org",
+            "SUSAN.WILSON@sakilacustomer.org"
+          ],
+          "address_id": [
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "active": [
+            "1",
+            "0"
+          ],
+          "create_date": [
+            "2006-02-14 22:04:36.0",
+            "2006-02-14 22:04:37.0"
+          ],
+          "last_update": [
+            "2006-02-15 04:57:20.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "film": {
+        "rows": 1000,
+        "sample_values": {
+          "film_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "title": [
+            "ACADEMY DINOSAUR",
+            "ACE GOLDFINGER",
+            "ADAPTATION HOLES",
+            "AFFAIR PREJUDICE",
+            "AFRICAN EGG",
+            "AGENT TRUMAN",
+            "AIRPLANE SIERRA",
+            "AIRPORT POLLOCK"
+          ],
+          "description": [
+            "A Epic Drama of a Feminist And a Mad Scientist who",
+            "A Astounding Epistle of a Database Administrator A",
+            "A Astounding Reflection of a Lumberjack And a Car ",
+            "A Fanciful Documentary of a Frisbee And a Lumberja",
+            "A Fast-Paced Documentary of a Pastry Chef And a De",
+            "A Intrepid Panorama of a Robot And a Boy who must ",
+            "A Touching Saga of a Hunter And a Butler who must ",
+            "A Epic Tale of a Moose And a Girl who must Confron"
+          ],
+          "release_year": [
+            "2006"
+          ],
+          "language_id": [
+            "1"
+          ],
+          "rental_duration": [
+            "6",
+            "3",
+            "7",
+            "5",
+            "4"
+          ],
+          "rental_rate": [
+            "0.99",
+            "4.99",
+            "2.99"
+          ],
+          "length": [
+            "86",
+            "48",
+            "50",
+            "117",
+            "130",
+            "169",
+            "62",
+            "54"
+          ],
+          "replacement_cost": [
+            "20.99",
+            "12.99",
+            "18.99",
+            "26.99",
+            "22.99",
+            "17.99",
+            "28.99",
+            "15.99"
+          ],
+          "rating": [
+            "PG",
+            "G",
+            "NC-17",
+            "PG-13",
+            "R"
+          ],
+          "special_features": [
+            "Deleted Scenes,Behind the Scenes",
+            "Trailers,Deleted Scenes",
+            "Commentaries,Behind the Scenes",
+            "Deleted Scenes",
+            "Trailers",
+            "Commentaries,Deleted Scenes",
+            "Trailers,Deleted Scenes,Behind the Scenes",
+            "Trailers,Commentaries,Behind the Scenes"
+          ],
+          "last_update": [
+            "2006-02-15 05:03:42.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "film_actor": {
+        "rows": 5462,
+        "sample_values": {
+          "actor_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "film_id": [
+            "1",
+            "23",
+            "25",
+            "106",
+            "140",
+            "166",
+            "277",
+            "361"
+          ],
+          "last_update": [
+            "2006-02-15 05:05:03.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "film_category": {
+        "rows": 1000,
+        "sample_values": {
+          "film_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "category_id": [
+            "6",
+            "11",
+            "8",
+            "9",
+            "5",
+            "15",
+            "12",
+            "4"
+          ],
+          "last_update": [
+            "2006-02-15 05:07:09.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "film_text": {
+        "rows": 1000,
+        "sample_values": {
+          "film_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "title": [
+            "ACADEMY DINOSAUR",
+            "ACE GOLDFINGER",
+            "ADAPTATION HOLES",
+            "AFFAIR PREJUDICE",
+            "AFRICAN EGG",
+            "AGENT TRUMAN",
+            "AIRPLANE SIERRA",
+            "AIRPORT POLLOCK"
+          ],
+          "description": [
+            "A Epic Drama of a Feminist And a Mad Scientist who",
+            "A Astounding Epistle of a Database Administrator A",
+            "A Astounding Reflection of a Lumberjack And a Car ",
+            "A Fanciful Documentary of a Frisbee And a Lumberja",
+            "A Fast-Paced Documentary of a Pastry Chef And a De",
+            "A Intrepid Panorama of a Robot And a Boy who must ",
+            "A Touching Saga of a Hunter And a Butler who must ",
+            "A Epic Tale of a Moose And a Girl who must Confron"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory": {
+        "rows": 4581,
+        "sample_values": {
+          "inventory_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "film_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "store_id": [
+            "1",
+            "2"
+          ],
+          "last_update": [
+            "2006-02-15 05:09:17.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "language": {
+        "rows": 6,
+        "sample_values": {
+          "language_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "name": [
+            "English",
+            "Italian",
+            "Japanese",
+            "Mandarin",
+            "French",
+            "German"
+          ],
+          "last_update": [
+            "2006-02-15 05:02:19.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment": {
+        "rows": 10000,
+        "sample_values": {
+          "payment_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "staff_id": [
+            "1",
+            "2"
+          ],
+          "rental_id": [
+            "76",
+            "573",
+            "1185",
+            "1422",
+            "1476",
+            "1725",
+            "2308",
+            "2363"
+          ],
+          "amount": [
+            "2.99",
+            "0.99",
+            "5.99",
+            "9.99",
+            "4.99",
+            "3.99",
+            "7.99",
+            "1.99"
+          ],
+          "payment_date": [
+            "2005-05-25 11:30:37.0",
+            "2005-05-28 10:35:23.0",
+            "2005-06-15 00:54:12.0",
+            "2005-06-15 18:02:53.0",
+            "2005-06-15 21:08:46.0",
+            "2005-06-16 15:18:57.0",
+            "2005-06-18 08:41:48.0",
+            "2005-06-18 13:33:59.0"
+          ],
+          "last_update": [
+            "2006-02-15 22:12:30.0",
+            "2006-02-15 22:12:31.0",
+            "2006-02-15 22:12:32.0",
+            "2006-02-15 22:12:33.0",
+            "2006-02-15 22:12:34.0",
+            "2006-02-15 22:12:35.0",
+            "2006-02-15 22:12:36.0",
+            "2006-02-15 22:12:37.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rental": {
+        "rows": 10000,
+        "sample_values": {
+          "rental_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "rental_date": [
+            "2005-05-24 22:53:30.0",
+            "2005-05-24 22:54:33.0",
+            "2005-05-24 23:03:39.0",
+            "2005-05-24 23:04:41.0",
+            "2005-05-24 23:05:21.0",
+            "2005-05-24 23:08:07.0",
+            "2005-05-24 23:11:53.0",
+            "2005-05-24 23:31:46.0"
+          ],
+          "inventory_id": [
+            "367",
+            "1525",
+            "1711",
+            "2452",
+            "2079",
+            "2792",
+            "3995",
+            "2346"
+          ],
+          "customer_id": [
+            "130",
+            "459",
+            "408",
+            "333",
+            "222",
+            "549",
+            "269",
+            "239"
+          ],
+          "return_date": [
+            "2005-05-26 22:04:30.0",
+            "2005-05-28 19:40:33.0",
+            "2005-06-01 22:12:39.0",
+            "2005-06-03 01:43:41.0",
+            "2005-06-02 04:33:21.0",
+            "2005-05-27 01:32:07.0",
+            "2005-05-29 20:34:53.0",
+            "2005-05-27 23:33:46.0"
+          ],
+          "staff_id": [
+            "1",
+            "2"
+          ],
+          "last_update": [
+            "2006-02-15 21:30:53.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "staff": {
+        "rows": 2,
+        "sample_values": {
+          "staff_id": [
+            "1",
+            "2"
+          ],
+          "first_name": [
+            "Mike",
+            "Jon"
+          ],
+          "last_name": [
+            "Hillyer",
+            "Stephens"
+          ],
+          "address_id": [
+            "3",
+            "4"
+          ],
+          "picture": [
+            "0x3F504E470D0A1A0A0000000D494844520000007900000075"
+          ],
+          "email": [
+            "Mike.Hillyer@sakilastaff.com",
+            "Jon.Stephens@sakilastaff.com"
+          ],
+          "store_id": [
+            "1",
+            "2"
+          ],
+          "active": [
+            "1"
+          ],
+          "username": [
+            "Mike",
+            "Jon"
+          ],
+          "password": [
+            "8cb2237d0679ca88db6464eac60da96345513964"
+          ],
+          "last_update": [
+            "2006-02-15 04:57:16.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "store": {
+        "rows": 2,
+        "sample_values": {
+          "store_id": [
+            "1",
+            "2"
+          ],
+          "manager_staff_id": [
+            "1",
+            "2"
+          ],
+          "address_id": [
+            "1",
+            "2"
+          ],
+          "last_update": [
+            "2006-02-15 04:57:12.0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

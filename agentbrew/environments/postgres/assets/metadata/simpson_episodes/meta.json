@@ -1,0 +1,431 @@
+{
+  "db_id": "simpson_episodes",
+  "source": "bird",
+  "tables": 7,
+  "total_rows": 5551,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#simpson_episodes",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Award\" {\n  \"award_id\" INTEGER [pk]\n  \"organization\" TEXT\n  \"year\" INTEGER\n  \"award_category\" TEXT\n  \"award\" TEXT\n  \"person\" TEXT\n  \"role\" TEXT\n  \"episode_id\" TEXT\n  \"season\" TEXT\n  \"song\" TEXT\n  \"result\" TEXT\n}\n\nTable \"Character_Award\" {\n  \"award_id\" INTEGER\n  \"character\" TEXT\n}\n\nTable \"Credit\" {\n  \"episode_id\" TEXT\n  \"category\" TEXT\n  \"person\" TEXT\n  \"role\" TEXT\n  \"credited\" TEXT\n}\n\nTable \"Episode\" {\n  \"episode_id\" TEXT [pk]\n  \"season\" INTEGER\n  \"episode\" INTEGER\n  \"number_in_series\" INTEGER\n  \"title\" TEXT\n  \"summary\" TEXT\n  \"air_date\" TEXT\n  \"episode_image\" TEXT\n  \"rating\" REAL\n  \"votes\" INTEGER\n}\n\nTable \"Keyword\" {\n  \"episode_id\" TEXT [pk]\n  \"keyword\" TEXT [pk]\n}\n\nTable \"Person\" {\n  \"name\" TEXT [pk]\n  \"birthdate\" TEXT\n  \"birth_name\" TEXT\n  \"birth_place\" TEXT\n  \"birth_region\" TEXT\n  \"birth_country\" TEXT\n  \"height_meters\" REAL\n  \"nickname\" TEXT\n}\n\nTable \"Vote\" {\n  \"episode_id\" TEXT\n  \"stars\" INTEGER\n  \"votes\" INTEGER\n  \"percent\" REAL\n}\n\n\n\nRef: \"Award\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Award\".\"person\" > \"Person\".\"name\"\n\nRef: \"Character_Award\".\"award_id\" > \"Award\".\"award_id\"\n\nRef: \"Credit\".\"person\" > \"Person\".\"name\"\n\nRef: \"Credit\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Keyword\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Vote\".\"episode_id\" > \"Episode\".\"episode_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Award\" {\n  \"award_id\" INTEGER [pk]\n  \"organization\" TEXT\n  \"year\" INTEGER\n  \"award_category\" TEXT\n  \"award\" TEXT\n  \"person\" TEXT\n  \"role\" TEXT\n  \"episode_id\" TEXT\n  \"season\" TEXT\n  \"song\" TEXT\n  \"result\" TEXT\n}\n\nTable \"Character_Award\" {\n  \"award_id\" INTEGER\n  \"character\" TEXT\n}\n\nTable \"Credit\" {\n  \"episode_id\" TEXT\n  \"category\" TEXT\n  \"person\" TEXT\n  \"role\" TEXT\n  \"credited\" TEXT\n}\n\nTable \"Episode\" {\n  \"episode_id\" TEXT [pk]\n  \"season\" INTEGER\n  \"episode\" INTEGER\n  \"number_in_series\" INTEGER\n  \"title\" TEXT\n  \"summary\" TEXT\n  \"air_date\" TEXT\n  \"episode_image\" TEXT\n  \"rating\" REAL\n  \"votes\" INTEGER\n}\n\nTable \"Keyword\" {\n  \"episode_id\" TEXT [pk]\n  \"keyword\" TEXT [pk]\n}\n\nTable \"Person\" {\n  \"name\" TEXT [pk]\n  \"birthdate\" TEXT\n  \"birth_name\" TEXT\n  \"birth_place\" TEXT\n  \"birth_region\" TEXT\n  \"birth_country\" TEXT\n  \"height_meters\" REAL\n  \"nickname\" TEXT\n}\n\nTable \"Vote\" {\n  \"episode_id\" TEXT\n  \"stars\" INTEGER\n  \"votes\" INTEGER\n  \"percent\" REAL\n}\n\nRef: \"Award\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Award\".\"person\" > \"Person\".\"name\"\n\nRef: \"Character_Award\".\"award_id\" > \"Award\".\"award_id\"\n\nRef: \"Credit\".\"person\" > \"Person\".\"name\"\n\nRef: \"Credit\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Keyword\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Vote\".\"episode_id\" > \"Episode\".\"episode_id\"\n\n## Table Stats & Sample Values\n\nAward: 75 rows\n  award_category: 'Primetime Emmy', 'Annie', 'Image Award', ...\n  role: 'executive producer', 'co-executive producer', 'co-executive producer, writer', ...\n  organization: 'Primetime Emmy Awards', 'Annie Awards', 'Image Awards (NAACP)', ...\n\nCharacter_Award: 12 rows\n  character: 'Homer Simpson', 'Moe Szyslak', 'Kent Brockman', ...\n  award_id: '325', '326', '327'\n\nCredit: 4557 rows\n  category: 'Casting Department', 'Animation Department', 'Sound Department', ...\n  role: 'casting', 'additional timer', 'adr engineer', ...\n  person: 'Bonita Pietila', 'Adam Kuhlman', 'Carlton Batten', ...\n\nEpisode: 21 rows\n  title: 'Sex, Pies and Idiot Scrapes', 'Lost Verizon', 'Double, Double, Boy in Trouble', ...\n  summary: 'Homer and Ned go into business together as bounty', 'Bart gets in trouble with Marge after she finds ou', 'Bart trades lives with his multi-millionaire looka', ...\n  air_date: '2008-09-28', '2008-10-05', '2008-10-19', ...\n\nKeyword: 307 rows\n  keyword: '1930s to 2020s', 'erotic bakery', 'cake', ...\n  episode_id: 'S20-E1', 'S20-E2', 'S20-E3', ...\n\nPerson: 369 rows\n  birth_name: 'Marc Edward Wilmore', 'Valentina Lantigua', 'Joseph Stewart Burns', ...\n  birth_region: 'California', 'New York', 'Illinois', ...\n  birth_country: 'USA', 'Canada', 'Ireland', ...\n\nVote: 210 rows\n  stars: '2', '3', '4', ...\n  votes: '16', '20', '36', ...\n  percent: '1.3', '1.7', '3.0', ...",
+    "stateUrl": "https://bird-bench.github.io/#simpson_episodes",
+    "tableStats": {
+      "Award": {
+        "rows": 75,
+        "sample_values": {
+          "award_id": [
+            "325",
+            "326",
+            "327",
+            "328",
+            "329",
+            "330",
+            "331",
+            "332"
+          ],
+          "organization": [
+            "Primetime Emmy Awards",
+            "Annie Awards",
+            "Image Awards (NAACP)",
+            "Jupiter Award",
+            "Kids' Choice Awards, USA",
+            "Online Film & Television Association",
+            "People's Choice Awards, USA",
+            "Prism Awards"
+          ],
+          "year": [
+            "2009",
+            "2010",
+            "2017",
+            "2018"
+          ],
+          "award_category": [
+            "Primetime Emmy",
+            "Annie",
+            "Image Award",
+            "Jupiter Award",
+            "Blimp Award",
+            "OFTA Television Award",
+            "People's Choice Award",
+            "Prism Award"
+          ],
+          "award": [
+            "Outstanding Voice-Over Performance",
+            "Outstanding Animated Program (For Programming Less",
+            "Outstanding Music Composition for a Series (Origin",
+            "Writing in a Television Production",
+            "Best Animated Television Production",
+            "Best Directing in an Animated Television Productio",
+            "Outstanding Writing in a Comedy Series",
+            "Best International TV Series"
+          ],
+          "person": [
+            "Dan Castellaneta",
+            "Hank Azaria",
+            "Harry Shearer",
+            "James L. Brooks",
+            "Matt Groening",
+            "Al Jean",
+            "Matt Selman",
+            "John Frink"
+          ],
+          "role": [
+            "executive producer",
+            "co-executive producer",
+            "co-executive producer, writer",
+            "animation producer",
+            "writer",
+            "director",
+            "supervising director",
+            "assistant director"
+          ],
+          "episode_id": [
+            "S20-E18",
+            "S20-E16",
+            "S20-E8",
+            "S20-E13",
+            "S20-E20",
+            "S20-E4",
+            "S20-E17",
+            "S20-E7"
+          ],
+          "result": [
+            "Winner",
+            "Nominee"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Character_Award": {
+        "rows": 12,
+        "sample_values": {
+          "award_id": [
+            "325",
+            "326",
+            "327"
+          ],
+          "character": [
+            "Homer Simpson",
+            "Moe Szyslak",
+            "Kent Brockman",
+            "Lenny",
+            "Mr. Burns",
+            "Smithers"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Credit": {
+        "rows": 4557,
+        "sample_values": {
+          "episode_id": [
+            "S20-E10",
+            "S20-E13",
+            "S20-E14",
+            "S20-E4",
+            "S20-E19",
+            "S20-E20",
+            "S20-E1",
+            "S20-E8"
+          ],
+          "category": [
+            "Casting Department",
+            "Animation Department",
+            "Sound Department",
+            "Editorial Department",
+            "Produced by",
+            "Production Management",
+            "Visual Effects by",
+            "Music Department"
+          ],
+          "person": [
+            "Bonita Pietila",
+            "Adam Kuhlman",
+            "Carlton Batten",
+            "Jack Dyer",
+            "Jeremy Robinson",
+            "Karen Carnegie Johnson",
+            "Larry Smith",
+            "Patrick Buchanan"
+          ],
+          "role": [
+            "casting",
+            "additional timer",
+            "adr engineer",
+            "adr mixer",
+            "animatic editor",
+            "animation associate producer",
+            "animation checker",
+            "animation co-producer"
+          ],
+          "credited": [
+            "true",
+            "false"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Episode": {
+        "rows": 21,
+        "sample_values": {
+          "episode_id": [
+            "S20-E1",
+            "S20-E2",
+            "S20-E3",
+            "S20-E4",
+            "S20-E5",
+            "S20-E6",
+            "S20-E7",
+            "S20-E8"
+          ],
+          "season": [
+            "20"
+          ],
+          "episode": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "number_in_series": [
+            "421",
+            "422",
+            "423",
+            "424",
+            "425",
+            "426",
+            "427",
+            "428"
+          ],
+          "title": [
+            "Sex, Pies and Idiot Scrapes",
+            "Lost Verizon",
+            "Double, Double, Boy in Trouble",
+            "Treehouse of Horror XIX",
+            "Dangerous Curves",
+            "Homer and Lisa Exchange Cross Words",
+            "MyPods and Boomsticks",
+            "The Burns and the Bees"
+          ],
+          "summary": [
+            "Homer and Ned go into business together as bounty ",
+            "Bart gets in trouble with Marge after she finds ou",
+            "Bart trades lives with his multi-millionaire looka",
+            "The Simpsons' 19th Halloween Special, with parodie",
+            "The Simpsons take a Fourth of July vacation to a c",
+            "Homer gets a job breaking up couples, and Lisa bec",
+            "Homer suspects that the family of Bart's new Musli",
+            "Mr. Burns wins a professional basketball team in a"
+          ],
+          "air_date": [
+            "2008-09-28",
+            "2008-10-05",
+            "2008-10-19",
+            "2008-11-02",
+            "2008-11-09",
+            "2008-11-16",
+            "2008-11-30",
+            "2008-12-07"
+          ],
+          "episode_image": [
+            "https://m.media-amazon.com/images/M/MV5BMTYwMzk2Nj",
+            "https://m.media-amazon.com/images/M/MV5BMjMyNzU4OD",
+            "https://m.media-amazon.com/images/M/MV5BMjA1ODM2OD",
+            "https://m.media-amazon.com/images/M/MV5BMTgzOTYyNT",
+            "https://m.media-amazon.com/images/M/MV5BMjMxOTY4Mj",
+            "https://m.media-amazon.com/images/M/MV5BMTQ2MzcyOT",
+            "https://m.media-amazon.com/images/M/MV5BNTE5NzY3Nj",
+            "https://m.media-amazon.com/images/M/MV5BNTg0MTc4MD"
+          ],
+          "rating": [
+            "7.2",
+            "7.0",
+            "7.1",
+            "6.5",
+            "6.6",
+            "5.9",
+            "6.9",
+            "6.8"
+          ],
+          "votes": [
+            "1192",
+            "1055",
+            "1015",
+            "1190",
+            "951",
+            "955",
+            "1117",
+            "956"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Keyword": {
+        "rows": 307,
+        "sample_values": {
+          "episode_id": [
+            "S20-E1",
+            "S20-E2",
+            "S20-E3",
+            "S20-E4",
+            "S20-E5",
+            "S20-E6",
+            "S20-E7",
+            "S20-E8"
+          ],
+          "keyword": [
+            "1930s to 2020s",
+            "erotic bakery",
+            "cake",
+            "bullet",
+            "st. patrick's day",
+            "riot",
+            "bounty hunter",
+            "bail bondsman"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Person": {
+        "rows": 369,
+        "sample_values": {
+          "name": [
+            "Marc Wilmore",
+            "Valentina Garza",
+            "J. Stewart Burns",
+            "Stephanie Gillis",
+            "Laurie Biernacki",
+            "Matthew Faughnan",
+            "Ron Hauge",
+            "James L. Brooks"
+          ],
+          "birthdate": [
+            "1963-05-04",
+            "1975-03-30",
+            "1969-12-04",
+            "1969-10-02",
+            "1940-05-09",
+            "1957-10-29",
+            "1954-02-15",
+            "1959-07-03"
+          ],
+          "birth_name": [
+            "Marc Edward Wilmore",
+            "Valentina Lantigua",
+            "Joseph Stewart Burns",
+            "Stephanie Katina Gillis",
+            "Laurie D Templeton",
+            "Matthew C Faughnan",
+            "James Lawrence Brooks",
+            "Daniel Louis Castellaneta"
+          ],
+          "birth_place": [
+            "USA",
+            "Brooklyn",
+            "Chicago",
+            "Portland",
+            "New York City",
+            "Hartford",
+            "South Plainfield",
+            "Los Angeles"
+          ],
+          "birth_region": [
+            "California",
+            "New York",
+            "Illinois",
+            "Oregon",
+            "Connecticut",
+            "New Jersey",
+            "Massachusetts",
+            "North Carolina"
+          ],
+          "birth_country": [
+            "USA",
+            "Canada",
+            "Ireland",
+            "Philippines",
+            "Czechoslovakia",
+            "North Korea",
+            "UK",
+            "France"
+          ],
+          "height_meters": [
+            "1.85",
+            "1.75",
+            "2.03",
+            "1.89",
+            "1.82",
+            "1.93",
+            "1.69",
+            "1.88"
+          ],
+          "nickname": [
+            "Jim",
+            "Doofus",
+            "Hoops",
+            "Boop",
+            "King Cool",
+            "Joe Cool",
+            "The Tiny Canadian",
+            "Jodie F"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Vote": {
+        "rows": 210,
+        "sample_values": {
+          "episode_id": [
+            "S20-E1",
+            "S20-E10",
+            "S20-E11",
+            "S20-E12",
+            "S20-E13",
+            "S20-E14",
+            "S20-E15",
+            "S20-E16"
+          ],
+          "stars": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "1",
+            "9",
+            "6",
+            "8"
+          ],
+          "votes": [
+            "16",
+            "20",
+            "36",
+            "49",
+            "67",
+            "102",
+            "133",
+            "231"
+          ],
+          "percent": [
+            "1.3",
+            "1.7",
+            "3.0",
+            "4.1",
+            "5.6",
+            "8.6",
+            "11.2",
+            "19.4"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

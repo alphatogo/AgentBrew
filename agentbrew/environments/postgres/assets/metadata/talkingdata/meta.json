@@ -1,0 +1,426 @@
+{
+  "db_id": "talkingdata",
+  "source": "bird",
+  "tables": 12,
+  "total_rows": 40645703,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#talkingdata",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"app_all\" {\n  \"app_id\" INTEGER [pk, not null]\n}\n\nTable \"app_events\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"app_id\" INTEGER [pk, not null]\n  \"is_installed\" INTEGER [not null]\n  \"is_active\" INTEGER [not null]\n}\n\nTable \"app_events_relevant\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"app_id\" INTEGER [pk, not null]\n  \"is_installed\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"app_labels\" {\n  \"app_id\" INTEGER [not null]\n  \"label_id\" INTEGER [not null]\n}\n\nTable \"events\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"device_id\" INTEGER\n  \"timestamp\" TIMESTAMP\n  \"longitude\" REAL\n  \"latitude\" REAL\n}\n\nTable \"events_relevant\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"device_id\" INTEGER\n  \"timestamp\" TIMESTAMP [not null]\n  \"longitude\" REAL [not null]\n  \"latitude\" REAL [not null]\n}\n\nTable \"gender_age\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"group\" TEXT\n}\n\nTable \"gender_age_test\" {\n  \"device_id\" INTEGER [pk, not null]\n}\n\nTable \"gender_age_train\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"group\" TEXT\n}\n\nTable \"label_categories\" {\n  \"label_id\" INTEGER [pk, not null]\n  \"category\" TEXT\n}\n\nTable \"phone_brand_device_model2\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"phone_brand\" TEXT [pk, not null]\n  \"device_model\" TEXT [pk, not null]\n}\n\nTable \"sample_submission\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"F23-\" REAL\n  \"F24-26\" REAL\n  \"F27-28\" REAL\n  \"F29-32\" REAL\n  \"F33-42\" REAL\n  \"F43+\" REAL\n  \"M22-\" REAL\n  \"M23-26\" REAL\n  \"M27-28\" REAL\n  \"M29-31\" REAL\n  \"M32-38\" REAL\n  \"M39+\" REAL\n}\n\n\n\nRef: \"app_events\".\"event_id\" > \"events\".\"event_id\"\n\nRef: \"app_events_relevant\".\"app_id\" > \"app_all\".\"app_id\"\n\nRef: \"app_events_relevant\".\"event_id\" > \"events_relevant\".\"event_id\"\n\nRef: \"app_labels\".\"app_id\" > \"app_all\".\"app_id\"\n\nRef: \"app_labels\".\"label_id\" > \"label_categories\".\"label_id\"\n\nRef: \"events_relevant\".\"device_id\" > \"gender_age\".\"device_id\"\n\nRef: \"gender_age\".\"device_id\" > \"phone_brand_device_model2\".\"device_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"app_all\" {\n  \"app_id\" INTEGER [pk, not null]\n}\n\nTable \"app_events\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"app_id\" INTEGER [pk, not null]\n  \"is_installed\" INTEGER [not null]\n  \"is_active\" INTEGER [not null]\n}\n\nTable \"app_events_relevant\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"app_id\" INTEGER [pk, not null]\n  \"is_installed\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"app_labels\" {\n  \"app_id\" INTEGER [not null]\n  \"label_id\" INTEGER [not null]\n}\n\nTable \"events\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"device_id\" INTEGER\n  \"timestamp\" TIMESTAMP\n  \"longitude\" REAL\n  \"latitude\" REAL\n}\n\nTable \"events_relevant\" {\n  \"event_id\" INTEGER [pk, not null]\n  \"device_id\" INTEGER\n  \"timestamp\" TIMESTAMP [not null]\n  \"longitude\" REAL [not null]\n  \"latitude\" REAL [not null]\n}\n\nTable \"gender_age\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"group\" TEXT\n}\n\nTable \"gender_age_test\" {\n  \"device_id\" INTEGER [pk, not null]\n}\n\nTable \"gender_age_train\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"group\" TEXT\n}\n\nTable \"label_categories\" {\n  \"label_id\" INTEGER [pk, not null]\n  \"category\" TEXT\n}\n\nTable \"phone_brand_device_model2\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"phone_brand\" TEXT [pk, not null]\n  \"device_model\" TEXT [pk, not null]\n}\n\nTable \"sample_submission\" {\n  \"device_id\" INTEGER [pk, not null]\n  \"F23-\" REAL\n  \"F24-26\" REAL\n  \"F27-28\" REAL\n  \"F29-32\" REAL\n  \"F33-42\" REAL\n  \"F43+\" REAL\n  \"M22-\" REAL\n  \"M23-26\" REAL\n  \"M27-28\" REAL\n  \"M29-31\" REAL\n  \"M32-38\" REAL\n  \"M39+\" REAL\n}\n\nRef: \"app_events\".\"event_id\" > \"events\".\"event_id\"\n\nRef: \"app_events_relevant\".\"app_id\" > \"app_all\".\"app_id\"\n\nRef: \"app_events_relevant\".\"event_id\" > \"events_relevant\".\"event_id\"\n\nRef: \"app_labels\".\"app_id\" > \"app_all\".\"app_id\"\n\nRef: \"app_labels\".\"label_id\" > \"label_categories\".\"label_id\"\n\nRef: \"events_relevant\".\"device_id\" > \"gender_age\".\"device_id\"\n\nRef: \"gender_age\".\"device_id\" > \"phone_brand_device_model2\".\"device_id\"\n\n## Table Stats & Sample Values\n\napp_all: 10000 rows\n  app_id: '-9223281467940916832', '-9222877069545393219', '-9222785464897897681', ...\n\napp_events: 10000 rows\n  is_active: '0', '1'\n  is_installed: '1'\n  event_id: '2', '6', '7', ...\n\napp_events_relevant: 10000 rows\n  is_active: '0', '1'\n  is_installed: '1'\n  event_id: '2', '6', '7', ...\n\napp_labels: 10000 rows\n  label_id: '251', '406', '407', ...\n  app_id: '7324884708820027918', '-4494216993218550286', '6058196446775239644', ...\n\nevents: 10000 rows\n  timestamp: '2016-05-01 00:55:25.0', '2016-05-01 00:54:12.0', '2016-05-01 00:08:05.0', ...\n  longitude: '121.0', '104.0', '107.0', ...\n  latitude: '31.0', '30.0', '23.0', ...\n\nevents_relevant: 10000 rows\n  timestamp: '-8942695423876075857', '-8764672938472212518', '-9050100410106163077', ...\n  latitude: '0.0', '1.0'\n  longitude: '1.0'\n\ngender_age: 10000 rows\n  gender: 'M', 'F'\n  group: 'M29-31', 'M32-38', 'F29-32', ...\n  age: '29', '31', '38', ...\n\ngender_age_test: 10000 rows\n  device_id: '-9223321966609553846', '-9223042152723782980', '-9222896629442493034', ...\n\ngender_age_train: 10000 rows\n  gender: 'M', 'F'\n  group: 'M23-26', 'M32-38', 'M29-31', ...\n  age: '24', '36', '29', ...\n\nlabel_categories: 930 rows\n  category: 'game-game type', 'game-Game themes', 'game-Art Style', ...\n  label_id: '1', '2', '3', ...\n\nphone_brand_device_model2: 10000 rows\n  device_model: '红米note', 'Y19T', 'MI 3', ...\n  phone_brand: '小米', 'vivo', '三星', ...\n  device_id: '-9223321966609553846', '-9223067244542181226', '-9223042152723782980', ...\n\nsample_submission: 10000 rows\n  F23-: '0.0833'\n  F24-26: '0.0833'\n  F27-28: '0.0833'",
+    "stateUrl": "https://bird-bench.github.io/#talkingdata",
+    "tableStats": {
+      "app_all": {
+        "rows": 10000,
+        "sample_values": {
+          "app_id": [
+            "-9223281467940916832",
+            "-9222877069545393219",
+            "-9222785464897897681",
+            "-9222198347540756780",
+            "-9221970424041518544",
+            "-9221828329335715761",
+            "-9221379430160197477",
+            "-9221345089971749240"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "app_events": {
+        "rows": 10000,
+        "sample_values": {
+          "event_id": [
+            "2",
+            "6",
+            "7",
+            "9",
+            "16",
+            "18",
+            "19",
+            "25"
+          ],
+          "app_id": [
+            "-8942695423876075857",
+            "-8022267440849930066",
+            "-5720078949152207372",
+            "-3725672010020973973",
+            "-1758857579862594461",
+            "-1633887856876571208",
+            "-653184325010919369",
+            "487766649788038994"
+          ],
+          "is_installed": [
+            "1"
+          ],
+          "is_active": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "app_events_relevant": {
+        "rows": 10000,
+        "sample_values": {
+          "event_id": [
+            "2",
+            "6",
+            "7",
+            "9",
+            "16",
+            "18",
+            "19",
+            "25"
+          ],
+          "app_id": [
+            "-8942695423876075857",
+            "-8022267440849930066",
+            "-5720078949152207372",
+            "-3725672010020973973",
+            "-1758857579862594461",
+            "-1633887856876571208",
+            "-653184325010919369",
+            "487766649788038994"
+          ],
+          "is_installed": [
+            "1"
+          ],
+          "is_active": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "app_labels": {
+        "rows": 10000,
+        "sample_values": {
+          "app_id": [
+            "7324884708820027918",
+            "-4494216993218550286",
+            "6058196446775239644",
+            "8694625920731541625",
+            "1977658975649789753",
+            "7311663864768030840",
+            "5902120154267999338",
+            "2441810024319437760"
+          ],
+          "label_id": [
+            "251",
+            "406",
+            "407",
+            "256",
+            "261",
+            "253",
+            "259",
+            "564"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "events": {
+        "rows": 10000,
+        "sample_values": {
+          "event_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "device_id": [
+            "29182687948017175",
+            "-6401643145415154744",
+            "-4833982096941402721",
+            "-6815121365017318426",
+            "-5373797595892518570",
+            "1476664663289716375",
+            "5990807147117726237",
+            "1782450055857303792"
+          ],
+          "timestamp": [
+            "2016-05-01 00:55:25.0",
+            "2016-05-01 00:54:12.0",
+            "2016-05-01 00:08:05.0",
+            "2016-05-01 00:06:40.0",
+            "2016-05-01 00:07:18.0",
+            "2016-05-01 00:27:21.0",
+            "2016-05-01 00:15:13.0",
+            "2016-05-01 00:15:35.0"
+          ],
+          "longitude": [
+            "121.0",
+            "104.0",
+            "107.0",
+            "116.0",
+            "0.0",
+            "114.0",
+            "119.0",
+            "118.0"
+          ],
+          "latitude": [
+            "31.0",
+            "30.0",
+            "23.0",
+            "29.0",
+            "0.0",
+            "35.0",
+            "26.0",
+            "40.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "events_relevant": {
+        "rows": 10000,
+        "sample_values": {
+          "event_id": [
+            "2",
+            "6",
+            "7",
+            "9",
+            "16",
+            "18",
+            "19",
+            "25"
+          ],
+          "timestamp": [
+            "-8942695423876075857",
+            "-8764672938472212518",
+            "-9050100410106163077",
+            "-7680145830980282919",
+            "-9142957261685295367",
+            "-6799509164833422300",
+            "-8885457271286017735",
+            "-9100764281193500782"
+          ],
+          "longitude": [
+            "1.0"
+          ],
+          "latitude": [
+            "0.0",
+            "1.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gender_age": {
+        "rows": 10000,
+        "sample_values": {
+          "device_id": [
+            "-9221086586254644858",
+            "-9221079146476055829",
+            "-9221066489596332354",
+            "-9221046405740900422",
+            "-9221026417907250887",
+            "-9221015678978880842",
+            "-9220961720447724253",
+            "-9220830859283101130"
+          ],
+          "gender": [
+            "M",
+            "F"
+          ],
+          "age": [
+            "29",
+            "31",
+            "38",
+            "20",
+            "19",
+            "21",
+            "40",
+            "22"
+          ],
+          "group": [
+            "M29-31",
+            "M32-38",
+            "F29-32",
+            "M22-",
+            "M39+",
+            "M27-28",
+            "F43+",
+            "M23-26"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gender_age_test": {
+        "rows": 10000,
+        "sample_values": {
+          "device_id": [
+            "-9223321966609553846",
+            "-9223042152723782980",
+            "-9222896629442493034",
+            "-9222894989445037972",
+            "-9222894319703307262",
+            "-9222661944218806987",
+            "-9222399302879214035",
+            "-9221825537663503111"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gender_age_train": {
+        "rows": 10000,
+        "sample_values": {
+          "device_id": [
+            "-9223067244542181226",
+            "-9222956879900151005",
+            "-9222754701995937853",
+            "-9222352239947207574",
+            "-9222173362545970626",
+            "-9221639938103564513",
+            "-9221307795397202665",
+            "-9221086586254644858"
+          ],
+          "gender": [
+            "M",
+            "F"
+          ],
+          "age": [
+            "24",
+            "36",
+            "29",
+            "23",
+            "56",
+            "27",
+            "33",
+            "31"
+          ],
+          "group": [
+            "M23-26",
+            "M32-38",
+            "M29-31",
+            "F43+",
+            "F27-28",
+            "F29-32",
+            "M22-",
+            "M39+"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "label_categories": {
+        "rows": 930,
+        "sample_values": {
+          "label_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "category": [
+            "game-game type",
+            "game-Game themes",
+            "game-Art Style",
+            "game-Leisure time",
+            "game-Cutting things",
+            "game-Finding fault",
+            "game-stress reliever",
+            "game-pet"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "phone_brand_device_model2": {
+        "rows": 10000,
+        "sample_values": {
+          "device_id": [
+            "-9223321966609553846",
+            "-9223067244542181226",
+            "-9223042152723782980",
+            "-9222956879900151005",
+            "-9222896629442493034",
+            "-9222894989445037972",
+            "-9222894319703307262",
+            "-9222754701995937853"
+          ],
+          "phone_brand": [
+            "小米",
+            "vivo",
+            "三星",
+            "OPPO",
+            "金立",
+            "魅族",
+            "酷派",
+            "华为"
+          ],
+          "device_model": [
+            "红米note",
+            "Y19T",
+            "MI 3",
+            "Galaxy Note 2",
+            "A31",
+            "ELIFE E7 Mini",
+            "MX3",
+            "8730L"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sample_submission": {
+        "rows": 10000,
+        "sample_values": {
+          "device_id": [
+            "-9223321966609553846",
+            "-9223042152723782980",
+            "-9222896629442493034",
+            "-9222894989445037972",
+            "-9222894319703307262",
+            "-9222661944218806987",
+            "-9222399302879214035",
+            "-9221825537663503111"
+          ],
+          "F23-": [
+            "0.0833"
+          ],
+          "F24-26": [
+            "0.0833"
+          ],
+          "F27-28": [
+            "0.0833"
+          ],
+          "F29-32": [
+            "0.0833"
+          ],
+          "F33-42": [
+            "0.0833"
+          ],
+          "F43+": [
+            "0.0833"
+          ],
+          "M22-": [
+            "0.0833"
+          ],
+          "M23-26": [
+            "0.0833"
+          ],
+          "M27-28": [
+            "0.0833"
+          ],
+          "M29-31": [
+            "0.0833"
+          ],
+          "M32-38": [
+            "0.0833"
+          ],
+          "M39+": [
+            "0.0833"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

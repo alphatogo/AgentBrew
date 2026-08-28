@@ -1,0 +1,617 @@
+{
+  "db_id": "malaria_control_and_prevention_data",
+  "source": "synsql",
+  "tables": 17,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/malaria_control_and_prevention_data",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"data_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"adherence_rates\" {\n  \"adherence_id\" INTEGER [pk]\n  \"regimen_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"adherence_rate\" REAL\n  \"reason_for_non_adherence\" TEXT\n  \"intervention_effectiveness\" REAL\n}\n\nTable \"public\".\"bednet_distributions\" {\n  \"distribution_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"distribution_date\" TEXT\n  \"number_distributed\" INTEGER\n  \"distributor_id\" INTEGER\n  \"distribution_method\" TEXT\n  \"feedback\" TEXT\n  \"coverage_percentage\" REAL\n}\n\nTable \"public\".\"clinical_trials\" {\n  \"trial_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"number_of_participants\" INTEGER\n  \"results\" TEXT\n  \"trial_status\" TEXT\n  \"trial_design\" TEXT\n}\n\nTable \"public\".\"distributors\" {\n  \"distributor_id\" INTEGER [pk]\n  \"distributor_name\" TEXT\n  \"contact_email\" TEXT\n  \"region_id\" INTEGER\n  \"phone_number\" TEXT\n  \"address\" TEXT\n}\n\nTable \"public\".\"external_data\" {\n  \"data_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"data_type\" TEXT\n  \"data_source\" TEXT\n  \"data_file\" TEXT\n  \"data_description\" TEXT\n  \"data_collection_date\" TEXT\n}\n\nTable \"public\".\"field_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_text\" TEXT\n  \"intervention_id\" INTEGER\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"public\".\"intervention_costs\" {\n  \"cost_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"cost_date\" TEXT\n  \"total_cost\" REAL\n  \"cost_breakdown\" TEXT\n  \"funding_received\" REAL\n}\n\nTable \"public\".\"intervention_effectiveness\" {\n  \"effectiveness_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"effectiveness_score\" REAL\n  \"impact_on_prevalence\" REAL\n  \"impact_on_mortality\" REAL\n}\n\nTable \"public\".\"interventions\" {\n  \"intervention_id\" INTEGER [pk]\n  \"intervention_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"target_population\" TEXT\n  \"funding_source\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"malaria_cases\" {\n  \"case_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"number_of_cases\" INTEGER\n  \"intervention_id\" INTEGER\n  \"age_group\" TEXT\n  \"gender\" TEXT\n}\n\nTable \"public\".\"malaria_deaths\" {\n  \"death_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"number_of_deaths\" INTEGER\n  \"intervention_id\" INTEGER\n  \"age_group\" TEXT\n  \"gender\" TEXT\n}\n\nTable \"public\".\"public_health_surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"survey_date\" TEXT\n  \"number_of_respondents\" INTEGER\n  \"malaria_prevalence\" REAL\n  \"intervention_id\" INTEGER\n  \"survey_method\" TEXT\n  \"survey_design\" TEXT\n}\n\nTable \"public\".\"regimens\" {\n  \"regimen_id\" INTEGER [pk]\n  \"regimen_name\" TEXT\n  \"description\" TEXT\n  \"dosing_schedule\" TEXT\n  \"side_effects\" TEXT\n  \"duration\" INTEGER\n  \"cost\" REAL\n}\n\nTable \"public\".\"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"country\" TEXT\n  \"population\" INTEGER\n  \"geographic_area\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n}\n\nTable \"public\".\"time_series_data\" {\n  \"data_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"coverage\" REAL\n  \"regimen\" TEXT\n  \"bednets\" INTEGER\n  \"adherence\" REAL\n  \"malaria_prevalence\" REAL\n  \"temperature\" REAL\n  \"rainfall\" REAL\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"phone_number\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"data_id\" > \"public\".\"time_series_data\".\"data_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"adherence_rates\".\"regimen_id\" > \"public\".\"regimens\".\"regimen_id\"\nRef: \"public\".\"adherence_rates\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"bednet_distributions\".\"distributor_id\" > \"public\".\"distributors\".\"distributor_id\"\nRef: \"public\".\"bednet_distributions\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"clinical_trials\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"clinical_trials\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"external_data\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"field_reports\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"field_reports\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"field_reports\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"intervention_costs\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"intervention_costs\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"intervention_effectiveness\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"intervention_effectiveness\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"malaria_cases\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"malaria_cases\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"malaria_deaths\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"malaria_deaths\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"public_health_surveys\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"public_health_surveys\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"time_series_data\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"time_series_data\".\"regimen\" > \"public\".\"regimens\".\"regimen_name\"\nRef: \"public\".\"time_series_data\".\"region_id\" > \"public\".\"regions\".\"region_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"data_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"adherence_rates\" {\n  \"adherence_id\" INTEGER [pk]\n  \"regimen_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"adherence_rate\" REAL\n  \"reason_for_non_adherence\" TEXT\n  \"intervention_effectiveness\" REAL\n}\n\nTable \"bednet_distributions\" {\n  \"distribution_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"distribution_date\" TEXT\n  \"number_distributed\" INTEGER\n  \"distributor_id\" INTEGER\n  \"distribution_method\" TEXT\n  \"feedback\" TEXT\n  \"coverage_percentage\" REAL\n}\n\nTable \"clinical_trials\" {\n  \"trial_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"number_of_participants\" INTEGER\n  \"results\" TEXT\n  \"trial_status\" TEXT\n  \"trial_design\" TEXT\n}\n\nTable \"distributors\" {\n  \"distributor_id\" INTEGER [pk]\n  \"distributor_name\" TEXT\n  \"contact_email\" TEXT\n  \"region_id\" INTEGER\n  \"phone_number\" TEXT\n  \"address\" TEXT\n}\n\nTable \"external_data\" {\n  \"data_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"data_type\" TEXT\n  \"data_source\" TEXT\n  \"data_file\" TEXT\n  \"data_description\" TEXT\n  \"data_collection_date\" TEXT\n}\n\nTable \"field_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_text\" TEXT\n  \"intervention_id\" INTEGER\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"intervention_costs\" {\n  \"cost_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"cost_date\" TEXT\n  \"total_cost\" REAL\n  \"cost_breakdown\" TEXT\n  \"funding_received\" REAL\n}\n\nTable \"intervention_effectiveness\" {\n  \"effectiveness_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"effectiveness_score\" REAL\n  \"impact_on_prevalence\" REAL\n  \"impact_on_mortality\" REAL\n}\n\nTable \"interventions\" {\n  \"intervention_id\" INTEGER [pk]\n  \"intervention_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"target_population\" TEXT\n  \"funding_source\" TEXT\n  \"status\" TEXT\n}\n\nTable \"malaria_cases\" {\n  \"case_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"number_of_cases\" INTEGER\n  \"intervention_id\" INTEGER\n  \"age_group\" TEXT\n  \"gender\" TEXT\n}\n\nTable \"malaria_deaths\" {\n  \"death_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"report_date\" TEXT\n  \"number_of_deaths\" INTEGER\n  \"intervention_id\" INTEGER\n  \"age_group\" TEXT\n  \"gender\" TEXT\n}\n\nTable \"public_health_surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"survey_date\" TEXT\n  \"number_of_respondents\" INTEGER\n  \"malaria_prevalence\" REAL\n  \"intervention_id\" INTEGER\n  \"survey_method\" TEXT\n  \"survey_design\" TEXT\n}\n\nTable \"regimens\" {\n  \"regimen_id\" INTEGER [pk]\n  \"regimen_name\" TEXT\n  \"description\" TEXT\n  \"dosing_schedule\" TEXT\n  \"side_effects\" TEXT\n  \"duration\" INTEGER\n  \"cost\" REAL\n}\n\nTable \"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"country\" TEXT\n  \"population\" INTEGER\n  \"geographic_area\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n}\n\nTable \"time_series_data\" {\n  \"data_id\" INTEGER [pk]\n  \"intervention_id\" INTEGER\n  \"region_id\" INTEGER\n  \"time\" INTEGER\n  \"coverage\" REAL\n  \"regimen\" TEXT\n  \"bednets\" INTEGER\n  \"adherence\" REAL\n  \"malaria_prevalence\" REAL\n  \"temperature\" REAL\n  \"rainfall\" REAL\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"phone_number\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n}\n\nRef: \"access_logs\".\"data_id\" > \"time_series_data\".\"data_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"adherence_rates\".\"regimen_id\" > \"regimens\".\"regimen_id\"\n\nRef: \"adherence_rates\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"bednet_distributions\".\"distributor_id\" > \"distributors\".\"distributor_id\"\n\nRef: \"bednet_distributions\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"clinical_trials\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"clinical_trials\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"external_data\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"field_reports\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"field_reports\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"field_reports\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"intervention_costs\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"intervention_costs\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"intervention_effectiveness\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"intervention_effectiveness\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"malaria_cases\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"malaria_cases\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"malaria_deaths\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"malaria_deaths\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"public_health_surveys\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"public_health_surveys\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"time_series_data\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"time_series_data\".\"regimen\" > \"regimens\".\"regimen_name\"\n\nRef: \"time_series_data\".\"region_id\" > \"regions\".\"region_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nadherence_rates: 2 rows\n  reason_for_non_adherence: 'Side effects', 'Lack of access'\n  intervention_effectiveness: '0.75', '0.8'\n  region_id: '1', '0'\n\nbednet_distributions: 2 rows\n  distribution_method: 'Door-to-door', 'Community centers'\n  distribution_date: '2023-01-15', '2023-02-20'\n  feedback: 'Distribution was well-received, but some areas wer', 'Community centers were effective, but some people'\n\nclinical_trials: 2 rows\n  trial_status: 'Ongoing'\n  trial_design: 'Randomized controlled trial', 'Observational study'\n  results: 'MDA reduced malaria cases by 20%.', 'IRS reduced malaria cases by 15%.'\n\ndistributors: 2 rows\n  distributor_name: 'Red Cross Nigeria', 'WHO Kenya'\n  address: '123 Main St, Lagos, Nigeria', '456 Health Ave, Nairobi, Kenya'\n  contact_email: 'nigeria@redcross.org', 'kenya@who.org'\n\nexternal_data: 2 rows\n  data_type: 'weather', 'environmental'\n  data_description: 'Monthly weather data for the region', 'Quarterly environmental data for the region'\n  data_source: 'Weather API', 'Environmental Agency'\n\nfield_reports: 2 rows\n  report_text: 'MDA campaign was successful in the region.', 'IRS coverage is low, need to increase efforts.'\n  report_date: '2023-05-01', '2023-05-02'\n  feedback: 'Good community engagement, but some areas need mor', 'Some households were resistant to the intervention'\n\nintervention_costs: 2 rows\n  cost_breakdown: 'Personnel: 5000, Materials: 5000', 'Personnel: 3000, Materials: 5000'\n  cost_date: '2023-01-01', '2023-02-01'\n  total_cost: '10000.0', '8000.0'\n\nintervention_effectiveness: 2 rows\n  effectiveness_score: '0.75', '0.8'\n  impact_on_prevalence: '0.05', '0.04'\n  impact_on_mortality: '0.01', '0.005'\n\ninterventions: 2 rows\n  intervention_name: 'MDA', 'IRS'\n  description: 'Mass Drug Administration', 'Indoor Residual Spraying'\n  status: 'Ongoing'\n\nmalaria_cases: 2 rows\n  age_group: '0-5 years', '6-15 years'\n  gender: 'Male', 'Female'\n  report_date: '2023-01-15', '2023-02-20'\n\nmalaria_deaths: 2 rows\n  age_group: '0-5 years', '6-15 years'\n  gender: 'Male', 'Female'\n  report_date: '2023-01-15', '2023-02-20'\n\npublic_health_surveys: 2 rows\n  survey_method: 'Door-to-door', 'Online'\n  survey_design: 'Structured', 'Unstructured'\n  survey_date: '2023-03-01', '2023-04-01'\n\nregimens: 2 rows\n  regimen_name: 'xxx', 'xIA'\n  description: 'Standard treatment regimen', 'Intensive treatment regimen'\n  dosing_schedule: 'Daily for 3 days', 'Weekly for 4 weeks'\n\nregions: 2 rows\n  region_name: 'West Africa Region', 'East Africa Region'\n  country: 'Nigeria', 'Kenya'\n  geographic_area: '10000 sq km', '5000 sq km'\n\ntime_series_data: 2 rows\n  regimen: '0', '1'\n  malaria_prevalence: '0.05', '0.04'\n  temperature: '25.0', '24.5'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'field worker', 'data analyst'\n  status: 'active'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "adherence_rates": {
+        "rows": 2,
+        "sample_values": {
+          "adherence_id": [
+            "0",
+            "1"
+          ],
+          "regimen_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "1",
+            "0"
+          ],
+          "time": [
+            "0",
+            "12"
+          ],
+          "adherence_rate": [
+            "0.35"
+          ],
+          "reason_for_non_adherence": [
+            "Side effects",
+            "Lack of access"
+          ],
+          "intervention_effectiveness": [
+            "0.75",
+            "0.8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "bednet_distributions": {
+        "rows": 2,
+        "sample_values": {
+          "distribution_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "1"
+          ],
+          "distribution_date": [
+            "2023-01-15",
+            "2023-02-20"
+          ],
+          "number_distributed": [
+            "5000",
+            "3000"
+          ],
+          "distributor_id": [
+            "0",
+            "1"
+          ],
+          "distribution_method": [
+            "Door-to-door",
+            "Community centers"
+          ],
+          "feedback": [
+            "Distribution was well-received, but some areas wer",
+            "Community centers were effective, but some people "
+          ],
+          "coverage_percentage": [
+            "0.75",
+            "0.65"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "clinical_trials": {
+        "rows": 2,
+        "sample_values": {
+          "trial_id": [
+            "0",
+            "1"
+          ],
+          "intervention_id": [
+            "1",
+            "0"
+          ],
+          "region_id": [
+            "1"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ],
+          "number_of_participants": [
+            "1000",
+            "500"
+          ],
+          "results": [
+            "MDA reduced malaria cases by 20%.",
+            "IRS reduced malaria cases by 15%."
+          ],
+          "trial_status": [
+            "Ongoing"
+          ],
+          "trial_design": [
+            "Randomized controlled trial",
+            "Observational study"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "distributors": {
+        "rows": 2,
+        "sample_values": {
+          "distributor_id": [
+            "0",
+            "1"
+          ],
+          "distributor_name": [
+            "Red Cross Nigeria",
+            "WHO Kenya"
+          ],
+          "contact_email": [
+            "nigeria@redcross.org",
+            "kenya@who.org"
+          ],
+          "region_id": [
+            "1",
+            "2"
+          ],
+          "phone_number": [
+            "+234123456789",
+            "+254123456789"
+          ],
+          "address": [
+            "123 Main St, Lagos, Nigeria",
+            "456 Health Ave, Nairobi, Kenya"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "external_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "data_type": [
+            "weather",
+            "environmental"
+          ],
+          "data_source": [
+            "Weather API",
+            "Environmental Agency"
+          ],
+          "data_file": [
+            "data/weather/region1.csv",
+            "data/environment/region2.csv"
+          ],
+          "data_description": [
+            "Monthly weather data for the region",
+            "Quarterly environmental data for the region"
+          ],
+          "data_collection_date": [
+            "2023-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "field_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "region_id": [
+            "1",
+            "0"
+          ],
+          "report_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "report_text": [
+            "MDA campaign was successful in the region.",
+            "IRS coverage is low, need to increase efforts."
+          ],
+          "intervention_id": [
+            "0",
+            "1"
+          ],
+          "latitude": [
+            "10.0",
+            "1.0"
+          ],
+          "longitude": [
+            "10.0",
+            "36.0"
+          ],
+          "feedback": [
+            "Good community engagement, but some areas need mor",
+            "Some households were resistant to the intervention"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "intervention_costs": {
+        "rows": 2,
+        "sample_values": {
+          "cost_id": [
+            "0",
+            "1"
+          ],
+          "intervention_id": [
+            "0"
+          ],
+          "region_id": [
+            "1",
+            "0"
+          ],
+          "cost_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "total_cost": [
+            "10000.0",
+            "8000.0"
+          ],
+          "cost_breakdown": [
+            "Personnel: 5000, Materials: 5000",
+            "Personnel: 3000, Materials: 5000"
+          ],
+          "funding_received": [
+            "12000.0",
+            "10000.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "intervention_effectiveness": {
+        "rows": 2,
+        "sample_values": {
+          "effectiveness_id": [
+            "0",
+            "1"
+          ],
+          "intervention_id": [
+            "0"
+          ],
+          "region_id": [
+            "0"
+          ],
+          "time": [
+            "0",
+            "12"
+          ],
+          "effectiveness_score": [
+            "0.75",
+            "0.8"
+          ],
+          "impact_on_prevalence": [
+            "0.05",
+            "0.04"
+          ],
+          "impact_on_mortality": [
+            "0.01",
+            "0.005"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "interventions": {
+        "rows": 2,
+        "sample_values": {
+          "intervention_id": [
+            "0",
+            "1"
+          ],
+          "intervention_name": [
+            "MDA",
+            "IRS"
+          ],
+          "description": [
+            "Mass Drug Administration",
+            "Indoor Residual Spraying"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ],
+          "target_population": [
+            "Children",
+            "Adults"
+          ],
+          "funding_source": [
+            "Global Health Fund",
+            "WHO"
+          ],
+          "status": [
+            "Ongoing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "malaria_cases": {
+        "rows": 2,
+        "sample_values": {
+          "case_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "1",
+            "0"
+          ],
+          "report_date": [
+            "2023-01-15",
+            "2023-02-20"
+          ],
+          "number_of_cases": [
+            "100",
+            "50"
+          ],
+          "intervention_id": [
+            "1"
+          ],
+          "age_group": [
+            "0-5 years",
+            "6-15 years"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "malaria_deaths": {
+        "rows": 2,
+        "sample_values": {
+          "death_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "report_date": [
+            "2023-01-15",
+            "2023-02-20"
+          ],
+          "number_of_deaths": [
+            "5",
+            "2"
+          ],
+          "intervention_id": [
+            "1"
+          ],
+          "age_group": [
+            "0-5 years",
+            "6-15 years"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "public_health_surveys": {
+        "rows": 2,
+        "sample_values": {
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "0"
+          ],
+          "survey_date": [
+            "2023-03-01",
+            "2023-04-01"
+          ],
+          "number_of_respondents": [
+            "1000",
+            "500"
+          ],
+          "malaria_prevalence": [
+            "0.05",
+            "0.03"
+          ],
+          "intervention_id": [
+            "1"
+          ],
+          "survey_method": [
+            "Door-to-door",
+            "Online"
+          ],
+          "survey_design": [
+            "Structured",
+            "Unstructured"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regimens": {
+        "rows": 2,
+        "sample_values": {
+          "regimen_id": [
+            "0",
+            "1"
+          ],
+          "regimen_name": [
+            "xxx",
+            "xIA"
+          ],
+          "description": [
+            "Standard treatment regimen",
+            "Intensive treatment regimen"
+          ],
+          "dosing_schedule": [
+            "Daily for 3 days",
+            "Weekly for 4 weeks"
+          ],
+          "side_effects": [
+            "Nausea, headache",
+            "Fatigue, dizziness"
+          ],
+          "duration": [
+            "3",
+            "28"
+          ],
+          "cost": [
+            "50.0",
+            "200.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 2,
+        "sample_values": {
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "region_name": [
+            "West Africa Region",
+            "East Africa Region"
+          ],
+          "country": [
+            "Nigeria",
+            "Kenya"
+          ],
+          "population": [
+            "1000000",
+            "500000"
+          ],
+          "geographic_area": [
+            "10000 sq km",
+            "5000 sq km"
+          ],
+          "latitude": [
+            "10.0",
+            "1.0"
+          ],
+          "longitude": [
+            "10.0",
+            "36.0"
+          ],
+          "elevation": [
+            "200",
+            "1500"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "time_series_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "intervention_id": [
+            "1",
+            "0"
+          ],
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "time": [
+            "0",
+            "12"
+          ],
+          "coverage": [
+            "0.0"
+          ],
+          "regimen": [
+            "0",
+            "1"
+          ],
+          "bednets": [
+            "0"
+          ],
+          "adherence": [
+            "0.35"
+          ],
+          "malaria_prevalence": [
+            "0.05",
+            "0.04"
+          ],
+          "temperature": [
+            "25.0",
+            "24.5"
+          ],
+          "rainfall": [
+            "100.0",
+            "110.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "field worker",
+            "data analyst"
+          ],
+          "phone_number": [
+            "+1234567890",
+            "+0987654321"
+          ],
+          "last_login": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

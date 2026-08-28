@@ -1,0 +1,625 @@
+{
+  "db_id": "character_preferences_and_interests",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/character_preferences_and_interests",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"character_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"duration\" TEXT\n}\n\nTable \"public\".\"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"parent_category_id\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"public\".\"character_dislikes\" {\n  \"dislike_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"dislike_name\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n}\n\nTable \"public\".\"character_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"document_type\" TEXT\n  \"is_confidential\" INTEGER\n}\n\nTable \"public\".\"character_history\" {\n  \"history_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"event_date\" TEXT\n  \"event_type\" TEXT\n  \"details\" TEXT\n  \"location\" TEXT\n  \"participants\" TEXT\n  \"impact\" TEXT\n}\n\nTable \"public\".\"character_images\" {\n  \"image_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"image_path\" TEXT\n  \"image_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"alt_text\" TEXT\n  \"is_main_image\" INTEGER\n}\n\nTable \"public\".\"character_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"character_id_1\" INTEGER\n  \"character_id_2\" INTEGER\n  \"interaction_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n  \"last_occurred\" TEXT\n}\n\nTable \"public\".\"character_likes\" {\n  \"like_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"like_name\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n}\n\nTable \"public\".\"character_media_appearances\" {\n  \"appearance_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"media_id\" INTEGER\n  \"appearance_date\" TEXT\n  \"description\" TEXT\n  \"role\" TEXT\n  \"duration\" TEXT\n  \"episode_number\" INTEGER\n}\n\nTable \"public\".\"character_traits\" {\n  \"trait_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"trait_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n  \"inherited\" INTEGER\n}\n\nTable \"public\".\"character_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"changes\" TEXT\n  \"created_at\" TEXT\n  \"version_by\" INTEGER\n  \"version_reason\" TEXT\n}\n\nTable \"public\".\"character_videos\" {\n  \"video_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"video_path\" TEXT\n  \"video_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"thumbnail_path\" TEXT\n  \"is_main_video\" INTEGER\n}\n\nTable \"public\".\"characters\" {\n  \"character_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"franchise_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"species\" TEXT\n  \"origin\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"franchises\" {\n  \"franchise_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"creator\" TEXT\n  \"parent_company\" TEXT\n  \"official_website\" TEXT\n  \"social_media_links\" TEXT\n}\n\nTable \"public\".\"media_items\" {\n  \"media_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"type\" TEXT\n  \"release_date\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"producer\" TEXT\n  \"rating\" TEXT\n  \"runtime\" TEXT\n  \"box_office\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"is_active\" INTEGER\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"categories\".\"parent_category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"character_dislikes\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_dislikes\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"character_documents\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_history\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_images\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_interactions\".\"character_id_1\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_interactions\".\"character_id_2\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_likes\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"character_likes\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_media_appearances\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_media_appearances\".\"media_id\" > \"public\".\"media_items\".\"media_id\"\nRef: \"public\".\"character_traits\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_versions\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_versions\".\"version_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"character_videos\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"characters\".\"franchise_id\" > \"public\".\"franchises\".\"franchise_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"character_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"duration\" TEXT\n}\n\nTable \"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"parent_category_id\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"character_dislikes\" {\n  \"dislike_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"dislike_name\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n}\n\nTable \"character_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"document_type\" TEXT\n  \"is_confidential\" INTEGER\n}\n\nTable \"character_history\" {\n  \"history_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"event_date\" TEXT\n  \"event_type\" TEXT\n  \"details\" TEXT\n  \"location\" TEXT\n  \"participants\" TEXT\n  \"impact\" TEXT\n}\n\nTable \"character_images\" {\n  \"image_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"image_path\" TEXT\n  \"image_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"alt_text\" TEXT\n  \"is_main_image\" INTEGER\n}\n\nTable \"character_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"character_id_1\" INTEGER\n  \"character_id_2\" INTEGER\n  \"interaction_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n  \"last_occurred\" TEXT\n}\n\nTable \"character_likes\" {\n  \"like_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"like_name\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n}\n\nTable \"character_media_appearances\" {\n  \"appearance_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"media_id\" INTEGER\n  \"appearance_date\" TEXT\n  \"description\" TEXT\n  \"role\" TEXT\n  \"duration\" TEXT\n  \"episode_number\" INTEGER\n}\n\nTable \"character_traits\" {\n  \"trait_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"trait_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"intensity\" TEXT\n  \"frequency\" TEXT\n  \"inherited\" INTEGER\n}\n\nTable \"character_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"changes\" TEXT\n  \"created_at\" TEXT\n  \"version_by\" INTEGER\n  \"version_reason\" TEXT\n}\n\nTable \"character_videos\" {\n  \"video_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"video_path\" TEXT\n  \"video_size\" REAL\n  \"upload_date\" TEXT\n  \"description\" TEXT\n  \"thumbnail_path\" TEXT\n  \"is_main_video\" INTEGER\n}\n\nTable \"characters\" {\n  \"character_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"franchise_id\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"gender\" TEXT\n  \"age\" INTEGER\n  \"species\" TEXT\n  \"origin\" TEXT\n  \"status\" TEXT\n}\n\nTable \"franchises\" {\n  \"franchise_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"creator\" TEXT\n  \"parent_company\" TEXT\n  \"official_website\" TEXT\n  \"social_media_links\" TEXT\n}\n\nTable \"media_items\" {\n  \"media_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"type\" TEXT\n  \"release_date\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"producer\" TEXT\n  \"rating\" TEXT\n  \"runtime\" TEXT\n  \"box_office\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"is_active\" INTEGER\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"categories\".\"parent_category_id\" > \"categories\".\"category_id\"\n\nRef: \"character_dislikes\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_dislikes\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"character_documents\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_history\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_images\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_interactions\".\"character_id_1\" > \"characters\".\"character_id\"\n\nRef: \"character_interactions\".\"character_id_2\" > \"characters\".\"character_id\"\n\nRef: \"character_likes\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"character_likes\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_media_appearances\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_media_appearances\".\"media_id\" > \"media_items\".\"media_id\"\n\nRef: \"character_traits\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_versions\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_versions\".\"version_by\" > \"users\".\"user_id\"\n\nRef: \"character_videos\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"characters\".\"franchise_id\" > \"franchises\".\"franchise_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'edit'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  duration: '5 minutes', '10 minutes'\n\ncategories: 2 rows\n  name: 'Hobbies', 'Activities'\n  description: 'Categories related to personal interests and hobbi', 'Categories related to various activities.'\n  created_at: '2023-01-01 09:30:00', '2023-01-02 09:30:00'\n\ncharacter_dislikes: 2 rows\n  dislike_name: 'Boxing', 'Graffiti Numbers'\n  description: 'Incineroar dislikes boxing because it's too rigid.', 'Inkling dislikes graffiti numbers because they are'\n  intensity: 'Medium', 'Low'\n\ncharacter_documents: 2 rows\n  description: 'Incineroar's character profile document.', 'Inkling's character profile document.'\n  document_type: 'Profile'\n  file_path: 'documents/1.pdf', 'documents/2.pdf'\n\ncharacter_history: 2 rows\n  event_type: 'introduction'\n  location: 'Pokémon World', 'Inkopolis'\n  details: 'Incineroar was introduced in Pokémon Sun and Moon.', 'Inkling was introduced in Splatoon 2.'\n\ncharacter_images: 2 rows\n  description: 'Incineroar's official artwork.', 'Inkling's official artwork.'\n  image_path: 'images/1.png', 'images/2.png'\n  alt_text: 'Incineroar', 'Inkling'\n\ncharacter_interactions: 2 rows\n  interaction_type: 'rivalry', 'friendship'\n  description: 'Incineroar and Inkling have a friendly rivalry.', 'Inkling and Isabelle are good friends.'\n  frequency: 'Occasionally', 'Frequently'\n\ncharacter_likes: 2 rows\n  like_name: 'Street Fighter', 'Painting'\n  description: 'Incineroar enjoys the intensity and action of Stre', 'Inkling loves to paint and create art.'\n  frequency: 'Occasionally', 'Frequently'\n\ncharacter_media_appearances: 2 rows\n  description: 'Incineroar appeared in the Pokémon Sun and Moon ga', 'Inkling appeared in the Splatoon 2 game.'\n  role: 'Main Character'\n  duration: '120 minutes', '90 minutes'\n\ncharacter_traits: 2 rows\n  trait_name: 'Determined', 'Creative'\n  description: 'Incineroar is known for its determination and pers', 'Inkling is known for its creativity and artistic s'\n  created_at: '2023-01-01 10:45:00', '2023-01-02 10:45:00'\n\ncharacter_versions: 2 rows\n  changes: 'Initial version of Incineroar's profile.', 'Initial version of Inkling's profile.'\n  version_date: '2023-01-01', '2023-01-02'\n  created_at: '2023-01-01 11:15:00', '2023-01-02 11:15:00'\n\ncharacter_videos: 2 rows\n  description: 'Incineroar's gameplay trailer.', 'Inkling's introduction video.'\n  thumbnail_path: 'thumbnails/1.png', 'thumbnails/2.png'\n  video_path: 'videos/1.mp4', 'videos/2.mp4'\n\ncharacters: 2 rows\n  name: 'Incineroar', 'Inkling'\n  description: 'A powerful Pokémon with a passion for wrestling.', 'A creative and artistic character from the Splatoo'\n  status: 'Active'\n\nfranchises: 2 rows\n  name: 'Pokémon', 'Splatoon'\n  description: 'A popular media franchise centered around creature', 'A third-person shooter game series featuring Inkli'\n  creator: 'Game Freak', 'Nintendo'\n\nmedia_items: 2 rows\n  title: 'Pokémon Sun and Moon', 'Splatoon 2'\n  description: 'The seventh generation of Pokémon games.', 'The sequel to the original Splatoon game.'\n  type: 'Game'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'content creator', 'data analyst'\n  address: '123 Main St', '456 Elm St'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "character_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "access_type": [
+            "view",
+            "edit"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap"
+          ],
+          "duration": [
+            "5 minutes",
+            "10 minutes"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "name": [
+            "Hobbies",
+            "Activities"
+          ],
+          "description": [
+            "Categories related to personal interests and hobbi",
+            "Categories related to various activities."
+          ],
+          "created_at": [
+            "2023-01-01 09:30:00",
+            "2023-01-02 09:30:00"
+          ],
+          "updated_at": [
+            "2023-01-05 09:30:00"
+          ],
+          "parent_category_id": [
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_dislikes": {
+        "rows": 2,
+        "sample_values": {
+          "dislike_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "dislike_name": [
+            "Boxing",
+            "Graffiti Numbers"
+          ],
+          "category_id": [
+            "0"
+          ],
+          "description": [
+            "Incineroar dislikes boxing because it's too rigid.",
+            "Inkling dislikes graffiti numbers because they are"
+          ],
+          "created_at": [
+            "2023-01-01 10:15:00",
+            "2023-01-02 10:15:00"
+          ],
+          "intensity": [
+            "Medium",
+            "Low"
+          ],
+          "frequency": [
+            "Rarely",
+            "Occasionally"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_documents": {
+        "rows": 2,
+        "sample_values": {
+          "document_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "1",
+            "0"
+          ],
+          "file_path": [
+            "documents/1.pdf",
+            "documents/2.pdf"
+          ],
+          "file_size": [
+            "1.2",
+            "1.0"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Incineroar's character profile document.",
+            "Inkling's character profile document."
+          ],
+          "document_type": [
+            "Profile"
+          ],
+          "is_confidential": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "event_date": [
+            "2016-11-18",
+            "2017-07-21"
+          ],
+          "event_type": [
+            "introduction"
+          ],
+          "details": [
+            "Incineroar was introduced in Pokémon Sun and Moon.",
+            "Inkling was introduced in Splatoon 2."
+          ],
+          "location": [
+            "Pokémon World",
+            "Inkopolis"
+          ],
+          "participants": [
+            "None"
+          ],
+          "impact": [
+            "Increased popularity of the franchise",
+            "Increased player engagement"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_images": {
+        "rows": 2,
+        "sample_values": {
+          "image_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0"
+          ],
+          "image_path": [
+            "images/1.png",
+            "images/2.png"
+          ],
+          "image_size": [
+            "0.5",
+            "0.4"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Incineroar's official artwork.",
+            "Inkling's official artwork."
+          ],
+          "alt_text": [
+            "Incineroar",
+            "Inkling"
+          ],
+          "is_main_image": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_interactions": {
+        "rows": 2,
+        "sample_values": {
+          "interaction_id": [
+            "0",
+            "1"
+          ],
+          "character_id_1": [
+            "0",
+            "1"
+          ],
+          "character_id_2": [
+            "0",
+            "1"
+          ],
+          "interaction_type": [
+            "rivalry",
+            "friendship"
+          ],
+          "description": [
+            "Incineroar and Inkling have a friendly rivalry.",
+            "Inkling and Isabelle are good friends."
+          ],
+          "created_at": [
+            "2023-01-01 10:30:00",
+            "2023-01-02 10:30:00"
+          ],
+          "intensity": [
+            "High"
+          ],
+          "frequency": [
+            "Occasionally",
+            "Frequently"
+          ],
+          "last_occurred": [
+            "2023-01-05",
+            "2023-01-04"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_likes": {
+        "rows": 2,
+        "sample_values": {
+          "like_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "like_name": [
+            "Street Fighter",
+            "Painting"
+          ],
+          "category_id": [
+            "0"
+          ],
+          "description": [
+            "Incineroar enjoys the intensity and action of Stre",
+            "Inkling loves to paint and create art."
+          ],
+          "created_at": [
+            "2023-01-01 10:10:00",
+            "2023-01-02 10:10:00"
+          ],
+          "intensity": [
+            "High"
+          ],
+          "frequency": [
+            "Occasionally",
+            "Frequently"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_media_appearances": {
+        "rows": 2,
+        "sample_values": {
+          "appearance_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "media_id": [
+            "1"
+          ],
+          "appearance_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Incineroar appeared in the Pokémon Sun and Moon ga",
+            "Inkling appeared in the Splatoon 2 game."
+          ],
+          "role": [
+            "Main Character"
+          ],
+          "duration": [
+            "120 minutes",
+            "90 minutes"
+          ],
+          "episode_number": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_traits": {
+        "rows": 2,
+        "sample_values": {
+          "trait_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "1",
+            "0"
+          ],
+          "trait_name": [
+            "Determined",
+            "Creative"
+          ],
+          "description": [
+            "Incineroar is known for its determination and pers",
+            "Inkling is known for its creativity and artistic s"
+          ],
+          "created_at": [
+            "2023-01-01 10:45:00",
+            "2023-01-02 10:45:00"
+          ],
+          "intensity": [
+            "High"
+          ],
+          "frequency": [
+            "Always"
+          ],
+          "inherited": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "version_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "changes": [
+            "Initial version of Incineroar's profile.",
+            "Initial version of Inkling's profile."
+          ],
+          "created_at": [
+            "2023-01-01 11:15:00",
+            "2023-01-02 11:15:00"
+          ],
+          "version_by": [
+            "1"
+          ],
+          "version_reason": [
+            "Initial creation"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_videos": {
+        "rows": 2,
+        "sample_values": {
+          "video_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "1",
+            "0"
+          ],
+          "video_path": [
+            "videos/1.mp4",
+            "videos/2.mp4"
+          ],
+          "video_size": [
+            "5.0",
+            "4.5"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Incineroar's gameplay trailer.",
+            "Inkling's introduction video."
+          ],
+          "thumbnail_path": [
+            "thumbnails/1.png",
+            "thumbnails/2.png"
+          ],
+          "is_main_video": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "characters": {
+        "rows": 2,
+        "sample_values": {
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "name": [
+            "Incineroar",
+            "Inkling"
+          ],
+          "franchise_id": [
+            "0"
+          ],
+          "description": [
+            "A powerful Pokémon with a passion for wrestling.",
+            "A creative and artistic character from the Splatoo"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00",
+            "2023-01-02 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-05 10:00:00"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ],
+          "age": [
+            "2",
+            "1"
+          ],
+          "species": [
+            "Pokémon",
+            "Inkling"
+          ],
+          "origin": [
+            "Pokémon World",
+            "Inkopolis"
+          ],
+          "status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "franchises": {
+        "rows": 2,
+        "sample_values": {
+          "franchise_id": [
+            "0",
+            "1"
+          ],
+          "name": [
+            "Pokémon",
+            "Splatoon"
+          ],
+          "description": [
+            "A popular media franchise centered around creature",
+            "A third-person shooter game series featuring Inkli"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00",
+            "2023-01-02 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-05 09:00:00"
+          ],
+          "creator": [
+            "Game Freak",
+            "Nintendo"
+          ],
+          "parent_company": [
+            "The Pokémon Company",
+            "Nintendo"
+          ],
+          "official_website": [
+            "https://www.pokemon.com",
+            "https://www.splatoon.nintendo.com"
+          ],
+          "social_media_links": [
+            "https://twitter.com/pokemon",
+            "https://twitter.com/splatoon"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "media_items": {
+        "rows": 2,
+        "sample_values": {
+          "media_id": [
+            "0",
+            "1"
+          ],
+          "title": [
+            "Pokémon Sun and Moon",
+            "Splatoon 2"
+          ],
+          "type": [
+            "Game"
+          ],
+          "release_date": [
+            "2016-11-18",
+            "2017-07-21"
+          ],
+          "description": [
+            "The seventh generation of Pokémon games.",
+            "The sequel to the original Splatoon game."
+          ],
+          "created_at": [
+            "2023-01-01 09:45:00",
+            "2023-01-02 09:45:00"
+          ],
+          "updated_at": [
+            "2023-01-05 09:45:00"
+          ],
+          "producer": [
+            "Game Freak",
+            "Nintendo"
+          ],
+          "rating": [
+            "8.5",
+            "9.0"
+          ],
+          "runtime": [
+            "120 minutes",
+            "90 minutes"
+          ],
+          "box_office": [
+            "100000000",
+            "150000000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "content creator",
+            "data analyst"
+          ],
+          "created_at": [
+            "2023-01-01 11:00:00",
+            "2023-01-02 11:00:00"
+          ],
+          "updated_at": [
+            "2023-01-05 11:00:00"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "is_active": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

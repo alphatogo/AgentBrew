@@ -1,0 +1,775 @@
+{
+  "db_id": "global_happiness_and_well_being_analysis_728465",
+  "source": "synsql",
+  "tables": 21,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/global_happiness_and_well_being_analysis_728465",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_type\" TEXT\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_ip\" TEXT\n}\n\nTable \"public\".\"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"iso_code\" TEXT\n  \"region\" TEXT\n  \"subregion\" TEXT\n  \"capital\" TEXT\n  \"population\" INTEGER\n  \"area_km2\" REAL\n  \"gdp_nominal\" REAL\n  \"gdp_ppp\" REAL\n  \"currency\" TEXT\n  \"official_language\" TEXT\n}\n\nTable \"public\".\"data_quality\" {\n  \"issue_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"issue_type\" TEXT\n  \"description\" TEXT\n  \"status\" TEXT\n  \"resolution_date\" TEXT\n}\n\nTable \"public\".\"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"url\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"dataset_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" INTEGER\n  \"release_date\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"economic_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"gdp_growth_rate\" REAL\n  \"inflation_rate\" REAL\n  \"unemployment_rate\" REAL\n  \"poverty_rate\" REAL\n  \"income_inequality\" REAL\n  \"trade_balance\" REAL\n  \"current_account_balance\" REAL\n}\n\nTable \"public\".\"education_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"enrollment_rate_primary\" REAL\n  \"enrollment_rate_secondary\" REAL\n  \"enrollment_rate_tertiary\" REAL\n  \"teacher_student_ratio\" REAL\n  \"public_expenditure_on_education\" REAL\n  \"literacy_rate_adults\" REAL\n  \"student_achievement_index\" REAL\n}\n\nTable \"public\".\"environmental_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"renewable_energy_share\" REAL\n  \"greenhouse_gas_emissions\" REAL\n  \"deforestation_rate\" REAL\n  \"water_consumption_per_capita\" REAL\n  \"waste_management_index\" REAL\n  \"water_quality_index\" REAL\n  \"air_pollution_index\" REAL\n}\n\nTable \"public\".\"environmental_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"co2_emissions\" REAL\n  \"water_quality_index\" REAL\n  \"air_quality_index\" REAL\n  \"biodiversity_index\" REAL\n  \"forest_coverage\" REAL\n  \"renewable_energy_share\" REAL\n}\n\nTable \"public\".\"happiness_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"happiness_rank\" INTEGER\n  \"happiness_score\" REAL\n  \"freedom_score\" REAL\n  \"generosity_score\" REAL\n  \"life_expectancy_score\" REAL\n  \"gdp_per_capita\" REAL\n  \"corruption_perception\" REAL\n  \"dystopia_residual\" REAL\n  \" hedonic_eudaimonia\" REAL\n}\n\nTable \"public\".\"health_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"life_expectancy\" REAL\n  \"infant_mortality_rate\" REAL\n  \"mortality_rate\" REAL\n  \"vaccination_coverage\" REAL\n  \"healthcare_quality_index\" REAL\n  \"maternal_mortality_ratio\" REAL\n}\n\nTable \"public\".\"healthcare_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"hospital_beds_per_1000\" REAL\n  \"physicians_per_1000\" REAL\n  \"nurses_per_1000\" REAL\n  \"public_expenditure_on_healthcare\" REAL\n  \"private_expenditure_on_healthcare\" REAL\n  \"healthcare_accessibility_index\" REAL\n  \"healthcare_outcome_index\" REAL\n}\n\nTable \"public\".\"political_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"political_parties\" INTEGER\n  \"voting_population\" INTEGER\n  \"voter_turnout\" REAL\n  \"legislative_efficiency\" REAL\n  \"civil_society_organization_density\" REAL\n  \"judicial_independence\" REAL\n}\n\nTable \"public\".\"political_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"democracy_index\" REAL\n  \"government_effectiveness\" REAL\n  \"political_stability\" REAL\n  \"corruption_index\" REAL\n  \"freedom_of_press\" REAL\n  \"electoral_process\" REAL\n}\n\nTable \"public\".\"project_datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"dataset_type\" TEXT\n  \"description\" TEXT\n  \"date_added\" TEXT\n  \"version\" INTEGER\n}\n\nTable \"public\".\"project_members\" {\n  \"member_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role_in_project\" TEXT\n  \"date_joined\" TEXT\n  \"contribution\" REAL\n}\n\nTable \"public\".\"projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"lead_user_id\" INTEGER\n  \"status\" TEXT\n}\n\nTable \"public\".\"security_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"police_force_per_1000\" REAL\n  \"prison_population_rate\" REAL\n  \"cybersecurity_index\" REAL\n  \"natural_disaster_risk_index\" REAL\n  \"terrorism_index\" REAL\n  \"nuclear_security_index\" REAL\n}\n\nTable \"public\".\"security_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"crime_rate\" REAL\n  \"homicide_rate\" REAL\n  \"terrorism_index\" REAL\n  \"military_spending_per_capita\" REAL\n  \"peacekeeping_contribution\" REAL\n}\n\nTable \"public\".\"social_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"education_index\" REAL\n  \"literacy_rate\" REAL\n  \"health_spending_per_capita\" REAL\n  \"social_support_index\" REAL\n  \"gender_equality_index\" REAL\n  \"population_growth_rate\" REAL\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"affiliation\" TEXT\n  \"date_joined\" TEXT\n  \"password\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"data_quality\".\"dataset_id\" > \"public\".\"project_datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_versions\".\"dataset_id\" > \"public\".\"project_datasets\".\"dataset_id\"\nRef: \"public\".\"economic_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"education_data\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"environmental_data\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"environmental_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"happiness_scores\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"health_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"healthcare_data\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"political_data\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"political_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"project_datasets\".\"project_id\" > \"public\".\"projects\".\"project_id\"\nRef: \"public\".\"project_members\".\"project_id\" > \"public\".\"projects\".\"project_id\"\nRef: \"public\".\"project_members\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"projects\".\"lead_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"security_data\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"security_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"social_indicators\".\"country_id\" > \"public\".\"countries\".\"country_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_type\" TEXT\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_ip\" TEXT\n}\n\nTable \"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"iso_code\" TEXT\n  \"region\" TEXT\n  \"subregion\" TEXT\n  \"capital\" TEXT\n  \"population\" INTEGER\n  \"area_km2\" REAL\n  \"gdp_nominal\" REAL\n  \"gdp_ppp\" REAL\n  \"currency\" TEXT\n  \"official_language\" TEXT\n}\n\nTable \"data_quality\" {\n  \"issue_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"issue_type\" TEXT\n  \"description\" TEXT\n  \"status\" TEXT\n  \"resolution_date\" TEXT\n}\n\nTable \"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"url\" TEXT\n  \"description\" TEXT\n}\n\nTable \"dataset_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" INTEGER\n  \"release_date\" TEXT\n  \"description\" TEXT\n}\n\nTable \"economic_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"gdp_growth_rate\" REAL\n  \"inflation_rate\" REAL\n  \"unemployment_rate\" REAL\n  \"poverty_rate\" REAL\n  \"income_inequality\" REAL\n  \"trade_balance\" REAL\n  \"current_account_balance\" REAL\n}\n\nTable \"education_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"enrollment_rate_primary\" REAL\n  \"enrollment_rate_secondary\" REAL\n  \"enrollment_rate_tertiary\" REAL\n  \"teacher_student_ratio\" REAL\n  \"public_expenditure_on_education\" REAL\n  \"literacy_rate_adults\" REAL\n  \"student_achievement_index\" REAL\n}\n\nTable \"environmental_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"renewable_energy_share\" REAL\n  \"greenhouse_gas_emissions\" REAL\n  \"deforestation_rate\" REAL\n  \"water_consumption_per_capita\" REAL\n  \"waste_management_index\" REAL\n  \"water_quality_index\" REAL\n  \"air_pollution_index\" REAL\n}\n\nTable \"environmental_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"co2_emissions\" REAL\n  \"water_quality_index\" REAL\n  \"air_quality_index\" REAL\n  \"biodiversity_index\" REAL\n  \"forest_coverage\" REAL\n  \"renewable_energy_share\" REAL\n}\n\nTable \"happiness_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"happiness_rank\" INTEGER\n  \"happiness_score\" REAL\n  \"freedom_score\" REAL\n  \"generosity_score\" REAL\n  \"life_expectancy_score\" REAL\n  \"gdp_per_capita\" REAL\n  \"corruption_perception\" REAL\n  \"dystopia_residual\" REAL\n  \" hedonic_eudaimonia\" REAL\n}\n\nTable \"health_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"life_expectancy\" REAL\n  \"infant_mortality_rate\" REAL\n  \"mortality_rate\" REAL\n  \"vaccination_coverage\" REAL\n  \"healthcare_quality_index\" REAL\n  \"maternal_mortality_ratio\" REAL\n}\n\nTable \"healthcare_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"hospital_beds_per_1000\" REAL\n  \"physicians_per_1000\" REAL\n  \"nurses_per_1000\" REAL\n  \"public_expenditure_on_healthcare\" REAL\n  \"private_expenditure_on_healthcare\" REAL\n  \"healthcare_accessibility_index\" REAL\n  \"healthcare_outcome_index\" REAL\n}\n\nTable \"political_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"political_parties\" INTEGER\n  \"voting_population\" INTEGER\n  \"voter_turnout\" REAL\n  \"legislative_efficiency\" REAL\n  \"civil_society_organization_density\" REAL\n  \"judicial_independence\" REAL\n}\n\nTable \"political_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"democracy_index\" REAL\n  \"government_effectiveness\" REAL\n  \"political_stability\" REAL\n  \"corruption_index\" REAL\n  \"freedom_of_press\" REAL\n  \"electoral_process\" REAL\n}\n\nTable \"project_datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"dataset_type\" TEXT\n  \"description\" TEXT\n  \"date_added\" TEXT\n  \"version\" INTEGER\n}\n\nTable \"project_members\" {\n  \"member_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role_in_project\" TEXT\n  \"date_joined\" TEXT\n  \"contribution\" REAL\n}\n\nTable \"projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"lead_user_id\" INTEGER\n  \"status\" TEXT\n}\n\nTable \"security_data\" {\n  \"data_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"police_force_per_1000\" REAL\n  \"prison_population_rate\" REAL\n  \"cybersecurity_index\" REAL\n  \"natural_disaster_risk_index\" REAL\n  \"terrorism_index\" REAL\n  \"nuclear_security_index\" REAL\n}\n\nTable \"security_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"crime_rate\" REAL\n  \"homicide_rate\" REAL\n  \"terrorism_index\" REAL\n  \"military_spending_per_capita\" REAL\n  \"peacekeeping_contribution\" REAL\n}\n\nTable \"social_indicators\" {\n  \"indicator_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"education_index\" REAL\n  \"literacy_rate\" REAL\n  \"health_spending_per_capita\" REAL\n  \"social_support_index\" REAL\n  \"gender_equality_index\" REAL\n  \"population_growth_rate\" REAL\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"affiliation\" TEXT\n  \"date_joined\" TEXT\n  \"password\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"data_quality\".\"dataset_id\" > \"project_datasets\".\"dataset_id\"\n\nRef: \"dataset_versions\".\"dataset_id\" > \"project_datasets\".\"dataset_id\"\n\nRef: \"economic_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"education_data\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"environmental_data\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"environmental_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"happiness_scores\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"health_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"healthcare_data\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"political_data\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"political_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"project_datasets\".\"project_id\" > \"projects\".\"project_id\"\n\nRef: \"project_members\".\"project_id\" > \"projects\".\"project_id\"\n\nRef: \"project_members\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"projects\".\"lead_user_id\" > \"users\".\"user_id\"\n\nRef: \"security_data\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"security_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"social_indicators\".\"country_id\" > \"countries\".\"country_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  resource_type: 'dataset', 'report'\n  access_type: 'view', 'download'\n  access_ip: '192.168.1.100', '192.168.1.101'\n\ncountries: 2 rows\n  country_name: 'Switzerland', 'Iceland'\n  subregion: 'Western Europe', 'Northern Europe'\n  region: 'Europe'\n\ndata_quality: 2 rows\n  issue_type: 'missing values', 'outliers'\n  status: 'resolved', 'in progress'\n  description: 'Missing values in the happiness scores for some co', 'Outliers in the healthcare spending data'\n\ndata_sources: 2 rows\n  source_name: 'World Bank', 'WHO'\n  source_type: 'government', 'NGO'\n  description: 'The World Bank is an international financial insti', 'The World Health Organization is a specialized age'\n\ndataset_versions: 2 rows\n  description: 'Initial release of the happiness dataset', 'Update to the happiness dataset with new data for'\n  release_date: '2023-01-01', '2023-02-01'\n  version: '1', '2'\n\neconomic_indicators: 2 rows\n  gdp_growth_rate: '1.2', '2.1'\n  unemployment_rate: '3.5', '4.0'\n  poverty_rate: '7.0', '8.0'\n\neducation_data: 2 rows\n  enrollment_rate_primary: '100.0', '98.0'\n  enrollment_rate_secondary: '95.0', '92.0'\n  enrollment_rate_tertiary: '70.0', '65.0'\n\nenvironmental_data: 2 rows\n  greenhouse_gas_emissions: '50.0', '45.0'\n  renewable_energy_share: '20.0', '15.0'\n  deforestation_rate: '0.5', '0.4'\n\nenvironmental_indicators: 2 rows\n  co2_emissions: '5.0', '4.5'\n  water_quality_index: '0.9', '0.95'\n  air_quality_index: '0.85', '0.8'\n\nhappiness_scores: 0 rows\n\nhealth_indicators: 2 rows\n  life_expectancy: '83.0', '82.0'\n  infant_mortality_rate: '2.5', '3.0'\n  mortality_rate: '8.0', '8.5'\n\nhealthcare_data: 2 rows\n  hospital_beds_per_1000: '4.5', '4.0'\n  physicians_per_1000: '2.5', '2.0'\n  nurses_per_1000: '8.0', '7.5'\n\npolitical_data: 2 rows\n  political_parties: '5', '4'\n  voter_turnout: '80.0', '75.0'\n  civil_society_organization_density: '0.5', '0.45'\n\npolitical_indicators: 2 rows\n  democracy_index: '0.85', '0.8'\n  government_effectiveness: '0.9', '0.85'\n  political_stability: '0.95', '0.9'\n\nproject_datasets: 2 rows\n  dataset_type: 'happiness', 'health'\n  description: 'Global happiness scores for 2015-2020', 'Healthcare spending and life expectancy data for 2'\n  date_added: '2023-01-01', '2023-02-01'\n\nproject_members: 2 rows\n  role_in_project: 'researcher', 'analyst'\n  date_joined: '2023-01-01', '2023-01-05'\n  contribution: '0.5', '0.3'\n\nprojects: 2 rows\n  project_name: 'Happiness Trends', 'Healthcare Impact'\n  status: 'ongoing', 'completed'\n  description: 'Analyzing global happiness trends over the past de', 'Assessing the impact of healthcare spending on lif'\n\nsecurity_data: 2 rows\n  police_force_per_1000: '3.0', '2.5'\n  cybersecurity_index: '0.85', '0.8'\n  natural_disaster_risk_index: '0.4', '0.35'\n\nsecurity_indicators: 2 rows\n  crime_rate: '5.0', '6.0'\n  terrorism_index: '0.1', '0.2'\n  military_spending_per_capita: '1500.0', '1200.0'\n\nsocial_indicators: 2 rows\n  education_index: '0.9', '0.85'\n  literacy_rate: '99.0', '98.0'\n  health_spending_per_capita: '6000.0', '5500.0'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'policymaker'\n  affiliation: 'Harvard University', 'WHO'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "resource_type": [
+            "dataset",
+            "report"
+          ],
+          "resource_id": [
+            "1",
+            "2"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_ip": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "countries": {
+        "rows": 2,
+        "sample_values": {
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "country_name": [
+            "Switzerland",
+            "Iceland"
+          ],
+          "iso_code": [
+            "CHE",
+            "ISL"
+          ],
+          "region": [
+            "Europe"
+          ],
+          "subregion": [
+            "Western Europe",
+            "Northern Europe"
+          ],
+          "capital": [
+            "Bern",
+            "Reykjavik"
+          ],
+          "population": [
+            "8570000",
+            "364000"
+          ],
+          "area_km2": [
+            "41285.0",
+            "103000.0"
+          ],
+          "gdp_nominal": [
+            "705915.0",
+            "27400.0"
+          ],
+          "gdp_ppp": [
+            "636633.0",
+            "19800.0"
+          ],
+          "currency": [
+            "Swiss franc",
+            "Icelandic króna"
+          ],
+          "official_language": [
+            "German, French, Italian, Romansh",
+            "Icelandic"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_quality": {
+        "rows": 2,
+        "sample_values": {
+          "issue_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "issue_type": [
+            "missing values",
+            "outliers"
+          ],
+          "description": [
+            "Missing values in the happiness scores for some co",
+            "Outliers in the healthcare spending data"
+          ],
+          "status": [
+            "resolved",
+            "in progress"
+          ],
+          "resolution_date": [
+            "2023-01-05"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "source_name": [
+            "World Bank",
+            "WHO"
+          ],
+          "source_type": [
+            "government",
+            "NGO"
+          ],
+          "url": [
+            "https://www.worldbank.org/",
+            "https://www.who.int/"
+          ],
+          "description": [
+            "The World Bank is an international financial insti",
+            "The World Health Organization is a specialized age"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "version": [
+            "1",
+            "2"
+          ],
+          "release_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "description": [
+            "Initial release of the happiness dataset",
+            "Update to the happiness dataset with new data for "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "economic_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "gdp_growth_rate": [
+            "1.2",
+            "2.1"
+          ],
+          "inflation_rate": [
+            "0.8",
+            "1.5"
+          ],
+          "unemployment_rate": [
+            "3.5",
+            "4.0"
+          ],
+          "poverty_rate": [
+            "7.0",
+            "8.0"
+          ],
+          "income_inequality": [
+            "0.32",
+            "0.27"
+          ],
+          "trade_balance": [
+            "1000.0",
+            "500.0"
+          ],
+          "current_account_balance": [
+            "2000.0",
+            "1000.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "education_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "enrollment_rate_primary": [
+            "100.0",
+            "98.0"
+          ],
+          "enrollment_rate_secondary": [
+            "95.0",
+            "92.0"
+          ],
+          "enrollment_rate_tertiary": [
+            "70.0",
+            "65.0"
+          ],
+          "teacher_student_ratio": [
+            "10.0",
+            "11.0"
+          ],
+          "public_expenditure_on_education": [
+            "5.0",
+            "4.5"
+          ],
+          "literacy_rate_adults": [
+            "99.0",
+            "98.0"
+          ],
+          "student_achievement_index": [
+            "500.0",
+            "450.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "environmental_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "renewable_energy_share": [
+            "20.0",
+            "15.0"
+          ],
+          "greenhouse_gas_emissions": [
+            "50.0",
+            "45.0"
+          ],
+          "deforestation_rate": [
+            "0.5",
+            "0.4"
+          ],
+          "water_consumption_per_capita": [
+            "150.0",
+            "140.0"
+          ],
+          "waste_management_index": [
+            "0.8",
+            "0.75"
+          ],
+          "water_quality_index": [
+            "80.0",
+            "75.0"
+          ],
+          "air_pollution_index": [
+            "70.0",
+            "65.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "environmental_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "co2_emissions": [
+            "5.0",
+            "4.5"
+          ],
+          "water_quality_index": [
+            "0.9",
+            "0.95"
+          ],
+          "air_quality_index": [
+            "0.85",
+            "0.8"
+          ],
+          "biodiversity_index": [
+            "0.75",
+            "0.7"
+          ],
+          "forest_coverage": [
+            "30.0",
+            "40.0"
+          ],
+          "renewable_energy_share": [
+            "20.0",
+            "30.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "happiness_scores": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "health_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "life_expectancy": [
+            "83.0",
+            "82.0"
+          ],
+          "infant_mortality_rate": [
+            "2.5",
+            "3.0"
+          ],
+          "mortality_rate": [
+            "8.0",
+            "8.5"
+          ],
+          "vaccination_coverage": [
+            "95.0",
+            "94.0"
+          ],
+          "healthcare_quality_index": [
+            "0.9",
+            "0.85"
+          ],
+          "maternal_mortality_ratio": [
+            "5.0",
+            "6.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "healthcare_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "hospital_beds_per_1000": [
+            "4.5",
+            "4.0"
+          ],
+          "physicians_per_1000": [
+            "2.5",
+            "2.0"
+          ],
+          "nurses_per_1000": [
+            "8.0",
+            "7.5"
+          ],
+          "public_expenditure_on_healthcare": [
+            "8.0",
+            "7.5"
+          ],
+          "private_expenditure_on_healthcare": [
+            "2.0",
+            "2.5"
+          ],
+          "healthcare_accessibility_index": [
+            "90.0",
+            "85.0"
+          ],
+          "healthcare_outcome_index": [
+            "85.0",
+            "80.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "political_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "political_parties": [
+            "5",
+            "4"
+          ],
+          "voting_population": [
+            "5000000",
+            "4500000"
+          ],
+          "voter_turnout": [
+            "80.0",
+            "75.0"
+          ],
+          "legislative_efficiency": [
+            "0.85",
+            "0.8"
+          ],
+          "civil_society_organization_density": [
+            "0.5",
+            "0.45"
+          ],
+          "judicial_independence": [
+            "0.8",
+            "0.7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "political_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "democracy_index": [
+            "0.85",
+            "0.8"
+          ],
+          "government_effectiveness": [
+            "0.9",
+            "0.85"
+          ],
+          "political_stability": [
+            "0.95",
+            "0.9"
+          ],
+          "corruption_index": [
+            "0.8",
+            "0.75"
+          ],
+          "freedom_of_press": [
+            "0.75",
+            "0.7"
+          ],
+          "electoral_process": [
+            "9.0",
+            "8.5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project_datasets": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "dataset_type": [
+            "happiness",
+            "health"
+          ],
+          "description": [
+            "Global happiness scores for 2015-2020",
+            "Healthcare spending and life expectancy data for 2"
+          ],
+          "date_added": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "version": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project_members": {
+        "rows": 2,
+        "sample_values": {
+          "member_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "0"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "role_in_project": [
+            "researcher",
+            "analyst"
+          ],
+          "date_joined": [
+            "2023-01-01",
+            "2023-01-05"
+          ],
+          "contribution": [
+            "0.5",
+            "0.3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "projects": {
+        "rows": 2,
+        "sample_values": {
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "project_name": [
+            "Happiness Trends",
+            "Healthcare Impact"
+          ],
+          "description": [
+            "Analyzing global happiness trends over the past de",
+            "Assessing the impact of healthcare spending on lif"
+          ],
+          "start_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "end_date": [
+            "2023-12-31",
+            "2023-11-30"
+          ],
+          "lead_user_id": [
+            "0"
+          ],
+          "status": [
+            "ongoing",
+            "completed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "security_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "police_force_per_1000": [
+            "3.0",
+            "2.5"
+          ],
+          "prison_population_rate": [
+            "80.0",
+            "75.0"
+          ],
+          "cybersecurity_index": [
+            "0.85",
+            "0.8"
+          ],
+          "natural_disaster_risk_index": [
+            "0.4",
+            "0.35"
+          ],
+          "terrorism_index": [
+            "0.2",
+            "0.25"
+          ],
+          "nuclear_security_index": [
+            "0.7",
+            "0.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "security_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "crime_rate": [
+            "5.0",
+            "6.0"
+          ],
+          "homicide_rate": [
+            "0.5",
+            "0.6"
+          ],
+          "terrorism_index": [
+            "0.1",
+            "0.2"
+          ],
+          "military_spending_per_capita": [
+            "1500.0",
+            "1200.0"
+          ],
+          "peacekeeping_contribution": [
+            "500.0",
+            "300.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "social_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "indicator_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "education_index": [
+            "0.9",
+            "0.85"
+          ],
+          "literacy_rate": [
+            "99.0",
+            "98.0"
+          ],
+          "health_spending_per_capita": [
+            "6000.0",
+            "5500.0"
+          ],
+          "social_support_index": [
+            "0.85",
+            "0.8"
+          ],
+          "gender_equality_index": [
+            "0.9",
+            "0.85"
+          ],
+          "population_growth_rate": [
+            "1.2",
+            "1.1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "policymaker"
+          ],
+          "affiliation": [
+            "Harvard University",
+            "WHO"
+          ],
+          "date_joined": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

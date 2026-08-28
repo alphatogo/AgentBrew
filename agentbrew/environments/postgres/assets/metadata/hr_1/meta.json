@@ -1,0 +1,397 @@
+{
+  "db_id": "hr_1",
+  "source": "sparc",
+  "tables": 7,
+  "total_rows": 216,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#hr_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"countries\" {\n  \"COUNTRY_ID\" TEXT [pk, not null]\n  \"COUNTRY_NAME\" TEXT\n  \"REGION_ID\" TEXT\n}\n\nTable \"departments\" {\n  \"DEPARTMENT_ID\" TEXT [pk, not null]\n  \"DEPARTMENT_NAME\" TEXT [not null]\n  \"MANAGER_ID\" TEXT\n  \"LOCATION_ID\" TEXT\n}\n\nTable \"employees\" {\n  \"EMPLOYEE_ID\" TEXT [pk, not null]\n  \"FIRST_NAME\" TEXT\n  \"LAST_NAME\" TEXT [not null]\n  \"EMAIL\" TEXT [not null]\n  \"PHONE_NUMBER\" TEXT\n  \"HIRE_DATE\" DATE [not null]\n  \"JOB_ID\" TEXT [not null]\n  \"SALARY\" TEXT\n  \"COMMISSION_PCT\" TEXT\n  \"MANAGER_ID\" TEXT\n  \"DEPARTMENT_ID\" TEXT\n}\n\nTable \"job_history\" {\n  \"EMPLOYEE_ID\" TEXT [pk, not null]\n  \"START_DATE\" DATE [pk, not null]\n  \"END_DATE\" DATE [not null]\n  \"JOB_ID\" TEXT [not null]\n  \"DEPARTMENT_ID\" TEXT\n}\n\nTable \"jobs\" {\n  \"JOB_ID\" TEXT [pk, not null]\n  \"JOB_TITLE\" TEXT [not null]\n  \"MIN_SALARY\" TEXT\n  \"MAX_SALARY\" TEXT\n}\n\nTable \"locations\" {\n  \"LOCATION_ID\" TEXT [pk, not null]\n  \"STREET_ADDRESS\" TEXT\n  \"POSTAL_CODE\" TEXT\n  \"CITY\" TEXT [not null]\n  \"STATE_PROVINCE\" TEXT\n  \"COUNTRY_ID\" TEXT\n}\n\nTable \"regions\" {\n  \"REGION_ID\" TEXT [pk, not null]\n  \"REGION_NAME\" TEXT\n}\n\n\n\nRef: \"countries\".\"REGION_ID\" > \"regions\".\"REGION_ID\"\n\nRef: \"employees\".\"JOB_ID\" > \"jobs\".\"JOB_ID\"\n\nRef: \"employees\".\"DEPARTMENT_ID\" > \"departments\".\"DEPARTMENT_ID\"\n\nRef: \"job_history\".\"JOB_ID\" > \"jobs\".\"JOB_ID\"\n\nRef: \"job_history\".\"DEPARTMENT_ID\" > \"departments\".\"DEPARTMENT_ID\"\n\nRef: \"job_history\".\"EMPLOYEE_ID\" > \"employees\".\"EMPLOYEE_ID\"\n\nRef: \"locations\".\"COUNTRY_ID\" > \"countries\".\"COUNTRY_ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"countries\" {\n  \"COUNTRY_ID\" TEXT [pk, not null]\n  \"COUNTRY_NAME\" TEXT\n  \"REGION_ID\" TEXT\n}\n\nTable \"departments\" {\n  \"DEPARTMENT_ID\" TEXT [pk, not null]\n  \"DEPARTMENT_NAME\" TEXT [not null]\n  \"MANAGER_ID\" TEXT\n  \"LOCATION_ID\" TEXT\n}\n\nTable \"employees\" {\n  \"EMPLOYEE_ID\" TEXT [pk, not null]\n  \"FIRST_NAME\" TEXT\n  \"LAST_NAME\" TEXT [not null]\n  \"EMAIL\" TEXT [not null]\n  \"PHONE_NUMBER\" TEXT\n  \"HIRE_DATE\" DATE [not null]\n  \"JOB_ID\" TEXT [not null]\n  \"SALARY\" TEXT\n  \"COMMISSION_PCT\" TEXT\n  \"MANAGER_ID\" TEXT\n  \"DEPARTMENT_ID\" TEXT\n}\n\nTable \"job_history\" {\n  \"EMPLOYEE_ID\" TEXT [pk, not null]\n  \"START_DATE\" DATE [pk, not null]\n  \"END_DATE\" DATE [not null]\n  \"JOB_ID\" TEXT [not null]\n  \"DEPARTMENT_ID\" TEXT\n}\n\nTable \"jobs\" {\n  \"JOB_ID\" TEXT [pk, not null]\n  \"JOB_TITLE\" TEXT [not null]\n  \"MIN_SALARY\" TEXT\n  \"MAX_SALARY\" TEXT\n}\n\nTable \"locations\" {\n  \"LOCATION_ID\" TEXT [pk, not null]\n  \"STREET_ADDRESS\" TEXT\n  \"POSTAL_CODE\" TEXT\n  \"CITY\" TEXT [not null]\n  \"STATE_PROVINCE\" TEXT\n  \"COUNTRY_ID\" TEXT\n}\n\nTable \"regions\" {\n  \"REGION_ID\" TEXT [pk, not null]\n  \"REGION_NAME\" TEXT\n}\n\nRef: \"countries\".\"REGION_ID\" > \"regions\".\"REGION_ID\"\n\nRef: \"employees\".\"JOB_ID\" > \"jobs\".\"JOB_ID\"\n\nRef: \"employees\".\"DEPARTMENT_ID\" > \"departments\".\"DEPARTMENT_ID\"\n\nRef: \"job_history\".\"JOB_ID\" > \"jobs\".\"JOB_ID\"\n\nRef: \"job_history\".\"DEPARTMENT_ID\" > \"departments\".\"DEPARTMENT_ID\"\n\nRef: \"job_history\".\"EMPLOYEE_ID\" > \"employees\".\"EMPLOYEE_ID\"\n\nRef: \"locations\".\"COUNTRY_ID\" > \"countries\".\"COUNTRY_ID\"\n\n## Table Stats & Sample Values\n\ncountries: 25 rows\n  COUNTRY_NAME: 'Argentina', 'Australia', 'Belgium', ...\n  REGION_ID: '2', '3', '1', ...\n  COUNTRY_ID: 'AR', 'AU', 'BE', ...\n\ndepartments: 27 rows\n  DEPARTMENT_NAME: 'Administration', 'Marketing', 'Purchasing', ...\n  MANAGER_ID: '200', '201', '114', ...\n  LOCATION_ID: '1700', '1800', '2400', ...\n\nemployees: 107 rows\n  FIRST_NAME: 'Steven', 'Neena', 'Lex', ...\n  LAST_NAME: 'King', 'Kochhar', 'De Haan', ...\n  SALARY: '24000', '17000', '9000', ...\n\njob_history: 11 rows\n  END_DATE: '1998-07-24', '1993-10-27', '1997-03-15', ...\n  JOB_ID: 'IT_PROG', 'AC_ACCOUNT', 'AC_MGR', ...\n  DEPARTMENT_ID: '60', '110', '20', ...\n\njobs: 19 rows\n  JOB_TITLE: 'President', 'Administration Vice President', 'Administration Assistant', ...\n  MIN_SALARY: '20000', '15000', '3000', ...\n  MAX_SALARY: '40000', '30000', '6000', ...\n\nlocations: 23 rows\n  CITY: 'Roma', 'Venice', 'Tokyo', ...\n  STATE_PROVINCE: 'Tokyo Prefecture', 'Texas', 'California', ...\n  STREET_ADDRESS: '1297 Via Cola di Rie', '93091 Calle della Testa', '2017 Shinjuku-ku', ...\n\nregions: 4 rows\n  REGION_NAME: 'Europe\\r', 'Americas\\r', 'Asia\\r', ...\n  REGION_ID: '1', '2', '3', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#hr_1",
+    "tableStats": {
+      "countries": {
+        "rows": 25,
+        "sample_values": {
+          "COUNTRY_ID": [
+            "AR",
+            "AU",
+            "BE",
+            "BR",
+            "CA",
+            "CH",
+            "CN",
+            "DE"
+          ],
+          "COUNTRY_NAME": [
+            "Argentina",
+            "Australia",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Switzerland",
+            "China",
+            "Germany"
+          ],
+          "REGION_ID": [
+            "2",
+            "3",
+            "1",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "departments": {
+        "rows": 27,
+        "sample_values": {
+          "DEPARTMENT_ID": [
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80"
+          ],
+          "DEPARTMENT_NAME": [
+            "Administration",
+            "Marketing",
+            "Purchasing",
+            "Human Resources",
+            "Shipping",
+            "IT",
+            "Public Relations",
+            "Sales"
+          ],
+          "MANAGER_ID": [
+            "200",
+            "201",
+            "114",
+            "203",
+            "121",
+            "103",
+            "204",
+            "145"
+          ],
+          "LOCATION_ID": [
+            "1700",
+            "1800",
+            "2400",
+            "1500",
+            "1400",
+            "2700",
+            "2500"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employees": {
+        "rows": 107,
+        "sample_values": {
+          "EMPLOYEE_ID": [
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107"
+          ],
+          "FIRST_NAME": [
+            "Steven",
+            "Neena",
+            "Lex",
+            "Alexander",
+            "Bruce",
+            "David",
+            "Valli",
+            "Diana"
+          ],
+          "LAST_NAME": [
+            "King",
+            "Kochhar",
+            "De Haan",
+            "Hunold",
+            "Ernst",
+            "Austin",
+            "Pataballa",
+            "Lorentz"
+          ],
+          "EMAIL": [
+            "SKING",
+            "NKOCHHAR",
+            "LDEHAAN",
+            "AHUNOLD",
+            "BERNST",
+            "DAUSTIN",
+            "VPATABAL",
+            "DLORENTZ"
+          ],
+          "PHONE_NUMBER": [
+            "515.123.4567",
+            "515.123.4568",
+            "515.123.4569",
+            "590.423.4567",
+            "590.423.4568",
+            "590.423.4569",
+            "590.423.4560",
+            "590.423.5567"
+          ],
+          "HIRE_DATE": [
+            "1987-06-17",
+            "1987-06-18",
+            "1987-06-19",
+            "1987-06-20",
+            "1987-06-21",
+            "1987-06-22",
+            "1987-06-23",
+            "1987-06-24"
+          ],
+          "JOB_ID": [
+            "AD_PRES",
+            "AD_VP",
+            "IT_PROG",
+            "FI_MGR",
+            "FI_ACCOUNT",
+            "PU_MAN",
+            "PU_CLERK",
+            "ST_MAN"
+          ],
+          "SALARY": [
+            "24000",
+            "17000",
+            "9000",
+            "6000",
+            "4800",
+            "4200",
+            "12000",
+            "8200"
+          ],
+          "COMMISSION_PCT": [
+            "0",
+            "0.4",
+            "0.3",
+            "0.2",
+            "0.25",
+            "0.15",
+            "0.35",
+            "0.1"
+          ],
+          "MANAGER_ID": [
+            "0",
+            "100",
+            "102",
+            "103",
+            "101",
+            "108",
+            "114",
+            "120"
+          ],
+          "DEPARTMENT_ID": [
+            "90",
+            "60",
+            "100",
+            "30",
+            "50",
+            "80",
+            "0",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "job_history": {
+        "rows": 11,
+        "sample_values": {
+          "EMPLOYEE_ID": [
+            "102",
+            "101",
+            "201",
+            "114",
+            "122",
+            "200",
+            "176",
+            "0"
+          ],
+          "START_DATE": [
+            "1993-01-13",
+            "1989-09-21",
+            "1993-10-28",
+            "1996-02-17",
+            "1998-03-24",
+            "1999-01-01",
+            "1987-09-17",
+            "1994-07-01"
+          ],
+          "END_DATE": [
+            "1998-07-24",
+            "1993-10-27",
+            "1997-03-15",
+            "1999-12-19",
+            "1999-12-31",
+            "1993-06-17",
+            "1998-12-31",
+            "0000-00-00"
+          ],
+          "JOB_ID": [
+            "IT_PROG",
+            "AC_ACCOUNT",
+            "AC_MGR",
+            "MK_REP",
+            "ST_CLERK",
+            "AD_ASST",
+            "SA_REP",
+            "SA_MAN"
+          ],
+          "DEPARTMENT_ID": [
+            "60",
+            "110",
+            "20",
+            "50",
+            "90",
+            "80",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "jobs": {
+        "rows": 19,
+        "sample_values": {
+          "JOB_ID": [
+            "AD_PRES",
+            "AD_VP",
+            "AD_ASST",
+            "FI_MGR",
+            "FI_ACCOUNT",
+            "AC_MGR",
+            "AC_ACCOUNT",
+            "SA_MAN"
+          ],
+          "JOB_TITLE": [
+            "President",
+            "Administration Vice President",
+            "Administration Assistant",
+            "Finance Manager",
+            "Accountant",
+            "Accounting Manager",
+            "Public Accountant",
+            "Sales Manager"
+          ],
+          "MIN_SALARY": [
+            "20000",
+            "15000",
+            "3000",
+            "8200",
+            "4200",
+            "10000",
+            "6000",
+            "8000"
+          ],
+          "MAX_SALARY": [
+            "40000",
+            "30000",
+            "6000",
+            "16000",
+            "9000",
+            "20000",
+            "12000",
+            "15000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "locations": {
+        "rows": 23,
+        "sample_values": {
+          "LOCATION_ID": [
+            "1000",
+            "1100",
+            "1200",
+            "1300",
+            "1400",
+            "1500",
+            "1600",
+            "1700"
+          ],
+          "STREET_ADDRESS": [
+            "1297 Via Cola di Rie",
+            "93091 Calle della Testa",
+            "2017 Shinjuku-ku",
+            "9450 Kamiya-cho",
+            "2014 Jabberwocky Rd",
+            "2011 Interiors Blvd",
+            "2007 Zagora St",
+            "2004 Charade Rd"
+          ],
+          "POSTAL_CODE": [
+            "989",
+            "10934",
+            "1689",
+            "6823",
+            "26192",
+            "99236",
+            "50090",
+            "98199"
+          ],
+          "CITY": [
+            "Roma",
+            "Venice",
+            "Tokyo",
+            "Hiroshima",
+            "Southlake",
+            "South San Francisco",
+            "South Brunswick",
+            "Seattle"
+          ],
+          "STATE_PROVINCE": [
+            "Tokyo Prefecture",
+            "Texas",
+            "California",
+            "New Jersey",
+            "Washington",
+            "Ontario",
+            "Yukon",
+            "Maharashtra"
+          ],
+          "COUNTRY_ID": [
+            "IT",
+            "JP",
+            "US",
+            "CA",
+            "CN",
+            "IN",
+            "AU",
+            "SG"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 4,
+        "sample_values": {
+          "REGION_ID": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "REGION_NAME": [
+            "Europe\\r",
+            "Americas\\r",
+            "Asia\\r",
+            "Middle East and Africa\\r"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

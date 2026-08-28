@@ -1,0 +1,591 @@
+{
+  "db_id": "socioeconomic_and_demographic_data_analysis_690908",
+  "source": "synsql",
+  "tables": 19,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/socioeconomic_and_demographic_data_analysis_690908",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"data_collection_methods\" {\n  \"method_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"reliability_score\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"data_quality_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"rating\" REAL\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"data_reliability_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"rating\" REAL\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"description\" TEXT\n  \"release_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"data_collection_method\" TEXT\n  \"data_collection_date\" TEXT\n  \"description\" TEXT\n  \"version\" TEXT\n  \"data_source\" TEXT\n  \"data_quality_score\" REAL\n  \"last_updated\" TEXT\n  \"is_active\" INTEGER\n}\n\nTable \"public\".\"education_data\" {\n  \"education_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"education_level\" TEXT\n  \"years_of_education\" INTEGER\n  \"institution_name\" TEXT\n  \"graduation_year\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"education_levels\" {\n  \"education_id\" INTEGER [pk]\n  \"education_level\" TEXT\n  \"description\" TEXT\n  \"average_years_of_education\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"employment_data\" {\n  \"employment_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"employment_status\" TEXT\n  \"job_title\" TEXT\n  \"company_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"employment_statuses\" {\n  \"employment_id\" INTEGER [pk]\n  \"employment_status\" TEXT\n  \"description\" TEXT\n  \"average_earnings\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"income_brackets\" {\n  \"income_id\" INTEGER [pk]\n  \"income_bracket\" TEXT\n  \"description\" TEXT\n  \"average_income\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"individuals\" {\n  \"individual_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"age\" INTEGER\n  \"education_id\" INTEGER\n  \"employment_id\" INTEGER\n  \"marital_id\" INTEGER\n  \"income_id\" INTEGER\n  \"re74\" REAL\n  \"re75\" REAL\n  \"re78\" REAL\n  \"address\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"marital_data\" {\n  \"marital_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"marital_status\" TEXT\n  \"spouse_name\" TEXT\n  \"marriage_date\" TEXT\n  \"divorce_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"marital_statuses\" {\n  \"marital_id\" INTEGER [pk]\n  \"marital_status\" TEXT\n  \"description\" TEXT\n  \"average_age\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"population\" INTEGER\n  \"area\" REAL\n  \"average_income\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"user_permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"last_login\" TEXT\n  \"is_active\" INTEGER\n  \"last_updated\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"data_collection_methods\".\"reliability_score\" > \"public\".\"data_reliability_ratings\".\"rating\"\nRef: \"public\".\"data_versions\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"datasets\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"datasets\".\"data_quality_score\" > \"public\".\"data_quality_ratings\".\"rating\"\nRef: \"public\".\"datasets\".\"data_source\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"datasets\".\"data_collection_method\" > \"public\".\"data_collection_methods\".\"method_id\"\nRef: \"public\".\"education_data\".\"education_level\" > \"public\".\"education_levels\".\"education_level\"\nRef: \"public\".\"education_data\".\"individual_id\" > \"public\".\"individuals\".\"individual_id\"\nRef: \"public\".\"employment_data\".\"employment_status\" > \"public\".\"employment_statuses\".\"employment_status\"\nRef: \"public\".\"employment_data\".\"individual_id\" > \"public\".\"individuals\".\"individual_id\"\nRef: \"public\".\"individuals\".\"education_id\" > \"public\".\"education_levels\".\"education_id\"\nRef: \"public\".\"individuals\".\"income_id\" > \"public\".\"income_brackets\".\"income_id\"\nRef: \"public\".\"individuals\".\"marital_id\" > \"public\".\"marital_statuses\".\"marital_id\"\nRef: \"public\".\"individuals\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"individuals\".\"employment_id\" > \"public\".\"employment_statuses\".\"employment_id\"\nRef: \"public\".\"marital_data\".\"individual_id\" > \"public\".\"individuals\".\"individual_id\"\nRef: \"public\".\"marital_data\".\"marital_status\" > \"public\".\"marital_statuses\".\"marital_status\"\nRef: \"public\".\"user_permissions\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"data_collection_methods\" {\n  \"method_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"reliability_score\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"data_quality_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"rating\" REAL\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"data_reliability_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"rating\" REAL\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"description\" TEXT\n  \"release_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"data_collection_method\" TEXT\n  \"data_collection_date\" TEXT\n  \"description\" TEXT\n  \"version\" TEXT\n  \"data_source\" TEXT\n  \"data_quality_score\" REAL\n  \"last_updated\" TEXT\n  \"is_active\" INTEGER\n}\n\nTable \"education_data\" {\n  \"education_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"education_level\" TEXT\n  \"years_of_education\" INTEGER\n  \"institution_name\" TEXT\n  \"graduation_year\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"education_levels\" {\n  \"education_id\" INTEGER [pk]\n  \"education_level\" TEXT\n  \"description\" TEXT\n  \"average_years_of_education\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"employment_data\" {\n  \"employment_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"employment_status\" TEXT\n  \"job_title\" TEXT\n  \"company_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"employment_statuses\" {\n  \"employment_id\" INTEGER [pk]\n  \"employment_status\" TEXT\n  \"description\" TEXT\n  \"average_earnings\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"income_brackets\" {\n  \"income_id\" INTEGER [pk]\n  \"income_bracket\" TEXT\n  \"description\" TEXT\n  \"average_income\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"individuals\" {\n  \"individual_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"age\" INTEGER\n  \"education_id\" INTEGER\n  \"employment_id\" INTEGER\n  \"marital_id\" INTEGER\n  \"income_id\" INTEGER\n  \"re74\" REAL\n  \"re75\" REAL\n  \"re78\" REAL\n  \"address\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"marital_data\" {\n  \"marital_data_id\" INTEGER [pk]\n  \"individual_id\" INTEGER\n  \"marital_status\" TEXT\n  \"spouse_name\" TEXT\n  \"marriage_date\" TEXT\n  \"divorce_date\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"marital_statuses\" {\n  \"marital_id\" INTEGER [pk]\n  \"marital_status\" TEXT\n  \"description\" TEXT\n  \"average_age\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"population\" INTEGER\n  \"area\" REAL\n  \"average_income\" REAL\n  \"last_updated\" TEXT\n}\n\nTable \"user_permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"last_login\" TEXT\n  \"is_active\" INTEGER\n  \"last_updated\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"data_collection_methods\".\"reliability_score\" > \"data_reliability_ratings\".\"rating\"\n\nRef: \"data_versions\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"datasets\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"datasets\".\"data_quality_score\" > \"data_quality_ratings\".\"rating\"\n\nRef: \"datasets\".\"data_source\" > \"data_sources\".\"source_id\"\n\nRef: \"datasets\".\"data_collection_method\" > \"data_collection_methods\".\"method_id\"\n\nRef: \"education_data\".\"education_level\" > \"education_levels\".\"education_level\"\n\nRef: \"education_data\".\"individual_id\" > \"individuals\".\"individual_id\"\n\nRef: \"employment_data\".\"employment_status\" > \"employment_statuses\".\"employment_status\"\n\nRef: \"employment_data\".\"individual_id\" > \"individuals\".\"individual_id\"\n\nRef: \"individuals\".\"education_id\" > \"education_levels\".\"education_id\"\n\nRef: \"individuals\".\"income_id\" > \"income_brackets\".\"income_id\"\n\nRef: \"individuals\".\"marital_id\" > \"marital_statuses\".\"marital_id\"\n\nRef: \"individuals\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"individuals\".\"employment_id\" > \"employment_statuses\".\"employment_id\"\n\nRef: \"marital_data\".\"individual_id\" > \"individuals\".\"individual_id\"\n\nRef: \"marital_data\".\"marital_status\" > \"marital_statuses\".\"marital_status\"\n\nRef: \"user_permissions\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\ndata_collection_methods: 2 rows\n  method_name: 'Survey', 'Census'\n  description: 'Data collected through surveys', 'Data collected through census'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\ndata_quality_ratings: 2 rows\n  description: 'High quality', 'Moderate quality'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n  rating: '4.5', '3.0'\n\ndata_reliability_ratings: 2 rows\n  description: 'High reliability', 'Moderate reliability'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n  rating: '4.5', '3.0'\n\ndata_sources: 2 rows\n  source_name: 'Government', 'Private Survey'\n  description: 'Data from government sources', 'Data from private surveys'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\ndata_versions: 2 rows\n  description: 'Initial release'\n  release_date: '2023-05-01', '2023-05-02'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\ndatasets: 2 rows\n  description: 'Socioeconomic data for NSW region', 'Demographic data for NSW region'\n  data_source: '1', '0'\n  data_collection_date: '2023-01-01', '2023-01-02'\n\neducation_data: 2 rows\n  institution_name: 'XYZ High School', 'ABC University'\n  education_level: '0'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\neducation_levels: 2 rows\n  education_level: 'High School', 'Bachelor's Degree'\n  description: 'High school education', 'Bachelor's degree'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nemployment_data: 2 rows\n  job_title: 'Software Engineer', 'None'\n  employment_status: '1'\n  company_name: 'TechCorp'\n\nemployment_statuses: 2 rows\n  employment_status: 'Employed', 'Unemployed'\n  description: 'Individual is employed', 'Individual is unemployed'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nincome_brackets: 2 rows\n  description: 'Low income bracket', 'Medium income bracket'\n  income_bracket: 'Low', 'Medium'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nindividuals: 2 rows\n  address: '123 Main St', '456 Elm St'\n  phone_number: '123-456-7890', '123-456-7891'\n  email: 'individual1@example.com', 'individual2@example.com'\n\nmarital_data: 2 rows\n  marital_status: '0', '1'\n  spouse_name: 'Jane Doe', 'None'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nmarital_statuses: 2 rows\n  marital_status: 'Married', 'Single'\n  description: 'Individual is married', 'Individual is single'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nregions: 2 rows\n  region_name: 'NSW', 'VIC'\n  location: 'New South Wales, Australia', 'Victoria, Australia'\n  contact_email: 'nsw@example.com', 'vic@example.com'\n\nuser_permissions: 2 rows\n  permission_name: 'view_data', 'download_data'\n  description: 'Permission to view data', 'Permission to download data'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nuser_roles: 2 rows\n  role_name: 'researcher', 'data analyst'\n  description: 'Researcher role', 'Data analyst role'\n  last_updated: '2023-05-01 12:00:00', '2023-05-02 12:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  last_login: '2023-05-01 12:00:00', '2023-05-02 12:00:00'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_collection_methods": {
+        "rows": 2,
+        "sample_values": {
+          "method_id": [
+            "0",
+            "1"
+          ],
+          "method_name": [
+            "Survey",
+            "Census"
+          ],
+          "description": [
+            "Data collected through surveys",
+            "Data collected through census"
+          ],
+          "reliability_score": [
+            "1.0",
+            "0.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_quality_ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "rating": [
+            "4.5",
+            "3.0"
+          ],
+          "description": [
+            "High quality",
+            "Moderate quality"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_reliability_ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "rating": [
+            "4.5",
+            "3.0"
+          ],
+          "description": [
+            "High reliability",
+            "Moderate reliability"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "source_name": [
+            "Government",
+            "Private Survey"
+          ],
+          "description": [
+            "Data from government sources",
+            "Data from private surveys"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "version": [
+            "1.0"
+          ],
+          "description": [
+            "Initial release"
+          ],
+          "release_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "datasets": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "data_collection_method": [
+            "0"
+          ],
+          "data_collection_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "description": [
+            "Socioeconomic data for NSW region",
+            "Demographic data for NSW region"
+          ],
+          "version": [
+            "1.0"
+          ],
+          "data_source": [
+            "1",
+            "0"
+          ],
+          "data_quality_score": [
+            "1.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ],
+          "is_active": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "education_data": {
+        "rows": 2,
+        "sample_values": {
+          "education_data_id": [
+            "0",
+            "1"
+          ],
+          "individual_id": [
+            "1",
+            "0"
+          ],
+          "education_level": [
+            "0"
+          ],
+          "years_of_education": [
+            "12",
+            "16"
+          ],
+          "institution_name": [
+            "XYZ High School",
+            "ABC University"
+          ],
+          "graduation_year": [
+            "2010",
+            "2015"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "education_levels": {
+        "rows": 2,
+        "sample_values": {
+          "education_id": [
+            "0",
+            "1"
+          ],
+          "education_level": [
+            "High School",
+            "Bachelor's Degree"
+          ],
+          "description": [
+            "High school education",
+            "Bachelor's degree"
+          ],
+          "average_years_of_education": [
+            "12",
+            "16"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employment_data": {
+        "rows": 2,
+        "sample_values": {
+          "employment_data_id": [
+            "0",
+            "1"
+          ],
+          "individual_id": [
+            "0",
+            "1"
+          ],
+          "employment_status": [
+            "1"
+          ],
+          "job_title": [
+            "Software Engineer",
+            "None"
+          ],
+          "company_name": [
+            "TechCorp"
+          ],
+          "start_date": [
+            "2020-01-01"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employment_statuses": {
+        "rows": 2,
+        "sample_values": {
+          "employment_id": [
+            "0",
+            "1"
+          ],
+          "employment_status": [
+            "Employed",
+            "Unemployed"
+          ],
+          "description": [
+            "Individual is employed",
+            "Individual is unemployed"
+          ],
+          "average_earnings": [
+            "50000.0",
+            "0.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "income_brackets": {
+        "rows": 2,
+        "sample_values": {
+          "income_id": [
+            "0",
+            "1"
+          ],
+          "income_bracket": [
+            "Low",
+            "Medium"
+          ],
+          "description": [
+            "Low income bracket",
+            "Medium income bracket"
+          ],
+          "average_income": [
+            "20000.0",
+            "50000.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "individuals": {
+        "rows": 2,
+        "sample_values": {
+          "individual_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "age": [
+            "37",
+            "22"
+          ],
+          "education_id": [
+            "1"
+          ],
+          "employment_id": [
+            "1",
+            "0"
+          ],
+          "marital_id": [
+            "0",
+            "1"
+          ],
+          "income_id": [
+            "1"
+          ],
+          "re74": [
+            "0.0"
+          ],
+          "re75": [
+            "0.0"
+          ],
+          "re78": [
+            "9930.05",
+            "3595.89"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "email": [
+            "individual1@example.com",
+            "individual2@example.com"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "marital_data": {
+        "rows": 2,
+        "sample_values": {
+          "marital_data_id": [
+            "0",
+            "1"
+          ],
+          "individual_id": [
+            "0"
+          ],
+          "marital_status": [
+            "0",
+            "1"
+          ],
+          "spouse_name": [
+            "Jane Doe",
+            "None"
+          ],
+          "marriage_date": [
+            "2018-01-01"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "marital_statuses": {
+        "rows": 2,
+        "sample_values": {
+          "marital_id": [
+            "0",
+            "1"
+          ],
+          "marital_status": [
+            "Married",
+            "Single"
+          ],
+          "description": [
+            "Individual is married",
+            "Individual is single"
+          ],
+          "average_age": [
+            "35",
+            "25"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 2,
+        "sample_values": {
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "region_name": [
+            "NSW",
+            "VIC"
+          ],
+          "location": [
+            "New South Wales, Australia",
+            "Victoria, Australia"
+          ],
+          "contact_email": [
+            "nsw@example.com",
+            "vic@example.com"
+          ],
+          "population": [
+            "8000000",
+            "6500000"
+          ],
+          "area": [
+            "809444.0",
+            "237629.0"
+          ],
+          "average_income": [
+            "80000.0",
+            "75000.0"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_permissions": {
+        "rows": 2,
+        "sample_values": {
+          "permission_id": [
+            "0",
+            "1"
+          ],
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "permission_name": [
+            "view_data",
+            "download_data"
+          ],
+          "description": [
+            "Permission to view data",
+            "Permission to download data"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "researcher",
+            "data analyst"
+          ],
+          "description": [
+            "Researcher role",
+            "Data analyst role"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "password_hash": [
+            "hashed_password"
+          ],
+          "last_login": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

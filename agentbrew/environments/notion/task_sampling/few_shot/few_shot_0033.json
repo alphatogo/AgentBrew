@@ -1,0 +1,9 @@
+{
+  "title": "Retrospective Numbered Symbols",
+  "capability": [
+    "rewrite_existing_blocks",
+    "preserve_order",
+    "lightweight_page_edit"
+  ],
+  "question": "Please find all numbered list items in the \"Quarterly Retrospective Notes\" page, use Notion tools to replace the numbers with corresponding emoji numbers (e.g., 1️⃣, 2️⃣, 3️⃣).\nFor example, if the original numbered list is:\n1. First reflection step 2. Second reflection step 3. Third reflection step\nIt should become:\n1️⃣ First reflection step 2️⃣ Second reflection step 3️⃣ Third reflection step\n"
+}

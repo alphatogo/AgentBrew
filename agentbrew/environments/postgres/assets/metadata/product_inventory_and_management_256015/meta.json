@@ -1,0 +1,661 @@
+{
+  "db_id": "product_inventory_and_management_256015",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/product_inventory_and_management_256015",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"audit_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"table_name\" TEXT\n  \"record_id\" INTEGER\n  \"column_name\" TEXT\n  \"old_value\" TEXT\n  \"new_value\" TEXT\n  \"user_id\" INTEGER\n  \"created_at\" TEXT\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"contact_name\" TEXT\n  \"contact_email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"vat_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"expense_types\" {\n  \"expense_type_id\" INTEGER [pk]\n  \"expense_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"expenses\" {\n  \"expense_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"expense_date\" TEXT\n  \"amount\" REAL\n  \"expense_type\" TEXT\n  \"description\" TEXT\n  \"user_id\" INTEGER\n  \"category_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"warehouse_id\" INTEGER\n  \"quantity\" INTEGER\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n  \"last_checked_at\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"order_lines\" {\n  \"order_line_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"line_total\" REAL\n  \"discount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"procurement_methods\" {\n  \"procurement_method_id\" INTEGER [pk]\n  \"procurement_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"product_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"product_suppliers\" {\n  \"product_supplier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"supplier_id\" INTEGER\n  \"preferred\" INTEGER\n  \"lead_time\" INTEGER\n  \"min_order_quantity\" INTEGER\n  \"max_order_quantity\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"product_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"products\" {\n  \"product_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"internal_reference\" TEXT\n  \"can_be_expensed\" INTEGER\n  \"can_be_purchased\" INTEGER\n  \"can_be_sold\" INTEGER\n  \"sale_price\" REAL\n  \"cost\" REAL\n  \"supply_method\" TEXT\n  \"product_type\" TEXT\n  \"procurement_method\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"image_url\" TEXT\n  \"weight\" REAL\n  \"dimensions\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"created_by\" INTEGER\n  \"updated_by\" INTEGER\n}\n\nTable \"public\".\"purchase_orders\" {\n  \"order_id\" INTEGER [pk]\n  \"order_date\" TEXT\n  \"supplier_id\" INTEGER\n  \"status\" TEXT\n  \"total_amount\" REAL\n  \"payment_terms\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"sales_order_lines\" {\n  \"order_line_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"line_total\" REAL\n  \"discount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"sales_orders\" {\n  \"order_id\" INTEGER [pk]\n  \"order_date\" TEXT\n  \"customer_id\" INTEGER\n  \"status\" TEXT\n  \"total_amount\" REAL\n  \"payment_status\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"contact_name\" TEXT\n  \"contact_email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"vat_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"supply_methods\" {\n  \"supply_method_id\" INTEGER [pk]\n  \"supply_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"warehouses\" {\n  \"warehouse_id\" INTEGER [pk]\n  \"warehouse_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"manager_id\" INTEGER\n  \"capacity\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"audit_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"expenses\".\"category_id\" > \"public\".\"product_categories\".\"category_id\"\nRef: \"public\".\"expenses\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"expenses\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"inventory\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"inventory\".\"warehouse_id\" > \"public\".\"warehouses\".\"warehouse_id\"\nRef: \"public\".\"order_lines\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"order_lines\".\"order_id\" > \"public\".\"purchase_orders\".\"order_id\"\nRef: \"public\".\"product_suppliers\".\"supplier_id\" > \"public\".\"suppliers\".\"supplier_id\"\nRef: \"public\".\"product_suppliers\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"products\".\"supply_method\" > \"public\".\"supply_methods\".\"supply_method_id\"\nRef: \"public\".\"products\".\"updated_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"products\".\"procurement_method\" > \"public\".\"procurement_methods\".\"procurement_method_id\"\nRef: \"public\".\"products\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"products\".\"product_type\" > \"public\".\"product_types\".\"type_id\"\nRef: \"public\".\"purchase_orders\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"purchase_orders\".\"supplier_id\" > \"public\".\"suppliers\".\"supplier_id\"\nRef: \"public\".\"sales_order_lines\".\"order_id\" > \"public\".\"sales_orders\".\"order_id\"\nRef: \"public\".\"sales_order_lines\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"sales_orders\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"sales_orders\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"warehouses\".\"manager_id\" > \"public\".\"users\".\"user_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"audit_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"table_name\" TEXT\n  \"record_id\" INTEGER\n  \"column_name\" TEXT\n  \"old_value\" TEXT\n  \"new_value\" TEXT\n  \"user_id\" INTEGER\n  \"created_at\" TEXT\n}\n\nTable \"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"contact_name\" TEXT\n  \"contact_email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"vat_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"expense_types\" {\n  \"expense_type_id\" INTEGER [pk]\n  \"expense_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"expenses\" {\n  \"expense_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"expense_date\" TEXT\n  \"amount\" REAL\n  \"expense_type\" TEXT\n  \"description\" TEXT\n  \"user_id\" INTEGER\n  \"category_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"warehouse_id\" INTEGER\n  \"quantity\" INTEGER\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n  \"last_checked_at\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"order_lines\" {\n  \"order_line_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"line_total\" REAL\n  \"discount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"procurement_methods\" {\n  \"procurement_method_id\" INTEGER [pk]\n  \"procurement_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"product_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"product_suppliers\" {\n  \"product_supplier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"supplier_id\" INTEGER\n  \"preferred\" INTEGER\n  \"lead_time\" INTEGER\n  \"min_order_quantity\" INTEGER\n  \"max_order_quantity\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"product_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"products\" {\n  \"product_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"internal_reference\" TEXT\n  \"can_be_expensed\" INTEGER\n  \"can_be_purchased\" INTEGER\n  \"can_be_sold\" INTEGER\n  \"sale_price\" REAL\n  \"cost\" REAL\n  \"supply_method\" TEXT\n  \"product_type\" TEXT\n  \"procurement_method\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"image_url\" TEXT\n  \"weight\" REAL\n  \"dimensions\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"created_by\" INTEGER\n  \"updated_by\" INTEGER\n}\n\nTable \"purchase_orders\" {\n  \"order_id\" INTEGER [pk]\n  \"order_date\" TEXT\n  \"supplier_id\" INTEGER\n  \"status\" TEXT\n  \"total_amount\" REAL\n  \"payment_terms\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"sales_order_lines\" {\n  \"order_line_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"line_total\" REAL\n  \"discount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"sales_orders\" {\n  \"order_id\" INTEGER [pk]\n  \"order_date\" TEXT\n  \"customer_id\" INTEGER\n  \"status\" TEXT\n  \"total_amount\" REAL\n  \"payment_status\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"contact_name\" TEXT\n  \"contact_email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"vat_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"supply_methods\" {\n  \"supply_method_id\" INTEGER [pk]\n  \"supply_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"warehouses\" {\n  \"warehouse_id\" INTEGER [pk]\n  \"warehouse_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"manager_id\" INTEGER\n  \"capacity\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"audit_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"expenses\".\"category_id\" > \"product_categories\".\"category_id\"\n\nRef: \"expenses\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"expenses\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"inventory\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"inventory\".\"warehouse_id\" > \"warehouses\".\"warehouse_id\"\n\nRef: \"order_lines\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"order_lines\".\"order_id\" > \"purchase_orders\".\"order_id\"\n\nRef: \"product_suppliers\".\"supplier_id\" > \"suppliers\".\"supplier_id\"\n\nRef: \"product_suppliers\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"products\".\"supply_method\" > \"supply_methods\".\"supply_method_id\"\n\nRef: \"products\".\"updated_by\" > \"users\".\"user_id\"\n\nRef: \"products\".\"procurement_method\" > \"procurement_methods\".\"procurement_method_id\"\n\nRef: \"products\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"products\".\"product_type\" > \"product_types\".\"type_id\"\n\nRef: \"purchase_orders\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"purchase_orders\".\"supplier_id\" > \"suppliers\".\"supplier_id\"\n\nRef: \"sales_order_lines\".\"order_id\" > \"sales_orders\".\"order_id\"\n\nRef: \"sales_order_lines\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"sales_orders\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"sales_orders\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"warehouses\".\"manager_id\" > \"users\".\"user_id\"\n\n## Table Stats & Sample Values\n\naudit_logs: 2 rows\n  table_name: 'products', 'suppliers'\n  column_name: 'name', 'contact_email'\n  old_value: 'Aluminum Stool', 'jane.smith@chairmanufacturers.com'\n\ncustomers: 2 rows\n  customer_name: 'Customer A', 'Customer B'\n  contact_name: 'Alice Doe', 'Bob Smith'\n  address: '789 Oak St, Anytown, USA', '321 Pine St, Anytown, USA'\n\nexpense_types: 2 rows\n  expense_type_name: 'purchase', 'maintenance'\n  description: 'Expenses related to purchasing products', 'Expenses related to maintaining products'\n  expense_type_id: '0', '1'\n\nexpenses: 2 rows\n  expense_type: 'purchase', 'maintenance'\n  description: 'Bought 100 units of Software Book Tutorial', 'Maintained fuel supply system'\n  expense_date: '2023-01-06', '2023-01-07'\n\ninventory: 2 rows\n  reorder_level: '20', '10'\n  last_checked_at: '2023-01-01 12:00:00'\n  quantity: '50', '30'\n\norder_lines: 2 rows\n  quantity: '25', '20'\n  unit_price: '25.0', '40.0'\n  line_total: '625.0', '800.0'\n\nprocurement_methods: 2 rows\n  procurement_method_name: 'Make to Stock', 'Buy'\n  description: 'Procurement method where products are made to stoc', 'Procurement method where products are bought from'\n  procurement_method_id: '0', '1'\n\nproduct_categories: 2 rows\n  category_name: 'Furniture', 'Software'\n  description: 'Products related to furniture', 'Products related to software'\n  category_id: '0', '1'\n\nproduct_suppliers: 2 rows\n  min_order_quantity: '10', '5'\n  max_order_quantity: '100', '50'\n  created_at: '2023-01-01 10:00:00'\n\nproduct_types: 2 rows\n  type_name: 'Stockable Product', 'Consumable'\n  description: 'Products that can be stored in inventory', 'Products that are used up or consumed'\n  type_id: '0', '1'\n\nproducts: 2 rows\n  name: 'Aluminum Stool', 'Chair'\n  product_type: '1', '0'\n  description: 'A sturdy stool made of aluminum', 'A comfortable chair for office use'\n\npurchase_orders: 2 rows\n  status: 'pending', 'approved'\n  payment_terms: '30 days net', '60 days net'\n  order_date: '2023-01-02', '2023-01-03'\n\nsales_order_lines: 2 rows\n  quantity: '5', '2'\n  unit_price: '49.0', '89.0'\n  line_total: '245.0', '178.0'\n\nsales_orders: 2 rows\n  status: 'pending', 'shipped'\n  payment_status: 'pending', 'paid'\n  order_date: '2023-01-04', '2023-01-05'\n\nsuppliers: 2 rows\n  supplier_name: 'Aluminum Supplies Inc.', 'Chair Manufacturers Ltd.'\n  contact_name: 'John Doe', 'Jane Smith'\n  address: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'\n\nsupply_methods: 2 rows\n  supply_method_name: 'Buy', 'Make to Stock'\n  description: 'Supply method where products are bought from suppl', 'Supply method where products are made to stock'\n  supply_method_id: '0', '1'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'admin', 'manager'\n  job_title: 'Sales Manager', 'Inventory Manager'\n\nwarehouses: 2 rows\n  warehouse_name: 'Main Warehouse', 'Secondary Warehouse'\n  capacity: '1000.0', '500.0'\n  location: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'",
+    "stateUrl": null,
+    "tableStats": {
+      "audit_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "table_name": [
+            "products",
+            "suppliers"
+          ],
+          "record_id": [
+            "1",
+            "2"
+          ],
+          "column_name": [
+            "name",
+            "contact_email"
+          ],
+          "old_value": [
+            "Aluminum Stool",
+            "jane.smith@chairmanufacturers.com"
+          ],
+          "new_value": [
+            "Aluminum Chair",
+            "jane.smith@newemail.com"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "created_at": [
+            "2023-01-06 09:00:00",
+            "2023-01-07 10:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "customer_name": [
+            "Customer A",
+            "Customer B"
+          ],
+          "contact_name": [
+            "Alice Doe",
+            "Bob Smith"
+          ],
+          "contact_email": [
+            "alice.doe@customerA.com",
+            "bob.smith@customerB.com"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "address": [
+            "789 Oak St, Anytown, USA",
+            "321 Pine St, Anytown, USA"
+          ],
+          "vat_number": [
+            "US123456789",
+            "US987654321"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "expense_types": {
+        "rows": 2,
+        "sample_values": {
+          "expense_type_id": [
+            "0",
+            "1"
+          ],
+          "expense_type_name": [
+            "purchase",
+            "maintenance"
+          ],
+          "description": [
+            "Expenses related to purchasing products",
+            "Expenses related to maintaining products"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "expenses": {
+        "rows": 2,
+        "sample_values": {
+          "expense_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "expense_date": [
+            "2023-01-06",
+            "2023-01-07"
+          ],
+          "amount": [
+            "1000.0",
+            "100.0"
+          ],
+          "expense_type": [
+            "purchase",
+            "maintenance"
+          ],
+          "description": [
+            "Bought 100 units of Software Book Tutorial",
+            "Maintained fuel supply system"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "category_id": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2023-01-06 09:00:00",
+            "2023-01-07 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-06 09:00:00",
+            "2023-01-07 10:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory": {
+        "rows": 2,
+        "sample_values": {
+          "inventory_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "warehouse_id": [
+            "0"
+          ],
+          "quantity": [
+            "50",
+            "30"
+          ],
+          "reorder_level": [
+            "20",
+            "10"
+          ],
+          "reorder_quantity": [
+            "30",
+            "20"
+          ],
+          "last_checked_at": [
+            "2023-01-01 12:00:00"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order_lines": {
+        "rows": 2,
+        "sample_values": {
+          "order_line_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "0"
+          ],
+          "product_id": [
+            "1"
+          ],
+          "quantity": [
+            "25",
+            "20"
+          ],
+          "unit_price": [
+            "25.0",
+            "40.0"
+          ],
+          "line_total": [
+            "625.0",
+            "800.0"
+          ],
+          "discount": [
+            "0.1",
+            "0.05"
+          ],
+          "created_at": [
+            "2023-01-02 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-02 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "procurement_methods": {
+        "rows": 2,
+        "sample_values": {
+          "procurement_method_id": [
+            "0",
+            "1"
+          ],
+          "procurement_method_name": [
+            "Make to Stock",
+            "Buy"
+          ],
+          "description": [
+            "Procurement method where products are made to stoc",
+            "Procurement method where products are bought from "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "category_name": [
+            "Furniture",
+            "Software"
+          ],
+          "description": [
+            "Products related to furniture",
+            "Products related to software"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_suppliers": {
+        "rows": 2,
+        "sample_values": {
+          "product_supplier_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "supplier_id": [
+            "1"
+          ],
+          "preferred": [
+            "1"
+          ],
+          "lead_time": [
+            "5",
+            "7"
+          ],
+          "min_order_quantity": [
+            "10",
+            "5"
+          ],
+          "max_order_quantity": [
+            "100",
+            "50"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 10:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "Stockable Product",
+            "Consumable"
+          ],
+          "description": [
+            "Products that can be stored in inventory",
+            "Products that are used up or consumed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 2,
+        "sample_values": {
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "name": [
+            "Aluminum Stool",
+            "Chair"
+          ],
+          "internal_reference": [
+            "ALS",
+            "CHR"
+          ],
+          "can_be_expensed": [
+            "0"
+          ],
+          "can_be_purchased": [
+            "1"
+          ],
+          "can_be_sold": [
+            "1"
+          ],
+          "sale_price": [
+            "49.0",
+            "89.0"
+          ],
+          "cost": [
+            "25.0",
+            "40.0"
+          ],
+          "supply_method": [
+            "1",
+            "0"
+          ],
+          "product_type": [
+            "1",
+            "0"
+          ],
+          "procurement_method": [
+            "1",
+            "0"
+          ],
+          "category_id": [
+            "1"
+          ],
+          "description": [
+            "A sturdy stool made of aluminum",
+            "A comfortable chair for office use"
+          ],
+          "image_url": [
+            "https://example.com/aluminum-stool.jpg",
+            "https://example.com/chair.jpg"
+          ],
+          "weight": [
+            "5.5",
+            "10.0"
+          ],
+          "dimensions": [
+            "40x40x60 cm",
+            "50x50x80 cm"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 10:00:00"
+          ],
+          "created_by": [
+            "0",
+            "1"
+          ],
+          "updated_by": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "purchase_orders": {
+        "rows": 2,
+        "sample_values": {
+          "order_id": [
+            "0",
+            "1"
+          ],
+          "order_date": [
+            "2023-01-02",
+            "2023-01-03"
+          ],
+          "supplier_id": [
+            "0"
+          ],
+          "status": [
+            "pending",
+            "approved"
+          ],
+          "total_amount": [
+            "1225.0",
+            "1780.0"
+          ],
+          "payment_terms": [
+            "30 days net",
+            "60 days net"
+          ],
+          "created_by": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2023-01-02 09:00:00",
+            "2023-01-03 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-02 09:00:00",
+            "2023-01-03 10:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sales_order_lines": {
+        "rows": 2,
+        "sample_values": {
+          "order_line_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "1",
+            "0"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "quantity": [
+            "5",
+            "2"
+          ],
+          "unit_price": [
+            "49.0",
+            "89.0"
+          ],
+          "line_total": [
+            "245.0",
+            "178.0"
+          ],
+          "discount": [
+            "0.1",
+            "0.05"
+          ],
+          "created_at": [
+            "2023-01-04 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-04 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sales_orders": {
+        "rows": 2,
+        "sample_values": {
+          "order_id": [
+            "0",
+            "1"
+          ],
+          "order_date": [
+            "2023-01-04",
+            "2023-01-05"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "status": [
+            "pending",
+            "shipped"
+          ],
+          "total_amount": [
+            "245.0",
+            "178.0"
+          ],
+          "payment_status": [
+            "pending",
+            "paid"
+          ],
+          "created_by": [
+            "0",
+            "1"
+          ],
+          "created_at": [
+            "2023-01-04 09:00:00",
+            "2023-01-05 10:00:00"
+          ],
+          "updated_at": [
+            "2023-01-04 09:00:00",
+            "2023-01-05 10:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "suppliers": {
+        "rows": 2,
+        "sample_values": {
+          "supplier_id": [
+            "0",
+            "1"
+          ],
+          "supplier_name": [
+            "Aluminum Supplies Inc.",
+            "Chair Manufacturers Ltd."
+          ],
+          "contact_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "contact_email": [
+            "john.doe@aluminumsupplies.com",
+            "jane.smith@chairmanufacturers.com"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "vat_number": [
+            "US123456789",
+            "US987654321"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "supply_methods": {
+        "rows": 2,
+        "sample_values": {
+          "supply_method_id": [
+            "0",
+            "1"
+          ],
+          "supply_method_name": [
+            "Buy",
+            "Make to Stock"
+          ],
+          "description": [
+            "Supply method where products are bought from suppl",
+            "Supply method where products are made to stock"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "admin",
+            "manager"
+          ],
+          "department": [
+            "Sales",
+            "Inventory"
+          ],
+          "job_title": [
+            "Sales Manager",
+            "Inventory Manager"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "warehouses": {
+        "rows": 2,
+        "sample_values": {
+          "warehouse_id": [
+            "0",
+            "1"
+          ],
+          "warehouse_name": [
+            "Main Warehouse",
+            "Secondary Warehouse"
+          ],
+          "location": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "contact_email": [
+            "warehouse@company.com",
+            "warehouse2@company.com"
+          ],
+          "manager_id": [
+            "1",
+            "0"
+          ],
+          "capacity": [
+            "1000.0",
+            "500.0"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

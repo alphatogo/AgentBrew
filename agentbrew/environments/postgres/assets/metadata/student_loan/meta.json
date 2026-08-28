@@ -1,0 +1,214 @@
+{
+  "db_id": "student_loan",
+  "source": "bird",
+  "tables": 10,
+  "total_rows": 5288,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#student_loan",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"bool\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"disabled\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"enlist\" {\n  \"name\" TEXT [not null]\n  \"organ\" TEXT [not null]\n}\n\nTable \"enrolled\" {\n  \"name\" TEXT [pk, not null]\n  \"school\" TEXT [pk, not null]\n  \"month\" INTEGER [not null]\n}\n\nTable \"filed_for_bankrupcy\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"longest_absense_from_school\" {\n  \"name\" TEXT [pk, not null]\n  \"month\" INTEGER\n}\n\nTable \"male\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"no_payment_due\" {\n  \"name\" TEXT [pk, not null]\n  \"bool\" TEXT\n}\n\nTable \"person\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"unemployed\" {\n  \"name\" TEXT [pk, not null]\n}\n\n\n\nRef: \"disabled\".\"name\" > \"person\".\"name\"\n\nRef: \"enlist\".\"name\" > \"person\".\"name\"\n\nRef: \"filed_for_bankrupcy\".\"name\" > \"person\".\"name\"\n\nRef: \"longest_absense_from_school\".\"name\" > \"person\".\"name\"\n\nRef: \"male\".\"name\" > \"person\".\"name\"\n\nRef: \"no_payment_due\".\"bool\" > \"bool\".\"name\"\n\nRef: \"no_payment_due\".\"name\" > \"person\".\"name\"\n\nRef: \"unemployed\".\"name\" > \"person\".\"name\"\n\nRef: \"enrolled\".\"name\" > \"person\".\"name\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"bool\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"disabled\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"enlist\" {\n  \"name\" TEXT [not null]\n  \"organ\" TEXT [not null]\n}\n\nTable \"enrolled\" {\n  \"name\" TEXT [pk, not null]\n  \"school\" TEXT [pk, not null]\n  \"month\" INTEGER [not null]\n}\n\nTable \"filed_for_bankrupcy\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"longest_absense_from_school\" {\n  \"name\" TEXT [pk, not null]\n  \"month\" INTEGER\n}\n\nTable \"male\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"no_payment_due\" {\n  \"name\" TEXT [pk, not null]\n  \"bool\" TEXT\n}\n\nTable \"person\" {\n  \"name\" TEXT [pk, not null]\n}\n\nTable \"unemployed\" {\n  \"name\" TEXT [pk, not null]\n}\n\nRef: \"disabled\".\"name\" > \"person\".\"name\"\n\nRef: \"enlist\".\"name\" > \"person\".\"name\"\n\nRef: \"filed_for_bankrupcy\".\"name\" > \"person\".\"name\"\n\nRef: \"longest_absense_from_school\".\"name\" > \"person\".\"name\"\n\nRef: \"male\".\"name\" > \"person\".\"name\"\n\nRef: \"no_payment_due\".\"bool\" > \"bool\".\"name\"\n\nRef: \"no_payment_due\".\"name\" > \"person\".\"name\"\n\nRef: \"unemployed\".\"name\" > \"person\".\"name\"\n\nRef: \"enrolled\".\"name\" > \"person\".\"name\"\n\n## Table Stats & Sample Values\n\nbool: 2 rows\n  name: 'neg', 'pos'\n\ndisabled: 95 rows\n  name: 'student114', 'student125', 'student142', ...\n\nenlist: 306 rows\n  name: 'student40', 'student51', 'student109', ...\n  organ: 'fire_department', 'air_force', 'navy', ...\n\nenrolled: 1194 rows\n  name: 'student10', 'student101', 'student122', ...\n  month: '1', '2', '3', ...\n  school: 'smc', 'ucb', 'ucsd', ...\n\nfiled_for_bankrupcy: 96 rows\n  name: 'student122', 'student126', 'student136', ...\n\nlongest_absense_from_school: 1000 rows\n  name: 'student10', 'student102', 'student110', ...\n  month: '0', '1', '2', ...\n\nmale: 497 rows\n  name: 'student1', 'student101', 'student102', ...\n\nno_payment_due: 1000 rows\n  name: 'student10', 'student101', 'student103', ...\n  bool: 'neg', 'pos'\n\nperson: 1000 rows\n  name: 'student1', 'student10', 'student100', ...\n\nunemployed: 98 rows\n  name: 'student1000', 'student102', 'student106', ...",
+    "stateUrl": "https://bird-bench.github.io/#student_loan",
+    "tableStats": {
+      "bool": {
+        "rows": 2,
+        "sample_values": {
+          "name": [
+            "neg",
+            "pos"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "disabled": {
+        "rows": 95,
+        "sample_values": {
+          "name": [
+            "student114",
+            "student125",
+            "student142",
+            "student155",
+            "student156",
+            "student173",
+            "student178",
+            "student181"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "enlist": {
+        "rows": 306,
+        "sample_values": {
+          "name": [
+            "student40",
+            "student51",
+            "student109",
+            "student139",
+            "student148",
+            "student167",
+            "student168",
+            "student183"
+          ],
+          "organ": [
+            "fire_department",
+            "air_force",
+            "navy",
+            "marines",
+            "foreign_legion",
+            "army",
+            "peace_corps"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "enrolled": {
+        "rows": 1194,
+        "sample_values": {
+          "name": [
+            "student10",
+            "student101",
+            "student122",
+            "student154",
+            "student161",
+            "student17",
+            "student245",
+            "student253"
+          ],
+          "school": [
+            "smc",
+            "ucb",
+            "ucsd",
+            "ucla",
+            "occ",
+            "uci"
+          ],
+          "month": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "filed_for_bankrupcy": {
+        "rows": 96,
+        "sample_values": {
+          "name": [
+            "student122",
+            "student126",
+            "student136",
+            "student145",
+            "student148",
+            "student159",
+            "student162",
+            "student170"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "longest_absense_from_school": {
+        "rows": 1000,
+        "sample_values": {
+          "name": [
+            "student10",
+            "student102",
+            "student110",
+            "student111",
+            "student114",
+            "student118",
+            "student119",
+            "student124"
+          ],
+          "month": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "male": {
+        "rows": 497,
+        "sample_values": {
+          "name": [
+            "student1",
+            "student101",
+            "student102",
+            "student103",
+            "student105",
+            "student106",
+            "student108",
+            "student110"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "no_payment_due": {
+        "rows": 1000,
+        "sample_values": {
+          "name": [
+            "student10",
+            "student101",
+            "student103",
+            "student107",
+            "student110",
+            "student111",
+            "student113",
+            "student115"
+          ],
+          "bool": [
+            "neg",
+            "pos"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "person": {
+        "rows": 1000,
+        "sample_values": {
+          "name": [
+            "student1",
+            "student10",
+            "student100",
+            "student1000",
+            "student101",
+            "student102",
+            "student103",
+            "student104"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "unemployed": {
+        "rows": 98,
+        "sample_values": {
+          "name": [
+            "student1000",
+            "student102",
+            "student106",
+            "student109",
+            "student118",
+            "student119",
+            "student129",
+            "student140"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

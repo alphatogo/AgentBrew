@@ -1,0 +1,13 @@
+{
+  "title": "Event Readiness Balance",
+  "capability": [
+    "update_existing_rows",
+    "compute_aggregates",
+    "insert_block_at_position",
+    "summarize_from_records",
+    "query_existing_data",
+    "coordinated_multirow_edit",
+    "add_exact_blocks"
+  ],
+  "question": "I'm preparing for the annual customer summit and need to organize the event readiness checklist. Please help me:\n**Step 1: Update Items in the Event Checklist Database** In the Venue category, all items have already been completed except for the \"Stage Lighting Review\" item. After this, check the \"Badge Printers\" entry and the \"Speaker Green Room\" entry.\n**Step 2: Balance Owner Assignments** In the Event Checklist database, find the person responsible for the most active checklist items and the person responsible for the fewest active checklist items, then swap their assigned checklist items. Only change the owner assignment; preserve every other property.\n**Step 3: Create Event Readiness Summary** After updating the items, create a new section immediately after the \"Event Checklist ✅\" heading. Add a paragraph block with the bold text \"**Event Readiness Summary**\", followed by bullet list items for every category in the format \"Category: X/Y completed\".\n"
+}

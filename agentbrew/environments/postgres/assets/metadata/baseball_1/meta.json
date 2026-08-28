@@ -1,0 +1,3183 @@
+{
+  "db_id": "baseball_1",
+  "source": "sparc",
+  "tables": 26,
+  "total_rows": 553693,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#baseball_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"all_star\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"game_num\" INTEGER\n  \"game_id\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"gp\" TEXT\n  \"starting_pos\" TEXT\n}\n\nTable \"appearances\" {\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"g_all\" TEXT\n  \"gs\" TEXT\n  \"g_batting\" INTEGER\n  \"g_defense\" TEXT\n  \"g_p\" INTEGER\n  \"g_c\" INTEGER\n  \"g_1b\" INTEGER\n  \"g_2b\" INTEGER\n  \"g_3b\" INTEGER\n  \"g_ss\" INTEGER\n  \"g_lf\" INTEGER\n  \"g_cf\" INTEGER\n  \"g_rf\" INTEGER\n  \"g_of\" INTEGER\n  \"g_dh\" TEXT\n  \"g_ph\" TEXT\n  \"g_pr\" TEXT\n}\n\nTable \"batting\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"g\" INTEGER\n  \"ab\" TEXT\n  \"r\" TEXT\n  \"h\" TEXT\n  \"double\" TEXT\n  \"triple\" TEXT\n  \"hr\" TEXT\n  \"rbi\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"bb\" TEXT\n  \"so\" TEXT\n  \"ibb\" TEXT\n  \"hbp\" TEXT\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"batting_postseason\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"player_id\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"g\" INTEGER\n  \"ab\" INTEGER\n  \"r\" INTEGER\n  \"h\" INTEGER\n  \"double\" INTEGER\n  \"triple\" INTEGER\n  \"hr\" INTEGER\n  \"rbi\" INTEGER\n  \"sb\" INTEGER\n  \"cs\" TEXT\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"ibb\" TEXT\n  \"hbp\" TEXT\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"college\" {\n  \"college_id\" TEXT\n  \"name_full\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n}\n\nTable \"fielding\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"pos\" TEXT\n  \"g\" INTEGER\n  \"gs\" TEXT\n  \"inn_outs\" TEXT\n  \"po\" TEXT\n  \"a\" TEXT\n  \"e\" TEXT\n  \"dp\" TEXT\n  \"pb\" TEXT\n  \"wp\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"zr\" TEXT\n}\n\nTable \"fielding_outfield\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"glf\" TEXT\n  \"gcf\" TEXT\n  \"grf\" TEXT\n}\n\nTable \"fielding_postseason\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"round\" TEXT\n  \"pos\" TEXT\n  \"g\" INTEGER\n  \"gs\" TEXT\n  \"inn_outs\" TEXT\n  \"po\" INTEGER\n  \"a\" INTEGER\n  \"e\" INTEGER\n  \"dp\" INTEGER\n  \"tp\" INTEGER\n  \"pb\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n}\n\nTable \"hall_of_fame\" {\n  \"player_id\" TEXT\n  \"yearid\" INTEGER\n  \"votedby\" TEXT\n  \"ballots\" TEXT\n  \"needed\" TEXT\n  \"votes\" TEXT\n  \"inducted\" TEXT\n  \"category\" TEXT\n  \"needed_note\" TEXT\n}\n\nTable \"home_game\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"park_id\" TEXT\n  \"span_first\" TEXT\n  \"span_last\" TEXT\n  \"games\" INTEGER\n  \"openings\" INTEGER\n  \"attendance\" INTEGER\n}\n\nTable \"manager\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"inseason\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"rank\" TEXT\n  \"plyr_mgr\" TEXT\n}\n\nTable \"manager_award\" {\n  \"player_id\" TEXT\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"tie\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"manager_award_vote\" {\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"points_won\" INTEGER\n  \"points_max\" INTEGER\n  \"votes_first\" INTEGER\n}\n\nTable \"manager_half\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"inseason\" INTEGER\n  \"half\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"rank\" INTEGER\n}\n\nTable \"park\" {\n  \"park_id\" TEXT\n  \"park_name\" TEXT\n  \"park_alias\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n}\n\nTable \"pitching\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"g\" INTEGER\n  \"gs\" INTEGER\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" TEXT\n  \"h\" INTEGER\n  \"er\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"baopp\" TEXT\n  \"era\" TEXT\n  \"ibb\" TEXT\n  \"wp\" TEXT\n  \"hbp\" TEXT\n  \"bk\" INTEGER\n  \"bfp\" TEXT\n  \"gf\" TEXT\n  \"r\" INTEGER\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"pitching_postseason\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"g\" INTEGER\n  \"gs\" INTEGER\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" INTEGER\n  \"h\" INTEGER\n  \"er\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"baopp\" TEXT\n  \"era\" TEXT\n  \"ibb\" TEXT\n  \"wp\" TEXT\n  \"hbp\" TEXT\n  \"bk\" TEXT\n  \"bfp\" TEXT\n  \"gf\" INTEGER\n  \"r\" INTEGER\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"player\" {\n  \"player_id\" TEXT\n  \"birth_year\" TEXT\n  \"birth_month\" TEXT\n  \"birth_day\" TEXT\n  \"birth_country\" TEXT\n  \"birth_state\" TEXT\n  \"birth_city\" TEXT\n  \"death_year\" TEXT\n  \"death_month\" TEXT\n  \"death_day\" TEXT\n  \"death_country\" TEXT\n  \"death_state\" TEXT\n  \"death_city\" TEXT\n  \"name_first\" TEXT\n  \"name_last\" TEXT\n  \"name_given\" TEXT\n  \"weight\" TEXT\n  \"height\" TEXT\n  \"bats\" TEXT\n  \"throws\" TEXT\n  \"debut\" TEXT\n  \"final_game\" TEXT\n  \"retro_id\" TEXT\n  \"bbref_id\" TEXT\n}\n\nTable \"player_award\" {\n  \"player_id\" TEXT\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"tie\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"player_award_vote\" {\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"points_won\" TEXT\n  \"points_max\" INTEGER\n  \"votes_first\" TEXT\n}\n\nTable \"player_college\" {\n  \"player_id\" TEXT\n  \"college_id\" TEXT\n  \"year\" INTEGER\n}\n\nTable \"postseason\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"team_id_winner\" TEXT\n  \"league_id_winner\" TEXT\n  \"team_id_loser\" TEXT\n  \"league_id_loser\" TEXT\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"ties\" INTEGER\n}\n\nTable \"salary\" {\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"salary\" INTEGER\n}\n\nTable \"team\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"franchise_id\" TEXT\n  \"div_id\" TEXT\n  \"rank\" INTEGER\n  \"g\" INTEGER\n  \"ghome\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"div_win\" TEXT\n  \"wc_win\" TEXT\n  \"lg_win\" TEXT\n  \"ws_win\" TEXT\n  \"r\" INTEGER\n  \"ab\" INTEGER\n  \"h\" INTEGER\n  \"double\" INTEGER\n  \"triple\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"hbp\" TEXT\n  \"sf\" TEXT\n  \"ra\" INTEGER\n  \"er\" INTEGER\n  \"era\" TEXT\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" INTEGER\n  \"ha\" INTEGER\n  \"hra\" INTEGER\n  \"bba\" INTEGER\n  \"soa\" INTEGER\n  \"e\" INTEGER\n  \"dp\" TEXT\n  \"fp\" TEXT\n  \"name\" TEXT\n  \"park\" TEXT\n  \"attendance\" TEXT\n  \"bpf\" INTEGER\n  \"ppf\" INTEGER\n  \"team_id_br\" TEXT\n  \"team_id_lahman45\" TEXT\n  \"team_id_retro\" TEXT\n}\n\nTable \"team_franchise\" {\n  \"franchise_id\" TEXT\n  \"franchise_name\" TEXT\n  \"active\" TEXT\n  \"na_assoc\" TEXT\n}\n\nTable \"team_half\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"half\" INTEGER\n  \"div_id\" TEXT\n  \"div_win\" TEXT\n  \"rank\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n}\n\n\n\nRef: \"all_star\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"appearances\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"appearances\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager_award\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_award\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_award_vote\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"batting\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"batting_postseason\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"batting_postseason\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_college\".\"college_id\" > \"college\".\"college_id\"\n\nRef: \"player_college\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding_outfield\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding_postseason\".\"team_id\" > \"player\".\"team_id\"\n\nRef: \"fielding_postseason\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"hall_of_fame\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"home_game\".\"park_id\" > \"park\".\"park_id\"\n\nRef: \"home_game\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager_half\".\"team_id\" > \"team\".\"team_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"all_star\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"game_num\" INTEGER\n  \"game_id\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"gp\" TEXT\n  \"starting_pos\" TEXT\n}\n\nTable \"appearances\" {\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"g_all\" TEXT\n  \"gs\" TEXT\n  \"g_batting\" INTEGER\n  \"g_defense\" TEXT\n  \"g_p\" INTEGER\n  \"g_c\" INTEGER\n  \"g_1b\" INTEGER\n  \"g_2b\" INTEGER\n  \"g_3b\" INTEGER\n  \"g_ss\" INTEGER\n  \"g_lf\" INTEGER\n  \"g_cf\" INTEGER\n  \"g_rf\" INTEGER\n  \"g_of\" INTEGER\n  \"g_dh\" TEXT\n  \"g_ph\" TEXT\n  \"g_pr\" TEXT\n}\n\nTable \"batting\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"g\" INTEGER\n  \"ab\" TEXT\n  \"r\" TEXT\n  \"h\" TEXT\n  \"double\" TEXT\n  \"triple\" TEXT\n  \"hr\" TEXT\n  \"rbi\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"bb\" TEXT\n  \"so\" TEXT\n  \"ibb\" TEXT\n  \"hbp\" TEXT\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"batting_postseason\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"player_id\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"g\" INTEGER\n  \"ab\" INTEGER\n  \"r\" INTEGER\n  \"h\" INTEGER\n  \"double\" INTEGER\n  \"triple\" INTEGER\n  \"hr\" INTEGER\n  \"rbi\" INTEGER\n  \"sb\" INTEGER\n  \"cs\" TEXT\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"ibb\" TEXT\n  \"hbp\" TEXT\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"college\" {\n  \"college_id\" TEXT\n  \"name_full\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n}\n\nTable \"fielding\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"pos\" TEXT\n  \"g\" INTEGER\n  \"gs\" TEXT\n  \"inn_outs\" TEXT\n  \"po\" TEXT\n  \"a\" TEXT\n  \"e\" TEXT\n  \"dp\" TEXT\n  \"pb\" TEXT\n  \"wp\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"zr\" TEXT\n}\n\nTable \"fielding_outfield\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"glf\" TEXT\n  \"gcf\" TEXT\n  \"grf\" TEXT\n}\n\nTable \"fielding_postseason\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"round\" TEXT\n  \"pos\" TEXT\n  \"g\" INTEGER\n  \"gs\" TEXT\n  \"inn_outs\" TEXT\n  \"po\" INTEGER\n  \"a\" INTEGER\n  \"e\" INTEGER\n  \"dp\" INTEGER\n  \"tp\" INTEGER\n  \"pb\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n}\n\nTable \"hall_of_fame\" {\n  \"player_id\" TEXT\n  \"yearid\" INTEGER\n  \"votedby\" TEXT\n  \"ballots\" TEXT\n  \"needed\" TEXT\n  \"votes\" TEXT\n  \"inducted\" TEXT\n  \"category\" TEXT\n  \"needed_note\" TEXT\n}\n\nTable \"home_game\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"park_id\" TEXT\n  \"span_first\" TEXT\n  \"span_last\" TEXT\n  \"games\" INTEGER\n  \"openings\" INTEGER\n  \"attendance\" INTEGER\n}\n\nTable \"manager\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"inseason\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"rank\" TEXT\n  \"plyr_mgr\" TEXT\n}\n\nTable \"manager_award\" {\n  \"player_id\" TEXT\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"tie\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"manager_award_vote\" {\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"points_won\" INTEGER\n  \"points_max\" INTEGER\n  \"votes_first\" INTEGER\n}\n\nTable \"manager_half\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"inseason\" INTEGER\n  \"half\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"rank\" INTEGER\n}\n\nTable \"park\" {\n  \"park_id\" TEXT\n  \"park_name\" TEXT\n  \"park_alias\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"country\" TEXT\n}\n\nTable \"pitching\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"g\" INTEGER\n  \"gs\" INTEGER\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" TEXT\n  \"h\" INTEGER\n  \"er\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"baopp\" TEXT\n  \"era\" TEXT\n  \"ibb\" TEXT\n  \"wp\" TEXT\n  \"hbp\" TEXT\n  \"bk\" INTEGER\n  \"bfp\" TEXT\n  \"gf\" TEXT\n  \"r\" INTEGER\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"pitching_postseason\" {\n  \"player_id\" TEXT\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"g\" INTEGER\n  \"gs\" INTEGER\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" INTEGER\n  \"h\" INTEGER\n  \"er\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" INTEGER\n  \"baopp\" TEXT\n  \"era\" TEXT\n  \"ibb\" TEXT\n  \"wp\" TEXT\n  \"hbp\" TEXT\n  \"bk\" TEXT\n  \"bfp\" TEXT\n  \"gf\" INTEGER\n  \"r\" INTEGER\n  \"sh\" TEXT\n  \"sf\" TEXT\n  \"g_idp\" TEXT\n}\n\nTable \"player\" {\n  \"player_id\" TEXT\n  \"birth_year\" TEXT\n  \"birth_month\" TEXT\n  \"birth_day\" TEXT\n  \"birth_country\" TEXT\n  \"birth_state\" TEXT\n  \"birth_city\" TEXT\n  \"death_year\" TEXT\n  \"death_month\" TEXT\n  \"death_day\" TEXT\n  \"death_country\" TEXT\n  \"death_state\" TEXT\n  \"death_city\" TEXT\n  \"name_first\" TEXT\n  \"name_last\" TEXT\n  \"name_given\" TEXT\n  \"weight\" TEXT\n  \"height\" TEXT\n  \"bats\" TEXT\n  \"throws\" TEXT\n  \"debut\" TEXT\n  \"final_game\" TEXT\n  \"retro_id\" TEXT\n  \"bbref_id\" TEXT\n}\n\nTable \"player_award\" {\n  \"player_id\" TEXT\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"tie\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"player_award_vote\" {\n  \"award_id\" TEXT\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"points_won\" TEXT\n  \"points_max\" INTEGER\n  \"votes_first\" TEXT\n}\n\nTable \"player_college\" {\n  \"player_id\" TEXT\n  \"college_id\" TEXT\n  \"year\" INTEGER\n}\n\nTable \"postseason\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"team_id_winner\" TEXT\n  \"league_id_winner\" TEXT\n  \"team_id_loser\" TEXT\n  \"league_id_loser\" TEXT\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"ties\" INTEGER\n}\n\nTable \"salary\" {\n  \"year\" INTEGER\n  \"team_id\" TEXT\n  \"league_id\" TEXT\n  \"player_id\" TEXT\n  \"salary\" INTEGER\n}\n\nTable \"team\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"franchise_id\" TEXT\n  \"div_id\" TEXT\n  \"rank\" INTEGER\n  \"g\" INTEGER\n  \"ghome\" TEXT\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"div_win\" TEXT\n  \"wc_win\" TEXT\n  \"lg_win\" TEXT\n  \"ws_win\" TEXT\n  \"r\" INTEGER\n  \"ab\" INTEGER\n  \"h\" INTEGER\n  \"double\" INTEGER\n  \"triple\" INTEGER\n  \"hr\" INTEGER\n  \"bb\" INTEGER\n  \"so\" TEXT\n  \"sb\" TEXT\n  \"cs\" TEXT\n  \"hbp\" TEXT\n  \"sf\" TEXT\n  \"ra\" INTEGER\n  \"er\" INTEGER\n  \"era\" TEXT\n  \"cg\" INTEGER\n  \"sho\" INTEGER\n  \"sv\" INTEGER\n  \"ipouts\" INTEGER\n  \"ha\" INTEGER\n  \"hra\" INTEGER\n  \"bba\" INTEGER\n  \"soa\" INTEGER\n  \"e\" INTEGER\n  \"dp\" TEXT\n  \"fp\" TEXT\n  \"name\" TEXT\n  \"park\" TEXT\n  \"attendance\" TEXT\n  \"bpf\" INTEGER\n  \"ppf\" INTEGER\n  \"team_id_br\" TEXT\n  \"team_id_lahman45\" TEXT\n  \"team_id_retro\" TEXT\n}\n\nTable \"team_franchise\" {\n  \"franchise_id\" TEXT\n  \"franchise_name\" TEXT\n  \"active\" TEXT\n  \"na_assoc\" TEXT\n}\n\nTable \"team_half\" {\n  \"year\" INTEGER\n  \"league_id\" TEXT\n  \"team_id\" TEXT\n  \"half\" INTEGER\n  \"div_id\" TEXT\n  \"div_win\" TEXT\n  \"rank\" INTEGER\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n}\n\nRef: \"all_star\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"appearances\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"appearances\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager_award\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_award\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_award_vote\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"batting\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"batting_postseason\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"batting_postseason\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"player_college\".\"college_id\" > \"college\".\"college_id\"\n\nRef: \"player_college\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding_outfield\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"fielding_postseason\".\"team_id\" > \"player\".\"team_id\"\n\nRef: \"fielding_postseason\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"hall_of_fame\".\"player_id\" > \"player\".\"player_id\"\n\nRef: \"home_game\".\"park_id\" > \"park\".\"park_id\"\n\nRef: \"home_game\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager\".\"team_id\" > \"team\".\"team_id\"\n\nRef: \"manager_half\".\"team_id\" > \"team\".\"team_id\"\n\n## Table Stats & Sample Values\n\nall_star: 5069 rows\n  gp: '1', '0'\n  starting_pos: '1', '2', '3', ...\n  year: '1933', '1934', '1935', ...\n\nappearances: 10000 rows\n  g_all: '31', '18', '29', ...\n  g_defense: '31', '18', '29', ...\n  year: '1871', '1872', '1873', ...\n\nbatting: 10000 rows\n  ab: '4', '118', '137', ...\n  r: '0', '30', '28', ...\n  h: '0', '32', '40', ...\n\nbatting_postseason: 10000 rows\n  round: 'WS', 'CS', 'ALCS', ...\n  cs: '0', '1', '2', ...\n  ibb: '0', '1', '3', ...\n\ncollege: 1207 rows\n  name_full: 'Abilene Christian University', 'Adelphi University', 'Adrian College', ...\n  city: 'Abilene', 'Garden City', 'Adrian', ...\n  state: 'TX', 'NY', 'MI', ...\n\nfielding: 10000 rows\n  pos: 'SS', '2B', 'OF', ...\n  po: '1', '67', '8', ...\n  a: '3', '72', '14', ...\n\nfielding_outfield: 10000 rows\n  glf: '0', '1', '13', ...\n  gcf: '29', '0', '11', ...\n  grf: '0', '1', '4', ...\n\nfielding_postseason: 10000 rows\n  round: 'WS', 'ALCS', 'NLCS', ...\n  pos: '3B', 'C', 'P', ...\n  gs: '8', '4', '1', ...\n\nhall_of_fame: 4120 rows\n  category: 'Player', 'Manager', 'Pioneer/Executive', ...\n  votedby: 'BBWAA', 'Veterans', 'Centennial', ...\n  ballots: '226', '78', '201', ...\n\nhome_game: 2944 rows\n  span_first: '1871-05-16', '1871-05-27', '1871-05-08', ...\n  span_last: '1871-10-07', '1871-05-27', '1871-09-29', ...\n  year: '1871', '1872', '1873', ...\n\nmanager: 3405 rows\n  rank: '3', '2', '8', ...\n  plyr_mgr: 'Y', 'N'\n  year: '1871', '1872', '1873', ...\n\nmanager_award: 177 rows\n  tie: 'Y'\n  year: '1983', '1984', '1985', ...\n  player_id: 'larusto01', 'lasorto01', 'andersp01', ...\n\nmanager_award_vote: 414 rows\n  year: '1983', '1984', '1985', ...\n  points_won: '7', '4', '17', ...\n  points_max: '28', '24', '140', ...\n\nmanager_half: 93 rows\n  year: '1892', '1981'\n  inseason: '3', '1', '2', ...\n  half: '1', '2'\n\npark: 250 rows\n  park_name: 'Riverside Park', 'Columbia Park', 'Angel Stadium of Anaheim', ...\n  city: 'Albany', 'Altoona', 'Anaheim', ...\n  state: 'NY', 'PA', 'CA', ...\n\npitching: 10000 rows\n  ipouts: '78', '792', '3', ...\n  baopp: '0.53', '0.15', '0.22', ...\n  era: '7.96', '4.5', '27', ...\n\npitching_postseason: 5109 rows\n  round: 'WS', 'CS', 'ALCS', ...\n  baopp: '0.23', '0.4', '0.29', ...\n  era: '10.5', '3.6', '0', ...\n\nplayer: 10000 rows\n  birth_country: 'USA', 'D.R.', 'Venezuela', ...\n  birth_state: 'CO', 'AL', 'CA', ...\n  birth_city: 'Denver', 'Mobile', 'Orange', ...\n\nplayer_award: 6078 rows\n  notes: '1B', '2B', '3B', ...\n  tie: 'Y'\n  year: '1877', '1878', '1884', ...\n\nplayer_award_vote: 6795 rows\n  points_won: '1', '4', '10', ...\n  votes_first: '1', '4', '10', ...\n  year: '1956', '1957', '1958', ...\n\nplayer_college: 10000 rows\n  year: '2001', '2002', '2003', ...\n  player_id: 'aardsda01', 'abadan01', 'abbeybe01', ...\n  college_id: 'pennst', 'rice', 'gamiddl', ...\n\npostseason: 307 rows\n  round: 'WS', 'CS', 'ALCS', ...\n  year: '1884', '1885', '1886', ...\n  wins: '3', '4', '10', ...\n\nsalary: 10000 rows\n  year: '1985', '1986', '1987', ...\n  salary: '870000', '550000', '545000', ...\n  team_id: 'ATL', 'BAL', 'BOS', ...\n\nteam: 2805 rows\n  name: 'Boston Red Stockings', 'Chicago White Stockings', 'Cleveland Forest Citys', ...\n  ghome: '66', '69', '68', ...\n  div_win: 'Y', 'N'\n\nteam_franchise: 120 rows\n  franchise_name: 'Altoona Mountain City', 'Los Angeles Angels of Anaheim', 'Arizona Diamondbacks', ...\n  active: 'N', 'Y'\n  na_assoc: 'PNA', 'BNA', 'ATL', ...\n\nteam_half: 52 rows\n  div_win: 'N'\n  half: '1', '2'\n  rank: '4', '5', '2', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#baseball_1",
+    "tableStats": {
+      "all_star": {
+        "rows": 5069,
+        "sample_values": {
+          "player_id": [
+            "gomezle01",
+            "ferreri01",
+            "gehrilo01",
+            "gehrich01",
+            "dykesji01",
+            "cronijo01",
+            "chapmbe01",
+            "simmoal01"
+          ],
+          "year": [
+            "1933",
+            "1934",
+            "1935",
+            "1936",
+            "1937",
+            "1938",
+            "1939",
+            "1940"
+          ],
+          "game_num": [
+            "0",
+            "2",
+            "1"
+          ],
+          "game_id": [
+            "ALS193307060",
+            "NLS193407100",
+            "ALS193507080",
+            "NLS193607070",
+            "ALS193707070",
+            "NLS193807060",
+            "ALS193907110",
+            "NLS194007090"
+          ],
+          "team_id": [
+            "NYA",
+            "BOS",
+            "DET",
+            "CHA",
+            "WS1",
+            "CLE",
+            "PHA",
+            "SLA"
+          ],
+          "league_id": [
+            "AL",
+            "NL"
+          ],
+          "gp": [
+            "1",
+            "0"
+          ],
+          "starting_pos": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "appearances": {
+        "rows": 10000,
+        "sample_values": {
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "team_id": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL"
+          ],
+          "player_id": [
+            "barnero01",
+            "barrofr01",
+            "birdsda01",
+            "conefr01",
+            "gouldch01",
+            "jackssa01",
+            "mcveyca01",
+            "schafha01"
+          ],
+          "g_all": [
+            "31",
+            "18",
+            "29",
+            "19",
+            "16",
+            "3",
+            "26",
+            "28"
+          ],
+          "g_batting": [
+            "31",
+            "18",
+            "29",
+            "19",
+            "16",
+            "3",
+            "26",
+            "28"
+          ],
+          "g_defense": [
+            "31",
+            "18",
+            "29",
+            "19",
+            "16",
+            "3",
+            "26",
+            "28"
+          ],
+          "g_p": [
+            "0",
+            "31",
+            "9",
+            "3",
+            "28",
+            "7",
+            "19",
+            "1"
+          ],
+          "g_c": [
+            "0",
+            "7",
+            "29",
+            "4",
+            "20",
+            "9",
+            "1",
+            "3"
+          ],
+          "g_1b": [
+            "0",
+            "30",
+            "1",
+            "26",
+            "2",
+            "29",
+            "16",
+            "33"
+          ],
+          "g_2b": [
+            "16",
+            "1",
+            "0",
+            "14",
+            "28",
+            "2",
+            "10",
+            "17"
+          ],
+          "g_3b": [
+            "0",
+            "1",
+            "31",
+            "3",
+            "10",
+            "18",
+            "2",
+            "29"
+          ],
+          "g_ss": [
+            "15",
+            "0",
+            "1",
+            "26",
+            "3",
+            "22",
+            "6",
+            "2"
+          ],
+          "g_lf": [
+            "0",
+            "13",
+            "18",
+            "2",
+            "1",
+            "25",
+            "28",
+            "5"
+          ],
+          "g_cf": [
+            "0",
+            "1",
+            "9",
+            "30",
+            "3",
+            "10",
+            "29",
+            "11"
+          ],
+          "g_rf": [
+            "0",
+            "4",
+            "27",
+            "1",
+            "5",
+            "8",
+            "17",
+            "3"
+          ],
+          "g_of": [
+            "0",
+            "17",
+            "27",
+            "18",
+            "1",
+            "5",
+            "9",
+            "30"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "batting": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "abercda01",
+            "addybo01",
+            "allisar01",
+            "allisdo01",
+            "ansonca01",
+            "armstbo01",
+            "barkeal01",
+            "barnero01"
+          ],
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "team_id": [
+            "TRO",
+            "RC1",
+            "CL1",
+            "WS3",
+            "FW1",
+            "BS1",
+            "PH1",
+            "CH1"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL"
+          ],
+          "g": [
+            "1",
+            "25",
+            "29",
+            "27",
+            "12",
+            "31",
+            "18",
+            "22"
+          ],
+          "ab": [
+            "4",
+            "118",
+            "137",
+            "133",
+            "120",
+            "49",
+            "157",
+            "5"
+          ],
+          "r": [
+            "0",
+            "30",
+            "28",
+            "29",
+            "9",
+            "66",
+            "1",
+            "13"
+          ],
+          "h": [
+            "0",
+            "32",
+            "40",
+            "44",
+            "39",
+            "11",
+            "1",
+            "63"
+          ],
+          "double": [
+            "0",
+            "6",
+            "4",
+            "10",
+            "11",
+            "2",
+            "1",
+            "9"
+          ],
+          "triple": [
+            "0",
+            "5",
+            "2",
+            "3",
+            "1",
+            "9",
+            "10",
+            "4"
+          ],
+          "hr": [
+            "0",
+            "2",
+            "3",
+            "1",
+            "4",
+            "6",
+            "5",
+            "9"
+          ],
+          "rbi": [
+            "0",
+            "13",
+            "19",
+            "27",
+            "16",
+            "5",
+            "2",
+            "34"
+          ],
+          "sb": [
+            "0",
+            "8",
+            "3",
+            "1",
+            "6",
+            "11",
+            "2",
+            "4"
+          ],
+          "cs": [
+            "0",
+            "1",
+            "2",
+            "6",
+            "4",
+            "3",
+            "5",
+            "8"
+          ],
+          "bb": [
+            "0",
+            "4",
+            "2",
+            "1",
+            "13",
+            "3",
+            "9",
+            "7"
+          ],
+          "so": [
+            "0",
+            "5",
+            "2",
+            "1",
+            "4",
+            "3",
+            "7",
+            "6"
+          ],
+          "ibb": [
+            "0"
+          ],
+          "hbp": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "4",
+            "3",
+            "13",
+            "6"
+          ],
+          "sh": [
+            "0",
+            "5",
+            "1",
+            "13",
+            "12",
+            "3",
+            "15",
+            "2"
+          ],
+          "sf": [
+            "0"
+          ],
+          "g_idp": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "batting_postseason": {
+        "rows": 10000,
+        "sample_values": {
+          "year": [
+            "1884",
+            "1885",
+            "1886",
+            "1887",
+            "1888",
+            "1889",
+            "1890",
+            "1892"
+          ],
+          "round": [
+            "WS",
+            "CS",
+            "ALCS",
+            "NLCS",
+            "AEDIV",
+            "AWDIV",
+            "NEDIV",
+            "NWDIV"
+          ],
+          "player_id": [
+            "becanbu01",
+            "bradyst01",
+            "esterdu01",
+            "forstto01",
+            "keefeti01",
+            "kenneed01",
+            "nelsoca01",
+            "orrda01"
+          ],
+          "team_id": [
+            "NY4",
+            "PRO",
+            "SL4",
+            "CHN",
+            "DTN",
+            "NY1",
+            "BR3",
+            "LS2"
+          ],
+          "league_id": [
+            "AA",
+            "NL",
+            "AL"
+          ],
+          "g": [
+            "1",
+            "3",
+            "2",
+            "7",
+            "4",
+            "5",
+            "6",
+            "9"
+          ],
+          "ab": [
+            "2",
+            "10",
+            "3",
+            "5",
+            "7",
+            "9",
+            "8",
+            "23"
+          ],
+          "r": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "4",
+            "8"
+          ],
+          "h": [
+            "1",
+            "0",
+            "3",
+            "4",
+            "2",
+            "7",
+            "6",
+            "5"
+          ],
+          "double": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "4",
+            "6"
+          ],
+          "triple": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "hr": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "rbi": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "3",
+            "4",
+            "9",
+            "8"
+          ],
+          "sb": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "15",
+            "5",
+            "7"
+          ],
+          "cs": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "4"
+          ],
+          "bb": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "9",
+            "10",
+            "5"
+          ],
+          "so": [
+            "0",
+            "1",
+            "3",
+            "4",
+            "2",
+            "5",
+            "6",
+            "9"
+          ],
+          "ibb": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "5",
+            "4",
+            "7",
+            "6"
+          ],
+          "hbp": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "sh": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "5"
+          ],
+          "sf": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "g_idp": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "5",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "college": {
+        "rows": 1207,
+        "sample_values": {
+          "college_id": [
+            "abilchrist",
+            "adelphi",
+            "adrianmi",
+            "akron",
+            "alabama",
+            "alabamaam",
+            "alabamast",
+            "albanyst"
+          ],
+          "name_full": [
+            "Abilene Christian University",
+            "Adelphi University",
+            "Adrian College",
+            "University of Akron",
+            "University of Alabama",
+            "Alabama A&M University",
+            "Alabama State University",
+            "Albany State University"
+          ],
+          "city": [
+            "Abilene",
+            "Garden City",
+            "Adrian",
+            "Akron",
+            "Tuscaloosa",
+            "Normal",
+            "Montgomery",
+            "Albany"
+          ],
+          "state": [
+            "TX",
+            "NY",
+            "MI",
+            "OH",
+            "AL",
+            "GA",
+            "ID",
+            "PA"
+          ],
+          "country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fielding": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "abercda01",
+            "addybo01",
+            "allisar01",
+            "allisdo01",
+            "ansonca01",
+            "armstbo01",
+            "barkeal01",
+            "barnero01"
+          ],
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "team_id": [
+            "TRO",
+            "RC1",
+            "CL1",
+            "WS3",
+            "FW1",
+            "BS1",
+            "PH1",
+            "CH1"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL"
+          ],
+          "pos": [
+            "SS",
+            "2B",
+            "OF",
+            "C",
+            "1B",
+            "3B",
+            "P"
+          ],
+          "g": [
+            "1",
+            "22",
+            "3",
+            "2",
+            "29",
+            "27",
+            "20",
+            "5"
+          ],
+          "po": [
+            "1",
+            "67",
+            "8",
+            "51",
+            "68",
+            "7",
+            "3",
+            "38"
+          ],
+          "a": [
+            "3",
+            "72",
+            "14",
+            "4",
+            "15",
+            "0",
+            "52",
+            "2"
+          ],
+          "e": [
+            "2",
+            "42",
+            "7",
+            "0",
+            "20",
+            "1",
+            "28",
+            "8"
+          ],
+          "dp": [
+            "0",
+            "5",
+            "1",
+            "4",
+            "2",
+            "10",
+            "3",
+            "11"
+          ],
+          "pb": [
+            "0",
+            "12",
+            "1",
+            "5",
+            "26",
+            "32",
+            "52",
+            "21"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fielding_outfield": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "allisar01",
+            "ansonca01",
+            "armstbo01",
+            "barkeal01",
+            "barrofr01",
+            "battijo01",
+            "bealsto01",
+            "bechtge01"
+          ],
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "glf": [
+            "0",
+            "1",
+            "13",
+            "4",
+            "11",
+            "18",
+            "27",
+            "6"
+          ],
+          "gcf": [
+            "29",
+            "0",
+            "11",
+            "3",
+            "1",
+            "25",
+            "33",
+            "9"
+          ],
+          "grf": [
+            "0",
+            "1",
+            "4",
+            "11",
+            "27",
+            "3",
+            "6",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fielding_postseason": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "colliji01",
+            "crigelo01",
+            "dinnebi01",
+            "doughpa01",
+            "ferriho01",
+            "freembu01",
+            "hugheto01",
+            "lachaca01"
+          ],
+          "year": [
+            "1903",
+            "1905",
+            "1906",
+            "1907",
+            "1908",
+            "1909",
+            "1910",
+            "1911"
+          ],
+          "team_id": [
+            "BOS",
+            "PIT",
+            "NY1",
+            "PHA",
+            "CHA",
+            "CHN",
+            "DET",
+            "BSN"
+          ],
+          "league_id": [
+            "AL",
+            "NL"
+          ],
+          "round": [
+            "WS",
+            "ALCS",
+            "NLCS",
+            "AEDIV",
+            "AWDIV",
+            "NEDIV",
+            "NWDIV",
+            "ALDS1"
+          ],
+          "pos": [
+            "3B",
+            "C",
+            "P",
+            "LF",
+            "2B",
+            "RF",
+            "1B",
+            "SS"
+          ],
+          "g": [
+            "8",
+            "4",
+            "1",
+            "2",
+            "7",
+            "5",
+            "3",
+            "6"
+          ],
+          "gs": [
+            "8",
+            "4",
+            "1",
+            "3",
+            "2",
+            "7",
+            "5",
+            "0"
+          ],
+          "inn_outs": [
+            "213",
+            "105",
+            "6",
+            "102",
+            "210",
+            "21",
+            "30",
+            "186"
+          ],
+          "po": [
+            "9",
+            "54",
+            "2",
+            "13",
+            "18",
+            "10",
+            "0",
+            "77"
+          ],
+          "a": [
+            "18",
+            "7",
+            "9",
+            "3",
+            "23",
+            "0",
+            "28",
+            "1"
+          ],
+          "e": [
+            "1",
+            "3",
+            "0",
+            "2",
+            "4",
+            "6",
+            "5",
+            "8"
+          ],
+          "dp": [
+            "1",
+            "2",
+            "0",
+            "3",
+            "5",
+            "4",
+            "6",
+            "7"
+          ],
+          "tp": [
+            "0",
+            "1"
+          ],
+          "pb": [
+            "0",
+            "3",
+            "1",
+            "2"
+          ],
+          "sb": [
+            "9",
+            "6",
+            "0",
+            "3",
+            "2",
+            "1",
+            "4",
+            "8"
+          ],
+          "cs": [
+            "3",
+            "1",
+            "0",
+            "2",
+            "6",
+            "5",
+            "7",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "hall_of_fame": {
+        "rows": 4120,
+        "sample_values": {
+          "player_id": [
+            "cobbty01",
+            "ruthba01",
+            "wagneho01",
+            "mathech01",
+            "johnswa01",
+            "lajoina01",
+            "speaktr01",
+            "youngcy01"
+          ],
+          "yearid": [
+            "1936",
+            "1937",
+            "1938",
+            "1939",
+            "1942",
+            "1944",
+            "1945",
+            "1946"
+          ],
+          "votedby": [
+            "BBWAA",
+            "Veterans",
+            "Centennial",
+            "Old Timers",
+            "Special Election",
+            "Final Ballot",
+            "Nominating Vote",
+            "Run Off"
+          ],
+          "ballots": [
+            "226",
+            "78",
+            "201",
+            "262",
+            "274",
+            "233",
+            "247",
+            "263"
+          ],
+          "needed": [
+            "170",
+            "59",
+            "151",
+            "197",
+            "206",
+            "175",
+            "186",
+            "198"
+          ],
+          "votes": [
+            "222",
+            "215",
+            "205",
+            "189",
+            "146",
+            "133",
+            "111",
+            "105"
+          ],
+          "inducted": [
+            "Y",
+            "N"
+          ],
+          "category": [
+            "Player",
+            "Manager",
+            "Pioneer/Executive",
+            "Umpire"
+          ],
+          "needed_note": [
+            "Top 20",
+            "1st"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "home_game": {
+        "rows": 2944,
+        "sample_values": {
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL",
+            "FL"
+          ],
+          "team_id": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ],
+          "park_id": [
+            "BOS01",
+            "NYC01",
+            "CHI01",
+            "CIN01",
+            "CLE01",
+            "FOR01",
+            "PHI01",
+            "RCK01"
+          ],
+          "span_first": [
+            "1871-05-16",
+            "1871-05-27",
+            "1871-05-08",
+            "1871-10-30",
+            "1871-05-13",
+            "1871-05-11",
+            "1871-05-04",
+            "1871-05-25"
+          ],
+          "span_last": [
+            "1871-10-07",
+            "1871-05-27",
+            "1871-09-29",
+            "1871-10-30",
+            "1871-07-22",
+            "1871-09-27",
+            "1871-08-29",
+            "1871-09-22"
+          ],
+          "games": [
+            "16",
+            "1",
+            "2",
+            "11",
+            "9",
+            "19",
+            "14",
+            "6"
+          ],
+          "openings": [
+            "16",
+            "1",
+            "15",
+            "2",
+            "6",
+            "4",
+            "18",
+            "14"
+          ],
+          "attendance": [
+            "32600",
+            "3000",
+            "85500",
+            "600",
+            "2200",
+            "9500",
+            "2350",
+            "42050"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "manager": {
+        "rows": 3405,
+        "sample_values": {
+          "player_id": [
+            "wrighha01",
+            "woodji01",
+            "paborch01",
+            "lennobi01",
+            "deaneha01",
+            "fergubo01",
+            "mcbridi01",
+            "hastisc01"
+          ],
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "team_id": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL",
+            "FL"
+          ],
+          "inseason": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "g": [
+            "31",
+            "28",
+            "29",
+            "14",
+            "5",
+            "33",
+            "25",
+            "4"
+          ],
+          "w": [
+            "20",
+            "19",
+            "10",
+            "5",
+            "2",
+            "16",
+            "21",
+            "4"
+          ],
+          "l": [
+            "10",
+            "9",
+            "19",
+            "3",
+            "17",
+            "7",
+            "21",
+            "12"
+          ],
+          "rank": [
+            "3",
+            "2",
+            "8",
+            "5",
+            "1",
+            "9",
+            "6",
+            "4"
+          ],
+          "plyr_mgr": [
+            "Y",
+            "N"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "manager_award": {
+        "rows": 177,
+        "sample_values": {
+          "player_id": [
+            "larusto01",
+            "lasorto01",
+            "andersp01",
+            "freyji99",
+            "coxbo01",
+            "herzowh01",
+            "mcnamjo99",
+            "lanieha01"
+          ],
+          "award_id": [
+            "BBWAA Manager of the year",
+            "TSN Manager of the Year"
+          ],
+          "year": [
+            "1983",
+            "1984",
+            "1985",
+            "1986",
+            "1987",
+            "1988",
+            "1989",
+            "1990"
+          ],
+          "league_id": [
+            "AL",
+            "NL",
+            "ML"
+          ],
+          "tie": [
+            "Y"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "manager_award_vote": {
+        "rows": 414,
+        "sample_values": {
+          "award_id": [
+            "Mgr of the year",
+            "Mgr of the Year"
+          ],
+          "year": [
+            "1983",
+            "1984",
+            "1985",
+            "1986",
+            "1987",
+            "1988",
+            "1989",
+            "1990"
+          ],
+          "league_id": [
+            "AL",
+            "NL"
+          ],
+          "player_id": [
+            "altobjo01",
+            "coxbo01",
+            "larusto01",
+            "lasorto01",
+            "lillibo01",
+            "owenspa99",
+            "tannech01",
+            "andersp01"
+          ],
+          "points_won": [
+            "7",
+            "4",
+            "17",
+            "10",
+            "9",
+            "1",
+            "96",
+            "48"
+          ],
+          "points_max": [
+            "28",
+            "24",
+            "140",
+            "120",
+            "160",
+            "150"
+          ],
+          "votes_first": [
+            "7",
+            "4",
+            "17",
+            "10",
+            "9",
+            "1",
+            "13",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "manager_half": {
+        "rows": 93,
+        "sample_values": {
+          "player_id": [
+            "hanlone01",
+            "vanhage01",
+            "waltzjo99",
+            "wardjo01",
+            "seleefr99",
+            "ansonca01",
+            "comisch01",
+            "tebeapa01"
+          ],
+          "year": [
+            "1892",
+            "1981"
+          ],
+          "team_id": [
+            "BLN",
+            "BRO",
+            "BSN",
+            "CHN",
+            "CIN",
+            "CL4",
+            "LS3",
+            "NY1"
+          ],
+          "league_id": [
+            "NL",
+            "AL"
+          ],
+          "inseason": [
+            "3",
+            "1",
+            "2",
+            "5",
+            "4"
+          ],
+          "half": [
+            "1",
+            "2"
+          ],
+          "g": [
+            "56",
+            "77",
+            "11",
+            "8",
+            "78",
+            "80",
+            "75",
+            "71"
+          ],
+          "w": [
+            "17",
+            "26",
+            "1",
+            "2",
+            "51",
+            "44",
+            "52",
+            "50"
+          ],
+          "l": [
+            "39",
+            "46",
+            "10",
+            "6",
+            "26",
+            "33",
+            "22",
+            "37"
+          ],
+          "rank": [
+            "12",
+            "10",
+            "2",
+            "3",
+            "1",
+            "8",
+            "7",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "park": {
+        "rows": 250,
+        "sample_values": {
+          "park_id": [
+            "ALB01",
+            "ALT01",
+            "ANA01",
+            "ARL01",
+            "ARL02",
+            "ATL01",
+            "ATL02",
+            "BAL01"
+          ],
+          "park_name": [
+            "Riverside Park",
+            "Columbia Park",
+            "Angel Stadium of Anaheim",
+            "Arlington Stadium",
+            "Rangers Ballpark in Arlington",
+            "Atlanta-Fulton County Stadium",
+            "Turner Field",
+            "Madison Avenue Grounds"
+          ],
+          "park_alias": [
+            "Edison Field; Anaheim Stadium",
+            "The Ballpark in Arlington; Ameriquest Field",
+            "American League Park",
+            "Oriole Park V",
+            "Walpole Street Grounds",
+            "Union Park",
+            "Bee Hive",
+            "Federal League Park"
+          ],
+          "city": [
+            "Albany",
+            "Altoona",
+            "Anaheim",
+            "Arlington",
+            "Atlanta",
+            "Baltimore",
+            "Boston",
+            "Buffalo"
+          ],
+          "state": [
+            "NY",
+            "PA",
+            "CA",
+            "TX",
+            "GA",
+            "MD",
+            "MA",
+            "OH"
+          ],
+          "country": [
+            "US",
+            "MX",
+            "CA",
+            "PR",
+            "AU",
+            "JP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pitching": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "bechtge01",
+            "brainas01",
+            "fergubo01",
+            "fishech01",
+            "fleetfr01",
+            "flowedi01",
+            "mackde01",
+            "mathebo01"
+          ],
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3"
+          ],
+          "team_id": [
+            "PH1",
+            "WS3",
+            "NY2",
+            "RC1",
+            "TRO",
+            "FW1",
+            "CL1",
+            "CH1"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL",
+            "FL"
+          ],
+          "w": [
+            "1",
+            "12",
+            "0",
+            "4",
+            "6",
+            "18",
+            "10",
+            "19"
+          ],
+          "l": [
+            "2",
+            "15",
+            "0",
+            "16",
+            "1",
+            "11",
+            "5",
+            "17"
+          ],
+          "g": [
+            "3",
+            "30",
+            "1",
+            "24",
+            "19",
+            "25",
+            "29",
+            "7"
+          ],
+          "gs": [
+            "3",
+            "30",
+            "0",
+            "24",
+            "1",
+            "19",
+            "25",
+            "29"
+          ],
+          "cg": [
+            "2",
+            "30",
+            "0",
+            "22",
+            "1",
+            "19",
+            "25",
+            "28"
+          ],
+          "sho": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "6",
+            "7",
+            "16"
+          ],
+          "sv": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "7",
+            "8",
+            "5",
+            "4"
+          ],
+          "ipouts": [
+            "78",
+            "792",
+            "3",
+            "639",
+            "27",
+            "39",
+            "507",
+            "666"
+          ],
+          "h": [
+            "43",
+            "361",
+            "8",
+            "295",
+            "20",
+            "1",
+            "261",
+            "285"
+          ],
+          "er": [
+            "23",
+            "132",
+            "3",
+            "103",
+            "10",
+            "0",
+            "5",
+            "97"
+          ],
+          "hr": [
+            "0",
+            "4",
+            "3",
+            "5",
+            "9",
+            "2",
+            "7",
+            "6"
+          ],
+          "bb": [
+            "11",
+            "37",
+            "0",
+            "31",
+            "3",
+            "21",
+            "40",
+            "75"
+          ],
+          "so": [
+            "1",
+            "13",
+            "0",
+            "15",
+            "17",
+            "12",
+            "34",
+            "23"
+          ],
+          "baopp": [
+            "0.53",
+            "0.15",
+            "0.22",
+            "0.43",
+            "0.47",
+            "0.27",
+            "0.26",
+            "0.21"
+          ],
+          "era": [
+            "7.96",
+            "4.5",
+            "27",
+            "4.35",
+            "10",
+            "0",
+            "3.46",
+            "5.17"
+          ],
+          "wp": [
+            "0",
+            "8",
+            "21",
+            "7",
+            "34",
+            "2",
+            "17",
+            "14"
+          ],
+          "hbp": [
+            "0",
+            "10",
+            "13",
+            "5",
+            "2",
+            "1",
+            "3",
+            "4"
+          ],
+          "bk": [
+            "0",
+            "2",
+            "1",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "bfp": [
+            "13",
+            "14",
+            "1623",
+            "51",
+            "34",
+            "983",
+            "779",
+            "2269"
+          ],
+          "gf": [
+            "0",
+            "1",
+            "6",
+            "2",
+            "4",
+            "13",
+            "5",
+            "7"
+          ],
+          "r": [
+            "42",
+            "292",
+            "9",
+            "257",
+            "21",
+            "0",
+            "30",
+            "243"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pitching_postseason": {
+        "rows": 5109,
+        "sample_values": {
+          "player_id": [
+            "becanbu01",
+            "keefeti01",
+            "radboch01",
+            "clarkjo01",
+            "mccorji01",
+            "carutbo01",
+            "foutzda01",
+            "ryanji01"
+          ],
+          "year": [
+            "1884",
+            "1885",
+            "1886",
+            "1887",
+            "1888",
+            "1889",
+            "1890",
+            "1892"
+          ],
+          "round": [
+            "WS",
+            "CS",
+            "ALCS",
+            "NLCS",
+            "AEDIV",
+            "AWDIV",
+            "NEDIV",
+            "NWDIV"
+          ],
+          "team_id": [
+            "NY4",
+            "PRO",
+            "CHN",
+            "SL4",
+            "DTN",
+            "NY1",
+            "BR3",
+            "BRO"
+          ],
+          "league_id": [
+            "AA",
+            "NL",
+            "AL"
+          ],
+          "w": [
+            "0",
+            "3",
+            "1",
+            "2",
+            "4"
+          ],
+          "l": [
+            "1",
+            "2",
+            "0",
+            "4",
+            "3"
+          ],
+          "g": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "4",
+            "6",
+            "8",
+            "7"
+          ],
+          "gs": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "4",
+            "0",
+            "6",
+            "8"
+          ],
+          "cg": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "4",
+            "0",
+            "6",
+            "8"
+          ],
+          "sho": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "sv": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "ipouts": [
+            "18",
+            "45",
+            "66",
+            "48",
+            "108",
+            "78",
+            "87",
+            "93"
+          ],
+          "h": [
+            "9",
+            "10",
+            "11",
+            "15",
+            "27",
+            "25",
+            "30",
+            "13"
+          ],
+          "er": [
+            "7",
+            "6",
+            "0",
+            "2",
+            "8",
+            "5",
+            "1",
+            "11"
+          ],
+          "hr": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "5"
+          ],
+          "bb": [
+            "2",
+            "3",
+            "0",
+            "1",
+            "6",
+            "4",
+            "9",
+            "12"
+          ],
+          "so": [
+            "1",
+            "12",
+            "17",
+            "15",
+            "19",
+            "16",
+            "14",
+            "28"
+          ],
+          "baopp": [
+            "0.23",
+            "0.4",
+            "0.29",
+            "0.3",
+            "0.22",
+            "0.33",
+            "0.21",
+            "0.25"
+          ],
+          "era": [
+            "10.5",
+            "3.6",
+            "0",
+            "1.13",
+            "2",
+            "2.42",
+            "0.62",
+            "2.03"
+          ],
+          "ibb": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "wp": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "hbp": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "bk": [
+            "0",
+            "1"
+          ],
+          "bfp": [
+            "134",
+            "12",
+            "142",
+            "38",
+            "48",
+            "178",
+            "9",
+            "31"
+          ],
+          "gf": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "6",
+            "4",
+            "5"
+          ],
+          "r": [
+            "12",
+            "9",
+            "3",
+            "14",
+            "22",
+            "18",
+            "20",
+            "15"
+          ],
+          "sh": [
+            "0",
+            "3",
+            "1",
+            "2",
+            "7",
+            "6",
+            "5",
+            "4"
+          ],
+          "sf": [
+            "0",
+            "1",
+            "4",
+            "2",
+            "3"
+          ],
+          "g_idp": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "aardsda01",
+            "aaronha01",
+            "aaronto01",
+            "aasedo01",
+            "abadan01",
+            "abadfe01",
+            "abadijo01",
+            "abbated01"
+          ],
+          "birth_year": [
+            "1981",
+            "1934",
+            "1939",
+            "1954",
+            "1972",
+            "1985",
+            "1854",
+            "1877"
+          ],
+          "birth_month": [
+            "12",
+            "2",
+            "8",
+            "9",
+            "11",
+            "4",
+            "10",
+            "3"
+          ],
+          "birth_day": [
+            "27",
+            "5",
+            "8",
+            "25",
+            "17",
+            "4",
+            "15",
+            "11"
+          ],
+          "birth_country": [
+            "USA",
+            "D.R.",
+            "Venezuela",
+            "Cuba",
+            "Mexico",
+            "Panama",
+            "CAN",
+            "P.R."
+          ],
+          "birth_state": [
+            "CO",
+            "AL",
+            "CA",
+            "FL",
+            "La Romana",
+            "PA",
+            "VT",
+            "NE"
+          ],
+          "birth_city": [
+            "Denver",
+            "Mobile",
+            "Orange",
+            "Palm Beach",
+            "La Romana",
+            "Philadelphia",
+            "Latrobe",
+            "Essex"
+          ],
+          "death_year": [
+            "1984",
+            "1905",
+            "1957",
+            "1962",
+            "1926",
+            "1930",
+            "1935",
+            "1933"
+          ],
+          "death_month": [
+            "8",
+            "5",
+            "1",
+            "6",
+            "4",
+            "2",
+            "11",
+            "12"
+          ],
+          "death_day": [
+            "16",
+            "17",
+            "6",
+            "11",
+            "27",
+            "13",
+            "20",
+            "19"
+          ],
+          "death_country": [
+            "USA",
+            "Cuba",
+            "Mexico",
+            "D.R.",
+            "P.R.",
+            "Austria",
+            "Venezuela",
+            "CAN"
+          ],
+          "death_state": [
+            "GA",
+            "NJ",
+            "FL",
+            "VT",
+            "CA",
+            "MI",
+            "DC",
+            "OH"
+          ],
+          "death_city": [
+            "Atlanta",
+            "Pemberton",
+            "Fort Lauderdale",
+            "Colchester",
+            "San Francisco",
+            "Ottawa Lake",
+            "Los Angeles",
+            "Washington"
+          ],
+          "name_first": [
+            "David",
+            "Hank",
+            "Tommie",
+            "Don",
+            "Andy",
+            "Fernando",
+            "John",
+            "Ed"
+          ],
+          "name_last": [
+            "Aardsma",
+            "Aaron",
+            "Aase",
+            "Abad",
+            "Abadie",
+            "Abbaticchio",
+            "Abbey",
+            "Abbott"
+          ],
+          "name_given": [
+            "David Allan",
+            "Henry Louis",
+            "Tommie Lee",
+            "Donald William",
+            "Fausto Andres",
+            "Fernando Antonio",
+            "John W.",
+            "Edward James"
+          ],
+          "weight": [
+            "220",
+            "180",
+            "190",
+            "184",
+            "192",
+            "170",
+            "175",
+            "169"
+          ],
+          "height": [
+            "75",
+            "72",
+            "73",
+            "71",
+            "68",
+            "70",
+            "78",
+            "74"
+          ],
+          "bats": [
+            "R",
+            "L",
+            "B"
+          ],
+          "throws": [
+            "R",
+            "L"
+          ],
+          "debut": [
+            "2004-04-06",
+            "1954-04-13",
+            "1962-04-10",
+            "1977-07-26",
+            "2001-09-10",
+            "2010-07-28",
+            "1875-04-26",
+            "1897-09-04"
+          ],
+          "final_game": [
+            "2015-08-23",
+            "1976-10-03",
+            "1971-09-26",
+            "1990-10-03",
+            "2006-04-13",
+            "2015-10-03",
+            "1875-06-10",
+            "1910-09-15"
+          ],
+          "retro_id": [
+            "aardd001",
+            "aaroh101",
+            "aarot101",
+            "aased001",
+            "abada001",
+            "abadf001",
+            "abadj101",
+            "abbae101"
+          ],
+          "bbref_id": [
+            "aardsda01",
+            "aaronha01",
+            "aaronto01",
+            "aasedo01",
+            "abadan01",
+            "abadfe01",
+            "abadijo01",
+            "abbated01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_award": {
+        "rows": 6078,
+        "sample_values": {
+          "player_id": [
+            "bondto01",
+            "hinespa01",
+            "heckegu01",
+            "radboch01",
+            "oneilti01",
+            "keefeti01",
+            "clarkjo01",
+            "rusieam01"
+          ],
+          "award_id": [
+            "Pitching Triple Crown",
+            "Triple Crown",
+            "Baseball Magazine All-Star",
+            "Most Valuable Player",
+            "TSN All-Star",
+            "TSN Guide MVP",
+            "TSN Major League Player of the Year",
+            "TSN Pitcher of the Year"
+          ],
+          "year": [
+            "1877",
+            "1878",
+            "1884",
+            "1887",
+            "1888",
+            "1889",
+            "1894",
+            "1901"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "AL",
+            "ML"
+          ],
+          "tie": [
+            "Y"
+          ],
+          "notes": [
+            "1B",
+            "2B",
+            "3B",
+            "C",
+            "CF",
+            "LF",
+            "P1",
+            "P2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_award_vote": {
+        "rows": 6795,
+        "sample_values": {
+          "award_id": [
+            "Cy Young",
+            "MVP",
+            "Rookie of the Year"
+          ],
+          "year": [
+            "1956",
+            "1957",
+            "1958",
+            "1959",
+            "1960",
+            "1961",
+            "1962",
+            "1963"
+          ],
+          "league_id": [
+            "ML",
+            "AL",
+            "NL"
+          ],
+          "player_id": [
+            "fordwh01",
+            "maglisa01",
+            "newcodo01",
+            "spahnwa01",
+            "donovdi01",
+            "burdele01",
+            "frienbo01",
+            "turlebo01"
+          ],
+          "points_won": [
+            "1",
+            "4",
+            "10",
+            "15",
+            "3",
+            "5",
+            "2",
+            "13"
+          ],
+          "points_max": [
+            "16",
+            "18",
+            "20",
+            "24",
+            "120",
+            "140",
+            "160",
+            "196"
+          ],
+          "votes_first": [
+            "1",
+            "4",
+            "10",
+            "15",
+            "3",
+            "5",
+            "2",
+            "13"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_college": {
+        "rows": 10000,
+        "sample_values": {
+          "player_id": [
+            "aardsda01",
+            "abadan01",
+            "abbeybe01",
+            "abbotje01",
+            "abbotji01",
+            "abbotky01",
+            "abercre01",
+            "abernte01"
+          ],
+          "college_id": [
+            "pennst",
+            "rice",
+            "gamiddl",
+            "vermont",
+            "kentucky",
+            "michigan",
+            "ucsd",
+            "longbeach"
+          ],
+          "year": [
+            "2001",
+            "2002",
+            "2003",
+            "1992",
+            "1993",
+            "1889",
+            "1890",
+            "1891"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "postseason": {
+        "rows": 307,
+        "sample_values": {
+          "year": [
+            "1884",
+            "1885",
+            "1886",
+            "1887",
+            "1888",
+            "1889",
+            "1890",
+            "1892"
+          ],
+          "round": [
+            "WS",
+            "CS",
+            "ALCS",
+            "NLCS",
+            "AEDIV",
+            "AWDIV",
+            "NEDIV",
+            "NWDIV"
+          ],
+          "team_id_winner": [
+            "PRO",
+            "CHC",
+            "STL",
+            "DTN",
+            "NYG",
+            "BRO",
+            "BSN",
+            "BOS"
+          ],
+          "league_id_winner": [
+            "NL",
+            "AA",
+            "AL"
+          ],
+          "team_id_loser": [
+            "NYP",
+            "STL",
+            "CHC",
+            "BRO",
+            "LOU",
+            "CLV",
+            "PIT",
+            "PHA"
+          ],
+          "league_id_loser": [
+            "AA",
+            "NL",
+            "AL"
+          ],
+          "wins": [
+            "3",
+            "4",
+            "10",
+            "6",
+            "5",
+            "1"
+          ],
+          "losses": [
+            "0",
+            "3",
+            "2",
+            "5",
+            "4",
+            "1"
+          ],
+          "ties": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "salary": {
+        "rows": 10000,
+        "sample_values": {
+          "year": [
+            "1985",
+            "1986",
+            "1987",
+            "1988",
+            "1989",
+            "1990",
+            "1991",
+            "1992"
+          ],
+          "team_id": [
+            "ATL",
+            "BAL",
+            "BOS",
+            "CAL",
+            "CHA",
+            "CHN",
+            "CIN",
+            "CLE"
+          ],
+          "league_id": [
+            "NL",
+            "AL"
+          ],
+          "player_id": [
+            "barkele01",
+            "bedrost01",
+            "benedbr01",
+            "campri01",
+            "ceronri01",
+            "chambch01",
+            "dedmoje01",
+            "forstte01"
+          ],
+          "salary": [
+            "870000",
+            "550000",
+            "545000",
+            "633333",
+            "625000",
+            "800000",
+            "150000",
+            "483333"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team": {
+        "rows": 2805,
+        "sample_values": {
+          "year": [
+            "1871",
+            "1872",
+            "1873",
+            "1874",
+            "1875",
+            "1876",
+            "1877",
+            "1878"
+          ],
+          "league_id": [
+            "NL",
+            "AA",
+            "UA",
+            "PL",
+            "AL",
+            "FL"
+          ],
+          "team_id": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ],
+          "franchise_id": [
+            "BNA",
+            "CNA",
+            "CFC",
+            "KEK",
+            "NNA",
+            "PNA",
+            "ROK",
+            "TRO"
+          ],
+          "div_id": [
+            "W",
+            "E",
+            "C"
+          ],
+          "rank": [
+            "3",
+            "2",
+            "8",
+            "7",
+            "5",
+            "1",
+            "9",
+            "6"
+          ],
+          "g": [
+            "31",
+            "28",
+            "29",
+            "19",
+            "33",
+            "25",
+            "32",
+            "58"
+          ],
+          "ghome": [
+            "66",
+            "69",
+            "68",
+            "70",
+            "71",
+            "72",
+            "64",
+            "65"
+          ],
+          "w": [
+            "20",
+            "19",
+            "10",
+            "7",
+            "16",
+            "21",
+            "4",
+            "13"
+          ],
+          "l": [
+            "10",
+            "9",
+            "19",
+            "12",
+            "17",
+            "7",
+            "21",
+            "15"
+          ],
+          "div_win": [
+            "Y",
+            "N"
+          ],
+          "wc_win": [
+            "N",
+            "Y"
+          ],
+          "lg_win": [
+            "N",
+            "Y"
+          ],
+          "ws_win": [
+            "N",
+            "Y"
+          ],
+          "r": [
+            "401",
+            "302",
+            "249",
+            "137",
+            "376",
+            "231",
+            "351",
+            "310"
+          ],
+          "ab": [
+            "1372",
+            "1196",
+            "1186",
+            "746",
+            "1404",
+            "1281",
+            "1036",
+            "1248"
+          ],
+          "h": [
+            "426",
+            "323",
+            "328",
+            "178",
+            "403",
+            "410",
+            "274",
+            "384"
+          ],
+          "double": [
+            "70",
+            "52",
+            "35",
+            "19",
+            "43",
+            "66",
+            "44",
+            "51"
+          ],
+          "triple": [
+            "37",
+            "21",
+            "40",
+            "8",
+            "27",
+            "25",
+            "34",
+            "26"
+          ],
+          "hr": [
+            "3",
+            "10",
+            "7",
+            "2",
+            "1",
+            "9",
+            "6",
+            "14"
+          ],
+          "bb": [
+            "60",
+            "26",
+            "33",
+            "46",
+            "38",
+            "49",
+            "48",
+            "27"
+          ],
+          "so": [
+            "19",
+            "22",
+            "25",
+            "9",
+            "15",
+            "23",
+            "30",
+            "13"
+          ],
+          "sb": [
+            "73",
+            "69",
+            "18",
+            "16",
+            "46",
+            "56",
+            "53",
+            "62"
+          ],
+          "cs": [
+            "15",
+            "4",
+            "14",
+            "3",
+            "21",
+            "32",
+            "7",
+            "0"
+          ],
+          "hbp": [
+            "47",
+            "59",
+            "49",
+            "42",
+            "53",
+            "54",
+            "64",
+            "51"
+          ],
+          "sf": [
+            "43",
+            "58",
+            "45",
+            "54",
+            "48",
+            "61",
+            "52",
+            "75"
+          ],
+          "ra": [
+            "303",
+            "241",
+            "341",
+            "243",
+            "313",
+            "266",
+            "287",
+            "362"
+          ],
+          "er": [
+            "109",
+            "77",
+            "116",
+            "97",
+            "121",
+            "137",
+            "108",
+            "153"
+          ],
+          "era": [
+            "3.55",
+            "2.76",
+            "4.11",
+            "5.17",
+            "3.72",
+            "4.95",
+            "4.3",
+            "5.51"
+          ],
+          "cg": [
+            "22",
+            "25",
+            "23",
+            "19",
+            "32",
+            "27",
+            "28",
+            "48"
+          ],
+          "sho": [
+            "1",
+            "0",
+            "3",
+            "2",
+            "4",
+            "10",
+            "7",
+            "13"
+          ],
+          "sv": [
+            "3",
+            "1",
+            "0",
+            "17",
+            "7",
+            "4",
+            "2",
+            "5"
+          ],
+          "ipouts": [
+            "828",
+            "753",
+            "762",
+            "507",
+            "879",
+            "747",
+            "678",
+            "750"
+          ],
+          "ha": [
+            "367",
+            "308",
+            "346",
+            "261",
+            "373",
+            "329",
+            "315",
+            "431"
+          ],
+          "hra": [
+            "2",
+            "6",
+            "13",
+            "5",
+            "7",
+            "3",
+            "4",
+            "0"
+          ],
+          "bba": [
+            "42",
+            "28",
+            "53",
+            "21",
+            "34",
+            "75",
+            "45",
+            "63"
+          ],
+          "soa": [
+            "23",
+            "22",
+            "34",
+            "17",
+            "16",
+            "12",
+            "13",
+            "0"
+          ],
+          "e": [
+            "225",
+            "218",
+            "223",
+            "163",
+            "227",
+            "194",
+            "220",
+            "198"
+          ],
+          "dp": [
+            "42",
+            "33",
+            "45",
+            "27",
+            "44",
+            "18",
+            "32",
+            "36"
+          ],
+          "fp": [
+            "0.83",
+            "0.82",
+            "0.81",
+            "0.8",
+            "0.84",
+            "0.85",
+            "0.79",
+            "0.87"
+          ],
+          "name": [
+            "Boston Red Stockings",
+            "Chicago White Stockings",
+            "Cleveland Forest Citys",
+            "Fort Wayne Kekiongas",
+            "New York Mutuals",
+            "Philadelphia Athletics",
+            "Rockford Forest Citys",
+            "Troy Haymakers"
+          ],
+          "park": [
+            "South End Grounds I",
+            "Union Base-Ball Grounds",
+            "National Association Grounds",
+            "Hamilton Field",
+            "Union Grounds (Brooklyn)",
+            "Jefferson Street Grounds",
+            "Agricultural Society Fair Grounds",
+            "Haymakers' Grounds"
+          ],
+          "attendance": [
+            "121412",
+            "147539",
+            "102536",
+            "131980",
+            "47478",
+            "60667",
+            "148366",
+            "16064"
+          ],
+          "bpf": [
+            "103",
+            "104",
+            "96",
+            "101",
+            "90",
+            "102",
+            "97",
+            "94"
+          ],
+          "ppf": [
+            "98",
+            "102",
+            "100",
+            "107",
+            "88",
+            "99",
+            "96",
+            "122"
+          ],
+          "team_id_br": [
+            "BOS",
+            "CHI",
+            "CLE",
+            "KEK",
+            "NYU",
+            "ATH",
+            "ROK",
+            "TRO"
+          ],
+          "team_id_lahman45": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ],
+          "team_id_retro": [
+            "BS1",
+            "CH1",
+            "CL1",
+            "FW1",
+            "NY2",
+            "PH1",
+            "RC1",
+            "TRO"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team_franchise": {
+        "rows": 120,
+        "sample_values": {
+          "franchise_id": [
+            "ALT",
+            "ANA",
+            "ARI",
+            "ATH",
+            "ATL",
+            "BAL",
+            "BFB",
+            "BFL"
+          ],
+          "franchise_name": [
+            "Altoona Mountain City",
+            "Los Angeles Angels of Anaheim",
+            "Arizona Diamondbacks",
+            "Philadelphia Athletics",
+            "Atlanta Braves",
+            "Baltimore Orioles",
+            "Buffalo Bisons",
+            "Baltimore Canaries"
+          ],
+          "active": [
+            "N",
+            "Y"
+          ],
+          "na_assoc": [
+            "PNA",
+            "BNA",
+            "ATL",
+            "CNA",
+            "CHC",
+            "HNA",
+            "HAR",
+            "NYU"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team_half": {
+        "rows": 52,
+        "sample_values": {
+          "year": [
+            "1981"
+          ],
+          "league_id": [
+            "NL",
+            "AL"
+          ],
+          "team_id": [
+            "ATL",
+            "BAL",
+            "BOS",
+            "CAL",
+            "CHA",
+            "CHN",
+            "CIN",
+            "CLE"
+          ],
+          "half": [
+            "1",
+            "2"
+          ],
+          "div_id": [
+            "W",
+            "E"
+          ],
+          "div_win": [
+            "N"
+          ],
+          "rank": [
+            "4",
+            "5",
+            "2",
+            "6",
+            "3",
+            "1",
+            "7"
+          ],
+          "g": [
+            "54",
+            "52",
+            "51",
+            "56",
+            "60",
+            "50",
+            "53",
+            "57"
+          ],
+          "w": [
+            "25",
+            "31",
+            "28",
+            "30",
+            "29",
+            "20",
+            "23",
+            "15"
+          ],
+          "l": [
+            "29",
+            "27",
+            "23",
+            "26",
+            "30",
+            "22",
+            "37",
+            "28"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Customer Health Tracker",
+  "capability": [
+    "create_database",
+    "define_schema",
+    "build_relations",
+    "rollup_formula_schema",
+    "populate_rows",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "reference_existing_object",
+    "query_and_filter_database",
+    "compute_aggregates",
+    "render_table_from_records",
+    "preserve_sort_order"
+  ],
+  "question": "Create a comprehensive customer recovery hub in the \"Customer Success Workspace\" page.\n\n**Task Requirements:**\n1. Create a new database named \"Customer Health Improvement Tracker\" as a child database in the main Customer Success Workspace page with the following properties:\n   - Name (title property)\n   - Current Account (relation to Accounts database)\n   - Current Health (rollup from related account's \"Health Score\" property)\n   - Target Health (number property with format \"percent\")\n   - Gap (formula: Target Health - Current Health)\n   - Recovery Plan (rich text property)\n   - Progress Notes (rich text property)\n\n2. Query the Accounts database for accounts whose Health Score is below 70% (0.7), then create a new child page titled \"Customer Recovery Hub\" containing, in order:\n   1) The Customer Health Improvement Tracker database embedded at the top.\n   2) A section headed \"Account Resources\" with @-mentions or link-to-page references to at least 3 existing account-support pages.\n   3) A \"Follow-up Checklist\" section with at least 3 to-do items for customer success managers to check off.\n\n3. In the Customer Recovery Hub page, create a five-column table block listing every low-health account from step 2. Store all values as plain text and sort rows by Renewal Date in ascending order. The table must include the following headers:\n   - Account\n   - Owner\n   - Health Score\n   - Renewal Date\n   - Recovery Priority\n\n4. For each low-health account, create one entry in the Customer Health Improvement Tracker:\n   - Name: \"[Account Name] Recovery Plan\"\n   - Link to the corresponding account in Accounts database\n   - Target Health: Set to Current + 20% (capped at 95%)\n   - Recovery Plan: \"Weekly check-ins and executive sponsor review\"\n   - Progress Notes: \"Initial health review completed\""
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Workshop Meal Budget Sync",
+  "capability": [
+    "query_and_filter_database",
+    "cross_database_sync",
+    "populate_rows",
+    "field_mapping",
+    "archive_or_delete_items",
+    "precise_selection"
+  ],
+  "question": "Please go to the \"Workshop Logistics\" page, remove the workshop schedule in Austin after 7 PM (excluding 7 PM) on Thursday and Friday, then find the meal sessions that remain in Friday of the Workshop Schedule database and create corresponding entries in the Workshop Budget database, one meal session per entry. Set the budget date uniformly to Jun 13, 2025, cost uniformly to $125, Expense to the session name, Category to Meals, and Comment to the Description from the corresponding meal session page. Leave other properties empty.\n"
+}

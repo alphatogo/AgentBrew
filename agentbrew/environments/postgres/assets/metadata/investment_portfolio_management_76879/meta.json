@@ -1,0 +1,593 @@
+{
+  "db_id": "investment_portfolio_management_76879",
+  "source": "synsql",
+  "tables": 22,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/investment_portfolio_management_76879",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"asset_classes\" {\n  \"asset_class_id\" INTEGER [pk]\n  \"asset_class_name\" TEXT\n  \"asset_class_description\" TEXT\n  \"asset_class_risk_level\" TEXT\n}\n\nTable \"public\".\"asset_investments\" {\n  \"investment_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"investment_type_id\" INTEGER\n  \"number_of_investments\" INTEGER\n  \"total_investment_amount\" REAL\n}\n\nTable \"public\".\"asset_performance\" {\n  \"performance_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"total_investment\" REAL\n  \"percentage_of_total\" REAL\n  \"return_on_investment\" REAL\n  \"standard_deviation\" REAL\n}\n\nTable \"public\".\"audit_trail\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_type\" TEXT\n  \"activity_date\" TEXT\n  \"activity_description\" TEXT\n}\n\nTable \"public\".\"benchmark_data\" {\n  \"benchmark_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"benchmark_date\" TEXT\n  \"benchmark_value\" REAL\n}\n\nTable \"public\".\"client_accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"account_name\" TEXT\n  \"balance\" REAL\n  \"account_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"collaboration\" {\n  \"collaboration_id\" INTEGER [pk]\n  \"user_id_1\" INTEGER\n  \"user_id_2\" INTEGER\n  \"collaboration_date\" TEXT\n  \"collaboration_notes\" TEXT\n  \"collaboration_status\" TEXT\n}\n\nTable \"public\".\"custom_basket_assets\" {\n  \"basket_asset_id\" INTEGER [pk]\n  \"basket_id\" INTEGER\n  \"asset_class_id\" INTEGER\n  \"asset_weight\" REAL\n}\n\nTable \"public\".\"custom_baskets\" {\n  \"basket_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"basket_name\" TEXT\n  \"basket_description\" TEXT\n}\n\nTable \"public\".\"document_storage\" {\n  \"document_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"document_type\" TEXT\n  \"document_date\" TEXT\n  \"document_description\" TEXT\n}\n\nTable \"public\".\"investment_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"account_id\" INTEGER\n  \"asset_class_id\" INTEGER\n  \"investment_type_id\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" REAL\n  \"transaction_type\" TEXT\n  \"fees\" REAL\n}\n\nTable \"public\".\"investment_types\" {\n  \"investment_type_id\" INTEGER [pk]\n  \"investment_type_name\" TEXT\n  \"investment_type_description\" TEXT\n}\n\nTable \"public\".\"market_data\" {\n  \"data_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"market_date\" TEXT\n  \"market_value\" REAL\n}\n\nTable \"public\".\"market_trends\" {\n  \"trend_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"trend_start_date\" TEXT\n  \"trend_end_date\" TEXT\n  \"trend_description\" TEXT\n  \"trend_impact\" TEXT\n}\n\nTable \"public\".\"meetings\" {\n  \"meeting_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"client_id\" INTEGER\n  \"meeting_date\" TEXT\n  \"meeting_duration\" INTEGER\n  \"meeting_notes\" TEXT\n  \"meeting_status\" TEXT\n}\n\nTable \"public\".\"news_feed\" {\n  \"news_id\" INTEGER [pk]\n  \"news_title\" TEXT\n  \"news_date\" TEXT\n  \"news_description\" TEXT\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"notification_date\" TEXT\n  \"notification_description\" TEXT\n}\n\nTable \"public\".\"peer_group_data\" {\n  \"peer_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"peer_date\" TEXT\n  \"peer_value\" REAL\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"public\".\"risk_profiles\" {\n  \"risk_profile_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"risk_level\" TEXT\n  \"risk_description\" TEXT\n  \"risk_impact\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"asset_investments\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"asset_investments\".\"investment_type_id\" > \"public\".\"investment_types\".\"investment_type_id\"\nRef: \"public\".\"asset_performance\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"audit_trail\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"benchmark_data\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"client_accounts\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"collaboration\".\"user_id_1\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"collaboration\".\"user_id_2\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"custom_basket_assets\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"custom_basket_assets\".\"basket_id\" > \"public\".\"custom_baskets\".\"basket_id\"\nRef: \"public\".\"custom_baskets\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_storage\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"investment_transactions\".\"investment_type_id\" > \"public\".\"investment_types\".\"investment_type_id\"\nRef: \"public\".\"investment_transactions\".\"account_id\" > \"public\".\"client_accounts\".\"account_id\"\nRef: \"public\".\"investment_transactions\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"market_data\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"market_trends\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"meetings\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"meetings\".\"client_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"peer_group_data\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\"\nRef: \"public\".\"reports\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"risk_profiles\".\"asset_class_id\" > \"public\".\"asset_classes\".\"asset_class_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"asset_classes\" {\n  \"asset_class_id\" INTEGER [pk]\n  \"asset_class_name\" TEXT\n  \"asset_class_description\" TEXT\n  \"asset_class_risk_level\" TEXT\n}\n\nTable \"asset_investments\" {\n  \"investment_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"investment_type_id\" INTEGER\n  \"number_of_investments\" INTEGER\n  \"total_investment_amount\" REAL\n}\n\nTable \"asset_performance\" {\n  \"performance_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"total_investment\" REAL\n  \"percentage_of_total\" REAL\n  \"return_on_investment\" REAL\n  \"standard_deviation\" REAL\n}\n\nTable \"audit_trail\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_type\" TEXT\n  \"activity_date\" TEXT\n  \"activity_description\" TEXT\n}\n\nTable \"benchmark_data\" {\n  \"benchmark_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"benchmark_date\" TEXT\n  \"benchmark_value\" REAL\n}\n\nTable \"client_accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"account_name\" TEXT\n  \"balance\" REAL\n  \"account_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"collaboration\" {\n  \"collaboration_id\" INTEGER [pk]\n  \"user_id_1\" INTEGER\n  \"user_id_2\" INTEGER\n  \"collaboration_date\" TEXT\n  \"collaboration_notes\" TEXT\n  \"collaboration_status\" TEXT\n}\n\nTable \"custom_basket_assets\" {\n  \"basket_asset_id\" INTEGER [pk]\n  \"basket_id\" INTEGER\n  \"asset_class_id\" INTEGER\n  \"asset_weight\" REAL\n}\n\nTable \"custom_baskets\" {\n  \"basket_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"basket_name\" TEXT\n  \"basket_description\" TEXT\n}\n\nTable \"document_storage\" {\n  \"document_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"document_type\" TEXT\n  \"document_date\" TEXT\n  \"document_description\" TEXT\n}\n\nTable \"investment_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"account_id\" INTEGER\n  \"asset_class_id\" INTEGER\n  \"investment_type_id\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" REAL\n  \"transaction_type\" TEXT\n  \"fees\" REAL\n}\n\nTable \"investment_types\" {\n  \"investment_type_id\" INTEGER [pk]\n  \"investment_type_name\" TEXT\n  \"investment_type_description\" TEXT\n}\n\nTable \"market_data\" {\n  \"data_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"market_date\" TEXT\n  \"market_value\" REAL\n}\n\nTable \"market_trends\" {\n  \"trend_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"trend_start_date\" TEXT\n  \"trend_end_date\" TEXT\n  \"trend_description\" TEXT\n  \"trend_impact\" TEXT\n}\n\nTable \"meetings\" {\n  \"meeting_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"client_id\" INTEGER\n  \"meeting_date\" TEXT\n  \"meeting_duration\" INTEGER\n  \"meeting_notes\" TEXT\n  \"meeting_status\" TEXT\n}\n\nTable \"news_feed\" {\n  \"news_id\" INTEGER [pk]\n  \"news_title\" TEXT\n  \"news_date\" TEXT\n  \"news_description\" TEXT\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"notification_date\" TEXT\n  \"notification_description\" TEXT\n}\n\nTable \"peer_group_data\" {\n  \"peer_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"peer_date\" TEXT\n  \"peer_value\" REAL\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"risk_profiles\" {\n  \"risk_profile_id\" INTEGER [pk]\n  \"asset_class_id\" INTEGER\n  \"risk_level\" TEXT\n  \"risk_description\" TEXT\n  \"risk_impact\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"asset_investments\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"asset_investments\".\"investment_type_id\" > \"investment_types\".\"investment_type_id\"\n\nRef: \"asset_performance\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"audit_trail\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"benchmark_data\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"client_accounts\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"collaboration\".\"user_id_1\" > \"users\".\"user_id\"\n\nRef: \"collaboration\".\"user_id_2\" > \"users\".\"user_id\"\n\nRef: \"custom_basket_assets\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"custom_basket_assets\".\"basket_id\" > \"custom_baskets\".\"basket_id\"\n\nRef: \"custom_baskets\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_storage\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"investment_transactions\".\"investment_type_id\" > \"investment_types\".\"investment_type_id\"\n\nRef: \"investment_transactions\".\"account_id\" > \"client_accounts\".\"account_id\"\n\nRef: \"investment_transactions\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"market_data\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"market_trends\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"meetings\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"meetings\".\"client_id\" > \"users\".\"user_id\"\n\nRef: \"notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"peer_group_data\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\nRef: \"reports\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"risk_profiles\".\"asset_class_id\" > \"asset_classes\".\"asset_class_id\"\n\n## Table Stats & Sample Values\n\nasset_classes: 2 rows\n  asset_class_name: 'INCOME', 'INFRA DEBT'\n  asset_class_risk_level: 'Medium', 'Low'\n  asset_class_description: 'Investments in income-generating assets (e.g., bon', 'Investments in infrastructure debt (e.g., bonds, l'\n\nasset_investments: 2 rows\n  number_of_investments: '404442', '116967'\n  total_investment_amount: '528900000.0', '144200000.0'\n  asset_class_id: '1', '0'\n\nasset_performance: 2 rows\n  total_investment: '528900.0', '1442.0'\n  percentage_of_total: '45.0', '0.1'\n  return_on_investment: '0.07', '0.02'\n\naudit_trail: 2 rows\n  activity_type: 'login', 'transaction'\n  activity_description: 'User logged in', 'User initiated transaction'\n  activity_date: '2023-05-01', '2023-05-02'\n\nbenchmark_data: 2 rows\n  benchmark_date: '2023-05-01', '2023-05-02'\n  benchmark_value: '1200.0', '600.0'\n  asset_class_id: '1'\n\nclient_accounts: 2 rows\n  account_name: 'Alice Johnson's Account', 'Bob Williams' Account'\n  account_type: 'individual'\n  created_at: '2023-01-01 12:00:00', '2023-01-02 12:00:00'\n\ncollaboration: 2 rows\n  collaboration_status: 'active', 'completed'\n  collaboration_notes: 'Discussed new investment opportunities', 'Reviewed market trends'\n  collaboration_date: '2023-05-05', '2023-05-06'\n\ncustom_basket_assets: 2 rows\n  asset_weight: '0.4', '0.6'\n  asset_class_id: '1', '0'\n  basket_id: '0'\n\ncustom_baskets: 2 rows\n  basket_name: 'My Portfolio', 'My Watchlist'\n  basket_description: 'Custom portfolio created by user', 'Custom watchlist created by user'\n  user_id: '1', '0'\n\ndocument_storage: 2 rows\n  document_type: 'pdf', 'excel'\n  document_description: 'Client agreement', 'Investment analysis'\n  document_date: '2023-05-01', '2023-05-02'\n\ninvestment_transactions: 2 rows\n  transaction_type: 'buy', 'sell'\n  transaction_date: '2023-05-01', '2023-05-02'\n  amount: '50000.0', '25000.0'\n\ninvestment_types: 2 rows\n  investment_type_name: 'Open-Ended', 'Close-Ended'\n  investment_type_description: 'Investments that can be bought or sold at any time', 'Investments that can only be bought or sold at spe'\n  investment_type_id: '0', '1'\n\nmarket_data: 2 rows\n  market_date: '2023-05-01', '2023-05-02'\n  market_value: '1000.0', '500.0'\n  asset_class_id: '0', '1'\n\nmarket_trends: 2 rows\n  trend_description: 'Positive trend in income funds', 'Stable trend in infrastructure debt'\n  trend_impact: 'Positive', 'Neutral'\n  trend_start_date: '2023-01-01', '2023-02-01'\n\nmeetings: 2 rows\n  meeting_status: 'completed', 'scheduled'\n  meeting_notes: 'Discussed investment strategy', 'Reviewed risk profile'\n  meeting_date: '2023-05-03', '2023-05-04'\n\nnews_feed: 2 rows\n  news_title: 'Market Trends', 'Investment Insights'\n  news_description: 'Summary of market trends', 'Analysis of investment options'\n  news_date: '2023-05-01', '2023-05-02'\n\nnotifications: 2 rows\n  notification_type: 'email', 'in-app'\n  notification_description: 'New report available', 'Transaction confirmed'\n  notification_date: '2023-05-01', '2023-05-02'\n\npeer_group_data: 2 rows\n  peer_date: '2023-05-01', '2023-05-02'\n  peer_value: '1100.0', '550.0'\n  asset_class_id: '0', '1'\n\nreports: 2 rows\n  report_name: 'Q1 Performance Report', 'Q1 Risk Analysis Report'\n  report_type: 'performance', 'risk'\n  report_status: 'completed', 'pending'\n\nrisk_profiles: 2 rows\n  risk_level: 'Medium', 'Low'\n  risk_description: 'Moderate risk associated with income funds', 'Low risk associated with infrastructure debt'\n  risk_impact: 'Medium', 'Low'\n\nuser_roles: 2 rows\n  role_name: 'portfolio manager', 'financial analyst'\n  permissions: 'full access', 'view and analyze data'\n  created_at: '2023-01-01 12:00:00', '2023-01-02 12:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'portfolio manager', 'financial analyst'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "asset_classes": {
+        "rows": 2,
+        "sample_values": {
+          "asset_class_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_name": [
+            "INCOME",
+            "INFRA DEBT"
+          ],
+          "asset_class_description": [
+            "Investments in income-generating assets (e.g., bon",
+            "Investments in infrastructure debt (e.g., bonds, l"
+          ],
+          "asset_class_risk_level": [
+            "Medium",
+            "Low"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "asset_investments": {
+        "rows": 2,
+        "sample_values": {
+          "investment_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "1",
+            "0"
+          ],
+          "investment_type_id": [
+            "0"
+          ],
+          "number_of_investments": [
+            "404442",
+            "116967"
+          ],
+          "total_investment_amount": [
+            "528900000.0",
+            "144200000.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "asset_performance": {
+        "rows": 2,
+        "sample_values": {
+          "performance_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "1",
+            "0"
+          ],
+          "total_investment": [
+            "528900.0",
+            "1442.0"
+          ],
+          "percentage_of_total": [
+            "45.0",
+            "0.1"
+          ],
+          "return_on_investment": [
+            "0.07",
+            "0.02"
+          ],
+          "standard_deviation": [
+            "0.03",
+            "0.01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_trail": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "activity_type": [
+            "login",
+            "transaction"
+          ],
+          "activity_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "activity_description": [
+            "User logged in",
+            "User initiated transaction"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "benchmark_data": {
+        "rows": 2,
+        "sample_values": {
+          "benchmark_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "1"
+          ],
+          "benchmark_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "benchmark_value": [
+            "1200.0",
+            "600.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "client_accounts": {
+        "rows": 2,
+        "sample_values": {
+          "account_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "account_name": [
+            "Alice Johnson's Account",
+            "Bob Williams' Account"
+          ],
+          "balance": [
+            "1000000.0",
+            "500000.0"
+          ],
+          "account_type": [
+            "individual"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "collaboration": {
+        "rows": 2,
+        "sample_values": {
+          "collaboration_id": [
+            "0",
+            "1"
+          ],
+          "user_id_1": [
+            "1"
+          ],
+          "user_id_2": [
+            "1",
+            "0"
+          ],
+          "collaboration_date": [
+            "2023-05-05",
+            "2023-05-06"
+          ],
+          "collaboration_notes": [
+            "Discussed new investment opportunities",
+            "Reviewed market trends"
+          ],
+          "collaboration_status": [
+            "active",
+            "completed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "custom_basket_assets": {
+        "rows": 2,
+        "sample_values": {
+          "basket_asset_id": [
+            "0",
+            "1"
+          ],
+          "basket_id": [
+            "0"
+          ],
+          "asset_class_id": [
+            "1",
+            "0"
+          ],
+          "asset_weight": [
+            "0.4",
+            "0.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "custom_baskets": {
+        "rows": 2,
+        "sample_values": {
+          "basket_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "basket_name": [
+            "My Portfolio",
+            "My Watchlist"
+          ],
+          "basket_description": [
+            "Custom portfolio created by user",
+            "Custom watchlist created by user"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_storage": {
+        "rows": 2,
+        "sample_values": {
+          "document_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "document_type": [
+            "pdf",
+            "excel"
+          ],
+          "document_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "document_description": [
+            "Client agreement",
+            "Investment analysis"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "investment_transactions": {
+        "rows": 2,
+        "sample_values": {
+          "transaction_id": [
+            "0",
+            "1"
+          ],
+          "account_id": [
+            "1"
+          ],
+          "asset_class_id": [
+            "0",
+            "1"
+          ],
+          "investment_type_id": [
+            "1",
+            "0"
+          ],
+          "transaction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "amount": [
+            "50000.0",
+            "25000.0"
+          ],
+          "transaction_type": [
+            "buy",
+            "sell"
+          ],
+          "fees": [
+            "500.0",
+            "250.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "investment_types": {
+        "rows": 2,
+        "sample_values": {
+          "investment_type_id": [
+            "0",
+            "1"
+          ],
+          "investment_type_name": [
+            "Open-Ended",
+            "Close-Ended"
+          ],
+          "investment_type_description": [
+            "Investments that can be bought or sold at any time",
+            "Investments that can only be bought or sold at spe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "market_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "0",
+            "1"
+          ],
+          "market_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "market_value": [
+            "1000.0",
+            "500.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "market_trends": {
+        "rows": 2,
+        "sample_values": {
+          "trend_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "1",
+            "0"
+          ],
+          "trend_start_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "trend_end_date": [
+            "2023-03-31",
+            "2023-04-30"
+          ],
+          "trend_description": [
+            "Positive trend in income funds",
+            "Stable trend in infrastructure debt"
+          ],
+          "trend_impact": [
+            "Positive",
+            "Neutral"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "meetings": {
+        "rows": 2,
+        "sample_values": {
+          "meeting_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "client_id": [
+            "0",
+            "1"
+          ],
+          "meeting_date": [
+            "2023-05-03",
+            "2023-05-04"
+          ],
+          "meeting_duration": [
+            "30",
+            "45"
+          ],
+          "meeting_notes": [
+            "Discussed investment strategy",
+            "Reviewed risk profile"
+          ],
+          "meeting_status": [
+            "completed",
+            "scheduled"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "news_feed": {
+        "rows": 2,
+        "sample_values": {
+          "news_id": [
+            "0",
+            "1"
+          ],
+          "news_title": [
+            "Market Trends",
+            "Investment Insights"
+          ],
+          "news_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "news_description": [
+            "Summary of market trends",
+            "Analysis of investment options"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "notification_type": [
+            "email",
+            "in-app"
+          ],
+          "notification_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "notification_description": [
+            "New report available",
+            "Transaction confirmed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "peer_group_data": {
+        "rows": 2,
+        "sample_values": {
+          "peer_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "0",
+            "1"
+          ],
+          "peer_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "peer_value": [
+            "1100.0",
+            "550.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "report_name": [
+            "Q1 Performance Report",
+            "Q1 Risk Analysis Report"
+          ],
+          "report_type": [
+            "performance",
+            "risk"
+          ],
+          "report_date": [
+            "2023-04-01",
+            "2023-04-02"
+          ],
+          "report_status": [
+            "completed",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "risk_profiles": {
+        "rows": 2,
+        "sample_values": {
+          "risk_profile_id": [
+            "0",
+            "1"
+          ],
+          "asset_class_id": [
+            "0"
+          ],
+          "risk_level": [
+            "Medium",
+            "Low"
+          ],
+          "risk_description": [
+            "Moderate risk associated with income funds",
+            "Low risk associated with infrastructure debt"
+          ],
+          "risk_impact": [
+            "Medium",
+            "Low"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "portfolio manager",
+            "financial analyst"
+          ],
+          "permissions": [
+            "full access",
+            "view and analyze data"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "portfolio manager",
+            "financial analyst"
+          ],
+          "password": [
+            "password123"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

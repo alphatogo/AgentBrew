@@ -1,0 +1,221 @@
+{
+  "db_id": "dorm_1",
+  "source": "sparc",
+  "tables": 5,
+  "total_rows": 124,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#dorm_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Dorm\" {\n  \"dormid\" INTEGER\n  \"dorm_name\" TEXT\n  \"student_capacity\" INTEGER\n  \"gender\" TEXT\n}\n\nTable \"Dorm_amenity\" {\n  \"amenid\" INTEGER\n  \"amenity_name\" TEXT\n}\n\nTable \"Has_amenity\" {\n  \"dormid\" INTEGER\n  \"amenid\" INTEGER\n}\n\nTable \"Lives_in\" {\n  \"stuid\" INTEGER\n  \"dormid\" INTEGER\n  \"room_number\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\n\n\nRef: \"Has_amenity\".\"amenid\" > \"Dorm_amenity\".\"amenid\"\n\nRef: \"Has_amenity\".\"dormid\" > \"Dorm\".\"dormid\"\n\nRef: \"Lives_in\".\"dormid\" > \"Dorm\".\"dormid\"\n\nRef: \"Lives_in\".\"stuid\" > \"Student\".\"StuID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Dorm\" {\n  \"dormid\" INTEGER\n  \"dorm_name\" TEXT\n  \"student_capacity\" INTEGER\n  \"gender\" TEXT\n}\n\nTable \"Dorm_amenity\" {\n  \"amenid\" INTEGER\n  \"amenity_name\" TEXT\n}\n\nTable \"Has_amenity\" {\n  \"dormid\" INTEGER\n  \"amenid\" INTEGER\n}\n\nTable \"Lives_in\" {\n  \"stuid\" INTEGER\n  \"dormid\" INTEGER\n  \"room_number\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\nRef: \"Has_amenity\".\"amenid\" > \"Dorm_amenity\".\"amenid\"\n\nRef: \"Has_amenity\".\"dormid\" > \"Dorm\".\"dormid\"\n\nRef: \"Lives_in\".\"dormid\" > \"Dorm\".\"dormid\"\n\nRef: \"Lives_in\".\"stuid\" > \"Student\".\"StuID\"\n\n## Table Stats & Sample Values\n\nDorm: 7 rows\n  dorm_name: 'Smith Hall', 'Bud Jones Hall', 'Fawlty Towers', ...\n  student_capacity: '85', '116', '355', ...\n  gender: 'X', 'M', 'F'\n\nDorm_amenity: 12 rows\n  amenity_name: 'TV Lounge', 'Study Room', 'Pub in Basement', ...\n  amenid: '900', '901', '902', ...\n\nHas_amenity: 40 rows\n  dormid: '109', '104', '160', ...\n  amenid: '900', '901', '903', ...\n\nLives_in: 31 rows\n  room_number: '105', '112', '124', ...\n  stuid: '1001', '1002', '1003', ...\n  dormid: '109', '100', '140', ...\n\nStudent: 34 rows\n  LName: 'Smith', 'Kim', 'Jones', ...\n  Fname: 'Linda', 'Tracy', 'Shiela', ...\n  city_code: 'BAL', 'HKG', 'WAS', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#dorm_1",
+    "tableStats": {
+      "Dorm": {
+        "rows": 7,
+        "sample_values": {
+          "dormid": [
+            "100",
+            "110",
+            "140",
+            "160",
+            "109",
+            "117",
+            "104"
+          ],
+          "dorm_name": [
+            "Smith Hall",
+            "Bud Jones Hall",
+            "Fawlty Towers",
+            "Dorm-plex 2000",
+            "Anonymous Donor Hall",
+            "University Hovels",
+            "Grad Student Asylum"
+          ],
+          "student_capacity": [
+            "85",
+            "116",
+            "355",
+            "400",
+            "128",
+            "40",
+            "256"
+          ],
+          "gender": [
+            "X",
+            "M",
+            "F"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Dorm_amenity": {
+        "rows": 12,
+        "sample_values": {
+          "amenid": [
+            "900",
+            "901",
+            "902",
+            "903",
+            "904",
+            "930",
+            "931",
+            "932"
+          ],
+          "amenity_name": [
+            "TV Lounge",
+            "Study Room",
+            "Pub in Basement",
+            "Carpeted Rooms",
+            "4 Walls",
+            "Roof",
+            "Ethernet Ports",
+            "Air Conditioning"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Has_amenity": {
+        "rows": 40,
+        "sample_values": {
+          "dormid": [
+            "109",
+            "104",
+            "160",
+            "100",
+            "117",
+            "110",
+            "140"
+          ],
+          "amenid": [
+            "900",
+            "901",
+            "903",
+            "904",
+            "930",
+            "931",
+            "932",
+            "922"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Lives_in": {
+        "rows": 31,
+        "sample_values": {
+          "stuid": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1007",
+            "1008",
+            "1009"
+          ],
+          "dormid": [
+            "109",
+            "100",
+            "140",
+            "160",
+            "104",
+            "110",
+            "117"
+          ],
+          "room_number": [
+            "105",
+            "112",
+            "124",
+            "215",
+            "333",
+            "113",
+            "334",
+            "332"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student": {
+        "rows": 34,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "LName": [
+            "Smith",
+            "Kim",
+            "Jones",
+            "Kumar",
+            "Gompers",
+            "Schultz",
+            "Apap",
+            "Nelson"
+          ],
+          "Fname": [
+            "Linda",
+            "Tracy",
+            "Shiela",
+            "Dinesh",
+            "Paul",
+            "Andy",
+            "Lisa",
+            "Jandy"
+          ],
+          "Age": [
+            "18",
+            "19",
+            "21",
+            "20",
+            "26",
+            "17",
+            "22",
+            "16"
+          ],
+          "Sex": [
+            "F",
+            "M"
+          ],
+          "Major": [
+            "600",
+            "520",
+            "540",
+            "550",
+            "100",
+            "50"
+          ],
+          "Advisor": [
+            "1121",
+            "7712",
+            "7792",
+            "8423",
+            "1148",
+            "8918",
+            "9172",
+            "2192"
+          ],
+          "city_code": [
+            "BAL",
+            "HKG",
+            "WAS",
+            "CHI",
+            "YYZ",
+            "PIT",
+            "HOU",
+            "PHL"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

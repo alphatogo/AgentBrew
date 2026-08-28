@@ -1,0 +1,871 @@
+{
+  "db_id": "synthea",
+  "source": "bird",
+  "tables": 11,
+  "total_rows": 170810,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#synthea",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"all_prevalences\" {\n  \"ITEM\" TEXT [pk]\n  \"POPULATION TYPE\" TEXT\n  \"OCCURRENCES\" INTEGER\n  \"POPULATION COUNT\" INTEGER\n  \"PREVALENCE RATE\" REAL\n  \"PREVALENCE PERCENTAGE\" REAL\n}\n\nTable \"allergies\" {\n  \"START\" TEXT\n  \"STOP\" TEXT\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"careplans\" {\n  \"ID\" TEXT\n  \"START\" DATE\n  \"STOP\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" REAL\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"claims\" {\n  \"ID\" TEXT [pk]\n  \"PATIENT\" TEXT\n  \"BILLABLEPERIOD\" DATE\n  \"ORGANIZATION\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"DIAGNOSIS\" TEXT\n  \"TOTAL\" INTEGER\n}\n\nTable \"conditions\" {\n  \"START\" DATE\n  \"STOP\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"encounters\" {\n  \"ID\" TEXT [pk]\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"immunizations\" {\n  \"DATE\" DATE [pk]\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"medications\" {\n  \"START\" DATE [pk]\n  \"STOP\" DATE\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"observations\" {\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" TEXT\n  \"DESCRIPTION\" TEXT\n  \"VALUE\" REAL\n  \"UNITS\" TEXT\n}\n\nTable \"patients\" {\n  \"patient\" TEXT [pk]\n  \"birthdate\" DATE\n  \"deathdate\" DATE\n  \"ssn\" TEXT\n  \"drivers\" TEXT\n  \"passport\" TEXT\n  \"prefix\" TEXT\n  \"first\" TEXT\n  \"last\" TEXT\n  \"suffix\" TEXT\n  \"maiden\" TEXT\n  \"marital\" TEXT\n  \"race\" TEXT\n  \"ethnicity\" TEXT\n  \"gender\" TEXT\n  \"birthplace\" TEXT\n  \"address\" TEXT\n}\n\nTable \"procedures\" {\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\n\n\nRef: \"encounters\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"allergies\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"allergies\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"careplans\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"careplans\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"conditions\".\"DESCRIPTION\" > \"all_prevalences\".\"ITEM\"\n\nRef: \"conditions\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"conditions\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"immunizations\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"immunizations\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"medications\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"medications\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"observations\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"observations\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"procedures\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"procedures\".\"ENCOUNTER\" > \"encounters\".\"ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"all_prevalences\" {\n  \"ITEM\" TEXT [pk]\n  \"POPULATION TYPE\" TEXT\n  \"OCCURRENCES\" INTEGER\n  \"POPULATION COUNT\" INTEGER\n  \"PREVALENCE RATE\" REAL\n  \"PREVALENCE PERCENTAGE\" REAL\n}\n\nTable \"allergies\" {\n  \"START\" TEXT\n  \"STOP\" TEXT\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"careplans\" {\n  \"ID\" TEXT\n  \"START\" DATE\n  \"STOP\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" REAL\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"claims\" {\n  \"ID\" TEXT [pk]\n  \"PATIENT\" TEXT\n  \"BILLABLEPERIOD\" DATE\n  \"ORGANIZATION\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"DIAGNOSIS\" TEXT\n  \"TOTAL\" INTEGER\n}\n\nTable \"conditions\" {\n  \"START\" DATE\n  \"STOP\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"encounters\" {\n  \"ID\" TEXT [pk]\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"immunizations\" {\n  \"DATE\" DATE [pk]\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n}\n\nTable \"medications\" {\n  \"START\" DATE [pk]\n  \"STOP\" DATE\n  \"PATIENT\" TEXT [pk]\n  \"ENCOUNTER\" TEXT [pk]\n  \"CODE\" INTEGER [pk]\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nTable \"observations\" {\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" TEXT\n  \"DESCRIPTION\" TEXT\n  \"VALUE\" REAL\n  \"UNITS\" TEXT\n}\n\nTable \"patients\" {\n  \"patient\" TEXT [pk]\n  \"birthdate\" DATE\n  \"deathdate\" DATE\n  \"ssn\" TEXT\n  \"drivers\" TEXT\n  \"passport\" TEXT\n  \"prefix\" TEXT\n  \"first\" TEXT\n  \"last\" TEXT\n  \"suffix\" TEXT\n  \"maiden\" TEXT\n  \"marital\" TEXT\n  \"race\" TEXT\n  \"ethnicity\" TEXT\n  \"gender\" TEXT\n  \"birthplace\" TEXT\n  \"address\" TEXT\n}\n\nTable \"procedures\" {\n  \"DATE\" DATE\n  \"PATIENT\" TEXT\n  \"ENCOUNTER\" TEXT\n  \"CODE\" INTEGER\n  \"DESCRIPTION\" TEXT\n  \"REASONCODE\" INTEGER\n  \"REASONDESCRIPTION\" TEXT\n}\n\nRef: \"encounters\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"allergies\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"allergies\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"careplans\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"careplans\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"conditions\".\"DESCRIPTION\" > \"all_prevalences\".\"ITEM\"\n\nRef: \"conditions\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"conditions\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"immunizations\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"immunizations\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"medications\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"medications\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"observations\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"observations\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\nRef: \"procedures\".\"PATIENT\" > \"patients\".\"patient\"\n\nRef: \"procedures\".\"ENCOUNTER\" > \"encounters\".\"ID\"\n\n## Table Stats & Sample Values\n\nall_prevalences: 244 rows\n  POPULATION TYPE: 'LIVING'\n  OCCURRENCES: '868', '487', '117', ...\n  PREVALENCE RATE: '0.868', '0.487', '0.117', ...\n\nallergies: 572 rows\n  DESCRIPTION: 'Allergy to dairy product', 'Allergy to tree pollen', 'Allergy to grass pollen', ...\n  START: '3/11/95', '6/15/58', '11/14/12', ...\n  STOP: '12/22/14', '4/21/10', '10/15/11', ...\n\ncareplans: 10000 rows\n  DESCRIPTION: 'Respiratory therapy', 'Recommendation to avoid exercise', 'Deep breathing and coughing exercises', ...\n  REASONDESCRIPTION: 'Acute bronchitis (disorder)', 'Cystitis', 'Normal pregnancy', ...\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', 'c2caaace-9119-4b2d-a2c3-4040f5a9cf32', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', ...\n\nclaims: 10000 rows\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', 'c2caaace-9119-4b2d-a2c3-4040f5a9cf32', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', ...\n  ENCOUNTER: '71949668-1c2e-43ae-ab0a-64654608defb', 'c2caaace-9119-4b2d-a2c3-4040f5a9cf32', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', ...\n  BILLABLEPERIOD: '2008-03-11', '2009-01-11', '2009-04-07', ...\n\nconditions: 7040 rows\n  DESCRIPTION: 'Acute bronchitis (disorder)', 'Cystitis', 'Normal pregnancy', ...\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', 'c2caaace-9119-4b2d-a2c3-4040f5a9cf32', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', ...\n  ENCOUNTER: '4d451e22-a354-40c9-8b33-b6126158666d', 'bed7ecff-b41c-422b-beac-ea00c8b02837', '6f2e3935-b203-493e-a9c0-f23e847b9798', ...\n\nencounters: 10000 rows\n  DESCRIPTION: 'Outpatient Encounter', 'Encounter for symptom', 'Consultation for treatment', ...\n  REASONDESCRIPTION: 'Acute bronchitis (disorder)', 'Cystitis', 'Normal pregnancy', ...\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', 'c2caaace-9119-4b2d-a2c3-4040f5a9cf32', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', ...\n\nimmunizations: 10000 rows\n  DESCRIPTION: 'Influenza seasonal injectable preservative free', 'Td (adult) preservative free', 'meningococcal MCV4P', ...\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', '79266ca2-b4e3-45e5-af65-7914bd4511a0', ...\n  ENCOUNTER: '5114a5b4-64b8-47b2-82a6-0ce24aae0943', 'bdb926b8-5b6d-4366-bbe9-76fe3f3fbc4f', '36796523-2672-4680-84c5-2d9a2b080ddb', ...\n\nmedications: 6048 rows\n  REASONDESCRIPTION: 'Streptococcal sore throat (disorder)', 'Acute bronchitis (disorder)', 'Cystitis', ...\n  DESCRIPTION: 'Penicillin V Potassium 250 MG', 'NuvaRing 0.12/0.015 MG per 24HR 21 Day Vaginal Rin', 'Acetaminophen 160 MG', ...\n  STOP: '2008-06-04', '2009-01-21', '2011-06-04', ...\n\nobservations: 10000 rows\n  DESCRIPTION: 'Body Height', 'Body Weight', 'Body Mass Index', ...\n  CODE: '8302-2', '29463-7', '39156-5', ...\n  UNITS: 'cm', 'kg', 'kg/m2', ...\n\npatients: 1462 rows\n  ethnicity: 'dominican', 'american', 'african', ...\n  ssn: '999-78-5976', '999-59-9186', '999-43-3780', ...\n  drivers: 'S99992928', 'S99975961', 'S99997003', ...\n\nprocedures: 10000 rows\n  REASONDESCRIPTION: 'Acute bronchitis (disorder)', 'Normal pregnancy', 'Fracture of rib', ...\n  DESCRIPTION: 'Measurement of respiratory function (procedure)', 'Standard pregnancy test', 'Augmentation of labor', ...\n  PATIENT: '71949668-1c2e-43ae-ab0a-64654608defb', '96b24072-e1fe-49cd-a22a-6dfb92c3994c', '79266ca2-b4e3-45e5-af65-7914bd4511a0', ...",
+    "stateUrl": "https://bird-bench.github.io/#synthea",
+    "tableStats": {
+      "all_prevalences": {
+        "rows": 244,
+        "sample_values": {
+          "ITEM": [
+            "Viral Sinusitis (Disorder)",
+            "Streptococcal Sore Throat (Disorder)",
+            "Laceration Of Thigh",
+            "Acute Viral Pharyngitis (Disorder)",
+            "Acute Bronchitis (Disorder)",
+            "Cystitis",
+            "Normal Pregnancy",
+            "Escherichia Coli Urinary Tract Infection"
+          ],
+          "POPULATION TYPE": [
+            "LIVING"
+          ],
+          "OCCURRENCES": [
+            "868",
+            "487",
+            "117",
+            "772",
+            "749",
+            "58",
+            "340",
+            "78"
+          ],
+          "POPULATION COUNT": [
+            "1000"
+          ],
+          "PREVALENCE RATE": [
+            "0.868",
+            "0.487",
+            "0.117",
+            "0.772",
+            "0.749",
+            "0.058",
+            "0.34",
+            "0.078"
+          ],
+          "PREVALENCE PERCENTAGE": [
+            "86.8",
+            "48.7",
+            "11.7",
+            "77.2",
+            "74.9",
+            "5.8",
+            "34.0",
+            "7.8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "allergies": {
+        "rows": 572,
+        "sample_values": {
+          "START": [
+            "3/11/95",
+            "6/15/58",
+            "11/14/12",
+            "2/5/31",
+            "11/4/11",
+            "3/13/20",
+            "1/10/98",
+            "1/8/88"
+          ],
+          "STOP": [
+            "12/22/14",
+            "4/21/10",
+            "10/15/11",
+            "3/17/10",
+            "5/26/08",
+            "8/31/14",
+            "7/18/14",
+            "11/6/08"
+          ],
+          "PATIENT": [
+            "ab6d8296-d3c7-4fef-9215-40b156db67ac",
+            "629b8fc9-0eb7-4576-b296-088e9b271941",
+            "10fd692e-fdef-4aa6-b010-8a95005b59f1",
+            "5f615f2b-efb7-4032-8c88-dea2dc2eacbb",
+            "9fb519d6-fd96-4dc2-8444-803c6677c7e3",
+            "4d90611b-cb87-433c-81e4-a35ac74b909d",
+            "2ff59946-e6d0-492e-8704-a98296eedd4c",
+            "1d0e18c5-b47c-4196-b1d4-93b141098ae1"
+          ],
+          "ENCOUNTER": [
+            "9d87c22d-a777-426b-b020-cfa469229f82",
+            "baddd467-ebd9-4ebc-bed4-31303ba21553",
+            "ff93f6e3-f381-42e0-8183-c23dcd24bfe5",
+            "adfcd316-7421-4e5c-a3c5-515b5c16d35b",
+            "b44d5fca-05e1-44e7-9a54-a555fb5d5d6c",
+            "69000199-d09f-458b-a459-004e70328192",
+            "4c9d4a1d-a970-46c6-ac61-71ca03a5786b",
+            "273d3878-e990-4093-a261-9593886ba01c"
+          ],
+          "CODE": [
+            "425525006",
+            "419263009",
+            "418689008",
+            "232347008",
+            "232350006",
+            "419474003",
+            "424213003",
+            "300913006"
+          ],
+          "DESCRIPTION": [
+            "Allergy to dairy product",
+            "Allergy to tree pollen",
+            "Allergy to grass pollen",
+            "Dander (animal) allergy",
+            "House dust mite allergy",
+            "Allergy to mould",
+            "Allergy to bee venom",
+            "Shellfish allergy"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "careplans": {
+        "rows": 10000,
+        "sample_values": {
+          "ID": [
+            "e031962d-d13d-4ede-a449-040417d5e4fb",
+            "26b879b7-0066-4bd6-b59c-099909720155",
+            "1f581c09-aab1-46dc-94cc-4b4295514d2b",
+            "1cac346e-109c-4b69-af3e-d1730bbb496b",
+            "56ee4bb5-bb70-4b95-b2be-2751cf4d5924",
+            "2d10bc1b-a823-4fc5-8086-12ca5288c299",
+            "bb4bb87a-5e85-4f10-b7dc-efcbcc40a877",
+            "337b3fd3-9114-4a58-9483-32f8dd29c0f2"
+          ],
+          "START": [
+            "2009-01-11",
+            "2010-10-16",
+            "2013-02-09",
+            "2013-10-19",
+            "2017-01-19",
+            "1987-02-03",
+            "1986-04-05",
+            "2010-06-22"
+          ],
+          "STOP": [
+            "2009-04-07",
+            "2010-10-23",
+            "2015-05-03",
+            "2014-05-17",
+            "2017-02-02",
+            "2010-09-22",
+            "2013-10-28",
+            "2016-07-18"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "ENCOUNTER": [
+            "4d451e22-a354-40c9-8b33-b6126158666d",
+            "bed7ecff-b41c-422b-beac-ea00c8b02837",
+            "6f2e3935-b203-493e-a9c0-f23e847b9798",
+            "da4fd626-e74e-4930-91be-7fb3da7ea098",
+            "1c93058f-eeb2-4659-a712-74e183877e9a",
+            "c35264e2-404f-4890-adc7-b5ce85e3901f",
+            "4e7beaee-50c2-4609-8a2b-b32fb3dc5a3b",
+            "24293a59-d876-418c-9630-8e4f3731bd70"
+          ],
+          "CODE": [
+            "53950000.0",
+            "304510005.0",
+            "371605008.0",
+            "869761000000107.0",
+            "223472008.0",
+            "171245007.0",
+            "134435003.0",
+            "135892000.0"
+          ],
+          "DESCRIPTION": [
+            "Respiratory therapy",
+            "Recommendation to avoid exercise",
+            "Deep breathing and coughing exercises",
+            "Urinary tract infection care",
+            "Discussion about hygiene",
+            "Urine screening",
+            "Routine antenatal care",
+            "Antenatal education"
+          ],
+          "REASONCODE": [
+            "10509002",
+            "38822007",
+            "72892002",
+            "301011002",
+            "423121009",
+            "15777000",
+            "33737001",
+            "185086009"
+          ],
+          "REASONDESCRIPTION": [
+            "Acute bronchitis (disorder)",
+            "Cystitis",
+            "Normal pregnancy",
+            "Escherichia coli urinary tract infection",
+            "Non-small cell carcinoma of lung TNM stage 4 (diso",
+            "Prediabetes",
+            "Fracture of rib",
+            "Chronic obstructive bronchitis (disorder)"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "claims": {
+        "rows": 10000,
+        "sample_values": {
+          "ID": [
+            "1a9e880e-27a1-4465-8adc-222b1996a14a",
+            "46c0f5f1-a926-4837-84d8-0603fad8a46f",
+            "b532157d-4056-436b-963d-6445523ed9b3",
+            "8bf9cfff-00e5-4714-9d71-927752c71f08",
+            "5ef9ef1b-6ec5-4cb8-a125-2dcc310bc654",
+            "e931b839-ce10-48cb-8f9f-f284c22e8c69",
+            "7e9ca597-b7dc-499f-ac08-508f3c0cbb0d",
+            "27e20ff7-7ba5-4b21-b6c4-43fd5411aed5"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "BILLABLEPERIOD": [
+            "2008-03-11",
+            "2009-01-11",
+            "2009-04-07",
+            "2010-06-04",
+            "2010-10-16",
+            "2012-07-02",
+            "2013-02-09",
+            "2013-10-19"
+          ],
+          "ORGANIZATION": [
+            "temp organization"
+          ],
+          "ENCOUNTER": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "TOTAL": [
+            "100"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "conditions": {
+        "rows": 7040,
+        "sample_values": {
+          "START": [
+            "2009-01-08",
+            "2010-10-16",
+            "2013-02-07",
+            "2013-10-19",
+            "2014-01-28",
+            "2017-01-19",
+            "1987-01-19",
+            "1987-01-31"
+          ],
+          "STOP": [
+            "2009-01-21",
+            "2010-10-23",
+            "2013-02-27",
+            "2014-05-17",
+            "2014-02-10",
+            "2017-02-02",
+            "2010-09-22",
+            "2013-05-15"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "ENCOUNTER": [
+            "4d451e22-a354-40c9-8b33-b6126158666d",
+            "bed7ecff-b41c-422b-beac-ea00c8b02837",
+            "6f2e3935-b203-493e-a9c0-f23e847b9798",
+            "da4fd626-e74e-4930-91be-7fb3da7ea098",
+            "b2e12445-b771-4738-944b-95cf6bbe76eb",
+            "1c93058f-eeb2-4659-a712-74e183877e9a",
+            "c35264e2-404f-4890-adc7-b5ce85e3901f",
+            "4e7beaee-50c2-4609-8a2b-b32fb3dc5a3b"
+          ],
+          "CODE": [
+            "10509002",
+            "38822007",
+            "72892002",
+            "195662009",
+            "301011002",
+            "162573006",
+            "254637007",
+            "423121009"
+          ],
+          "DESCRIPTION": [
+            "Acute bronchitis (disorder)",
+            "Cystitis",
+            "Normal pregnancy",
+            "Acute viral pharyngitis (disorder)",
+            "Escherichia coli urinary tract infection",
+            "Suspected lung cancer (situation)",
+            "Non-small cell lung cancer (disorder)",
+            "Non-small cell carcinoma of lung TNM stage 4 (diso"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "encounters": {
+        "rows": 10000,
+        "sample_values": {
+          "ID": [
+            "5114a5b4-64b8-47b2-82a6-0ce24aae0943",
+            "4d451e22-a354-40c9-8b33-b6126158666d",
+            "bdb926b8-5b6d-4366-bbe9-76fe3f3fbc4f",
+            "f45c623f-a5e7-47a0-8cce-cfe19d16c47a",
+            "bed7ecff-b41c-422b-beac-ea00c8b02837",
+            "36796523-2672-4680-84c5-2d9a2b080ddb",
+            "6f2e3935-b203-493e-a9c0-f23e847b9798",
+            "da4fd626-e74e-4930-91be-7fb3da7ea098"
+          ],
+          "DATE": [
+            "2008-03-11",
+            "2009-01-11",
+            "2009-04-07",
+            "2010-06-04",
+            "2010-10-16",
+            "2012-07-02",
+            "2013-02-09",
+            "2013-10-19"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "CODE": [
+            "185349003",
+            "185345009",
+            "698314001",
+            "424441002",
+            "424619006",
+            "183460006",
+            "308646001",
+            "50849002"
+          ],
+          "DESCRIPTION": [
+            "Outpatient Encounter",
+            "Encounter for symptom",
+            "Consultation for treatment",
+            "Prenatal initial visit",
+            "Prenatal visit",
+            "Obstetric emergency hospital admission",
+            "Death Certification",
+            "Encounter for 'check-up'"
+          ],
+          "REASONCODE": [
+            "10509002",
+            "38822007",
+            "72892002",
+            "195662009",
+            "301011002",
+            "33737001",
+            "444814009",
+            "65966004"
+          ],
+          "REASONDESCRIPTION": [
+            "Acute bronchitis (disorder)",
+            "Cystitis",
+            "Normal pregnancy",
+            "Acute viral pharyngitis (disorder)",
+            "Escherichia coli urinary tract infection",
+            "Fracture of rib",
+            "Viral sinusitis (disorder)",
+            "Fracture of forearm"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "immunizations": {
+        "rows": 10000,
+        "sample_values": {
+          "DATE": [
+            "2008-03-11",
+            "2009-04-07",
+            "2012-07-02",
+            "2015-05-03",
+            "2008-06-02",
+            "2009-05-15",
+            "2010-05-06",
+            "2011-06-02"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "00630ce3-e8eb-4ed4-889b-2c0ac257cbf4",
+            "2c884d0f-62a1-4371-becc-36a98cdc4f52",
+            "b545c170-d612-420b-8540-23b6ceaf904d"
+          ],
+          "ENCOUNTER": [
+            "5114a5b4-64b8-47b2-82a6-0ce24aae0943",
+            "bdb926b8-5b6d-4366-bbe9-76fe3f3fbc4f",
+            "36796523-2672-4680-84c5-2d9a2b080ddb",
+            "323e1478-fdbf-4904-80a6-2b7e4526fc22",
+            "4e7beaee-50c2-4609-8a2b-b32fb3dc5a3b",
+            "cac10621-ec28-427c-bb64-366874c07579",
+            "03d2235c-ec8a-448d-a5d4-2958a77ca5ce",
+            "4bed31f0-5a1e-4124-a3c5-4e3c34b13e88"
+          ],
+          "CODE": [
+            "140",
+            "113",
+            "114",
+            "115",
+            "62",
+            "8",
+            "119",
+            "20"
+          ],
+          "DESCRIPTION": [
+            "Influenza seasonal injectable preservative free",
+            "Td (adult) preservative free",
+            "meningococcal MCV4P",
+            "Tdap",
+            "HPV quadrivalent",
+            "Hep B adolescent or pediatric",
+            "rotavirus monovalent",
+            "DTaP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "medications": {
+        "rows": 6048,
+        "sample_values": {
+          "START": [
+            "1988-09-05",
+            "2007-06-04",
+            "2009-01-11",
+            "2010-06-04",
+            "2010-10-16",
+            "2013-02-09",
+            "2016-06-04",
+            "2017-01-19"
+          ],
+          "STOP": [
+            "2008-06-04",
+            "2009-01-21",
+            "2011-06-04",
+            "2010-10-23",
+            "2013-02-27",
+            "2017-06-04",
+            "2017-01-26",
+            "2017-02-02"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "ENCOUNTER": [
+            "5114a5b4-64b8-47b2-82a6-0ce24aae0943",
+            "4d451e22-a354-40c9-8b33-b6126158666d",
+            "f45c623f-a5e7-47a0-8cce-cfe19d16c47a",
+            "bed7ecff-b41c-422b-beac-ea00c8b02837",
+            "6f2e3935-b203-493e-a9c0-f23e847b9798",
+            "8ae1f76d-fdf1-40b7-9c9d-66b530701d9d",
+            "1c93058f-eeb2-4659-a712-74e183877e9a",
+            "23c293ec-dbae-4a22-896e-f12cf3c8bac3"
+          ],
+          "CODE": [
+            "834060",
+            "1367439",
+            "608680",
+            "748879",
+            "568530",
+            "1094108",
+            "1020137",
+            "1111011"
+          ],
+          "DESCRIPTION": [
+            "Penicillin V Potassium 250 MG",
+            "NuvaRing 0.12/0.015 MG per 24HR 21 Day Vaginal Rin",
+            "Acetaminophen 160 MG",
+            "Levora 0.15/30 28 Day Pack",
+            "Nitrofurantoin 5 MG/ML [Furadantin]",
+            "Phenazopyridine hydrochloride 100 MG [Pyridium]",
+            "Dextromethorphan Hydrobromide 1 MG/ML",
+            "Nexplanon 68 MG Drug Implant"
+          ],
+          "REASONCODE": [
+            "43878008",
+            "10509002",
+            "38822007",
+            "301011002",
+            "44054006",
+            "185086009",
+            "239872002",
+            "233678006"
+          ],
+          "REASONDESCRIPTION": [
+            "Streptococcal sore throat (disorder)",
+            "Acute bronchitis (disorder)",
+            "Cystitis",
+            "Escherichia coli urinary tract infection",
+            "Diabetes",
+            "Chronic obstructive bronchitis (disorder)",
+            "Osteoarthritis of hip",
+            "Childhood asthma"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "observations": {
+        "rows": 10000,
+        "sample_values": {
+          "DATE": [
+            "2008-03-11",
+            "2009-04-07",
+            "2012-07-02",
+            "2014-02-01",
+            "2015-05-03",
+            "2017-10-31",
+            "1987-11-06",
+            "2008-06-02"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "c2caaace-9119-4b2d-a2c3-4040f5a9cf32",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "de43eb48-496c-46d4-8c5b-be6125a38c15",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "443a0255-5584-45d9-93ca-9174f1d45f03"
+          ],
+          "ENCOUNTER": [
+            "5114a5b4-64b8-47b2-82a6-0ce24aae0943",
+            "bdb926b8-5b6d-4366-bbe9-76fe3f3fbc4f",
+            "36796523-2672-4680-84c5-2d9a2b080ddb",
+            "b2e12445-b771-4738-944b-95cf6bbe76eb",
+            "323e1478-fdbf-4904-80a6-2b7e4526fc22",
+            "c35264e2-404f-4890-adc7-b5ce85e3901f",
+            "4e7beaee-50c2-4609-8a2b-b32fb3dc5a3b",
+            "cac10621-ec28-427c-bb64-366874c07579"
+          ],
+          "CODE": [
+            "8302-2",
+            "29463-7",
+            "39156-5",
+            "8480-6",
+            "8462-4",
+            "8331-1",
+            "273724008",
+            "273421001"
+          ],
+          "DESCRIPTION": [
+            "Body Height",
+            "Body Weight",
+            "Body Mass Index",
+            "Systolic Blood Pressure",
+            "Diastolic Blood Pressure",
+            "Oral temperature",
+            "Quality adjusted life years",
+            "Disability rating scale"
+          ],
+          "VALUE": [
+            "166.03",
+            "54.42",
+            "19.74",
+            "139.0",
+            "89.0",
+            "166.04",
+            "55.94",
+            "20.29"
+          ],
+          "UNITS": [
+            "cm",
+            "kg",
+            "kg/m2",
+            "mmHg",
+            "Cel",
+            "years",
+            "%",
+            "mg/dL"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "patients": {
+        "rows": 1462,
+        "sample_values": {
+          "patient": [
+            "4ee2c837-e60f-4c54-9fdf-8686bc70760b",
+            "efaf74f9-3de3-45dd-a5d5-26d08e8a3190",
+            "aaa4c718-2f48-4c13-9ad0-d287cf280824",
+            "a1851c06-804e-4f31-9d8f-388cd52d4ad0",
+            "48074b70-4db4-4ab0-b9e8-361bd2ba6216",
+            "a4a67345-d7e5-4246-8e06-ed043a9764e2",
+            "53244745-9198-41c8-83b7-1647d98cc618",
+            "90ab3acb-46b7-40d2-b66c-a04022cee236"
+          ],
+          "birthdate": [
+            "1929-04-08",
+            "2016-12-15",
+            "1943-11-28",
+            "1954-10-22",
+            "1935-04-08",
+            "1936-02-02",
+            "1938-03-02",
+            "1936-12-21"
+          ],
+          "deathdate": [
+            "2029-11-11",
+            "2020-02-19",
+            "2017-10-22",
+            "2017-10-13",
+            "2017-09-06",
+            "2017-09-03",
+            "2017-08-02",
+            "2017-07-31"
+          ],
+          "ssn": [
+            "999-78-5976",
+            "999-59-9186",
+            "999-43-3780",
+            "999-53-5542",
+            "999-34-8549",
+            "999-53-8873",
+            "999-10-3260",
+            "999-34-7173"
+          ],
+          "drivers": [
+            "S99992928",
+            "S99975961",
+            "S99997003",
+            "S99969847",
+            "S99992575",
+            "S99934663",
+            "S99977281",
+            "S99995636"
+          ],
+          "passport": [
+            "FALSE",
+            "X98167138X",
+            "X65866752X",
+            "X69163281X",
+            "X33467772X",
+            "X87852092X",
+            "X76769314X",
+            "X91693117X"
+          ],
+          "prefix": [
+            "Mr.",
+            "Mrs.",
+            "Ms."
+          ],
+          "first": [
+            "Rosamaria",
+            "Loan",
+            "Angelo",
+            "Cami",
+            "Giovanni",
+            "Kendrick",
+            "Major",
+            "Maurine"
+          ],
+          "last": [
+            "Pfannerstill",
+            "Bashirian",
+            "Buckridge",
+            "Terry",
+            "Russel",
+            "Watsica",
+            "D'Amore",
+            "Kling"
+          ],
+          "suffix": [
+            "PhD",
+            "JD",
+            "MD"
+          ],
+          "maiden": [
+            "Schuster",
+            "Schaden",
+            "Brekke",
+            "Murazik",
+            "Waelchi",
+            "Goodwin",
+            "Wisoky",
+            "Hudson"
+          ],
+          "marital": [
+            "S",
+            "M"
+          ],
+          "race": [
+            "black",
+            "white",
+            "hispanic",
+            "asian"
+          ],
+          "ethnicity": [
+            "dominican",
+            "american",
+            "african",
+            "english",
+            "puerto_rican",
+            "german",
+            "irish",
+            "italian"
+          ],
+          "gender": [
+            "F",
+            "M"
+          ],
+          "birthplace": [
+            "Pittsfield MA US",
+            "Medford MA US",
+            "Framingham MA US",
+            "Hudson MA US",
+            "Westfield MA US",
+            "Beverly MA US",
+            "Brockton MA US",
+            "Agawam Town MA US"
+          ],
+          "address": [
+            "18797 Karson Burgs Suite 444 Palmer Town MA 01069 ",
+            "301 Eula Radial Suite 298 Brockton MA 02305 US",
+            "8693 Fred Crossroad New Bedford MA 02746 US",
+            "344 Olson Road Apt. 936 Attleboro MA 02703 US",
+            "5780 Corwin Trafficway Dartmouth MA 02714 US",
+            "867 Gust Vista Apt. 630 Haverhill MA 01833 US",
+            "9089 McClure Junctions Apt. 246 Boston MA 02121 US",
+            "6272 Gottlieb Road Suite 292 Brockton MA 02301 US"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "procedures": {
+        "rows": 10000,
+        "sample_values": {
+          "DATE": [
+            "2013-02-09",
+            "2013-10-19",
+            "2014-05-17",
+            "2016-06-04",
+            "2009-05-15",
+            "2009-08-09",
+            "2010-06-22",
+            "2011-06-02"
+          ],
+          "PATIENT": [
+            "71949668-1c2e-43ae-ab0a-64654608defb",
+            "96b24072-e1fe-49cd-a22a-6dfb92c3994c",
+            "79266ca2-b4e3-45e5-af65-7914bd4511a0",
+            "31410948-38be-4990-be5e-a47ab44f33a1",
+            "b1943aad-500b-4b22-8da8-b4d9c667c763",
+            "00630ce3-e8eb-4ed4-889b-2c0ac257cbf4",
+            "2c884d0f-62a1-4371-becc-36a98cdc4f52",
+            "b545c170-d612-420b-8540-23b6ceaf904d"
+          ],
+          "ENCOUNTER": [
+            "6f2e3935-b203-493e-a9c0-f23e847b9798",
+            "da4fd626-e74e-4930-91be-7fb3da7ea098",
+            "988f02a3-bf7e-485a-8d26-3378ddc9524c",
+            "8ae1f76d-fdf1-40b7-9c9d-66b530701d9d",
+            "cac10621-ec28-427c-bb64-366874c07579",
+            "a27de598-e828-46a7-b8eb-398304295def",
+            "24293a59-d876-418c-9630-8e4f3731bd70",
+            "4bed31f0-5a1e-4124-a3c5-4e3c34b13e88"
+          ],
+          "CODE": [
+            "23426006",
+            "252160004",
+            "237001001",
+            "11466000",
+            "169553002",
+            "428191000124101",
+            "73761001",
+            "274474001"
+          ],
+          "DESCRIPTION": [
+            "Measurement of respiratory function (procedure)",
+            "Standard pregnancy test",
+            "Augmentation of labor",
+            "Cesarean section",
+            "Insertion of subcutaneous contraceptive",
+            "Documentation of current medications",
+            "Colonoscopy",
+            "Bone immobilization"
+          ],
+          "REASONCODE": [
+            "10509002",
+            "72892002",
+            "33737001",
+            "284549007",
+            "65966004",
+            "192127007",
+            "195662009",
+            "58150001"
+          ],
+          "REASONDESCRIPTION": [
+            "Acute bronchitis (disorder)",
+            "Normal pregnancy",
+            "Fracture of rib",
+            "Laceration of hand",
+            "Fracture of forearm",
+            "Child attention deficit disorder",
+            "Acute viral pharyngitis (disorder)",
+            "Fracture of clavicle"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

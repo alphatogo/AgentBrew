@@ -1,0 +1,951 @@
+{
+  "db_id": "card_games",
+  "source": "bird_dev",
+  "tables": 6,
+  "total_rows": 803445,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#card_games",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"cards\" {\n  \"id\" INTEGER [pk, not null]\n  \"artist\" TEXT\n  \"asciiName\" TEXT\n  \"availability\" TEXT\n  \"borderColor\" TEXT\n  \"cardKingdomFoilId\" TEXT\n  \"cardKingdomId\" TEXT\n  \"colorIdentity\" TEXT\n  \"colorIndicator\" TEXT\n  \"colors\" TEXT\n  \"convertedManaCost\" REAL\n  \"duelDeck\" TEXT\n  \"edhrecRank\" INTEGER\n  \"faceConvertedManaCost\" REAL\n  \"faceName\" TEXT\n  \"flavorName\" TEXT\n  \"flavorText\" TEXT\n  \"frameEffects\" TEXT\n  \"frameVersion\" TEXT\n  \"hand\" TEXT\n  \"hasAlternativeDeckLimit\" INTEGER [not null]\n  \"hasContentWarning\" INTEGER [not null]\n  \"hasFoil\" INTEGER [not null]\n  \"hasNonFoil\" INTEGER [not null]\n  \"isAlternative\" INTEGER [not null]\n  \"isFullArt\" INTEGER [not null]\n  \"isOnlineOnly\" INTEGER [not null]\n  \"isOversized\" INTEGER [not null]\n  \"isPromo\" INTEGER [not null]\n  \"isReprint\" INTEGER [not null]\n  \"isReserved\" INTEGER [not null]\n  \"isStarter\" INTEGER [not null]\n  \"isStorySpotlight\" INTEGER [not null]\n  \"isTextless\" INTEGER [not null]\n  \"isTimeshifted\" INTEGER [not null]\n  \"keywords\" TEXT\n  \"layout\" TEXT\n  \"leadershipSkills\" TEXT\n  \"life\" TEXT\n  \"loyalty\" TEXT\n  \"manaCost\" TEXT\n  \"mcmId\" TEXT\n  \"mcmMetaId\" TEXT\n  \"mtgArenaId\" TEXT\n  \"mtgjsonV4Id\" TEXT\n  \"mtgoFoilId\" TEXT\n  \"mtgoId\" TEXT\n  \"multiverseId\" TEXT\n  \"name\" TEXT\n  \"number\" TEXT\n  \"originalReleaseDate\" TEXT\n  \"originalText\" TEXT\n  \"originalType\" TEXT\n  \"otherFaceIds\" TEXT\n  \"power\" TEXT\n  \"printings\" TEXT\n  \"promoTypes\" TEXT\n  \"purchaseUrls\" TEXT\n  \"rarity\" TEXT\n  \"scryfallId\" TEXT\n  \"scryfallIllustrationId\" TEXT\n  \"scryfallOracleId\" TEXT\n  \"setCode\" TEXT\n  \"side\" TEXT\n  \"subtypes\" TEXT\n  \"supertypes\" TEXT\n  \"tcgplayerProductId\" TEXT\n  \"text\" TEXT\n  \"toughness\" TEXT\n  \"type\" TEXT\n  \"types\" TEXT\n  \"uuid\" TEXT [not null]\n  \"variations\" TEXT\n  \"watermark\" TEXT\n}\n\nTable \"foreign_data\" {\n  \"id\" INTEGER [pk, not null]\n  \"flavorText\" TEXT\n  \"language\" TEXT\n  \"multiverseid\" INTEGER\n  \"name\" TEXT\n  \"text\" TEXT\n  \"type\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"legalities\" {\n  \"id\" INTEGER [pk, not null]\n  \"format\" TEXT\n  \"status\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"rulings\" {\n  \"id\" INTEGER [pk, not null]\n  \"date\" DATE\n  \"text\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"set_translations\" {\n  \"id\" INTEGER [pk, not null]\n  \"language\" TEXT\n  \"setCode\" TEXT\n  \"translation\" TEXT\n}\n\nTable \"sets\" {\n  \"id\" INTEGER [pk, not null]\n  \"baseSetSize\" INTEGER\n  \"block\" TEXT\n  \"booster\" TEXT\n  \"code\" TEXT [not null]\n  \"isFoilOnly\" INTEGER [not null]\n  \"isForeignOnly\" INTEGER [not null]\n  \"isNonFoilOnly\" INTEGER [not null]\n  \"isOnlineOnly\" INTEGER [not null]\n  \"isPartialPreview\" INTEGER [not null]\n  \"keyruneCode\" TEXT\n  \"mcmId\" INTEGER\n  \"mcmIdExtras\" INTEGER\n  \"mcmName\" TEXT\n  \"mtgoCode\" TEXT\n  \"name\" TEXT\n  \"parentCode\" TEXT\n  \"releaseDate\" DATE\n  \"tcgplayerGroupId\" INTEGER\n  \"totalSetSize\" INTEGER\n  \"type\" TEXT\n}\n\n\n\nRef: \"foreign_data\".\"uuid\" > \"cards\".\"uuid\"\n\nRef: \"legalities\".\"uuid\" > \"cards\".\"uuid\"\n\nRef: \"set_translations\".\"setCode\" > \"sets\".\"code\"\n\nRef: \"rulings\".\"uuid\" > \"cards\".\"uuid\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"cards\" {\n  \"id\" INTEGER [pk, not null]\n  \"artist\" TEXT\n  \"asciiName\" TEXT\n  \"availability\" TEXT\n  \"borderColor\" TEXT\n  \"cardKingdomFoilId\" TEXT\n  \"cardKingdomId\" TEXT\n  \"colorIdentity\" TEXT\n  \"colorIndicator\" TEXT\n  \"colors\" TEXT\n  \"convertedManaCost\" REAL\n  \"duelDeck\" TEXT\n  \"edhrecRank\" INTEGER\n  \"faceConvertedManaCost\" REAL\n  \"faceName\" TEXT\n  \"flavorName\" TEXT\n  \"flavorText\" TEXT\n  \"frameEffects\" TEXT\n  \"frameVersion\" TEXT\n  \"hand\" TEXT\n  \"hasAlternativeDeckLimit\" INTEGER [not null]\n  \"hasContentWarning\" INTEGER [not null]\n  \"hasFoil\" INTEGER [not null]\n  \"hasNonFoil\" INTEGER [not null]\n  \"isAlternative\" INTEGER [not null]\n  \"isFullArt\" INTEGER [not null]\n  \"isOnlineOnly\" INTEGER [not null]\n  \"isOversized\" INTEGER [not null]\n  \"isPromo\" INTEGER [not null]\n  \"isReprint\" INTEGER [not null]\n  \"isReserved\" INTEGER [not null]\n  \"isStarter\" INTEGER [not null]\n  \"isStorySpotlight\" INTEGER [not null]\n  \"isTextless\" INTEGER [not null]\n  \"isTimeshifted\" INTEGER [not null]\n  \"keywords\" TEXT\n  \"layout\" TEXT\n  \"leadershipSkills\" TEXT\n  \"life\" TEXT\n  \"loyalty\" TEXT\n  \"manaCost\" TEXT\n  \"mcmId\" TEXT\n  \"mcmMetaId\" TEXT\n  \"mtgArenaId\" TEXT\n  \"mtgjsonV4Id\" TEXT\n  \"mtgoFoilId\" TEXT\n  \"mtgoId\" TEXT\n  \"multiverseId\" TEXT\n  \"name\" TEXT\n  \"number\" TEXT\n  \"originalReleaseDate\" TEXT\n  \"originalText\" TEXT\n  \"originalType\" TEXT\n  \"otherFaceIds\" TEXT\n  \"power\" TEXT\n  \"printings\" TEXT\n  \"promoTypes\" TEXT\n  \"purchaseUrls\" TEXT\n  \"rarity\" TEXT\n  \"scryfallId\" TEXT\n  \"scryfallIllustrationId\" TEXT\n  \"scryfallOracleId\" TEXT\n  \"setCode\" TEXT\n  \"side\" TEXT\n  \"subtypes\" TEXT\n  \"supertypes\" TEXT\n  \"tcgplayerProductId\" TEXT\n  \"text\" TEXT\n  \"toughness\" TEXT\n  \"type\" TEXT\n  \"types\" TEXT\n  \"uuid\" TEXT [not null]\n  \"variations\" TEXT\n  \"watermark\" TEXT\n}\n\nTable \"foreign_data\" {\n  \"id\" INTEGER [pk, not null]\n  \"flavorText\" TEXT\n  \"language\" TEXT\n  \"multiverseid\" INTEGER\n  \"name\" TEXT\n  \"text\" TEXT\n  \"type\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"legalities\" {\n  \"id\" INTEGER [pk, not null]\n  \"format\" TEXT\n  \"status\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"rulings\" {\n  \"id\" INTEGER [pk, not null]\n  \"date\" DATE\n  \"text\" TEXT\n  \"uuid\" TEXT\n}\n\nTable \"set_translations\" {\n  \"id\" INTEGER [pk, not null]\n  \"language\" TEXT\n  \"setCode\" TEXT\n  \"translation\" TEXT\n}\n\nTable \"sets\" {\n  \"id\" INTEGER [pk, not null]\n  \"baseSetSize\" INTEGER\n  \"block\" TEXT\n  \"booster\" TEXT\n  \"code\" TEXT [not null]\n  \"isFoilOnly\" INTEGER [not null]\n  \"isForeignOnly\" INTEGER [not null]\n  \"isNonFoilOnly\" INTEGER [not null]\n  \"isOnlineOnly\" INTEGER [not null]\n  \"isPartialPreview\" INTEGER [not null]\n  \"keyruneCode\" TEXT\n  \"mcmId\" INTEGER\n  \"mcmIdExtras\" INTEGER\n  \"mcmName\" TEXT\n  \"mtgoCode\" TEXT\n  \"name\" TEXT\n  \"parentCode\" TEXT\n  \"releaseDate\" DATE\n  \"tcgplayerGroupId\" INTEGER\n  \"totalSetSize\" INTEGER\n  \"type\" TEXT\n}\n\nRef: \"foreign_data\".\"uuid\" > \"cards\".\"uuid\"\n\nRef: \"legalities\".\"uuid\" > \"cards\".\"uuid\"\n\nRef: \"set_translations\".\"setCode\" > \"sets\".\"code\"\n\nRef: \"rulings\".\"uuid\" > \"cards\".\"uuid\"\n\n## Table Stats & Sample Values\n\ncards: 4402 rows\n  asciiName: 'El-Hajjaj', 'Juzam Djinn', 'Khabal Ghoul', ...\n  faceName: 'Dusk', 'Commit', 'Never', ...\n  name: 'Ballista Squad', 'Beacon of Immortality', 'Cho-Manno, Revolutionary', ...\n\nforeign_data: 7584 rows\n  name: 'Ballistaeinheit', 'Escuadra de ballesta', 'Escouade de balistes', ...\n  type: 'Kreatur — Mensch, Rebell', 'Criatura — Rebelde humano', 'Créature : humain et rebelle', ...\n  language: 'German', 'Spanish', 'French', ...\n\nlegalities: 10000 rows\n  status: 'Legal', 'Banned', 'Restricted'\n  format: 'commander', 'duel', 'legacy', ...\n  uuid: '5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c', '57aaebc1-850c-503d-9f6e-bb8d00d8bf7c', '8ac972b5-9f6e-5cc8-91c3-b9a40a98232e', ...\n\nrulings: 10000 rows\n  text: 'You draw the card when Bandage resolves, not when', 'If you double a negative life total, you do the re', 'Beacon of Immortality’s effect counts as life gain', ...\n  uuid: '6d268c95-c176-5766-9a46-c14f739aba1c', '56f4935b-f6c5-59b9-88bf-9bcce20247ce', '7fef665c-36a1-5f7a-9299-cf8938708710', ...\n  date: '2007-07-15', '2007-02-01', '2010-08-15', ...\n\nset_translations: 1210 rows\n  language: 'Chinese Simplified', 'Chinese Traditional', 'French', ...\n  setCode: '10E', '4ED', '5DN', ...\n  translation: '核心系列第十版', 'Dixième édition', 'Hauptset Zehnte Edition', ...\n\nsets: 551 rows\n  mcmName: 'Tenth Edition', 'Double Masters', 'Fourth Edition', ...\n  name: 'Tenth Edition', 'Unlimited Edition', 'Double Masters', ...\n  type: 'core', 'masters', 'expansion', ...",
+    "stateUrl": "https://bird-bench.github.io/#card_games",
+    "tableStats": {
+      "cards": {
+        "rows": 4402,
+        "sample_values": {
+          "id": [
+            "4",
+            "6",
+            "9",
+            "15",
+            "18",
+            "21",
+            "22",
+            "23"
+          ],
+          "artist": [
+            "Matthew D. Wilson",
+            "Rob Alexander",
+            "Steven Belledin",
+            "Stephen Tappin",
+            "Kev Walker",
+            "rk post",
+            "Dan Dos Santos",
+            "Wayne England"
+          ],
+          "asciiName": [
+            "El-Hajjaj",
+            "Juzam Djinn",
+            "Khabal Ghoul",
+            "Ghazban Ogre",
+            "Ring of Ma'ruf",
+            "Lim-Dul's Vault"
+          ],
+          "availability": [
+            "mtgo,paper",
+            "paper",
+            "arena"
+          ],
+          "borderColor": [
+            "black",
+            "white",
+            "borderless"
+          ],
+          "cardKingdomFoilId": [
+            "123094",
+            "123096",
+            "123098",
+            "123103",
+            "123106",
+            "123109",
+            "123110",
+            "123122"
+          ],
+          "cardKingdomId": [
+            "122726",
+            "122728",
+            "122730",
+            "122733",
+            "122735",
+            "122738",
+            "122741",
+            "122742"
+          ],
+          "colorIdentity": [
+            "W",
+            "U",
+            "B",
+            "R",
+            "G",
+            "B,G,R,U,W",
+            "B,R",
+            "B,G"
+          ],
+          "colors": [
+            "W",
+            "U",
+            "B",
+            "R",
+            "G",
+            "B,R",
+            "U,W",
+            "R,U"
+          ],
+          "convertedManaCost": [
+            "4.0",
+            "6.0",
+            "3.0",
+            "1.0",
+            "2.0",
+            "8.0",
+            "5.0",
+            "9.0"
+          ],
+          "edhrecRank": [
+            "12901",
+            "2801",
+            "10053",
+            "7102",
+            "3509",
+            "12260",
+            "20009",
+            "20011"
+          ],
+          "faceConvertedManaCost": [
+            "4.0",
+            "3.0",
+            "2.0",
+            "1.0",
+            "6.0"
+          ],
+          "faceName": [
+            "Dusk",
+            "Commit",
+            "Never",
+            "Insult",
+            "Mouth",
+            "Start",
+            "Reduce",
+            "Destined"
+          ],
+          "flavorText": [
+            "The perfect antidote for a tightly packed formatio",
+            "The cave floods with light. A thousand rays shine ",
+            "\"Mercadia's masks can no longer hide the truth. Ou",
+            "He is the only one who sees the patterns in the ov",
+            "Once heard, the battle song of an angel becomes pa",
+            "In war, as in society, position is everything.",
+            "The strength of one. The courage of ten.",
+            "Grelden knelt and felt the cool, dry hand of the p"
+          ],
+          "frameEffects": [
+            "legendary",
+            "nyxtouched"
+          ],
+          "frameVersion": [
+            "2003",
+            "1993",
+            "2015",
+            "1997"
+          ],
+          "hasAlternativeDeckLimit": [
+            "0"
+          ],
+          "hasContentWarning": [
+            "0",
+            "1"
+          ],
+          "hasFoil": [
+            "1",
+            "0"
+          ],
+          "hasNonFoil": [
+            "1",
+            "0"
+          ],
+          "isAlternative": [
+            "0",
+            "1"
+          ],
+          "isFullArt": [
+            "0",
+            "1"
+          ],
+          "isOnlineOnly": [
+            "0",
+            "1"
+          ],
+          "isOversized": [
+            "0"
+          ],
+          "isPromo": [
+            "0",
+            "1"
+          ],
+          "isReprint": [
+            "1",
+            "0"
+          ],
+          "isReserved": [
+            "0",
+            "1"
+          ],
+          "isStarter": [
+            "0",
+            "1"
+          ],
+          "isStorySpotlight": [
+            "0",
+            "1"
+          ],
+          "isTextless": [
+            "0"
+          ],
+          "isTimeshifted": [
+            "0"
+          ],
+          "keywords": [
+            "Mill",
+            "Swampwalk",
+            "Islandwalk,Landwalk",
+            "Flying,Vigilance",
+            "First strike,Protection",
+            "Flying",
+            "Haste",
+            "Fear"
+          ],
+          "layout": [
+            "normal",
+            "aftermath",
+            "split",
+            "flip"
+          ],
+          "leadershipSkills": [
+            "{'brawl': False, 'commander': True, 'oathbreaker':"
+          ],
+          "manaCost": [
+            "{3}{W}",
+            "{5}{W}",
+            "{2}{W}{W}",
+            "{1}{W}{W}",
+            "{W}",
+            "{1}{W}",
+            "{1}{U}{U}",
+            "{U}{U}"
+          ],
+          "mcmId": [
+            "16172",
+            "16174",
+            "16176",
+            "16179",
+            "16181",
+            "16184",
+            "16187",
+            "16188"
+          ],
+          "mcmMetaId": [
+            "423",
+            "499",
+            "971",
+            "8191",
+            "2361",
+            "2690",
+            "2717",
+            "2793"
+          ],
+          "mtgArenaId": [
+            "74986",
+            "74989",
+            "74990",
+            "74991",
+            "74999",
+            "74998",
+            "74992",
+            "74997"
+          ],
+          "mtgjsonV4Id": [
+            "bfbb65b1-f1bb-5355-9495-fb094f9b0782",
+            "43f8222f-3fd5-5491-9e76-5b1cc9a86e93",
+            "8f6bfe34-f704-5ac8-a025-921a0276bb54",
+            "f80fd1e6-0ac6-5db3-bac6-efd541cb9ec7",
+            "3512bcb5-7103-5605-88ed-b89e3171cc2b",
+            "dd5518e9-f47e-5e9b-af98-d08d6bb4a13b",
+            "6ab172f1-9688-5edd-86c6-3bf2e69e14b7",
+            "a22a8e1d-0b61-5139-b464-4e6b01114baa"
+          ],
+          "mtgoFoilId": [
+            "27327",
+            "27622",
+            "27187",
+            "27752",
+            "27289",
+            "27243",
+            "26995",
+            "26999"
+          ],
+          "mtgoId": [
+            "27326",
+            "27621",
+            "27186",
+            "27751",
+            "27288",
+            "27242",
+            "26994",
+            "26998"
+          ],
+          "multiverseId": [
+            "129477",
+            "130553",
+            "130554",
+            "135258",
+            "129572",
+            "132145",
+            "129595",
+            "132123"
+          ],
+          "name": [
+            "Ballista Squad",
+            "Beacon of Immortality",
+            "Cho-Manno, Revolutionary",
+            "Field Marshal",
+            "Glorious Anthem",
+            "High Ground",
+            "Honor Guard",
+            "Icatian Priest"
+          ],
+          "number": [
+            "8",
+            "10",
+            "12",
+            "15",
+            "17",
+            "20",
+            "23",
+            "24"
+          ],
+          "originalText": [
+            "{X}{W}, {T}: Ballista Squad deals X damage to targ",
+            "Double target player's life total. Shuffle Beacon ",
+            "Prevent all damage that would be dealt to Cho-Mann",
+            "Other Soldier creatures get +1/+1 and have first s",
+            "Creatures you control get +1/+1.",
+            "Each creature you control can block an additional ",
+            "{W}: Honor Guard gets +0/+1 until end of turn.",
+            "{1}{W}{W}: Target creature gets +1/+1 until end of"
+          ],
+          "originalType": [
+            "Creature - Human Rebel",
+            "Instant",
+            "Legendary Creature - Human Rebel",
+            "Creature - Human Soldier",
+            "Enchantment",
+            "Creature - Human Cleric",
+            "Creature - Human Wizard",
+            "Legendary Creature - Merfolk Wizard"
+          ],
+          "otherFaceIds": [
+            "87f0062a-8321-5c16-960e-a12ce1df5839",
+            "95a37a67-eac8-5ae2-9a50-31f81f810f18",
+            "6acc8501-aa59-5777-a7d0-e3ef66a609ea",
+            "c44192e3-0732-528d-a4c4-b27a49d8ebe4",
+            "e765058a-4a7c-513f-bb97-cb7d3aa56218",
+            "93de0571-9509-5933-b298-2660f5f97f7d",
+            "57aa1356-3638-57b6-9b4f-4ef1f77de5df",
+            "a241affc-f016-5e33-94c2-c4e9b95b1cf1"
+          ],
+          "power": [
+            "2",
+            "1",
+            "0",
+            "11",
+            "3",
+            "4",
+            "6",
+            "5"
+          ],
+          "printings": [
+            "10E,9ED,MMQ",
+            "10E,5DN,E02,MB1",
+            "10E,MMQ,PS11",
+            "10E,CSP",
+            "10E,7ED,8ED,9ED,M21,PJAS,PJJT,PJSE,PM21,PRM,PS11,P",
+            "10E,EXO",
+            "10E,7ED,8ED,9ED,STH",
+            "10E,DDC,DVD,FEM"
+          ],
+          "promoTypes": [
+            "boxtopper,boosterfun",
+            "boosterfun",
+            "release,buyabox",
+            "intropack"
+          ],
+          "purchaseUrls": [
+            "{'cardKingdom': 'https://mtgjson.com/links/d702da7",
+            "{'cardKingdom': 'https://mtgjson.com/links/641aecf",
+            "{'cardKingdom': 'https://mtgjson.com/links/8b23ca3",
+            "{'cardKingdom': 'https://mtgjson.com/links/7178233",
+            "{'cardKingdom': 'https://mtgjson.com/links/b2be19d",
+            "{'cardKingdom': 'https://mtgjson.com/links/26c254a",
+            "{'cardKingdom': 'https://mtgjson.com/links/1bbf258",
+            "{'cardKingdom': 'https://mtgjson.com/links/3b6b2ed"
+          ],
+          "rarity": [
+            "uncommon",
+            "rare",
+            "common",
+            "mythic"
+          ],
+          "scryfallId": [
+            "a4d17394-b9c4-43f6-9a6d-2c7c7ecb1d74",
+            "f0b9b5da-d3fa-4d70-a71a-a2342dbfd527",
+            "fe04dfe7-6376-4c12-9404-0e1ae0942917",
+            "1e22d287-274e-4222-9ed7-3e609a84ac07",
+            "2efbc588-019e-416a-938c-4ccbe7121335",
+            "b79b3153-8874-458d-8e7e-cf97c6c1887c",
+            "9c8a5add-87af-447d-9fd7-c4aeec3685fb",
+            "71f8c040-b6da-42f4-9140-7cd5eceb51c7"
+          ],
+          "scryfallIllustrationId": [
+            "8464353d-099c-47ba-a0eb-e08b7b76b464",
+            "e314cc4f-55dc-48c5-abb3-2aa78e940020",
+            "443c01cf-c337-4b68-9a0a-cd39a3e103f5",
+            "9d77dc26-2898-46f4-9984-c8100320c433",
+            "1b1a6269-0822-4f73-b61f-ef580839e425",
+            "c3998375-78f7-4e56-bfcd-af3fbec94bbe",
+            "a8748d0f-0c8e-490b-b4e5-c9d3a8b905be",
+            "f8348e16-e638-42b4-a917-157019fbb8ee"
+          ],
+          "scryfallOracleId": [
+            "5973725c-6e1f-4d7e-bcef-3d867ea4c244",
+            "bfcdf563-c6e5-4a54-bb63-4aba219b94e2",
+            "91af5e35-b3b8-43ce-b1ea-997ed74e4ad2",
+            "1c0a53fc-8037-46e3-90ea-cb8b73631a83",
+            "e3886fe8-9b76-4613-8891-4ec74657c087",
+            "b59053d5-b5f2-44aa-a29c-7f3908d86577",
+            "4ba82d8e-1857-40a9-8b42-5d8348c68859",
+            "3a9d29ce-e8e2-402f-b0c2-873f70418234"
+          ],
+          "setCode": [
+            "10E",
+            "2ED",
+            "2XM",
+            "3ED",
+            "4BB",
+            "4ED",
+            "5DN",
+            "5ED"
+          ],
+          "side": [
+            "a",
+            "b"
+          ],
+          "subtypes": [
+            "Human,Rebel",
+            "Human,Soldier",
+            "Human,Cleric",
+            "Human,Wizard",
+            "Merfolk,Wizard",
+            "Cephalid,Wizard",
+            "Shapeshifter",
+            "Serpent"
+          ],
+          "supertypes": [
+            "Legendary",
+            "Basic",
+            "World"
+          ],
+          "tcgplayerProductId": [
+            "15048",
+            "15052",
+            "15070",
+            "15123",
+            "15144",
+            "15160",
+            "15165",
+            "15172"
+          ],
+          "text": [
+            "{X}{W}, {T}: Ballista Squad deals X damage to targ",
+            "Double target player's life total. Shuffle Beacon ",
+            "Prevent all damage that would be dealt to Cho-Mann",
+            "Other Soldier creatures get +1/+1 and have first s",
+            "Creatures you control get +1/+1.",
+            "Each creature you control can block an additional ",
+            "{W}: Honor Guard gets +0/+1 until end of turn.",
+            "{1}{W}{W}: Target creature gets +1/+1 until end of"
+          ],
+          "toughness": [
+            "2",
+            "1",
+            "3",
+            "0",
+            "11",
+            "4",
+            "6",
+            "5"
+          ],
+          "type": [
+            "Creature — Human Rebel",
+            "Instant",
+            "Legendary Creature — Human Rebel",
+            "Creature — Human Soldier",
+            "Enchantment",
+            "Creature — Human Cleric",
+            "Creature — Human Wizard",
+            "Legendary Creature — Merfolk Wizard"
+          ],
+          "types": [
+            "Creature",
+            "Instant",
+            "Enchantment",
+            "Sorcery",
+            "Artifact",
+            "Artifact,Creature",
+            "Land",
+            "Enchantment,Creature"
+          ],
+          "uuid": [
+            "a69b404f-144a-5317-b10e-7d9dce135b24",
+            "56f4935b-f6c5-59b9-88bf-9bcce20247ce",
+            "81daea6a-2735-5a46-a2da-b65a2ad5738f",
+            "668c64a2-cecb-5f48-af16-d7a64814d3e7",
+            "546eac7c-1424-597d-ac13-bf8558e88fe3",
+            "60f49caf-3583-5f85-b4b3-08dca73a8628",
+            "9bee1901-1125-5635-9e22-3b4f37989c37",
+            "cb865391-5b14-58ce-aa99-b36b83e6377f"
+          ],
+          "variations": [
+            "6d6a31d5-a80b-5f31-9b46-2c2083a95581",
+            "efaa7c3d-c5e0-5346-b3b2-c6a3d132c27a",
+            "ac084dab-6ac0-55fa-94b7-e009fede9012",
+            "f76ee94d-b1a1-5c9f-bdc8-4bf659844cd8",
+            "f1eba89f-dd82-5843-80a9-e9b2cd3a6037",
+            "b2f56602-e85a-588f-a4be-40b6e56f44f7",
+            "e451cc8a-2bbe-5850-adc4-fb1b738bcef0",
+            "18db55ad-e62f-5c76-a6b8-743378d6ea38"
+          ],
+          "watermark": [
+            "set (LGN)",
+            "set (LEA)",
+            "set (ODY)",
+            "set (SOI)",
+            "set (RTR)",
+            "set (ALA)",
+            "set (PTK)",
+            "set (S99)"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "foreign_data": {
+        "rows": 7584,
+        "sample_values": {
+          "id": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32"
+          ],
+          "flavorText": [
+            "Das perfekte Gegenmittel zu einer dichten Formatio",
+            "Es el antídoto perfecto para una formación apretad",
+            "L'antidote parfait à la formation serrée.",
+            "L'antidoto perfetto per una formazione estremament",
+            "密集した隊形のための完璧な対策だ。",
+            "O antídoto perfeito contra as formações muito cerr",
+            "Прекрасное средство против сплоченных отрядов.",
+            "对付坚实紧密的阵型之良方。"
+          ],
+          "language": [
+            "German",
+            "Spanish",
+            "French",
+            "Italian",
+            "Japanese",
+            "Portuguese (Brazil)",
+            "Russian",
+            "Chinese Simplified"
+          ],
+          "multiverseid": [
+            "148427",
+            "150324",
+            "149941",
+            "148810",
+            "148044",
+            "149558",
+            "149175",
+            "147661"
+          ],
+          "name": [
+            "Ballistaeinheit",
+            "Escuadra de ballesta",
+            "Escouade de balistes",
+            "Unità Balista",
+            "バリスタ班",
+            "Esquadrão de Balista",
+            "Баллиста",
+            "巨弩小队"
+          ],
+          "text": [
+            "{X}{W}, {T}: Die Ballistaeinheit fügt einer angrei",
+            "{X}{W}, {T}: La Escuadra de ballesta hace X puntos",
+            "{X}{W}, {T} : L'Escouade de balistes inflige X ble",
+            "{X}{W}, {T}: L'Unità Balista infligge X danni a un",
+            "{X}{W}, {T}：攻撃かブロックしているクリーチャー１体を対象とする。バリスタ班はそれにＸ点の",
+            "{X}{W}, {T}: Esquadrão de Balista causa X pontos d",
+            "{X}{W}, {T}: Баллиста наносит X повреждений целево",
+            "{X}{W}，{T}：巨弩小队对目标进行攻击或阻挡的生物造成X点伤害。"
+          ],
+          "type": [
+            "Kreatur — Mensch, Rebell",
+            "Criatura — Rebelde humano",
+            "Créature : humain et rebelle",
+            "Creatura — Ribelle Umano",
+            "クリーチャー — 人間・レベル",
+            "Criatura — Humano Rebelde",
+            "Существо — Человек Повстанец",
+            "生物～人类／反抗军"
+          ],
+          "uuid": [
+            "a69b404f-144a-5317-b10e-7d9dce135b24",
+            "56f4935b-f6c5-59b9-88bf-9bcce20247ce",
+            "81daea6a-2735-5a46-a2da-b65a2ad5738f",
+            "7fef665c-36a1-5f7a-9299-cf8938708710",
+            "2f9c211e-1869-5b3f-94ea-f73b7910a5af",
+            "668c64a2-cecb-5f48-af16-d7a64814d3e7",
+            "d68306e2-9877-5987-84b3-12b8234c8eec",
+            "546eac7c-1424-597d-ac13-bf8558e88fe3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "legalities": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "format": [
+            "commander",
+            "duel",
+            "legacy",
+            "modern",
+            "penny",
+            "premodern",
+            "vintage",
+            "gladiator"
+          ],
+          "status": [
+            "Legal",
+            "Banned",
+            "Restricted"
+          ],
+          "uuid": [
+            "5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c",
+            "57aaebc1-850c-503d-9f6e-bb8d00d8bf7c",
+            "8ac972b5-9f6e-5cc8-91c3-b9a40a98232e",
+            "a69b404f-144a-5317-b10e-7d9dce135b24",
+            "6d268c95-c176-5766-9a46-c14f739aba1c",
+            "56f4935b-f6c5-59b9-88bf-9bcce20247ce",
+            "62365fbb-af07-5c2a-976d-e3092bdfc317",
+            "0d2a4e1d-cc12-5675-8044-9a7bc7d60050"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rulings": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "date": [
+            "2007-07-15",
+            "2007-02-01",
+            "2010-08-15",
+            "2008-08-01",
+            "2005-06-01",
+            "2009-10-01",
+            "2012-07-01",
+            "2013-07-01"
+          ],
+          "text": [
+            "You draw the card when Bandage resolves, not when ",
+            "If you double a negative life total, you do the re",
+            "Beacon of Immortality’s effect counts as life gain",
+            "If a Beacon is countered or doesn’t resolve, it’s ",
+            "The affected creature’s last known existence on th",
+            "The ability triggers even if the Specter’s damage ",
+            "You choose how the damage will be divided among th",
+            "High Ground’s effect is cumulative. If you have a "
+          ],
+          "uuid": [
+            "6d268c95-c176-5766-9a46-c14f739aba1c",
+            "56f4935b-f6c5-59b9-88bf-9bcce20247ce",
+            "7fef665c-36a1-5f7a-9299-cf8938708710",
+            "f39b4446-0ca6-5446-8507-4b1ba37bb3e7",
+            "c19bcfc2-fc10-5040-8239-1c193098df47",
+            "60f49caf-3583-5f85-b4b3-08dca73a8628",
+            "9a14261a-b567-5429-a5ca-a913e15d8bf7",
+            "b8a68840-4044-52c0-a14e-0a1c630ba42c"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "set_translations": {
+        "rows": 1210,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "language": [
+            "Chinese Simplified",
+            "Chinese Traditional",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Korean",
+            "Portuguese (Brazil)"
+          ],
+          "setCode": [
+            "10E",
+            "4ED",
+            "5DN",
+            "5ED",
+            "6ED",
+            "7ED",
+            "8ED",
+            "9ED"
+          ],
+          "translation": [
+            "核心系列第十版",
+            "Dixième édition",
+            "Hauptset Zehnte Edition",
+            "Set Base Decima Edizione",
+            "第10版基本セット",
+            "코어세트 10판",
+            "Coleção Básica Décima Edição",
+            "Базовый выпуск Десятое Издание"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sets": {
+        "rows": 551,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "baseSetSize": [
+            "383",
+            "302",
+            "332",
+            "306",
+            "378",
+            "165",
+            "455",
+            "351"
+          ],
+          "block": [
+            "Core Set",
+            "Mirrodin",
+            "Kaladesh",
+            "Amonkhet",
+            "Alara",
+            "Ice Age",
+            "Invasion",
+            "Innistrad"
+          ],
+          "booster": [
+            "{'default': {'boosters': [{'contents': {'basic': 1",
+            "{'default': {'boosters': [{'contents': {'common': ",
+            "{'arena': {'boosters': [{'contents': {'common': 10",
+            "{'default': {'boosters': [{'contents': {'blackA': ",
+            "{'default': {'boosters': [{'contents': {'conspirac",
+            "{'default': {'boosters': [{'contents': {'draft': 1",
+            "{'default': {'boosters': [{'contents': {'commonOrB",
+            "{'default': {'boosters': [{'contents': {'dfc': 1, "
+          ],
+          "code": [
+            "10E",
+            "2ED",
+            "2XM",
+            "3ED",
+            "4BB",
+            "4ED",
+            "5DN",
+            "5ED"
+          ],
+          "isFoilOnly": [
+            "0",
+            "1"
+          ],
+          "isForeignOnly": [
+            "0",
+            "1"
+          ],
+          "isNonFoilOnly": [
+            "0",
+            "1"
+          ],
+          "isOnlineOnly": [
+            "0",
+            "1"
+          ],
+          "isPartialPreview": [
+            "0",
+            "1"
+          ],
+          "keyruneCode": [
+            "10E",
+            "2ED",
+            "2XM",
+            "3ED",
+            "4ED",
+            "5DN",
+            "5ED",
+            "6ED"
+          ],
+          "mcmId": [
+            "74",
+            "3204",
+            "10",
+            "47",
+            "23",
+            "37",
+            "44",
+            "49"
+          ],
+          "mcmIdExtras": [
+            "3209",
+            "3459",
+            "2587",
+            "2371",
+            "3113",
+            "3680",
+            "2419",
+            "2961"
+          ],
+          "mcmName": [
+            "Tenth Edition",
+            "Double Masters",
+            "Fourth Edition",
+            "Fifth Dawn",
+            "Fifth Edition",
+            "Seventh Edition",
+            "Eighth Edition",
+            "Ninth Edition"
+          ],
+          "mtgoCode": [
+            "10E",
+            "2XM",
+            "5DN",
+            "7E",
+            "8ED",
+            "9ED",
+            "A25",
+            "AER"
+          ],
+          "name": [
+            "Tenth Edition",
+            "Unlimited Edition",
+            "Double Masters",
+            "Revised Edition",
+            "Fourth Edition Foreign Black Border",
+            "Fourth Edition",
+            "Fifth Dawn",
+            "Fifth Edition"
+          ],
+          "parentCode": [
+            "JMP",
+            "MH1",
+            "ZNR",
+            "MB1",
+            "M15",
+            "FRF",
+            "ORI",
+            "CSP"
+          ],
+          "releaseDate": [
+            "2007-07-13",
+            "1993-12-01",
+            "2020-08-07",
+            "1994-04-01",
+            "1995-04-01",
+            "2004-06-04",
+            "1997-03-24",
+            "1999-04-21"
+          ],
+          "tcgplayerGroupId": [
+            "1",
+            "115",
+            "2655",
+            "97",
+            "46",
+            "43",
+            "44",
+            "23"
+          ],
+          "totalSetSize": [
+            "508",
+            "302",
+            "384",
+            "306",
+            "378",
+            "379",
+            "165",
+            "460"
+          ],
+          "type": [
+            "core",
+            "masters",
+            "expansion",
+            "starter",
+            "memorabilia",
+            "archenemy",
+            "box",
+            "draft_innovation"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

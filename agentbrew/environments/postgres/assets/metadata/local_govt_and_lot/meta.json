@@ -1,0 +1,467 @@
+{
+  "db_id": "local_govt_and_lot",
+  "source": "sparc",
+  "tables": 11,
+  "total_rows": 148,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#local_govt_and_lot",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Customer_Event_Notes\" {\n  \"Customer_Event_Note_ID\" INTEGER [pk, not null]\n  \"Customer_Event_ID\" INTEGER [not null]\n  \"service_type_code\" TEXT [not null]\n  \"resident_id\" INTEGER [not null]\n  \"property_id\" INTEGER [not null]\n  \"date_moved_in\" TIMESTAMP [not null]\n}\n\nTable \"Customer_Events\" {\n  \"Customer_Event_ID\" INTEGER [pk, not null]\n  \"customer_id\" INTEGER\n  \"date_moved_in\" TIMESTAMP\n  \"property_id\" INTEGER\n  \"resident_id\" INTEGER\n  \"thing_id\" INTEGER [not null]\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk, not null]\n  \"customer_details\" TEXT\n}\n\nTable \"Organizations\" {\n  \"organization_id\" INTEGER [pk, not null]\n  \"parent_organization_id\" INTEGER\n  \"organization_details\" TEXT\n}\n\nTable \"Properties\" {\n  \"property_id\" INTEGER [pk, not null]\n  \"property_type_code\" TEXT [not null]\n  \"property_address\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Residents\" {\n  \"resident_id\" INTEGER [pk, not null]\n  \"property_id\" INTEGER [pk, not null]\n  \"date_moved_in\" TIMESTAMP [pk, not null]\n  \"date_moved_out\" TIMESTAMP [not null]\n  \"other_details\" TEXT\n}\n\nTable \"Residents_Services\" {\n  \"resident_id\" INTEGER [pk, not null]\n  \"service_id\" INTEGER [pk, not null]\n  \"date_moved_in\" TIMESTAMP\n  \"property_id\" INTEGER\n  \"date_requested\" TIMESTAMP\n  \"date_provided\" TIMESTAMP\n  \"other_details\" TEXT\n}\n\nTable \"Services\" {\n  \"service_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [not null]\n  \"service_type_code\" TEXT [not null]\n  \"service_details\" TEXT\n}\n\nTable \"Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [not null]\n  \"Type_of_Thing_Code\" TEXT [not null]\n  \"service_type_code\" TEXT [not null]\n  \"service_details\" TEXT\n}\n\nTable \"Timed_Locations_of_Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"Date_and_Time\" TIMESTAMP [pk, not null]\n  \"Location_Code\" TEXT [pk, not null]\n}\n\nTable \"Timed_Status_of_Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"Date_and_Date\" TIMESTAMP [pk, not null]\n  \"Status_of_Thing_Code\" TEXT [pk, not null]\n}\n\n\n\nRef: \"Residents\".\"property_id\" > \"Properties\".\"property_id\"\n\nRef: \"Services\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Residents_Services\".\"resident_id\" > \"Residents\".\"resident_id\"\n\nRef: \"Residents_Services\".\"property_id\" > \"Residents\".\"property_id\"\n\nRef: \"Residents_Services\".\"date_moved_in\" > \"Residents\".\"date_moved_in\"\n\nRef: \"Residents_Services\".\"service_id\" > \"Services\".\"service_id\"\n\nRef: \"Things\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Customer_Events\".\"resident_id\" > \"Residents\".\"resident_id\"\n\nRef: \"Customer_Events\".\"property_id\" > \"Residents\".\"property_id\"\n\nRef: \"Customer_Events\".\"date_moved_in\" > \"Residents\".\"date_moved_in\"\n\nRef: \"Customer_Events\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Events\".\"thing_id\" > \"Things\".\"thing_id\"\n\nRef: \"Customer_Event_Notes\".\"Customer_Event_ID\" > \"Customer_Events\".\"Customer_Event_ID\"\n\nRef: \"Timed_Status_of_Things\".\"thing_id\" > \"Things\".\"thing_id\"\n\nRef: \"Timed_Locations_of_Things\".\"thing_id\" > \"Things\".\"thing_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Customer_Event_Notes\" {\n  \"Customer_Event_Note_ID\" INTEGER [pk, not null]\n  \"Customer_Event_ID\" INTEGER [not null]\n  \"service_type_code\" TEXT [not null]\n  \"resident_id\" INTEGER [not null]\n  \"property_id\" INTEGER [not null]\n  \"date_moved_in\" TIMESTAMP [not null]\n}\n\nTable \"Customer_Events\" {\n  \"Customer_Event_ID\" INTEGER [pk, not null]\n  \"customer_id\" INTEGER\n  \"date_moved_in\" TIMESTAMP\n  \"property_id\" INTEGER\n  \"resident_id\" INTEGER\n  \"thing_id\" INTEGER [not null]\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk, not null]\n  \"customer_details\" TEXT\n}\n\nTable \"Organizations\" {\n  \"organization_id\" INTEGER [pk, not null]\n  \"parent_organization_id\" INTEGER\n  \"organization_details\" TEXT\n}\n\nTable \"Properties\" {\n  \"property_id\" INTEGER [pk, not null]\n  \"property_type_code\" TEXT [not null]\n  \"property_address\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Residents\" {\n  \"resident_id\" INTEGER [pk, not null]\n  \"property_id\" INTEGER [pk, not null]\n  \"date_moved_in\" TIMESTAMP [pk, not null]\n  \"date_moved_out\" TIMESTAMP [not null]\n  \"other_details\" TEXT\n}\n\nTable \"Residents_Services\" {\n  \"resident_id\" INTEGER [pk, not null]\n  \"service_id\" INTEGER [pk, not null]\n  \"date_moved_in\" TIMESTAMP\n  \"property_id\" INTEGER\n  \"date_requested\" TIMESTAMP\n  \"date_provided\" TIMESTAMP\n  \"other_details\" TEXT\n}\n\nTable \"Services\" {\n  \"service_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [not null]\n  \"service_type_code\" TEXT [not null]\n  \"service_details\" TEXT\n}\n\nTable \"Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"organization_id\" INTEGER [not null]\n  \"Type_of_Thing_Code\" TEXT [not null]\n  \"service_type_code\" TEXT [not null]\n  \"service_details\" TEXT\n}\n\nTable \"Timed_Locations_of_Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"Date_and_Time\" TIMESTAMP [pk, not null]\n  \"Location_Code\" TEXT [pk, not null]\n}\n\nTable \"Timed_Status_of_Things\" {\n  \"thing_id\" INTEGER [pk, not null]\n  \"Date_and_Date\" TIMESTAMP [pk, not null]\n  \"Status_of_Thing_Code\" TEXT [pk, not null]\n}\n\nRef: \"Residents\".\"property_id\" > \"Properties\".\"property_id\"\n\nRef: \"Services\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Residents_Services\".\"resident_id\" > \"Residents\".\"resident_id\"\n\nRef: \"Residents_Services\".\"property_id\" > \"Residents\".\"property_id\"\n\nRef: \"Residents_Services\".\"date_moved_in\" > \"Residents\".\"date_moved_in\"\n\nRef: \"Residents_Services\".\"service_id\" > \"Services\".\"service_id\"\n\nRef: \"Things\".\"organization_id\" > \"Organizations\".\"organization_id\"\n\nRef: \"Customer_Events\".\"resident_id\" > \"Residents\".\"resident_id\"\n\nRef: \"Customer_Events\".\"property_id\" > \"Residents\".\"property_id\"\n\nRef: \"Customer_Events\".\"date_moved_in\" > \"Residents\".\"date_moved_in\"\n\nRef: \"Customer_Events\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Events\".\"thing_id\" > \"Things\".\"thing_id\"\n\nRef: \"Customer_Event_Notes\".\"Customer_Event_ID\" > \"Customer_Events\".\"Customer_Event_ID\"\n\nRef: \"Timed_Status_of_Things\".\"thing_id\" > \"Things\".\"thing_id\"\n\nRef: \"Timed_Locations_of_Things\".\"thing_id\" > \"Things\".\"thing_id\"\n\n## Table Stats & Sample Values\n\nCustomer_Event_Notes: 13 rows\n  service_type_code: 'Cleanning', 'Check'\n  date_moved_in: '2016-08-04 01:06:05', '2016-12-11 01:05:14', '2016-07-10 04:09:56', ...\n  Customer_Event_ID: '70', '428', '627', ...\n\nCustomer_Events: 13 rows\n  date_moved_in: '2015-03-27 12:00:00', '2016-09-27 12:00:00'\n  customer_id: '19', '5', '16', ...\n  property_id: '605', '879', '629', ...\n\nCustomers: 15 rows\n  customer_details: 'Mr. Raul Prosacco', 'Esteban Senger', 'Tyrique Durgan II', ...\n  customer_id: '4', '5', '16', ...\n\nOrganizations: 3 rows\n  organization_details: 'Reinger, Hudson and Nolan Group', 'Denesik and Sons Party', 'Robel-Schulist Group'\n  parent_organization_id: '7', '8'\n  organization_id: '7', '8', '10'\n\nProperties: 15 rows\n  property_type_code: 'apartment', 'house', 'flat'\n  property_address: '85456 Annie Lodge Suite 449', '2580 Yundt Plains', '5983 Fleta Throughway', ...\n  other_details: 'USA'\n\nResidents: 15 rows\n  other_details: 'Anderson Batz', 'Miss Naomie Osinski', 'Jess Wyman', ...\n  date_moved_out: '2017-12-18 03:46:04', '2018-03-17 07:48:09', '2017-11-14 06:28:48', ...\n  date_moved_in: '2017-06-17 15:43:33', '2015-03-27 12:00:00', '2016-09-27 12:00:00'\n\nResidents_Services: 11 rows\n  other_details: 'Satisfied', 'Unsatisfied'\n  date_moved_in: '2017-06-17 15:43:33', '2015-03-27 12:00:00', '2016-09-27 12:00:00'\n  date_requested: '2016-07-25 01:32:23', '2016-10-10 21:42:21', '2017-07-14 19:03:47', ...\n\nServices: 15 rows\n  service_type_code: 'Cleanning', 'Check', 'Moving Out', ...\n  service_details: 'Satisfied', 'Unsatisfied'\n  organization_id: '10', '7', '8'\n\nThings: 15 rows\n  Type_of_Thing_Code: 'Electronics', 'Commen', 'Furniture'\n  service_type_code: 'Check', 'Cleanning'\n  service_details: 'Unsatisfied', 'Satisfied'\n\nTimed_Locations_of_Things: 15 rows\n  Location_Code: '064 Charles Mou', '288 Lang Ferry', '854 Keeling Sho', ...\n  Date_and_Time: '2016-10-12 12:03:07', '2016-12-29 00:39:19', '2017-10-21 04:21:54', ...\n  thing_id: '2', '10', '14', ...\n\nTimed_Status_of_Things: 18 rows\n  Status_of_Thing_Code: 'Open', 'Close', 'In Progress'\n  Date_and_Date: '2016-05-27 23:33:34', '2016-07-17 08:35:27', '2017-06-19 02:59:21', ...\n  thing_id: '2', '10', '14', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#local_govt_and_lot",
+    "tableStats": {
+      "Customer_Event_Notes": {
+        "rows": 13,
+        "sample_values": {
+          "Customer_Event_Note_ID": [
+            "18",
+            "21",
+            "32",
+            "46",
+            "49",
+            "50",
+            "55",
+            "56"
+          ],
+          "Customer_Event_ID": [
+            "70",
+            "428",
+            "627",
+            "559",
+            "606",
+            "817",
+            "216",
+            "591"
+          ],
+          "service_type_code": [
+            "Cleanning",
+            "Check"
+          ],
+          "resident_id": [
+            "58",
+            "87",
+            "37",
+            "45",
+            "43",
+            "88",
+            "28",
+            "67"
+          ],
+          "property_id": [
+            "107",
+            "445",
+            "669",
+            "373",
+            "849",
+            "120",
+            "748",
+            "605"
+          ],
+          "date_moved_in": [
+            "2016-08-04 01:06:05",
+            "2016-12-11 01:05:14",
+            "2016-07-10 04:09:56",
+            "2016-05-24 02:56:54",
+            "2016-08-08 07:58:26",
+            "2017-04-25 09:08:14",
+            "2017-06-26 13:24:36",
+            "2016-11-04 12:46:21"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer_Events": {
+        "rows": 13,
+        "sample_values": {
+          "Customer_Event_ID": [
+            "70",
+            "160",
+            "166",
+            "216",
+            "226",
+            "256",
+            "428",
+            "530"
+          ],
+          "customer_id": [
+            "19",
+            "5",
+            "16",
+            "79",
+            "63",
+            "4",
+            "91",
+            "31"
+          ],
+          "date_moved_in": [
+            "2015-03-27 12:00:00",
+            "2016-09-27 12:00:00"
+          ],
+          "property_id": [
+            "605",
+            "879",
+            "629",
+            "669",
+            "748",
+            "108",
+            "954",
+            "107"
+          ],
+          "resident_id": [
+            "10",
+            "23",
+            "28",
+            "37",
+            "38",
+            "43",
+            "45",
+            "47"
+          ],
+          "thing_id": [
+            "1",
+            "80",
+            "14",
+            "46",
+            "2",
+            "68",
+            "10",
+            "85"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 15,
+        "sample_values": {
+          "customer_id": [
+            "4",
+            "5",
+            "16",
+            "17",
+            "19",
+            "21",
+            "31",
+            "41"
+          ],
+          "customer_details": [
+            "Mr. Raul Prosacco",
+            "Esteban Senger",
+            "Tyrique Durgan II",
+            "Malcolm Farrell",
+            "Sabryna Moore PhD",
+            "Dr. Haylie Hilll III",
+            "Monty Sauer III",
+            "Jayme Marquardt"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Organizations": {
+        "rows": 3,
+        "sample_values": {
+          "organization_id": [
+            "7",
+            "8",
+            "10"
+          ],
+          "parent_organization_id": [
+            "7",
+            "8"
+          ],
+          "organization_details": [
+            "Reinger, Hudson and Nolan Group",
+            "Denesik and Sons Party",
+            "Robel-Schulist Group"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Properties": {
+        "rows": 15,
+        "sample_values": {
+          "property_id": [
+            "24",
+            "107",
+            "108",
+            "120",
+            "373",
+            "445",
+            "586",
+            "605"
+          ],
+          "property_type_code": [
+            "apartment",
+            "house",
+            "flat"
+          ],
+          "property_address": [
+            "85456 Annie Lodge Suite 449",
+            "2580 Yundt Plains",
+            "5983 Fleta Throughway",
+            "322 Johnston Parkway Suite 422",
+            "5384 Sipes Land Apt. 344",
+            "04164 Raul Stream",
+            "54591 Bernard Ridges Suite 864",
+            "7713 Bode Burgs Apt. 113"
+          ],
+          "other_details": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Residents": {
+        "rows": 15,
+        "sample_values": {
+          "resident_id": [
+            "6",
+            "10",
+            "23",
+            "28",
+            "37",
+            "38",
+            "43",
+            "45"
+          ],
+          "property_id": [
+            "954",
+            "605",
+            "879",
+            "629",
+            "669",
+            "748",
+            "108",
+            "107"
+          ],
+          "date_moved_in": [
+            "2017-06-17 15:43:33",
+            "2015-03-27 12:00:00",
+            "2016-09-27 12:00:00"
+          ],
+          "date_moved_out": [
+            "2017-12-18 03:46:04",
+            "2018-03-17 07:48:09",
+            "2017-11-14 06:28:48",
+            "2017-10-05 02:47:31",
+            "2018-01-30 10:20:59",
+            "2017-12-30 23:55:10",
+            "2018-02-22 06:24:15",
+            "2017-10-14 10:23:42"
+          ],
+          "other_details": [
+            "Anderson Batz",
+            "Miss Naomie Osinski",
+            "Jess Wyman",
+            "Miss Alanis Lockman",
+            "Prof. Arvel Kozey",
+            "Chaim Swaniawski",
+            "Elroy Schuster",
+            "Prof. Nasir Hoppe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Residents_Services": {
+        "rows": 11,
+        "sample_values": {
+          "resident_id": [
+            "6",
+            "23",
+            "28",
+            "43",
+            "45",
+            "47",
+            "67",
+            "83"
+          ],
+          "service_id": [
+            "49",
+            "41",
+            "11",
+            "10",
+            "65",
+            "87",
+            "29",
+            "36"
+          ],
+          "date_moved_in": [
+            "2017-06-17 15:43:33",
+            "2015-03-27 12:00:00",
+            "2016-09-27 12:00:00"
+          ],
+          "property_id": [
+            "954",
+            "879",
+            "629",
+            "108",
+            "669",
+            "120",
+            "445",
+            "748"
+          ],
+          "date_requested": [
+            "2016-07-25 01:32:23",
+            "2016-10-10 21:42:21",
+            "2017-07-14 19:03:47",
+            "2016-09-20 22:50:26",
+            "2017-06-14 14:04:50",
+            "2016-12-16 06:08:10",
+            "2016-04-27 14:51:07",
+            "2016-11-27 15:37:02"
+          ],
+          "date_provided": [
+            "2018-02-26 00:27:11",
+            "2017-08-21 06:23:06",
+            "2017-08-28 03:43:56",
+            "2017-10-17 03:30:08",
+            "2017-08-14 08:06:43",
+            "2018-01-30 09:58:57",
+            "2017-11-13 10:28:34",
+            "2017-09-10 00:48:58"
+          ],
+          "other_details": [
+            "Satisfied",
+            "Unsatisfied"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Services": {
+        "rows": 15,
+        "sample_values": {
+          "service_id": [
+            "10",
+            "11",
+            "13",
+            "22",
+            "29",
+            "31",
+            "36",
+            "41"
+          ],
+          "organization_id": [
+            "10",
+            "7",
+            "8"
+          ],
+          "service_type_code": [
+            "Cleanning",
+            "Check",
+            "Moving Out",
+            "Pay bills"
+          ],
+          "service_details": [
+            "Satisfied",
+            "Unsatisfied"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Things": {
+        "rows": 15,
+        "sample_values": {
+          "thing_id": [
+            "1",
+            "2",
+            "10",
+            "14",
+            "26",
+            "35",
+            "45",
+            "46"
+          ],
+          "organization_id": [
+            "8",
+            "10",
+            "7"
+          ],
+          "Type_of_Thing_Code": [
+            "Electronics",
+            "Commen",
+            "Furniture"
+          ],
+          "service_type_code": [
+            "Check",
+            "Cleanning"
+          ],
+          "service_details": [
+            "Unsatisfied",
+            "Satisfied"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Timed_Locations_of_Things": {
+        "rows": 15,
+        "sample_values": {
+          "thing_id": [
+            "2",
+            "10",
+            "14",
+            "26",
+            "45",
+            "58",
+            "68",
+            "85"
+          ],
+          "Date_and_Time": [
+            "2016-10-12 12:03:07",
+            "2016-12-29 00:39:19",
+            "2017-10-21 04:21:54",
+            "2017-03-19 19:28:13",
+            "2016-04-26 16:34:09",
+            "2017-04-19 16:41:03",
+            "2017-04-22 00:37:48",
+            "2016-08-04 00:25:55"
+          ],
+          "Location_Code": [
+            "064 Charles Mou",
+            "288 Lang Ferry",
+            "854 Keeling Sho",
+            "1316 Morgan Spr",
+            "192 Kub Rapids",
+            "4667 Kellen Fie",
+            "1313 Sawayn Riv",
+            "94425 Nellie Kn"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Timed_Status_of_Things": {
+        "rows": 18,
+        "sample_values": {
+          "thing_id": [
+            "2",
+            "10",
+            "14",
+            "26",
+            "35",
+            "47",
+            "58",
+            "80"
+          ],
+          "Date_and_Date": [
+            "2016-05-27 23:33:34",
+            "2016-07-17 08:35:27",
+            "2017-06-19 02:59:21",
+            "2016-09-06 16:31:13",
+            "2016-11-14 17:30:51",
+            "2017-07-03 02:22:12",
+            "2016-04-10 06:32:15",
+            "2017-08-05 02:10:02"
+          ],
+          "Status_of_Thing_Code": [
+            "Open",
+            "Close",
+            "In Progress"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

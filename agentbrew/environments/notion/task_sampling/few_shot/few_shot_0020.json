@@ -1,0 +1,16 @@
+{
+  "title": "Market Launch Overview",
+  "capability": [
+    "query_existing_data",
+    "summarize_from_records",
+    "create_child_page",
+    "create_database",
+    "populate_rows",
+    "insert_ordered_sections",
+    "add_exact_blocks",
+    "query_multiple_sources",
+    "query_and_filter_database",
+    "compute_aggregates"
+  ],
+  "question": "Create a quarterly market launch overview page based on the existing \"Market Expansion Workspace\".\n**Task Requirements:** 1. Inside the \"Launch Library\" page you will find a sub-page named \"Regional Launch Goals\". Extract every launch objective listed under the four regions: North America, Europe, APAC, and LATAM.\n2. Under the top-level page \"Market Expansion Workspace\", create a new child page titled \"Q2 Market Launch Overview\".\n3. Inside that new page build the following structure (all parts must exist):\n   1. A single callout block near the top that summarises progress toward\n   the three current launch themes shown on the main page:\n      - partner readiness\n      - regional enablement\n      - customer proof points\n      All three phrases must appear in the callout text.\n   2. Four separate section headings, one for each region: North America,\n      Europe, APAC, and LATAM. Under each heading list the objectives\n      extracted from the Regional Launch Goals sub-page for that region.\n\n4. Query the \"Launch Activities\" database to retrieve all activities and group them by the Launch Week property. Under each launch-week heading, create to-do list items in the format \"Activity Name - Region\". Check each to-do item only if the source activity has the Completed property checked.\n5. Query the \"Partner Events\" database to identify all events that have the \"Executive Briefing\" tag. Query the \"Customer Stories\" database to find all stories with either the \"Healthcare\" or \"Finance\" tag. Query the \"Reference Assets\" database to retrieve all entries.\n6. Add the following additional sections in this exact order below the regional objectives:\n   - A heading_2 block with text \"Executive Briefings\"\n   - A bulleted list with all matching Partner Events, showing:\n     Event Name - Event Link if available\n   - A heading_2 block with text \"Customer Proof Points\"\n   - A bulleted list with all matching Customer Stories, showing:\n     Story Name - Region if available\n   - A heading_2 block with text \"Reference Assets\"\n   - A bulleted list with all Reference Assets entries\n\n7. Add a final Trip Summary-style paragraph that lists the total number of completed launch activities, the number of executive briefings, the number of customer stories, and the number of reference assets included.\n"
+}

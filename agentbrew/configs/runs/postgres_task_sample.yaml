@@ -1,0 +1,32 @@
+mode: task_sample
+domain: postgres
+
+llm:
+  type: local_llm
+  config:
+    model_name: ./Qwen3-32B
+    base_url: http://localhost:2024/v1
+    api_key: ""
+    temperature: 0.7
+    top_p: 1.0
+    max_completion_tokens: 2200
+    use_extra_body: false
+    use_max_completion_tokens: true
+
+task_sampling:
+  engine: llm
+  seeds: {}
+  output_task_dir: .
+
+evaluation:
+  enabled: false
+
+execution:
+  workers: 200
+  overwrite: false
+
+output:
+  root: outputs/postgres_task_sample
+  traces: false
+  reports: false
+  task_results: false

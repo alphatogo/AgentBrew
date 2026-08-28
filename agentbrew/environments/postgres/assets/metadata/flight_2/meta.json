@@ -1,0 +1,146 @@
+{
+  "db_id": "flight_2",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 1312,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#flight_2",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"airlines\" {\n  \"uid\" INTEGER [pk]\n  \"Airline\" TEXT\n  \"Abbreviation\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"airports\" {\n  \"City\" TEXT\n  \"AirportCode\" TEXT [pk]\n  \"AirportName\" TEXT\n  \"Country\" TEXT\n  \"CountryAbbrev\" TEXT\n}\n\nTable \"flights\" {\n  \"Airline\" INTEGER [pk]\n  \"FlightNo\" INTEGER [pk]\n  \"SourceAirport\" TEXT\n  \"DestAirport\" TEXT\n}\n\n\n\nRef: \"flights\".\"DestAirport\" > \"airports\".\"AirportCode\"\n\nRef: \"flights\".\"SourceAirport\" > \"airports\".\"AirportCode\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"airlines\" {\n  \"uid\" INTEGER [pk]\n  \"Airline\" TEXT\n  \"Abbreviation\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"airports\" {\n  \"City\" TEXT\n  \"AirportCode\" TEXT [pk]\n  \"AirportName\" TEXT\n  \"Country\" TEXT\n  \"CountryAbbrev\" TEXT\n}\n\nTable \"flights\" {\n  \"Airline\" INTEGER [pk]\n  \"FlightNo\" INTEGER [pk]\n  \"SourceAirport\" TEXT\n  \"DestAirport\" TEXT\n}\n\nRef: \"flights\".\"DestAirport\" > \"airports\".\"AirportCode\"\n\nRef: \"flights\".\"SourceAirport\" > \"airports\".\"AirportCode\"\n\n## Table Stats & Sample Values\n\nairlines: 12 rows\n  Country: 'USA'\n  Airline: 'United Airlines', 'US Airways', 'Delta Airlines', ...\n  Abbreviation: 'UAL', 'USAir', 'Delta', ...\n\nairports: 100 rows\n  City: 'Aberdeen', 'Abilene', 'Abingdon', ...\n  AirportName: 'Phillips AAF', 'Municipal', 'Dyess AFB', ...\n  Country: 'United States'\n\nflights: 1200 rows\n  SourceAirport: 'APG', 'ASY', 'CVO', ...\n  DestAirport: 'ASY', 'APG', 'ACV', ...\n  Airline: '1', '2', '3', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#flight_2",
+    "tableStats": {
+      "airlines": {
+        "rows": 12,
+        "sample_values": {
+          "uid": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Airline": [
+            "United Airlines",
+            "US Airways",
+            "Delta Airlines",
+            "Southwest Airlines",
+            "American Airlines",
+            "Northwest Airlines",
+            "Continental Airlines",
+            "JetBlue Airways"
+          ],
+          "Abbreviation": [
+            "UAL",
+            "USAir",
+            "Delta",
+            "Southwest",
+            "American",
+            "Northwest",
+            "Continental",
+            "JetBlue"
+          ],
+          "Country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "airports": {
+        "rows": 100,
+        "sample_values": {
+          "City": [
+            "Aberdeen",
+            "Abilene",
+            "Abingdon",
+            "Ada",
+            "Adak Island",
+            "Adrian",
+            "Afton",
+            "Aiken"
+          ],
+          "AirportCode": [
+            "APG",
+            "ABR",
+            "DYS",
+            "ABI",
+            "VJI",
+            "ADT",
+            "ADK",
+            "ADG"
+          ],
+          "AirportName": [
+            "Phillips AAF",
+            "Municipal",
+            "Dyess AFB",
+            "Virginia Highlands",
+            "Ada",
+            "Adak Island Ns",
+            "Lenawee County",
+            "Ainsworth"
+          ],
+          "Country": [
+            "United States"
+          ],
+          "CountryAbbrev": [
+            "US"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "flights": {
+        "rows": 1200,
+        "sample_values": {
+          "Airline": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "FlightNo": [
+            "28",
+            "29",
+            "44",
+            "45",
+            "54",
+            "55",
+            "90",
+            "91"
+          ],
+          "SourceAirport": [
+            "APG",
+            "ASY",
+            "CVO",
+            "ACV",
+            "AHD",
+            "AHT",
+            "ATO",
+            "ABR"
+          ],
+          "DestAirport": [
+            "ASY",
+            "APG",
+            "ACV",
+            "CVO",
+            "AHT",
+            "AHD",
+            "ABR",
+            "ATO"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Release Metrics And Recommendations",
+  "capability": [
+    "compute_aggregates",
+    "summarize_from_records",
+    "insert_block_at_position",
+    "add_exact_blocks",
+    "query_and_filter_database",
+    "render_table_from_records",
+    "preserve_sort_order"
+  ],
+  "question": "In the \"Release Readiness Board\" page, add a release risk dashboard after the \"Release Lessons\" section.\n\n**Task Requirements:**\n1. Add a heading_3 block titled \"Release Risk Dashboard\".\n\n2. Query the existing \"Release Projects\" database and find every task meeting either of the following conditions:\n   - The progress is 50% or less, or\n   - The task has priority P0 but is not yet completed (progress is not 100%)\n\n3. Create a five-column table block under the Release Risk Dashboard heading. Each row should represent one matching task, all information should be stored as plain text, and the rows should be sorted by expected end date (End Date) in ascending order. The table must include these headers:\n   - Project\n   - Eng Hours\n   - Progress\n   - Start Date\n   - End Date\n\n4. After the table, add a brown callout titled \"Release Risk Statistics\" with no icon. The callout content must be a bulleted list with the following items in exact order:\n   - Total Risk Items: [X]\n   - P0 Not Complete: [X]\n   - Progress 50% Or Less: [X]\n   - Earliest End Date: [DATE]\n\n5. After the Release Risk Statistics callout, add a toggle block with:\n   - Text: \"🏆 Completed Release Lessons (Click to expand)\"\n   - Nested Content: Numbered list containing exactly 5 items\n     - List lessons from Release Lessons with Status=\"Done\"\n\n6. Preserve all nearby page content."
+}

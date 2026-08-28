@@ -1,0 +1,336 @@
+{
+  "db_id": "airline",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 709518,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#airline",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Air Carriers\" {\n  \"Code\" INTEGER [pk]\n  \"Description\" TEXT\n}\n\nTable \"Airlines\" {\n  \"FL_DATE\" TEXT\n  \"OP_CARRIER_AIRLINE_ID\" INTEGER\n  \"TAIL_NUM\" TEXT\n  \"OP_CARRIER_FL_NUM\" INTEGER\n  \"ORIGIN_AIRPORT_ID\" INTEGER\n  \"ORIGIN_AIRPORT_SEQ_ID\" INTEGER\n  \"ORIGIN_CITY_MARKET_ID\" INTEGER\n  \"ORIGIN\" TEXT\n  \"DEST_AIRPORT_ID\" INTEGER\n  \"DEST_AIRPORT_SEQ_ID\" INTEGER\n  \"DEST_CITY_MARKET_ID\" INTEGER\n  \"DEST\" TEXT\n  \"CRS_DEP_TIME\" INTEGER\n  \"DEP_TIME\" INTEGER\n  \"DEP_DELAY\" INTEGER\n  \"DEP_DELAY_NEW\" INTEGER\n  \"ARR_TIME\" INTEGER\n  \"ARR_DELAY\" INTEGER\n  \"ARR_DELAY_NEW\" INTEGER\n  \"CANCELLED\" INTEGER\n  \"CANCELLATION_CODE\" TEXT\n  \"CRS_ELAPSED_TIME\" INTEGER\n  \"ACTUAL_ELAPSED_TIME\" INTEGER\n  \"CARRIER_DELAY\" INTEGER\n  \"WEATHER_DELAY\" INTEGER\n  \"NAS_DELAY\" INTEGER\n  \"SECURITY_DELAY\" INTEGER\n  \"LATE_AIRCRAFT_DELAY\" INTEGER\n}\n\nTable \"Airports\" {\n  \"Code\" TEXT [pk]\n  \"Description\" TEXT\n}\n\n\n\nRef: \"Airlines\".\"OP_CARRIER_AIRLINE_ID\" > \"Air Carriers\".\"Code\"\n\nRef: \"Airlines\".\"DEST\" > \"Airports\".\"Code\"\n\nRef: \"Airlines\".\"ORIGIN\" > \"Airports\".\"Code\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Air Carriers\" {\n  \"Code\" INTEGER [pk]\n  \"Description\" TEXT\n}\n\nTable \"Airlines\" {\n  \"FL_DATE\" TEXT\n  \"OP_CARRIER_AIRLINE_ID\" INTEGER\n  \"TAIL_NUM\" TEXT\n  \"OP_CARRIER_FL_NUM\" INTEGER\n  \"ORIGIN_AIRPORT_ID\" INTEGER\n  \"ORIGIN_AIRPORT_SEQ_ID\" INTEGER\n  \"ORIGIN_CITY_MARKET_ID\" INTEGER\n  \"ORIGIN\" TEXT\n  \"DEST_AIRPORT_ID\" INTEGER\n  \"DEST_AIRPORT_SEQ_ID\" INTEGER\n  \"DEST_CITY_MARKET_ID\" INTEGER\n  \"DEST\" TEXT\n  \"CRS_DEP_TIME\" INTEGER\n  \"DEP_TIME\" INTEGER\n  \"DEP_DELAY\" INTEGER\n  \"DEP_DELAY_NEW\" INTEGER\n  \"ARR_TIME\" INTEGER\n  \"ARR_DELAY\" INTEGER\n  \"ARR_DELAY_NEW\" INTEGER\n  \"CANCELLED\" INTEGER\n  \"CANCELLATION_CODE\" TEXT\n  \"CRS_ELAPSED_TIME\" INTEGER\n  \"ACTUAL_ELAPSED_TIME\" INTEGER\n  \"CARRIER_DELAY\" INTEGER\n  \"WEATHER_DELAY\" INTEGER\n  \"NAS_DELAY\" INTEGER\n  \"SECURITY_DELAY\" INTEGER\n  \"LATE_AIRCRAFT_DELAY\" INTEGER\n}\n\nTable \"Airports\" {\n  \"Code\" TEXT [pk]\n  \"Description\" TEXT\n}\n\nRef: \"Airlines\".\"OP_CARRIER_AIRLINE_ID\" > \"Air Carriers\".\"Code\"\n\nRef: \"Airlines\".\"DEST\" > \"Airports\".\"Code\"\n\nRef: \"Airlines\".\"ORIGIN\" > \"Airports\".\"Code\"\n\n## Table Stats & Sample Values\n\nAir Carriers: 1656 rows\n  Description: 'Mackey International Inc.: MAC', 'Munz Northern Airlines Inc.: XY', 'Cochise Airlines Inc.: COC', ...\n  Code: '19031', '19032', '19033', ...\n\nAirlines: 10000 rows\n  TAIL_NUM: 'N956AN', 'N973AN', 'N9006', ...\n  ORIGIN: 'JFK', 'PHX', 'CLE', ...\n  DEST: 'PHX', 'EWR', 'DFW', ...\n\nAirports: 6510 rows\n  Description: 'Afognak Lake, AK: Afognak Lake Airport', 'Granite Mountain, AK: Bear Creek Mining Strip', 'Lik, AK: Lik Mining Camp', ...\n  Code: '01A', '03A', '04A', ...",
+    "stateUrl": "https://bird-bench.github.io/#airline",
+    "tableStats": {
+      "Air Carriers": {
+        "rows": 1656,
+        "sample_values": {
+          "Code": [
+            "19031",
+            "19032",
+            "19033",
+            "19034",
+            "19035",
+            "19036",
+            "19037",
+            "19038"
+          ],
+          "Description": [
+            "Mackey International Inc.: MAC",
+            "Munz Northern Airlines Inc.: XY",
+            "Cochise Airlines Inc.: COC",
+            "Golden Gate Airlines Inc.: GSA",
+            "Aeromech Inc.: RZZ",
+            "Golden West Airlines Co.: GLW",
+            "Puerto Rico Intl Airlines: PRN",
+            "Air America Inc.: STZ"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Airlines": {
+        "rows": 10000,
+        "sample_values": {
+          "FL_DATE": [
+            "2018/8/1"
+          ],
+          "OP_CARRIER_AIRLINE_ID": [
+            "19805",
+            "20427",
+            "21167",
+            "20452",
+            "20363",
+            "19790",
+            "20409",
+            "20366"
+          ],
+          "TAIL_NUM": [
+            "N956AN",
+            "N973AN",
+            "N9006",
+            "N870NN",
+            "N9023N",
+            "N924NN",
+            "N905AU",
+            "N301NW"
+          ],
+          "OP_CARRIER_FL_NUM": [
+            "1587",
+            "1588",
+            "1590",
+            "1591",
+            "1593",
+            "1594",
+            "1595",
+            "1596"
+          ],
+          "ORIGIN_AIRPORT_ID": [
+            "12478",
+            "14107",
+            "11042",
+            "14843",
+            "10423",
+            "11433",
+            "13930",
+            "11298"
+          ],
+          "ORIGIN_AIRPORT_SEQ_ID": [
+            "1247805",
+            "1410702",
+            "1104205",
+            "1484306",
+            "1042302",
+            "1143302",
+            "1393006",
+            "1129806"
+          ],
+          "ORIGIN_CITY_MARKET_ID": [
+            "31703",
+            "30466",
+            "30647",
+            "34819",
+            "30423",
+            "31295",
+            "30977",
+            "30194"
+          ],
+          "ORIGIN": [
+            "JFK",
+            "PHX",
+            "CLE",
+            "SJU",
+            "AUS",
+            "DTW",
+            "ORD",
+            "DFW"
+          ],
+          "DEST_AIRPORT_ID": [
+            "14107",
+            "11618",
+            "11298",
+            "13303",
+            "13930",
+            "11433",
+            "13851",
+            "14908"
+          ],
+          "DEST_AIRPORT_SEQ_ID": [
+            "1410702",
+            "1161802",
+            "1129806",
+            "1330303",
+            "1393006",
+            "1143302",
+            "1385103",
+            "1490803"
+          ],
+          "DEST_CITY_MARKET_ID": [
+            "30466",
+            "31703",
+            "30194",
+            "32467",
+            "30977",
+            "31295",
+            "33851",
+            "32575"
+          ],
+          "DEST": [
+            "PHX",
+            "EWR",
+            "DFW",
+            "MIA",
+            "ORD",
+            "DTW",
+            "OKC",
+            "SNA"
+          ],
+          "CRS_DEP_TIME": [
+            "1640",
+            "1512",
+            "744",
+            "900",
+            "600",
+            "1201",
+            "850",
+            "701"
+          ],
+          "DEP_TIME": [
+            "1649",
+            "1541",
+            "741",
+            "944",
+            "556",
+            "1151",
+            "849",
+            "655"
+          ],
+          "DEP_DELAY": [
+            "9",
+            "29",
+            "-3",
+            "44",
+            "-4",
+            "-10",
+            "-1",
+            "-6"
+          ],
+          "DEP_DELAY_NEW": [
+            "9",
+            "29",
+            "0",
+            "44",
+            "1",
+            "18",
+            "34",
+            "36"
+          ],
+          "ARR_TIME": [
+            "2006",
+            "2350",
+            "938",
+            "1347",
+            "951",
+            "1224",
+            "1110",
+            "757"
+          ],
+          "ARR_DELAY": [
+            "44",
+            "53",
+            "-2",
+            "43",
+            "-7",
+            "5",
+            "-13",
+            "-5"
+          ],
+          "ARR_DELAY_NEW": [
+            "44",
+            "53",
+            "0",
+            "43",
+            "5",
+            "1",
+            "2",
+            "14"
+          ],
+          "CANCELLED": [
+            "0",
+            "1"
+          ],
+          "CANCELLATION_CODE": [
+            "A",
+            "B",
+            "C"
+          ],
+          "CRS_ELAPSED_TIME": [
+            "342",
+            "285",
+            "176",
+            "304",
+            "173",
+            "90",
+            "75",
+            "69"
+          ],
+          "ACTUAL_ELAPSED_TIME": [
+            "377",
+            "309",
+            "177",
+            "303",
+            "175",
+            "93",
+            "81",
+            "62"
+          ],
+          "CARRIER_DELAY": [
+            "9",
+            "0",
+            "43",
+            "28",
+            "21",
+            "2",
+            "16",
+            "80"
+          ],
+          "WEATHER_DELAY": [
+            "0",
+            "2",
+            "48",
+            "46",
+            "9",
+            "33",
+            "25",
+            "15"
+          ],
+          "NAS_DELAY": [
+            "35",
+            "53",
+            "0",
+            "2",
+            "70",
+            "5",
+            "15",
+            "20"
+          ],
+          "SECURITY_DELAY": [
+            "0",
+            "42",
+            "4",
+            "3",
+            "14"
+          ],
+          "LATE_AIRCRAFT_DELAY": [
+            "0",
+            "6",
+            "73",
+            "33",
+            "5",
+            "20",
+            "17",
+            "37"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Airports": {
+        "rows": 6510,
+        "sample_values": {
+          "Code": [
+            "01A",
+            "03A",
+            "04A",
+            "05A",
+            "06A",
+            "07A",
+            "08A",
+            "09A"
+          ],
+          "Description": [
+            "Afognak Lake, AK: Afognak Lake Airport",
+            "Granite Mountain, AK: Bear Creek Mining Strip",
+            "Lik, AK: Lik Mining Camp",
+            "Little Squaw, AK: Little Squaw Airport",
+            "Kizhuyak, AK: Kizhuyak Bay",
+            "Klawock, AK: Klawock Seaplane Base",
+            "Elizabeth Island, AK: Elizabeth Island Airport",
+            "Homer, AK: Augustin Island"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

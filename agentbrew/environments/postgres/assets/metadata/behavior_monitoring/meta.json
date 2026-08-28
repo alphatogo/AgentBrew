@@ -1,0 +1,553 @@
+{
+  "db_id": "behavior_monitoring",
+  "source": "sparc",
+  "tables": 11,
+  "total_rows": 138,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#behavior_monitoring",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1\" TEXT\n  \"line_2\" TEXT\n  \"line_3\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n  \"other_address_details\" TEXT\n}\n\nTable \"Assessment_Notes\" {\n  \"notes_id\" INTEGER [not null]\n  \"student_id\" INTEGER\n  \"teacher_id\" INTEGER [not null]\n  \"date_of_notes\" TIMESTAMP\n  \"text_of_notes\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Behavior_Incident\" {\n  \"incident_id\" INTEGER [pk]\n  \"incident_type_code\" TEXT [not null]\n  \"student_id\" INTEGER [not null]\n  \"date_incident_start\" TIMESTAMP\n  \"date_incident_end\" TIMESTAMP\n  \"incident_summary\" TEXT\n  \"recommendations\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Detention\" {\n  \"detention_id\" INTEGER [pk]\n  \"detention_type_code\" TEXT [not null]\n  \"teacher_id\" INTEGER\n  \"datetime_detention_start\" TIMESTAMP\n  \"datetime_detention_end\" TIMESTAMP\n  \"detention_summary\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Ref_Address_Types\" {\n  \"address_type_code\" TEXT [pk]\n  \"address_type_description\" TEXT\n}\n\nTable \"Ref_Detention_Type\" {\n  \"detention_type_code\" TEXT [pk]\n  \"detention_type_description\" TEXT\n}\n\nTable \"Ref_Incident_Type\" {\n  \"incident_type_code\" TEXT [pk]\n  \"incident_type_description\" TEXT\n}\n\nTable \"Student_Addresses\" {\n  \"student_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"date_address_from\" TIMESTAMP [not null]\n  \"date_address_to\" TIMESTAMP\n  \"monthly_rental\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Students\" {\n  \"student_id\" INTEGER [pk]\n  \"address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"date_first_rental\" TIMESTAMP\n  \"date_left_university\" TIMESTAMP\n  \"other_student_details\" TEXT\n}\n\nTable \"Students_in_Detention\" {\n  \"student_id\" INTEGER [not null]\n  \"detention_id\" INTEGER [not null]\n  \"incident_id\" INTEGER [not null]\n}\n\nTable \"Teachers\" {\n  \"teacher_id\" INTEGER [pk]\n  \"address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"gender\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"other_details\" TEXT\n}\n\n\n\nRef: \"Students\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Teachers\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Assessment_Notes\".\"teacher_id\" > \"Teachers\".\"teacher_id\"\n\nRef: \"Assessment_Notes\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Behavior_Incident\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Behavior_Incident\".\"incident_type_code\" > \"Ref_Incident_Type\".\"incident_type_code\"\n\nRef: \"Detention\".\"teacher_id\" > \"Teachers\".\"teacher_id\"\n\nRef: \"Detention\".\"detention_type_code\" > \"Ref_Detention_Type\".\"detention_type_code\"\n\nRef: \"Student_Addresses\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Student_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Students_in_Detention\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Students_in_Detention\".\"detention_id\" > \"Detention\".\"detention_id\"\n\nRef: \"Students_in_Detention\".\"incident_id\" > \"Behavior_Incident\".\"incident_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1\" TEXT\n  \"line_2\" TEXT\n  \"line_3\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n  \"other_address_details\" TEXT\n}\n\nTable \"Assessment_Notes\" {\n  \"notes_id\" INTEGER [not null]\n  \"student_id\" INTEGER\n  \"teacher_id\" INTEGER [not null]\n  \"date_of_notes\" TIMESTAMP\n  \"text_of_notes\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Behavior_Incident\" {\n  \"incident_id\" INTEGER [pk]\n  \"incident_type_code\" TEXT [not null]\n  \"student_id\" INTEGER [not null]\n  \"date_incident_start\" TIMESTAMP\n  \"date_incident_end\" TIMESTAMP\n  \"incident_summary\" TEXT\n  \"recommendations\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Detention\" {\n  \"detention_id\" INTEGER [pk]\n  \"detention_type_code\" TEXT [not null]\n  \"teacher_id\" INTEGER\n  \"datetime_detention_start\" TIMESTAMP\n  \"datetime_detention_end\" TIMESTAMP\n  \"detention_summary\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Ref_Address_Types\" {\n  \"address_type_code\" TEXT [pk]\n  \"address_type_description\" TEXT\n}\n\nTable \"Ref_Detention_Type\" {\n  \"detention_type_code\" TEXT [pk]\n  \"detention_type_description\" TEXT\n}\n\nTable \"Ref_Incident_Type\" {\n  \"incident_type_code\" TEXT [pk]\n  \"incident_type_description\" TEXT\n}\n\nTable \"Student_Addresses\" {\n  \"student_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"date_address_from\" TIMESTAMP [not null]\n  \"date_address_to\" TIMESTAMP\n  \"monthly_rental\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Students\" {\n  \"student_id\" INTEGER [pk]\n  \"address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"date_first_rental\" TIMESTAMP\n  \"date_left_university\" TIMESTAMP\n  \"other_student_details\" TEXT\n}\n\nTable \"Students_in_Detention\" {\n  \"student_id\" INTEGER [not null]\n  \"detention_id\" INTEGER [not null]\n  \"incident_id\" INTEGER [not null]\n}\n\nTable \"Teachers\" {\n  \"teacher_id\" INTEGER [pk]\n  \"address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"gender\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"other_details\" TEXT\n}\n\nRef: \"Students\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Teachers\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Assessment_Notes\".\"teacher_id\" > \"Teachers\".\"teacher_id\"\n\nRef: \"Assessment_Notes\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Behavior_Incident\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Behavior_Incident\".\"incident_type_code\" > \"Ref_Incident_Type\".\"incident_type_code\"\n\nRef: \"Detention\".\"teacher_id\" > \"Teachers\".\"teacher_id\"\n\nRef: \"Detention\".\"detention_type_code\" > \"Ref_Detention_Type\".\"detention_type_code\"\n\nRef: \"Student_Addresses\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Student_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Students_in_Detention\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Students_in_Detention\".\"detention_id\" > \"Detention\".\"detention_id\"\n\nRef: \"Students_in_Detention\".\"incident_id\" > \"Behavior_Incident\".\"incident_id\"\n\n## Table Stats & Sample Values\n\nAddresses: 20 rows\n  city: 'North Loyceville', 'West Sean', 'Beierview', ...\n  state_province_county: 'Hawaii', 'Illinois', 'Texas', ...\n  country: 'USA'\n\nAssessment_Notes: 15 rows\n  date_of_notes: '1978-04-15 04:49:18', '2005-06-30 02:48:35', '1988-06-09 00:24:01', ...\n  notes_id: '1', '2', '3', ...\n  student_id: '7', '11', '15', ...\n\nBehavior_Incident: 15 rows\n  incident_type_code: 'NOISE', 'DISTURB', 'VIOLENCE'\n  recommendations: 'Transfer schools'\n  date_incident_start: '2017-07-09 10:04:13', '2018-01-31 10:51:13', '2017-10-10 22:43:54', ...\n\nDetention: 15 rows\n  detention_type_code: 'AFTER', 'BREAK', 'LUNCH'\n  datetime_detention_start: '2017-09-05 00:38:25', '2018-01-10 08:09:02', '2017-12-14 06:40:29', ...\n  datetime_detention_end: '2018-03-08 02:08:32', '2018-03-07 04:24:48', '2018-03-08 09:16:38', ...\n\nRef_Address_Types: 2 rows\n  address_type_description: 'Billing', 'Home or Residence'\n  address_type_code: 'BILL', 'HOME'\n\nRef_Detention_Type: 3 rows\n  detention_type_description: 'During Break time', 'After School', 'Lunch-time'\n  detention_type_code: 'BREAK', 'AFTER', 'LUNCH'\n\nRef_Incident_Type: 3 rows\n  incident_type_description: 'Noise', 'Violence', 'Disturbance'\n  incident_type_code: 'NOISE', 'VIOLENCE', 'DISTURB'\n\nStudent_Addresses: 20 rows\n  monthly_rental: '826.4319', '1113.0996', '1297.3186', ...\n  other_details: 'house', 'apartment'\n  date_address_from: '2017-10-16 13:56:34', '2017-06-19 12:39:39', '2017-10-31 12:40:34', ...\n\nStudents: 15 rows\n  first_name: 'Emma', 'Louvenia', 'Rhea', ...\n  last_name: 'Rohan', 'Hansen', 'Bergnaum', ...\n  middle_name: 'Frederic', 'Fatima', 'Gardner', ...\n\nStudents_in_Detention: 15 rows\n  student_id: '3', '8', '11', ...\n  detention_id: '15', '13', '6', ...\n  incident_id: '1', '3', '11', ...\n\nTeachers: 15 rows\n  first_name: 'Lyla', 'Sid', 'Trystan', ...\n  last_name: 'Medhurst', 'Brakus', 'Schuster', ...\n  middle_name: 'Wilson', 'Tremayne', 'Alexane', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#behavior_monitoring",
+    "tableStats": {
+      "Addresses": {
+        "rows": 20,
+        "sample_values": {
+          "address_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "line_1": [
+            "020 Orie Canyon",
+            "1333 Boyle Lane",
+            "027 Kim Divide Apt. 492",
+            "056 Murphy Stravenue Apt. 600",
+            "719 Pfannerstill Ridge Suite 663",
+            "420 Zieme Oval",
+            "27712 Marks Lake Apt. 752",
+            "6960 O'Connell Dale Suite 622"
+          ],
+          "city": [
+            "North Loyceville",
+            "West Sean",
+            "Beierview",
+            "Elinoreport",
+            "Meganeland",
+            "Corkeryborough",
+            "Gleasonshire",
+            "New Annabellefort"
+          ],
+          "zip_postcode": [
+            "197",
+            "937",
+            "918",
+            "238",
+            "002",
+            "744",
+            "182",
+            "062"
+          ],
+          "state_province_county": [
+            "Hawaii",
+            "Illinois",
+            "Texas",
+            "Wisconsin",
+            "SouthDakota",
+            "Maryland",
+            "Kentucky",
+            "Oregon"
+          ],
+          "country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Assessment_Notes": {
+        "rows": 15,
+        "sample_values": {
+          "notes_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "student_id": [
+            "7",
+            "11",
+            "15",
+            "12",
+            "4",
+            "14",
+            "13",
+            "3"
+          ],
+          "teacher_id": [
+            "3",
+            "10",
+            "9",
+            "6",
+            "7",
+            "14",
+            "15",
+            "1"
+          ],
+          "date_of_notes": [
+            "1978-04-15 04:49:18",
+            "2005-06-30 02:48:35",
+            "1988-06-09 00:24:01",
+            "1991-08-15 01:22:08",
+            "1971-05-05 20:07:08",
+            "2014-01-31 02:05:02",
+            "1984-12-13 23:04:28",
+            "1988-04-11 04:56:26"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Behavior_Incident": {
+        "rows": 15,
+        "sample_values": {
+          "incident_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "incident_type_code": [
+            "NOISE",
+            "DISTURB",
+            "VIOLENCE"
+          ],
+          "student_id": [
+            "6",
+            "13",
+            "1",
+            "10",
+            "7",
+            "8",
+            "4",
+            "11"
+          ],
+          "date_incident_start": [
+            "2017-07-09 10:04:13",
+            "2018-01-31 10:51:13",
+            "2017-10-10 22:43:54",
+            "2017-07-20 17:43:50",
+            "2017-08-13 22:15:05",
+            "2017-06-09 18:32:28",
+            "2017-04-23 07:03:17",
+            "2017-05-02 12:52:09"
+          ],
+          "date_incident_end": [
+            "2018-03-08 14:08:54",
+            "2018-03-18 18:40:05",
+            "2018-03-22 02:10:35",
+            "2018-03-09 06:28:44",
+            "2018-02-25 05:38:58",
+            "2018-03-20 10:32:10",
+            "2018-03-19 02:35:39",
+            "2018-03-18 01:23:29"
+          ],
+          "recommendations": [
+            "Transfer schools"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Detention": {
+        "rows": 15,
+        "sample_values": {
+          "detention_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "detention_type_code": [
+            "AFTER",
+            "BREAK",
+            "LUNCH"
+          ],
+          "teacher_id": [
+            "7",
+            "14",
+            "11",
+            "8",
+            "3",
+            "12",
+            "15",
+            "5"
+          ],
+          "datetime_detention_start": [
+            "2017-09-05 00:38:25",
+            "2018-01-10 08:09:02",
+            "2017-12-14 06:40:29",
+            "2017-06-09 06:13:09",
+            "2017-08-25 12:00:46",
+            "2017-10-20 22:34:44",
+            "2018-02-19 11:44:52",
+            "2017-11-26 15:05:05"
+          ],
+          "datetime_detention_end": [
+            "2018-03-08 02:08:32",
+            "2018-03-07 04:24:48",
+            "2018-03-08 09:16:38",
+            "2018-03-21 19:34:56",
+            "2018-03-11 13:21:07",
+            "2018-03-11 12:58:40",
+            "2018-03-17 12:35:41",
+            "2018-03-16 01:37:25"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Address_Types": {
+        "rows": 2,
+        "sample_values": {
+          "address_type_code": [
+            "BILL",
+            "HOME"
+          ],
+          "address_type_description": [
+            "Billing",
+            "Home or Residence"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Detention_Type": {
+        "rows": 3,
+        "sample_values": {
+          "detention_type_code": [
+            "BREAK",
+            "AFTER",
+            "LUNCH"
+          ],
+          "detention_type_description": [
+            "During Break time",
+            "After School",
+            "Lunch-time"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Incident_Type": {
+        "rows": 3,
+        "sample_values": {
+          "incident_type_code": [
+            "NOISE",
+            "VIOLENCE",
+            "DISTURB"
+          ],
+          "incident_type_description": [
+            "Noise",
+            "Violence",
+            "Disturbance"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student_Addresses": {
+        "rows": 20,
+        "sample_values": {
+          "student_id": [
+            "6",
+            "3",
+            "8",
+            "7",
+            "13",
+            "11",
+            "4",
+            "2"
+          ],
+          "address_id": [
+            "12",
+            "18",
+            "1",
+            "3",
+            "16",
+            "8",
+            "13",
+            "2"
+          ],
+          "date_address_from": [
+            "2017-10-16 13:56:34",
+            "2017-06-19 12:39:39",
+            "2017-10-31 12:40:34",
+            "2017-04-28 06:27:14",
+            "2018-03-23 08:25:36",
+            "2018-02-18 06:58:49",
+            "2017-06-22 12:20:52",
+            "2017-07-21 10:13:10"
+          ],
+          "date_address_to": [
+            "2018-03-15 10:37:19",
+            "2018-03-02 00:19:57",
+            "2018-02-25 05:21:34",
+            "2018-03-23 09:52:56",
+            "2018-03-12 17:21:24",
+            "2018-02-27 04:45:57",
+            "2018-03-04 17:04:35",
+            "2018-03-20 09:02:48"
+          ],
+          "monthly_rental": [
+            "826.4319",
+            "1113.0996",
+            "1297.3186",
+            "894.0958",
+            "1297.807",
+            "747.5312",
+            "756.6745",
+            "1287.5604"
+          ],
+          "other_details": [
+            "house",
+            "apartment"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Students": {
+        "rows": 15,
+        "sample_values": {
+          "student_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "address_id": [
+            "19",
+            "9",
+            "10",
+            "8",
+            "12",
+            "20",
+            "14",
+            "2"
+          ],
+          "first_name": [
+            "Emma",
+            "Louvenia",
+            "Rhea",
+            "David",
+            "Lucile",
+            "Antonietta",
+            "Rupert",
+            "Julia"
+          ],
+          "middle_name": [
+            "Frederic",
+            "Fatima",
+            "Gardner",
+            "Darlene",
+            "Stone",
+            "Crystal",
+            "Lincoln",
+            "Arno"
+          ],
+          "last_name": [
+            "Rohan",
+            "Hansen",
+            "Bergnaum",
+            "Gorczany",
+            "Gottlieb",
+            "Fahey",
+            "Marks",
+            "Balistreri"
+          ],
+          "cell_mobile_number": [
+            "235.899.9744",
+            "1-247-673-8446",
+            "1-751-162-9676x115",
+            "1-895-196-9979",
+            "1-036-062-5465",
+            "(874)070-9495",
+            "763.072.5520x5907",
+            "319.497.4575x2214"
+          ],
+          "email_address": [
+            "derrick.jenkins@example.com",
+            "rohan.clarabelle@example.org",
+            "kkirlin@example.org",
+            "eolson@example.com",
+            "dicki.kathryne@example.org",
+            "norwood.howell@example.org",
+            "lisette.brekke@example.net",
+            "jasmin.schuppe@example.com"
+          ],
+          "date_first_rental": [
+            "2017-12-05 15:20:04",
+            "2017-08-08 22:30:36",
+            "2017-11-15 04:57:28",
+            "2018-02-15 20:03:11",
+            "2017-07-20 18:20:27",
+            "2017-10-31 12:33:09",
+            "2017-09-25 12:02:23",
+            "2018-02-23 02:28:07"
+          ],
+          "date_left_university": [
+            "2018-03-03 03:33:05",
+            "2018-02-24 11:12:11",
+            "2018-03-19 12:49:20",
+            "2018-03-11 02:21:24",
+            "2018-03-18 16:07:42",
+            "2018-03-20 22:01:07",
+            "2018-03-01 08:56:04",
+            "2018-03-01 16:03:55"
+          ],
+          "other_student_details": [
+            "first honor"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Students_in_Detention": {
+        "rows": 15,
+        "sample_values": {
+          "student_id": [
+            "3",
+            "8",
+            "11",
+            "12",
+            "14",
+            "7",
+            "13",
+            "10"
+          ],
+          "detention_id": [
+            "15",
+            "13",
+            "6",
+            "12",
+            "7",
+            "9",
+            "14",
+            "2"
+          ],
+          "incident_id": [
+            "1",
+            "3",
+            "11",
+            "13",
+            "8",
+            "12",
+            "15",
+            "14"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Teachers": {
+        "rows": 15,
+        "sample_values": {
+          "teacher_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "address_id": [
+            "15",
+            "7",
+            "8",
+            "16",
+            "3",
+            "13",
+            "2",
+            "12"
+          ],
+          "first_name": [
+            "Lyla",
+            "Sid",
+            "Trystan",
+            "Donnie",
+            "Aniya",
+            "Citlalli",
+            "Alvis",
+            "Cecilia"
+          ],
+          "middle_name": [
+            "Wilson",
+            "Tremayne",
+            "Alexane",
+            "Morgan",
+            "Ian",
+            "Ahmad",
+            "Macey",
+            "Mitchel"
+          ],
+          "last_name": [
+            "Medhurst",
+            "Brakus",
+            "Schuster",
+            "Kuhic",
+            "Becker",
+            "Schultz",
+            "Ward",
+            "Goldner"
+          ],
+          "gender": [
+            "1",
+            "0"
+          ],
+          "cell_mobile_number": [
+            "792.333.7714",
+            "202.626.1698x9242",
+            "583-467-0403x647",
+            "07928511102",
+            "599.373.0773x67706",
+            "017.636.7409",
+            "944-154-5379x4990",
+            "809.852.7009"
+          ],
+          "email_address": [
+            "ohammes@example.com",
+            "deborah37@example.com",
+            "hilll.kitty@example.com",
+            "destany.reichert@example.net",
+            "hahn.isom@example.com",
+            "kozey.adeline@example.org",
+            "everardo.lynch@example.net",
+            "paula.abbott@example.org"
+          ],
+          "other_details": [
+            "Dean"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

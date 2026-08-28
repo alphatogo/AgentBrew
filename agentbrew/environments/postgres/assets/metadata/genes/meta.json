@@ -1,0 +1,178 @@
+{
+  "db_id": "genes",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 6118,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#genes",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Classification\" {\n  \"GeneID\" TEXT [pk, not null]\n  \"Localization\" TEXT [not null]\n}\n\nTable \"Genes\" {\n  \"GeneID\" TEXT [not null]\n  \"Essential\" TEXT [not null]\n  \"Class\" TEXT [not null]\n  \"Complex\" TEXT\n  \"Phenotype\" TEXT [not null]\n  \"Motif\" TEXT [not null]\n  \"Chromosome\" INTEGER [not null]\n  \"Function\" TEXT [not null]\n  \"Localization\" TEXT [not null]\n}\n\nTable \"Interactions\" {\n  \"GeneID1\" TEXT [pk, not null]\n  \"GeneID2\" TEXT [pk, not null]\n  \"Type\" TEXT [not null]\n  \"Expression_Corr\" REAL [not null]\n}\n\n\n\nRef: \"Genes\".\"GeneID\" > \"Classification\".\"GeneID\"\n\nRef: \"Interactions\".\"GeneID2\" > \"Classification\".\"GeneID\"\n\nRef: \"Interactions\".\"GeneID1\" > \"Classification\".\"GeneID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Classification\" {\n  \"GeneID\" TEXT [pk, not null]\n  \"Localization\" TEXT [not null]\n}\n\nTable \"Genes\" {\n  \"GeneID\" TEXT [not null]\n  \"Essential\" TEXT [not null]\n  \"Class\" TEXT [not null]\n  \"Complex\" TEXT\n  \"Phenotype\" TEXT [not null]\n  \"Motif\" TEXT [not null]\n  \"Chromosome\" INTEGER [not null]\n  \"Function\" TEXT [not null]\n  \"Localization\" TEXT [not null]\n}\n\nTable \"Interactions\" {\n  \"GeneID1\" TEXT [pk, not null]\n  \"GeneID2\" TEXT [pk, not null]\n  \"Type\" TEXT [not null]\n  \"Expression_Corr\" REAL [not null]\n}\n\nRef: \"Genes\".\"GeneID\" > \"Classification\".\"GeneID\"\n\nRef: \"Interactions\".\"GeneID2\" > \"Classification\".\"GeneID\"\n\nRef: \"Interactions\".\"GeneID1\" > \"Classification\".\"GeneID\"\n\n## Table Stats & Sample Values\n\nClassification: 862 rows\n  Localization: 'cytoplasm', 'cytoskeleton', 'nucleus', ...\n  GeneID: 'G234064', 'G234065', 'G234070', ...\n\nGenes: 4346 rows\n  Class: 'GTP/GDP-exchange factors (GEFs)', 'ATPases', 'Molecular chaperones', ...\n  Phenotype: '?', 'Mating and sporulation defects', 'Cell cycle defects', ...\n  Essential: 'Essential', 'Non-Essential', '?', ...\n\nInteractions: 910 rows\n  Type: 'Genetic-Physical', 'Genetic', 'Physical'\n  Expression_Corr: '0.914095071', '0.751584888', '0.823773738', ...\n  GeneID1: 'G234064', 'G234065', 'G234073', ...",
+    "stateUrl": "https://bird-bench.github.io/#genes",
+    "tableStats": {
+      "Classification": {
+        "rows": 862,
+        "sample_values": {
+          "GeneID": [
+            "G234064",
+            "G234065",
+            "G234070",
+            "G234073",
+            "G234074",
+            "G234076",
+            "G234084",
+            "G234085"
+          ],
+          "Localization": [
+            "cytoplasm",
+            "cytoskeleton",
+            "nucleus",
+            "plasma membrane",
+            "mitochondria",
+            "vacuole",
+            "ER",
+            "golgi"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Genes": {
+        "rows": 4346,
+        "sample_values": {
+          "GeneID": [
+            "G234064",
+            "G234065",
+            "G234070",
+            "G234073",
+            "G234074",
+            "G234076",
+            "G234084",
+            "G234085"
+          ],
+          "Essential": [
+            "Essential",
+            "Non-Essential",
+            "?",
+            "Ambiguous-Essential"
+          ],
+          "Class": [
+            "GTP/GDP-exchange factors (GEFs)",
+            "ATPases",
+            "Molecular chaperones",
+            "Motorproteins",
+            "Cyclins",
+            "Transcription factors",
+            "Protein Kinases",
+            "Major facilitator superfamily proteins (MFS)"
+          ],
+          "Complex": [
+            "Translation complexes",
+            "?",
+            "Cytoskeleton",
+            "Cyclin-CDK (Cyclin-dependent kinases) complexes",
+            "Transcription complexes/Transcriptosome",
+            "Respiration chain complexes",
+            "Nucleosomal protein complex",
+            "Intracellular transport complexes"
+          ],
+          "Phenotype": [
+            "?",
+            "Mating and sporulation defects",
+            "Cell cycle defects",
+            "Cell morphology and organelle mutants",
+            "Conditional phenotypes",
+            "Stress response defects",
+            "Carbohydrate and lipid biosynthesis defects",
+            "Nucleic acid metabolism defects"
+          ],
+          "Motif": [
+            "PS00824",
+            "PS00825",
+            "?",
+            "PS00017",
+            "PS00013",
+            "PS00741",
+            "PS00463",
+            "PS00107"
+          ],
+          "Chromosome": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Function": [
+            "CELLULAR ORGANIZATION (proteins are localized to t",
+            "PROTEIN SYNTHESIS",
+            "CELL RESCUE, DEFENSE, CELL DEATH AND AGEING",
+            "CELLULAR TRANSPORT AND TRANSPORTMECHANISMS",
+            "PROTEIN DESTINATION",
+            "CELL GROWTH, CELL DIVISION AND DNA SYNTHESIS",
+            "CELLULAR COMMUNICATION/SIGNAL TRANSDUCTION",
+            "METABOLISM"
+          ],
+          "Localization": [
+            "cytoplasm",
+            "cytoskeleton",
+            "nucleus",
+            "plasma membrane",
+            "mitochondria",
+            "vacuole",
+            "ER",
+            "golgi"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Interactions": {
+        "rows": 910,
+        "sample_values": {
+          "GeneID1": [
+            "G234064",
+            "G234065",
+            "G234073",
+            "G234074",
+            "G234076",
+            "G234085",
+            "G234089",
+            "G234093"
+          ],
+          "GeneID2": [
+            "G234126",
+            "G235065",
+            "G234371",
+            "G234854",
+            "G234065",
+            "G234084",
+            "G234700",
+            "G237843"
+          ],
+          "Type": [
+            "Genetic-Physical",
+            "Genetic",
+            "Physical"
+          ],
+          "Expression_Corr": [
+            "0.914095071",
+            "0.751584888",
+            "0.823773738",
+            "0.939001091",
+            "0.749192312",
+            "0.611960418",
+            "0.596091968",
+            "0.54176406"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

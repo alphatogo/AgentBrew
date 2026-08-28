@@ -1,0 +1,9 @@
+{
+  "title": "Exam Prep Session Insert",
+  "capability": [
+    "insert_block_at_position",
+    "match_existing_format",
+    "add_exact_blocks"
+  ],
+  "question": "Your goal is to create a new study-session entry in the \"Certification Study Board\" page.\n1. Locate the \"Exam Prep Tracker\" section of the page.\n2. Insert a new date section immediately after the existing \"2025-02-10\"\n   to-do items but before the divider block that follows them. Make sure\n   the new date has proper formatting with a date mention and bold styling\n   like the existing dates, and all to-do items should be unchecked\n   initially. The new section should be inserted right after the\n   2025-02-10 to-do items but before the divider.\n\n3. Directly beneath this new date mention, add exactly four unchecked\n   to-do blocks with the following plain text:\n   - \"🧠 Review mock exam errors\"\n   - \"📚 Rewrite weak concept notes\"\n   - \"⚡ Practice timed architecture questions\"\n   - \"🎯 Summarize final review checklist\"\n"
+}

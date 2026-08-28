@@ -1,0 +1,617 @@
+{
+  "db_id": "machine_learning_model_performance_analysis_951812",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/machine_learning_model_performance_analysis_951812",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"model_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_time\" TEXT\n}\n\nTable \"public\".\"data_fold_history\" {\n  \"history_id\" INTEGER [pk]\n  \"fold_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"data_folds\" {\n  \"fold_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"fold_number\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"dataset_history\" {\n  \"history_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"dataset_name\" TEXT\n  \"data_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"dataset_status\" TEXT\n}\n\nTable \"public\".\"model_comparisons\" {\n  \"comparison_id\" INTEGER [pk]\n  \"model_id_1\" INTEGER\n  \"model_id_2\" INTEGER\n  \"comparison_type\" TEXT\n  \"comparison_result\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"model_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"config_name\" TEXT\n  \"config_value\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"model_history\" {\n  \"history_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"version_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"model_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"metric_name\" TEXT\n  \"metric_description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"model_performance\" {\n  \"performance_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"fold_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"model_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"model_status\" TEXT\n}\n\nTable \"public\".\"user_role_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role_id\" INTEGER\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"activity_log\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"created_at\" TEXT\n  \"last_login_at\" TEXT\n  \"last_login_ip\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"model_id\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"data_fold_history\".\"fold_id\" > \"public\".\"data_folds\".\"fold_id\"\nRef: \"public\".\"data_fold_history\".\"changed_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"data_folds\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"data_folds\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_history\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_history\".\"changed_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"model_comparisons\".\"model_id_1\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"model_comparisons\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"model_comparisons\".\"model_id_2\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"model_configurations\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"model_configurations\".\"version_id\" > \"public\".\"model_versions\".\"version_id\"\nRef: \"public\".\"model_history\".\"model_id\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"model_history\".\"version_id\" > \"public\".\"model_versions\".\"version_id\"\nRef: \"public\".\"model_history\".\"changed_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"model_performance\".\"fold_id\" > \"public\".\"data_folds\".\"fold_id\"\nRef: \"public\".\"model_performance\".\"model_id\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"model_performance\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"model_versions\".\"model_id\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"model_versions\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_role_assignments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_role_assignments\".\"role_id\" > \"public\".\"user_roles\".\"role_id\"\nRef: \"public\".\"user_sessions\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_sessions\".\"user_id\" > \"public\".\"users\".\"user_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"model_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_time\" TEXT\n}\n\nTable \"data_fold_history\" {\n  \"history_id\" INTEGER [pk]\n  \"fold_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"data_folds\" {\n  \"fold_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"fold_number\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"dataset_history\" {\n  \"history_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"dataset_name\" TEXT\n  \"data_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"dataset_status\" TEXT\n}\n\nTable \"model_comparisons\" {\n  \"comparison_id\" INTEGER [pk]\n  \"model_id_1\" INTEGER\n  \"model_id_2\" INTEGER\n  \"comparison_type\" TEXT\n  \"comparison_result\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"model_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"config_name\" TEXT\n  \"config_value\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"model_history\" {\n  \"history_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"version_id\" INTEGER\n  \"change_type\" TEXT\n  \"change_description\" TEXT\n  \"changed_at\" TEXT\n  \"changed_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"model_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"metric_name\" TEXT\n  \"metric_description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"model_performance\" {\n  \"performance_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"fold_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"model_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"model_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_type\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n  \"model_status\" TEXT\n}\n\nTable \"user_role_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role_id\" INTEGER\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"activity_log\" TEXT\n  \"created_at\" TEXT\n  \"created_by\" INTEGER\n  \"last_updated_at\" TEXT\n  \"last_updated_by\" INTEGER\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"created_at\" TEXT\n  \"last_login_at\" TEXT\n  \"last_login_ip\" TEXT\n}\n\nRef: \"access_logs\".\"model_id\" > \"models\".\"model_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"data_fold_history\".\"fold_id\" > \"data_folds\".\"fold_id\"\n\nRef: \"data_fold_history\".\"changed_by\" > \"users\".\"user_id\"\n\nRef: \"data_folds\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"data_folds\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"dataset_history\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_history\".\"changed_by\" > \"users\".\"user_id\"\n\nRef: \"model_comparisons\".\"model_id_1\" > \"models\".\"model_id\"\n\nRef: \"model_comparisons\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"model_comparisons\".\"model_id_2\" > \"models\".\"model_id\"\n\nRef: \"model_configurations\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"model_configurations\".\"version_id\" > \"model_versions\".\"version_id\"\n\nRef: \"model_history\".\"model_id\" > \"models\".\"model_id\"\n\nRef: \"model_history\".\"version_id\" > \"model_versions\".\"version_id\"\n\nRef: \"model_history\".\"changed_by\" > \"users\".\"user_id\"\n\nRef: \"model_performance\".\"fold_id\" > \"data_folds\".\"fold_id\"\n\nRef: \"model_performance\".\"model_id\" > \"models\".\"model_id\"\n\nRef: \"model_performance\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"model_versions\".\"model_id\" > \"models\".\"model_id\"\n\nRef: \"model_versions\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"user_role_assignments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_role_assignments\".\"role_id\" > \"user_roles\".\"role_id\"\n\nRef: \"user_sessions\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"user_sessions\".\"user_id\" > \"users\".\"user_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-01-01', '2023-01-02'\n  access_time: '10:00:00', '11:00:00'\n\ndata_fold_history: 2 rows\n  change_description: 'First fold of training data created', 'First fold of test data created'\n  change_type: 'created'\n  changed_at: '2023-01-01 22:00:00', '2023-01-01 22:05:00'\n\ndata_folds: 2 rows\n  description: 'First fold of training data', 'First fold of test data'\n  created_at: '2023-01-01 12:00:00', '2023-01-01 12:05:00'\n  last_updated_at: '2023-01-01 13:00:00', '2023-01-01 13:05:00'\n\ndataset_history: 2 rows\n  change_description: 'Training dataset created', 'Test dataset created'\n  change_type: 'created'\n  changed_at: '2023-01-01 20:00:00', '2023-01-01 20:05:00'\n\ndatasets: 2 rows\n  dataset_name: 'Training Data', 'Test Data'\n  data_type: 'train', 'test'\n  description: 'Training dataset for NLP tasks', 'Test dataset for NLP tasks'\n\nmodel_comparisons: 2 rows\n  comparison_type: 'loss', 'accuracy'\n  comparison_result: 'MSGD has a lower loss than MSGD+C', 'MSGD+C has higher accuracy than MSGD+CR'\n  created_at: '2023-01-01 21:00:00', '2023-01-01 21:05:00'\n\nmodel_configurations: 2 rows\n  config_name: 'learning_rate', 'batch_size'\n  config_value: '0.001', '64'\n  created_at: '2023-01-01 15:00:00', '2023-01-01 15:05:00'\n\nmodel_history: 2 rows\n  change_description: 'Initial version of MSGD model created', 'Initial version of MSGD+C model created'\n  change_type: 'created'\n  changed_at: '2023-01-01 19:00:00', '2023-01-01 19:05:00'\n\nmodel_metrics: 2 rows\n  metric_name: 'Loss', 'Accuracy'\n  metric_description: 'Loss function value', 'Accuracy of the model'\n  created_at: '2023-01-01 16:00:00', '2023-01-01 16:05:00'\n\nmodel_performance: 2 rows\n  metric_name: 'Loss'\n  created_at: '2023-01-01 13:00:00', '2023-01-01 13:05:00'\n  last_updated_at: '2023-01-01 14:00:00', '2023-01-01 14:05:00'\n\nmodel_versions: 2 rows\n  description: 'Initial version of MSGD model', 'Initial version of MSGD+C model'\n  created_at: '2023-01-01 14:00:00', '2023-01-01 14:05:00'\n  last_updated_at: '2023-01-01 15:00:00', '2023-01-01 15:05:00'\n\nmodels: 2 rows\n  model_name: 'MSGD', 'MSGD+C'\n  description: 'Momentum Stochastic Gradient Descent', 'Momentum Stochastic Gradient Descent with Clipping'\n  model_type: 'Optimizer'\n\nuser_role_assignments: 2 rows\n  created_at: '2023-01-01 18:00:00', '2023-01-01 18:05:00'\n  last_updated_at: '2023-01-01 19:00:00', '2023-01-01 19:05:00'\n  role_id: '1', '0'\n\nuser_roles: 2 rows\n  role_name: 'data scientist', 'researcher'\n  description: 'Role for data scientists', 'Role for researchers'\n  permissions: 'view, edit, delete', 'view, edit'\n\nuser_sessions: 2 rows\n  activity_log: 'viewed models, accessed datasets', 'created new dataset, uploaded data'\n  login_time: '2023-01-01 08:00:00', '2023-01-01 09:00:00'\n  logout_time: '2023-01-01 17:00:00', '2023-01-01 18:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'data scientist', 'researcher'\n  password_hash: 'hashed_password1', 'hashed_password2'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "model_id": [
+            "0"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "access_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_time": [
+            "10:00:00",
+            "11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_fold_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "fold_id": [
+            "0",
+            "1"
+          ],
+          "change_type": [
+            "created"
+          ],
+          "change_description": [
+            "First fold of training data created",
+            "First fold of test data created"
+          ],
+          "changed_at": [
+            "2023-01-01 22:00:00",
+            "2023-01-01 22:05:00"
+          ],
+          "changed_by": [
+            "1",
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 23:00:00",
+            "2023-01-01 23:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_folds": {
+        "rows": 2,
+        "sample_values": {
+          "fold_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "fold_number": [
+            "1"
+          ],
+          "description": [
+            "First fold of training data",
+            "First fold of test data"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-01 12:05:00"
+          ],
+          "created_by": [
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 13:00:00",
+            "2023-01-01 13:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0"
+          ],
+          "change_type": [
+            "created"
+          ],
+          "change_description": [
+            "Training dataset created",
+            "Test dataset created"
+          ],
+          "changed_at": [
+            "2023-01-01 20:00:00",
+            "2023-01-01 20:05:00"
+          ],
+          "changed_by": [
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 21:00:00",
+            "2023-01-01 21:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "datasets": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "dataset_name": [
+            "Training Data",
+            "Test Data"
+          ],
+          "data_type": [
+            "train",
+            "test"
+          ],
+          "description": [
+            "Training dataset for NLP tasks",
+            "Test dataset for NLP tasks"
+          ],
+          "created_at": [
+            "2023-01-01 11:00:00",
+            "2023-01-01 11:05:00"
+          ],
+          "created_by": [
+            "1001",
+            "1002"
+          ],
+          "last_updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-01 12:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ],
+          "dataset_status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_comparisons": {
+        "rows": 2,
+        "sample_values": {
+          "comparison_id": [
+            "0",
+            "1"
+          ],
+          "model_id_1": [
+            "0",
+            "1"
+          ],
+          "model_id_2": [
+            "0"
+          ],
+          "comparison_type": [
+            "loss",
+            "accuracy"
+          ],
+          "comparison_result": [
+            "MSGD has a lower loss than MSGD+C",
+            "MSGD+C has higher accuracy than MSGD+CR"
+          ],
+          "created_at": [
+            "2023-01-01 21:00:00",
+            "2023-01-01 21:05:00"
+          ],
+          "created_by": [
+            "1",
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 22:00:00",
+            "2023-01-01 22:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_configurations": {
+        "rows": 2,
+        "sample_values": {
+          "config_id": [
+            "0",
+            "1"
+          ],
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "config_name": [
+            "learning_rate",
+            "batch_size"
+          ],
+          "config_value": [
+            "0.001",
+            "64"
+          ],
+          "created_at": [
+            "2023-01-01 15:00:00",
+            "2023-01-01 15:05:00"
+          ],
+          "created_by": [
+            "1"
+          ],
+          "last_updated_at": [
+            "2023-01-01 16:00:00",
+            "2023-01-01 16:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "change_type": [
+            "created"
+          ],
+          "change_description": [
+            "Initial version of MSGD model created",
+            "Initial version of MSGD+C model created"
+          ],
+          "changed_at": [
+            "2023-01-01 19:00:00",
+            "2023-01-01 19:05:00"
+          ],
+          "changed_by": [
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 20:00:00",
+            "2023-01-01 20:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_metrics": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "Loss",
+            "Accuracy"
+          ],
+          "metric_description": [
+            "Loss function value",
+            "Accuracy of the model"
+          ],
+          "created_at": [
+            "2023-01-01 16:00:00",
+            "2023-01-01 16:05:00"
+          ],
+          "created_by": [
+            "1001",
+            "1002"
+          ],
+          "last_updated_at": [
+            "2023-01-01 17:00:00",
+            "2023-01-01 17:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_performance": {
+        "rows": 2,
+        "sample_values": {
+          "performance_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "fold_id": [
+            "1",
+            "0"
+          ],
+          "metric_name": [
+            "Loss"
+          ],
+          "metric_value": [
+            "6.87",
+            "6.81"
+          ],
+          "created_at": [
+            "2023-01-01 13:00:00",
+            "2023-01-01 13:05:00"
+          ],
+          "created_by": [
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 14:00:00",
+            "2023-01-01 14:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "model_id": [
+            "1"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "description": [
+            "Initial version of MSGD model",
+            "Initial version of MSGD+C model"
+          ],
+          "created_at": [
+            "2023-01-01 14:00:00",
+            "2023-01-01 14:05:00"
+          ],
+          "created_by": [
+            "0"
+          ],
+          "last_updated_at": [
+            "2023-01-01 15:00:00",
+            "2023-01-01 15:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "models": {
+        "rows": 2,
+        "sample_values": {
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "model_name": [
+            "MSGD",
+            "MSGD+C"
+          ],
+          "model_type": [
+            "Optimizer"
+          ],
+          "description": [
+            "Momentum Stochastic Gradient Descent",
+            "Momentum Stochastic Gradient Descent with Clipping"
+          ],
+          "created_at": [
+            "2023-01-01 10:00:00",
+            "2023-01-01 10:05:00"
+          ],
+          "created_by": [
+            "1001",
+            "1002"
+          ],
+          "last_updated_at": [
+            "2023-01-01 11:00:00",
+            "2023-01-01 11:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ],
+          "model_status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_role_assignments": {
+        "rows": 2,
+        "sample_values": {
+          "assignment_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "role_id": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2023-01-01 18:00:00",
+            "2023-01-01 18:05:00"
+          ],
+          "created_by": [
+            "1001",
+            "1002"
+          ],
+          "last_updated_at": [
+            "2023-01-01 19:00:00",
+            "2023-01-01 19:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "data scientist",
+            "researcher"
+          ],
+          "permissions": [
+            "view, edit, delete",
+            "view, edit"
+          ],
+          "description": [
+            "Role for data scientists",
+            "Role for researchers"
+          ],
+          "created_at": [
+            "2023-01-01 17:00:00",
+            "2023-01-01 17:05:00"
+          ],
+          "created_by": [
+            "1001",
+            "1002"
+          ],
+          "last_updated_at": [
+            "2023-01-01 18:00:00",
+            "2023-01-01 18:05:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_sessions": {
+        "rows": 2,
+        "sample_values": {
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "login_time": [
+            "2023-01-01 08:00:00",
+            "2023-01-01 09:00:00"
+          ],
+          "logout_time": [
+            "2023-01-01 17:00:00",
+            "2023-01-01 18:00:00"
+          ],
+          "activity_log": [
+            "viewed models, accessed datasets",
+            "created new dataset, uploaded data"
+          ],
+          "created_at": [
+            "2023-01-01 08:00:00",
+            "2023-01-01 09:00:00"
+          ],
+          "created_by": [
+            "0",
+            "1"
+          ],
+          "last_updated_at": [
+            "2023-01-01 18:00:00",
+            "2023-01-01 19:00:00"
+          ],
+          "last_updated_by": [
+            "1001",
+            "1002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "data scientist",
+            "researcher"
+          ],
+          "password_hash": [
+            "hashed_password1",
+            "hashed_password2"
+          ],
+          "created_at": [
+            "2023-01-01 09:00:00",
+            "2023-01-01 09:05:00"
+          ],
+          "last_login_at": [
+            "2023-01-01 10:00:00",
+            "2023-01-01 10:05:00"
+          ],
+          "last_login_ip": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

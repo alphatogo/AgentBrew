@@ -1,0 +1,610 @@
+{
+  "db_id": "donor",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 7528409,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#donor",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"donations\" {\n  \"donationid\" TEXT [pk, not null]\n  \"projectid\" TEXT\n  \"donor_acctid\" TEXT\n  \"donor_city\" TEXT\n  \"donor_state\" TEXT\n  \"donor_zip\" TEXT\n  \"is_teacher_acct\" TEXT\n  \"donation_timestamp\" TIMESTAMP\n  \"donation_to_project\" REAL\n  \"donation_optional_support\" REAL\n  \"donation_total\" REAL\n  \"dollar_amount\" TEXT\n  \"donation_included_optional_support\" TEXT\n  \"payment_method\" TEXT\n  \"payment_included_acct_credit\" TEXT\n  \"payment_included_campaign_gift_card\" TEXT\n  \"payment_included_web_purchased_gift_card\" TEXT\n  \"payment_was_promo_matched\" TEXT\n  \"via_giving_page\" TEXT\n  \"for_honoree\" TEXT\n  \"donation_message\" TEXT\n}\n\nTable \"essays\" {\n  \"projectid\" TEXT\n  \"teacher_acctid\" TEXT\n  \"title\" TEXT\n  \"short_description\" TEXT\n  \"need_statement\" TEXT\n  \"essay\" TEXT\n}\n\nTable \"projects\" {\n  \"projectid\" TEXT [pk, not null]\n  \"teacher_acctid\" TEXT\n  \"schoolid\" TEXT\n  \"school_ncesid\" TEXT\n  \"school_latitude\" REAL\n  \"school_longitude\" REAL\n  \"school_city\" TEXT\n  \"school_state\" TEXT\n  \"school_zip\" INTEGER\n  \"school_metro\" TEXT\n  \"school_district\" TEXT\n  \"school_county\" TEXT\n  \"school_charter\" TEXT\n  \"school_magnet\" TEXT\n  \"school_year_round\" TEXT\n  \"school_nlns\" TEXT\n  \"school_kipp\" TEXT\n  \"school_charter_ready_promise\" TEXT\n  \"teacher_prefix\" TEXT\n  \"teacher_teach_for_america\" TEXT\n  \"teacher_ny_teaching_fellow\" TEXT\n  \"primary_focus_subject\" TEXT\n  \"primary_focus_area\" TEXT\n  \"secondary_focus_subject\" TEXT\n  \"secondary_focus_area\" TEXT\n  \"resource_type\" TEXT\n  \"poverty_level\" TEXT\n  \"grade_level\" TEXT\n  \"fulfillment_labor_materials\" REAL\n  \"total_price_excluding_optional_support\" REAL\n  \"total_price_including_optional_support\" REAL\n  \"students_reached\" INTEGER\n  \"eligible_double_your_impact_match\" TEXT\n  \"eligible_almost_home_match\" TEXT\n  \"date_posted\" DATE\n}\n\nTable \"resources\" {\n  \"resourceid\" TEXT [pk, not null]\n  \"projectid\" TEXT\n  \"vendorid\" INTEGER\n  \"vendor_name\" TEXT\n  \"project_resource_type\" TEXT\n  \"item_name\" TEXT\n  \"item_number\" TEXT\n  \"item_unit_price\" REAL\n  \"item_quantity\" INTEGER\n}\n\n\n\nRef: \"donations\".\"projectid\" > \"projects\".\"projectid\"\n\nRef: \"resources\".\"projectid\" > \"projects\".\"projectid\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"donations\" {\n  \"donationid\" TEXT [pk, not null]\n  \"projectid\" TEXT\n  \"donor_acctid\" TEXT\n  \"donor_city\" TEXT\n  \"donor_state\" TEXT\n  \"donor_zip\" TEXT\n  \"is_teacher_acct\" TEXT\n  \"donation_timestamp\" TIMESTAMP\n  \"donation_to_project\" REAL\n  \"donation_optional_support\" REAL\n  \"donation_total\" REAL\n  \"dollar_amount\" TEXT\n  \"donation_included_optional_support\" TEXT\n  \"payment_method\" TEXT\n  \"payment_included_acct_credit\" TEXT\n  \"payment_included_campaign_gift_card\" TEXT\n  \"payment_included_web_purchased_gift_card\" TEXT\n  \"payment_was_promo_matched\" TEXT\n  \"via_giving_page\" TEXT\n  \"for_honoree\" TEXT\n  \"donation_message\" TEXT\n}\n\nTable \"essays\" {\n  \"projectid\" TEXT\n  \"teacher_acctid\" TEXT\n  \"title\" TEXT\n  \"short_description\" TEXT\n  \"need_statement\" TEXT\n  \"essay\" TEXT\n}\n\nTable \"projects\" {\n  \"projectid\" TEXT [pk, not null]\n  \"teacher_acctid\" TEXT\n  \"schoolid\" TEXT\n  \"school_ncesid\" TEXT\n  \"school_latitude\" REAL\n  \"school_longitude\" REAL\n  \"school_city\" TEXT\n  \"school_state\" TEXT\n  \"school_zip\" INTEGER\n  \"school_metro\" TEXT\n  \"school_district\" TEXT\n  \"school_county\" TEXT\n  \"school_charter\" TEXT\n  \"school_magnet\" TEXT\n  \"school_year_round\" TEXT\n  \"school_nlns\" TEXT\n  \"school_kipp\" TEXT\n  \"school_charter_ready_promise\" TEXT\n  \"teacher_prefix\" TEXT\n  \"teacher_teach_for_america\" TEXT\n  \"teacher_ny_teaching_fellow\" TEXT\n  \"primary_focus_subject\" TEXT\n  \"primary_focus_area\" TEXT\n  \"secondary_focus_subject\" TEXT\n  \"secondary_focus_area\" TEXT\n  \"resource_type\" TEXT\n  \"poverty_level\" TEXT\n  \"grade_level\" TEXT\n  \"fulfillment_labor_materials\" REAL\n  \"total_price_excluding_optional_support\" REAL\n  \"total_price_including_optional_support\" REAL\n  \"students_reached\" INTEGER\n  \"eligible_double_your_impact_match\" TEXT\n  \"eligible_almost_home_match\" TEXT\n  \"date_posted\" DATE\n}\n\nTable \"resources\" {\n  \"resourceid\" TEXT [pk, not null]\n  \"projectid\" TEXT\n  \"vendorid\" INTEGER\n  \"vendor_name\" TEXT\n  \"project_resource_type\" TEXT\n  \"item_name\" TEXT\n  \"item_number\" TEXT\n  \"item_unit_price\" REAL\n  \"item_quantity\" INTEGER\n}\n\nRef: \"donations\".\"projectid\" > \"projects\".\"projectid\"\n\nRef: \"resources\".\"projectid\" > \"projects\".\"projectid\"\n\n## Table Stats & Sample Values\n\ndonations: 9794 rows\n  donor_city: 'Peachtree City', 'Rockville', 'Salem', ...\n  donor_state: 'GA', 'MD', 'IN', ...\n  donor_zip: '30269', '20853', '47167', ...\n\nessays: 4771 rows\n  title: 'iMath', 'Too Close for Comfort', 'Building English Proficiency in English Language L', ...\n  need_statement: 'My students need four iPods.', 'My students need another iPad to experience techno', 'The cost the Grade K Audiobook Collection from Rec', ...\n  short_description: 'It is imperative that teachers bring technology in', 'Have you ever had to crowd around an iPad screen t', 'My full-day Kindergarten class is over 50% English', ...\n\nprojects: 10000 rows\n  school_city: 'Selma', 'Dallas', 'Colton', ...\n  school_state: 'CA', 'TX', 'OR', ...\n  resource_type: 'Books', 'Technology', 'Other', ...\n\nresources: 10000 rows\n  vendor_name: 'Woodwind and Brasswind', 'Best Buy for Business', 'Lakeshore Learning Materials', ...\n  project_resource_type: 'Technology', 'Supplies', 'Other', ...\n  item_name: 'iPod nano 4th Gen 8GB (Black)', 'Sony bloggie MHS-FS1 - camcorder - internal flash', 'VX748 - Best-Buy Jumbo Crayons - 12-Color Box', ...",
+    "stateUrl": "https://bird-bench.github.io/#donor",
+    "tableStats": {
+      "donations": {
+        "rows": 9794,
+        "sample_values": {
+          "donationid": [
+            "431d720bc3dfd75ae445a5eaa0b0638d",
+            "fcfedba1c8a0ba77d280cace80a909f6",
+            "3fa95d29986aa6f401c6719ced3a3ce7",
+            "020ad6bd5e88a35741d23b5e08f8b8e8",
+            "4b44b03f304d6425ae94446686f93cd6",
+            "9be4b22432cae4c9ad0a8f8b45e23549",
+            "d638145f90a23325b721813b2f8ee7c4",
+            "b39547f29dfc25fb13c6e9e8d940dc43"
+          ],
+          "projectid": [
+            "ffffac55ee02a49d1abc87ba6fc61135",
+            "ffff97ed93720407d70a2787475932b0",
+            "ffff418bb42fad24347527ad96100f81",
+            "ffff2d9c769c8fb5335e949c615425eb",
+            "fffeebf4827d745aa36b17c2d38d1966",
+            "fffee68353ade53e7692b23098096683",
+            "fffec078a2249c2365f3086a6eac7e4a",
+            "fffeb149cd9b85d802b2500368fd605e"
+          ],
+          "donor_acctid": [
+            "22cbc920c9b5fa08dfb331422f5926b5",
+            "521f1830a77c9dbbf8119d99c6206a16",
+            "1e0a63fc8141c7ba26b8b44ca0871b90",
+            "1d4acb508df29d5f1cc6d382969576cb",
+            "59c3c3cfcccc53ae855f7eee911c478b",
+            "2215e4e3f54e8834284906fedca89383",
+            "f1b43a3b756a68b200df0301ff675d6c",
+            "12bc331b479e327d8be5dd475bb0d926"
+          ],
+          "donor_city": [
+            "Peachtree City",
+            "Rockville",
+            "Salem",
+            "anonymous",
+            "Pocatello",
+            "Rigby",
+            "Dillon",
+            "Malden Bridge"
+          ],
+          "donor_state": [
+            "GA",
+            "MD",
+            "IN",
+            "NY",
+            "TX",
+            "ID",
+            "CO",
+            "CA"
+          ],
+          "donor_zip": [
+            "30269",
+            "20853",
+            "47167",
+            "0",
+            "83201",
+            "80003",
+            "83605",
+            "83442"
+          ],
+          "is_teacher_acct": [
+            "f",
+            "t"
+          ],
+          "donation_timestamp": [
+            "2011-08-25 14:27:34.807",
+            "2011-11-04 07:54:21.552",
+            "2011-11-02 22:53:53.019",
+            "2011-11-03 23:54:01.109",
+            "2011-11-02 23:21:00.043",
+            "2011-10-16 20:59:09.417",
+            "2011-08-31 08:13:55.15",
+            "2010-11-12 16:11:46.116"
+          ],
+          "donation_to_project": [
+            "42.5",
+            "26.83",
+            "55.35",
+            "8.5",
+            "20.0",
+            "4.25",
+            "50.0",
+            "212.5"
+          ],
+          "donation_optional_support": [
+            "7.5",
+            "4.73",
+            "0.0",
+            "1.5",
+            "0.75",
+            "37.5",
+            "32.65",
+            "3.75"
+          ],
+          "donation_total": [
+            "50.0",
+            "31.56",
+            "55.35",
+            "10.0",
+            "20.0",
+            "5.0",
+            "250.0",
+            "217.66"
+          ],
+          "dollar_amount": [
+            "10_to_100",
+            "under_10",
+            "100_and_up"
+          ],
+          "donation_included_optional_support": [
+            "t",
+            "f"
+          ],
+          "payment_method": [
+            "no_cash_received",
+            "creditcard",
+            "paypal",
+            "amazon",
+            "promo_code_match",
+            "check",
+            "double_your_impact_match",
+            "almost_home_match"
+          ],
+          "payment_included_acct_credit": [
+            "f",
+            "t"
+          ],
+          "payment_included_campaign_gift_card": [
+            "t",
+            "f"
+          ],
+          "payment_included_web_purchased_gift_card": [
+            "f",
+            "t"
+          ],
+          "payment_was_promo_matched": [
+            "f",
+            "t"
+          ],
+          "via_giving_page": [
+            "f",
+            "t"
+          ],
+          "for_honoree": [
+            "f",
+            "t"
+          ],
+          "donation_message": [
+            "I gave to this project because I support the effor",
+            "I donated because I want to support kids in Georgi",
+            "The Spark's 'pet' projects include those which sup",
+            "I gave to this project because Education is import",
+            "I lent a paw to help the children in this classroo",
+            "I helped because I'm a strong believer in Special ",
+            "I gave to this project because I am helping MCM su",
+            "Donation on behalf of Matt Carpenter because I'm a"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "essays": {
+        "rows": 4771,
+        "sample_values": {
+          "projectid": [
+            "ffffc4f85b60efc5b52347df489d0238",
+            "ffff2d9c769c8fb5335e949c615425eb",
+            "fffec078a2249c2365f3086a6eac7e4a",
+            "fffe598a41270538eab48432513513ab",
+            "fffe45b28ea6f2889de1e3f797fb31a3",
+            "fffe426c60834b0ba2eb05f759d854da",
+            "fffdfdcf27588d2d32c15c12dec3a2cb",
+            "fffdfafaf7cc8fdd9b6567051b394da7"
+          ],
+          "teacher_acctid": [
+            "c24011b20fc161ed02248e85beb59a90",
+            "485784e52a4c85ea6783285d09d8aea4",
+            "b70b3bcacd73905c88028ba115740ddf",
+            "a2abddbac0cc4a11e8d791469c580d2c",
+            "defe5366f82c80715343e58cf95bd2ac",
+            "0e853a40819781b2de5d410418674d02",
+            "7f00774dc719bbd571b7035e30e2fbf8",
+            "e48ca9c6f11053514180edcc19981475"
+          ],
+          "title": [
+            "iMath",
+            "Too Close for Comfort",
+            "Building English Proficiency in English Language L",
+            "Glazed Clay Pots",
+            "Glockenspiels for an Elementary School Instrumenta",
+            "Listening For Fluency",
+            "Igniting a PASSION for Reading Within Sixth Grader",
+            "Chapter Books for Our 4th Grade Class"
+          ],
+          "short_description": [
+            "It is imperative that teachers bring technology in",
+            "Have you ever had to crowd around an iPad screen t",
+            "My full-day Kindergarten class is over 50% English",
+            "My students love to open their imaginations by wor",
+            "The glockenspiel adds great tonal beauty to an ins",
+            "Upgrading our listening center by adding individua",
+            "Do you remember what it was like the first time yo",
+            "Save us from a limited classroom library! Our clas"
+          ],
+          "need_statement": [
+            "My students need four iPods.",
+            "My students need another iPad to experience techno",
+            "The cost the Grade K Audiobook Collection from Rec",
+            "My students need 50lbs of clay and some colorful g",
+            "My students need a glockenspiel for our music clas",
+            "My students need 6 listening center headphones, 8-",
+            "My students need 36 copies of The Westing Game so ",
+            "My students need 16 copies of 'Tuck Everlasting,' "
+          ],
+          "essay": [
+            "I am a fourth year fifth grade math teacher. The s",
+            "Have you ever had to crowd around an iPad screen t",
+            "My full-day Kindergarten class is over 50% English",
+            "My students love to open their imaginations by wor",
+            "The glockenspiel adds great tonal beauty to an ins",
+            "Fifty per cent of my students have been left back ",
+            "Do you remember what it was like the first time yo",
+            "Save us from a limited classroom library! Our clas"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "projects": {
+        "rows": 10000,
+        "sample_values": {
+          "projectid": [
+            "316ed8fb3b81402ff6ac8f721bb31192",
+            "90de744e368a7e4883223ca49318ae30",
+            "32943bb1063267de6ed19fc0ceb4b9a7",
+            "bb18f409abda2f264d5acda8cab577a9",
+            "24761b686e18e5eace634607acbcc19f",
+            "eac7d156205f1333de3887d656f46611",
+            "5a3bfdf2e05781ccd0654dee0d51d1cd",
+            "afda16eb54d8992db7bb42923b2a0c69"
+          ],
+          "teacher_acctid": [
+            "42d43fa6f37314365d08692e08680973",
+            "864eb466462bf704bf7a16a585ef296a",
+            "37f85135259ece793213aca9d8765542",
+            "2133fc46f951f1e7d60645b0f9e48a6c",
+            "867ff478a63f5457eaf41049536c47cd",
+            "ff064802c18e68db7ddb7ea0bf7732e8",
+            "085794a9e315b88cb7aec548831572f5",
+            "1d94a31c2dc38d51350eb26a4a2d892c"
+          ],
+          "schoolid": [
+            "c0e6ce89b244764085691a1b8e28cb81",
+            "d711e47810900c96f26a5d0be30c446d",
+            "665c3613013ba0a66e3a2a26b89f1b68",
+            "4f12c3fa0c1cce823c7ba1df57e90ccb",
+            "10179fd362d7b8cf0e89baa1ca3025bb",
+            "929336e5a242d2e67f1a591196ba7701",
+            "dc34b021fd177cfdb22f22055ca9d04f",
+            "86fff7caa07e4f595a716d8a1960f09e"
+          ],
+          "school_ncesid": [
+            "063627006187",
+            "483702008193",
+            "410327000109",
+            "360015302507",
+            "062271003157",
+            "040187001058",
+            "010060000256",
+            "130129000571"
+          ],
+          "school_latitude": [
+            "36.57634",
+            "32.911179",
+            "45.166039",
+            "40.641727",
+            "34.043939",
+            "33.298792",
+            "32.838778",
+            "33.896013"
+          ],
+          "school_longitude": [
+            "-119.608713",
+            "-96.72364",
+            "-122.414576",
+            "-73.965655",
+            "-118.288371",
+            "-111.827793",
+            "-85.517527",
+            "-84.554213"
+          ],
+          "school_city": [
+            "Selma",
+            "Dallas",
+            "Colton",
+            "Brooklyn",
+            "Los Angeles",
+            "Chandler",
+            "Lafayette",
+            "Marietta"
+          ],
+          "school_state": [
+            "CA",
+            "TX",
+            "OR",
+            "NY",
+            "AZ",
+            "AL",
+            "GA",
+            "MI"
+          ],
+          "school_zip": [
+            "93662",
+            "75243",
+            "97017",
+            "11226",
+            "90006",
+            "85225",
+            "36862",
+            "30060"
+          ],
+          "school_metro": [
+            "urban",
+            "rural",
+            "suburban"
+          ],
+          "school_district": [
+            "Selma Unified Sch District",
+            "Richardson Ind School District",
+            "Colton School District 53",
+            "New York City Dept Of Ed",
+            "Los Angeles Unif Sch Dist",
+            "Chandler Unif School Dist 80",
+            "Chambers Co School District",
+            "Cobb Co School District"
+          ],
+          "school_county": [
+            "Fresno",
+            "Dallas",
+            "Clackamas",
+            "Kings (Brooklyn)",
+            "Los Angeles",
+            "Maricopa",
+            "Chambers",
+            "Cobb"
+          ],
+          "school_charter": [
+            "f",
+            "t"
+          ],
+          "school_magnet": [
+            "f",
+            "t"
+          ],
+          "school_year_round": [
+            "f",
+            "t"
+          ],
+          "school_nlns": [
+            "f",
+            "t"
+          ],
+          "school_kipp": [
+            "f",
+            "t"
+          ],
+          "school_charter_ready_promise": [
+            "f",
+            "t"
+          ],
+          "teacher_prefix": [
+            "Mrs.",
+            "Mr.",
+            "Ms.",
+            "Dr."
+          ],
+          "teacher_teach_for_america": [
+            "f",
+            "t"
+          ],
+          "teacher_ny_teaching_fellow": [
+            "f",
+            "t"
+          ],
+          "primary_focus_subject": [
+            "Literature & Writing",
+            "Literacy",
+            "Social Sciences",
+            "Mathematics",
+            "Gym & Fitness",
+            "College & Career Prep",
+            "Special Needs",
+            "Applied Sciences"
+          ],
+          "primary_focus_area": [
+            "Literacy & Language",
+            "History & Civics",
+            "Math & Science",
+            "Health & Sports",
+            "Applied Learning",
+            "Special Needs",
+            "Music & The Arts"
+          ],
+          "secondary_focus_subject": [
+            "College & Career Prep",
+            "ESL",
+            "Mathematics",
+            "Special Needs",
+            "Literacy",
+            "Social Sciences",
+            "Health & Life Science",
+            "Parent Involvement"
+          ],
+          "secondary_focus_area": [
+            "Applied Learning",
+            "Literacy & Language",
+            "Math & Science",
+            "Special Needs",
+            "History & Civics",
+            "Music & The Arts",
+            "Health & Sports"
+          ],
+          "resource_type": [
+            "Books",
+            "Technology",
+            "Other",
+            "Supplies",
+            "Visitors",
+            "Trips"
+          ],
+          "poverty_level": [
+            "highest poverty",
+            "high poverty",
+            "moderate poverty",
+            "low poverty"
+          ],
+          "grade_level": [
+            "Grades 6-8",
+            "Grades PreK-2",
+            "Grades 3-5",
+            "Grades 9-12"
+          ],
+          "fulfillment_labor_materials": [
+            "30.0"
+          ],
+          "total_price_excluding_optional_support": [
+            "555.81",
+            "296.47",
+            "430.89",
+            "576.07",
+            "408.4",
+            "750.92",
+            "2291.48",
+            "459.36"
+          ],
+          "total_price_including_optional_support": [
+            "653.89",
+            "348.79",
+            "506.93",
+            "677.73",
+            "480.47",
+            "883.44",
+            "2695.86",
+            "540.42"
+          ],
+          "students_reached": [
+            "32",
+            "22",
+            "17",
+            "12",
+            "24",
+            "20",
+            "320",
+            "18"
+          ],
+          "eligible_double_your_impact_match": [
+            "f",
+            "t"
+          ],
+          "eligible_almost_home_match": [
+            "f",
+            "t"
+          ],
+          "date_posted": [
+            "2014-05-12",
+            "2014-05-11",
+            "2014-05-10",
+            "2014-05-09",
+            "2014-05-08",
+            "2014-05-07",
+            "2014-05-06",
+            "2014-05-05"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "resources": {
+        "rows": 10000,
+        "sample_values": {
+          "resourceid": [
+            "8a1c1c45bc30d065061912fd9114fcf3",
+            "015d2c4935c50427964a12dc3f584091",
+            "26a02944b2f0c25f9abdeacca3ede3ee",
+            "7fef1f92cb4447d18d599f69ea27e833",
+            "8dccf77df25ee615bb1a68b98ba9d861",
+            "76ad6546da5113f03162c3c38da3bd21",
+            "f2293c48469eeedd11820bf479a37f4b",
+            "8b0a477c471f955076c997b459ed672f"
+          ],
+          "projectid": [
+            "ffffc4f85b60efc5b52347df489d0238",
+            "ffffac55ee02a49d1abc87ba6fc61135",
+            "ffff97ed93720407d70a2787475932b0",
+            "ffff7266778f71242675416e600b94e1",
+            "ffff418bb42fad24347527ad96100f81",
+            "ffff2d9c769c8fb5335e949c615425eb",
+            "fffeebf4827d745aa36b17c2d38d1966",
+            "fffee68353ade53e7692b23098096683"
+          ],
+          "vendorid": [
+            "430",
+            "82",
+            "767",
+            "47",
+            "773",
+            "224",
+            "776",
+            "752"
+          ],
+          "vendor_name": [
+            "Woodwind and Brasswind",
+            "Best Buy for Business",
+            "Lakeshore Learning Materials",
+            "Scholastic Classroom Magazines",
+            "School Specialty",
+            "Kaplan Early Learning",
+            "Recorded Books",
+            "Nasco"
+          ],
+          "project_resource_type": [
+            "Technology",
+            "Supplies",
+            "Other",
+            "Books",
+            "Trips",
+            "Visitors"
+          ],
+          "item_name": [
+            "iPod nano 4th Gen 8GB (Black)",
+            "Sony bloggie MHS-FS1 - camcorder - internal flash ",
+            "VX748 - Best-Buy Jumbo Crayons - 12-Color Box",
+            "LA138 - Best-Buy Write & Wipe Broad-Tip Markers - ",
+            "BJ7471 - 1 1/2&#34; Ruled Chart Tablet",
+            "NF9763 - White Sentence Strips",
+            "HU18 - Electric Pencil Sharpener",
+            "GG297 - Behavior Management Pocket Chart"
+          ],
+          "item_number": [
+            "249995.001",
+            "BB11216668",
+            "VX748",
+            "LA138",
+            "BJ7471",
+            "NF9763",
+            "HU18",
+            "GG297"
+          ],
+          "item_unit_price": [
+            "149.0",
+            "148.0",
+            "69.95",
+            "34.95",
+            "10.95",
+            "3.99",
+            "44.95",
+            "19.95"
+          ],
+          "item_quantity": [
+            "4",
+            "1",
+            "2",
+            "3",
+            "25",
+            "6",
+            "20",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

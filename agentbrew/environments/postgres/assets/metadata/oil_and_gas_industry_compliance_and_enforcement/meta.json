@@ -1,0 +1,604 @@
+{
+  "db_id": "oil_and_gas_industry_compliance_and_enforcement",
+  "source": "synsql",
+  "tables": 21,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/oil_and_gas_industry_compliance_and_enforcement",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"case_attachments\" {\n  \"case_attachment_id\" INTEGER [pk]\n  \"case_id\" INTEGER\n  \"attachment\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"case_history\" {\n  \"case_history_id\" INTEGER [pk]\n  \"case_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"cases\" {\n  \"case_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"case_number\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"civil_penalties\" {\n  \"civil_penalty_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"amount\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_order_attachments\" {\n  \"compliance_order_attachment_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"attachment\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_order_categories\" {\n  \"compliance_order_category_id\" INTEGER [pk]\n  \"compliance_order_category_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_order_history\" {\n  \"compliance_order_history_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_order_subcategories\" {\n  \"compliance_order_subcategory_id\" INTEGER [pk]\n  \"compliance_order_subcategory_name\" TEXT\n  \"compliance_order_category_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_order_types\" {\n  \"compliance_order_type_id\" INTEGER [pk]\n  \"compliance_order_type_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"compliance_orders\" {\n  \"compliance_order_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"compliance_order_type\" INTEGER\n  \"compliance_order_category\" INTEGER\n  \"compliance_order_subcategory\" INTEGER\n  \"final_order_date\" TEXT\n  \"civil_penalties_assessed\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"operator_contacts\" {\n  \"operator_contact_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"contact_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"operator_history\" {\n  \"operator_history_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"operators\" {\n  \"operator_id\" INTEGER [pk]\n  \"operator_name\" TEXT\n  \"region_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"permission_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"region_history\" {\n  \"region_history_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"region_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"role_permissions\" {\n  \"role_permission_id\" INTEGER [pk]\n  \"user_role_id\" INTEGER\n  \"permission_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"user_activity\" {\n  \"user_activity_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_date\" TEXT\n  \"activity_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"user_role_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"case_attachments\".\"case_id\" > \"public\".\"cases\".\"case_id\"\nRef: \"public\".\"case_history\".\"case_id\" > \"public\".\"cases\".\"case_id\"\nRef: \"public\".\"cases\".\"compliance_order_id\" > \"public\".\"compliance_orders\".\"compliance_order_id\"\nRef: \"public\".\"civil_penalties\".\"compliance_order_id\" > \"public\".\"compliance_orders\".\"compliance_order_id\"\nRef: \"public\".\"compliance_order_attachments\".\"compliance_order_id\" > \"public\".\"compliance_orders\".\"compliance_order_id\"\nRef: \"public\".\"compliance_order_history\".\"compliance_order_id\" > \"public\".\"compliance_orders\".\"compliance_order_id\"\nRef: \"public\".\"compliance_orders\".\"compliance_order_subcategory\" > \"public\".\"compliance_order_subcategories\".\"compliance_order_subcategory_id\"\nRef: \"public\".\"compliance_orders\".\"compliance_order_type\" > \"public\".\"compliance_order_types\".\"compliance_order_type_id\"\nRef: \"public\".\"compliance_orders\".\"operator_id\" > \"public\".\"operators\".\"operator_id\"\nRef: \"public\".\"compliance_orders\".\"compliance_order_category\" > \"public\".\"compliance_order_categories\".\"compliance_order_category_id\"\nRef: \"public\".\"operator_contacts\".\"operator_id\" > \"public\".\"operators\".\"operator_id\"\nRef: \"public\".\"operator_history\".\"operator_id\" > \"public\".\"operators\".\"operator_id\"\nRef: \"public\".\"region_history\".\"region_id\" > \"public\".\"regions\".\"region_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"case_attachments\" {\n  \"case_attachment_id\" INTEGER [pk]\n  \"case_id\" INTEGER\n  \"attachment\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"case_history\" {\n  \"case_history_id\" INTEGER [pk]\n  \"case_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"cases\" {\n  \"case_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"case_number\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"civil_penalties\" {\n  \"civil_penalty_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"amount\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_order_attachments\" {\n  \"compliance_order_attachment_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"attachment\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_order_categories\" {\n  \"compliance_order_category_id\" INTEGER [pk]\n  \"compliance_order_category_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_order_history\" {\n  \"compliance_order_history_id\" INTEGER [pk]\n  \"compliance_order_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_order_subcategories\" {\n  \"compliance_order_subcategory_id\" INTEGER [pk]\n  \"compliance_order_subcategory_name\" TEXT\n  \"compliance_order_category_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_order_types\" {\n  \"compliance_order_type_id\" INTEGER [pk]\n  \"compliance_order_type_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"compliance_orders\" {\n  \"compliance_order_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"compliance_order_type\" INTEGER\n  \"compliance_order_category\" INTEGER\n  \"compliance_order_subcategory\" INTEGER\n  \"final_order_date\" TEXT\n  \"civil_penalties_assessed\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"operator_contacts\" {\n  \"operator_contact_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"contact_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"operator_history\" {\n  \"operator_history_id\" INTEGER [pk]\n  \"operator_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"operators\" {\n  \"operator_id\" INTEGER [pk]\n  \"operator_name\" TEXT\n  \"region_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"permission_name\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"region_history\" {\n  \"region_history_id\" INTEGER [pk]\n  \"region_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"region_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"role_permissions\" {\n  \"role_permission_id\" INTEGER [pk]\n  \"user_role_id\" INTEGER\n  \"permission_id\" INTEGER\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"user_activity\" {\n  \"user_activity_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_date\" TEXT\n  \"activity_type\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"user_roles\" {\n  \"user_role_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_date\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"case_attachments\".\"case_id\" > \"cases\".\"case_id\"\n\nRef: \"case_history\".\"case_id\" > \"cases\".\"case_id\"\n\nRef: \"cases\".\"compliance_order_id\" > \"compliance_orders\".\"compliance_order_id\"\n\nRef: \"civil_penalties\".\"compliance_order_id\" > \"compliance_orders\".\"compliance_order_id\"\n\nRef: \"compliance_order_attachments\".\"compliance_order_id\" > \"compliance_orders\".\"compliance_order_id\"\n\nRef: \"compliance_order_history\".\"compliance_order_id\" > \"compliance_orders\".\"compliance_order_id\"\n\nRef: \"compliance_orders\".\"compliance_order_subcategory\" > \"compliance_order_subcategories\".\"compliance_order_subcategory_id\"\n\nRef: \"compliance_orders\".\"compliance_order_type\" > \"compliance_order_types\".\"compliance_order_type_id\"\n\nRef: \"compliance_orders\".\"operator_id\" > \"operators\".\"operator_id\"\n\nRef: \"compliance_orders\".\"compliance_order_category\" > \"compliance_order_categories\".\"compliance_order_category_id\"\n\nRef: \"operator_contacts\".\"operator_id\" > \"operators\".\"operator_id\"\n\nRef: \"operator_history\".\"operator_id\" > \"operators\".\"operator_id\"\n\nRef: \"region_history\".\"region_id\" > \"regions\".\"region_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n\ncase_attachments: 2 rows\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n  attachment: '<file>'\n\ncase_history: 2 rows\n  change_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncases: 2 rows\n  description: 'Example case'\n  status: 'Active'\n  case_number: '420005007', '520015002'\n\ncivil_penalties: 2 rows\n  amount: '5000.0', '13400.0'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncompliance_order_attachments: 2 rows\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n  attachment: '<file>'\n\ncompliance_order_categories: 2 rows\n  compliance_order_category_name: 'Environmental', 'Safety'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncompliance_order_history: 2 rows\n  change_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncompliance_order_subcategories: 2 rows\n  compliance_order_subcategory_name: 'Water Pollution', 'Air Pollution'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncompliance_order_types: 2 rows\n  compliance_order_type_name: 'Yes', 'No'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\ncompliance_orders: 2 rows\n  description: 'Example compliance order'\n  status: 'Active'\n  compliance_order_type: '1', '0'\n\noperator_contacts: 2 rows\n  contact_name: 'John Doe', 'Jane Smith'\n  email: 'johndoe@example.com', 'janesmith@example.com'\n  phone_number: '123-456-7890', '987-654-3210'\n\noperator_history: 2 rows\n  change_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\noperators: 2 rows\n  operator_name: 'AMOCO EXPLORATION AND PRODUCTION COMPANY', 'CENEX PIPELINE LLC'\n  status: 'Active'\n  created_date: '2023-05-01', '2023-05-02'\n\npermissions: 2 rows\n  permission_name: 'view compliance orders', 'edit compliance orders'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\nregion_history: 2 rows\n  change_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\nregions: 2 rows\n  region_name: 'SOUTHWEST', 'WESTERN'\n  region_type: 'State', 'County'\n  created_date: '2023-05-01', '2023-05-02'\n\nrole_permissions: 2 rows\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n  user_role_id: '1', '2'\n\nuser_activity: 2 rows\n  activity_type: 'login', 'logout'\n  activity_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n\nuser_roles: 2 rows\n  role: 'agency staff', 'operator'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'agency staff', 'operator'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "case_attachments": {
+        "rows": 2,
+        "sample_values": {
+          "case_attachment_id": [
+            "0",
+            "1"
+          ],
+          "case_id": [
+            "1"
+          ],
+          "attachment": [
+            "<file>"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "case_history": {
+        "rows": 2,
+        "sample_values": {
+          "case_history_id": [
+            "0",
+            "1"
+          ],
+          "case_id": [
+            "1"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "cases": {
+        "rows": 2,
+        "sample_values": {
+          "case_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_id": [
+            "1"
+          ],
+          "case_number": [
+            "420005007",
+            "520015002"
+          ],
+          "description": [
+            "Example case"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "civil_penalties": {
+        "rows": 2,
+        "sample_values": {
+          "civil_penalty_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_id": [
+            "0",
+            "1"
+          ],
+          "amount": [
+            "5000.0",
+            "13400.0"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_order_attachments": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_attachment_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_id": [
+            "0",
+            "1"
+          ],
+          "attachment": [
+            "<file>"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_order_categories": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_category_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_category_name": [
+            "Environmental",
+            "Safety"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_order_history": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_history_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_order_subcategories": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_subcategory_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_subcategory_name": [
+            "Water Pollution",
+            "Air Pollution"
+          ],
+          "compliance_order_category_id": [
+            "1"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_order_types": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_type_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_type_name": [
+            "Yes",
+            "No"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_orders": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_order_id": [
+            "0",
+            "1"
+          ],
+          "operator_id": [
+            "0",
+            "1"
+          ],
+          "compliance_order_type": [
+            "1",
+            "0"
+          ],
+          "compliance_order_category": [
+            "0"
+          ],
+          "compliance_order_subcategory": [
+            "1"
+          ],
+          "final_order_date": [
+            "2003-02-05"
+          ],
+          "civil_penalties_assessed": [
+            "5000.0",
+            "13400.0"
+          ],
+          "description": [
+            "Example compliance order"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "operator_contacts": {
+        "rows": 2,
+        "sample_values": {
+          "operator_contact_id": [
+            "0",
+            "1"
+          ],
+          "operator_id": [
+            "0"
+          ],
+          "contact_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "johndoe@example.com",
+            "janesmith@example.com"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "operator_history": {
+        "rows": 2,
+        "sample_values": {
+          "operator_history_id": [
+            "0",
+            "1"
+          ],
+          "operator_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "operators": {
+        "rows": 2,
+        "sample_values": {
+          "operator_id": [
+            "0",
+            "1"
+          ],
+          "operator_name": [
+            "AMOCO EXPLORATION AND PRODUCTION COMPANY",
+            "CENEX PIPELINE LLC"
+          ],
+          "region_id": [
+            "1001",
+            "1002"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "permissions": {
+        "rows": 2,
+        "sample_values": {
+          "permission_id": [
+            "0",
+            "1"
+          ],
+          "permission_name": [
+            "view compliance orders",
+            "edit compliance orders"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "region_history": {
+        "rows": 2,
+        "sample_values": {
+          "region_history_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 2,
+        "sample_values": {
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "region_name": [
+            "SOUTHWEST",
+            "WESTERN"
+          ],
+          "region_type": [
+            "State",
+            "County"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "role_permissions": {
+        "rows": 2,
+        "sample_values": {
+          "role_permission_id": [
+            "0",
+            "1"
+          ],
+          "user_role_id": [
+            "1",
+            "2"
+          ],
+          "permission_id": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_activity": {
+        "rows": 2,
+        "sample_values": {
+          "user_activity_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "activity_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "activity_type": [
+            "login",
+            "logout"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "user_role_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "role": [
+            "agency staff",
+            "operator"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "agency staff",
+            "operator"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

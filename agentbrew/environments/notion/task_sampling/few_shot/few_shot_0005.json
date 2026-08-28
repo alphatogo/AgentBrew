@@ -1,0 +1,15 @@
+{
+  "title": "Client Kickoff Onboarding Portal",
+  "capability": [
+    "create_database",
+    "define_schema",
+    "populate_rows",
+    "create_child_page",
+    "insert_ordered_sections",
+    "reference_existing_object",
+    "query_and_filter_database",
+    "archive_or_delete_items",
+    "precise_selection"
+  ],
+  "question": "Create a comprehensive client kickoff onboarding system in the \"Agency Delivery Workspace\" page.\n**Task Requirements:** 1. Create a new database named \"Client Kickoff Tracker\" as a child\n   database in the Agency Delivery Workspace page with the following\n   properties:\n   - Client Name (title property)\n   - Kickoff Date (date property)\n   - Service Line (select property with exactly these options: Strategy,\n     Design, Engineering, Analytics, Support)\n   - Launch Owner (rich text property)\n   - Current Status (select property with options: Not started, In review,\n     Ready, Blocked)\n\n2. Add exactly three sample client pages covering three different Service\n   Line values. Every property in each entry must be filled.\n\n3. Create a new child page under Agency Delivery Workspace titled \"Client\n   Kickoff Command Center\".\n\n4. At the top of the Client Kickoff Command Center page, embed or link the\n   Client Kickoff Tracker database.\n\n5. Below the embedded database, add a heading_2 block titled \"Required\n   Delivery References\".\n\n6. Under that heading, add a bulleted list containing @-mentions or\n   link-to-page references to at least three existing delivery reference\n   pages. Each bullet must include one existing page or database reference\n   and a short note explaining when that reference should be used during\n   client kickoff.\n\n7. Replace the usual timeline section with a \"Schedule Cleanup\" section:\n   remove every Chicago delivery schedule item after 5:30 PM (excluding\n   5:30 PM) on Thursday and Friday, and do not remove records for other\n   cities, other days, or earlier times.\n\n8. Add a \"Feedback Form\" section with at least 3 to-do items for client\n   launch owners to check off.\n"
+}

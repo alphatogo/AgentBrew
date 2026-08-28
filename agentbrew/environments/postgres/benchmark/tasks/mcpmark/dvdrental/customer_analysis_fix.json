@@ -1,0 +1,36 @@
+{
+    "category": "dvdrental",
+    "question": "Fix the customer analysis query that is producing incorrect results.\n\n## Background\n\nThe data analytics team attempted to create a customer behavior analysis query to identify active customers and analyze their spending patterns and preferences. The requirements are:\n- Only count rentals that have associated payment records (paid rentals)\n- Only include customers with at least 15 paid rentals\n- Only include customers with valid email addresses\n\nHowever, they're getting incorrect results - the query is over-counting rentals and calculating wrong spending amounts.\n\nYour task is to fix this query to produce accurate results.\n\n## The Problematic Query\n\nHere's the buggy query that needs to be fixed:\n\n```sql\nWITH customer_basic_stats AS (\n    SELECT\n        c.customer_id,\n        c.first_name || ' ' || c.last_name as customer_name,\n        ci.city as customer_city,\n        co.country as customer_country,\n        COUNT(r.rental_id) as total_rentals,\n        COUNT(DISTINCT i.film_id) as unique_films,\n        SUM(p.amount) as total_spent,\n        AVG(EXTRACT(days FROM (r.return_date - r.rental_date))) as avg_rental_duration\n    FROM customer c\n    JOIN address a ON c.address_id = a.address_id\n    JOIN city ci ON a.city_id = ci.city_id\n    JOIN country co ON ci.country_id = co.country_id\n    JOIN rental r ON c.customer_id = r.customer_id\n    JOIN inventory i ON r.inventory_id = i.inventory_id\n    JOIN payment p ON r.rental_id = p.rental_id\n    WHERE c.email IS NOT NULL\n    GROUP BY c.customer_id, c.first_name, c.last_name, ci.city, co.country\n    HAVING COUNT(r.rental_id) >= 15\n),\ncustomer_categories AS (\n    SELECT\n        c.customer_id,\n        cat.name as category_name,\n        COUNT(*) as category_count,\n        ROW_NUMBER() OVER (PARTITION BY c.customer_id ORDER BY COUNT(*) DESC, cat.name ASC) as rn\n    FROM customer c\n    JOIN rental r ON c.customer_id = r.customer_id\n    JOIN inventory i ON r.inventory_id = i.inventory_id\n    JOIN film f ON i.film_id = f.film_id\n    JOIN film_category fc ON f.film_id = fc.film_id\n    JOIN category cat ON fc.category_id = cat.category_id\n    JOIN payment p ON r.rental_id = p.rental_id\n    WHERE c.email IS NOT NULL\n    GROUP BY c.customer_id, cat.name\n),\ncustomer_actors AS (\n    SELECT\n        c.customer_id,\n        a.first_name || ' ' || a.last_name as actor_name,\n        COUNT(*) as actor_count,\n        ROW_NUMBER() OVER (PARTITION BY c.customer_id ORDER BY COUNT(*) DESC, (a.first_name || ' ' || a.last_name) ASC) as rn\n    FROM customer c\n    JOIN rental r ON c.customer_id = r.customer_id\n    JOIN inventory i ON r.inventory_id = i.inventory_id\n    JOIN film f ON i.film_id = f.film_id\n    JOIN film_actor fa ON f.film_id = fa.film_id\n    JOIN actor a ON fa.actor_id = a.actor_id\n    JOIN payment p ON r.rental_id = p.rental_id\n    WHERE c.email IS NOT NULL\n    GROUP BY c.customer_id, a.first_name, a.last_name\n),\nregional_popular_films AS (\n    SELECT\n        co.country,\n        f.title,\n        COUNT(*) as rental_count,\n        ROW_NUMBER() OVER (PARTITION BY co.country ORDER BY COUNT(*) DESC, f.title ASC) as rn\n    FROM rental r\n    JOIN inventory i ON r.inventory_id = i.inventory_id\n    JOIN film f ON i.film_id = f.film_id\n    JOIN customer c ON r.customer_id = c.customer_id\n    JOIN address a ON c.address_id = a.address_id\n    JOIN city ci ON a.city_id = ci.city_id\n    JOIN country co ON ci.country_id = co.country_id\n    JOIN payment p ON r.rental_id = p.rental_id\n    WHERE c.email IS NOT NULL\n    GROUP BY co.country, f.title\n)\nSELECT\n    cbs.customer_id,\n    cbs.customer_name,\n    cbs.customer_city,\n    cbs.customer_country,\n    cbs.total_rentals,\n    cbs.unique_films,\n    cbs.total_spent,\n    cc.category_name as favorite_category,\n    ca.actor_name as favorite_actor,\n    cbs.avg_rental_duration,\n    CASE\n        WHEN cbs.total_spent >= 150 THEN 'Premium'\n        WHEN cbs.total_spent >= 75 THEN 'Standard'\n        ELSE 'Basic'\n    END as customer_tier,\n    rpf.title as most_popular_film_in_region,\n    rpf.rental_count as regional_film_rental_count\nFROM customer_basic_stats cbs\nLEFT JOIN customer_categories cc ON cbs.customer_id = cc.customer_id AND cc.rn = 1\nLEFT JOIN customer_actors ca ON cbs.customer_id = ca.customer_id AND ca.rn = 1\nLEFT JOIN regional_popular_films rpf ON cbs.customer_country = rpf.country AND rpf.rn = 1\nORDER BY cbs.total_spent DESC, cbs.total_rentals DESC, cbs.customer_name ASC;\n```\n\n## Known Issues\n\nWhen comparing the problematic query results with the expected correct values, the following discrepancies are observed:\n\n1. **Rental count discrepancies**: Many customers show higher `total_rentals` counts than expected\n\n2. **Spending amount errors**: The `total_spent` values don't match the correct calculations\n\n3. **Incorrect favorite categories and actors**: Many customers show wrong favorite categories and actors compared to the expected results\n\n4. **Time calculation inconsistencies**: The `avg_rental_duration` values differ significantly from the correct calculations\n    - Example: Customer ID 1 shows 3.90 days instead of the expected 4.27 days\n    - Example: Customer ID 2 shows 5.23 days instead of the expected 5.69 days\n\n## Your Task\n\nDebug and fix the query to produce accurate results. Then create a table with your corrected results.\n\n1. **Fix the query** to ensure:\n   - Accurate customer spending and rental counts\n   - Correct favorite categories and actors\n   - Proper regional popular films\n\n2. **Create a table** called `customer_analysis_fixed` in the `public` schema with your corrected query results. The table should have the same columns as the original query output.\n\n**Important**: The business logic and output columns should remain the same - only fix the data accuracy issues.\n",
+    "use_specified_server": true,
+    "mcp_servers": [
+        {
+            "name": "postgres-pro"
+        }
+    ],
+    "output_format": {
+        "fix_status": "Customer analysis query fix completion report"
+    },
+    "evaluators": [
+        {
+            "func": "raw",
+            "op": "postgres_customer_analysis_fix_verifier",
+            "value": "success",
+            "op_args": {},
+            "desc": "Check if the AI agent fixed the customer analysis query to produce accurate results"
+        }
+    ],
+    "prepares": [
+        {
+            "prepare_func": "mcpmark_postgres_setup",
+            "prepare_args": {}
+        }
+    ],
+    "cleanups": [
+        {
+            "server": "mcpmark",
+            "tool": "",
+            "cleanup_func": "postgres_cleanup",
+            "cleanup_args": {}
+        }
+    ]
+}

@@ -1,0 +1,634 @@
+{
+  "db_id": "child_health_and_development_data_management",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/child_health_and_development_data_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"child_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"child_facilities\" {\n  \"child_facility_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"facility_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"care_type\" TEXT\n  \"reason_for_transfer\" TEXT\n}\n\nTable \"public\".\"child_interventions\" {\n  \"child_intervention_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"intervention_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"intervention_status\" TEXT\n  \"reason_for_termination\" TEXT\n}\n\nTable \"public\".\"child_variables\" {\n  \"child_variable_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"variable_id\" INTEGER\n  \"value\" REAL\n  \"measurement_date\" TEXT\n  \"unit_of_measurement\" TEXT\n  \"measurement_method\" TEXT\n  \"source\" TEXT\n}\n\nTable \"public\".\"children\" {\n  \"child_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"birth_location\" TEXT\n  \"mother_id\" INTEGER\n  \"father_id\" INTEGER\n  \"study_id\" INTEGER\n  \"ethnicity\" TEXT\n  \"nationality\" TEXT\n  \"birth_weight\" REAL\n  \"birth_length\" REAL\n  \"gestational_age\" INTEGER\n  \"apgar_score_1min\" INTEGER\n  \"apgar_score_5min\" INTEGER\n}\n\nTable \"public\".\"data_files\" {\n  \"file_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_checksum\" TEXT\n}\n\nTable \"public\".\"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"data_type\" TEXT\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"description\" TEXT\n  \"version_status\" TEXT\n  \"created_by\" TEXT\n  \"approved_by\" TEXT\n}\n\nTable \"public\".\"health_outcomes\" {\n  \"outcome_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"outcome_name\" TEXT\n  \"outcome_value\" TEXT\n  \"outcome_date\" TEXT\n  \"outcome_type\" TEXT\n  \"severity\" TEXT\n  \"source\" TEXT\n}\n\nTable \"public\".\"healthcare_facilities\" {\n  \"facility_id\" INTEGER [pk]\n  \"facility_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"facility_type\" TEXT\n  \"facility_size\" TEXT\n  \"services_offered\" TEXT\n  \"quality_rating\" TEXT\n}\n\nTable \"public\".\"interventions\" {\n  \"intervention_id\" INTEGER [pk]\n  \"intervention_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"intervention_type\" TEXT\n  \"target_population\" TEXT\n  \"funding_source\" TEXT\n  \"outcome_measures\" TEXT\n}\n\nTable \"public\".\"parents\" {\n  \"parent_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"education_level\" TEXT\n  \"occupation\" TEXT\n  \"income_level\" TEXT\n  \"marital_status\" TEXT\n}\n\nTable \"public\".\"readme_files\" {\n  \"readme_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_checksum\" TEXT\n}\n\nTable \"public\".\"risk_factors\" {\n  \"risk_factor_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"risk_factor_name\" TEXT\n  \"risk_factor_value\" TEXT\n  \"risk_factor_date\" TEXT\n  \"risk_factor_type\" TEXT\n  \"source\" TEXT\n}\n\nTable \"public\".\"studies\" {\n  \"study_id\" INTEGER [pk]\n  \"study_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"location\" TEXT\n  \"principal_investigator\" TEXT\n  \"description\" TEXT\n  \"funding_source\" TEXT\n  \"research_design\" TEXT\n  \"sample_size\" INTEGER\n  \"status\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"user_status\" TEXT\n  \"last_login_date\" TEXT\n  \"created_date\" TEXT\n}\n\nTable \"public\".\"variables\" {\n  \"variable_id\" INTEGER [pk]\n  \"variable_name\" TEXT\n  \"variable_label\" TEXT\n  \"category\" TEXT\n  \"units\" TEXT\n  \"variable_type\" TEXT\n  \"data_type\" TEXT\n  \"minimum_value\" REAL\n  \"maximum_value\" REAL\n  \"description\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"child_id\" > \"public\".\"children\".\"child_id\"\nRef: \"public\".\"child_facilities\".\"child_id\" > \"public\".\"children\".\"child_id\"\nRef: \"public\".\"child_facilities\".\"facility_id\" > \"public\".\"healthcare_facilities\".\"facility_id\"\nRef: \"public\".\"child_interventions\".\"child_id\" > \"public\".\"children\".\"child_id\"\nRef: \"public\".\"child_interventions\".\"intervention_id\" > \"public\".\"interventions\".\"intervention_id\"\nRef: \"public\".\"child_variables\".\"variable_id\" > \"public\".\"variables\".\"variable_id\"\nRef: \"public\".\"child_variables\".\"child_id\" > \"public\".\"children\".\"child_id\"\nRef: \"public\".\"children\".\"father_id\" > \"public\".\"parents\".\"parent_id\"\nRef: \"public\".\"children\".\"mother_id\" > \"public\".\"parents\".\"parent_id\"\nRef: \"public\".\"children\".\"study_id\" > \"public\".\"studies\".\"study_id\"\nRef: \"public\".\"data_files\".\"version_id\" > \"public\".\"data_versions\".\"version_id\"\nRef: \"public\".\"health_outcomes\".\"child_id\" > \"public\".\"children\".\"child_id\"\nRef: \"public\".\"readme_files\".\"version_id\" > \"public\".\"data_versions\".\"version_id\"\nRef: \"public\".\"risk_factors\".\"child_id\" > \"public\".\"children\".\"child_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"child_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"child_facilities\" {\n  \"child_facility_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"facility_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"care_type\" TEXT\n  \"reason_for_transfer\" TEXT\n}\n\nTable \"child_interventions\" {\n  \"child_intervention_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"intervention_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"intervention_status\" TEXT\n  \"reason_for_termination\" TEXT\n}\n\nTable \"child_variables\" {\n  \"child_variable_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"variable_id\" INTEGER\n  \"value\" REAL\n  \"measurement_date\" TEXT\n  \"unit_of_measurement\" TEXT\n  \"measurement_method\" TEXT\n  \"source\" TEXT\n}\n\nTable \"children\" {\n  \"child_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"birth_location\" TEXT\n  \"mother_id\" INTEGER\n  \"father_id\" INTEGER\n  \"study_id\" INTEGER\n  \"ethnicity\" TEXT\n  \"nationality\" TEXT\n  \"birth_weight\" REAL\n  \"birth_length\" REAL\n  \"gestational_age\" INTEGER\n  \"apgar_score_1min\" INTEGER\n  \"apgar_score_5min\" INTEGER\n}\n\nTable \"data_files\" {\n  \"file_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_checksum\" TEXT\n}\n\nTable \"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"data_type\" TEXT\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"description\" TEXT\n  \"version_status\" TEXT\n  \"created_by\" TEXT\n  \"approved_by\" TEXT\n}\n\nTable \"health_outcomes\" {\n  \"outcome_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"outcome_name\" TEXT\n  \"outcome_value\" TEXT\n  \"outcome_date\" TEXT\n  \"outcome_type\" TEXT\n  \"severity\" TEXT\n  \"source\" TEXT\n}\n\nTable \"healthcare_facilities\" {\n  \"facility_id\" INTEGER [pk]\n  \"facility_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"facility_type\" TEXT\n  \"facility_size\" TEXT\n  \"services_offered\" TEXT\n  \"quality_rating\" TEXT\n}\n\nTable \"interventions\" {\n  \"intervention_id\" INTEGER [pk]\n  \"intervention_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"intervention_type\" TEXT\n  \"target_population\" TEXT\n  \"funding_source\" TEXT\n  \"outcome_measures\" TEXT\n}\n\nTable \"parents\" {\n  \"parent_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"education_level\" TEXT\n  \"occupation\" TEXT\n  \"income_level\" TEXT\n  \"marital_status\" TEXT\n}\n\nTable \"readme_files\" {\n  \"readme_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_checksum\" TEXT\n}\n\nTable \"risk_factors\" {\n  \"risk_factor_id\" INTEGER [pk]\n  \"child_id\" INTEGER\n  \"risk_factor_name\" TEXT\n  \"risk_factor_value\" TEXT\n  \"risk_factor_date\" TEXT\n  \"risk_factor_type\" TEXT\n  \"source\" TEXT\n}\n\nTable \"studies\" {\n  \"study_id\" INTEGER [pk]\n  \"study_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"location\" TEXT\n  \"principal_investigator\" TEXT\n  \"description\" TEXT\n  \"funding_source\" TEXT\n  \"research_design\" TEXT\n  \"sample_size\" INTEGER\n  \"status\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"user_status\" TEXT\n  \"last_login_date\" TEXT\n  \"created_date\" TEXT\n}\n\nTable \"variables\" {\n  \"variable_id\" INTEGER [pk]\n  \"variable_name\" TEXT\n  \"variable_label\" TEXT\n  \"category\" TEXT\n  \"units\" TEXT\n  \"variable_type\" TEXT\n  \"data_type\" TEXT\n  \"minimum_value\" REAL\n  \"maximum_value\" REAL\n  \"description\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"child_id\" > \"children\".\"child_id\"\n\nRef: \"child_facilities\".\"child_id\" > \"children\".\"child_id\"\n\nRef: \"child_facilities\".\"facility_id\" > \"healthcare_facilities\".\"facility_id\"\n\nRef: \"child_interventions\".\"child_id\" > \"children\".\"child_id\"\n\nRef: \"child_interventions\".\"intervention_id\" > \"interventions\".\"intervention_id\"\n\nRef: \"child_variables\".\"variable_id\" > \"variables\".\"variable_id\"\n\nRef: \"child_variables\".\"child_id\" > \"children\".\"child_id\"\n\nRef: \"children\".\"father_id\" > \"parents\".\"parent_id\"\n\nRef: \"children\".\"mother_id\" > \"parents\".\"parent_id\"\n\nRef: \"children\".\"study_id\" > \"studies\".\"study_id\"\n\nRef: \"data_files\".\"version_id\" > \"data_versions\".\"version_id\"\n\nRef: \"health_outcomes\".\"child_id\" > \"children\".\"child_id\"\n\nRef: \"readme_files\".\"version_id\" > \"data_versions\".\"version_id\"\n\nRef: \"risk_factors\".\"child_id\" > \"children\".\"child_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nchild_facilities: 2 rows\n  care_type: 'Primary care', 'Specialized care'\n  reason_for_transfer: 'None'\n  start_date: '2022-01-01'\n\nchild_interventions: 2 rows\n  intervention_status: 'Completed', 'Ongoing'\n  reason_for_termination: 'None'\n  start_date: '2022-01-01'\n\nchild_variables: 2 rows\n  unit_of_measurement: 'Centimeters', 'Kilograms'\n  measurement_method: 'Ultrasound', 'Scale'\n  source: 'Hosp. A'\n\nchildren: 2 rows\n  first_name: 'Alice', 'Bob'\n  last_name: 'Johnson', 'Williams'\n  ethnicity: 'Caucasian', 'African American'\n\ndata_files: 2 rows\n  file_type: 'CSV'\n  file_path: 'data/child_variables_v1.csv', 'data/health_outcomes_v1.csv'\n  file_checksum: 'abc123', 'def456'\n\ndata_versions: 2 rows\n  data_type: 'child_variables', 'health_outcomes'\n  description: 'Initial data collection'\n  version_status: 'Published'\n\nhealth_outcomes: 2 rows\n  outcome_name: 'ever_stunted'\n  outcome_type: 'Physical'\n  outcome_value: 'Yes', 'No'\n\nhealthcare_facilities: 2 rows\n  facility_name: 'Hosp. A', 'Hosp. B'\n  facility_type: 'Hospital', 'Clinic'\n  location: 'City X', 'City Y'\n\ninterventions: 2 rows\n  intervention_name: 'Nutrition Program', 'Health Education'\n  intervention_type: 'Nutritional', 'Educational'\n  description: 'A program to improve child nutrition', 'A program to educate parents on child health'\n\nparents: 2 rows\n  first_name: 'Mary', 'John'\n  education_level: 'Bachelor's', 'Master's'\n  income_level: 'Middle', 'High'\n\nreadme_files: 2 rows\n  file_type: 'Text'\n  file_path: 'readme/child_variables_v1.txt', 'readme/health_outcomes_v1.txt'\n  file_checksum: 'ghi789', 'jkl101'\n\nrisk_factors: 2 rows\n  risk_factor_name: 'enstunt'\n  risk_factor_type: 'Environmental'\n  risk_factor_value: 'Yes', 'No'\n\nstudies: 2 rows\n  study_name: 'Child Health Study 2022', 'Child Development Study 2022'\n  status: 'Ongoing', 'Completed'\n  description: 'A study on child health metrics in City X', 'A study on child development metrics in City Y'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  user_status: 'active'\n\nvariables: 2 rows\n  variable_name: 'birthlen', 'birthwt'\n  variable_label: 'Birth length', 'Birthweight'\n  description: 'The length of the child at birth', 'The weight of the child at birth'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "child_id": [
+            "1",
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "child_facilities": {
+        "rows": 2,
+        "sample_values": {
+          "child_facility_id": [
+            "0",
+            "1"
+          ],
+          "child_id": [
+            "0"
+          ],
+          "facility_id": [
+            "0",
+            "1"
+          ],
+          "start_date": [
+            "2022-01-01"
+          ],
+          "end_date": [
+            "2022-12-31"
+          ],
+          "care_type": [
+            "Primary care",
+            "Specialized care"
+          ],
+          "reason_for_transfer": [
+            "None"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "child_interventions": {
+        "rows": 2,
+        "sample_values": {
+          "child_intervention_id": [
+            "0",
+            "1"
+          ],
+          "child_id": [
+            "0",
+            "1"
+          ],
+          "intervention_id": [
+            "1",
+            "0"
+          ],
+          "start_date": [
+            "2022-01-01"
+          ],
+          "end_date": [
+            "2022-12-31"
+          ],
+          "intervention_status": [
+            "Completed",
+            "Ongoing"
+          ],
+          "reason_for_termination": [
+            "None"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "child_variables": {
+        "rows": 2,
+        "sample_values": {
+          "child_variable_id": [
+            "0",
+            "1"
+          ],
+          "child_id": [
+            "1"
+          ],
+          "variable_id": [
+            "0"
+          ],
+          "value": [
+            "50.5",
+            "3.5"
+          ],
+          "measurement_date": [
+            "2022-01-15"
+          ],
+          "unit_of_measurement": [
+            "Centimeters",
+            "Kilograms"
+          ],
+          "measurement_method": [
+            "Ultrasound",
+            "Scale"
+          ],
+          "source": [
+            "Hosp. A"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "children": {
+        "rows": 2,
+        "sample_values": {
+          "child_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alice",
+            "Bob"
+          ],
+          "last_name": [
+            "Johnson",
+            "Williams"
+          ],
+          "date_of_birth": [
+            "2022-01-15",
+            "2022-02-20"
+          ],
+          "gender": [
+            "Female",
+            "Male"
+          ],
+          "birth_location": [
+            "Hosp. A, City X",
+            "Hosp. B, City Y"
+          ],
+          "mother_id": [
+            "0",
+            "1"
+          ],
+          "father_id": [
+            "0",
+            "1"
+          ],
+          "study_id": [
+            "1"
+          ],
+          "ethnicity": [
+            "Caucasian",
+            "African American"
+          ],
+          "nationality": [
+            "USA"
+          ],
+          "birth_weight": [
+            "3.5",
+            "3.7"
+          ],
+          "birth_length": [
+            "50.5",
+            "51.0"
+          ],
+          "gestational_age": [
+            "38",
+            "39"
+          ],
+          "apgar_score_1min": [
+            "8",
+            "9"
+          ],
+          "apgar_score_5min": [
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "data/child_variables_v1.csv",
+            "data/health_outcomes_v1.csv"
+          ],
+          "file_size": [
+            "1.2",
+            "1.5"
+          ],
+          "upload_date": [
+            "2023-01-01"
+          ],
+          "file_type": [
+            "CSV"
+          ],
+          "file_checksum": [
+            "abc123",
+            "def456"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "data_type": [
+            "child_variables",
+            "health_outcomes"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "version_date": [
+            "2023-01-01"
+          ],
+          "description": [
+            "Initial data collection"
+          ],
+          "version_status": [
+            "Published"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "approved_by": [
+            "Dr. Jane Doe",
+            "Dr. John Smith"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "health_outcomes": {
+        "rows": 2,
+        "sample_values": {
+          "outcome_id": [
+            "0",
+            "1"
+          ],
+          "child_id": [
+            "1"
+          ],
+          "outcome_name": [
+            "ever_stunted"
+          ],
+          "outcome_value": [
+            "Yes",
+            "No"
+          ],
+          "outcome_date": [
+            "2023-01-01"
+          ],
+          "outcome_type": [
+            "Physical"
+          ],
+          "severity": [
+            "Severe",
+            "None"
+          ],
+          "source": [
+            "Hosp. A",
+            "Hosp. B"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "healthcare_facilities": {
+        "rows": 2,
+        "sample_values": {
+          "facility_id": [
+            "0",
+            "1"
+          ],
+          "facility_name": [
+            "Hosp. A",
+            "Hosp. B"
+          ],
+          "location": [
+            "City X",
+            "City Y"
+          ],
+          "contact_email": [
+            "hospa@example.com",
+            "hospb@example.com"
+          ],
+          "contact_phone": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "facility_type": [
+            "Hospital",
+            "Clinic"
+          ],
+          "facility_size": [
+            "500 beds",
+            "20 beds"
+          ],
+          "services_offered": [
+            "Emergency, Pediatrics, Neonatal",
+            "Primary care, Pediatrics"
+          ],
+          "quality_rating": [
+            "4.5 stars",
+            "4.0 stars"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "interventions": {
+        "rows": 2,
+        "sample_values": {
+          "intervention_id": [
+            "0",
+            "1"
+          ],
+          "intervention_name": [
+            "Nutrition Program",
+            "Health Education"
+          ],
+          "description": [
+            "A program to improve child nutrition",
+            "A program to educate parents on child health"
+          ],
+          "start_date": [
+            "2022-01-01"
+          ],
+          "end_date": [
+            "2022-12-31"
+          ],
+          "intervention_type": [
+            "Nutritional",
+            "Educational"
+          ],
+          "target_population": [
+            "Children under 5",
+            "Parents"
+          ],
+          "funding_source": [
+            "UNICEF",
+            "WHO"
+          ],
+          "outcome_measures": [
+            "Weight gain, BMI",
+            "Parental knowledge, child health outcomes"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "parents": {
+        "rows": 2,
+        "sample_values": {
+          "parent_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Mary",
+            "John"
+          ],
+          "last_name": [
+            "Johnson"
+          ],
+          "date_of_birth": [
+            "1990-05-10",
+            "1990-06-15"
+          ],
+          "gender": [
+            "Female",
+            "Male"
+          ],
+          "email": [
+            "mary.johnson@example.com",
+            "john.johnson@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "address": [
+            "123 Main St, City X"
+          ],
+          "education_level": [
+            "Bachelor's",
+            "Master's"
+          ],
+          "occupation": [
+            "Nurse",
+            "Engineer"
+          ],
+          "income_level": [
+            "Middle",
+            "High"
+          ],
+          "marital_status": [
+            "Married"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "readme_files": {
+        "rows": 2,
+        "sample_values": {
+          "readme_id": [
+            "0",
+            "1"
+          ],
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "readme/child_variables_v1.txt",
+            "readme/health_outcomes_v1.txt"
+          ],
+          "file_size": [
+            "0.1"
+          ],
+          "upload_date": [
+            "2023-01-01"
+          ],
+          "file_type": [
+            "Text"
+          ],
+          "file_checksum": [
+            "ghi789",
+            "jkl101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "risk_factors": {
+        "rows": 2,
+        "sample_values": {
+          "risk_factor_id": [
+            "0",
+            "1"
+          ],
+          "child_id": [
+            "1",
+            "0"
+          ],
+          "risk_factor_name": [
+            "enstunt"
+          ],
+          "risk_factor_value": [
+            "Yes",
+            "No"
+          ],
+          "risk_factor_date": [
+            "2023-01-01"
+          ],
+          "risk_factor_type": [
+            "Environmental"
+          ],
+          "source": [
+            "Survey"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "studies": {
+        "rows": 2,
+        "sample_values": {
+          "study_id": [
+            "0",
+            "1"
+          ],
+          "study_name": [
+            "Child Health Study 2022",
+            "Child Development Study 2022"
+          ],
+          "start_date": [
+            "2022-01-01"
+          ],
+          "end_date": [
+            "2022-12-31"
+          ],
+          "location": [
+            "City X",
+            "City Y"
+          ],
+          "principal_investigator": [
+            "Dr. Jane Doe",
+            "Dr. John Smith"
+          ],
+          "description": [
+            "A study on child health metrics in City X",
+            "A study on child development metrics in City Y"
+          ],
+          "funding_source": [
+            "NIH",
+            "WHO"
+          ],
+          "research_design": [
+            "Observational",
+            "Experimental"
+          ],
+          "sample_size": [
+            "500",
+            "300"
+          ],
+          "status": [
+            "Ongoing",
+            "Completed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "department": [
+            "Research",
+            "Data Analysis"
+          ],
+          "user_status": [
+            "active"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "variables": {
+        "rows": 2,
+        "sample_values": {
+          "variable_id": [
+            "0",
+            "1"
+          ],
+          "variable_name": [
+            "birthlen",
+            "birthwt"
+          ],
+          "variable_label": [
+            "Birth length",
+            "Birthweight"
+          ],
+          "category": [
+            "Child characteristics"
+          ],
+          "units": [
+            "Centimeters",
+            "Kilograms"
+          ],
+          "variable_type": [
+            "risk factor"
+          ],
+          "data_type": [
+            "continuous"
+          ],
+          "minimum_value": [
+            "30.0",
+            "1.0"
+          ],
+          "maximum_value": [
+            "60.0",
+            "5.0"
+          ],
+          "description": [
+            "The length of the child at birth",
+            "The weight of the child at birth"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

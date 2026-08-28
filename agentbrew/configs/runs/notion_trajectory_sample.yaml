@@ -1,0 +1,38 @@
+mode: trajectory_sample
+domain: notion
+
+
+llm:
+  type: local_llm
+  config:
+    model_name: ./Qwen3-32B
+    base_url: http://localhost:2024/v1
+    api_key: ""
+    temperature: 0.7
+    max_completion_tokens: 10000
+    enable_thinking: false
+    
+agent:
+  type: react_summary
+  config:
+    max_iterations: 50
+    max_tool_output_length: 10000
+    history_window_steps: 3
+
+task_source:
+  type: directory
+  path: outputs/notion_task_sample
+  glob: "*.json"
+
+evaluation:
+  enabled: false
+
+execution:
+  workers: 10
+  task_timeout_seconds: 1800
+
+output:
+  root: outputs/notion_trajectory_sample
+  traces: true
+  include_prompts: true
+  task_results: false

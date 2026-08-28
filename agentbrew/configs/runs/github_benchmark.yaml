@@ -1,0 +1,33 @@
+mode: benchmark
+domain: github
+
+llm:
+  type: local_llm
+  config:
+    model_name: ./Qwen3-32B
+    base_url: http://localhost:2024/v1
+    api_key: ""
+    temperature: 0.7
+    max_completion_tokens: 10000
+    enable_thinking: false
+
+agent:
+  type: react_summary
+  config:
+    max_iterations: 50
+    max_tool_output_length: 10000
+    history_window_steps: 3
+
+task_source:
+  type: directory
+  path: agentbrew/environments/github/benchmark/tasks
+  glob: "*.json"
+
+evaluation:
+  enabled: true
+
+execution:
+  workers: 1
+
+output:
+  root: outputs/github_benchmark

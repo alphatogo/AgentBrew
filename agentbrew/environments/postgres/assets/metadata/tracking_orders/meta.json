@@ -1,0 +1,277 @@
+{
+  "db_id": "tracking_orders",
+  "source": "sparc",
+  "tables": 7,
+  "total_rows": 105,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#tracking_orders",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"customer_details\" TEXT\n}\n\nTable \"Invoices\" {\n  \"invoice_number\" INTEGER [pk]\n  \"invoice_date\" TIMESTAMP\n  \"invoice_details\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"product_id\" INTEGER [not null]\n  \"order_id\" INTEGER [not null]\n  \"order_item_status\" TEXT [not null]\n  \"order_item_details\" TEXT\n}\n\nTable \"Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_status\" TEXT [not null]\n  \"date_order_placed\" TIMESTAMP [not null]\n  \"order_details\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_details\" TEXT\n}\n\nTable \"Shipment_Items\" {\n  \"shipment_id\" INTEGER [not null]\n  \"order_item_id\" INTEGER [not null]\n}\n\nTable \"Shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER [not null]\n  \"shipment_tracking_number\" TEXT\n  \"shipment_date\" TIMESTAMP\n  \"other_shipment_details\" TEXT\n}\n\n\n\nRef: \"Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Shipments\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Shipments\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Shipment_Items\".\"shipment_id\" > \"Shipments\".\"shipment_id\"\n\nRef: \"Shipment_Items\".\"order_item_id\" > \"Order_Items\".\"order_item_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"customer_details\" TEXT\n}\n\nTable \"Invoices\" {\n  \"invoice_number\" INTEGER [pk]\n  \"invoice_date\" TIMESTAMP\n  \"invoice_details\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"product_id\" INTEGER [not null]\n  \"order_id\" INTEGER [not null]\n  \"order_item_status\" TEXT [not null]\n  \"order_item_details\" TEXT\n}\n\nTable \"Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_status\" TEXT [not null]\n  \"date_order_placed\" TIMESTAMP [not null]\n  \"order_details\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_details\" TEXT\n}\n\nTable \"Shipment_Items\" {\n  \"shipment_id\" INTEGER [not null]\n  \"order_item_id\" INTEGER [not null]\n}\n\nTable \"Shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"invoice_number\" INTEGER [not null]\n  \"shipment_tracking_number\" TEXT\n  \"shipment_date\" TIMESTAMP\n  \"other_shipment_details\" TEXT\n}\n\nRef: \"Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Shipments\".\"invoice_number\" > \"Invoices\".\"invoice_number\"\n\nRef: \"Shipments\".\"order_id\" > \"Orders\".\"order_id\"\n\nRef: \"Shipment_Items\".\"shipment_id\" > \"Shipments\".\"shipment_id\"\n\nRef: \"Shipment_Items\".\"order_item_id\" > \"Order_Items\".\"order_item_id\"\n\n## Table Stats & Sample Values\n\nCustomers: 15 rows\n  customer_name: 'Savannah', 'George', 'Alberto', ...\n  customer_details: 'rerum', 'est', 'deleniti', ...\n  customer_id: '1', '2', '3', ...\n\nInvoices: 15 rows\n  invoice_details: 'vitae', 'magnam', 'et', ...\n  invoice_date: '1989-09-03 16:03:05', '1989-12-11 16:40:57', '1995-10-07 14:13:05', ...\n  invoice_number: '1', '2', '3', ...\n\nOrder_Items: 15 rows\n  order_item_status: 'Finish', 'Payed', 'Cancel'\n  product_id: '4', '15', '12', ...\n  order_id: '6', '15', '8', ...\n\nOrders: 15 rows\n  order_status: 'Shipped', 'Packing', 'On Road'\n  date_order_placed: '2009-02-21 15:26:19', '1974-06-24 22:10:26', '1982-12-29 21:10:11', ...\n  customer_id: '2', '11', '4', ...\n\nProducts: 15 rows\n  product_name: 'food', 'book', 'clothes', ...\n  product_id: '1', '2', '3', ...\n\nShipment_Items: 15 rows\n  shipment_id: '11', '10', '2', ...\n  order_item_id: '12', '15', '2', ...\n\nShipments: 15 rows\n  shipment_tracking_number: '3452', '0114', '478', ...\n  invoice_number: '13', '2', '5', ...\n  shipment_date: '1983-08-13 22:34:11', '1977-11-10 12:11:25', '2006-01-17 03:08:05', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#tracking_orders",
+    "tableStats": {
+      "Customers": {
+        "rows": 15,
+        "sample_values": {
+          "customer_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_name": [
+            "Savannah",
+            "George",
+            "Alberto",
+            "Leilani",
+            "Hadley",
+            "Chaz",
+            "Violet",
+            "Parker"
+          ],
+          "customer_details": [
+            "rerum",
+            "est",
+            "deleniti",
+            "sequi",
+            "corrupti",
+            "nostrum",
+            "consectetur",
+            "doloribus"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Invoices": {
+        "rows": 15,
+        "sample_values": {
+          "invoice_number": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "invoice_date": [
+            "1989-09-03 16:03:05",
+            "1989-12-11 16:40:57",
+            "1995-10-07 14:13:05",
+            "1985-04-27 08:38:49",
+            "1971-02-12 00:29:57",
+            "2007-12-25 15:49:37",
+            "1991-01-05 16:44:25",
+            "2012-06-12 07:34:17"
+          ],
+          "invoice_details": [
+            "vitae",
+            "magnam",
+            "et",
+            "tempore",
+            "labore",
+            "optio",
+            "reiciendis",
+            "doloremque"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Order_Items": {
+        "rows": 15,
+        "sample_values": {
+          "order_item_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "product_id": [
+            "4",
+            "15",
+            "12",
+            "8",
+            "11",
+            "14",
+            "3",
+            "7"
+          ],
+          "order_id": [
+            "6",
+            "15",
+            "8",
+            "5",
+            "10",
+            "7",
+            "11",
+            "14"
+          ],
+          "order_item_status": [
+            "Finish",
+            "Payed",
+            "Cancel"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Orders": {
+        "rows": 15,
+        "sample_values": {
+          "order_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "2",
+            "11",
+            "4",
+            "15",
+            "5",
+            "7",
+            "10",
+            "3"
+          ],
+          "order_status": [
+            "Shipped",
+            "Packing",
+            "On Road"
+          ],
+          "date_order_placed": [
+            "2009-02-21 15:26:19",
+            "1974-06-24 22:10:26",
+            "1982-12-29 21:10:11",
+            "1974-08-10 08:15:16",
+            "2010-06-08 02:20:49",
+            "1975-12-23 15:59:43",
+            "1976-09-01 09:27:00",
+            "1997-01-27 19:12:01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "product_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "product_name": [
+            "food",
+            "book",
+            "clothes",
+            "phone",
+            "music"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Shipment_Items": {
+        "rows": 15,
+        "sample_values": {
+          "shipment_id": [
+            "11",
+            "10",
+            "2",
+            "14",
+            "3",
+            "4",
+            "13",
+            "12"
+          ],
+          "order_item_id": [
+            "12",
+            "15",
+            "2",
+            "10",
+            "7",
+            "5",
+            "13",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Shipments": {
+        "rows": 15,
+        "sample_values": {
+          "shipment_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "order_id": [
+            "5",
+            "7",
+            "10",
+            "6",
+            "4",
+            "13",
+            "9",
+            "8"
+          ],
+          "invoice_number": [
+            "13",
+            "2",
+            "5",
+            "15",
+            "3",
+            "10",
+            "9"
+          ],
+          "shipment_tracking_number": [
+            "3452",
+            "0114",
+            "478",
+            "08858",
+            "35342",
+            "7480",
+            "7662",
+            "2323"
+          ],
+          "shipment_date": [
+            "1983-08-13 22:34:11",
+            "1977-11-10 12:11:25",
+            "2006-01-17 03:08:05",
+            "1982-01-24 12:13:16",
+            "1981-11-13 23:20:42",
+            "1978-05-17 00:03:43",
+            "1999-10-12 10:41:49",
+            "1983-03-08 16:14:58"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

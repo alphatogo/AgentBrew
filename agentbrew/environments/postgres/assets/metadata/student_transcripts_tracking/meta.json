@@ -1,0 +1,550 @@
+{
+  "db_id": "student_transcripts_tracking",
+  "source": "sparc",
+  "tables": 11,
+  "total_rows": 165,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#student_transcripts_tracking",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1\" TEXT\n  \"line_2\" TEXT\n  \"line_3\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n  \"other_address_details\" TEXT\n}\n\nTable \"Courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_name\" TEXT\n  \"course_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Degree_Programs\" {\n  \"degree_program_id\" INTEGER [pk]\n  \"department_id\" INTEGER [not null]\n  \"degree_summary_name\" TEXT\n  \"degree_summary_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"department_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Sections\" {\n  \"section_id\" INTEGER [pk]\n  \"course_id\" INTEGER [not null]\n  \"section_name\" TEXT\n  \"section_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Semesters\" {\n  \"semester_id\" INTEGER [pk]\n  \"semester_name\" TEXT\n  \"semester_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Student_Enrolment\" {\n  \"student_enrolment_id\" INTEGER [pk]\n  \"degree_program_id\" INTEGER [not null]\n  \"semester_id\" INTEGER [not null]\n  \"student_id\" INTEGER [not null]\n  \"other_details\" TEXT\n}\n\nTable \"Student_Enrolment_Courses\" {\n  \"student_course_id\" INTEGER [pk]\n  \"course_id\" INTEGER [not null]\n  \"student_enrolment_id\" INTEGER [not null]\n}\n\nTable \"Students\" {\n  \"student_id\" INTEGER [pk]\n  \"current_address_id\" INTEGER [not null]\n  \"permanent_address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"ssn\" TEXT\n  \"date_first_registered\" TIMESTAMP\n  \"date_left\" TIMESTAMP\n  \"other_student_details\" TEXT\n}\n\nTable \"Transcript_Contents\" {\n  \"student_course_id\" INTEGER [not null]\n  \"transcript_id\" INTEGER [not null]\n}\n\nTable \"Transcripts\" {\n  \"transcript_id\" INTEGER [pk]\n  \"transcript_date\" TIMESTAMP\n  \"other_details\" TEXT\n}\n\n\n\nRef: \"Degree_Programs\".\"department_id\" > \"Departments\".\"department_id\"\n\nRef: \"Sections\".\"course_id\" > \"Courses\".\"course_id\"\n\nRef: \"Students\".\"permanent_address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Students\".\"current_address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Student_Enrolment\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Student_Enrolment\".\"semester_id\" > \"Semesters\".\"semester_id\"\n\nRef: \"Student_Enrolment\".\"degree_program_id\" > \"Degree_Programs\".\"degree_program_id\"\n\nRef: \"Student_Enrolment_Courses\".\"student_enrolment_id\" > \"Student_Enrolment\".\"student_enrolment_id\"\n\nRef: \"Student_Enrolment_Courses\".\"course_id\" > \"Courses\".\"course_id\"\n\nRef: \"Transcript_Contents\".\"transcript_id\" > \"Transcripts\".\"transcript_id\"\n\nRef: \"Transcript_Contents\".\"student_course_id\" > \"Student_Enrolment_Courses\".\"student_course_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1\" TEXT\n  \"line_2\" TEXT\n  \"line_3\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n  \"other_address_details\" TEXT\n}\n\nTable \"Courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_name\" TEXT\n  \"course_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Degree_Programs\" {\n  \"degree_program_id\" INTEGER [pk]\n  \"department_id\" INTEGER [not null]\n  \"degree_summary_name\" TEXT\n  \"degree_summary_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"department_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Sections\" {\n  \"section_id\" INTEGER [pk]\n  \"course_id\" INTEGER [not null]\n  \"section_name\" TEXT\n  \"section_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Semesters\" {\n  \"semester_id\" INTEGER [pk]\n  \"semester_name\" TEXT\n  \"semester_description\" TEXT\n  \"other_details\" TEXT\n}\n\nTable \"Student_Enrolment\" {\n  \"student_enrolment_id\" INTEGER [pk]\n  \"degree_program_id\" INTEGER [not null]\n  \"semester_id\" INTEGER [not null]\n  \"student_id\" INTEGER [not null]\n  \"other_details\" TEXT\n}\n\nTable \"Student_Enrolment_Courses\" {\n  \"student_course_id\" INTEGER [pk]\n  \"course_id\" INTEGER [not null]\n  \"student_enrolment_id\" INTEGER [not null]\n}\n\nTable \"Students\" {\n  \"student_id\" INTEGER [pk]\n  \"current_address_id\" INTEGER [not null]\n  \"permanent_address_id\" INTEGER [not null]\n  \"first_name\" TEXT\n  \"middle_name\" TEXT\n  \"last_name\" TEXT\n  \"cell_mobile_number\" TEXT\n  \"email_address\" TEXT\n  \"ssn\" TEXT\n  \"date_first_registered\" TIMESTAMP\n  \"date_left\" TIMESTAMP\n  \"other_student_details\" TEXT\n}\n\nTable \"Transcript_Contents\" {\n  \"student_course_id\" INTEGER [not null]\n  \"transcript_id\" INTEGER [not null]\n}\n\nTable \"Transcripts\" {\n  \"transcript_id\" INTEGER [pk]\n  \"transcript_date\" TIMESTAMP\n  \"other_details\" TEXT\n}\n\nRef: \"Degree_Programs\".\"department_id\" > \"Departments\".\"department_id\"\n\nRef: \"Sections\".\"course_id\" > \"Courses\".\"course_id\"\n\nRef: \"Students\".\"permanent_address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Students\".\"current_address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Student_Enrolment\".\"student_id\" > \"Students\".\"student_id\"\n\nRef: \"Student_Enrolment\".\"semester_id\" > \"Semesters\".\"semester_id\"\n\nRef: \"Student_Enrolment\".\"degree_program_id\" > \"Degree_Programs\".\"degree_program_id\"\n\nRef: \"Student_Enrolment_Courses\".\"student_enrolment_id\" > \"Student_Enrolment\".\"student_enrolment_id\"\n\nRef: \"Student_Enrolment_Courses\".\"course_id\" > \"Courses\".\"course_id\"\n\nRef: \"Transcript_Contents\".\"transcript_id\" > \"Transcripts\".\"transcript_id\"\n\nRef: \"Transcript_Contents\".\"student_course_id\" > \"Student_Enrolment_Courses\".\"student_course_id\"\n\n## Table Stats & Sample Values\n\nAddresses: 15 rows\n  city: 'Port Chelsea', 'Lake Laishafurt', 'Goodwinhaven', ...\n  state_province_county: 'Virginia', 'Kentucky', 'Kansas', ...\n  country: 'Iceland', 'Burundi', 'Saudi Arabia', ...\n\nCourses: 15 rows\n  course_name: 'ds', 'math', 'os', ...\n  course_description: 'p', 'q', 'v', ...\n  course_id: '1', '2', '3', ...\n\nDegree_Programs: 15 rows\n  degree_summary_name: 'Master', 'Bachelor', 'PHD'\n  degree_summary_description: 'architecto', 'cumque', 'placeat', ...\n  department_id: '13', '2', '8', ...\n\nDepartments: 15 rows\n  department_name: 'computer science', 'history', 'art', ...\n  department_description: 'error', 'nostrum', 'aliquam', ...\n  department_id: '1', '2', '3', ...\n\nSections: 15 rows\n  section_name: 'a', 'b', 'c', ...\n  section_description: 'non', 'voluptatem', 'qui', ...\n  course_id: '9', '2', '8', ...\n\nSemesters: 15 rows\n  semester_name: 'spring 2010', 'summer 2010', 'fall 2010', ...\n  semester_description: 'x', 'g', 'w', ...\n  semester_id: '1', '2', '3', ...\n\nStudent_Enrolment: 15 rows\n  degree_program_id: '12', '4', '10', ...\n  semester_id: '13', '2', '15', ...\n  student_id: '14', '9', '7', ...\n\nStudent_Enrolment_Courses: 15 rows\n  course_id: '6', '14', '11', ...\n  student_enrolment_id: '2', '8', '5', ...\n  student_course_id: '0', '1', '2', ...\n\nStudents: 15 rows\n  first_name: 'Timmothy', 'Hobart', 'Warren', ...\n  last_name: 'Ward', 'Balistreri', 'Gleichner', ...\n  middle_name: 'Anna', 'Lorenz', 'Violet', ...\n\nTranscript_Contents: 15 rows\n  student_course_id: '0', '96', '76', ...\n  transcript_id: '2', '8', '9', ...\n\nTranscripts: 15 rows\n  transcript_date: '1988-04-30 01:19:47', '1975-10-28 15:16:51', '1984-12-19 00:37:21', ...\n  transcript_id: '1', '2', '3', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#student_transcripts_tracking",
+    "tableStats": {
+      "Addresses": {
+        "rows": 15,
+        "sample_values": {
+          "address_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "line_1": [
+            "2294 Grant Square Apt. 235",
+            "3999 Aufderhar Ways Suite 593",
+            "67942 Carlotta Ferry Apt. 686",
+            "0144 Lamar Plaza Apt. 346",
+            "858 Peggie Bypass Suite 212",
+            "16998 Mraz Lodge",
+            "193 Marlin Brook",
+            "202 Hessel Views Apt. 468"
+          ],
+          "line_2": [
+            "Apt. 370",
+            "Apt. 388",
+            "Apt. 583",
+            "Suite 703",
+            "Apt. 335",
+            "Apt. 689",
+            "Apt. 406",
+            "Apt. 305"
+          ],
+          "city": [
+            "Port Chelsea",
+            "Lake Laishafurt",
+            "Goodwinhaven",
+            "Port Evanston",
+            "Michelleburgh",
+            "North Omer",
+            "Herzoghaven",
+            "Mariliehaven"
+          ],
+          "zip_postcode": [
+            "148",
+            "943",
+            "541",
+            "847",
+            "446",
+            "902",
+            "068",
+            "638"
+          ],
+          "state_province_county": [
+            "Virginia",
+            "Kentucky",
+            "Kansas",
+            "Washington",
+            "Hawaii",
+            "Arkansas",
+            "Idaho",
+            "NorthCarolina"
+          ],
+          "country": [
+            "Iceland",
+            "Burundi",
+            "Saudi Arabia",
+            "Angola",
+            "Haiti",
+            "Gibraltar",
+            "Cook Islands",
+            "Croatia"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Courses": {
+        "rows": 15,
+        "sample_values": {
+          "course_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "course_name": [
+            "ds",
+            "math",
+            "os",
+            "en",
+            "fr",
+            "la",
+            "cal",
+            "nlp"
+          ],
+          "course_description": [
+            "p",
+            "q",
+            "v",
+            "k",
+            "c",
+            "n",
+            "l",
+            "b"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Degree_Programs": {
+        "rows": 15,
+        "sample_values": {
+          "degree_program_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "department_id": [
+            "13",
+            "2",
+            "8",
+            "11",
+            "14",
+            "15",
+            "3",
+            "4"
+          ],
+          "degree_summary_name": [
+            "Master",
+            "Bachelor",
+            "PHD"
+          ],
+          "degree_summary_description": [
+            "architecto",
+            "cumque",
+            "placeat",
+            "unde",
+            "officiis",
+            "aperiam",
+            "assumenda",
+            "earum"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Departments": {
+        "rows": 15,
+        "sample_values": {
+          "department_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "department_name": [
+            "computer science",
+            "history",
+            "art",
+            "linguistic",
+            "management",
+            "engineer",
+            "math",
+            "statistics"
+          ],
+          "department_description": [
+            "error",
+            "nostrum",
+            "aliquam",
+            "natus",
+            "nihil",
+            "autem",
+            "doloribus",
+            "dolorem"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Sections": {
+        "rows": 15,
+        "sample_values": {
+          "section_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "course_id": [
+            "9",
+            "2",
+            "8",
+            "1",
+            "5",
+            "7",
+            "12",
+            "14"
+          ],
+          "section_name": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h"
+          ],
+          "section_description": [
+            "non",
+            "voluptatem",
+            "qui",
+            "voluptas",
+            "ex",
+            "doloremque",
+            "provident",
+            "et"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Semesters": {
+        "rows": 15,
+        "sample_values": {
+          "semester_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "semester_name": [
+            "spring 2010",
+            "summer 2010",
+            "fall 2010",
+            "winter 2010",
+            "spring 2018",
+            "spring 2012",
+            "spring 2013",
+            "spring 2014"
+          ],
+          "semester_description": [
+            "x",
+            "g",
+            "w",
+            "c",
+            "l",
+            "y",
+            "f",
+            "m"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student_Enrolment": {
+        "rows": 15,
+        "sample_values": {
+          "student_enrolment_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "degree_program_id": [
+            "12",
+            "4",
+            "10",
+            "5",
+            "3",
+            "9",
+            "8",
+            "11"
+          ],
+          "semester_id": [
+            "13",
+            "2",
+            "15",
+            "1",
+            "9",
+            "5",
+            "6",
+            "12"
+          ],
+          "student_id": [
+            "14",
+            "9",
+            "7",
+            "1",
+            "4",
+            "12",
+            "5",
+            "6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student_Enrolment_Courses": {
+        "rows": 15,
+        "sample_values": {
+          "student_course_id": [
+            "0",
+            "1",
+            "2",
+            "7",
+            "8",
+            "76",
+            "96",
+            "9860"
+          ],
+          "course_id": [
+            "6",
+            "14",
+            "11",
+            "2",
+            "10",
+            "3",
+            "4",
+            "8"
+          ],
+          "student_enrolment_id": [
+            "2",
+            "8",
+            "5",
+            "13",
+            "4",
+            "10",
+            "6",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Students": {
+        "rows": 15,
+        "sample_values": {
+          "student_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "current_address_id": [
+            "10",
+            "12",
+            "9",
+            "7",
+            "6",
+            "15",
+            "1",
+            "2"
+          ],
+          "permanent_address_id": [
+            "15",
+            "5",
+            "11",
+            "9",
+            "3",
+            "14",
+            "4",
+            "8"
+          ],
+          "first_name": [
+            "Timmothy",
+            "Hobart",
+            "Warren",
+            "Jarvis",
+            "Milton",
+            "Stanford",
+            "Frida",
+            "Delaney"
+          ],
+          "middle_name": [
+            "Anna",
+            "Lorenz",
+            "Violet",
+            "Aaliyah",
+            "Vaughn",
+            "Mona",
+            "Aisha",
+            "Judd"
+          ],
+          "last_name": [
+            "Ward",
+            "Balistreri",
+            "Gleichner",
+            "Carroll",
+            "Christiansen",
+            "Rogahn",
+            "Huel",
+            "Ankunding"
+          ],
+          "cell_mobile_number": [
+            "(096)889-8954x524",
+            "1-009-710-5151",
+            "07661787471",
+            "09700166582",
+            "171-642-5684",
+            "436.613.7683",
+            "1-879-796-8987x164",
+            "03174364122"
+          ],
+          "email_address": [
+            "erwin.zboncak@example.com",
+            "swift.kolby@example.com",
+            "johns.unique@example.net",
+            "jillian26@example.net",
+            "lhartmann@example.org",
+            "skassulke@example.net",
+            "baumbach.lucious@example.org",
+            "dell43@example.net"
+          ],
+          "ssn": [
+            "965",
+            "304246",
+            "3",
+            "141072406",
+            "248",
+            "668",
+            "402",
+            "39"
+          ],
+          "date_first_registered": [
+            "1971-02-05 07:28:23",
+            "1976-10-26 02:33:06",
+            "2007-08-29 23:25:41",
+            "2014-03-28 05:48:23",
+            "1973-05-19 19:12:46",
+            "1997-03-20 16:47:25",
+            "2018-03-13 09:56:22",
+            "1982-02-14 08:46:35"
+          ],
+          "date_left": [
+            "1971-05-17 19:28:49",
+            "2013-10-05 17:41:28",
+            "2007-03-31 09:53:19",
+            "2007-08-02 04:12:58",
+            "2007-11-28 12:50:21",
+            "2016-04-09 12:27:04",
+            "1997-11-16 08:54:33",
+            "2004-12-08 05:29:11"
+          ],
+          "other_student_details": [
+            "quia",
+            "autem",
+            "facilis",
+            "atque",
+            "laborum",
+            "qui",
+            "dolorum",
+            "voluptatem"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Transcript_Contents": {
+        "rows": 15,
+        "sample_values": {
+          "student_course_id": [
+            "0",
+            "96",
+            "76",
+            "7",
+            "28982908",
+            "2",
+            "8",
+            "45105806"
+          ],
+          "transcript_id": [
+            "2",
+            "8",
+            "9",
+            "4",
+            "15",
+            "6",
+            "13",
+            "12"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Transcripts": {
+        "rows": 15,
+        "sample_values": {
+          "transcript_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "transcript_date": [
+            "1988-04-30 01:19:47",
+            "1975-10-28 15:16:51",
+            "1984-12-19 00:37:21",
+            "1999-01-06 20:06:46",
+            "2013-06-30 13:01:40",
+            "2010-12-13 10:55:15",
+            "1990-03-05 11:59:41",
+            "1975-05-06 12:04:47"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

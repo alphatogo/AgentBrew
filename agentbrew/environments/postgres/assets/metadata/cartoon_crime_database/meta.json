@@ -1,0 +1,681 @@
+{
+  "db_id": "cartoon_crime_database",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/cartoon_crime_database",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"character_appearances\" {\n  \"appearance_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"show_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"appearance_date\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"character_relationships\" {\n  \"relationship_id\" INTEGER [pk]\n  \"character_id_1\" INTEGER\n  \"character_id_2\" INTEGER\n  \"relationship_type\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"character_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"show_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"characters\" {\n  \"character_id\" INTEGER [pk]\n  \"character_name\" TEXT\n  \"alias\" TEXT\n  \"description\" TEXT\n  \"first_appeared\" TEXT\n  \"last_appeared\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"content_warnings\" {\n  \"warning_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"warning_text\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"episode_writers\" {\n  \"writer_id\" INTEGER [pk]\n  \"episode_id\" INTEGER\n  \"writer_name\" TEXT\n  \"writer_email\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"episodes\" {\n  \"episode_id\" INTEGER [pk]\n  \"show_id\" INTEGER\n  \"episode_title\" TEXT\n  \"air_date\" TEXT\n  \"season_number\" INTEGER\n  \"episode_number\" INTEGER\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incident_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incident_links\" {\n  \"link_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"link_url\" TEXT\n  \"link_description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incident_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_value\" INTEGER\n  \"rating_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incident_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incident_types_incidents\" {\n  \"mapping_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"type_id\" INTEGER\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"incidents\" {\n  \"incident_id\" INTEGER [pk]\n  \"perpetrator_id\" INTEGER\n  \"victim_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"clued_word\" TEXT\n  \"extra_letter\" TEXT\n  \"accusation\" TEXT\n  \"incident_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"show_producers\" {\n  \"producer_id\" INTEGER [pk]\n  \"show_id\" INTEGER\n  \"producer_name\" TEXT\n  \"producer_email\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"shows\" {\n  \"show_id\" INTEGER [pk]\n  \"show_name\" TEXT\n  \"network\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"genre\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nRef: \"public\".\"character_appearances\".\"show_id\" > \"public\".\"shows\".\"show_id\"\nRef: \"public\".\"character_appearances\".\"episode_id\" > \"public\".\"episodes\".\"episode_id\"\nRef: \"public\".\"character_appearances\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_relationships\".\"character_id_2\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_relationships\".\"character_id_1\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"character_roles\".\"show_id\" > \"public\".\"shows\".\"show_id\"\nRef: \"public\".\"character_roles\".\"episode_id\" > \"public\".\"episodes\".\"episode_id\"\nRef: \"public\".\"character_roles\".\"character_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"content_warnings\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"episode_writers\".\"episode_id\" > \"public\".\"episodes\".\"episode_id\"\nRef: \"public\".\"episodes\".\"show_id\" > \"public\".\"shows\".\"show_id\"\nRef: \"public\".\"incident_comments\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"incident_links\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_ratings\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_ratings\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"incident_types_incidents\".\"type_id\" > \"public\".\"incident_types\".\"type_id\"\nRef: \"public\".\"incident_types_incidents\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incidents\".\"episode_id\" > \"public\".\"episodes\".\"episode_id\"\nRef: \"public\".\"incidents\".\"perpetrator_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"incidents\".\"victim_id\" > \"public\".\"characters\".\"character_id\"\nRef: \"public\".\"show_producers\".\"show_id\" > \"public\".\"shows\".\"show_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"character_appearances\" {\n  \"appearance_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"show_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"appearance_date\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"character_relationships\" {\n  \"relationship_id\" INTEGER [pk]\n  \"character_id_1\" INTEGER\n  \"character_id_2\" INTEGER\n  \"relationship_type\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"character_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"character_id\" INTEGER\n  \"show_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"characters\" {\n  \"character_id\" INTEGER [pk]\n  \"character_name\" TEXT\n  \"alias\" TEXT\n  \"description\" TEXT\n  \"first_appeared\" TEXT\n  \"last_appeared\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"content_warnings\" {\n  \"warning_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"warning_text\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"episode_writers\" {\n  \"writer_id\" INTEGER [pk]\n  \"episode_id\" INTEGER\n  \"writer_name\" TEXT\n  \"writer_email\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"episodes\" {\n  \"episode_id\" INTEGER [pk]\n  \"show_id\" INTEGER\n  \"episode_title\" TEXT\n  \"air_date\" TEXT\n  \"season_number\" INTEGER\n  \"episode_number\" INTEGER\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incident_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incident_links\" {\n  \"link_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"link_url\" TEXT\n  \"link_description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incident_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_value\" INTEGER\n  \"rating_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incident_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incident_types_incidents\" {\n  \"mapping_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"type_id\" INTEGER\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"incidents\" {\n  \"incident_id\" INTEGER [pk]\n  \"perpetrator_id\" INTEGER\n  \"victim_id\" INTEGER\n  \"episode_id\" INTEGER\n  \"clued_word\" TEXT\n  \"extra_letter\" TEXT\n  \"accusation\" TEXT\n  \"incident_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"show_producers\" {\n  \"producer_id\" INTEGER [pk]\n  \"show_id\" INTEGER\n  \"producer_name\" TEXT\n  \"producer_email\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"shows\" {\n  \"show_id\" INTEGER [pk]\n  \"show_name\" TEXT\n  \"network\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"genre\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_by\" INTEGER\n  \"created_date\" TEXT\n  \"updated_by\" INTEGER\n  \"updated_date\" TEXT\n}\n\nRef: \"character_appearances\".\"show_id\" > \"shows\".\"show_id\"\n\nRef: \"character_appearances\".\"episode_id\" > \"episodes\".\"episode_id\"\n\nRef: \"character_appearances\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"character_relationships\".\"character_id_2\" > \"characters\".\"character_id\"\n\nRef: \"character_relationships\".\"character_id_1\" > \"characters\".\"character_id\"\n\nRef: \"character_roles\".\"show_id\" > \"shows\".\"show_id\"\n\nRef: \"character_roles\".\"episode_id\" > \"episodes\".\"episode_id\"\n\nRef: \"character_roles\".\"character_id\" > \"characters\".\"character_id\"\n\nRef: \"content_warnings\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"episode_writers\".\"episode_id\" > \"episodes\".\"episode_id\"\n\nRef: \"episodes\".\"show_id\" > \"shows\".\"show_id\"\n\nRef: \"incident_comments\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"incident_links\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_ratings\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_ratings\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"incident_types_incidents\".\"type_id\" > \"incident_types\".\"type_id\"\n\nRef: \"incident_types_incidents\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incidents\".\"episode_id\" > \"episodes\".\"episode_id\"\n\nRef: \"incidents\".\"perpetrator_id\" > \"characters\".\"character_id\"\n\nRef: \"incidents\".\"victim_id\" > \"characters\".\"character_id\"\n\nRef: \"show_producers\".\"show_id\" > \"shows\".\"show_id\"\n\n## Table Stats & Sample Values\n\ncharacter_appearances: 2 rows\n  description: 'BEAR appeared in the pilot episode of 'BJ and the', 'BINGO appeared in the episode 'The Monster Mash' o'\n  appearance_date: '1972-09-10', '1967-09-01'\n  created_date: '2023-05-01', '2023-05-02'\n\ncharacter_relationships: 2 rows\n  relationship_type: 'partner', 'bandmate'\n  description: 'BEAR and GRODD were partners in the show 'BJ and t', 'BINGO and DUNSTON were bandmates in 'Banana Splits'\n  created_date: '2023-05-01', '2023-05-02'\n\ncharacter_roles: 2 rows\n  role_name: 'protagonist', 'bandmate'\n  description: 'BEAR was the protagonist in the pilot episode of '', 'BINGO was a bandmate in the episode 'The Monster M'\n  created_date: '2023-05-01', '2023-05-02'\n\ncharacters: 2 rows\n  character_name: 'BEAR', 'BINGO'\n  alias: 'BJ', 'Bingo'\n  description: 'A friendly truck driver bear.', 'A musical bear in a band.'\n\ncontent_warnings: 2 rows\n  warning_text: 'This incident contains mild violence', 'This incident contains strong language'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\nepisode_writers: 2 rows\n  writer_name: 'Alice Johnson', 'Bob Williams'\n  writer_email: 'alice.johnson@example.com', 'bob.williams@example.com'\n  created_date: '2023-05-01', '2023-05-02'\n\nepisodes: 2 rows\n  episode_title: 'Pilot', 'The Monster Mash'\n  air_date: '1972-09-10', '1967-09-01'\n  created_date: '2023-05-01', '2023-05-02'\n\nincident_comments: 2 rows\n  comment_text: 'I always thought BEAR was a good guy, but this is', 'BINGO's music must have been really wild to cause'\n  comment_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n\nincident_links: 2 rows\n  link_description: 'Link to a news article about the incident', 'Link to a video of the incident'\n  link_url: 'https://example.com/link1', 'https://example.com/link2'\n  created_date: '2023-05-01', '2023-05-02'\n\nincident_ratings: 2 rows\n  rating_date: '2023-05-01', '2023-05-02'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n\nincident_types: 2 rows\n  type_name: 'Crime', 'Prank'\n  description: 'Serious criminal acts', 'Light-hearted jokes and pranks'\n  created_date: '2023-05-01', '2023-05-02'\n\nincident_types_incidents: 2 rows\n  created_date: '2023-05-01', '2023-05-02'\n  updated_date: '2023-05-01', '2023-05-02'\n  type_id: '0', '1'\n\nincidents: 2 rows\n  clued_word: 'DODGER', 'UNSTONED'\n  accusation: 'During the three seasons you spent trucking around', 'You played drums alongside Fleegle and your other'\n  incident_date: '1972-09-10', '1967-09-01'\n\nshow_producers: 2 rows\n  producer_name: 'John Doe', 'Jane Smith'\n  producer_email: 'john.doe@example.com', 'jane.smith@example.com'\n  start_date: '1972-09-10', '1967-09-01'\n\nshows: 2 rows\n  show_name: 'BJ and the Bear', 'Banana Splits'\n  genre: 'Comedy', 'Children's'\n  network: 'NBC', 'CBS'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "character_appearances": {
+        "rows": 2,
+        "sample_values": {
+          "appearance_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "show_id": [
+            "0"
+          ],
+          "episode_id": [
+            "1",
+            "0"
+          ],
+          "appearance_date": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "description": [
+            "BEAR appeared in the pilot episode of 'BJ and the ",
+            "BINGO appeared in the episode 'The Monster Mash' o"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_relationships": {
+        "rows": 2,
+        "sample_values": {
+          "relationship_id": [
+            "0",
+            "1"
+          ],
+          "character_id_1": [
+            "0",
+            "1"
+          ],
+          "character_id_2": [
+            "1",
+            "0"
+          ],
+          "relationship_type": [
+            "partner",
+            "bandmate"
+          ],
+          "description": [
+            "BEAR and GRODD were partners in the show 'BJ and t",
+            "BINGO and DUNSTON were bandmates in 'Banana Splits"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "character_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "character_id": [
+            "1"
+          ],
+          "show_id": [
+            "0"
+          ],
+          "episode_id": [
+            "0"
+          ],
+          "role_name": [
+            "protagonist",
+            "bandmate"
+          ],
+          "description": [
+            "BEAR was the protagonist in the pilot episode of '",
+            "BINGO was a bandmate in the episode 'The Monster M"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "characters": {
+        "rows": 2,
+        "sample_values": {
+          "character_id": [
+            "0",
+            "1"
+          ],
+          "character_name": [
+            "BEAR",
+            "BINGO"
+          ],
+          "alias": [
+            "BJ",
+            "Bingo"
+          ],
+          "description": [
+            "A friendly truck driver bear.",
+            "A musical bear in a band."
+          ],
+          "first_appeared": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "last_appeared": [
+            "1974-03-15",
+            "1968-08-30"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "content_warnings": {
+        "rows": 2,
+        "sample_values": {
+          "warning_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "0"
+          ],
+          "warning_text": [
+            "This incident contains mild violence",
+            "This incident contains strong language"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "episode_writers": {
+        "rows": 2,
+        "sample_values": {
+          "writer_id": [
+            "0",
+            "1"
+          ],
+          "episode_id": [
+            "0",
+            "1"
+          ],
+          "writer_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "writer_email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "episodes": {
+        "rows": 2,
+        "sample_values": {
+          "episode_id": [
+            "0",
+            "1"
+          ],
+          "show_id": [
+            "0",
+            "1"
+          ],
+          "episode_title": [
+            "Pilot",
+            "The Monster Mash"
+          ],
+          "air_date": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "season_number": [
+            "1"
+          ],
+          "episode_number": [
+            "1"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "comment_text": [
+            "I always thought BEAR was a good guy, but this is ",
+            "BINGO's music must have been really wild to cause "
+          ],
+          "comment_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_links": {
+        "rows": 2,
+        "sample_values": {
+          "link_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "0"
+          ],
+          "link_url": [
+            "https://example.com/link1",
+            "https://example.com/link2"
+          ],
+          "link_description": [
+            "Link to a news article about the incident",
+            "Link to a video of the incident"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "rating_value": [
+            "4",
+            "5"
+          ],
+          "rating_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "Crime",
+            "Prank"
+          ],
+          "description": [
+            "Serious criminal acts",
+            "Light-hearted jokes and pranks"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_types_incidents": {
+        "rows": 2,
+        "sample_values": {
+          "mapping_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "0"
+          ],
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incidents": {
+        "rows": 2,
+        "sample_values": {
+          "incident_id": [
+            "0",
+            "1"
+          ],
+          "perpetrator_id": [
+            "0",
+            "1"
+          ],
+          "victim_id": [
+            "0"
+          ],
+          "episode_id": [
+            "0",
+            "1"
+          ],
+          "clued_word": [
+            "DODGER",
+            "UNSTONED"
+          ],
+          "extra_letter": [
+            "E"
+          ],
+          "accusation": [
+            "During the three seasons you spent trucking around",
+            "You played drums alongside Fleegle and your other "
+          ],
+          "incident_date": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "show_producers": {
+        "rows": 2,
+        "sample_values": {
+          "producer_id": [
+            "0",
+            "1"
+          ],
+          "show_id": [
+            "1",
+            "0"
+          ],
+          "producer_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "producer_email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "start_date": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "end_date": [
+            "1974-03-15",
+            "1968-08-30"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shows": {
+        "rows": 2,
+        "sample_values": {
+          "show_id": [
+            "0",
+            "1"
+          ],
+          "show_name": [
+            "BJ and the Bear",
+            "Banana Splits"
+          ],
+          "network": [
+            "NBC",
+            "CBS"
+          ],
+          "start_date": [
+            "1972-09-10",
+            "1967-09-01"
+          ],
+          "end_date": [
+            "1974-03-15",
+            "1968-08-30"
+          ],
+          "genre": [
+            "Comedy",
+            "Children's"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "password": [
+            "password123"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "1",
+            "2"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

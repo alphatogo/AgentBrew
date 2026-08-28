@@ -1,0 +1,560 @@
+{
+  "db_id": "cybersecurity_incident_management_and_analysis",
+  "source": "synsql",
+  "tables": 24,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/cybersecurity_incident_management_and_analysis",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"actor_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"affected_entities\" {\n  \"entity_id\" INTEGER [pk]\n  \"entity_name\" TEXT\n  \"entity_type\" TEXT\n  \"incident_id\" INTEGER\n}\n\nTable \"public\".\"anomaly_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"entity_id\" INTEGER\n  \"score\" REAL\n  \"timestamp\" TEXT\n}\n\nTable \"public\".\"entity_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"entity_id\" INTEGER\n  \"target_entity_id\" INTEGER\n  \"interaction_type\" TEXT\n  \"timestamp\" TEXT\n}\n\nTable \"public\".\"entity_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"incident_actors\" {\n  \"actor_id\" INTEGER [pk]\n  \"actor_name\" TEXT\n  \"actor_type\" TEXT\n  \"incident_id\" INTEGER\n}\n\nTable \"public\".\"incident_impact_map\" {\n  \"map_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"impact_id\" INTEGER\n}\n\nTable \"public\".\"incident_impacts\" {\n  \"impact_id\" INTEGER [pk]\n  \"impact_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"incident_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"action_taken\" TEXT\n  \"action_time\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"public\".\"incident_notes\" {\n  \"note_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"note_text\" TEXT\n  \"note_time\" TEXT\n}\n\nTable \"public\".\"incident_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"report_type\" TEXT\n  \"report_file_path\" TEXT\n  \"report_time\" TEXT\n}\n\nTable \"public\".\"incident_status\" {\n  \"status_id\" INTEGER [pk]\n  \"status_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"incident_threat_intelligence\" {\n  \"intelligence_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"threat_source\" TEXT\n  \"threat_indicator\" TEXT\n  \"threat_confidence\" REAL\n}\n\nTable \"public\".\"incident_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"incidents\" {\n  \"incident_id\" INTEGER [pk]\n  \"incident_type\" TEXT\n  \"description\" TEXT\n  \"severity\" TEXT\n  \"platform\" TEXT\n  \"source\" TEXT\n  \"detected_at\" TEXT\n  \"status\" TEXT\n  \"response_team_id\" INTEGER\n  \"prediction_score\" REAL\n  \"prediction_model\" TEXT\n}\n\nTable \"public\".\"models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_type\" TEXT\n  \"model_parameters\" TEXT\n}\n\nTable \"public\".\"platforms\" {\n  \"platform_id\" INTEGER [pk]\n  \"platform_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"predictions\" {\n  \"prediction_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"model_id\" INTEGER\n  \"prediction_score\" REAL\n  \"timestamp\" TEXT\n}\n\nTable \"public\".\"response_teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"description\" TEXT\n  \"lead_user_id\" INTEGER\n}\n\nTable \"public\".\"roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"severities\" {\n  \"severity_id\" INTEGER [pk]\n  \"severity_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"user_entities\" {\n  \"map_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"entity_id\" INTEGER\n  \"interaction_type\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"team_id\" INTEGER\n}\n\nRef: \"public\".\"affected_entities\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"affected_entities\".\"entity_type\" > \"public\".\"entity_types\".\"type_id\"\nRef: \"public\".\"anomaly_scores\".\"entity_id\" > \"public\".\"affected_entities\".\"entity_id\"\nRef: \"public\".\"entity_interactions\".\"target_entity_id\" > \"public\".\"affected_entities\".\"entity_id\"\nRef: \"public\".\"entity_interactions\".\"entity_id\" > \"public\".\"affected_entities\".\"entity_id\"\nRef: \"public\".\"incident_actors\".\"actor_type\" > \"public\".\"actor_types\".\"type_id\"\nRef: \"public\".\"incident_actors\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_impact_map\".\"impact_id\" > \"public\".\"incident_impacts\".\"impact_id\"\nRef: \"public\".\"incident_impact_map\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"incident_logs\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_notes\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_notes\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"incident_reports\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incident_threat_intelligence\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"incidents\".\"platform\" > \"public\".\"platforms\".\"platform_id\"\nRef: \"public\".\"incidents\".\"incident_type\" > \"public\".\"incident_types\".\"type_id\"\nRef: \"public\".\"incidents\".\"source\" > \"public\".\"sources\".\"source_id\"\nRef: \"public\".\"incidents\".\"response_team_id\" > \"public\".\"response_teams\".\"team_id\"\nRef: \"public\".\"incidents\".\"status\" > \"public\".\"incident_status\".\"status_id\"\nRef: \"public\".\"incidents\".\"severity\" > \"public\".\"severities\".\"severity_id\"\nRef: \"public\".\"predictions\".\"model_id\" > \"public\".\"models\".\"model_id\"\nRef: \"public\".\"predictions\".\"incident_id\" > \"public\".\"incidents\".\"incident_id\"\nRef: \"public\".\"response_teams\".\"lead_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_entities\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_entities\".\"entity_id\" > \"public\".\"affected_entities\".\"entity_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"actor_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"affected_entities\" {\n  \"entity_id\" INTEGER [pk]\n  \"entity_name\" TEXT\n  \"entity_type\" TEXT\n  \"incident_id\" INTEGER\n}\n\nTable \"anomaly_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"entity_id\" INTEGER\n  \"score\" REAL\n  \"timestamp\" TEXT\n}\n\nTable \"entity_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"entity_id\" INTEGER\n  \"target_entity_id\" INTEGER\n  \"interaction_type\" TEXT\n  \"timestamp\" TEXT\n}\n\nTable \"entity_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"incident_actors\" {\n  \"actor_id\" INTEGER [pk]\n  \"actor_name\" TEXT\n  \"actor_type\" TEXT\n  \"incident_id\" INTEGER\n}\n\nTable \"incident_impact_map\" {\n  \"map_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"impact_id\" INTEGER\n}\n\nTable \"incident_impacts\" {\n  \"impact_id\" INTEGER [pk]\n  \"impact_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"incident_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"action_taken\" TEXT\n  \"action_time\" TEXT\n  \"notes\" TEXT\n}\n\nTable \"incident_notes\" {\n  \"note_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"user_id\" INTEGER\n  \"note_text\" TEXT\n  \"note_time\" TEXT\n}\n\nTable \"incident_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"report_type\" TEXT\n  \"report_file_path\" TEXT\n  \"report_time\" TEXT\n}\n\nTable \"incident_status\" {\n  \"status_id\" INTEGER [pk]\n  \"status_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"incident_threat_intelligence\" {\n  \"intelligence_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"threat_source\" TEXT\n  \"threat_indicator\" TEXT\n  \"threat_confidence\" REAL\n}\n\nTable \"incident_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"incidents\" {\n  \"incident_id\" INTEGER [pk]\n  \"incident_type\" TEXT\n  \"description\" TEXT\n  \"severity\" TEXT\n  \"platform\" TEXT\n  \"source\" TEXT\n  \"detected_at\" TEXT\n  \"status\" TEXT\n  \"response_team_id\" INTEGER\n  \"prediction_score\" REAL\n  \"prediction_model\" TEXT\n}\n\nTable \"models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_type\" TEXT\n  \"model_parameters\" TEXT\n}\n\nTable \"platforms\" {\n  \"platform_id\" INTEGER [pk]\n  \"platform_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"predictions\" {\n  \"prediction_id\" INTEGER [pk]\n  \"incident_id\" INTEGER\n  \"model_id\" INTEGER\n  \"prediction_score\" REAL\n  \"timestamp\" TEXT\n}\n\nTable \"response_teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"description\" TEXT\n  \"lead_user_id\" INTEGER\n}\n\nTable \"roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"severities\" {\n  \"severity_id\" INTEGER [pk]\n  \"severity_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"user_entities\" {\n  \"map_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"entity_id\" INTEGER\n  \"interaction_type\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"team_id\" INTEGER\n}\n\nRef: \"affected_entities\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"affected_entities\".\"entity_type\" > \"entity_types\".\"type_id\"\n\nRef: \"anomaly_scores\".\"entity_id\" > \"affected_entities\".\"entity_id\"\n\nRef: \"entity_interactions\".\"target_entity_id\" > \"affected_entities\".\"entity_id\"\n\nRef: \"entity_interactions\".\"entity_id\" > \"affected_entities\".\"entity_id\"\n\nRef: \"incident_actors\".\"actor_type\" > \"actor_types\".\"type_id\"\n\nRef: \"incident_actors\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_impact_map\".\"impact_id\" > \"incident_impacts\".\"impact_id\"\n\nRef: \"incident_impact_map\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"incident_logs\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_notes\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_notes\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"incident_reports\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incident_threat_intelligence\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"incidents\".\"platform\" > \"platforms\".\"platform_id\"\n\nRef: \"incidents\".\"incident_type\" > \"incident_types\".\"type_id\"\n\nRef: \"incidents\".\"source\" > \"sources\".\"source_id\"\n\nRef: \"incidents\".\"response_team_id\" > \"response_teams\".\"team_id\"\n\nRef: \"incidents\".\"status\" > \"incident_status\".\"status_id\"\n\nRef: \"incidents\".\"severity\" > \"severities\".\"severity_id\"\n\nRef: \"predictions\".\"model_id\" > \"models\".\"model_id\"\n\nRef: \"predictions\".\"incident_id\" > \"incidents\".\"incident_id\"\n\nRef: \"response_teams\".\"lead_user_id\" > \"users\".\"user_id\"\n\nRef: \"user_entities\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_entities\".\"entity_id\" > \"affected_entities\".\"entity_id\"\n\n## Table Stats & Sample Values\n\nactor_types: 2 rows\n  type_name: 'external', 'internal'\n  description: 'An actor external to the organization', 'An actor internal to the organization'\n  type_id: '0', '1'\n\naffected_entities: 2 rows\n  entity_name: 'VM_ThreatIntelSuspectLogon', 'Guest Account'\n  entity_type: '0', '1'\n  incident_id: '1'\n\nanomaly_scores: 2 rows\n  timestamp: '2023-09-01 10:00:00', '2023-09-01 10:05:00'\n  score: '0.8', '0.5'\n  entity_id: '1'\n\nentity_interactions: 2 rows\n  interaction_type: 'communication', 'access'\n  timestamp: '2023-09-01 10:00:00', '2023-09-01 10:05:00'\n  entity_id: '1', '0'\n\nentity_types: 2 rows\n  type_name: 'host', 'user'\n  description: 'A network host or machine', 'A user account'\n  type_id: '0', '1'\n\nincident_actors: 2 rows\n  actor_name: 'Malicious IP x.x.x.x', 'Internal User'\n  actor_type: '0', '1'\n  incident_id: '0'\n\nincident_impact_map: 2 rows\n  incident_id: '1'\n  impact_id: '0'\n  map_id: '0', '1'\n\nincident_impacts: 2 rows\n  impact_name: 'Data Loss', 'System Downtime'\n  description: 'Loss of sensitive data', 'Downtime of critical systems'\n  impact_id: '0', '1'\n\nincident_logs: 2 rows\n  action_taken: 'Isolate affected system', 'Run malware scan'\n  notes: 'The affected system has been isolated to prevent f', 'Malware scan completed with no findings.'\n  action_time: '2023-09-01 10:05:00', '2023-09-01 10:10:00'\n\nincident_notes: 2 rows\n  note_text: 'The IP address x.x.x.x has been blacklisted.', 'The Guest account has been disabled.'\n  note_time: '2023-09-01 10:15:00', '2023-09-01 10:20:00'\n  user_id: '1', '0'\n\nincident_reports: 2 rows\n  report_type: 'incident_summary', 'forensic_analysis'\n  report_file_path: 'reports/1_summary.pdf', 'reports/2_analysis.pdf'\n  report_time: '2023-09-01 11:00:00', '2023-09-01 11:30:00'\n\nincident_status: 3 rows\n  status_name: 'Open', 'In Progress', 'Closed'\n  description: 'Incident is open and requires attention', 'Incident is being actively managed', 'Incident has been resolved and closed'\n  status_id: '0', '1', '2'\n\nincident_threat_intelligence: 2 rows\n  threat_source: 'Threat Feed', 'Manual Input'\n  threat_indicator: 'x.x.x.x', 'y.y.y.y'\n  threat_confidence: '0.95', '0.85'\n\nincident_types: 2 rows\n  type_name: 'malicious_logon', 'guest_account_addition'\n  description: 'A logon attempt from a known malicious IP address.', 'The addition of the Guest account to the Local Adm'\n  type_id: '0', '1'\n\nincidents: 2 rows\n  prediction_model: 'Logistic Regression', 'Decision Tree'\n  description: 'A successful remote authentication for the account', 'Analysis of host data has detected the addition of'\n  status: '0'\n\nmodels: 2 rows\n  model_name: 'Logistic Regression', 'Decision Tree'\n  model_parameters: '{\"C\": 1.0, \"penalty\": \"l2\"}', '{\"max_depth\": 5, \"min_samples_split\": 2}'\n  model_type: 'classification'\n\nplatforms: 2 rows\n  description: 'Windows operating system', 'Linux operating system'\n  platform_name: 'Windows', 'Linux'\n  platform_id: '0', '1'\n\npredictions: 2 rows\n  timestamp: '2023-09-01 10:00:00', '2023-09-01 10:05:00'\n  prediction_score: '0.85', '0.65'\n  model_id: '1', '0'\n\nresponse_teams: 2 rows\n  team_name: 'Incident Response Team 1', 'Incident Response Team 2'\n  description: 'Primary team for handling high-severity incidents', 'Secondary team for handling medium-severity incide'\n  lead_user_id: '1'\n\nroles: 2 rows\n  role_name: 'lead_responder', 'analyst'\n  description: 'User responsible for leading the incident response', 'User responsible for analyzing security incidents'\n  role_id: '0', '1'\n\nseverities: 4 rows\n  severity_name: 'High', 'Medium', 'Low', ...\n  description: 'Indicates a critical security incident that requir', 'Indicates a significant security incident that req', 'Indicates a minor security incident that requires', ...\n  severity_id: '0', '1', '2', ...\n\nsources: 2 rows\n  source_name: 'Azure Defender', 'Firewall'\n  description: 'Security service provided by Microsoft Azure', 'Network security system that monitors and controls'\n  source_id: '0', '1'\n\nuser_entities: 2 rows\n  interaction_type: 'login', 'access'\n  user_id: '1', '0'\n  entity_id: '1'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'lead_responder', 'analyst'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "actor_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "external",
+            "internal"
+          ],
+          "description": [
+            "An actor external to the organization",
+            "An actor internal to the organization"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "affected_entities": {
+        "rows": 2,
+        "sample_values": {
+          "entity_id": [
+            "0",
+            "1"
+          ],
+          "entity_name": [
+            "VM_ThreatIntelSuspectLogon",
+            "Guest Account"
+          ],
+          "entity_type": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "anomaly_scores": {
+        "rows": 2,
+        "sample_values": {
+          "score_id": [
+            "0",
+            "1"
+          ],
+          "entity_id": [
+            "1"
+          ],
+          "score": [
+            "0.8",
+            "0.5"
+          ],
+          "timestamp": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "entity_interactions": {
+        "rows": 2,
+        "sample_values": {
+          "interaction_id": [
+            "0",
+            "1"
+          ],
+          "entity_id": [
+            "1",
+            "0"
+          ],
+          "target_entity_id": [
+            "0",
+            "1"
+          ],
+          "interaction_type": [
+            "communication",
+            "access"
+          ],
+          "timestamp": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "entity_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "host",
+            "user"
+          ],
+          "description": [
+            "A network host or machine",
+            "A user account"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_actors": {
+        "rows": 2,
+        "sample_values": {
+          "actor_id": [
+            "0",
+            "1"
+          ],
+          "actor_name": [
+            "Malicious IP x.x.x.x",
+            "Internal User"
+          ],
+          "actor_type": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_impact_map": {
+        "rows": 2,
+        "sample_values": {
+          "map_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1"
+          ],
+          "impact_id": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_impacts": {
+        "rows": 2,
+        "sample_values": {
+          "impact_id": [
+            "0",
+            "1"
+          ],
+          "impact_name": [
+            "Data Loss",
+            "System Downtime"
+          ],
+          "description": [
+            "Loss of sensitive data",
+            "Downtime of critical systems"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "action_taken": [
+            "Isolate affected system",
+            "Run malware scan"
+          ],
+          "action_time": [
+            "2023-09-01 10:05:00",
+            "2023-09-01 10:10:00"
+          ],
+          "notes": [
+            "The affected system has been isolated to prevent f",
+            "Malware scan completed with no findings."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_notes": {
+        "rows": 2,
+        "sample_values": {
+          "note_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "note_text": [
+            "The IP address x.x.x.x has been blacklisted.",
+            "The Guest account has been disabled."
+          ],
+          "note_time": [
+            "2023-09-01 10:15:00",
+            "2023-09-01 10:20:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1"
+          ],
+          "report_type": [
+            "incident_summary",
+            "forensic_analysis"
+          ],
+          "report_file_path": [
+            "reports/1_summary.pdf",
+            "reports/2_analysis.pdf"
+          ],
+          "report_time": [
+            "2023-09-01 11:00:00",
+            "2023-09-01 11:30:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_status": {
+        "rows": 3,
+        "sample_values": {
+          "status_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "status_name": [
+            "Open",
+            "In Progress",
+            "Closed"
+          ],
+          "description": [
+            "Incident is open and requires attention",
+            "Incident is being actively managed",
+            "Incident has been resolved and closed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_threat_intelligence": {
+        "rows": 2,
+        "sample_values": {
+          "intelligence_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1",
+            "0"
+          ],
+          "threat_source": [
+            "Threat Feed",
+            "Manual Input"
+          ],
+          "threat_indicator": [
+            "x.x.x.x",
+            "y.y.y.y"
+          ],
+          "threat_confidence": [
+            "0.95",
+            "0.85"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incident_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "malicious_logon",
+            "guest_account_addition"
+          ],
+          "description": [
+            "A logon attempt from a known malicious IP address.",
+            "The addition of the Guest account to the Local Adm"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "incidents": {
+        "rows": 2,
+        "sample_values": {
+          "incident_id": [
+            "0",
+            "1"
+          ],
+          "incident_type": [
+            "0"
+          ],
+          "description": [
+            "A successful remote authentication for the account",
+            "Analysis of host data has detected the addition of"
+          ],
+          "severity": [
+            "1",
+            "0"
+          ],
+          "platform": [
+            "1"
+          ],
+          "source": [
+            "0",
+            "1"
+          ],
+          "detected_at": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ],
+          "status": [
+            "0"
+          ],
+          "response_team_id": [
+            "1"
+          ],
+          "prediction_score": [
+            "0.85",
+            "0.65"
+          ],
+          "prediction_model": [
+            "Logistic Regression",
+            "Decision Tree"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "models": {
+        "rows": 2,
+        "sample_values": {
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "model_name": [
+            "Logistic Regression",
+            "Decision Tree"
+          ],
+          "model_type": [
+            "classification"
+          ],
+          "model_parameters": [
+            "{\"C\": 1.0, \"penalty\": \"l2\"}",
+            "{\"max_depth\": 5, \"min_samples_split\": 2}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "platforms": {
+        "rows": 2,
+        "sample_values": {
+          "platform_id": [
+            "0",
+            "1"
+          ],
+          "platform_name": [
+            "Windows",
+            "Linux"
+          ],
+          "description": [
+            "Windows operating system",
+            "Linux operating system"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "predictions": {
+        "rows": 2,
+        "sample_values": {
+          "prediction_id": [
+            "0",
+            "1"
+          ],
+          "incident_id": [
+            "1",
+            "0"
+          ],
+          "model_id": [
+            "1",
+            "0"
+          ],
+          "prediction_score": [
+            "0.85",
+            "0.65"
+          ],
+          "timestamp": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "response_teams": {
+        "rows": 2,
+        "sample_values": {
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "team_name": [
+            "Incident Response Team 1",
+            "Incident Response Team 2"
+          ],
+          "description": [
+            "Primary team for handling high-severity incidents",
+            "Secondary team for handling medium-severity incide"
+          ],
+          "lead_user_id": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "lead_responder",
+            "analyst"
+          ],
+          "description": [
+            "User responsible for leading the incident response",
+            "User responsible for analyzing security incidents"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "severities": {
+        "rows": 4,
+        "sample_values": {
+          "severity_id": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "severity_name": [
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "description": [
+            "Indicates a critical security incident that requir",
+            "Indicates a significant security incident that req",
+            "Indicates a minor security incident that requires ",
+            "Indicates a security event for informational purpo"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "source_name": [
+            "Azure Defender",
+            "Firewall"
+          ],
+          "description": [
+            "Security service provided by Microsoft Azure",
+            "Network security system that monitors and controls"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_entities": {
+        "rows": 2,
+        "sample_values": {
+          "map_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "entity_id": [
+            "1"
+          ],
+          "interaction_type": [
+            "login",
+            "access"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "lead_responder",
+            "analyst"
+          ],
+          "team_id": [
+            "101",
+            "102"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

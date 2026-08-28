@@ -1,0 +1,593 @@
+{
+  "db_id": "crime_reporting_and_analysis_14267",
+  "source": "synsql",
+  "tables": 23,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/crime_reporting_and_analysis_14267",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_time\" TEXT\n}\n\nTable \"public\".\"audit_logs\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"audit_date\" TEXT\n  \"audit_action\" TEXT\n}\n\nTable \"public\".\"crime_data_analytics\" {\n  \"analytics_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"analytics_date\" TEXT\n  \"analytics_data\" TEXT\n}\n\nTable \"public\".\"crime_data_exports\" {\n  \"export_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"export_date\" TEXT\n  \"export_file\" TEXT\n}\n\nTable \"public\".\"crime_data_imports\" {\n  \"import_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"import_date\" TEXT\n  \"import_file\" TEXT\n}\n\nTable \"public\".\"crime_incident_evidence\" {\n  \"evidence_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"evidence_type\" TEXT\n  \"description\" TEXT\n  \"storage_location\" TEXT\n}\n\nTable \"public\".\"crime_incident_locations\" {\n  \"incident_location_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"location_id\" INTEGER\n}\n\nTable \"public\".\"crime_incident_officers\" {\n  \"officer_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"officer_name\" TEXT\n  \"badge_number\" TEXT\n  \"rank\" TEXT\n}\n\nTable \"public\".\"crime_incident_participants\" {\n  \"participant_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"participant_type\" TEXT\n  \"description\" TEXT\n  \"name\" TEXT\n  \"age\" INTEGER\n  \"gender\" TEXT\n}\n\nTable \"public\".\"crime_incident_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_details\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"public\".\"crime_incident_witnesses\" {\n  \"witness_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"witness_name\" TEXT\n  \"statement\" TEXT\n  \"contact_info\" TEXT\n}\n\nTable \"public\".\"crime_pattern_analysis\" {\n  \"analysis_id\" INTEGER [pk]\n  \"trend_id\" INTEGER\n  \"analysis_date\" TEXT\n  \"analysis_details\" TEXT\n  \"analysis_conclusion\" TEXT\n}\n\nTable \"public\".\"crime_prediction_models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_description\" TEXT\n  \"model_accuracy\" REAL\n}\n\nTable \"public\".\"crime_prevention_strategies\" {\n  \"strategy_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"strategy_description\" TEXT\n  \"implementation_date\" TEXT\n}\n\nTable \"public\".\"crime_trends\" {\n  \"trend_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"date_range\" TEXT\n  \"trend_description\" TEXT\n  \"trend_analysis\" TEXT\n}\n\nTable \"public\".\"crime_types\" {\n  \"crime_type_id\" INTEGER [pk]\n  \"crime_type_name\" TEXT\n  \"description\" TEXT\n  \"crime_category\" TEXT\n}\n\nTable \"public\".\"crimes\" {\n  \"crime_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"date\" TEXT\n  \"time\" TEXT\n  \"location_type_id\" INTEGER\n  \"severity_id\" INTEGER\n  \"description\" TEXT\n  \"status\" TEXT\n  \"case_number\" TEXT\n  \"incident_summary\" TEXT\n}\n\nTable \"public\".\"location_types\" {\n  \"location_type_id\" INTEGER [pk]\n  \"location_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zipcode\" TEXT\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_date\" TEXT\n  \"notification_message\" TEXT\n}\n\nTable \"public\".\"settings\" {\n  \"setting_id\" INTEGER [pk]\n  \"setting_name\" TEXT\n  \"setting_value\" TEXT\n}\n\nTable \"public\".\"severities\" {\n  \"severity_id\" INTEGER [pk]\n  \"severity_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login\" TEXT\n}\n\nRef: \"public\".\"crime_data_analytics\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"crime_data_analytics\".\"crime_type_id\" > \"public\".\"crime_types\".\"crime_type_id\"\nRef: \"public\".\"crime_incident_evidence\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_incident_locations\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"crime_incident_locations\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_incident_officers\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_incident_participants\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_incident_reports\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_incident_witnesses\".\"crime_id\" > \"public\".\"crimes\".\"crime_id\"\nRef: \"public\".\"crime_pattern_analysis\".\"trend_id\" > \"public\".\"crime_trends\".\"trend_id\"\nRef: \"public\".\"crime_prevention_strategies\".\"crime_type_id\" > \"public\".\"crime_types\".\"crime_type_id\"\nRef: \"public\".\"crime_prevention_strategies\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"crime_trends\".\"crime_type_id\" > \"public\".\"crime_types\".\"crime_type_id\"\nRef: \"public\".\"crime_trends\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"crimes\".\"severity_id\" > \"public\".\"severities\".\"severity_id\"\nRef: \"public\".\"crimes\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"crimes\".\"crime_type_id\" > \"public\".\"crime_types\".\"crime_type_id\"\nRef: \"public\".\"crimes\".\"location_type_id\" > \"public\".\"location_types\".\"location_type_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_time\" TEXT\n}\n\nTable \"audit_logs\" {\n  \"audit_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"audit_date\" TEXT\n  \"audit_action\" TEXT\n}\n\nTable \"crime_data_analytics\" {\n  \"analytics_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"analytics_date\" TEXT\n  \"analytics_data\" TEXT\n}\n\nTable \"crime_data_exports\" {\n  \"export_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"export_date\" TEXT\n  \"export_file\" TEXT\n}\n\nTable \"crime_data_imports\" {\n  \"import_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"import_date\" TEXT\n  \"import_file\" TEXT\n}\n\nTable \"crime_incident_evidence\" {\n  \"evidence_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"evidence_type\" TEXT\n  \"description\" TEXT\n  \"storage_location\" TEXT\n}\n\nTable \"crime_incident_locations\" {\n  \"incident_location_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"location_id\" INTEGER\n}\n\nTable \"crime_incident_officers\" {\n  \"officer_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"officer_name\" TEXT\n  \"badge_number\" TEXT\n  \"rank\" TEXT\n}\n\nTable \"crime_incident_participants\" {\n  \"participant_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"participant_type\" TEXT\n  \"description\" TEXT\n  \"name\" TEXT\n  \"age\" INTEGER\n  \"gender\" TEXT\n}\n\nTable \"crime_incident_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_details\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"crime_incident_witnesses\" {\n  \"witness_id\" INTEGER [pk]\n  \"crime_id\" INTEGER\n  \"witness_name\" TEXT\n  \"statement\" TEXT\n  \"contact_info\" TEXT\n}\n\nTable \"crime_pattern_analysis\" {\n  \"analysis_id\" INTEGER [pk]\n  \"trend_id\" INTEGER\n  \"analysis_date\" TEXT\n  \"analysis_details\" TEXT\n  \"analysis_conclusion\" TEXT\n}\n\nTable \"crime_prediction_models\" {\n  \"model_id\" INTEGER [pk]\n  \"model_name\" TEXT\n  \"model_description\" TEXT\n  \"model_accuracy\" REAL\n}\n\nTable \"crime_prevention_strategies\" {\n  \"strategy_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"strategy_description\" TEXT\n  \"implementation_date\" TEXT\n}\n\nTable \"crime_trends\" {\n  \"trend_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"date_range\" TEXT\n  \"trend_description\" TEXT\n  \"trend_analysis\" TEXT\n}\n\nTable \"crime_types\" {\n  \"crime_type_id\" INTEGER [pk]\n  \"crime_type_name\" TEXT\n  \"description\" TEXT\n  \"crime_category\" TEXT\n}\n\nTable \"crimes\" {\n  \"crime_id\" INTEGER [pk]\n  \"crime_type_id\" INTEGER\n  \"location_id\" INTEGER\n  \"date\" TEXT\n  \"time\" TEXT\n  \"location_type_id\" INTEGER\n  \"severity_id\" INTEGER\n  \"description\" TEXT\n  \"status\" TEXT\n  \"case_number\" TEXT\n  \"incident_summary\" TEXT\n}\n\nTable \"location_types\" {\n  \"location_type_id\" INTEGER [pk]\n  \"location_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zipcode\" TEXT\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_date\" TEXT\n  \"notification_message\" TEXT\n}\n\nTable \"settings\" {\n  \"setting_id\" INTEGER [pk]\n  \"setting_name\" TEXT\n  \"setting_value\" TEXT\n}\n\nTable \"severities\" {\n  \"severity_id\" INTEGER [pk]\n  \"severity_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login\" TEXT\n}\n\nRef: \"crime_data_analytics\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"crime_data_analytics\".\"crime_type_id\" > \"crime_types\".\"crime_type_id\"\n\nRef: \"crime_incident_evidence\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_incident_locations\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"crime_incident_locations\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_incident_officers\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_incident_participants\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_incident_reports\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_incident_witnesses\".\"crime_id\" > \"crimes\".\"crime_id\"\n\nRef: \"crime_pattern_analysis\".\"trend_id\" > \"crime_trends\".\"trend_id\"\n\nRef: \"crime_prevention_strategies\".\"crime_type_id\" > \"crime_types\".\"crime_type_id\"\n\nRef: \"crime_prevention_strategies\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"crime_trends\".\"crime_type_id\" > \"crime_types\".\"crime_type_id\"\n\nRef: \"crime_trends\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"crimes\".\"severity_id\" > \"severities\".\"severity_id\"\n\nRef: \"crimes\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"crimes\".\"crime_type_id\" > \"crime_types\".\"crime_type_id\"\n\nRef: \"crimes\".\"location_type_id\" > \"location_types\".\"location_type_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_date: '2022-01-01', '2022-01-02'\n  access_time: '08:00', '09:00'\n  user_id: '1401', '1402'\n\naudit_logs: 2 rows\n  audit_action: 'Logged in to the system', 'Exported crime data'\n  audit_date: '2022-01-01', '2022-01-02'\n  user_id: '1401', '1402'\n\ncrime_data_analytics: 2 rows\n  analytics_date: '2022-01-01', '2022-01-02'\n  analytics_data: 'Robbery incidents in Kanjirappally are increasing', 'Assault incidents in Kottayam are decreasing by 5%'\n  crime_type_id: '0', '1'\n\ncrime_data_exports: 2 rows\n  export_file: 'crime_data_2022-01-01.csv', 'crime_data_2022-01-02.csv'\n  export_date: '2022-01-01', '2022-01-02'\n  user_id: '1401', '1402'\n\ncrime_data_imports: 2 rows\n  import_file: 'crime_data_2022-01-01.csv', 'crime_data_2022-01-02.csv'\n  import_date: '2022-01-01', '2022-01-02'\n  user_id: '1401', '1402'\n\ncrime_incident_evidence: 2 rows\n  description: 'Security camera footage', 'Witness statement'\n  evidence_type: 'Physical', 'Testimonial'\n  storage_location: 'Evidence Room 1', 'Evidence Room 2'\n\ncrime_incident_locations: 2 rows\n  crime_id: '1', '0'\n  location_id: '1'\n  incident_location_id: '0', '1'\n\ncrime_incident_officers: 2 rows\n  officer_name: 'Officer Johnson', 'Officer Williams'\n  badge_number: '1234', '5678'\n  rank: 'Sergeant', 'Lieutenant'\n\ncrime_incident_participants: 2 rows\n  participant_type: 'Victim', 'Perpetrator'\n  description: 'Jewelry store owner', 'Unidentified male'\n  name: 'John Doe', 'Unknown'\n\ncrime_incident_reports: 2 rows\n  report_status: 'submitted', 'approved'\n  report_date: '2022-01-01', '2022-01-03'\n  report_details: 'Incident report for robbery at jewelry store', 'Incident report for assault at residential area'\n\ncrime_incident_witnesses: 2 rows\n  witness_name: 'John Doe', 'Jane Smith'\n  statement: 'I saw the perpetrator flee the scene', 'I heard a loud noise and called the police'\n  contact_info: '123 Main St, Kanjirappally', '456 Elm St, Kottayam'\n\ncrime_pattern_analysis: 2 rows\n  analysis_date: '2022-02-01', '2022-03-01'\n  analysis_details: 'Robbery incidents in Kanjirappally are increasing', 'Assault incidents in Kottayam are decreasing due t'\n  analysis_conclusion: 'The lack of police presence in Kanjirappally is co', 'The community outreach programs in Kottayam are co'\n\ncrime_prediction_models: 2 rows\n  model_name: 'Linear Regression', 'Decision Tree'\n  model_description: 'Predicts crime incidents based on historical data', 'Predicts crime incidents based on demographic data'\n  model_accuracy: '0.8', '0.9'\n\ncrime_prevention_strategies: 2 rows\n  strategy_description: 'Increase police presence in Kanjirappally during p', 'Implement community outreach programs in Kottayam'\n  implementation_date: '2022-01-01', '2022-02-01'\n  crime_type_id: '0'\n\ncrime_trends: 2 rows\n  trend_description: 'Increase in robbery incidents in Kanjirappally', 'Decrease in assault incidents in Kottayam'\n  date_range: '2022-01-01 to 2022-01-31', '2022-02-01 to 2022-02-28'\n  trend_analysis: 'The increase in robbery incidents is attributed to', 'The decrease in assault incidents is attributed to'\n\ncrime_types: 2 rows\n  crime_type_name: 'Robbery', 'Assault'\n  description: 'Unauthorized taking of property from a person', 'Physical attack on a person resulting in injury'\n  crime_category: 'violent'\n\ncrimes: 2 rows\n  status: 'open', 'closed'\n  description: 'Armed robbery at a jewelry store', 'Verbal altercation leading to a physical fight'\n  case_number: 'CR-001', 'CR-002'\n\nlocation_types: 2 rows\n  location_type_name: 'Commercial', 'Residential'\n  description: 'Business or office areas', 'Residential areas or homes'\n  location_type_id: '0', '1'\n\nlocations: 2 rows\n  location_name: 'Kanjirappally', 'Kottayam'\n  city: 'Kanjirappally', 'Kottayam'\n  state: 'Kerala'\n\nnotifications: 2 rows\n  notification_message: 'New crime incident reported in Kanjirappally', 'Crime incident updated in Kottayam'\n  notification_date: '2022-01-01', '2022-01-02'\n  user_id: '1401', '1402'\n\nsettings: 2 rows\n  setting_name: 'notification_threshold', 'export_format'\n  setting_value: '10', 'csv'\n  setting_id: '0', '1'\n\nseverities: 2 rows\n  severity_name: 'Major', 'Moderate'\n  description: 'Severe crimes resulting in significant harm', 'Crimes resulting in moderate harm or damage'\n  severity_id: '0', '1'\n\nusers: 2 rows\n  user_name: 'John Doe', 'Jane Smith'\n  role: 'analyst', 'investigator'\n  password: 'password123', 'password456'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1401",
+            "1402"
+          ],
+          "access_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "access_time": [
+            "08:00",
+            "09:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_logs": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1401",
+            "1402"
+          ],
+          "audit_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "audit_action": [
+            "Logged in to the system",
+            "Exported crime data"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_data_analytics": {
+        "rows": 2,
+        "sample_values": {
+          "analytics_id": [
+            "0",
+            "1"
+          ],
+          "crime_type_id": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "1"
+          ],
+          "analytics_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "analytics_data": [
+            "Robbery incidents in Kanjirappally are increasing ",
+            "Assault incidents in Kottayam are decreasing by 5%"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_data_exports": {
+        "rows": 2,
+        "sample_values": {
+          "export_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1401",
+            "1402"
+          ],
+          "export_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "export_file": [
+            "crime_data_2022-01-01.csv",
+            "crime_data_2022-01-02.csv"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_data_imports": {
+        "rows": 2,
+        "sample_values": {
+          "import_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1401",
+            "1402"
+          ],
+          "import_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "import_file": [
+            "crime_data_2022-01-01.csv",
+            "crime_data_2022-01-02.csv"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_evidence": {
+        "rows": 2,
+        "sample_values": {
+          "evidence_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "1"
+          ],
+          "evidence_type": [
+            "Physical",
+            "Testimonial"
+          ],
+          "description": [
+            "Security camera footage",
+            "Witness statement"
+          ],
+          "storage_location": [
+            "Evidence Room 1",
+            "Evidence Room 2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_locations": {
+        "rows": 2,
+        "sample_values": {
+          "incident_location_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "1",
+            "0"
+          ],
+          "location_id": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_officers": {
+        "rows": 2,
+        "sample_values": {
+          "officer_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "0",
+            "1"
+          ],
+          "officer_name": [
+            "Officer Johnson",
+            "Officer Williams"
+          ],
+          "badge_number": [
+            "1234",
+            "5678"
+          ],
+          "rank": [
+            "Sergeant",
+            "Lieutenant"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_participants": {
+        "rows": 2,
+        "sample_values": {
+          "participant_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "1"
+          ],
+          "participant_type": [
+            "Victim",
+            "Perpetrator"
+          ],
+          "description": [
+            "Jewelry store owner",
+            "Unidentified male"
+          ],
+          "name": [
+            "John Doe",
+            "Unknown"
+          ],
+          "age": [
+            "35",
+            "0"
+          ],
+          "gender": [
+            "Male"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "1"
+          ],
+          "report_date": [
+            "2022-01-01",
+            "2022-01-03"
+          ],
+          "report_details": [
+            "Incident report for robbery at jewelry store",
+            "Incident report for assault at residential area"
+          ],
+          "report_status": [
+            "submitted",
+            "approved"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_incident_witnesses": {
+        "rows": 2,
+        "sample_values": {
+          "witness_id": [
+            "0",
+            "1"
+          ],
+          "crime_id": [
+            "0"
+          ],
+          "witness_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "statement": [
+            "I saw the perpetrator flee the scene",
+            "I heard a loud noise and called the police"
+          ],
+          "contact_info": [
+            "123 Main St, Kanjirappally",
+            "456 Elm St, Kottayam"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_pattern_analysis": {
+        "rows": 2,
+        "sample_values": {
+          "analysis_id": [
+            "0",
+            "1"
+          ],
+          "trend_id": [
+            "0"
+          ],
+          "analysis_date": [
+            "2022-02-01",
+            "2022-03-01"
+          ],
+          "analysis_details": [
+            "Robbery incidents in Kanjirappally are increasing ",
+            "Assault incidents in Kottayam are decreasing due t"
+          ],
+          "analysis_conclusion": [
+            "The lack of police presence in Kanjirappally is co",
+            "The community outreach programs in Kottayam are co"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_prediction_models": {
+        "rows": 2,
+        "sample_values": {
+          "model_id": [
+            "0",
+            "1"
+          ],
+          "model_name": [
+            "Linear Regression",
+            "Decision Tree"
+          ],
+          "model_description": [
+            "Predicts crime incidents based on historical data",
+            "Predicts crime incidents based on demographic data"
+          ],
+          "model_accuracy": [
+            "0.8",
+            "0.9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_prevention_strategies": {
+        "rows": 2,
+        "sample_values": {
+          "strategy_id": [
+            "0",
+            "1"
+          ],
+          "crime_type_id": [
+            "0"
+          ],
+          "location_id": [
+            "0"
+          ],
+          "strategy_description": [
+            "Increase police presence in Kanjirappally during p",
+            "Implement community outreach programs in Kottayam "
+          ],
+          "implementation_date": [
+            "2022-01-01",
+            "2022-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_trends": {
+        "rows": 2,
+        "sample_values": {
+          "trend_id": [
+            "0",
+            "1"
+          ],
+          "crime_type_id": [
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "date_range": [
+            "2022-01-01 to 2022-01-31",
+            "2022-02-01 to 2022-02-28"
+          ],
+          "trend_description": [
+            "Increase in robbery incidents in Kanjirappally",
+            "Decrease in assault incidents in Kottayam"
+          ],
+          "trend_analysis": [
+            "The increase in robbery incidents is attributed to",
+            "The decrease in assault incidents is attributed to"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crime_types": {
+        "rows": 2,
+        "sample_values": {
+          "crime_type_id": [
+            "0",
+            "1"
+          ],
+          "crime_type_name": [
+            "Robbery",
+            "Assault"
+          ],
+          "description": [
+            "Unauthorized taking of property from a person",
+            "Physical attack on a person resulting in injury"
+          ],
+          "crime_category": [
+            "violent"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crimes": {
+        "rows": 2,
+        "sample_values": {
+          "crime_id": [
+            "0",
+            "1"
+          ],
+          "crime_type_id": [
+            "1"
+          ],
+          "location_id": [
+            "0"
+          ],
+          "date": [
+            "2022-01-01",
+            "2022-01-03"
+          ],
+          "time": [
+            "08:30",
+            "17:45"
+          ],
+          "location_type_id": [
+            "0",
+            "1"
+          ],
+          "severity_id": [
+            "0",
+            "1"
+          ],
+          "description": [
+            "Armed robbery at a jewelry store",
+            "Verbal altercation leading to a physical fight"
+          ],
+          "status": [
+            "open",
+            "closed"
+          ],
+          "case_number": [
+            "CR-001",
+            "CR-002"
+          ],
+          "incident_summary": [
+            "A robbery occurred at a jewelry store in Kanjirapp",
+            "A physical fight occurred between two individuals "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "location_types": {
+        "rows": 2,
+        "sample_values": {
+          "location_type_id": [
+            "0",
+            "1"
+          ],
+          "location_type_name": [
+            "Commercial",
+            "Residential"
+          ],
+          "description": [
+            "Business or office areas",
+            "Residential areas or homes"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "locations": {
+        "rows": 2,
+        "sample_values": {
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "location_name": [
+            "Kanjirappally",
+            "Kottayam"
+          ],
+          "latitude": [
+            "9.5959",
+            "9.5923"
+          ],
+          "longitude": [
+            "76.7724",
+            "76.5205"
+          ],
+          "address": [
+            "Main St, Kanjirappally",
+            "Kottayam, Kerala"
+          ],
+          "city": [
+            "Kanjirappally",
+            "Kottayam"
+          ],
+          "state": [
+            "Kerala"
+          ],
+          "zipcode": [
+            "686507",
+            "686001"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1401",
+            "1402"
+          ],
+          "notification_date": [
+            "2022-01-01",
+            "2022-01-02"
+          ],
+          "notification_message": [
+            "New crime incident reported in Kanjirappally",
+            "Crime incident updated in Kottayam"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "settings": {
+        "rows": 2,
+        "sample_values": {
+          "setting_id": [
+            "0",
+            "1"
+          ],
+          "setting_name": [
+            "notification_threshold",
+            "export_format"
+          ],
+          "setting_value": [
+            "10",
+            "csv"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "severities": {
+        "rows": 2,
+        "sample_values": {
+          "severity_id": [
+            "0",
+            "1"
+          ],
+          "severity_name": [
+            "Major",
+            "Moderate"
+          ],
+          "description": [
+            "Severe crimes resulting in significant harm",
+            "Crimes resulting in moderate harm or damage"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "role": [
+            "analyst",
+            "investigator"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "last_login": [
+            "2022-01-01",
+            "2022-01-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

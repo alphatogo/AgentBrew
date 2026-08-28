@@ -1,0 +1,517 @@
+{
+  "db_id": "movie_platform",
+  "source": "bird",
+  "tables": 5,
+  "total_rows": 20200856,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#movie_platform",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"lists\" {\n  \"user_id\" INTEGER\n  \"list_id\" INTEGER [pk, not null]\n  \"list_title\" TEXT\n  \"list_movie_number\" INTEGER\n  \"list_update_timestamp_utc\" TEXT\n  \"list_creation_timestamp_utc\" TEXT\n  \"list_followers\" INTEGER\n  \"list_url\" TEXT\n  \"list_comments\" INTEGER\n  \"list_description\" TEXT\n  \"list_cover_image_url\" TEXT\n  \"list_first_image_url\" TEXT\n  \"list_second_image_url\" TEXT\n  \"list_third_image_url\" TEXT\n}\n\nTable \"lists_users\" {\n  \"user_id\" INTEGER [pk, not null]\n  \"list_id\" INTEGER [pk, not null]\n  \"list_update_date_utc\" TEXT\n  \"list_creation_date_utc\" TEXT\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_avatar_image_url\" TEXT\n  \"user_cover_image_url\" TEXT\n  \"user_eligible_for_trial\" TEXT\n  \"user_has_payment_method\" TEXT\n}\n\nTable \"movies\" {\n  \"movie_id\" INTEGER [pk, not null]\n  \"movie_title\" TEXT\n  \"movie_release_year\" INTEGER\n  \"movie_url\" TEXT\n  \"movie_title_language\" TEXT\n  \"movie_popularity\" INTEGER\n  \"movie_image_url\" TEXT\n  \"director_id\" TEXT\n  \"director_name\" TEXT\n  \"director_url\" TEXT\n}\n\nTable \"ratings\" {\n  \"movie_id\" INTEGER\n  \"rating_id\" INTEGER\n  \"rating_url\" TEXT\n  \"rating_score\" INTEGER\n  \"rating_timestamp_utc\" TEXT\n  \"critic\" TEXT\n  \"critic_likes\" INTEGER\n  \"critic_comments\" INTEGER\n  \"user_id\" INTEGER\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_eligible_for_trial\" INTEGER\n  \"user_has_payment_method\" INTEGER\n}\n\nTable \"ratings_users\" {\n  \"user_id\" INTEGER\n  \"rating_date_utc\" TEXT\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_avatar_image_url\" TEXT\n  \"user_cover_image_url\" TEXT\n  \"user_eligible_for_trial\" INTEGER\n  \"user_has_payment_method\" INTEGER\n}\n\n\n\nRef: \"lists\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"ratings_users\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"lists_users\".\"user_id\" > \"lists\".\"user_id\"\n\nRef: \"lists_users\".\"list_id\" > \"lists\".\"list_id\"\n\nRef: \"ratings\".\"user_id\" > \"ratings_users\".\"user_id\"\n\nRef: \"ratings\".\"rating_id\" > \"ratings\".\"rating_id\"\n\nRef: \"ratings\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"ratings\".\"movie_id\" > \"movies\".\"movie_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"lists\" {\n  \"user_id\" INTEGER\n  \"list_id\" INTEGER [pk, not null]\n  \"list_title\" TEXT\n  \"list_movie_number\" INTEGER\n  \"list_update_timestamp_utc\" TEXT\n  \"list_creation_timestamp_utc\" TEXT\n  \"list_followers\" INTEGER\n  \"list_url\" TEXT\n  \"list_comments\" INTEGER\n  \"list_description\" TEXT\n  \"list_cover_image_url\" TEXT\n  \"list_first_image_url\" TEXT\n  \"list_second_image_url\" TEXT\n  \"list_third_image_url\" TEXT\n}\n\nTable \"lists_users\" {\n  \"user_id\" INTEGER [pk, not null]\n  \"list_id\" INTEGER [pk, not null]\n  \"list_update_date_utc\" TEXT\n  \"list_creation_date_utc\" TEXT\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_avatar_image_url\" TEXT\n  \"user_cover_image_url\" TEXT\n  \"user_eligible_for_trial\" TEXT\n  \"user_has_payment_method\" TEXT\n}\n\nTable \"movies\" {\n  \"movie_id\" INTEGER [pk, not null]\n  \"movie_title\" TEXT\n  \"movie_release_year\" INTEGER\n  \"movie_url\" TEXT\n  \"movie_title_language\" TEXT\n  \"movie_popularity\" INTEGER\n  \"movie_image_url\" TEXT\n  \"director_id\" TEXT\n  \"director_name\" TEXT\n  \"director_url\" TEXT\n}\n\nTable \"ratings\" {\n  \"movie_id\" INTEGER\n  \"rating_id\" INTEGER\n  \"rating_url\" TEXT\n  \"rating_score\" INTEGER\n  \"rating_timestamp_utc\" TEXT\n  \"critic\" TEXT\n  \"critic_likes\" INTEGER\n  \"critic_comments\" INTEGER\n  \"user_id\" INTEGER\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_eligible_for_trial\" INTEGER\n  \"user_has_payment_method\" INTEGER\n}\n\nTable \"ratings_users\" {\n  \"user_id\" INTEGER\n  \"rating_date_utc\" TEXT\n  \"user_trialist\" INTEGER\n  \"user_subscriber\" INTEGER\n  \"user_avatar_image_url\" TEXT\n  \"user_cover_image_url\" TEXT\n  \"user_eligible_for_trial\" INTEGER\n  \"user_has_payment_method\" INTEGER\n}\n\nRef: \"lists\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"ratings_users\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"lists_users\".\"user_id\" > \"lists\".\"user_id\"\n\nRef: \"lists_users\".\"list_id\" > \"lists\".\"list_id\"\n\nRef: \"ratings\".\"user_id\" > \"ratings_users\".\"user_id\"\n\nRef: \"ratings\".\"rating_id\" > \"ratings\".\"rating_id\"\n\nRef: \"ratings\".\"user_id\" > \"lists_users\".\"user_id\"\n\nRef: \"ratings\".\"movie_id\" > \"movies\".\"movie_id\"\n\n## Table Stats & Sample Values\n\nlists: 7405 rows\n  list_title: 'This is America', 'Best Documentaries', 'Best Movies of 2008', ...\n  list_description: '<p>Stories of the people, place and things.</p>', '<p>See also: <a href=\"http://www.theauteurs.com/li', '<p>An ever fluctuating list, but these 10 stay con', ...\n  list_update_timestamp_utc: '2019-01-24 19:16:18', '2020-04-25 05:55:07', '2009-11-11 00:41:28', ...\n\nlists_users: 10000 rows\n  user_eligible_for_trial: '0', '1'\n  user_has_payment_method: '1', '0'\n  list_update_date_utc: '2019-11-26', '2020-05-01', '2020-04-12', ...\n\nmovies: 10000 rows\n  movie_title: 'La Antena', 'Elementary Particles', 'It's Winter', ...\n  director_name: 'Esteban Sapir', 'Oskar Roehler', 'Rafi Pitts', ...\n  movie_title_language: 'en'\n\nratings: 9978 rows\n  rating_timestamp_utc: '2017-06-10 12:38:33', '2014-08-15 23:42:31', '2014-01-30 13:21:57', ...\n  critic: 'I am a bit disappointed by this documentary film I', 'Splendid debut. Whatever happened to Amma Asante?', 'One of the more harrowing viewing experiences I ha', ...\n  rating_url: 'http://mubi.com/films/pavee-lackeen-the-traveller-', 'http://mubi.com/films/a-way-of-life/ratings/118080', 'http://mubi.com/films/a-way-of-life/ratings/104649', ...\n\nratings_users: 10000 rows\n  rating_date_utc: '2017-06-10', '2012-10-02', '2010-12-25', ...\n  user_trialist: '0', '1'\n  user_subscriber: '0', '1'",
+    "stateUrl": "https://bird-bench.github.io/#movie_platform",
+    "tableStats": {
+      "lists": {
+        "rows": 7405,
+        "sample_values": {
+          "user_id": [
+            "12074910",
+            "67171533",
+            "27149062",
+            "66433398",
+            "83091380",
+            "439378",
+            "28943198",
+            "23245754"
+          ],
+          "list_id": [
+            "7",
+            "8",
+            "9",
+            "13",
+            "19",
+            "23",
+            "24",
+            "25"
+          ],
+          "list_title": [
+            "This is America",
+            "Best Documentaries",
+            "Best Movies of 2008",
+            "My Top Ten Faves",
+            "20 All Time Favorite Films",
+            "My Top Ten Favourite Films of All-Time",
+            "My Movies",
+            "15 Best Ballet Films"
+          ],
+          "list_movie_number": [
+            "11",
+            "41",
+            "6",
+            "10",
+            "20",
+            "1",
+            "15",
+            "102"
+          ],
+          "list_update_timestamp_utc": [
+            "2019-01-24 19:16:18",
+            "2020-04-25 05:55:07",
+            "2009-11-11 00:41:28",
+            "2020-04-27 06:03:51",
+            "2020-04-28 03:11:44",
+            "2009-11-11 01:26:44",
+            "2019-05-31 03:00:06",
+            "2020-05-01 05:54:33"
+          ],
+          "list_creation_timestamp_utc": [
+            "2009-11-11 00:32:52",
+            "2009-11-11 00:41:10",
+            "2009-11-11 00:41:28",
+            "2009-11-11 00:48:13",
+            "2009-11-11 01:11:26",
+            "2009-11-11 01:20:38",
+            "2009-11-11 01:26:44",
+            "2009-11-11 01:30:59"
+          ],
+          "list_followers": [
+            "9",
+            "90",
+            "1",
+            "5",
+            "2",
+            "0",
+            "40",
+            "92"
+          ],
+          "list_url": [
+            "http://mubi.com/lists/this-is-america",
+            "http://mubi.com/lists/best-documentaries",
+            "http://mubi.com/lists/best-movies-of-2008",
+            "http://mubi.com/lists/my-top-ten-faves",
+            "http://mubi.com/lists/20-all-time-favorite-films",
+            "http://mubi.com/lists/my-top-ten-favourite-films-o",
+            "http://mubi.com/lists/my-movies",
+            "http://mubi.com/lists/my-top-ten-faves--2"
+          ],
+          "list_comments": [
+            "3",
+            "4",
+            "0",
+            "1",
+            "2",
+            "10",
+            "5",
+            "7"
+          ],
+          "list_description": [
+            "<p>Stories of the people, place and things.</p>",
+            "<p>See also: <a href=\"http://www.theauteurs.com/li",
+            "<p>An ever fluctuating list, but these 10 stay con",
+            "<p>These are my 10 FAVORITE films, not necessarily",
+            "<p>Films with my favorite villains</p>",
+            "<p>Here I have attempted to rank the work of one o",
+            "<p>I am including 11 titles because The Argentine ",
+            "<p><strong>Odyssees, quests and travel narratives…"
+          ],
+          "list_cover_image_url": [
+            "https://assets.mubicdn.net/images/film/4058/image-",
+            "https://assets.mubicdn.net/images/film/470/image-w",
+            "https://assets.mubicdn.net/images/film/1688/image-",
+            "https://assets.mubicdn.net/images/film/598/image-w",
+            "https://assets.mubicdn.net/images/film/1003/image-",
+            "https://assets.mubicdn.net/images/film/12236/image",
+            "https://assets.mubicdn.net/images/film/3551/image-",
+            "https://assets.mubicdn.net/images/film/187/image-w"
+          ],
+          "list_first_image_url": [
+            "https://assets.mubicdn.net/images/film/4058/image-",
+            "https://assets.mubicdn.net/images/film/470/image-w",
+            "https://assets.mubicdn.net/images/film/1688/image-",
+            "https://assets.mubicdn.net/images/film/598/image-w",
+            "https://assets.mubicdn.net/images/film/1003/image-",
+            "https://assets.mubicdn.net/images/film/12236/image",
+            "https://assets.mubicdn.net/images/film/3551/image-",
+            "https://assets.mubicdn.net/images/film/187/image-w"
+          ],
+          "list_second_image_url": [
+            "https://assets.mubicdn.net/images/film/1033/image-",
+            "https://assets.mubicdn.net/images/film/2115/image-",
+            "https://assets.mubicdn.net/images/film/470/image-w",
+            "https://assets.mubicdn.net/images/film/191/image-w",
+            "https://assets.mubicdn.net/images/film/450/image-w",
+            "https://assets.mubicdn.net/images/film/405/image-w",
+            "https://assets.mubicdn.net/images/film/3403/image-",
+            "https://assets.mubicdn.net/images/film/1707/image-"
+          ],
+          "list_third_image_url": [
+            "https://assets.mubicdn.net/images/film/407/image-w",
+            "https://assets.mubicdn.net/images/film/1688/image-",
+            "https://assets.mubicdn.net/images/film/3350/image-",
+            "https://assets.mubicdn.net/images/film/2317/image-",
+            "https://assets.mubicdn.net/images/film/198/image-w",
+            "https://assets.mubicdn.net/images/film/240/image-w",
+            "https://assets.mubicdn.net/images/film/162/image-w",
+            "https://assets.mubicdn.net/images/film/21723/image"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lists_users": {
+        "rows": 10000,
+        "sample_values": {
+          "user_id": [
+            "85981819",
+            "4208563",
+            "9820140",
+            "57756708",
+            "8516503",
+            "9315002",
+            "93302487",
+            "18845680"
+          ],
+          "list_id": [
+            "1969",
+            "3946",
+            "6683",
+            "8865",
+            "13796",
+            "136620",
+            "136622",
+            "136628"
+          ],
+          "list_update_date_utc": [
+            "2019-11-26",
+            "2020-05-01",
+            "2020-04-12",
+            "2018-12-14",
+            "2016-04-12",
+            "2020-03-09",
+            "2018-07-14",
+            "2017-10-09"
+          ],
+          "list_creation_date_utc": [
+            "2009-12-18",
+            "2010-01-30",
+            "2010-03-31",
+            "2010-05-10",
+            "2010-08-25",
+            "2016-04-09",
+            "2016-11-24",
+            "2010-11-09"
+          ],
+          "user_trialist": [
+            "1",
+            "0"
+          ],
+          "user_subscriber": [
+            "1",
+            "0"
+          ],
+          "user_avatar_image_url": [
+            "https://assets.mubicdn.net/images/avatars/74983/im",
+            "https://graph.facebook.com/754931657/picture?width",
+            "https://assets.mubicdn.net/images/avatars/24396/im",
+            "https://graph.facebook.com/1639060242/picture?widt",
+            "https://assets.mubicdn.net/images/avatars/41627/im",
+            "https://assets.mubicdn.net/images/avatars/67926/im",
+            "https://assets.mubicdn.net/images/avatars/12246/im",
+            "https://assets.mubicdn.net/images/avatars/6649/ima"
+          ],
+          "user_cover_image_url": [
+            "https://assets.mubicdn.net/images/cover_images/127",
+            "https://assets.mubicdn.net/images/cover_images/191",
+            "https://assets.mubicdn.net/images/cover_images/677",
+            "https://assets.mubicdn.net/images/cover_images/852",
+            "https://assets.mubicdn.net/images/cover_images/210",
+            "https://assets.mubicdn.net/images/cover_images/369",
+            "https://assets.mubicdn.net/images/cover_images/623",
+            "https://assets.mubicdn.net/images/cover_images/393"
+          ],
+          "user_eligible_for_trial": [
+            "0",
+            "1"
+          ],
+          "user_has_payment_method": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movies": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "movie_title": [
+            "La Antena",
+            "Elementary Particles",
+            "It's Winter",
+            "Kirikou and the Wild Beasts",
+            "Padre Nuestro",
+            "The Perfume of the Lady in Black",
+            "Riviera",
+            "Someone Else's Happiness"
+          ],
+          "movie_release_year": [
+            "2007",
+            "2006",
+            "2005",
+            "2003",
+            "1957",
+            "1926",
+            "1930",
+            "1960"
+          ],
+          "movie_url": [
+            "http://mubi.com/films/la-antena",
+            "http://mubi.com/films/elementary-particles",
+            "http://mubi.com/films/its-winter",
+            "http://mubi.com/films/kirikou-and-the-wild-beasts",
+            "http://mubi.com/films/padre-nuestro",
+            "http://mubi.com/films/the-perfume-of-the-lady-in-b",
+            "http://mubi.com/films/riviera",
+            "http://mubi.com/films/someone-elses-happiness"
+          ],
+          "movie_title_language": [
+            "en"
+          ],
+          "movie_popularity": [
+            "105",
+            "23",
+            "21",
+            "46",
+            "7",
+            "6",
+            "5",
+            "8"
+          ],
+          "movie_image_url": [
+            "https://images.mubicdn.net/images/film/1/cache-792",
+            "https://images.mubicdn.net/images/film/2/cache-512",
+            "https://images.mubicdn.net/images/film/3/cache-792",
+            "https://images.mubicdn.net/images/film/4/cache-793",
+            "https://images.mubicdn.net/images/film/5/cache-793",
+            "https://images.mubicdn.net/images/film/6/cache-793",
+            "https://images.mubicdn.net/images/film/7/cache-473",
+            "https://images.mubicdn.net/images/film/8/cache-113"
+          ],
+          "director_id": [
+            "131",
+            "73",
+            "82",
+            "89, 90",
+            "92",
+            "102",
+            "109",
+            "118"
+          ],
+          "director_name": [
+            "Esteban Sapir",
+            "Oskar Roehler",
+            "Rafi Pitts",
+            "Michel Ocelot, Bénédicte Galup",
+            "Christopher Zalla",
+            "Bruno Podalydès",
+            "Anne Villacèque",
+            "Fien Troch"
+          ],
+          "director_url": [
+            "http://mubi.com/cast/esteban-sapir",
+            "http://mubi.com/cast/oskar-roehler",
+            "http://mubi.com/cast/rafi-pitts",
+            "http://mubi.com/cast/michel-ocelot, http://mubi.co",
+            "http://mubi.com/cast/christopher-zalla",
+            "http://mubi.com/cast/bruno-podalydes",
+            "http://mubi.com/cast/anne-villaceque",
+            "http://mubi.com/cast/fien-troch"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ratings": {
+        "rows": 9978,
+        "sample_values": {
+          "movie_id": [
+            "1066",
+            "1067",
+            "1068",
+            "1069",
+            "1070",
+            "1071",
+            "1072",
+            "1073"
+          ],
+          "rating_id": [
+            "15610495",
+            "10704606",
+            "10177114",
+            "10130280",
+            "8357049",
+            "6220019",
+            "5255936",
+            "5192128"
+          ],
+          "rating_url": [
+            "http://mubi.com/films/pavee-lackeen-the-traveller-",
+            "http://mubi.com/films/a-way-of-life/ratings/118080",
+            "http://mubi.com/films/a-way-of-life/ratings/104649",
+            "http://mubi.com/films/a-way-of-life/ratings/102999",
+            "http://mubi.com/films/a-way-of-life/ratings/876122",
+            "http://mubi.com/films/a-way-of-life/ratings/845805",
+            "http://mubi.com/films/a-way-of-life/ratings/623323",
+            "http://mubi.com/films/a-way-of-life/ratings/500873"
+          ],
+          "rating_score": [
+            "3",
+            "2",
+            "4",
+            "5",
+            "1"
+          ],
+          "rating_timestamp_utc": [
+            "2017-06-10 12:38:33",
+            "2014-08-15 23:42:31",
+            "2014-01-30 13:21:57",
+            "2014-01-19 01:04:23",
+            "2012-10-02 18:28:47",
+            "2011-08-19 01:53:53",
+            "2011-04-04 19:04:05",
+            "2011-03-27 02:06:34"
+          ],
+          "critic": [
+            "I am a bit disappointed by this documentary film I",
+            "Splendid debut. Whatever happened to Amma Asante?",
+            "One of the more harrowing viewing experiences I ha",
+            "2,5",
+            "Can we all just agree to pretend that this flick d",
+            "worked on this, was not impressed....",
+            "No. No. And no. Don't waste your time on this.",
+            "Okay, so a bunch of sociopath hustlers and prostit"
+          ],
+          "critic_likes": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "6",
+            "3",
+            "5",
+            "10"
+          ],
+          "critic_comments": [
+            "0",
+            "2",
+            "1",
+            "3",
+            "11",
+            "29",
+            "8",
+            "5"
+          ],
+          "user_id": [
+            "41579158",
+            "85981819",
+            "4208563",
+            "9820140",
+            "68654088",
+            "97262846",
+            "52128819",
+            "57756708"
+          ],
+          "user_trialist": [
+            "0",
+            "1"
+          ],
+          "user_subscriber": [
+            "0",
+            "1"
+          ],
+          "user_eligible_for_trial": [
+            "1",
+            "0"
+          ],
+          "user_has_payment_method": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ratings_users": {
+        "rows": 10000,
+        "sample_values": {
+          "user_id": [
+            "41579158",
+            "68654088",
+            "84114365",
+            "29755671",
+            "93302487",
+            "65861201",
+            "43826147",
+            "2591449"
+          ],
+          "rating_date_utc": [
+            "2017-06-10",
+            "2012-10-02",
+            "2010-12-25",
+            "2010-11-15",
+            "2010-01-05",
+            "2009-06-27",
+            "2015-02-12",
+            "2014-05-08"
+          ],
+          "user_trialist": [
+            "0",
+            "1"
+          ],
+          "user_subscriber": [
+            "0",
+            "1"
+          ],
+          "user_avatar_image_url": [
+            "https://assets.mubicdn.net/images/avatars/74283/im",
+            "https://assets.mubicdn.net/images/avatars/27714/im",
+            "https://assets.mubicdn.net/images/avatars/1808/ima",
+            "//mubi.com/assets/placeholders/avatar-c68833eec06a",
+            "https://assets.mubicdn.net/images/avatars/12246/im",
+            "https://assets.mubicdn.net/images/avatars/4836/ima",
+            "https://assets.mubicdn.net/images/avatars/94311/im",
+            "https://assets.mubicdn.net/images/avatars/59566/im"
+          ],
+          "user_cover_image_url": [
+            "https://assets.mubicdn.net/images/cover_images/378",
+            "https://assets.mubicdn.net/images/cover_images/149",
+            "https://assets.mubicdn.net/images/cover_images/742",
+            "https://assets.mubicdn.net/images/cover_images/563",
+            "https://assets.mubicdn.net/images/cover_images/946",
+            "https://assets.mubicdn.net/images/cover_images/601",
+            "https://assets.mubicdn.net/images/cover_images/436",
+            "https://assets.mubicdn.net/images/cover_images/864"
+          ],
+          "user_eligible_for_trial": [
+            "1",
+            "0"
+          ],
+          "user_has_payment_method": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

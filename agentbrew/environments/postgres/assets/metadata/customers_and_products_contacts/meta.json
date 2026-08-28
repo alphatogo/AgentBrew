@@ -1,0 +1,376 @@
+{
+  "db_id": "customers_and_products_contacts",
+  "source": "sparc",
+  "tables": 7,
+  "total_rows": 110,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#customers_and_products_contacts",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1_number_building\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"gender\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"contact_phone\" TEXT\n}\n\nTable \"Customer_Address_History\" {\n  \"customer_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Customer_Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_date\" TIMESTAMP [not null]\n  \"order_status_code\" TEXT\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT\n  \"customer_number\" TEXT\n  \"customer_name\" TEXT\n  \"customer_address\" TEXT\n  \"customer_phone\" TEXT\n  \"customer_email\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [not null]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"order_quantity\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type_code\" TEXT\n  \"product_name\" TEXT\n  \"product_price\" REAL\n}\n\n\n\nRef: \"Customer_Address_History\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Address_History\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Customer_Orders\".\"order_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"line_1_number_building\" TEXT\n  \"city\" TEXT\n  \"zip_postcode\" TEXT\n  \"state_province_county\" TEXT\n  \"country\" TEXT\n}\n\nTable \"Contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"gender\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"contact_phone\" TEXT\n}\n\nTable \"Customer_Address_History\" {\n  \"customer_id\" INTEGER [not null]\n  \"address_id\" INTEGER [not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Customer_Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_date\" TIMESTAMP [not null]\n  \"order_status_code\" TEXT\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT\n  \"customer_number\" TEXT\n  \"customer_name\" TEXT\n  \"customer_address\" TEXT\n  \"customer_phone\" TEXT\n  \"customer_email\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [not null]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n  \"order_quantity\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type_code\" TEXT\n  \"product_name\" TEXT\n  \"product_price\" REAL\n}\n\nRef: \"Customer_Address_History\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Address_History\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Customer_Orders\".\"order_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\n## Table Stats & Sample Values\n\nAddresses: 15 rows\n  city: 'Hertafurt', 'Edgardoberg', 'Gilbertmouth', ...\n  state_province_county: 'Nevada', 'Colorado', 'Virginia', ...\n  country: 'USA'\n\nContacts: 15 rows\n  first_name: 'Cierra', 'Jennifer', 'Carli', ...\n  last_name: 'Collins', 'Doyle', 'Blick', ...\n  gender: 'male', 'female'\n\nCustomer_Address_History: 20 rows\n  date_from: '2015-07-23 14:37:18', '2016-11-06 14:33:12', '2011-11-19 12:17:36', ...\n  date_to: '2018-03-07 12:04:20', '2018-03-14 21:36:28', '2018-03-22 10:20:16', ...\n  customer_id: '12', '3', '13', ...\n\nCustomer_Orders: 15 rows\n  order_status_code: 'Completed', 'Part'\n  order_date: '2009-07-19 13:40:49', '1976-05-28 15:02:44', '1979-03-29 02:47:13', ...\n  customer_id: '2', '6', '4', ...\n\nCustomers: 15 rows\n  customer_name: 'Kayley', 'Sterling', 'Buford', ...\n  payment_method_code: 'Credit Card', 'Direct Debit'\n  customer_number: '456', '553', '951', ...\n\nOrder_Items: 15 rows\n  order_quantity: '3', '7', '9', ...\n  order_item_id: '1', '2', '3', ...\n  order_id: '9', '8', '11', ...\n\nProducts: 15 rows\n  product_type_code: 'Hardware', 'Clothes'\n  product_name: 'Apple', 'jcrew', 'Sony', ...\n  product_price: '54753982.574522', '30590929.528306', '10268.85297069', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#customers_and_products_contacts",
+    "tableStats": {
+      "Addresses": {
+        "rows": 15,
+        "sample_values": {
+          "address_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "line_1_number_building": [
+            "4315 Kerluke Canyon Apt. 800",
+            "319 Kozey Highway Suite 973",
+            "592 Frederique Ridge",
+            "01868 Laverna Green",
+            "6017 Price Greens",
+            "037 Luella Path",
+            "044 Greenfelder Fort",
+            "2676 Connelly Islands Apt. 199"
+          ],
+          "city": [
+            "Hertafurt",
+            "Edgardoberg",
+            "Gilbertmouth",
+            "Lake Floyd",
+            "Gibsonfurt",
+            "North Jairo",
+            "East Rickey",
+            "West Kaiatown"
+          ],
+          "zip_postcode": [
+            "740",
+            "282",
+            "167",
+            "041",
+            "873",
+            "126",
+            "564",
+            "770"
+          ],
+          "state_province_county": [
+            "Nevada",
+            "Colorado",
+            "Virginia",
+            "Oklahoma",
+            "District of Columbia",
+            "Maryland",
+            "Louisiana",
+            "Oregon"
+          ],
+          "country": [
+            "USA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Contacts": {
+        "rows": 15,
+        "sample_values": {
+          "contact_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "4",
+            "6",
+            "8",
+            "14",
+            "3",
+            "9",
+            "10",
+            "7"
+          ],
+          "gender": [
+            "male",
+            "female"
+          ],
+          "first_name": [
+            "Cierra",
+            "Jennifer",
+            "Carli",
+            "Gustave",
+            "Danika",
+            "Rachelle",
+            "Sid",
+            "Adella"
+          ],
+          "last_name": [
+            "Collins",
+            "Doyle",
+            "Blick",
+            "Ebert",
+            "Bauch",
+            "Stamm",
+            "Legros",
+            "Streich"
+          ],
+          "contact_phone": [
+            "+73(2)0854391820",
+            "482-949-1364x17500",
+            "(608)868-5069x554",
+            "00414184198",
+            "1-368-227-6322",
+            "048-342-0880x5170",
+            "658.850.7946x9993",
+            "1-613-226-7727"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer_Address_History": {
+        "rows": 20,
+        "sample_values": {
+          "customer_id": [
+            "12",
+            "3",
+            "13",
+            "11",
+            "2",
+            "6",
+            "14",
+            "7"
+          ],
+          "address_id": [
+            "7",
+            "2",
+            "9",
+            "15",
+            "12",
+            "10",
+            "13",
+            "11"
+          ],
+          "date_from": [
+            "2015-07-23 14:37:18",
+            "2016-11-06 14:33:12",
+            "2011-11-19 12:17:36",
+            "2009-02-16 23:04:20",
+            "2008-06-22 21:50:44",
+            "2012-04-09 18:10:36",
+            "2014-11-17 15:11:26",
+            "2011-01-02 21:42:29"
+          ],
+          "date_to": [
+            "2018-03-07 12:04:20",
+            "2018-03-14 21:36:28",
+            "2018-03-22 10:20:16",
+            "2018-03-07 17:47:47",
+            "2018-03-13 00:08:29",
+            "2018-03-11 20:16:56",
+            "2018-03-08 23:31:30",
+            "2018-02-25 19:55:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer_Orders": {
+        "rows": 15,
+        "sample_values": {
+          "order_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "2",
+            "6",
+            "4",
+            "13",
+            "10",
+            "9",
+            "5",
+            "3"
+          ],
+          "order_date": [
+            "2009-07-19 13:40:49",
+            "1976-05-28 15:02:44",
+            "1979-03-29 02:47:13",
+            "2003-01-17 00:06:12",
+            "1992-04-19 21:42:58",
+            "1972-03-17 21:42:29",
+            "2002-01-20 01:52:53",
+            "1985-01-03 05:22:09"
+          ],
+          "order_status_code": [
+            "Completed",
+            "Part"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 15,
+        "sample_values": {
+          "customer_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "payment_method_code": [
+            "Credit Card",
+            "Direct Debit"
+          ],
+          "customer_number": [
+            "456",
+            "553",
+            "951",
+            "497",
+            "752",
+            "838",
+            "429",
+            "564"
+          ],
+          "customer_name": [
+            "Kayley",
+            "Sterling",
+            "Buford",
+            "Caterina",
+            "Raymond",
+            "Cheyenne",
+            "Cecelia",
+            "Brenna"
+          ],
+          "customer_address": [
+            "636 Chanelle Isle Apt. 846",
+            "12174 Boyer Crossroad",
+            "650 Spencer Way Apt. 584",
+            "075 Skiles Expressway",
+            "8497 Huel Stravenue",
+            "058 Ben Street Apt. 034",
+            "4065 Forest Vista Apt. 103",
+            "440 Aiden Ports"
+          ],
+          "customer_phone": [
+            "+87(9)5279161988",
+            "896.685.8228x2786",
+            "(192)144-4687",
+            "387.053.1225",
+            "1-513-427-0125",
+            "009-136-4509x19635",
+            "672-559-0630x7875",
+            "1-271-345-4681x1131"
+          ],
+          "customer_email": [
+            "antonette73@example.com",
+            "stroman.chadd@example.net",
+            "pattie.mayer@example.net",
+            "dbeahan@example.net",
+            "bergnaum.ashton@example.com",
+            "rhayes@example.org",
+            "caesar.lemke@example.net",
+            "macy.huel@example.org"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Order_Items": {
+        "rows": 15,
+        "sample_values": {
+          "order_item_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "order_id": [
+            "9",
+            "8",
+            "11",
+            "15",
+            "13",
+            "3",
+            "7",
+            "6"
+          ],
+          "product_id": [
+            "15",
+            "12",
+            "9",
+            "2",
+            "3",
+            "6",
+            "4",
+            "11"
+          ],
+          "order_quantity": [
+            "3",
+            "7",
+            "9",
+            "male",
+            "4",
+            "8",
+            "2",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "product_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "product_type_code": [
+            "Hardware",
+            "Clothes"
+          ],
+          "product_name": [
+            "Apple",
+            "jcrew",
+            "Sony",
+            "gucci"
+          ],
+          "product_price": [
+            "54753982.574522",
+            "30590929.528306",
+            "10268.85297069",
+            "22956668.699482",
+            "5927021.8748021",
+            "77.109961147471",
+            "450.39232520498",
+            "4446237.9177554"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+    "category": "sports",
+    "question": "# Team Roster Management Operations\n\n## Background\nYou need to manage team rosters for the upcoming season, including player transfers, injury tracking, and performance evaluations.\n\n## Requirements\n\nComplete the following 5 operations in order:\n\n### 1. Set Up Player Performance Tracking\nCreate a table called `player_evaluation` with the following structure:\n- performance_id (serial primary key)\n- person_id (integer not null, references persons(id))\n- batting_avg (decimal)\n- home_runs (integer)\n- rbis (integer)\n- games_played (integer)\n- performance_score (decimal)\n- evaluation_date (date)\n\nAdd constraint: CHECK (batting_avg BETWEEN 0 AND 1)\n\n### 2. Load Historical Player Statistics\nInsert player performance data into `player_evaluation`:\n- Select all players who have offensive statistics\n- Calculate batting_avg as hits/at_bats (handle division by zero)\n- Sum up home_runs, rbi from baseball_offensive_stats\n- Count games_played from person_event_metadata\n- Calculate performance_score as: (batting_avg * 1000) + (home_runs * 5) + (rbi * 2)\n- Only include players with at least 10 games played\n- Set evaluation_date to '2024-01-01'\n\n### 3. Track Player Health Status\nCreate a table called `player_injury_status`:\n- status_id (serial primary key)\n- person_id (integer unique not null)\n- injury_count (integer default 0)\n- last_injury_date (date)\n- current_status (varchar check in ('healthy', 'injured', 'recovering'))\n\nInsert data by:\n- Including all players from player_evaluation\n- Count injuries from injury_phases for each player\n- Get the most recent injury start_date as last_injury_date\n- Set current_status: 'injured' if injury has no end_date, otherwise 'healthy'\n\n### 4. Adjust Scores Based on Health\nUpdate `player_evaluation` to reduce performance scores for injured players:\n- Reduce performance_score by 20% for players with current_status = 'injured'\n- Reduce performance_score by 10% for players with injury_count > 2\n- Set minimum performance_score to 0 (no negative scores)\n\n### 5. Generate Performance Summary Report\nCreate a summary table called `team_performance_summary`:\n- summary_id (serial primary key)\n- metric_name (varchar unique)\n- metric_value (decimal)\n\nInsert the following metrics:\n- 'total_players' - count of players in player_evaluation\n- 'avg_batting_average' - average batting_avg\n- 'total_home_runs' - sum of all home_runs\n- 'avg_performance_score' - average performance_score\n- 'injured_player_count' - count of injured players\n- 'healthy_player_count' - count of healthy players\n\n## Important Notes\n- Handle NULL values appropriately (treat as 0 where needed)\n- Ensure foreign key constraints are properly set\n- Do NOT use ROUND functions in calculations\n- Use COALESCE to handle NULL values in calculations\n",
+    "use_specified_server": true,
+    "mcp_servers": [
+        {
+            "name": "postgres-pro"
+        }
+    ],
+    "output_format": {
+        "roster_status": "Team roster management completion status"
+    },
+    "evaluators": [
+        {
+            "func": "raw",
+            "op": "postgres_team_roster_management_verifier",
+            "value": "completed",
+            "op_args": {},
+            "desc": "Check if the AI agent completed all team roster management operations"
+        }
+    ],
+    "prepares": [
+        {
+            "prepare_func": "mcpmark_postgres_setup",
+            "prepare_args": {}
+        }
+    ],
+    "cleanups": [
+        {
+            "server": "mcpmark",
+            "tool": "",
+            "cleanup_func": "postgres_cleanup",
+            "cleanup_args": {}
+        }
+    ]
+}

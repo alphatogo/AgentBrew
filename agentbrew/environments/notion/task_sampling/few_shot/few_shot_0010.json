@@ -1,0 +1,12 @@
+{
+  "title": "Department Objectives Toggle Cleanup",
+  "capability": [
+    "reorganize_layout",
+    "convert_block_type",
+    "move_existing_blocks",
+    "preserve_content_order",
+    "create_columns",
+    "preserve_format"
+  ],
+  "question": "Please restructure the \"Department Objectives\" area on my \"Operating Plan Workspace\" page so the objectives and their planning FAQ are easier to review.\n**Task Requirements:** 1. In the \"Department Objectives\" section, create a new heading_3 block\n   titled:\n\n   \"Customer Expansion\"\n\n2. Convert all four objective headings to toggles - the three existing\n   objectives\n   - \"Product Quality\"\n   - \"Revenue Operations\"\n   - \"Customer Retention\"\n   - \"Customer Expansion\"\n\n3. Move descriptions inside the toggles - every paragraph or list that\n   originally sat directly under an objective heading should become a child\n   block of that heading after it is made toggleable.\n\n4. Replace the normal final clean-up sentence with a nested FAQ cleanup:\n   inside the \"Customer Expansion\" toggle, add a \"Planning FAQ\" toggle with\n   two columns. Move the first two existing Q&A pairs left, move the third\n   Q&A pair right, and add one matching Q&A pair so both columns have\n   exactly 2 Q&A pairs using heading_3 questions and paragraph answers.\n\n5. Preserve content & order - apart from the changes above, do not modify\n    the text, formatting, or order of existing objective descriptions.\n\nThe end result should be a clean \"Department Objectives\" section containing four toggleable objective headings, with a two-column Planning FAQ nested inside Customer Expansion.\n"
+}

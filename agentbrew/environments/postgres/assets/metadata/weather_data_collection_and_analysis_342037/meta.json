@@ -1,0 +1,765 @@
+{
+  "db_id": "weather_data_collection_and_analysis_342037",
+  "source": "synsql",
+  "tables": 29,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/weather_data_collection_and_analysis_342037",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"data_access\" {\n  \"access_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n}\n\nTable \"public\".\"data_collection_methods\" {\n  \"collection_method_id\" INTEGER [pk]\n  \"collection_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"data_export\" {\n  \"export_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"export_date\" TEXT\n  \"export_format\" TEXT\n}\n\nTable \"public\".\"dataset_access\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n}\n\nTable \"public\".\"dataset_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n}\n\nTable \"public\".\"dataset_metadata\" {\n  \"metadata_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"metadata_key\" TEXT\n  \"metadata_value\" TEXT\n}\n\nTable \"public\".\"dataset_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_value\" INTEGER\n}\n\nTable \"public\".\"dataset_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"tag_name\" TEXT\n}\n\nTable \"public\".\"dataset_versions\" {\n  \"dataset_version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"version_date\" TEXT\n}\n\nTable \"public\".\"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"dataset_name\" TEXT\n  \"collection_method_id\" INTEGER\n  \"collection_frequency\" TEXT\n  \"metadata_id\" INTEGER\n}\n\nTable \"public\".\"events\" {\n  \"event_id\" INTEGER [pk]\n  \"event_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"humidity_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n}\n\nTable \"public\".\"location_metadata\" {\n  \"metadata_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"metadata_key\" TEXT\n  \"metadata_value\" TEXT\n}\n\nTable \"public\".\"location_types\" {\n  \"location_type_id\" INTEGER [pk]\n  \"location_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" REAL\n  \"location_type_id\" INTEGER\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_date\" TEXT\n  \"notification_message\" TEXT\n}\n\nTable \"public\".\"permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"precipitation_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"precipitation_in\" REAL\n  \"events\" TEXT\n}\n\nTable \"public\".\"pressure_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_sea_level_pressure_in\" REAL\n  \"mean_sea_level_pressure_in\" REAL\n  \"min_sea_level_pressure_in\" REAL\n}\n\nTable \"public\".\"roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"search_queries\" {\n  \"search_query_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n}\n\nTable \"public\".\"search_results\" {\n  \"search_result_id\" INTEGER [pk]\n  \"search_query_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"result_date\" TEXT\n}\n\nTable \"public\".\"system_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"log_date\" TEXT\n  \"log_level\" TEXT\n  \"log_message\" TEXT\n}\n\nTable \"public\".\"temperature_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_temp_f\" INTEGER\n  \"mean_temp_f\" INTEGER\n  \"min_temp_f\" INTEGER\n}\n\nTable \"public\".\"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"preference_key\" TEXT\n  \"preference_value\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n}\n\nTable \"public\".\"visibility_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n}\n\nTable \"public\".\"weather_data\" {\n  \"date\" TEXT [pk]\n  \"max_temp_f\" INTEGER\n  \"mean_temp_f\" INTEGER\n  \"min_temp_f\" INTEGER\n  \"max_dew_f\" INTEGER\n  \"mean_dew_f\" INTEGER\n  \"min_dew_f\" INTEGER\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n  \"max_sea_level_pressure_in\" REAL\n  \"mean_sea_level_pressure_in\" REAL\n  \"min_sea_level_pressure_in\" REAL\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n  \"max_wind_speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"precipitation_in\" REAL\n  \"cloud_cover\" INTEGER\n  \"events\" TEXT\n  \"wind_dir_degrees\" INTEGER\n  \"collection_method_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"metadata_id\" INTEGER\n}\n\nTable \"public\".\"wind_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_wind_speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"wind_dir_degrees\" INTEGER\n}\n\nRef: \"public\".\"data_export\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"data_export\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_access\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_access\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_comments\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_metadata\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_ratings\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_ratings\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_tags\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_versions\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"location_metadata\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"locations\".\"location_type_id\" > \"public\".\"location_types\".\"location_type_id\"\nRef: \"public\".\"notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"permissions\".\"role_id\" > \"public\".\"roles\".\"role_id\"\nRef: \"public\".\"search_results\".\"search_query_id\" > \"public\".\"search_queries\".\"search_query_id\"\nRef: \"public\".\"search_results\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"user_preferences\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"weather_data\".\"metadata_id\" > \"public\".\"dataset_metadata\".\"metadata_id\"\nRef: \"public\".\"weather_data\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"weather_data\".\"collection_method_id\" > \"public\".\"data_collection_methods\".\"collection_method_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"data_access\" {\n  \"access_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n}\n\nTable \"data_collection_methods\" {\n  \"collection_method_id\" INTEGER [pk]\n  \"collection_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"data_export\" {\n  \"export_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"export_date\" TEXT\n  \"export_format\" TEXT\n}\n\nTable \"dataset_access\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n}\n\nTable \"dataset_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n}\n\nTable \"dataset_metadata\" {\n  \"metadata_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"metadata_key\" TEXT\n  \"metadata_value\" TEXT\n}\n\nTable \"dataset_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_value\" INTEGER\n}\n\nTable \"dataset_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"tag_name\" TEXT\n}\n\nTable \"dataset_versions\" {\n  \"dataset_version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"version_date\" TEXT\n}\n\nTable \"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"dataset_name\" TEXT\n  \"collection_method_id\" INTEGER\n  \"collection_frequency\" TEXT\n  \"metadata_id\" INTEGER\n}\n\nTable \"events\" {\n  \"event_id\" INTEGER [pk]\n  \"event_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"humidity_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n}\n\nTable \"location_metadata\" {\n  \"metadata_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"metadata_key\" TEXT\n  \"metadata_value\" TEXT\n}\n\nTable \"location_types\" {\n  \"location_type_id\" INTEGER [pk]\n  \"location_type_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" REAL\n  \"location_type_id\" INTEGER\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_date\" TEXT\n  \"notification_message\" TEXT\n}\n\nTable \"permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"precipitation_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"precipitation_in\" REAL\n  \"events\" TEXT\n}\n\nTable \"pressure_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_sea_level_pressure_in\" REAL\n  \"mean_sea_level_pressure_in\" REAL\n  \"min_sea_level_pressure_in\" REAL\n}\n\nTable \"roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"search_queries\" {\n  \"search_query_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n}\n\nTable \"search_results\" {\n  \"search_result_id\" INTEGER [pk]\n  \"search_query_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"result_date\" TEXT\n}\n\nTable \"system_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"log_date\" TEXT\n  \"log_level\" TEXT\n  \"log_message\" TEXT\n}\n\nTable \"temperature_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_temp_f\" INTEGER\n  \"mean_temp_f\" INTEGER\n  \"min_temp_f\" INTEGER\n}\n\nTable \"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"preference_key\" TEXT\n  \"preference_value\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n}\n\nTable \"visibility_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n}\n\nTable \"weather_data\" {\n  \"date\" TEXT [pk]\n  \"max_temp_f\" INTEGER\n  \"mean_temp_f\" INTEGER\n  \"min_temp_f\" INTEGER\n  \"max_dew_f\" INTEGER\n  \"mean_dew_f\" INTEGER\n  \"min_dew_f\" INTEGER\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n  \"max_sea_level_pressure_in\" REAL\n  \"mean_sea_level_pressure_in\" REAL\n  \"min_sea_level_pressure_in\" REAL\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n  \"max_wind_speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"precipitation_in\" REAL\n  \"cloud_cover\" INTEGER\n  \"events\" TEXT\n  \"wind_dir_degrees\" INTEGER\n  \"collection_method_id\" INTEGER\n  \"dataset_id\" INTEGER\n  \"version\" TEXT\n  \"metadata_id\" INTEGER\n}\n\nTable \"wind_data\" {\n  \"date\" TEXT [pk]\n  \"location_id\" INTEGER [pk]\n  \"max_wind_speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"wind_dir_degrees\" INTEGER\n}\n\nRef: \"data_export\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"data_export\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_access\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_access\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_comments\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_metadata\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_ratings\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_ratings\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_tags\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_versions\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"location_metadata\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"locations\".\"location_type_id\" > \"location_types\".\"location_type_id\"\n\nRef: \"notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"permissions\".\"role_id\" > \"roles\".\"role_id\"\n\nRef: \"search_results\".\"search_query_id\" > \"search_queries\".\"search_query_id\"\n\nRef: \"search_results\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"user_preferences\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"weather_data\".\"metadata_id\" > \"dataset_metadata\".\"metadata_id\"\n\nRef: \"weather_data\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"weather_data\".\"collection_method_id\" > \"data_collection_methods\".\"collection_method_id\"\n\n## Table Stats & Sample Values\n\ndata_access: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-05-01', '2023-05-02'\n  location_id: '1001', '1002'\n\ndata_collection_methods: 2 rows\n  collection_method_name: 'Manual', 'Automated'\n  description: 'Data collected manually by observers', 'Data collected automatically by sensors'\n  collection_method_id: '0', '1'\n\ndata_export: 2 rows\n  export_format: 'csv', 'json'\n  export_date: '2023-05-01', '2023-06-01'\n  dataset_id: '0', '1'\n\ndataset_access: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-05-01', '2023-06-01'\n  dataset_id: '0', '1'\n\ndataset_comments: 2 rows\n  comment_text: 'This dataset is very useful', 'I found an error in this dataset'\n  comment_date: '2023-05-01', '2023-06-01'\n  dataset_id: '1', '0'\n\ndataset_metadata: 2 rows\n  metadata_key: 'created_by', 'updated_by'\n  metadata_value: 'John Doe', 'Jane Doe'\n  dataset_id: '0'\n\ndataset_ratings: 2 rows\n  rating_date: '2023-05-01', '2023-06-01'\n  rating_value: '5', '4'\n  user_id: '0', '1'\n\ndataset_tags: 2 rows\n  tag_name: 'weather', 'climate'\n  dataset_id: '0'\n  tag_id: '0', '1'\n\ndataset_versions: 2 rows\n  version: '1.0', '2.0'\n  version_date: '2023-01-01', '2023-06-01'\n  dataset_id: '1'\n\ndatasets: 2 rows\n  dataset_name: 'Weather Data', 'Climate Data'\n  collection_frequency: 'Daily', 'Weekly'\n  collection_method_id: '1', '2'\n\nevents: 2 rows\n  event_name: 'Rain', 'Snow'\n  description: 'Precipitation in liquid form', 'Precipitation in frozen form'\n  event_id: '0', '1'\n\nhumidity_data: 2 rows\n  mean_humidity: '86', '89'\n  date: '0', '1'\n  max_humidity: '97'\n\nlocation_metadata: 2 rows\n  metadata_key: 'population', 'area'\n  metadata_value: '10000', '10 km^2'\n  location_id: '1'\n\nlocation_types: 2 rows\n  location_type_name: 'City', 'Rural'\n  description: 'Urban area', 'Countryside'\n  location_type_id: '0', '1'\n\nlocations: 2 rows\n  location_name: 'West Branch, Iowa, United States', 'Walnut Grove, California, United States'\n  elevation: '620.0', '15.0'\n  latitude: '41.8819', '38.6774'\n\nnotifications: 2 rows\n  notification_message: 'New dataset available', 'Error occurred during data export'\n  notification_date: '2023-05-01', '2023-06-01'\n  user_id: '0', '1'\n\npermissions: 2 rows\n  permission_name: 'create_dataset', 'view_dataset'\n  description: 'Create a new dataset', 'View an existing dataset'\n  role_id: '1'\n\nprecipitation_data: 2 rows\n  events: 'Rain'\n  precipitation_in: '0.69', '0.34'\n  date: '0', '1'\n\npressure_data: 2 rows\n  max_sea_level_pressure_in: '29.95', '30.09'\n  mean_sea_level_pressure_in: '29.77', '29.9'\n  min_sea_level_pressure_in: '29.57', '29.81'\n\nroles: 2 rows\n  role_name: 'admin', 'researcher'\n  description: 'Administrator', 'Researcher'\n  role_id: '0', '1'\n\nsearch_queries: 2 rows\n  search_query: 'weather data for 2023', 'climate data for 2022'\n  search_date: '2023-05-01', '2023-06-01'\n  user_id: '1', '2'\n\nsearch_results: 2 rows\n  result_date: '2023-05-01', '2023-06-01'\n  search_query_id: '1', '0'\n  dataset_id: '0', '1'\n\nsystem_logs: 2 rows\n  log_level: 'info', 'error'\n  log_message: 'System started', 'Error occurred during data export'\n  log_date: '2023-05-01', '2023-06-01'\n\ntemperature_data: 2 rows\n  max_temp_f: '46', '41'\n  mean_temp_f: '42', '38'\n  min_temp_f: '37', '35'\n\nuser_preferences: 2 rows\n  preference_key: 'language', 'unit_system'\n  preference_value: 'English', 'Metric'\n  user_id: '1', '0'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'\n\nvisibility_data: 2 rows\n  mean_visibility_miles: '8', '9'\n  min_visibility_miles: '2', '4'\n  date: '0', '1'\n\nweather_data: 2 rows\n  max_sea_level_pressure_in: '29.95', '30.09'\n  mean_sea_level_pressure_in: '29.77', '29.9'\n  min_sea_level_pressure_in: '29.57', '29.81'\n\nwind_data: 2 rows\n  max_wind_speed_mph: '25', '14'\n  mean_wind_speed_mph: '14', '7'\n  max_gust_speed_mph: '36', '22'",
+    "stateUrl": null,
+    "tableStats": {
+      "data_access": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "1001",
+            "1002"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_collection_methods": {
+        "rows": 2,
+        "sample_values": {
+          "collection_method_id": [
+            "0",
+            "1"
+          ],
+          "collection_method_name": [
+            "Manual",
+            "Automated"
+          ],
+          "description": [
+            "Data collected manually by observers",
+            "Data collected automatically by sensors"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_export": {
+        "rows": 2,
+        "sample_values": {
+          "export_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "export_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "export_format": [
+            "csv",
+            "json"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_access": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "comment_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "comment_text": [
+            "This dataset is very useful",
+            "I found an error in this dataset"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_metadata": {
+        "rows": 2,
+        "sample_values": {
+          "metadata_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0"
+          ],
+          "metadata_key": [
+            "created_by",
+            "updated_by"
+          ],
+          "metadata_value": [
+            "John Doe",
+            "Jane Doe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "rating_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "rating_value": [
+            "5",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_tags": {
+        "rows": 2,
+        "sample_values": {
+          "tag_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0"
+          ],
+          "tag_name": [
+            "weather",
+            "climate"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_versions": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_version_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "version": [
+            "1.0",
+            "2.0"
+          ],
+          "version_date": [
+            "2023-01-01",
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "datasets": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "dataset_name": [
+            "Weather Data",
+            "Climate Data"
+          ],
+          "collection_method_id": [
+            "1",
+            "2"
+          ],
+          "collection_frequency": [
+            "Daily",
+            "Weekly"
+          ],
+          "metadata_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "events": {
+        "rows": 2,
+        "sample_values": {
+          "event_id": [
+            "0",
+            "1"
+          ],
+          "event_name": [
+            "Rain",
+            "Snow"
+          ],
+          "description": [
+            "Precipitation in liquid form",
+            "Precipitation in frozen form"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "humidity_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "max_humidity": [
+            "97"
+          ],
+          "mean_humidity": [
+            "86",
+            "89"
+          ],
+          "min_humidity": [
+            "76"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "location_metadata": {
+        "rows": 2,
+        "sample_values": {
+          "metadata_id": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "1"
+          ],
+          "metadata_key": [
+            "population",
+            "area"
+          ],
+          "metadata_value": [
+            "10000",
+            "10 km^2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "location_types": {
+        "rows": 2,
+        "sample_values": {
+          "location_type_id": [
+            "0",
+            "1"
+          ],
+          "location_type_name": [
+            "City",
+            "Rural"
+          ],
+          "description": [
+            "Urban area",
+            "Countryside"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "locations": {
+        "rows": 2,
+        "sample_values": {
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "location_name": [
+            "West Branch, Iowa, United States",
+            "Walnut Grove, California, United States"
+          ],
+          "latitude": [
+            "41.8819",
+            "38.6774"
+          ],
+          "longitude": [
+            "-91.2965",
+            "-121.8781"
+          ],
+          "elevation": [
+            "620.0",
+            "15.0"
+          ],
+          "location_type_id": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "notification_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "notification_message": [
+            "New dataset available",
+            "Error occurred during data export"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "permissions": {
+        "rows": 2,
+        "sample_values": {
+          "permission_id": [
+            "0",
+            "1"
+          ],
+          "role_id": [
+            "1"
+          ],
+          "permission_name": [
+            "create_dataset",
+            "view_dataset"
+          ],
+          "description": [
+            "Create a new dataset",
+            "View an existing dataset"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "precipitation_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "precipitation_in": [
+            "0.69",
+            "0.34"
+          ],
+          "events": [
+            "Rain"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pressure_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "max_sea_level_pressure_in": [
+            "29.95",
+            "30.09"
+          ],
+          "mean_sea_level_pressure_in": [
+            "29.77",
+            "29.9"
+          ],
+          "min_sea_level_pressure_in": [
+            "29.57",
+            "29.81"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "admin",
+            "researcher"
+          ],
+          "description": [
+            "Administrator",
+            "Researcher"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "search_queries": {
+        "rows": 2,
+        "sample_values": {
+          "search_query_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "search_query": [
+            "weather data for 2023",
+            "climate data for 2022"
+          ],
+          "search_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "search_results": {
+        "rows": 2,
+        "sample_values": {
+          "search_result_id": [
+            "0",
+            "1"
+          ],
+          "search_query_id": [
+            "1",
+            "0"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "result_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "system_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "log_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "log_level": [
+            "info",
+            "error"
+          ],
+          "log_message": [
+            "System started",
+            "Error occurred during data export"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "temperature_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "max_temp_f": [
+            "46",
+            "41"
+          ],
+          "mean_temp_f": [
+            "42",
+            "38"
+          ],
+          "min_temp_f": [
+            "37",
+            "35"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sample_values": {
+          "preference_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "preference_key": [
+            "language",
+            "unit_system"
+          ],
+          "preference_value": [
+            "English",
+            "Metric"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "visibility_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "max_visibility_miles": [
+            "10"
+          ],
+          "mean_visibility_miles": [
+            "8",
+            "9"
+          ],
+          "min_visibility_miles": [
+            "2",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "weather_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "max_temp_f": [
+            "46",
+            "41"
+          ],
+          "mean_temp_f": [
+            "42",
+            "38"
+          ],
+          "min_temp_f": [
+            "37",
+            "35"
+          ],
+          "max_dew_f": [
+            "40",
+            "38"
+          ],
+          "mean_dew_f": [
+            "38",
+            "35"
+          ],
+          "min_dew_f": [
+            "36",
+            "32"
+          ],
+          "max_humidity": [
+            "97"
+          ],
+          "mean_humidity": [
+            "86",
+            "89"
+          ],
+          "min_humidity": [
+            "76"
+          ],
+          "max_sea_level_pressure_in": [
+            "29.95",
+            "30.09"
+          ],
+          "mean_sea_level_pressure_in": [
+            "29.77",
+            "29.9"
+          ],
+          "min_sea_level_pressure_in": [
+            "29.57",
+            "29.81"
+          ],
+          "max_visibility_miles": [
+            "10"
+          ],
+          "mean_visibility_miles": [
+            "8",
+            "9"
+          ],
+          "min_visibility_miles": [
+            "2",
+            "4"
+          ],
+          "max_wind_speed_mph": [
+            "25",
+            "14"
+          ],
+          "mean_wind_speed_mph": [
+            "14",
+            "7"
+          ],
+          "max_gust_speed_mph": [
+            "36",
+            "22"
+          ],
+          "precipitation_in": [
+            "0.69",
+            "0.34"
+          ],
+          "cloud_cover": [
+            "8"
+          ],
+          "events": [
+            "Rain"
+          ],
+          "wind_dir_degrees": [
+            "138",
+            "92"
+          ],
+          "collection_method_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "version": [
+            "1"
+          ],
+          "metadata_id": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "wind_data": {
+        "rows": 2,
+        "sample_values": {
+          "date": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "max_wind_speed_mph": [
+            "25",
+            "14"
+          ],
+          "mean_wind_speed_mph": [
+            "14",
+            "7"
+          ],
+          "max_gust_speed_mph": [
+            "36",
+            "22"
+          ],
+          "wind_dir_degrees": [
+            "138",
+            "92"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

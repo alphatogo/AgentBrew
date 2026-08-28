@@ -1,0 +1,4 @@
+{
+  "workflow_pattern": "This is a 'V1_2cand_compare_fork_conditional' style workflow. It requires the following operations, in roughly this order: select repo by comparison metric, fork repository preserving name, append conditional reference link readme. The task should combine these operations into one coherent, realistic request without listing them as separate steps.",
+  "question": "There are two repositories: fastapi's fastapi and encode's httpx. Fork whichever of the two repositories has the MOST stars (not open issue count — compare by stargazer count this time), maintaining the same name as the source repository. If fastapi is forked, add a reference link at the bottom of the README.md file: 'Related project: [httpx](https://github.com/encode/httpx)'. If httpx is forked, add a reference link at the bottom of the README.md file: 'Related project: [fastapi](https://github.com/fastapi/fastapi)'."
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Portfolio Case Study Growth Tracker",
+  "capability": [
+    "archive_or_delete_items",
+    "populate_rows",
+    "field_mapping",
+    "insert_block_at_position",
+    "summarize_from_records",
+    "create_database",
+    "define_schema",
+    "build_relations",
+    "rollup_formula_schema"
+  ],
+  "question": "Find the page named \"Creative Portfolio HQ\" and reorganize the case studies section to showcase only the most recent and relevant work.\n**Task Requirements:** 1. Delete the case study named \"Legacy Banner Refresh\" from the Case Studies\n   database since it's from 2021 and no longer relevant.\n\n2. Create a new case study entry called \"Enterprise Analytics Redesign\"\n   with:\n   - Description: \"Led the redesign of an enterprise analytics workspace,\n     improving navigation clarity, dashboard hierarchy, and stakeholder\n     reporting workflows. Produced a scalable design system for complex\n     data review and executive decision-making.\"\n   - Date: Start \"2025-02-03\", End \"2025-06-27\"\n   - Tags: Add the existing \"Product Design\" tag, and create a new tag\n     \"Enterprise Systems\" with purple color, then add both tags to this\n     case study\n   - Contact Email: Same as the email address under the Contact section\n   - Portfolio Url: Same as the personal website under the Contact section\n\n3. After the Case Studies database block, add the following blocks in\n   sequence:\n   - A divider block\n   - A heading_2 block with text \"Current Strategic Focus\"\n   - A blue_background callout with 🎯 icon and content: \"Focus Areas:\n     [3 capabilities with lowest current capability score]\"\n"
+}

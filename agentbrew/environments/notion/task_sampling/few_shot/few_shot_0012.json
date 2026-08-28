@@ -1,0 +1,14 @@
+{
+  "title": "Event Schedule Daily Overview",
+  "capability": [
+    "query_existing_data",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "add_exact_blocks",
+    "query_multiple_sources",
+    "query_and_filter_database",
+    "compute_aggregates"
+  ],
+  "question": "Create a comprehensive daily conference overview page to help organize my event plans. I need you to create a new page called \"Conference Daily Overview\" as a child of the main \"Conference Planning Hub\" page.\n**Task Requirements:** 1. Create a new page titled \"Conference Daily Overview\" as a child page of\n   the main Conference Planning Hub page.\n2. Query the \"Conference Schedule\" database to retrieve all sessions. 3. Replace the usual Day 3 schedule section by querying the \"Networking\n   Activities\" database for entries with the \"Workshop\" tag.\n4. Structure the page with this exact format:\n   - Add a heading_1 block with text \"📅 Conference Daily Overview\".\n   - Add a heading_2 block with text \"📊 Conference Summary\".\n   - Under Conference Summary, add the exact text \"Total sessions\n     confirmed (from Day 1 to Day 3): [NUMBER]\".\n   - Create heading_2 blocks for \"🌅 Day 1\" and \"🌆 Day 2\".\n   - Under each day heading, list the sessions scheduled for that day as\n     to-do items formatted \"Session Name - Room\"; check confirmed sessions.\n   - Add a heading_2 block with text \"🧭 Workshop Activities\".\n   - Under it, create a bulleted list of all Workshop activities formatted\n     \"Name - Map Link\" if a map link is available.\n5. Ensure all headings use the exact emoji and text format specified above.\n"
+}

@@ -1,0 +1,262 @@
+{
+  "db_id": "video_games",
+  "source": "bird",
+  "tables": 8,
+  "total_rows": 105319,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#video_games",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"game\" {\n  \"id\" INTEGER [pk, not null]\n  \"genre_id\" INTEGER\n  \"game_name\" TEXT\n}\n\nTable \"game_platform\" {\n  \"id\" INTEGER [pk, not null]\n  \"game_publisher_id\" INTEGER\n  \"platform_id\" INTEGER\n  \"release_year\" INTEGER\n}\n\nTable \"game_publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"game_id\" INTEGER\n  \"publisher_id\" INTEGER\n}\n\nTable \"genre\" {\n  \"id\" INTEGER [pk, not null]\n  \"genre_name\" TEXT\n}\n\nTable \"platform\" {\n  \"id\" INTEGER [pk, not null]\n  \"platform_name\" TEXT\n}\n\nTable \"publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"publisher_name\" TEXT\n}\n\nTable \"region\" {\n  \"id\" INTEGER [pk, not null]\n  \"region_name\" TEXT\n}\n\nTable \"region_sales\" {\n  \"region_id\" INTEGER\n  \"game_platform_id\" INTEGER\n  \"num_sales\" REAL\n}\n\n\n\nRef: \"game\".\"genre_id\" > \"genre\".\"id\"\n\nRef: \"game_publisher\".\"publisher_id\" > \"publisher\".\"id\"\n\nRef: \"game_publisher\".\"game_id\" > \"game\".\"id\"\n\nRef: \"game_platform\".\"platform_id\" > \"platform\".\"id\"\n\nRef: \"game_platform\".\"game_publisher_id\" > \"game_publisher\".\"id\"\n\nRef: \"region_sales\".\"region_id\" > \"region\".\"id\"\n\nRef: \"region_sales\".\"game_platform_id\" > \"game_platform\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"game\" {\n  \"id\" INTEGER [pk, not null]\n  \"genre_id\" INTEGER\n  \"game_name\" TEXT\n}\n\nTable \"game_platform\" {\n  \"id\" INTEGER [pk, not null]\n  \"game_publisher_id\" INTEGER\n  \"platform_id\" INTEGER\n  \"release_year\" INTEGER\n}\n\nTable \"game_publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"game_id\" INTEGER\n  \"publisher_id\" INTEGER\n}\n\nTable \"genre\" {\n  \"id\" INTEGER [pk, not null]\n  \"genre_name\" TEXT\n}\n\nTable \"platform\" {\n  \"id\" INTEGER [pk, not null]\n  \"platform_name\" TEXT\n}\n\nTable \"publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"publisher_name\" TEXT\n}\n\nTable \"region\" {\n  \"id\" INTEGER [pk, not null]\n  \"region_name\" TEXT\n}\n\nTable \"region_sales\" {\n  \"region_id\" INTEGER\n  \"game_platform_id\" INTEGER\n  \"num_sales\" REAL\n}\n\nRef: \"game\".\"genre_id\" > \"genre\".\"id\"\n\nRef: \"game_publisher\".\"publisher_id\" > \"publisher\".\"id\"\n\nRef: \"game_publisher\".\"game_id\" > \"game\".\"id\"\n\nRef: \"game_platform\".\"platform_id\" > \"platform\".\"id\"\n\nRef: \"game_platform\".\"game_publisher_id\" > \"game_publisher\".\"id\"\n\nRef: \"region_sales\".\"region_id\" > \"region\".\"id\"\n\nRef: \"region_sales\".\"game_platform_id\" > \"game_platform\".\"id\"\n\n## Table Stats & Sample Values\n\ngame: 10000 rows\n  game_name: '2 Games in 1: Sonic Advance & ChuChu Rocket!', '2 Games in 1: Sonic Battle & ChuChu Rocket!', '2 Games in 1: Sonic Pinball Party & Columns Crown', ...\n  genre_id: '4', '5', '11', ...\n  id: '44', '45', '46', ...\n\ngame_platform: 10000 rows\n  release_year: '2007', '2006', '2011', ...\n  game_publisher_id: '8564', '9852', '11063', ...\n  platform_id: '4', '7', '15', ...\n\ngame_publisher: 10000 rows\n  game_id: '10866', '9244', '5464', ...\n  publisher_id: '369', '328', '498', ...\n  id: '1', '2', '3', ...\n\ngenre: 12 rows\n  genre_name: 'Action', 'Adventure', 'Fighting', ...\n  id: '1', '2', '3', ...\n\nplatform: 31 rows\n  platform_name: 'Wii', 'NES', 'GB', ...\n  id: '1', '2', '3', ...\n\npublisher: 577 rows\n  publisher_name: '10TACLE Studios', '1C Company', '20th Century Fox Video Games', ...\n  id: '1', '2', '3', ...\n\nregion: 4 rows\n  region_name: 'North America', 'Europe', 'Japan', ...\n  id: '1', '2', '3', ...\n\nregion_sales: 10000 rows\n  num_sales: '3.5', '1.43', '0.51', ...\n  region_id: '1'\n  game_platform_id: '50', '51', '52', ...",
+    "stateUrl": "https://bird-bench.github.io/#video_games",
+    "tableStats": {
+      "game": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51"
+          ],
+          "genre_id": [
+            "4",
+            "5",
+            "11",
+            "2",
+            "9",
+            "1",
+            "8",
+            "6"
+          ],
+          "game_name": [
+            "2 Games in 1: Sonic Advance & ChuChu Rocket!",
+            "2 Games in 1: Sonic Battle & ChuChu Rocket!",
+            "2 Games in 1: Sonic Pinball Party & Columns Crown",
+            "2 Games in 1: SpongeBob SquarePants: SuperSponge &",
+            "2 in 1 Combo Pack: Sonic Heroes / Super Monkey Bal",
+            "2-in-1 Game Pack: Spider-Man & Spider-Man 2",
+            "2002 FIFA World Cup",
+            "2010 FIFA World Cup South Africa"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "game_platform": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "game_publisher_id": [
+            "8564",
+            "9852",
+            "11063",
+            "9065",
+            "9544",
+            "11623",
+            "1977",
+            "3833"
+          ],
+          "platform_id": [
+            "4",
+            "7",
+            "15",
+            "16",
+            "12",
+            "13",
+            "14",
+            "19"
+          ],
+          "release_year": [
+            "2007",
+            "2006",
+            "2011",
+            "2009",
+            "1981",
+            "1982",
+            "2008",
+            "2002"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "game_publisher": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "game_id": [
+            "10866",
+            "9244",
+            "5464",
+            "10868",
+            "7282",
+            "9603",
+            "6573",
+            "10864"
+          ],
+          "publisher_id": [
+            "369",
+            "328",
+            "498",
+            "464",
+            "17",
+            "532",
+            "65",
+            "139"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "genre": {
+        "rows": 12,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "genre_name": [
+            "Action",
+            "Adventure",
+            "Fighting",
+            "Misc",
+            "Platform",
+            "Puzzle",
+            "Racing",
+            "Role-Playing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "platform": {
+        "rows": 31,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "platform_name": [
+            "Wii",
+            "NES",
+            "GB",
+            "DS",
+            "X360",
+            "PS3",
+            "PS2",
+            "SNES"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publisher": {
+        "rows": 577,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "publisher_name": [
+            "10TACLE Studios",
+            "1C Company",
+            "20th Century Fox Video Games",
+            "2D Boy",
+            "3DO",
+            "49Games",
+            "505 Games",
+            "5pb"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "region": {
+        "rows": 4,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "region_name": [
+            "North America",
+            "Europe",
+            "Japan",
+            "Other"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "region_sales": {
+        "rows": 10000,
+        "sample_values": {
+          "region_id": [
+            "1"
+          ],
+          "game_platform_id": [
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57"
+          ],
+          "num_sales": [
+            "3.5",
+            "1.43",
+            "0.51",
+            "0.27",
+            "0.48",
+            "0.34",
+            "0.36",
+            "0.17"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

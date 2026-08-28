@@ -1,0 +1,681 @@
+{
+  "db_id": "public_review_platform",
+  "source": "bird",
+  "tables": 15,
+  "total_rows": 990846,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#public_review_platform",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"attribute_name\" TEXT\n}\n\nTable \"Business\" {\n  \"business_id\" INTEGER [pk]\n  \"active\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"stars\" REAL\n  \"review_count\" TEXT\n}\n\nTable \"Business_Attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"business_id\" INTEGER [pk]\n  \"attribute_value\" TEXT\n}\n\nTable \"Business_Categories\" {\n  \"business_id\" INTEGER [pk]\n  \"category_id\" INTEGER [pk]\n}\n\nTable \"Business_Hours\" {\n  \"business_id\" INTEGER [pk]\n  \"day_id\" INTEGER [pk]\n  \"opening_time\" TEXT\n  \"closing_time\" TEXT\n}\n\nTable \"Categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n}\n\nTable \"Checkins\" {\n  \"business_id\" INTEGER [pk]\n  \"day_id\" INTEGER [pk]\n  \"label_time_0\" TEXT\n  \"label_time_1\" TEXT\n  \"label_time_2\" TEXT\n  \"label_time_3\" TEXT\n  \"label_time_4\" TEXT\n  \"label_time_5\" TEXT\n  \"label_time_6\" TEXT\n  \"label_time_7\" TEXT\n  \"label_time_8\" TEXT\n  \"label_time_9\" TEXT\n  \"label_time_10\" TEXT\n  \"label_time_11\" TEXT\n  \"label_time_12\" TEXT\n  \"label_time_13\" TEXT\n  \"label_time_14\" TEXT\n  \"label_time_15\" TEXT\n  \"label_time_16\" TEXT\n  \"label_time_17\" TEXT\n  \"label_time_18\" TEXT\n  \"label_time_19\" TEXT\n  \"label_time_20\" TEXT\n  \"label_time_21\" TEXT\n  \"label_time_22\" TEXT\n  \"label_time_23\" TEXT\n}\n\nTable \"Compliments\" {\n  \"compliment_id\" INTEGER [pk]\n  \"compliment_type\" TEXT\n}\n\nTable \"Days\" {\n  \"day_id\" INTEGER [pk]\n  \"day_of_week\" TEXT\n}\n\nTable \"Elite\" {\n  \"user_id\" INTEGER [pk]\n  \"year_id\" INTEGER [pk]\n}\n\nTable \"Reviews\" {\n  \"business_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"review_stars\" INTEGER\n  \"review_votes_funny\" TEXT\n  \"review_votes_useful\" TEXT\n  \"review_votes_cool\" TEXT\n  \"review_length\" TEXT\n}\n\nTable \"Tips\" {\n  \"business_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"likes\" INTEGER\n  \"tip_length\" TEXT\n}\n\nTable \"Users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_yelping_since_year\" INTEGER\n  \"user_average_stars\" TEXT\n  \"user_votes_funny\" TEXT\n  \"user_votes_useful\" TEXT\n  \"user_votes_cool\" TEXT\n  \"user_review_count\" TEXT\n  \"user_fans\" TEXT\n}\n\nTable \"Users_Compliments\" {\n  \"compliment_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"number_of_compliments\" TEXT\n}\n\nTable \"Years\" {\n  \"year_id\" INTEGER [pk]\n  \"actual_year\" INTEGER\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"attribute_name\" TEXT\n}\n\nTable \"Business\" {\n  \"business_id\" INTEGER [pk]\n  \"active\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"stars\" REAL\n  \"review_count\" TEXT\n}\n\nTable \"Business_Attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"business_id\" INTEGER [pk]\n  \"attribute_value\" TEXT\n}\n\nTable \"Business_Categories\" {\n  \"business_id\" INTEGER [pk]\n  \"category_id\" INTEGER [pk]\n}\n\nTable \"Business_Hours\" {\n  \"business_id\" INTEGER [pk]\n  \"day_id\" INTEGER [pk]\n  \"opening_time\" TEXT\n  \"closing_time\" TEXT\n}\n\nTable \"Categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n}\n\nTable \"Checkins\" {\n  \"business_id\" INTEGER [pk]\n  \"day_id\" INTEGER [pk]\n  \"label_time_0\" TEXT\n  \"label_time_1\" TEXT\n  \"label_time_2\" TEXT\n  \"label_time_3\" TEXT\n  \"label_time_4\" TEXT\n  \"label_time_5\" TEXT\n  \"label_time_6\" TEXT\n  \"label_time_7\" TEXT\n  \"label_time_8\" TEXT\n  \"label_time_9\" TEXT\n  \"label_time_10\" TEXT\n  \"label_time_11\" TEXT\n  \"label_time_12\" TEXT\n  \"label_time_13\" TEXT\n  \"label_time_14\" TEXT\n  \"label_time_15\" TEXT\n  \"label_time_16\" TEXT\n  \"label_time_17\" TEXT\n  \"label_time_18\" TEXT\n  \"label_time_19\" TEXT\n  \"label_time_20\" TEXT\n  \"label_time_21\" TEXT\n  \"label_time_22\" TEXT\n  \"label_time_23\" TEXT\n}\n\nTable \"Compliments\" {\n  \"compliment_id\" INTEGER [pk]\n  \"compliment_type\" TEXT\n}\n\nTable \"Days\" {\n  \"day_id\" INTEGER [pk]\n  \"day_of_week\" TEXT\n}\n\nTable \"Elite\" {\n  \"user_id\" INTEGER [pk]\n  \"year_id\" INTEGER [pk]\n}\n\nTable \"Reviews\" {\n  \"business_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"review_stars\" INTEGER\n  \"review_votes_funny\" TEXT\n  \"review_votes_useful\" TEXT\n  \"review_votes_cool\" TEXT\n  \"review_length\" TEXT\n}\n\nTable \"Tips\" {\n  \"business_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"likes\" INTEGER\n  \"tip_length\" TEXT\n}\n\nTable \"Users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_yelping_since_year\" INTEGER\n  \"user_average_stars\" TEXT\n  \"user_votes_funny\" TEXT\n  \"user_votes_useful\" TEXT\n  \"user_votes_cool\" TEXT\n  \"user_review_count\" TEXT\n  \"user_fans\" TEXT\n}\n\nTable \"Users_Compliments\" {\n  \"compliment_id\" INTEGER [pk]\n  \"user_id\" INTEGER [pk]\n  \"number_of_compliments\" TEXT\n}\n\nTable \"Years\" {\n  \"year_id\" INTEGER [pk]\n  \"actual_year\" INTEGER\n}\n\n## Table Stats & Sample Values\n\nAttributes: 80 rows\n  attribute_name: 'Alcohol', 'Waiter Service', 'Delivery', ...\n  attribute_id: '1', '2', '3', ...\n\nBusiness: 10000 rows\n  city: 'Phoenix', 'Scottsdale', 'Glendale', ...\n  state: 'AZ', 'SC', 'CA'\n  active: 'true', 'false'\n\nBusiness_Attributes: 10000 rows\n  attribute_value: 'none', 'full_bar', 'beer_and_wine', ...\n  attribute_id: '1', '2', '3'\n  business_id: '2', '3', '13', ...\n\nBusiness_Categories: 10000 rows\n  category_id: '8', '143', '18', ...\n  business_id: '1', '2', '3', ...\n\nBusiness_Hours: 10000 rows\n  opening_time: '11AM', '12PM', '10AM', ...\n  closing_time: '8PM', '9PM', '6PM', ...\n  business_id: '2', '3', '4', ...\n\nCategories: 591 rows\n  category_name: 'Active Life', 'Arts & Entertainment', 'Stadiums & Arenas', ...\n  category_id: '1', '2', '3', ...\n\nCheckins: 10000 rows\n  label_time_0: 'None', 'Low', 'Medium', ...\n  label_time_1: 'None', 'Low', 'Medium'\n  label_time_2: 'None', 'Low', 'Medium'\n\nCompliments: 11 rows\n  compliment_type: 'photos', 'cool', 'hot', ...\n  compliment_id: '1', '2', '3', ...\n\nDays: 7 rows\n  day_of_week: 'Sunday', 'Monday', 'Tuesday', ...\n  day_id: '1', '2', '3', ...\n\nElite: 10000 rows\n  user_id: '3', '19', '33', ...\n  year_id: '2010', '2011', '2012', ...\n\nReviews: 10000 rows\n  review_votes_funny: 'None', 'Low', 'Medium', ...\n  review_votes_useful: 'None', 'Low', 'Medium', ...\n  review_votes_cool: 'None', 'Low', 'Medium', ...\n\nTips: 10000 rows\n  tip_length: 'Medium', 'Short', 'Long'\n  likes: '0', '1', '2'\n  business_id: '2', '3', '6', ...\n\nUsers: 10000 rows\n  user_average_stars: '4.0', '2.5', '4.5', ...\n  user_votes_funny: 'Low', 'None', 'Uber', ...\n  user_votes_useful: 'Low', 'Medium', 'Uber', ...\n\nUsers_Compliments: 10000 rows\n  number_of_compliments: 'Medium', 'Low', 'High', ...\n  compliment_id: '1', '2'\n  user_id: '3', '19', '45', ...\n\nYears: 10 rows\n  actual_year: '2005', '2006', '2007', ...\n  year_id: '2005', '2006', '2007', ...",
+    "stateUrl": "https://bird-bench.github.io/#public_review_platform",
+    "tableStats": {
+      "Attributes": {
+        "rows": 80,
+        "sample_values": {
+          "attribute_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "attribute_name": [
+            "Alcohol",
+            "Waiter Service",
+            "Delivery",
+            "Attire",
+            "Good for Kids",
+            "Take-out",
+            "Accepts Credit Cards",
+            "Price Range"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Business": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "active": [
+            "true",
+            "false"
+          ],
+          "city": [
+            "Phoenix",
+            "Scottsdale",
+            "Glendale",
+            "Casa Grande",
+            "Peoria",
+            "Mesa",
+            "Tempe",
+            "Chandler"
+          ],
+          "state": [
+            "AZ",
+            "SC",
+            "CA"
+          ],
+          "stars": [
+            "3.0",
+            "4.5",
+            "4.0",
+            "5.0",
+            "3.5",
+            "2.0",
+            "2.5",
+            "1.5"
+          ],
+          "review_count": [
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Business_Attributes": {
+        "rows": 10000,
+        "sample_values": {
+          "attribute_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "business_id": [
+            "2",
+            "3",
+            "13",
+            "17",
+            "22",
+            "23",
+            "24",
+            "32"
+          ],
+          "attribute_value": [
+            "none",
+            "full_bar",
+            "beer_and_wine",
+            "false",
+            "true"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Business_Categories": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "category_id": [
+            "8",
+            "143",
+            "18",
+            "170",
+            "93",
+            "196",
+            "207",
+            "15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Business_Hours": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "2",
+            "3",
+            "4",
+            "7",
+            "11",
+            "12",
+            "13",
+            "16"
+          ],
+          "day_id": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "1"
+          ],
+          "opening_time": [
+            "11AM",
+            "12PM",
+            "10AM",
+            "8AM",
+            "9AM",
+            "7AM",
+            "5AM",
+            "4PM"
+          ],
+          "closing_time": [
+            "8PM",
+            "9PM",
+            "6PM",
+            "5PM",
+            "7PM",
+            "4PM",
+            "10PM",
+            "2PM"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Categories": {
+        "rows": 591,
+        "sample_values": {
+          "category_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "category_name": [
+            "Active Life",
+            "Arts & Entertainment",
+            "Stadiums & Arenas",
+            "Horse Racing",
+            "Tires",
+            "Automotive",
+            "Fashion",
+            "Shopping"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Checkins": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "day_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "label_time_0": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_1": [
+            "None",
+            "Low",
+            "Medium"
+          ],
+          "label_time_2": [
+            "None",
+            "Low",
+            "Medium"
+          ],
+          "label_time_3": [
+            "None",
+            "Low"
+          ],
+          "label_time_4": [
+            "None",
+            "Low",
+            "Medium"
+          ],
+          "label_time_5": [
+            "None",
+            "Low",
+            "Medium"
+          ],
+          "label_time_6": [
+            "None",
+            "Low",
+            "Medium"
+          ],
+          "label_time_7": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_8": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_9": [
+            "Low",
+            "None",
+            "Medium",
+            "High"
+          ],
+          "label_time_10": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "label_time_11": [
+            "Low",
+            "None",
+            "Medium",
+            "High"
+          ],
+          "label_time_12": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_13": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "label_time_14": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_15": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_16": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "label_time_17": [
+            "Low",
+            "None",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "label_time_18": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "label_time_19": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_20": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_21": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_22": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "label_time_23": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Compliments": {
+        "rows": 11,
+        "sample_values": {
+          "compliment_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "compliment_type": [
+            "photos",
+            "cool",
+            "hot",
+            "note",
+            "more",
+            "funny",
+            "writer",
+            "plain"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Days": {
+        "rows": 7,
+        "sample_values": {
+          "day_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "day_of_week": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Elite": {
+        "rows": 10000,
+        "sample_values": {
+          "user_id": [
+            "3",
+            "19",
+            "33",
+            "45",
+            "65",
+            "82",
+            "94",
+            "102"
+          ],
+          "year_id": [
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2008",
+            "2009",
+            "2006"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Reviews": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "user_id": [
+            "36129",
+            "40299",
+            "59125",
+            "60776",
+            "62013",
+            "612",
+            "6248",
+            "10149"
+          ],
+          "review_stars": [
+            "2",
+            "1",
+            "5",
+            "4",
+            "3"
+          ],
+          "review_votes_funny": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Uber"
+          ],
+          "review_votes_useful": [
+            "None",
+            "Low",
+            "Medium",
+            "Uber",
+            "High"
+          ],
+          "review_votes_cool": [
+            "None",
+            "Low",
+            "Medium",
+            "Uber",
+            "High"
+          ],
+          "review_length": [
+            "Medium",
+            "Short",
+            "Long"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Tips": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "2",
+            "3",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "13"
+          ],
+          "user_id": [
+            "12490",
+            "16328",
+            "19191",
+            "25891",
+            "34759",
+            "45153",
+            "47930",
+            "50186"
+          ],
+          "likes": [
+            "0",
+            "1",
+            "2"
+          ],
+          "tip_length": [
+            "Medium",
+            "Short",
+            "Long"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Users": {
+        "rows": 10000,
+        "sample_values": {
+          "user_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "user_yelping_since_year": [
+            "2012",
+            "2010",
+            "2009",
+            "2008",
+            "2013",
+            "2011",
+            "2014",
+            "2006"
+          ],
+          "user_average_stars": [
+            "4.0",
+            "2.5",
+            "4.5",
+            "5.0",
+            "2.0",
+            "3.5",
+            "1.0",
+            "3.0"
+          ],
+          "user_votes_funny": [
+            "Low",
+            "None",
+            "Uber",
+            "Medium",
+            "High"
+          ],
+          "user_votes_useful": [
+            "Low",
+            "Medium",
+            "Uber",
+            "None",
+            "High"
+          ],
+          "user_votes_cool": [
+            "Low",
+            "Uber",
+            "None",
+            "High",
+            "Medium"
+          ],
+          "user_review_count": [
+            "Medium",
+            "High",
+            "Low",
+            "Uber"
+          ],
+          "user_fans": [
+            "Low",
+            "None",
+            "Medium",
+            "High",
+            "Uber"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Users_Compliments": {
+        "rows": 10000,
+        "sample_values": {
+          "compliment_id": [
+            "1",
+            "2"
+          ],
+          "user_id": [
+            "3",
+            "19",
+            "45",
+            "53",
+            "102",
+            "115",
+            "120",
+            "146"
+          ],
+          "number_of_compliments": [
+            "Medium",
+            "Low",
+            "High",
+            "Uber"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Years": {
+        "rows": 10,
+        "sample_values": {
+          "year_id": [
+            "2005",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2010",
+            "2011",
+            "2012"
+          ],
+          "actual_year": [
+            "2005",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2010",
+            "2011",
+            "2012"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

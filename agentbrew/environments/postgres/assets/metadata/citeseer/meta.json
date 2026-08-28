@@ -1,0 +1,95 @@
+{
+  "db_id": "citeseer",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 113209,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#citeseer",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"cites\" {\n  \"cited_paper_id\" TEXT [pk, not null]\n  \"citing_paper_id\" TEXT [pk, not null]\n}\n\nTable \"content\" {\n  \"paper_id\" TEXT [pk, not null]\n  \"word_cited_id\" TEXT [pk, not null]\n}\n\nTable \"paper\" {\n  \"paper_id\" TEXT [pk, not null]\n  \"class_label\" TEXT [not null]\n}\n\n\n\nRef: \"content\".\"paper_id\" > \"paper\".\"paper_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"cites\" {\n  \"cited_paper_id\" TEXT [pk, not null]\n  \"citing_paper_id\" TEXT [pk, not null]\n}\n\nTable \"content\" {\n  \"paper_id\" TEXT [pk, not null]\n  \"word_cited_id\" TEXT [pk, not null]\n}\n\nTable \"paper\" {\n  \"paper_id\" TEXT [pk, not null]\n  \"class_label\" TEXT [not null]\n}\n\nRef: \"content\".\"paper_id\" > \"paper\".\"paper_id\"\n\n## Table Stats & Sample Values\n\ncites: 4732 rows\n  cited_paper_id: '100157', '100598', '101570', ...\n  citing_paper_id: '100157', '364207', '38848', ...\n\ncontent: 10000 rows\n  paper_id: '100157', '100598', '101570', ...\n  word_cited_id: 'word1163', 'word1509', 'word1614', ...\n\npaper: 3312 rows\n  class_label: 'Agents', 'IR', 'ML', ...\n  paper_id: '100157', '100598', '101570', ...",
+    "stateUrl": "https://bird-bench.github.io/#citeseer",
+    "tableStats": {
+      "cites": {
+        "rows": 4732,
+        "sample_values": {
+          "cited_paper_id": [
+            "100157",
+            "100598",
+            "101570",
+            "10227",
+            "103027",
+            "105684",
+            "106003",
+            "106339"
+          ],
+          "citing_paper_id": [
+            "100157",
+            "364207",
+            "38848",
+            "bradshaw97introduction",
+            "bylund99coordinating",
+            "dix01metaagent",
+            "gray99finding",
+            "labrou01standardizing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "content": {
+        "rows": 10000,
+        "sample_values": {
+          "paper_id": [
+            "100157",
+            "100598",
+            "101570",
+            "10227",
+            "102637",
+            "103027",
+            "104045",
+            "104129"
+          ],
+          "word_cited_id": [
+            "word1163",
+            "word1509",
+            "word1614",
+            "word1642",
+            "word1663",
+            "word1798",
+            "word1843",
+            "word1989"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "paper": {
+        "rows": 3312,
+        "sample_values": {
+          "paper_id": [
+            "100157",
+            "100598",
+            "101570",
+            "10227",
+            "102637",
+            "103027",
+            "104045",
+            "104129"
+          ],
+          "class_label": [
+            "Agents",
+            "IR",
+            "ML",
+            "AI",
+            "DB",
+            "HCI"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

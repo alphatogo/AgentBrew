@@ -1,0 +1,679 @@
+{
+  "db_id": "climate_and_environmental_monitoring_data",
+  "source": "synsql",
+  "tables": 21,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/climate_and_environmental_monitoring_data",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_notes\" TEXT\n}\n\nTable \"public\".\"data_aggregations\" {\n  \"aggregation_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"aggregation_type\" TEXT\n  \"aggregation_value\" REAL\n  \"aggregation_date\" TEXT\n  \"aggregation_period\" TEXT\n}\n\nTable \"public\".\"data_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"comment_type\" TEXT\n}\n\nTable \"public\".\"data_points\" {\n  \"data_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"date\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"days_since_last_reading\" INTEGER\n  \"smb\" REAL\n  \"t2m\" REAL\n  \"sf\" REAL\n  \"pdd\" REAL\n  \"data_quality\" TEXT\n  \"data_source\" TEXT\n}\n\nTable \"public\".\"data_projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"project_description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"team_id\" INTEGER\n  \"project_status\" TEXT\n}\n\nTable \"public\".\"data_publications\" {\n  \"publication_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"publication_title\" TEXT\n  \"publication_date\" TEXT\n  \"publication_url\" TEXT\n  \"publication_authors\" TEXT\n}\n\nTable \"public\".\"data_quality_assurance\" {\n  \"qa_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"qa_type\" TEXT\n  \"qa_result\" TEXT\n  \"qa_date\" TEXT\n  \"qa_notes\" TEXT\n  \"qa_status\" TEXT\n}\n\nTable \"public\".\"data_sharing\" {\n  \"share_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"shared_with_user_id\" INTEGER\n  \"shared_with_team_id\" INTEGER\n  \"share_date\" TEXT\n  \"share_notes\" TEXT\n  \"share_status\" TEXT\n}\n\nTable \"public\".\"data_source_integrations\" {\n  \"integration_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"source_id\" INTEGER\n  \"integration_date\" TEXT\n  \"integration_notes\" TEXT\n  \"integration_status\" TEXT\n}\n\nTable \"public\".\"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"source_url\" TEXT\n  \"last_updated\" TEXT\n  \"data_format\" TEXT\n}\n\nTable \"public\".\"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"version_notes\" TEXT\n  \"version_author\" TEXT\n}\n\nTable \"public\".\"data_visualizations\" {\n  \"visualization_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"visualization_type\" TEXT\n  \"visualization_url\" TEXT\n  \"creation_date\" TEXT\n  \"created_by\" TEXT\n  \"visualization_notes\" TEXT\n}\n\nTable \"public\".\"geospatial_data\" {\n  \"geospatial_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"data_type\" TEXT\n  \"data_value\" TEXT\n  \"data_date\" TEXT\n  \"geometry\" TEXT\n  \"projection_system\" TEXT\n}\n\nTable \"public\".\"monitoring_stations\" {\n  \"station_id\" INTEGER [pk]\n  \"station_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"installation_date\" TEXT\n  \"last_maintenance\" TEXT\n  \"contact_email\" TEXT\n  \"station_description\" TEXT\n  \"station_type\" TEXT\n  \"data_coverage\" TEXT\n}\n\nTable \"public\".\"project Deliverables\" {\n  \"deliverable_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"deliverable_name\" TEXT\n  \"deliverable_description\" TEXT\n  \"deliverable_date\" TEXT\n  \"deliverable_status\" TEXT\n}\n\nTable \"public\".\"project_collaborators\" {\n  \"collaborator_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"user_id\" INTEGER\n  \"collaboration_role\" TEXT\n  \"collaboration_status\" TEXT\n}\n\nTable \"public\".\"project_data_points\" {\n  \"project_data_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"data_id\" INTEGER\n  \"usage_notes\" TEXT\n  \"usage_date\" TEXT\n}\n\nTable \"public\".\"project_milestones\" {\n  \"milestone_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"milestone_name\" TEXT\n  \"milestone_description\" TEXT\n  \"milestone_date\" TEXT\n  \"milestone_status\" TEXT\n}\n\nTable \"public\".\"team_members\" {\n  \"team_member_id\" INTEGER [pk]\n  \"team_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role_in_team\" TEXT\n  \"member_status\" TEXT\n}\n\nTable \"public\".\"teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"team_description\" TEXT\n  \"team_leader_id\" INTEGER\n  \"team_department\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"expertise\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_aggregations\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_comments\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"data_points\".\"station_id\" > \"public\".\"monitoring_stations\".\"station_id\"\nRef: \"public\".\"data_projects\".\"team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"data_publications\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_quality_assurance\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_sharing\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_sharing\".\"shared_with_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"data_sharing\".\"shared_with_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"data_source_integrations\".\"source_id\" > \"public\".\"data_sources\".\"source_id\"\nRef: \"public\".\"data_source_integrations\".\"station_id\" > \"public\".\"monitoring_stations\".\"station_id\"\nRef: \"public\".\"data_versions\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"data_visualizations\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"geospatial_data\".\"station_id\" > \"public\".\"monitoring_stations\".\"station_id\"\nRef: \"public\".\"project_collaborators\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"project_collaborators\".\"project_id\" > \"public\".\"data_projects\".\"project_id\"\nRef: \"public\".\"project_data_points\".\"data_id\" > \"public\".\"data_points\".\"data_id\"\nRef: \"public\".\"project_data_points\".\"project_id\" > \"public\".\"data_projects\".\"project_id\"\nRef: \"public\".\"project_milestones\".\"project_id\" > \"public\".\"data_projects\".\"project_id\"\nRef: \"public\".\"team_members\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"team_members\".\"team_id\" > \"public\".\"teams\".\"team_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_notes\" TEXT\n}\n\nTable \"data_aggregations\" {\n  \"aggregation_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"aggregation_type\" TEXT\n  \"aggregation_value\" REAL\n  \"aggregation_date\" TEXT\n  \"aggregation_period\" TEXT\n}\n\nTable \"data_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"comment_type\" TEXT\n}\n\nTable \"data_points\" {\n  \"data_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"date\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"days_since_last_reading\" INTEGER\n  \"smb\" REAL\n  \"t2m\" REAL\n  \"sf\" REAL\n  \"pdd\" REAL\n  \"data_quality\" TEXT\n  \"data_source\" TEXT\n}\n\nTable \"data_projects\" {\n  \"project_id\" INTEGER [pk]\n  \"project_name\" TEXT\n  \"project_description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"team_id\" INTEGER\n  \"project_status\" TEXT\n}\n\nTable \"data_publications\" {\n  \"publication_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"publication_title\" TEXT\n  \"publication_date\" TEXT\n  \"publication_url\" TEXT\n  \"publication_authors\" TEXT\n}\n\nTable \"data_quality_assurance\" {\n  \"qa_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"qa_type\" TEXT\n  \"qa_result\" TEXT\n  \"qa_date\" TEXT\n  \"qa_notes\" TEXT\n  \"qa_status\" TEXT\n}\n\nTable \"data_sharing\" {\n  \"share_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"shared_with_user_id\" INTEGER\n  \"shared_with_team_id\" INTEGER\n  \"share_date\" TEXT\n  \"share_notes\" TEXT\n  \"share_status\" TEXT\n}\n\nTable \"data_source_integrations\" {\n  \"integration_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"source_id\" INTEGER\n  \"integration_date\" TEXT\n  \"integration_notes\" TEXT\n  \"integration_status\" TEXT\n}\n\nTable \"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"source_name\" TEXT\n  \"source_type\" TEXT\n  \"source_url\" TEXT\n  \"last_updated\" TEXT\n  \"data_format\" TEXT\n}\n\nTable \"data_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"version_notes\" TEXT\n  \"version_author\" TEXT\n}\n\nTable \"data_visualizations\" {\n  \"visualization_id\" INTEGER [pk]\n  \"data_id\" INTEGER\n  \"visualization_type\" TEXT\n  \"visualization_url\" TEXT\n  \"creation_date\" TEXT\n  \"created_by\" TEXT\n  \"visualization_notes\" TEXT\n}\n\nTable \"geospatial_data\" {\n  \"geospatial_id\" INTEGER [pk]\n  \"station_id\" INTEGER\n  \"data_type\" TEXT\n  \"data_value\" TEXT\n  \"data_date\" TEXT\n  \"geometry\" TEXT\n  \"projection_system\" TEXT\n}\n\nTable \"monitoring_stations\" {\n  \"station_id\" INTEGER [pk]\n  \"station_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"installation_date\" TEXT\n  \"last_maintenance\" TEXT\n  \"contact_email\" TEXT\n  \"station_description\" TEXT\n  \"station_type\" TEXT\n  \"data_coverage\" TEXT\n}\n\nTable \"project Deliverables\" {\n  \"deliverable_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"deliverable_name\" TEXT\n  \"deliverable_description\" TEXT\n  \"deliverable_date\" TEXT\n  \"deliverable_status\" TEXT\n}\n\nTable \"project_collaborators\" {\n  \"collaborator_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"user_id\" INTEGER\n  \"collaboration_role\" TEXT\n  \"collaboration_status\" TEXT\n}\n\nTable \"project_data_points\" {\n  \"project_data_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"data_id\" INTEGER\n  \"usage_notes\" TEXT\n  \"usage_date\" TEXT\n}\n\nTable \"project_milestones\" {\n  \"milestone_id\" INTEGER [pk]\n  \"project_id\" INTEGER\n  \"milestone_name\" TEXT\n  \"milestone_description\" TEXT\n  \"milestone_date\" TEXT\n  \"milestone_status\" TEXT\n}\n\nTable \"team_members\" {\n  \"team_member_id\" INTEGER [pk]\n  \"team_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role_in_team\" TEXT\n  \"member_status\" TEXT\n}\n\nTable \"teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"team_description\" TEXT\n  \"team_leader_id\" INTEGER\n  \"team_department\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"expertise\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_aggregations\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_comments\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"data_points\".\"station_id\" > \"monitoring_stations\".\"station_id\"\n\nRef: \"data_projects\".\"team_id\" > \"teams\".\"team_id\"\n\nRef: \"data_publications\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_quality_assurance\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_sharing\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_sharing\".\"shared_with_team_id\" > \"teams\".\"team_id\"\n\nRef: \"data_sharing\".\"shared_with_user_id\" > \"users\".\"user_id\"\n\nRef: \"data_source_integrations\".\"source_id\" > \"data_sources\".\"source_id\"\n\nRef: \"data_source_integrations\".\"station_id\" > \"monitoring_stations\".\"station_id\"\n\nRef: \"data_versions\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"data_visualizations\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"geospatial_data\".\"station_id\" > \"monitoring_stations\".\"station_id\"\n\nRef: \"project_collaborators\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"project_collaborators\".\"project_id\" > \"data_projects\".\"project_id\"\n\nRef: \"project_data_points\".\"data_id\" > \"data_points\".\"data_id\"\n\nRef: \"project_data_points\".\"project_id\" > \"data_projects\".\"project_id\"\n\nRef: \"project_milestones\".\"project_id\" > \"data_projects\".\"project_id\"\n\nRef: \"team_members\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"team_members\".\"team_id\" > \"teams\".\"team_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_notes: 'Viewed data for research purposes', 'Downloaded data for analysis'\n  access_date: '2023-05-01', '2023-05-02'\n\ndata_aggregations: 2 rows\n  aggregation_type: 'daily', 'weekly'\n  aggregation_period: 'day', 'week'\n  aggregation_date: '2008-01-26', '2008-02-02'\n\ndata_comments: 2 rows\n  comment_type: 'question', 'answer'\n  comment_text: 'This data point seems accurate.', 'There might be an issue with the temperature readi'\n  comment_date: '2023-01-01', '2023-01-02'\n\ndata_points: 2 rows\n  data_quality: 'good', 'bad'\n  data_source: 'sensor', 'model'\n  date: '2008-01-26', '2008-02-02'\n\ndata_projects: 2 rows\n  project_name: 'Climate Change Impact Study', 'Data Analysis for Policy Making'\n  project_status: 'ongoing', 'completed'\n  project_description: 'Study the impact of climate change on various regi', 'Analyze data to inform policy decisions'\n\ndata_publications: 2 rows\n  publication_title: 'Impact of Climate Change on Surface Mass Balance', 'Temperature Trends in the Arctic'\n  publication_authors: 'Alice Johnson, Bob Williams', 'Bob Williams, Alice Johnson'\n  publication_date: '2023-01-01', '2023-01-02'\n\ndata_quality_assurance: 2 rows\n  qa_type: 'accuracy', 'consistency'\n  qa_status: 'complete', 'incomplete'\n  qa_result: 'pass', 'fail'\n\ndata_sharing: 2 rows\n  share_status: 'pending', 'shared'\n  share_notes: 'Shared with Alice Johnson for review', 'Shared with the Climate Research team'\n  share_date: '2023-01-01', '2023-01-02'\n\ndata_source_integrations: 2 rows\n  integration_status: 'successful', 'failed'\n  integration_date: '2023-01-01', '2023-01-02'\n  integration_notes: 'Integrated satellite imagery with station R15', 'Integrated climate model data with station R15'\n\ndata_sources: 2 rows\n  source_name: 'Satellite Imagery Source 1', 'Climate Model Source 1'\n  source_type: 'satellite', 'climate_model'\n  data_format: 'CSV', 'JSON'\n\ndata_versions: 2 rows\n  version_notes: 'Initial data collection', 'Data correction'\n  version_author: 'Alice Johnson', 'Bob Williams'\n  version_date: '2008-01-26', '2008-02-01'\n\ndata_visualizations: 2 rows\n  visualization_type: 'chart', 'map'\n  visualization_notes: 'Temperature chart for station R15', 'Snowfall map for station R15'\n  visualization_url: 'http://example.com/chart1.png', 'http://example.com/map1.png'\n\ngeospatial_data: 2 rows\n  data_type: 'satellite_imagery', 'elevation_map'\n  data_value: 'image1.png', 'map1.png'\n  projection_system: 'WGS84', 'UTM'\n\nmonitoring_stations: 2 rows\n  station_name: 'R15', 'R16'\n  station_description: 'Weather monitoring station', 'Glacier monitoring station'\n  station_type: 'weather', 'glacier'\n\nproject Deliverables: 2 rows\n  deliverable_name: 'Final Report', 'Presentation'\n  deliverable_status: 'submitted', 'pending'\n  deliverable_description: 'Final report of the project', 'Presentation of the project results'\n\nproject_collaborators: 2 rows\n  collaboration_role: 'researcher', 'analyst'\n  collaboration_status: 'active', 'inactive'\n  project_id: '0', '1'\n\nproject_data_points: 2 rows\n  usage_notes: 'Used to analyze surface mass balance trends', 'Used to validate temperature models'\n  usage_date: '2023-01-01', '2023-01-02'\n  project_id: '1'\n\nproject_milestones: 2 rows\n  milestone_name: 'Data Collection', 'Data Analysis'\n  milestone_status: 'achieved', 'pending'\n  milestone_description: 'Collection of data from monitoring stations', 'Analysis of the collected data'\n\nteam_members: 2 rows\n  role_in_team: 'member', 'lead'\n  member_status: 'active', 'inactive'\n  team_id: '1'\n\nteams: 2 rows\n  team_name: 'Climate Research', 'Data Science'\n  team_description: 'Focuses on climate change research', 'Focuses on data analysis and modeling'\n  team_department: 'Research', 'Data Science'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  job_title: 'Climate Scientist', 'Data Analyst'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_notes": [
+            "Viewed data for research purposes",
+            "Downloaded data for analysis"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_aggregations": {
+        "rows": 2,
+        "sample_values": {
+          "aggregation_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "1"
+          ],
+          "aggregation_type": [
+            "daily",
+            "weekly"
+          ],
+          "aggregation_value": [
+            "-0.23003",
+            "-0.0289"
+          ],
+          "aggregation_date": [
+            "2008-01-26",
+            "2008-02-02"
+          ],
+          "aggregation_period": [
+            "day",
+            "week"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "comment_text": [
+            "This data point seems accurate.",
+            "There might be an issue with the temperature readi"
+          ],
+          "comment_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "comment_type": [
+            "question",
+            "answer"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_points": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "station_id": [
+            "0"
+          ],
+          "date": [
+            "2008-01-26",
+            "2008-02-02"
+          ],
+          "latitude": [
+            "-62.1789"
+          ],
+          "longitude": [
+            "-58.9079"
+          ],
+          "elevation": [
+            "54"
+          ],
+          "days_since_last_reading": [
+            "21",
+            "7"
+          ],
+          "smb": [
+            "-0.23003",
+            "-0.0289"
+          ],
+          "t2m": [
+            "0.669618",
+            "1.33547"
+          ],
+          "sf": [
+            "0.018224",
+            "2.8e-05"
+          ],
+          "pdd": [
+            "15.8876",
+            "10.6837"
+          ],
+          "data_quality": [
+            "good",
+            "bad"
+          ],
+          "data_source": [
+            "sensor",
+            "model"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_projects": {
+        "rows": 2,
+        "sample_values": {
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "project_name": [
+            "Climate Change Impact Study",
+            "Data Analysis for Policy Making"
+          ],
+          "project_description": [
+            "Study the impact of climate change on various regi",
+            "Analyze data to inform policy decisions"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31",
+            "2023-06-30"
+          ],
+          "team_id": [
+            "1"
+          ],
+          "project_status": [
+            "ongoing",
+            "completed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_publications": {
+        "rows": 2,
+        "sample_values": {
+          "publication_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0"
+          ],
+          "publication_title": [
+            "Impact of Climate Change on Surface Mass Balance",
+            "Temperature Trends in the Arctic"
+          ],
+          "publication_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "publication_url": [
+            "http://example.com/publication1.pdf",
+            "http://example.com/publication2.pdf"
+          ],
+          "publication_authors": [
+            "Alice Johnson, Bob Williams",
+            "Bob Williams, Alice Johnson"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_quality_assurance": {
+        "rows": 2,
+        "sample_values": {
+          "qa_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "1",
+            "0"
+          ],
+          "qa_type": [
+            "accuracy",
+            "consistency"
+          ],
+          "qa_result": [
+            "pass",
+            "fail"
+          ],
+          "qa_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "qa_notes": [
+            "No issues found",
+            "Inconsistent data values"
+          ],
+          "qa_status": [
+            "complete",
+            "incomplete"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sharing": {
+        "rows": 2,
+        "sample_values": {
+          "share_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "1"
+          ],
+          "shared_with_user_id": [
+            "0"
+          ],
+          "shared_with_team_id": [
+            "0",
+            "1"
+          ],
+          "share_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "share_notes": [
+            "Shared with Alice Johnson for review",
+            "Shared with the Climate Research team"
+          ],
+          "share_status": [
+            "pending",
+            "shared"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_source_integrations": {
+        "rows": 2,
+        "sample_values": {
+          "integration_id": [
+            "0",
+            "1"
+          ],
+          "station_id": [
+            "0"
+          ],
+          "source_id": [
+            "0"
+          ],
+          "integration_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "integration_notes": [
+            "Integrated satellite imagery with station R15",
+            "Integrated climate model data with station R15"
+          ],
+          "integration_status": [
+            "successful",
+            "failed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "source_name": [
+            "Satellite Imagery Source 1",
+            "Climate Model Source 1"
+          ],
+          "source_type": [
+            "satellite",
+            "climate_model"
+          ],
+          "source_url": [
+            "http://satellite1.com",
+            "http://climate1.com"
+          ],
+          "last_updated": [
+            "2023-01-01"
+          ],
+          "data_format": [
+            "CSV",
+            "JSON"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "version_date": [
+            "2008-01-26",
+            "2008-02-01"
+          ],
+          "version_notes": [
+            "Initial data collection",
+            "Data correction"
+          ],
+          "version_author": [
+            "Alice Johnson",
+            "Bob Williams"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_visualizations": {
+        "rows": 2,
+        "sample_values": {
+          "visualization_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "0"
+          ],
+          "visualization_type": [
+            "chart",
+            "map"
+          ],
+          "visualization_url": [
+            "http://example.com/chart1.png",
+            "http://example.com/map1.png"
+          ],
+          "creation_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "visualization_notes": [
+            "Temperature chart for station R15",
+            "Snowfall map for station R15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geospatial_data": {
+        "rows": 2,
+        "sample_values": {
+          "geospatial_id": [
+            "0",
+            "1"
+          ],
+          "station_id": [
+            "0",
+            "1"
+          ],
+          "data_type": [
+            "satellite_imagery",
+            "elevation_map"
+          ],
+          "data_value": [
+            "image1.png",
+            "map1.png"
+          ],
+          "data_date": [
+            "2008-01-26"
+          ],
+          "geometry": [
+            "POINT(-62.1789 -58.9079)"
+          ],
+          "projection_system": [
+            "WGS84",
+            "UTM"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "monitoring_stations": {
+        "rows": 2,
+        "sample_values": {
+          "station_id": [
+            "0",
+            "1"
+          ],
+          "station_name": [
+            "R15",
+            "R16"
+          ],
+          "latitude": [
+            "-62.1789",
+            "-62.18"
+          ],
+          "longitude": [
+            "-58.9079",
+            "-58.908"
+          ],
+          "elevation": [
+            "54",
+            "60"
+          ],
+          "installation_date": [
+            "2008-01-01"
+          ],
+          "last_maintenance": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "contact_email": [
+            "r15@example.com",
+            "r16@example.com"
+          ],
+          "station_description": [
+            "Weather monitoring station",
+            "Glacier monitoring station"
+          ],
+          "station_type": [
+            "weather",
+            "glacier"
+          ],
+          "data_coverage": [
+            "hourly",
+            "daily"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project Deliverables": {
+        "rows": 2,
+        "sample_values": {
+          "deliverable_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "1",
+            "2"
+          ],
+          "deliverable_name": [
+            "Final Report",
+            "Presentation"
+          ],
+          "deliverable_description": [
+            "Final report of the project",
+            "Presentation of the project results"
+          ],
+          "deliverable_date": [
+            "2023-12-31",
+            "2023-06-30"
+          ],
+          "deliverable_status": [
+            "submitted",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project_collaborators": {
+        "rows": 2,
+        "sample_values": {
+          "collaborator_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "collaboration_role": [
+            "researcher",
+            "analyst"
+          ],
+          "collaboration_status": [
+            "active",
+            "inactive"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project_data_points": {
+        "rows": 2,
+        "sample_values": {
+          "project_data_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "1"
+          ],
+          "data_id": [
+            "1"
+          ],
+          "usage_notes": [
+            "Used to analyze surface mass balance trends",
+            "Used to validate temperature models"
+          ],
+          "usage_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "project_milestones": {
+        "rows": 2,
+        "sample_values": {
+          "milestone_id": [
+            "0",
+            "1"
+          ],
+          "project_id": [
+            "1"
+          ],
+          "milestone_name": [
+            "Data Collection",
+            "Data Analysis"
+          ],
+          "milestone_description": [
+            "Collection of data from monitoring stations",
+            "Analysis of the collected data"
+          ],
+          "milestone_date": [
+            "2023-06-30",
+            "2023-09-30"
+          ],
+          "milestone_status": [
+            "achieved",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team_members": {
+        "rows": 2,
+        "sample_values": {
+          "team_member_id": [
+            "0",
+            "1"
+          ],
+          "team_id": [
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "role_in_team": [
+            "member",
+            "lead"
+          ],
+          "member_status": [
+            "active",
+            "inactive"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teams": {
+        "rows": 2,
+        "sample_values": {
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "team_name": [
+            "Climate Research",
+            "Data Science"
+          ],
+          "team_description": [
+            "Focuses on climate change research",
+            "Focuses on data analysis and modeling"
+          ],
+          "team_leader_id": [
+            "1",
+            "2"
+          ],
+          "team_department": [
+            "Research",
+            "Data Science"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "department": [
+            "Climate Research",
+            "Data Science"
+          ],
+          "job_title": [
+            "Climate Scientist",
+            "Data Analyst"
+          ],
+          "expertise": [
+            "Climate Modeling",
+            "Data Visualization"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

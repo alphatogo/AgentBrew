@@ -1,0 +1,514 @@
+{
+  "db_id": "public_opinion_on_evolution_by_state",
+  "source": "synsql",
+  "tables": 17,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/public_opinion_on_evolution_by_state",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"survey_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"education_levels\" {\n  \"education_id\" INTEGER [pk]\n  \"education_level\" TEXT\n  \"education_description\" TEXT\n}\n\nTable \"public\".\"income_brackets\" {\n  \"income_id\" INTEGER [pk]\n  \"income_bracket\" TEXT\n  \"income_description\" TEXT\n}\n\nTable \"public\".\"religious_beliefs\" {\n  \"belief_id\" INTEGER [pk]\n  \"religious_belief\" TEXT\n  \"belief_description\" TEXT\n}\n\nTable \"public\".\"respondents\" {\n  \"respondent_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"education_level\" TEXT\n  \"income_bracket\" TEXT\n  \"religious_belief\" TEXT\n  \"ethnicity\" TEXT\n  \"occupation\" TEXT\n  \"household_size\" INTEGER\n  \"children\" INTEGER\n  \"political_affiliation\" TEXT\n}\n\nTable \"public\".\"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"abbreviation\" TEXT\n  \"region\" TEXT\n  \"population\" INTEGER\n  \"median_income\" INTEGER\n  \"education_level_distribution\" TEXT\n}\n\nTable \"public\".\"survey_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"survey_id\" INTEGER\n  \"question_text\" TEXT\n  \"question_type\" TEXT\n  \"question_order\" INTEGER\n  \"question_options\" TEXT\n  \"question_required\" INTEGER\n}\n\nTable \"public\".\"survey_questions_by_topic\" {\n  \"question_topic_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"topic_id\" INTEGER\n  \"topic_weight\" REAL\n}\n\nTable \"public\".\"survey_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"respondent_id\" INTEGER\n  \"response_text\" TEXT\n  \"response_date\" TEXT\n  \"response_score\" INTEGER\n  \"response_metadata\" TEXT\n}\n\nTable \"public\".\"survey_responses_by_education\" {\n  \"response_education_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"education_id\" INTEGER\n  \"response_percentage\" REAL\n  \"education_distribution\" TEXT\n}\n\nTable \"public\".\"survey_responses_by_income\" {\n  \"response_income_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"income_id\" INTEGER\n  \"response_percentage\" REAL\n  \"income_distribution\" TEXT\n}\n\nTable \"public\".\"survey_responses_by_religion\" {\n  \"response_religion_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"belief_id\" INTEGER\n  \"response_percentage\" REAL\n  \"belief_distribution\" TEXT\n}\n\nTable \"public\".\"survey_responses_by_state\" {\n  \"response_state_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"state_id\" INTEGER\n  \"response_percentage\" REAL\n  \"response_distribution\" TEXT\n}\n\nTable \"public\".\"survey_states\" {\n  \"survey_state_id\" INTEGER [pk]\n  \"survey_id\" INTEGER\n  \"state_id\" INTEGER\n  \"sample_size\" INTEGER\n  \"response_rate\" REAL\n  \"demographic_summary\" TEXT\n}\n\nTable \"public\".\"surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"survey_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"description\" TEXT\n  \"survey_version\" INTEGER\n  \"survey_status\" TEXT\n}\n\nTable \"public\".\"topics\" {\n  \"topic_id\" INTEGER [pk]\n  \"topic_name\" TEXT\n  \"description\" TEXT\n  \"topic_keywords\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_status\" TEXT\n  \"last_login\" TEXT\n  \"permissions\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"survey_id\" > \"public\".\"surveys\".\"survey_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"respondents\".\"education_level\" > \"public\".\"education_levels\".\"education_level\"\nRef: \"public\".\"respondents\".\"religious_belief\" > \"public\".\"religious_beliefs\".\"religious_belief\"\nRef: \"public\".\"respondents\".\"state\" > \"public\".\"states\".\"state_name\"\nRef: \"public\".\"respondents\".\"income_bracket\" > \"public\".\"income_brackets\".\"income_bracket\"\nRef: \"public\".\"survey_questions\".\"survey_id\" > \"public\".\"surveys\".\"survey_id\"\nRef: \"public\".\"survey_questions_by_topic\".\"topic_id\" > \"public\".\"topics\".\"topic_id\"\nRef: \"public\".\"survey_questions_by_topic\".\"question_id\" > \"public\".\"survey_questions\".\"question_id\"\nRef: \"public\".\"survey_responses\".\"question_id\" > \"public\".\"survey_questions\".\"question_id\"\nRef: \"public\".\"survey_responses\".\"respondent_id\" > \"public\".\"respondents\".\"respondent_id\"\nRef: \"public\".\"survey_responses_by_education\".\"response_id\" > \"public\".\"survey_responses\".\"response_id\"\nRef: \"public\".\"survey_responses_by_education\".\"education_id\" > \"public\".\"education_levels\".\"education_id\"\nRef: \"public\".\"survey_responses_by_income\".\"response_id\" > \"public\".\"survey_responses\".\"response_id\"\nRef: \"public\".\"survey_responses_by_income\".\"income_id\" > \"public\".\"income_brackets\".\"income_id\"\nRef: \"public\".\"survey_responses_by_religion\".\"response_id\" > \"public\".\"survey_responses\".\"response_id\"\nRef: \"public\".\"survey_responses_by_religion\".\"belief_id\" > \"public\".\"religious_beliefs\".\"belief_id\"\nRef: \"public\".\"survey_responses_by_state\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"survey_responses_by_state\".\"response_id\" > \"public\".\"survey_responses\".\"response_id\"\nRef: \"public\".\"survey_states\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"survey_states\".\"survey_id\" > \"public\".\"surveys\".\"survey_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"survey_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"education_levels\" {\n  \"education_id\" INTEGER [pk]\n  \"education_level\" TEXT\n  \"education_description\" TEXT\n}\n\nTable \"income_brackets\" {\n  \"income_id\" INTEGER [pk]\n  \"income_bracket\" TEXT\n  \"income_description\" TEXT\n}\n\nTable \"religious_beliefs\" {\n  \"belief_id\" INTEGER [pk]\n  \"religious_belief\" TEXT\n  \"belief_description\" TEXT\n}\n\nTable \"respondents\" {\n  \"respondent_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"date_of_birth\" TEXT\n  \"gender\" TEXT\n  \"education_level\" TEXT\n  \"income_bracket\" TEXT\n  \"religious_belief\" TEXT\n  \"ethnicity\" TEXT\n  \"occupation\" TEXT\n  \"household_size\" INTEGER\n  \"children\" INTEGER\n  \"political_affiliation\" TEXT\n}\n\nTable \"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"abbreviation\" TEXT\n  \"region\" TEXT\n  \"population\" INTEGER\n  \"median_income\" INTEGER\n  \"education_level_distribution\" TEXT\n}\n\nTable \"survey_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"survey_id\" INTEGER\n  \"question_text\" TEXT\n  \"question_type\" TEXT\n  \"question_order\" INTEGER\n  \"question_options\" TEXT\n  \"question_required\" INTEGER\n}\n\nTable \"survey_questions_by_topic\" {\n  \"question_topic_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"topic_id\" INTEGER\n  \"topic_weight\" REAL\n}\n\nTable \"survey_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"respondent_id\" INTEGER\n  \"response_text\" TEXT\n  \"response_date\" TEXT\n  \"response_score\" INTEGER\n  \"response_metadata\" TEXT\n}\n\nTable \"survey_responses_by_education\" {\n  \"response_education_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"education_id\" INTEGER\n  \"response_percentage\" REAL\n  \"education_distribution\" TEXT\n}\n\nTable \"survey_responses_by_income\" {\n  \"response_income_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"income_id\" INTEGER\n  \"response_percentage\" REAL\n  \"income_distribution\" TEXT\n}\n\nTable \"survey_responses_by_religion\" {\n  \"response_religion_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"belief_id\" INTEGER\n  \"response_percentage\" REAL\n  \"belief_distribution\" TEXT\n}\n\nTable \"survey_responses_by_state\" {\n  \"response_state_id\" INTEGER [pk]\n  \"response_id\" INTEGER\n  \"state_id\" INTEGER\n  \"response_percentage\" REAL\n  \"response_distribution\" TEXT\n}\n\nTable \"survey_states\" {\n  \"survey_state_id\" INTEGER [pk]\n  \"survey_id\" INTEGER\n  \"state_id\" INTEGER\n  \"sample_size\" INTEGER\n  \"response_rate\" REAL\n  \"demographic_summary\" TEXT\n}\n\nTable \"surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"survey_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"description\" TEXT\n  \"survey_version\" INTEGER\n  \"survey_status\" TEXT\n}\n\nTable \"topics\" {\n  \"topic_id\" INTEGER [pk]\n  \"topic_name\" TEXT\n  \"description\" TEXT\n  \"topic_keywords\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_status\" TEXT\n  \"last_login\" TEXT\n  \"permissions\" TEXT\n}\n\nRef: \"access_logs\".\"survey_id\" > \"surveys\".\"survey_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"respondents\".\"education_level\" > \"education_levels\".\"education_level\"\n\nRef: \"respondents\".\"religious_belief\" > \"religious_beliefs\".\"religious_belief\"\n\nRef: \"respondents\".\"state\" > \"states\".\"state_name\"\n\nRef: \"respondents\".\"income_bracket\" > \"income_brackets\".\"income_bracket\"\n\nRef: \"survey_questions\".\"survey_id\" > \"surveys\".\"survey_id\"\n\nRef: \"survey_questions_by_topic\".\"topic_id\" > \"topics\".\"topic_id\"\n\nRef: \"survey_questions_by_topic\".\"question_id\" > \"survey_questions\".\"question_id\"\n\nRef: \"survey_responses\".\"question_id\" > \"survey_questions\".\"question_id\"\n\nRef: \"survey_responses\".\"respondent_id\" > \"respondents\".\"respondent_id\"\n\nRef: \"survey_responses_by_education\".\"response_id\" > \"survey_responses\".\"response_id\"\n\nRef: \"survey_responses_by_education\".\"education_id\" > \"education_levels\".\"education_id\"\n\nRef: \"survey_responses_by_income\".\"response_id\" > \"survey_responses\".\"response_id\"\n\nRef: \"survey_responses_by_income\".\"income_id\" > \"income_brackets\".\"income_id\"\n\nRef: \"survey_responses_by_religion\".\"response_id\" > \"survey_responses\".\"response_id\"\n\nRef: \"survey_responses_by_religion\".\"belief_id\" > \"religious_beliefs\".\"belief_id\"\n\nRef: \"survey_responses_by_state\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"survey_responses_by_state\".\"response_id\" > \"survey_responses\".\"response_id\"\n\nRef: \"survey_states\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"survey_states\".\"survey_id\" > \"surveys\".\"survey_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\neducation_levels: 2 rows\n  education_level: 'High School Diploma', 'Bachelor's Degree'\n  education_description: 'Completed high school education', 'Completed four-year college degree'\n  education_id: '0', '1'\n\nincome_brackets: 2 rows\n  income_description: 'Annual income between $30,000 and $50,000', 'Annual income between $50,000 and $70,000'\n  income_bracket: '$30,000 - $50,000', '$50,000 - $70,000'\n  income_id: '0', '1'\n\nreligious_beliefs: 2 rows\n  belief_description: 'Followers of Christianity', 'Non-believers in deities'\n  religious_belief: 'Christian', 'Atheist'\n  belief_id: '0', '1'\n\nrespondents: 2 rows\n  first_name: 'Alice', 'Bob'\n  last_name: 'Johnson', 'Williams'\n  ethnicity: 'Caucasian', 'African American'\n\nstates: 2 rows\n  state_name: 'Alabama', 'Alaska'\n  region: 'Southeast', 'West'\n  education_level_distribution: '{'High School Diploma': 30, 'Bachelor's Degree': 2', '{'High School Diploma': 25, 'Bachelor's Degree': 2'\n\nsurvey_questions: 2 rows\n  question_type: 'multiple choice', 'open-ended'\n  question_text: 'What is your view on human evolution?', 'What factors influence your views on human evoluti'\n  question_order: '1', '2'\n\nsurvey_questions_by_topic: 2 rows\n  topic_weight: '0.8', '0.6'\n  question_id: '1'\n  topic_id: '1'\n\nsurvey_responses: 2 rows\n  response_metadata: '{'time_taken': '120 seconds'}', '{'time_taken': '60 seconds'}'\n  response_text: 'Evolved; due to natural processes', 'Always existed in present form'\n  response_date: '2023-01-05', '2023-01-06'\n\nsurvey_responses_by_education: 2 rows\n  education_distribution: '{'High School Diploma': 0.02, 'Bachelor's Degree':', '{'High School Diploma': 0.03, 'Bachelor's Degree':'\n  response_percentage: '0.01', '0.02'\n  response_id: '0', '1'\n\nsurvey_responses_by_income: 2 rows\n  income_distribution: '{'$30,000 - $50,000': 0.02, '$50,000 - $70,000': 0', '{'$30,000 - $50,000': 0.03, '$50,000 - $70,000': 0'\n  response_percentage: '0.01', '0.02'\n  response_id: '0', '1'\n\nsurvey_responses_by_religion: 2 rows\n  belief_distribution: '{'Christian': 0.02, 'Atheist': 0.01, 'Muslim': 0.0', '{'Christian': 0.03, 'Atheist': 0.02, 'Muslim': 0.0'\n  response_percentage: '0.01', '0.02'\n  response_id: '1'\n\nsurvey_responses_by_state: 2 rows\n  response_distribution: '{'age_distribution': {'18-25': 0.02, '26-35': 0.03', '{'age_distribution': {'18-25': 0.03, '26-35': 0.04'\n  response_percentage: '0.01', '0.02'\n  state_id: '0'\n\nsurvey_states: 2 rows\n  demographic_summary: '{'age_distribution': {'18-25': 20, '26-35': 30, '3', '{'age_distribution': {'18-25': 25, '26-35': 35, '3'\n  sample_size: '11947', '8717'\n  response_rate: '0.85', '0.78'\n\nsurveys: 2 rows\n  survey_name: 'Public Opinion on Evolution', 'Educational Impact on Evolution Views'\n  description: 'Survey to gauge public opinion on human evolution', 'Survey to understand the impact of education on vi'\n  survey_status: 'active'\n\ntopics: 2 rows\n  topic_name: 'Evolution', 'Education Impact'\n  description: 'Questions related to human evolution', 'Questions related to the impact of education on vi'\n  topic_keywords: '['evolution', 'natural selection', 'species']', '['education', 'impact', 'views']'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'analyst'\n  user_status: 'active'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "education_levels": {
+        "rows": 2,
+        "sample_values": {
+          "education_id": [
+            "0",
+            "1"
+          ],
+          "education_level": [
+            "High School Diploma",
+            "Bachelor's Degree"
+          ],
+          "education_description": [
+            "Completed high school education",
+            "Completed four-year college degree"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "income_brackets": {
+        "rows": 2,
+        "sample_values": {
+          "income_id": [
+            "0",
+            "1"
+          ],
+          "income_bracket": [
+            "$30,000 - $50,000",
+            "$50,000 - $70,000"
+          ],
+          "income_description": [
+            "Annual income between $30,000 and $50,000",
+            "Annual income between $50,000 and $70,000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "religious_beliefs": {
+        "rows": 2,
+        "sample_values": {
+          "belief_id": [
+            "0",
+            "1"
+          ],
+          "religious_belief": [
+            "Christian",
+            "Atheist"
+          ],
+          "belief_description": [
+            "Followers of Christianity",
+            "Non-believers in deities"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "respondents": {
+        "rows": 2,
+        "sample_values": {
+          "respondent_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alice",
+            "Bob"
+          ],
+          "last_name": [
+            "Johnson",
+            "Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Springfield"
+          ],
+          "state": [
+            "0"
+          ],
+          "zip_code": [
+            "62704"
+          ],
+          "date_of_birth": [
+            "1980-05-10",
+            "1985-07-15"
+          ],
+          "gender": [
+            "Female",
+            "Male"
+          ],
+          "education_level": [
+            "1"
+          ],
+          "income_bracket": [
+            "1"
+          ],
+          "religious_belief": [
+            "0"
+          ],
+          "ethnicity": [
+            "Caucasian",
+            "African American"
+          ],
+          "occupation": [
+            "Teacher",
+            "Engineer"
+          ],
+          "household_size": [
+            "4",
+            "2"
+          ],
+          "children": [
+            "1",
+            "0"
+          ],
+          "political_affiliation": [
+            "Democratic",
+            "Republican"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "states": {
+        "rows": 2,
+        "sample_values": {
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "state_name": [
+            "Alabama",
+            "Alaska"
+          ],
+          "abbreviation": [
+            "AL",
+            "AK"
+          ],
+          "region": [
+            "Southeast",
+            "West"
+          ],
+          "population": [
+            "5000000",
+            "730000"
+          ],
+          "median_income": [
+            "45000",
+            "60000"
+          ],
+          "education_level_distribution": [
+            "{'High School Diploma': 30, 'Bachelor's Degree': 2",
+            "{'High School Diploma': 25, 'Bachelor's Degree': 2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_questions": {
+        "rows": 2,
+        "sample_values": {
+          "question_id": [
+            "0",
+            "1"
+          ],
+          "survey_id": [
+            "0"
+          ],
+          "question_text": [
+            "What is your view on human evolution?",
+            "What factors influence your views on human evoluti"
+          ],
+          "question_type": [
+            "multiple choice",
+            "open-ended"
+          ],
+          "question_order": [
+            "1",
+            "2"
+          ],
+          "question_options": [
+            "['Evolved; due to natural processes', 'Always exis"
+          ],
+          "question_required": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_questions_by_topic": {
+        "rows": 2,
+        "sample_values": {
+          "question_topic_id": [
+            "0",
+            "1"
+          ],
+          "question_id": [
+            "1"
+          ],
+          "topic_id": [
+            "1"
+          ],
+          "topic_weight": [
+            "0.8",
+            "0.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_responses": {
+        "rows": 2,
+        "sample_values": {
+          "response_id": [
+            "0",
+            "1"
+          ],
+          "question_id": [
+            "1"
+          ],
+          "respondent_id": [
+            "0",
+            "1"
+          ],
+          "response_text": [
+            "Evolved; due to natural processes",
+            "Always existed in present form"
+          ],
+          "response_date": [
+            "2023-01-05",
+            "2023-01-06"
+          ],
+          "response_score": [
+            "3",
+            "1"
+          ],
+          "response_metadata": [
+            "{'time_taken': '120 seconds'}",
+            "{'time_taken': '60 seconds'}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_responses_by_education": {
+        "rows": 2,
+        "sample_values": {
+          "response_education_id": [
+            "0",
+            "1"
+          ],
+          "response_id": [
+            "0",
+            "1"
+          ],
+          "education_id": [
+            "1"
+          ],
+          "response_percentage": [
+            "0.01",
+            "0.02"
+          ],
+          "education_distribution": [
+            "{'High School Diploma': 0.02, 'Bachelor's Degree':",
+            "{'High School Diploma': 0.03, 'Bachelor's Degree':"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_responses_by_income": {
+        "rows": 2,
+        "sample_values": {
+          "response_income_id": [
+            "0",
+            "1"
+          ],
+          "response_id": [
+            "0",
+            "1"
+          ],
+          "income_id": [
+            "1",
+            "0"
+          ],
+          "response_percentage": [
+            "0.01",
+            "0.02"
+          ],
+          "income_distribution": [
+            "{'$30,000 - $50,000': 0.02, '$50,000 - $70,000': 0",
+            "{'$30,000 - $50,000': 0.03, '$50,000 - $70,000': 0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_responses_by_religion": {
+        "rows": 2,
+        "sample_values": {
+          "response_religion_id": [
+            "0",
+            "1"
+          ],
+          "response_id": [
+            "1"
+          ],
+          "belief_id": [
+            "1"
+          ],
+          "response_percentage": [
+            "0.01",
+            "0.02"
+          ],
+          "belief_distribution": [
+            "{'Christian': 0.02, 'Atheist': 0.01, 'Muslim': 0.0",
+            "{'Christian': 0.03, 'Atheist': 0.02, 'Muslim': 0.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_responses_by_state": {
+        "rows": 2,
+        "sample_values": {
+          "response_state_id": [
+            "0",
+            "1"
+          ],
+          "response_id": [
+            "0"
+          ],
+          "state_id": [
+            "0"
+          ],
+          "response_percentage": [
+            "0.01",
+            "0.02"
+          ],
+          "response_distribution": [
+            "{'age_distribution': {'18-25': 0.02, '26-35': 0.03",
+            "{'age_distribution': {'18-25': 0.03, '26-35': 0.04"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survey_states": {
+        "rows": 2,
+        "sample_values": {
+          "survey_state_id": [
+            "0",
+            "1"
+          ],
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "sample_size": [
+            "11947",
+            "8717"
+          ],
+          "response_rate": [
+            "0.85",
+            "0.78"
+          ],
+          "demographic_summary": [
+            "{'age_distribution': {'18-25': 20, '26-35': 30, '3",
+            "{'age_distribution': {'18-25': 25, '26-35': 35, '3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "surveys": {
+        "rows": 2,
+        "sample_values": {
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "survey_name": [
+            "Public Opinion on Evolution",
+            "Educational Impact on Evolution Views"
+          ],
+          "start_date": [
+            "2023-01-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ],
+          "description": [
+            "Survey to gauge public opinion on human evolution",
+            "Survey to understand the impact of education on vi"
+          ],
+          "survey_version": [
+            "1"
+          ],
+          "survey_status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "topics": {
+        "rows": 2,
+        "sample_values": {
+          "topic_id": [
+            "0",
+            "1"
+          ],
+          "topic_name": [
+            "Evolution",
+            "Education Impact"
+          ],
+          "description": [
+            "Questions related to human evolution",
+            "Questions related to the impact of education on vi"
+          ],
+          "topic_keywords": [
+            "['evolution', 'natural selection', 'species']",
+            "['education', 'impact', 'views']"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "analyst"
+          ],
+          "user_status": [
+            "active"
+          ],
+          "last_login": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "permissions": [
+            "['view_survey', 'download_data', 'edit_data']",
+            "['view_survey', 'download_data']"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

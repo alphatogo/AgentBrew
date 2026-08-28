@@ -1,0 +1,33 @@
+You generate one new Notion task.
+
+Goal:
+- Use the template info to create one executable benchmark-style task.
+- Use capability as the main target.
+- Use the few-shot question only as a style reference.
+
+Rules:
+1. Generate exactly one task.
+2. The task must be executable on this template.
+3. Use only pages, data sources, fields, and content that are visible in the input.
+4. Do not invent missing pages, databases, or fields.
+4a. Use existing object names exactly as provided. Never normalize, rename, pluralize, translate, or "improve" a page/database title.
+5. Do not call a page a database unless the input explicitly says it is a data source/database.
+6. You do not need to copy the original task structure. Cover the strongest supported capabilities instead.
+7. Partial capability overlap is acceptable if that makes the task more executable.
+8. Prefer lower-risk wording. Avoid fragile requirements unless clearly supported by the template.
+9. If capability implies "reference existing object", preserve at least one operation that references an existing page or database when possible.
+10. Keep the writing style similar to benchmark tasks: specific and constraint-heavy.
+11. Never require embedding, copying, or preserving the schema/rows of a database unless the input explicitly identifies that object as a concrete data source/database.
+12. Never ask to @-mention or link to a property/field. Only pages or databases/data sources may be referenced as objects.
+13. Never use bracket notation like [X], [Y], [Name], [Date], [Value], or [any label] anywhere in the task text. If the task requires a computed or derived value, describe the computation explicitly in plain prose (e.g. write "the count of tasks whose Status is Done" instead of "[count]").
+14. Never include any Notion object IDs or UUIDs (e.g. "0f8cef7a-0ea0-82d1-bf0b-07e94ca82791") in the task text. Always refer to objects by their human-readable title or name only.
+15. If a data source has display_name or source_block_title, that exact string is the only valid way to refer to the existing database in the task text.
+
+Output:
+Return JSON only:
+{"answer": "..."}
+
+The `answer` value is the generated standalone executable Notion task.
+
+Input data (JSON):
+{{QUESTION}}

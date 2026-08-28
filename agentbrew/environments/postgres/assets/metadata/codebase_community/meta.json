@@ -1,0 +1,637 @@
+{
+  "db_id": "codebase_community",
+  "source": "bird_dev",
+  "tables": 8,
+  "total_rows": 740646,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#codebase_community",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"badges\" {\n  \"Id\" INTEGER [pk, not null]\n  \"UserId\" INTEGER\n  \"Name\" TEXT\n  \"Date\" TIMESTAMP\n}\n\nTable \"comments\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostId\" INTEGER\n  \"Score\" INTEGER\n  \"Text\" TEXT\n  \"CreationDate\" TIMESTAMP\n  \"UserId\" INTEGER\n  \"UserDisplayName\" TEXT\n}\n\nTable \"postHistory\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostHistoryTypeId\" INTEGER\n  \"PostId\" INTEGER\n  \"RevisionGUID\" TEXT\n  \"CreationDate\" TIMESTAMP\n  \"UserId\" INTEGER\n  \"Text\" TEXT\n  \"Comment\" TEXT\n  \"UserDisplayName\" TEXT\n}\n\nTable \"postLinks\" {\n  \"Id\" INTEGER [pk, not null]\n  \"CreationDate\" TIMESTAMP\n  \"PostId\" INTEGER\n  \"RelatedPostId\" INTEGER\n  \"LinkTypeId\" INTEGER\n}\n\nTable \"posts\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostTypeId\" INTEGER\n  \"AcceptedAnswerId\" INTEGER\n  \"CreaionDate\" TIMESTAMP\n  \"Score\" INTEGER\n  \"ViewCount\" INTEGER\n  \"Body\" TEXT\n  \"OwnerUserId\" INTEGER\n  \"LasActivityDate\" TIMESTAMP\n  \"Title\" TEXT\n  \"Tags\" TEXT\n  \"AnswerCount\" INTEGER\n  \"CommentCount\" INTEGER\n  \"FavoriteCount\" INTEGER\n  \"LastEditorUserId\" INTEGER\n  \"LastEditDate\" TIMESTAMP\n  \"CommunityOwnedDate\" TIMESTAMP\n  \"ParentId\" INTEGER\n  \"ClosedDate\" TIMESTAMP\n  \"OwnerDisplayName\" TEXT\n  \"LastEditorDisplayName\" TEXT\n}\n\nTable \"tags\" {\n  \"Id\" INTEGER [pk, not null]\n  \"TagName\" TEXT\n  \"Count\" INTEGER\n  \"ExcerptPostId\" INTEGER\n  \"WikiPostId\" INTEGER\n}\n\nTable \"users\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Reputation\" INTEGER\n  \"CreationDate\" TIMESTAMP\n  \"DisplayName\" TEXT\n  \"LastAccessDate\" TIMESTAMP\n  \"WebsiteUrl\" TEXT\n  \"Location\" TEXT\n  \"AboutMe\" TEXT\n  \"Views\" INTEGER\n  \"UpVotes\" INTEGER\n  \"DownVotes\" INTEGER\n  \"AccountId\" INTEGER\n  \"Age\" INTEGER\n  \"ProfileImageUrl\" TEXT\n}\n\nTable \"votes\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostId\" INTEGER\n  \"VoteTypeId\" INTEGER\n  \"CreationDate\" DATE\n  \"UserId\" INTEGER\n  \"BountyAmount\" INTEGER\n}\n\n\n\nRef: \"badges\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"comments\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"comments\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"postHistory\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"postHistory\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"postLinks\".\"RelatedPostId\" > \"posts\".\"Id\"\n\nRef: \"postLinks\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"posts\".\"ParentId\" > \"posts\".\"Id\"\n\nRef: \"posts\".\"OwnerUserId\" > \"users\".\"Id\"\n\nRef: \"posts\".\"LastEditorUserId\" > \"users\".\"Id\"\n\nRef: \"tags\".\"ExcerptPostId\" > \"posts\".\"Id\"\n\nRef: \"votes\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"votes\".\"PostId\" > \"posts\".\"Id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"badges\" {\n  \"Id\" INTEGER [pk, not null]\n  \"UserId\" INTEGER\n  \"Name\" TEXT\n  \"Date\" TIMESTAMP\n}\n\nTable \"comments\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostId\" INTEGER\n  \"Score\" INTEGER\n  \"Text\" TEXT\n  \"CreationDate\" TIMESTAMP\n  \"UserId\" INTEGER\n  \"UserDisplayName\" TEXT\n}\n\nTable \"postHistory\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostHistoryTypeId\" INTEGER\n  \"PostId\" INTEGER\n  \"RevisionGUID\" TEXT\n  \"CreationDate\" TIMESTAMP\n  \"UserId\" INTEGER\n  \"Text\" TEXT\n  \"Comment\" TEXT\n  \"UserDisplayName\" TEXT\n}\n\nTable \"postLinks\" {\n  \"Id\" INTEGER [pk, not null]\n  \"CreationDate\" TIMESTAMP\n  \"PostId\" INTEGER\n  \"RelatedPostId\" INTEGER\n  \"LinkTypeId\" INTEGER\n}\n\nTable \"posts\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostTypeId\" INTEGER\n  \"AcceptedAnswerId\" INTEGER\n  \"CreaionDate\" TIMESTAMP\n  \"Score\" INTEGER\n  \"ViewCount\" INTEGER\n  \"Body\" TEXT\n  \"OwnerUserId\" INTEGER\n  \"LasActivityDate\" TIMESTAMP\n  \"Title\" TEXT\n  \"Tags\" TEXT\n  \"AnswerCount\" INTEGER\n  \"CommentCount\" INTEGER\n  \"FavoriteCount\" INTEGER\n  \"LastEditorUserId\" INTEGER\n  \"LastEditDate\" TIMESTAMP\n  \"CommunityOwnedDate\" TIMESTAMP\n  \"ParentId\" INTEGER\n  \"ClosedDate\" TIMESTAMP\n  \"OwnerDisplayName\" TEXT\n  \"LastEditorDisplayName\" TEXT\n}\n\nTable \"tags\" {\n  \"Id\" INTEGER [pk, not null]\n  \"TagName\" TEXT\n  \"Count\" INTEGER\n  \"ExcerptPostId\" INTEGER\n  \"WikiPostId\" INTEGER\n}\n\nTable \"users\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Reputation\" INTEGER\n  \"CreationDate\" TIMESTAMP\n  \"DisplayName\" TEXT\n  \"LastAccessDate\" TIMESTAMP\n  \"WebsiteUrl\" TEXT\n  \"Location\" TEXT\n  \"AboutMe\" TEXT\n  \"Views\" INTEGER\n  \"UpVotes\" INTEGER\n  \"DownVotes\" INTEGER\n  \"AccountId\" INTEGER\n  \"Age\" INTEGER\n  \"ProfileImageUrl\" TEXT\n}\n\nTable \"votes\" {\n  \"Id\" INTEGER [pk, not null]\n  \"PostId\" INTEGER\n  \"VoteTypeId\" INTEGER\n  \"CreationDate\" DATE\n  \"UserId\" INTEGER\n  \"BountyAmount\" INTEGER\n}\n\nRef: \"badges\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"comments\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"comments\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"postHistory\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"postHistory\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"postLinks\".\"RelatedPostId\" > \"posts\".\"Id\"\n\nRef: \"postLinks\".\"PostId\" > \"posts\".\"Id\"\n\nRef: \"posts\".\"ParentId\" > \"posts\".\"Id\"\n\nRef: \"posts\".\"OwnerUserId\" > \"users\".\"Id\"\n\nRef: \"posts\".\"LastEditorUserId\" > \"users\".\"Id\"\n\nRef: \"tags\".\"ExcerptPostId\" > \"posts\".\"Id\"\n\nRef: \"votes\".\"UserId\" > \"users\".\"Id\"\n\nRef: \"votes\".\"PostId\" > \"posts\".\"Id\"\n\n## Table Stats & Sample Values\n\nbadges: 10000 rows\n  Name: 'Teacher', 'Student', 'Editor', ...\n  Date: '2010-07-19 19:39:07.0', '2010-07-19 19:39:08.0', '2010-07-19 19:39:09.0', ...\n  UserId: '5', '6', '8', ...\n\ncomments: 9713 rows\n  UserDisplayName: 'user28', 'Statprof', 'jjgibaja', ...\n  Text: 'Could be a poster child fo argumentative and subje', 'Yes, R is nice- but WHY is it 'valuable'.', 'Again- why? How would I convince my boss to use th', ...\n  Score: '5', '0', '11', ...\n\npostHistory: 9990 rows\n  UserDisplayName: 'user28', 'user209', 'Michael Bishop', ...\n  PostHistoryTypeId: '2', '1', '3', ...\n  Text: 'How should I elicit prior distributions from exper', 'Eliciting priors from experts', '<bayesian><prior><elicitation>', ...\n\npostLinks: 10000 rows\n  LinkTypeId: '1', '3'\n  CreationDate: '2010-07-21 14:47:33.0', '2010-07-23 16:30:41.0', '2010-07-26 20:12:15.0', ...\n  PostId: '395', '548', '375', ...\n\nposts: 42 rows\n  PostTypeId: '4', '5', '3'\n  Body: 'Use this tag for any *on-topic* question that (a)', 'Refers to a class of models developed to account f', 'Psychometrics has evolved as a subfield of psychol', ...\n  CreaionDate: '2010-09-03 07:25:03.0', '2010-09-06 18:24:38.0', '2010-09-12 20:54:55.0', ...\n\ntags: 1032 rows\n  TagName: 'bayesian', 'prior', 'elicitation', ...\n  Count: '1342', '168', '6', ...\n  ExcerptPostId: '20258', '62158', '67815', ...\n\nusers: 6998 rows\n  DisplayName: 'Vince', 'Pierre', 'Sharpie', ...\n  Location: 'Davis, CA', 'France', 'United States', ...\n  WebsiteUrl: 'http://bioinformatics.ucdavis.edu', 'http://plindenbaum.blogspot.com', 'http://www.sharpsteen.net', ...\n\nvotes: 10000 rows\n  VoteTypeId: '2', '5', '3', ...\n  CreationDate: '2010-07-19', '2010-07-20', '2010-07-21', ...\n  BountyAmount: '50', '25', '0', ...",
+    "stateUrl": "https://bird-bench.github.io/#codebase_community",
+    "tableStats": {
+      "badges": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "UserId": [
+            "5",
+            "6",
+            "8",
+            "23",
+            "36",
+            "37",
+            "50",
+            "55"
+          ],
+          "Name": [
+            "Teacher",
+            "Student",
+            "Editor",
+            "Organizer",
+            "Supporter",
+            "Critic",
+            "Autobiographer",
+            "Nice Answer"
+          ],
+          "Date": [
+            "2010-07-19 19:39:07.0",
+            "2010-07-19 19:39:08.0",
+            "2010-07-19 19:39:09.0",
+            "2010-07-19 19:39:10.0",
+            "2010-07-19 19:44:07.0",
+            "2010-07-19 19:49:06.0",
+            "2010-07-19 19:49:07.0",
+            "2010-07-19 19:54:06.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "comments": {
+        "rows": 9713,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9"
+          ],
+          "PostId": [
+            "3",
+            "5",
+            "9",
+            "14",
+            "18",
+            "16",
+            "23",
+            "43"
+          ],
+          "Score": [
+            "5",
+            "0",
+            "11",
+            "1",
+            "9",
+            "4",
+            "2",
+            "6"
+          ],
+          "Text": [
+            "Could be a poster child fo argumentative and subje",
+            "Yes, R is nice- but WHY is it 'valuable'.",
+            "Again- why? How would I convince my boss to use th",
+            "It's mature, well supported, and a standard within",
+            "Define \"valuable\"...",
+            "why ask the question here? All are community-wiki,",
+            "also the US census data http://www.census.gov/main",
+            "Andrew Gelman has a nice R library that links Bugs"
+          ],
+          "CreationDate": [
+            "2010-07-19 19:15:52.0",
+            "2010-07-19 19:16:14.0",
+            "2010-07-19 19:18:54.0",
+            "2010-07-19 19:19:56.0",
+            "2010-07-19 19:20:28.0",
+            "2010-07-19 19:22:27.0",
+            "2010-07-19 19:25:47.0",
+            "2010-07-19 19:30:24.0"
+          ],
+          "UserId": [
+            "13",
+            "37",
+            "5",
+            "23",
+            "36",
+            "78",
+            "54",
+            "24"
+          ],
+          "UserDisplayName": [
+            "user28",
+            "Statprof",
+            "jjgibaja",
+            "Pete",
+            "anonymous",
+            "user712",
+            "CLOCK",
+            "Jay"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "postHistory": {
+        "rows": 9990,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "PostHistoryTypeId": [
+            "2",
+            "1",
+            "3",
+            "16",
+            "6",
+            "5",
+            "4",
+            "10"
+          ],
+          "PostId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "RevisionGUID": [
+            "e58bf7fd-e60f-4c58-a6e4-dfc91cf98a69",
+            "18bf9150-f1cb-432d-b7b7-26d2f8e33581",
+            "6320bb0f-c792-4a8c-8083-89507c28d375",
+            "ccbe017d-d22c-4c0a-83b0-1d82a792a098",
+            "5631dbb1-2781-4924-b7bd-5a67c06c5e4e",
+            "18914b59-1d73-4c14-a8b6-25d429a1888e",
+            "ad3deff5-e4fd-446f-abce-77984eb5eeeb",
+            "8b903ea3-538d-4cbf-be6e-9aefc1ad0019"
+          ],
+          "CreationDate": [
+            "2010-07-19 19:12:12.0",
+            "2010-07-19 19:12:57.0",
+            "2010-07-19 19:13:28.0",
+            "2010-07-19 19:13:31.0",
+            "2010-07-19 19:14:43.0",
+            "2010-07-19 19:14:44.0",
+            "2010-07-19 19:15:59.0",
+            "2010-07-19 19:16:21.0"
+          ],
+          "UserId": [
+            "8",
+            "24",
+            "18",
+            "23",
+            "-1",
+            "5",
+            "38",
+            "37"
+          ],
+          "Text": [
+            "How should I elicit prior distributions from exper",
+            "Eliciting priors from experts",
+            "<bayesian><prior><elicitation>",
+            "In many different statistical methods there is an ",
+            "What is normality?",
+            "<normality>",
+            "What are the most valuable Statistical Analysis op",
+            "<open-source>"
+          ],
+          "Comment": [
+            "edited tags",
+            "add content from the comments;",
+            "Removed the word \"most\" and used \"some\"- most is w",
+            "added 310 characters in body",
+            "added 251 characters in body",
+            "added 115 characters in body; added 62 characters ",
+            "added 73 characters in body; added 4 characters in",
+            "added 187 characters in body"
+          ],
+          "UserDisplayName": [
+            "user28",
+            "user209",
+            "Michael Bishop",
+            "Guy Srinivasan",
+            "arik",
+            "Branson",
+            "Tzippy",
+            "sjcockell"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "postLinks": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "108",
+            "145",
+            "217",
+            "263",
+            "264",
+            "272",
+            "281",
+            "338"
+          ],
+          "CreationDate": [
+            "2010-07-21 14:47:33.0",
+            "2010-07-23 16:30:41.0",
+            "2010-07-26 20:12:15.0",
+            "2010-07-27 16:00:22.0",
+            "2010-07-27 17:19:27.0",
+            "2010-07-27 23:22:51.0",
+            "2010-07-28 19:36:09.0",
+            "2010-07-29 19:01:22.0"
+          ],
+          "PostId": [
+            "395",
+            "548",
+            "375",
+            "769",
+            "790",
+            "715",
+            "834",
+            "614"
+          ],
+          "RelatedPostId": [
+            "173",
+            "539",
+            "30",
+            "31",
+            "6",
+            "298",
+            "7",
+            "577"
+          ],
+          "LinkTypeId": [
+            "1",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "posts": {
+        "rows": 42,
+        "sample_values": {
+          "Id": [
+            "2331",
+            "2417",
+            "2601",
+            "3012",
+            "3013",
+            "3015",
+            "3017",
+            "3018"
+          ],
+          "PostTypeId": [
+            "4",
+            "5",
+            "3"
+          ],
+          "CreaionDate": [
+            "2010-09-03 07:25:03.0",
+            "2010-09-06 18:24:38.0",
+            "2010-09-12 20:54:55.0",
+            "2010-09-23 10:59:13.0",
+            "2010-09-23 11:06:19.0",
+            "2010-09-23 11:14:30.0",
+            "2010-09-23 11:28:36.0",
+            "2010-09-30 08:09:08.0"
+          ],
+          "Score": [
+            "0"
+          ],
+          "Body": [
+            "Use this tag for any *on-topic* question that (a) ",
+            "Refers to a class of models developed to account f",
+            "Psychometrics has evolved as a subfield of psychol",
+            "Model selection is a problem of judging which mode",
+            "Partitioning data into subsets of objects accordin",
+            "Time series are data observed over time (either in",
+            "Hypothesis testing assesses whether data support a",
+            "Forecasting involves estimating the value or distr"
+          ],
+          "OwnerUserId": [
+            "183",
+            "88",
+            "930",
+            "159",
+            "449",
+            "2116",
+            "919",
+            "2660"
+          ],
+          "LasActivityDate": [
+            "2014-07-15 19:01:01.0",
+            "2013-09-03 09:52:39.0",
+            "2010-09-12 20:54:55.0",
+            "2010-09-23 10:59:13.0",
+            "2011-06-15 03:58:08.0",
+            "2013-03-07 18:29:50.0",
+            "2011-03-11 19:39:55.0",
+            "2010-09-23 11:28:36.0"
+          ],
+          "CommentCount": [
+            "0"
+          ],
+          "LastEditorUserId": [
+            "196",
+            "27581",
+            "930",
+            "88",
+            "919",
+            "5739",
+            "449",
+            "2116"
+          ],
+          "LastEditDate": [
+            "2014-07-15 19:01:01.0",
+            "2013-09-03 09:52:39.0",
+            "2010-09-12 20:54:55.0",
+            "2010-09-23 10:59:13.0",
+            "2011-06-15 03:58:08.0",
+            "2013-03-07 18:29:50.0",
+            "2011-03-11 19:39:55.0",
+            "2010-09-23 11:28:36.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "tags": {
+        "rows": 1032,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "9",
+            "10"
+          ],
+          "TagName": [
+            "bayesian",
+            "prior",
+            "elicitation",
+            "normality",
+            "open-source",
+            "distributions",
+            "machine-learning",
+            "dataset"
+          ],
+          "Count": [
+            "1342",
+            "168",
+            "6",
+            "191",
+            "13",
+            "1880",
+            "2564",
+            "514"
+          ],
+          "ExcerptPostId": [
+            "20258",
+            "62158",
+            "67815",
+            "8046",
+            "9066",
+            "20490",
+            "28276",
+            "69287"
+          ],
+          "WikiPostId": [
+            "20257",
+            "62157",
+            "67814",
+            "8045",
+            "9065",
+            "20489",
+            "28275",
+            "69286"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 6998,
+        "sample_values": {
+          "Id": [
+            "7",
+            "10",
+            "13",
+            "15",
+            "16",
+            "17",
+            "21",
+            "24"
+          ],
+          "Reputation": [
+            "429",
+            "121",
+            "817",
+            "11",
+            "101",
+            "345",
+            "344",
+            "3150"
+          ],
+          "CreationDate": [
+            "2010-07-19 19:04:37.0",
+            "2010-07-19 19:05:40.0",
+            "2010-07-19 19:06:49.0",
+            "2010-07-19 19:07:32.0",
+            "2010-07-19 19:08:13.0",
+            "2010-07-19 19:08:28.0",
+            "2010-07-19 19:08:56.0",
+            "2010-07-19 19:09:32.0"
+          ],
+          "DisplayName": [
+            "Vince",
+            "Pierre",
+            "Sharpie",
+            "hannes.koller",
+            "slashnick",
+            "Random",
+            "Waleed Al-Balooshi",
+            "A Lion"
+          ],
+          "LastAccessDate": [
+            "2014-09-10 21:14:12.0",
+            "2014-07-28 18:15:02.0",
+            "2014-08-14 17:28:14.0",
+            "2010-08-24 14:23:18.0",
+            "2010-08-19 20:40:59.0",
+            "2010-09-10 07:34:36.0",
+            "2011-09-26 02:28:45.0",
+            "2011-12-06 04:21:56.0"
+          ],
+          "WebsiteUrl": [
+            "http://bioinformatics.ucdavis.edu",
+            "http://plindenbaum.blogspot.com",
+            "http://www.sharpsteen.net",
+            "http://soma.denkt.org",
+            "http://cerebralmastication.com",
+            "http://www.contrib.andrew.cmu.edu/~amukherj/",
+            "http://nickcanzoneri.com",
+            "http://had.co.nz"
+          ],
+          "Location": [
+            "Davis, CA",
+            "France",
+            "United States",
+            "Vienna, Austria",
+            "London, United Kingdom",
+            "Michigan",
+            "Chicago, IL",
+            "Pittsburgh, PA"
+          ],
+          "AboutMe": [
+            "I'm a recent graduate of UC Davis in Economics, Po",
+            "Bioinformatician\\\\\\\\nVirology\\\\\\\\nGenetics\\\\\\\\nBio",
+            "Undergraduate studying Environmental Engineering a",
+            "I'm a data guy not a programmer. But sometimes I h",
+            "I'm an assistant professor of Statistics at Rice U",
+            "Just chilling. <a href=\"http://1.618034.com\" rel=\"",
+            "Maths Teacher, Computer Programmer, Web Designer.",
+            "GIS, Transportation, Civil Engineer in New Brunswi"
+          ],
+          "Views": [
+            "56",
+            "20",
+            "178",
+            "8",
+            "4",
+            "14",
+            "6",
+            "48"
+          ],
+          "UpVotes": [
+            "20",
+            "2",
+            "44",
+            "0",
+            "7",
+            "13",
+            "36",
+            "138"
+          ],
+          "DownVotes": [
+            "0",
+            "1",
+            "7",
+            "15",
+            "4",
+            "3",
+            "10",
+            "5"
+          ],
+          "AccountId": [
+            "49514",
+            "23234",
+            "46029",
+            "189902",
+            "10996",
+            "509454",
+            "40640",
+            "85249"
+          ],
+          "Age": [
+            "28",
+            "44",
+            "35",
+            "31",
+            "33",
+            "42",
+            "26",
+            "40"
+          ],
+          "ProfileImageUrl": [
+            "http://i.stack.imgur.com/wSfuj.png",
+            "https://www.gravatar.com/avatar/?s=128&d=identicon",
+            "http://i.stack.imgur.com/BF0y7.jpg",
+            "http://i.stack.imgur.com/GTHqI.jpg",
+            "http://i.stack.imgur.com/FluI8.jpg",
+            "http://i.stack.imgur.com/IPbxC.jpg",
+            "http://i.stack.imgur.com/1uoPg.jpg",
+            "http://i.stack.imgur.com/bmLJq.png"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "votes": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "PostId": [
+            "3",
+            "2",
+            "5",
+            "4",
+            "6",
+            "10",
+            "1",
+            "9"
+          ],
+          "VoteTypeId": [
+            "2",
+            "5",
+            "3",
+            "1",
+            "8",
+            "11",
+            "9"
+          ],
+          "CreationDate": [
+            "2010-07-19",
+            "2010-07-20",
+            "2010-07-21",
+            "2010-07-22",
+            "2010-07-23",
+            "2010-07-24",
+            "2010-07-25",
+            "2010-07-26"
+          ],
+          "UserId": [
+            "58",
+            "6",
+            "66",
+            "71",
+            "22",
+            "94",
+            "87",
+            "102"
+          ],
+          "BountyAmount": [
+            "50",
+            "25",
+            "0",
+            "100"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

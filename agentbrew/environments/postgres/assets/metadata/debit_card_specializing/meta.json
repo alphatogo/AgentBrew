@@ -1,0 +1,235 @@
+{
+  "db_id": "debit_card_specializing",
+  "source": "bird_dev",
+  "tables": 5,
+  "total_rows": 423050,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#debit_card_specializing",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"customers\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"Segment\" TEXT\n  \"Currency\" TEXT\n}\n\nTable \"gasstations\" {\n  \"GasStationID\" INTEGER [pk, not null]\n  \"ChainID\" INTEGER\n  \"Country\" TEXT\n  \"Segment\" TEXT\n}\n\nTable \"products\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"Description\" TEXT\n}\n\nTable \"transactions_1k\" {\n  \"TransactionID\" INTEGER [pk]\n  \"Date\" DATE\n  \"Time\" TEXT\n  \"CustomerID\" INTEGER\n  \"CardID\" INTEGER\n  \"GasStationID\" INTEGER\n  \"ProductID\" INTEGER\n  \"Amount\" INTEGER\n  \"Price\" REAL\n}\n\nTable \"yearmonth\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"Date\" TEXT [pk, not null]\n  \"Consumption\" REAL\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"customers\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"Segment\" TEXT\n  \"Currency\" TEXT\n}\n\nTable \"gasstations\" {\n  \"GasStationID\" INTEGER [pk, not null]\n  \"ChainID\" INTEGER\n  \"Country\" TEXT\n  \"Segment\" TEXT\n}\n\nTable \"products\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"Description\" TEXT\n}\n\nTable \"transactions_1k\" {\n  \"TransactionID\" INTEGER [pk]\n  \"Date\" DATE\n  \"Time\" TEXT\n  \"CustomerID\" INTEGER\n  \"CardID\" INTEGER\n  \"GasStationID\" INTEGER\n  \"ProductID\" INTEGER\n  \"Amount\" INTEGER\n  \"Price\" REAL\n}\n\nTable \"yearmonth\" {\n  \"CustomerID\" INTEGER [pk, not null]\n  \"Date\" TEXT [pk, not null]\n  \"Consumption\" REAL\n}\n\n## Table Stats & Sample Values\n\ncustomers: 10000 rows\n  Segment: 'SME', 'LAM', 'KAM'\n  Currency: 'EUR', 'CZK'\n  CustomerID: '3', '5', '6', ...\n\ngasstations: 5716 rows\n  Country: 'CZE', 'SVK'\n  Segment: 'Value for money', 'Premium', 'Other', ...\n  ChainID: '13', '6', '23', ...\n\nproducts: 591 rows\n  Description: 'Rucní zadání', 'Nafta', 'Special', ...\n  ProductID: '1', '2', '3', ...\n\ntransactions_1k: 1000 rows\n  Time: '09:41:00', '10:03:00', '13:53:00', ...\n  Date: '2012-08-24', '2012-08-23', '2012-08-25', ...\n  Amount: '28', '18', '1', ...\n\nyearmonth: 10000 rows\n  Consumption: '528.3', '1598.28', '1931.36', ...\n  Date: '201207', '201302', '201303', ...\n  CustomerID: '5', '6', '7', ...",
+    "stateUrl": "https://bird-bench.github.io/#debit_card_specializing",
+    "tableStats": {
+      "customers": {
+        "rows": 10000,
+        "sample_values": {
+          "CustomerID": [
+            "3",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "20",
+            "35"
+          ],
+          "Segment": [
+            "SME",
+            "LAM",
+            "KAM"
+          ],
+          "Currency": [
+            "EUR",
+            "CZK"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gasstations": {
+        "rows": 5716,
+        "sample_values": {
+          "GasStationID": [
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51"
+          ],
+          "ChainID": [
+            "13",
+            "6",
+            "23",
+            "33",
+            "4",
+            "10",
+            "1",
+            "3"
+          ],
+          "Country": [
+            "CZE",
+            "SVK"
+          ],
+          "Segment": [
+            "Value for money",
+            "Premium",
+            "Other",
+            "Noname",
+            "Discount"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 591,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Description": [
+            "Rucní zadání",
+            "Nafta",
+            "Special",
+            "Super",
+            "Natural",
+            "Mix",
+            "Oleje,tuky",
+            "Natural +"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transactions_1k": {
+        "rows": 1000,
+        "sample_values": {
+          "TransactionID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Date": [
+            "2012-08-24",
+            "2012-08-23",
+            "2012-08-25",
+            "2012-08-26"
+          ],
+          "Time": [
+            "09:41:00",
+            "10:03:00",
+            "13:53:00",
+            "08:49:00",
+            "08:53:00",
+            "14:20:00",
+            "14:01:00",
+            "14:38:00"
+          ],
+          "CustomerID": [
+            "31543",
+            "46707",
+            "7654",
+            "17373",
+            "7881",
+            "17241",
+            "17320",
+            "19111"
+          ],
+          "CardID": [
+            "486621",
+            "550134",
+            "684220",
+            "536109",
+            "99745",
+            "571420",
+            "729387",
+            "726672"
+          ],
+          "GasStationID": [
+            "3704",
+            "656",
+            "741",
+            "1152",
+            "636",
+            "3869",
+            "967",
+            "662"
+          ],
+          "ProductID": [
+            "2",
+            "23",
+            "5",
+            "11",
+            "7",
+            "9",
+            "22",
+            "15"
+          ],
+          "Amount": [
+            "28",
+            "18",
+            "1",
+            "5",
+            "4",
+            "0",
+            "34",
+            "21"
+          ],
+          "Price": [
+            "672.64",
+            "430.72",
+            "121.99",
+            "120.74",
+            "645.05",
+            "96.84",
+            "81.94",
+            "21.75"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "yearmonth": {
+        "rows": 10000,
+        "sample_values": {
+          "CustomerID": [
+            "5",
+            "6",
+            "7",
+            "9",
+            "20",
+            "35",
+            "37",
+            "38"
+          ],
+          "Date": [
+            "201207",
+            "201302",
+            "201303",
+            "201304",
+            "201203",
+            "201205",
+            "201305",
+            "201306"
+          ],
+          "Consumption": [
+            "528.3",
+            "1598.28",
+            "1931.36",
+            "1497.14",
+            "51.06",
+            "49.34",
+            "43.67",
+            "294.38"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

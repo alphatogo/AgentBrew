@@ -1,0 +1,548 @@
+{
+  "db_id": "chicago_crime",
+  "source": "bird",
+  "tables": 7,
+  "total_rows": 268824,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#chicago_crime",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Community_Area\" {\n  \"community_area_no\" INTEGER [pk]\n  \"community_area_name\" TEXT\n  \"side\" TEXT\n  \"population\" TEXT\n}\n\nTable \"Crime\" {\n  \"report_no\" INTEGER [pk]\n  \"case_number\" TEXT\n  \"date\" TEXT\n  \"block\" TEXT\n  \"iucr_no\" TEXT\n  \"location_description\" TEXT\n  \"arrest\" TEXT\n  \"domestic\" TEXT\n  \"beat\" INTEGER\n  \"district_no\" INTEGER\n  \"ward_no\" INTEGER\n  \"community_area_no\" INTEGER\n  \"fbi_code_no\" TEXT\n  \"latitude\" TEXT\n  \"longitude\" TEXT\n}\n\nTable \"District\" {\n  \"district_no\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"address\" TEXT\n  \"zip_code\" INTEGER\n  \"commander\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"tty\" TEXT\n  \"twitter\" TEXT\n}\n\nTable \"FBI_Code\" {\n  \"fbi_code_no\" TEXT [pk]\n  \"title\" TEXT\n  \"description\" TEXT\n  \"crime_against\" TEXT\n}\n\nTable \"IUCR\" {\n  \"iucr_no\" TEXT [pk]\n  \"primary_description\" TEXT\n  \"secondary_description\" TEXT\n  \"index_code\" TEXT\n}\n\nTable \"Neighborhood\" {\n  \"neighborhood_name\" TEXT [pk]\n  \"community_area_no\" INTEGER\n}\n\nTable \"Ward\" {\n  \"ward_no\" INTEGER [pk]\n  \"alderman_first_name\" TEXT\n  \"alderman_last_name\" TEXT\n  \"alderman_name_suffix\" TEXT\n  \"ward_office_address\" TEXT\n  \"ward_office_zip\" TEXT\n  \"ward_email\" TEXT\n  \"ward_office_phone\" TEXT\n  \"ward_office_fax\" TEXT\n  \"city_hall_office_room\" INTEGER\n  \"city_hall_office_phone\" TEXT\n  \"city_hall_office_fax\" TEXT\n  \"Population\" INTEGER\n}\n\n\n\nRef: \"Neighborhood\".\"community_area_no\" > \"Community_Area\".\"community_area_no\"\n\nRef: \"Crime\".\"fbi_code_no\" > \"FBI_Code\".\"fbi_code_no\"\n\nRef: \"Crime\".\"community_area_no\" > \"Community_Area\".\"community_area_no\"\n\nRef: \"Crime\".\"district_no\" > \"District\".\"district_no\"\n\nRef: \"Crime\".\"iucr_no\" > \"IUCR\".\"iucr_no\"\n\nRef: \"Crime\".\"ward_no\" > \"Ward\".\"ward_no\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Community_Area\" {\n  \"community_area_no\" INTEGER [pk]\n  \"community_area_name\" TEXT\n  \"side\" TEXT\n  \"population\" TEXT\n}\n\nTable \"Crime\" {\n  \"report_no\" INTEGER [pk]\n  \"case_number\" TEXT\n  \"date\" TEXT\n  \"block\" TEXT\n  \"iucr_no\" TEXT\n  \"location_description\" TEXT\n  \"arrest\" TEXT\n  \"domestic\" TEXT\n  \"beat\" INTEGER\n  \"district_no\" INTEGER\n  \"ward_no\" INTEGER\n  \"community_area_no\" INTEGER\n  \"fbi_code_no\" TEXT\n  \"latitude\" TEXT\n  \"longitude\" TEXT\n}\n\nTable \"District\" {\n  \"district_no\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"address\" TEXT\n  \"zip_code\" INTEGER\n  \"commander\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"fax\" TEXT\n  \"tty\" TEXT\n  \"twitter\" TEXT\n}\n\nTable \"FBI_Code\" {\n  \"fbi_code_no\" TEXT [pk]\n  \"title\" TEXT\n  \"description\" TEXT\n  \"crime_against\" TEXT\n}\n\nTable \"IUCR\" {\n  \"iucr_no\" TEXT [pk]\n  \"primary_description\" TEXT\n  \"secondary_description\" TEXT\n  \"index_code\" TEXT\n}\n\nTable \"Neighborhood\" {\n  \"neighborhood_name\" TEXT [pk]\n  \"community_area_no\" INTEGER\n}\n\nTable \"Ward\" {\n  \"ward_no\" INTEGER [pk]\n  \"alderman_first_name\" TEXT\n  \"alderman_last_name\" TEXT\n  \"alderman_name_suffix\" TEXT\n  \"ward_office_address\" TEXT\n  \"ward_office_zip\" TEXT\n  \"ward_email\" TEXT\n  \"ward_office_phone\" TEXT\n  \"ward_office_fax\" TEXT\n  \"city_hall_office_room\" INTEGER\n  \"city_hall_office_phone\" TEXT\n  \"city_hall_office_fax\" TEXT\n  \"Population\" INTEGER\n}\n\nRef: \"Neighborhood\".\"community_area_no\" > \"Community_Area\".\"community_area_no\"\n\nRef: \"Crime\".\"fbi_code_no\" > \"FBI_Code\".\"fbi_code_no\"\n\nRef: \"Crime\".\"community_area_no\" > \"Community_Area\".\"community_area_no\"\n\nRef: \"Crime\".\"district_no\" > \"District\".\"district_no\"\n\nRef: \"Crime\".\"iucr_no\" > \"IUCR\".\"iucr_no\"\n\nRef: \"Crime\".\"ward_no\" > \"Ward\".\"ward_no\"\n\n## Table Stats & Sample Values\n\nCommunity_Area: 77 rows\n  community_area_name: 'Rogers Park', 'West Ridge', 'Uptown', ...\n  side: 'Far North', 'North', 'Central', ...\n  population: '54,991', '71,942', '56,362', ...\n\nCrime: 10000 rows\n  location_description: 'AUTO', 'APARTMENT', 'ALLEY', ...\n  case_number: 'JB100159', 'JB100522', 'JB100839', ...\n  block: '039XX W CORNELIA AVE', '026XX N HAMPDEN CT', '047XX S PRINCETON AVE', ...\n\nDistrict: 22 rows\n  district_name: 'Central', 'Wentworth', 'Grand Crossing', ...\n  address: '1718 South State Street', '5101 South Wentworh Avenue', '7040 South Cottage Grove Ave', ...\n  commander: 'Jake M. Alderden', 'Joshua Wallace', 'Eve T. Quarterman', ...\n\nFBI_Code: 26 rows\n  title: 'Homicide 1st & 2nd Degree', 'Involuntary Manslaughter', 'Criminal Sexual Assault', ...\n  description: 'The killing of one human being by another.', 'The killing of another person through negligence.', 'Any sexual act directed against another person, fo', ...\n  crime_against: 'Persons', 'Property', 'Society', ...\n\nIUCR: 401 rows\n  primary_description: 'HOMICIDE', 'CRIM SEXUAL ASSAULT', 'BATTERY', ...\n  secondary_description: 'FIRST DEGREE MURDER', 'SECOND DEGREE MURDER', 'INVOLUNTARY MANSLAUGHTER', ...\n  index_code: 'I', 'N'\n\nNeighborhood: 246 rows\n  neighborhood_name: 'Albany Park', 'Altgeld Gardens', 'Andersonville', ...\n  community_area_no: '14', '54', '77', ...\n\nWard: 50 rows\n  alderman_first_name: 'Daniel', 'Brian', 'Pat', ...\n  alderman_last_name: 'La Spata', 'Hopkins', 'Dowell', ...\n  city_hall_office_phone: '312.744.6836', '312.744.8734', '312.744.2690', ...",
+    "stateUrl": "https://bird-bench.github.io/#chicago_crime",
+    "tableStats": {
+      "Community_Area": {
+        "rows": 77,
+        "sample_values": {
+          "community_area_no": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "community_area_name": [
+            "Rogers Park",
+            "West Ridge",
+            "Uptown",
+            "Lincoln Square",
+            "North Center",
+            "Lake View",
+            "Lincoln Park",
+            "Near North Side"
+          ],
+          "side": [
+            "Far North",
+            "North",
+            "Central",
+            "Northwest",
+            "West",
+            "South",
+            "Far Southeast",
+            "Southwest"
+          ],
+          "population": [
+            "54,991",
+            "71,942",
+            "56,362",
+            "39,493",
+            "31,867",
+            "94,368",
+            "64,116",
+            "80,484"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Crime": {
+        "rows": 10000,
+        "sample_values": {
+          "report_no": [
+            "23757",
+            "23758",
+            "23759",
+            "23761",
+            "23762",
+            "23763",
+            "23765",
+            "23766"
+          ],
+          "case_number": [
+            "JB100159",
+            "JB100522",
+            "JB100839",
+            "JB101043",
+            "JB105277",
+            "JB105765",
+            "JB106545",
+            "JB107582"
+          ],
+          "date": [
+            "1/1/2018 2:46",
+            "1/1/2018 11:33",
+            "1/1/2018 18:27",
+            "1/1/2018 22:40",
+            "1/6/2018 12:54",
+            "1/5/2018 18:50",
+            "1/6/2018 13:20",
+            "1/7/2018 13:35"
+          ],
+          "block": [
+            "039XX W CORNELIA AVE",
+            "026XX N HAMPDEN CT",
+            "047XX S PRINCETON AVE",
+            "081XX S STONY ISLAND AVE",
+            "015XX E 62ND ST",
+            "053XX W LAKE ST",
+            "072XX S MAY ST",
+            "004XX N LARAMIE AVE"
+          ],
+          "iucr_no": [
+            "110",
+            "143B",
+            "1310",
+            "460",
+            "2022",
+            "143A",
+            "1477",
+            "1320"
+          ],
+          "location_description": [
+            "AUTO",
+            "APARTMENT",
+            "ALLEY",
+            "STREET",
+            "PARKING LOT",
+            "GAS STATION",
+            "HOUSE",
+            "CTA PROPERTY"
+          ],
+          "arrest": [
+            "FALSE",
+            "TRUE"
+          ],
+          "domestic": [
+            "FALSE",
+            "TRUE"
+          ],
+          "beat": [
+            "1732",
+            "1935",
+            "935",
+            "411",
+            "314",
+            "1523",
+            "733",
+            "1532"
+          ],
+          "district_no": [
+            "17",
+            "19",
+            "9",
+            "4",
+            "3",
+            "15",
+            "7",
+            "11"
+          ],
+          "ward_no": [
+            "30",
+            "43",
+            "3",
+            "8",
+            "5",
+            "37",
+            "6",
+            "28"
+          ],
+          "community_area_no": [
+            "21",
+            "7",
+            "37",
+            "45",
+            "42",
+            "25",
+            "68",
+            "23"
+          ],
+          "fbi_code_no": [
+            "01A",
+            "15",
+            "14",
+            "08B",
+            "18",
+            "04B",
+            "08A",
+            "26"
+          ],
+          "latitude": [
+            "41.94456125",
+            "41.92972657",
+            "41.808168",
+            "41.74698404",
+            "41.78289015",
+            "41.88732204",
+            "41.76226341",
+            "41.88832617"
+          ],
+          "longitude": [
+            "-87.72668181",
+            "-87.64092074",
+            "-87.63333646",
+            "-87.5854287",
+            "-87.58877343",
+            "-87.75868972",
+            "-87.65282951",
+            "-87.75535704"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "District": {
+        "rows": 22,
+        "sample_values": {
+          "district_no": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "district_name": [
+            "Central",
+            "Wentworth",
+            "Grand Crossing",
+            "South Chicago",
+            "Calumet",
+            "Gresham",
+            "Englewood",
+            "Chicago Lawn"
+          ],
+          "address": [
+            "1718 South State Street",
+            "5101 South Wentworh Avenue",
+            "7040 South Cottage Grove Ave",
+            "2255 East 103rd St",
+            "727 East 111th St",
+            "7808 South Halsted Street",
+            "1438 W. 63rd Street",
+            "3420 West 63rd St"
+          ],
+          "zip_code": [
+            "60616",
+            "60609",
+            "60637",
+            "60617",
+            "60628",
+            "60620",
+            "60636",
+            "60629"
+          ],
+          "commander": [
+            "Jake M. Alderden",
+            "Joshua Wallace",
+            "Eve T. Quarterman",
+            "Robert A. Rubio",
+            "Glenn White",
+            "Rahman S. Muhammad",
+            "Larry Snelling",
+            "Brian P. McDermott"
+          ],
+          "email": [
+            "CAPS001District@chicagopolice.org",
+            "CAPS002District@chicagopolice.org",
+            "CAPS003District@chicagopolice.org",
+            "caps.004district@chicagopolice.org",
+            "CAPS005District@chicagopolice.org",
+            "CAPS006District@chicagopolice.org",
+            "CAPS007District@chicagopolice.org",
+            "CAPS008District@chicagopolice.org"
+          ],
+          "phone": [
+            "312-745-4290",
+            "312-747-8366",
+            "312-747-8201",
+            "312-747-8205",
+            "312-747-8210",
+            "312-745-3610",
+            "312-747-8220",
+            "312-747-8730"
+          ],
+          "fax": [
+            "312-745-3694",
+            "312-747-5396",
+            "312-747-5479",
+            "312-747-4559",
+            "312-747-5935",
+            "312-745-3649",
+            "312-747-6558",
+            "312-747-8545"
+          ],
+          "tty": [
+            "312-745-3693",
+            "312-747-6656",
+            "312-747-9168",
+            "312-747-9169",
+            "312-747-9170",
+            "312-745-3639",
+            "312-747-6652",
+            "312-747-8116"
+          ],
+          "twitter": [
+            "ChicagoCAPS01",
+            "ChicagoCAPS02",
+            "ChicagoCAPS03",
+            "ChicagoCAPS04",
+            "ChicagoCAPS05",
+            "ChicagoCAPS06",
+            "ChicagoCAPS07",
+            "ChicagoCAPS08"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "FBI_Code": {
+        "rows": 26,
+        "sample_values": {
+          "fbi_code_no": [
+            "01A",
+            "01B",
+            "2",
+            "3",
+            "04A",
+            "04B",
+            "5",
+            "13"
+          ],
+          "title": [
+            "Homicide 1st & 2nd Degree",
+            "Involuntary Manslaughter",
+            "Criminal Sexual Assault",
+            "Robbery",
+            "Aggravated Assault",
+            "Aggravated Battery",
+            "Burglary",
+            "Stolen Property"
+          ],
+          "description": [
+            "The killing of one human being by another.",
+            "The killing of another person through negligence.",
+            "Any sexual act directed against another person, fo",
+            "The taking or attempting to take anything of value",
+            "An unlawful attack by one person upon another wher",
+            "The unlawful entry into a building or other struct",
+            "Receiving, buying, selling, possessing, concealing",
+            "To willfully or maliciously destroy, damage, defac"
+          ],
+          "crime_against": [
+            "Persons",
+            "Property",
+            "Society",
+            "Persons and Society"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "IUCR": {
+        "rows": 401,
+        "sample_values": {
+          "iucr_no": [
+            "110",
+            "130",
+            "141",
+            "142",
+            "261",
+            "262",
+            "263",
+            "264"
+          ],
+          "primary_description": [
+            "HOMICIDE",
+            "CRIM SEXUAL ASSAULT",
+            "BATTERY",
+            "PUBLIC PEACE VIOLATION",
+            "RITUALISM",
+            "ROBBERY",
+            "DECEPTIVE PRACTICE",
+            "GAMBLING"
+          ],
+          "secondary_description": [
+            "FIRST DEGREE MURDER",
+            "SECOND DEGREE MURDER",
+            "INVOLUNTARY MANSLAUGHTER",
+            "RECKLESS HOMICIDE",
+            "AGGRAVATED: HANDGUN",
+            "AGGRAVATED: OTHER FIREARM",
+            "AGGRAVATED: KNIFE/CUT INSTR",
+            "AGGRAVATED: OTHER DANG WEAPON"
+          ],
+          "index_code": [
+            "I",
+            "N"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Neighborhood": {
+        "rows": 246,
+        "sample_values": {
+          "neighborhood_name": [
+            "Albany Park",
+            "Altgeld Gardens",
+            "Andersonville",
+            "Archer Heights",
+            "Armour Square",
+            "Ashburn",
+            "Ashburn Estates",
+            "Auburn Gresham"
+          ],
+          "community_area_no": [
+            "14",
+            "54",
+            "77",
+            "57",
+            "34",
+            "70",
+            "71",
+            "45"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ward": {
+        "rows": 50,
+        "sample_values": {
+          "ward_no": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "alderman_first_name": [
+            "Daniel",
+            "Brian",
+            "Pat",
+            "Sophia",
+            "Leslie",
+            "Roderick",
+            "Gregory",
+            "Michelle"
+          ],
+          "alderman_last_name": [
+            "La Spata",
+            "Hopkins",
+            "Dowell",
+            "King",
+            "Hairston",
+            "Sawyer",
+            "Mitchell",
+            "Harris"
+          ],
+          "alderman_name_suffix": [
+            "Jr."
+          ],
+          "ward_office_address": [
+            "1958 N. Milwaukee Ave.",
+            "1400 N. Ashland",
+            "5046 S. State St.",
+            "435 E. 35th Street",
+            "2325 E. 71st Street",
+            "700 E. 79th Street",
+            "2249 East 95th St.",
+            "8539 S. Cottage Grove Ave."
+          ],
+          "ward_office_zip": [
+            "60647",
+            "60622",
+            "60609",
+            "60616",
+            "60649",
+            "60619",
+            "60617",
+            "60628"
+          ],
+          "ward_email": [
+            "info@the1stward.com",
+            "ward02@cityofchicago.org",
+            "ward03@cityofchicago.org",
+            "ward04@cityofchicago.org",
+            "ward05@cityofchicago.org",
+            "ward06@cityofchicago.org",
+            "ward07@cityofchicago.org",
+            "ward08@cityofchicago.org"
+          ],
+          "ward_office_phone": [
+            "872.206.2685",
+            "312.643.2299",
+            "773.373.9273",
+            "773.536.8103",
+            "773.324.5555",
+            "773.635.0006",
+            "773.731.7777",
+            "773.874.3300"
+          ],
+          "ward_office_fax": [
+            "312.448.8829",
+            "773.536.7296",
+            "773.324.1585",
+            "773.224.2425",
+            "312.744.4096",
+            "773.523.8440",
+            "773.284.5956",
+            "773.672.5133"
+          ],
+          "city_hall_office_room": [
+            "200",
+            "305",
+            "300",
+            "302"
+          ],
+          "city_hall_office_phone": [
+            "312.744.6836",
+            "312.744.8734",
+            "312.744.2690",
+            "312.744.6832",
+            "312.744.6868",
+            "312.744.6833",
+            "312.744.3075",
+            "312.744.6838"
+          ],
+          "city_hall_office_fax": [
+            "312.744.6712",
+            "312.744.7738",
+            "312.744.3195",
+            "312.744.0670",
+            "312.744.6825",
+            "312.744.3061",
+            "312.744.4025",
+            "312.744.3076"
+          ],
+          "Population": [
+            "56149",
+            "55805",
+            "53039",
+            "54589",
+            "51455",
+            "52341",
+            "51581",
+            "51687"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

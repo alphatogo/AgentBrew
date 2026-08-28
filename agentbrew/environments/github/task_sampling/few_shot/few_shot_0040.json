@@ -1,0 +1,4 @@
+{
+  "workflow_pattern": "This is a 'V3_4cand_qualitative_fork_multiple' style workflow. It requires the following operations, in roughly this order: select repo by qualitative research, fork repository preserving name, append multiple reference links readme. The task should combine these operations into one coherent, realistic request without listing them as separate steps.",
+  "question": "Hi! I'm researching embedded storage engines and have 4 repositories in mind: facebookincubator's rocksdb, google's leveldb, cockroachdb's pebble, and surrealdb's surrealdb. I'd like you to fork whichever one is implemented in Go. Keep the same name as the original repo. Then add three reference links at the bottom of the README.md file pointing to the other three repos like this: '1. related project [repo name 1](the link of repo 1)', '2. related project [repo name 2](the link of repo 2)', '3. related project [repo name 3](the link of repo 3)'."
+}

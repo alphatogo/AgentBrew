@@ -1,0 +1,612 @@
+{
+  "db_id": "indian_state_information_and_governance",
+  "source": "synsql",
+  "tables": 21,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/indian_state_information_and_governance",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"public\".\"chief_minister_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"cm_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"public\".\"chief_ministers\" {\n  \"cm_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"cm_name\" TEXT\n  \"term_start\" TEXT\n  \"term_end\" TEXT\n  \"party\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"public\".\"comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"comment_status\" TEXT\n}\n\nTable \"public\".\"file_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"public\".\"governor_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"governor_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"public\".\"governors\" {\n  \"governor_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"governor_name\" TEXT\n  \"term_start\" TEXT\n  \"term_end\" TEXT\n  \"party\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"public\".\"ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_value\" REAL\n  \"rating_status\" TEXT\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_type\" TEXT\n  \"report_data\" TEXT\n  \"report_summary\" TEXT\n  \"report_keywords\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"public\".\"search_queries\" {\n  \"query_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"query_date\" TEXT\n  \"query_text\" TEXT\n  \"query_results_count\" INTEGER\n  \"search_duration\" REAL\n}\n\nTable \"public\".\"state_animals\" {\n  \"animal_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"animal_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"public\".\"state_birds\" {\n  \"bird_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"bird_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"public\".\"state_capital_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"capital_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"public\".\"state_capitals\" {\n  \"capital_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"capital_name\" TEXT\n}\n\nTable \"public\".\"state_files\" {\n  \"file_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"file_name\" TEXT\n  \"file_type\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_path\" TEXT\n  \"file_description\" TEXT\n}\n\nTable \"public\".\"state_flowers\" {\n  \"flower_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"flower_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"public\".\"state_trees\" {\n  \"tree_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"tree_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"public\".\"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"capital\" TEXT\n  \"population\" TEXT\n  \"area_sq_km\" REAL\n  \"official_language\" TEXT\n  \"founding_date\" TEXT\n  \"timezone\" TEXT\n  \"geographic_region\" TEXT\n}\n\nTable \"public\".\"tag_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"tag_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"public\".\"tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"tag_name\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"chief_minister_revisions\".\"cm_id\" > \"public\".\"chief_ministers\".\"cm_id\"\nRef: \"public\".\"chief_ministers\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"comments\".\"report_id\" > \"public\".\"reports\".\"report_id\"\nRef: \"public\".\"comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"file_revisions\".\"file_id\" > \"public\".\"state_files\".\"file_id\"\nRef: \"public\".\"governor_revisions\".\"governor_id\" > \"public\".\"governors\".\"governor_id\"\nRef: \"public\".\"governors\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"ratings\".\"report_id\" > \"public\".\"reports\".\"report_id\"\nRef: \"public\".\"ratings\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"reports\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"search_queries\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"state_animals\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"state_birds\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"state_capital_revisions\".\"capital_id\" > \"public\".\"state_capitals\".\"capital_id\"\nRef: \"public\".\"state_capitals\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"state_files\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"state_flowers\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"state_trees\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"tag_revisions\".\"tag_id\" > \"public\".\"tags\".\"tag_id\"\nRef: \"public\".\"tags\".\"report_id\" > \"public\".\"reports\".\"report_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n}\n\nTable \"chief_minister_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"cm_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"chief_ministers\" {\n  \"cm_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"cm_name\" TEXT\n  \"term_start\" TEXT\n  \"term_end\" TEXT\n  \"party\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"comment_status\" TEXT\n}\n\nTable \"file_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"governor_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"governor_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"governors\" {\n  \"governor_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"governor_name\" TEXT\n  \"term_start\" TEXT\n  \"term_end\" TEXT\n  \"party\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n}\n\nTable \"ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"user_id\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_value\" REAL\n  \"rating_status\" TEXT\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_type\" TEXT\n  \"report_data\" TEXT\n  \"report_summary\" TEXT\n  \"report_keywords\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"search_queries\" {\n  \"query_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"query_date\" TEXT\n  \"query_text\" TEXT\n  \"query_results_count\" INTEGER\n  \"search_duration\" REAL\n}\n\nTable \"state_animals\" {\n  \"animal_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"animal_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"state_birds\" {\n  \"bird_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"bird_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"state_capital_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"capital_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"state_capitals\" {\n  \"capital_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"capital_name\" TEXT\n}\n\nTable \"state_files\" {\n  \"file_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"file_name\" TEXT\n  \"file_type\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_path\" TEXT\n  \"file_description\" TEXT\n}\n\nTable \"state_flowers\" {\n  \"flower_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"flower_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"state_trees\" {\n  \"tree_id\" INTEGER [pk]\n  \"state_id\" INTEGER\n  \"tree_name\" TEXT\n  \"description\" TEXT\n  \"image_url\" TEXT\n}\n\nTable \"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"capital\" TEXT\n  \"population\" TEXT\n  \"area_sq_km\" REAL\n  \"official_language\" TEXT\n  \"founding_date\" TEXT\n  \"timezone\" TEXT\n  \"geographic_region\" TEXT\n}\n\nTable \"tag_revisions\" {\n  \"revision_id\" INTEGER [pk]\n  \"tag_id\" INTEGER\n  \"revision_date\" TEXT\n  \"revision_description\" TEXT\n}\n\nTable \"tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"report_id\" INTEGER\n  \"tag_name\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password_hash\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"chief_minister_revisions\".\"cm_id\" > \"chief_ministers\".\"cm_id\"\n\nRef: \"chief_ministers\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"comments\".\"report_id\" > \"reports\".\"report_id\"\n\nRef: \"comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"file_revisions\".\"file_id\" > \"state_files\".\"file_id\"\n\nRef: \"governor_revisions\".\"governor_id\" > \"governors\".\"governor_id\"\n\nRef: \"governors\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"ratings\".\"report_id\" > \"reports\".\"report_id\"\n\nRef: \"ratings\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"reports\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"search_queries\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"state_animals\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"state_birds\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"state_capital_revisions\".\"capital_id\" > \"state_capitals\".\"capital_id\"\n\nRef: \"state_capitals\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"state_files\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"state_flowers\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"state_trees\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"tag_revisions\".\"tag_id\" > \"tags\".\"tag_id\"\n\nRef: \"tags\".\"report_id\" > \"reports\".\"report_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'login', 'logout'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nchief_minister_revisions: 2 rows\n  revision_description: 'Updated chief minister name', 'Revised chief minister description'\n  revision_date: '2023-01-15', '2023-01-20'\n  cm_id: '1'\n\nchief_ministers: 2 rows\n  cm_name: 'M.K. Stalin', 'Mamata Banerjee'\n  party: 'Dravida Munnetra Kazhagam (DMK)', 'All India Trinamool Congress (TMC)'\n  term_start: '2021-05-07', '2021-05-05'\n\ncomments: 2 rows\n  comment_status: 'approved', 'pending'\n  comment_text: 'This report is very informative.', 'I found this report very helpful.'\n  comment_date: '2023-05-01', '2023-05-02'\n\nfile_revisions: 2 rows\n  revision_description: 'Updated map with new boundaries', 'Revised brochure with new content'\n  revision_date: '2023-01-15', '2023-01-20'\n  file_id: '1'\n\ngovernor_revisions: 2 rows\n  revision_description: 'Updated governor name', 'Revised governor description'\n  revision_date: '2023-01-15', '2023-01-20'\n  governor_id: '1', '0'\n\ngovernors: 2 rows\n  governor_name: 'Bawarilal Purohit', 'Jagdeep Dhankhar'\n  party: 'Independent'\n  term_start: '2021-02-14', '2021-07-30'\n\nratings: 2 rows\n  rating_status: 'approved', 'pending'\n  rating_date: '2023-05-01', '2023-05-02'\n  rating_value: '4.5', '4.8'\n\nreports: 2 rows\n  report_type: 'state-wise comparison', 'governance performance'\n  report_status: 'published', 'draft'\n  report_data: 'state_capitals.pdf', 'governance_report.pdf'\n\nsearch_queries: 2 rows\n  query_text: 'state capitals', 'state birds'\n  query_date: '2023-05-01', '2023-05-02'\n  query_results_count: '36', '28'\n\nstate_animals: 2 rows\n  animal_name: 'Nilgiri Tahr', 'Fishing Cat'\n  description: 'A mountain goat found in the Nilgiri Hills.', 'A small wild cat found near rivers and wetlands.'\n  image_url: 'http://example.com/nilgiri_tahr.jpg', 'http://example.com/fishing_cat.jpg'\n\nstate_birds: 2 rows\n  bird_name: 'Emerald Dove', 'White-throated King Fisher'\n  description: 'A green and blue dove found in the forests of Tami', 'A colorful kingfisher with a white throat found in'\n  image_url: 'http://example.com/emerald_dove.jpg', 'http://example.com/king_fisher.jpg'\n\nstate_capital_revisions: 2 rows\n  revision_description: 'Updated capital name', 'Revised capital description'\n  revision_date: '2023-01-15', '2023-01-20'\n  capital_id: '0', '1'\n\nstate_capitals: 2 rows\n  capital_name: 'Chennai', 'Kolkata'\n  state_id: '0'\n  capital_id: '0', '1'\n\nstate_files: 2 rows\n  file_name: 'tamilnadu_map.jpg', 'west_bengal_brochure.pdf'\n  file_type: 'image', 'document'\n  file_description: 'Map of Tamil Nadu with district boundaries', 'Tourism brochure for West Bengal'\n\nstate_flowers: 2 rows\n  flower_name: 'Nobile Orchid', 'Shiuli'\n  description: 'A beautiful orchid found in the hills.', 'A fragrant flower found in the forests.'\n  image_url: 'http://example.com/nobile_orchid.jpg', 'http://example.com/shiuli.jpg'\n\nstate_trees: 2 rows\n  tree_name: 'Palmyra Palm', 'Chatian'\n  description: 'A tall palm tree found in coastal areas.', 'A tree with medicinal properties found in forests.'\n  image_url: 'http://example.com/palmyra_palm.jpg', 'http://example.com/chatian.jpg'\n\nstates: 2 rows\n  state_name: 'Tamil Nadu', 'West Bengal'\n  geographic_region: 'South', 'East'\n  capital: 'Chennai', 'Kolkata'\n\ntag_revisions: 2 rows\n  revision_description: 'Updated tag name', 'Revised tag description'\n  revision_date: '2023-01-15', '2023-01-20'\n  tag_id: '1', '0'\n\ntags: 2 rows\n  tag_name: 'state capitals', 'governance performance'\n  report_id: '1', '0'\n  tag_id: '0', '1'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'administrator', 'data analyst'\n  status: 'active'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "login",
+            "logout"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "chief_minister_revisions": {
+        "rows": 2,
+        "sample_values": {
+          "revision_id": [
+            "0",
+            "1"
+          ],
+          "cm_id": [
+            "1"
+          ],
+          "revision_date": [
+            "2023-01-15",
+            "2023-01-20"
+          ],
+          "revision_description": [
+            "Updated chief minister name",
+            "Revised chief minister description"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "chief_ministers": {
+        "rows": 2,
+        "sample_values": {
+          "cm_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "1"
+          ],
+          "cm_name": [
+            "M.K. Stalin",
+            "Mamata Banerjee"
+          ],
+          "term_start": [
+            "2021-05-07",
+            "2021-05-05"
+          ],
+          "term_end": [
+            "2026-05-07",
+            "2026-05-05"
+          ],
+          "party": [
+            "Dravida Munnetra Kazhagam (DMK)",
+            "All India Trinamool Congress (TMC)"
+          ],
+          "contact_email": [
+            "cm.tamilnadu@example.com",
+            "cm.westbengal@example.com"
+          ],
+          "contact_phone": [
+            "+91-1234567890",
+            "+91-0987654321"
+          ],
+          "website": [
+            "http://cm.tn.gov.in",
+            "http://cm.wb.gov.in"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "report_id": [
+            "0"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "comment_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "comment_text": [
+            "This report is very informative.",
+            "I found this report very helpful."
+          ],
+          "comment_status": [
+            "approved",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "file_revisions": {
+        "rows": 2,
+        "sample_values": {
+          "revision_id": [
+            "0",
+            "1"
+          ],
+          "file_id": [
+            "1"
+          ],
+          "revision_date": [
+            "2023-01-15",
+            "2023-01-20"
+          ],
+          "revision_description": [
+            "Updated map with new boundaries",
+            "Revised brochure with new content"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "governor_revisions": {
+        "rows": 2,
+        "sample_values": {
+          "revision_id": [
+            "0",
+            "1"
+          ],
+          "governor_id": [
+            "1",
+            "0"
+          ],
+          "revision_date": [
+            "2023-01-15",
+            "2023-01-20"
+          ],
+          "revision_description": [
+            "Updated governor name",
+            "Revised governor description"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "governors": {
+        "rows": 2,
+        "sample_values": {
+          "governor_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "0"
+          ],
+          "governor_name": [
+            "Bawarilal Purohit",
+            "Jagdeep Dhankhar"
+          ],
+          "term_start": [
+            "2021-02-14",
+            "2021-07-30"
+          ],
+          "term_end": [
+            "2026-02-14",
+            "2026-07-30"
+          ],
+          "party": [
+            "Independent"
+          ],
+          "contact_email": [
+            "governor.tamilnadu@example.com",
+            "governor.westbengal@example.com"
+          ],
+          "contact_phone": [
+            "+91-1122334455",
+            "+91-1122334466"
+          ],
+          "website": [
+            "http://governor.tn.gov.in",
+            "http://governor.wb.gov.in"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "report_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "rating_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "rating_value": [
+            "4.5",
+            "4.8"
+          ],
+          "rating_status": [
+            "approved",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "report_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "report_type": [
+            "state-wise comparison",
+            "governance performance"
+          ],
+          "report_data": [
+            "state_capitals.pdf",
+            "governance_report.pdf"
+          ],
+          "report_summary": [
+            "Comparison of state capitals based on population a",
+            "Performance of state governments based on various "
+          ],
+          "report_keywords": [
+            "state capitals, population, area",
+            "governance, performance, metrics"
+          ],
+          "report_status": [
+            "published",
+            "draft"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "search_queries": {
+        "rows": 2,
+        "sample_values": {
+          "query_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "query_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "query_text": [
+            "state capitals",
+            "state birds"
+          ],
+          "query_results_count": [
+            "36",
+            "28"
+          ],
+          "search_duration": [
+            "0.5",
+            "0.3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_animals": {
+        "rows": 2,
+        "sample_values": {
+          "animal_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "1",
+            "0"
+          ],
+          "animal_name": [
+            "Nilgiri Tahr",
+            "Fishing Cat"
+          ],
+          "description": [
+            "A mountain goat found in the Nilgiri Hills.",
+            "A small wild cat found near rivers and wetlands."
+          ],
+          "image_url": [
+            "http://example.com/nilgiri_tahr.jpg",
+            "http://example.com/fishing_cat.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_birds": {
+        "rows": 2,
+        "sample_values": {
+          "bird_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "1",
+            "0"
+          ],
+          "bird_name": [
+            "Emerald Dove",
+            "White-throated King Fisher"
+          ],
+          "description": [
+            "A green and blue dove found in the forests of Tami",
+            "A colorful kingfisher with a white throat found in"
+          ],
+          "image_url": [
+            "http://example.com/emerald_dove.jpg",
+            "http://example.com/king_fisher.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_capital_revisions": {
+        "rows": 2,
+        "sample_values": {
+          "revision_id": [
+            "0",
+            "1"
+          ],
+          "capital_id": [
+            "0",
+            "1"
+          ],
+          "revision_date": [
+            "2023-01-15",
+            "2023-01-20"
+          ],
+          "revision_description": [
+            "Updated capital name",
+            "Revised capital description"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_capitals": {
+        "rows": 2,
+        "sample_values": {
+          "capital_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "0"
+          ],
+          "capital_name": [
+            "Chennai",
+            "Kolkata"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "1"
+          ],
+          "file_name": [
+            "tamilnadu_map.jpg",
+            "west_bengal_brochure.pdf"
+          ],
+          "file_type": [
+            "image",
+            "document"
+          ],
+          "file_size": [
+            "1.2",
+            "2.5"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "file_path": [
+            "/files/tamilnadu_map.jpg",
+            "/files/west_bengal_brochure.pdf"
+          ],
+          "file_description": [
+            "Map of Tamil Nadu with district boundaries",
+            "Tourism brochure for West Bengal"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_flowers": {
+        "rows": 2,
+        "sample_values": {
+          "flower_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "flower_name": [
+            "Nobile Orchid",
+            "Shiuli"
+          ],
+          "description": [
+            "A beautiful orchid found in the hills.",
+            "A fragrant flower found in the forests."
+          ],
+          "image_url": [
+            "http://example.com/nobile_orchid.jpg",
+            "http://example.com/shiuli.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state_trees": {
+        "rows": 2,
+        "sample_values": {
+          "tree_id": [
+            "0",
+            "1"
+          ],
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "tree_name": [
+            "Palmyra Palm",
+            "Chatian"
+          ],
+          "description": [
+            "A tall palm tree found in coastal areas.",
+            "A tree with medicinal properties found in forests."
+          ],
+          "image_url": [
+            "http://example.com/palmyra_palm.jpg",
+            "http://example.com/chatian.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "states": {
+        "rows": 2,
+        "sample_values": {
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "state_name": [
+            "Tamil Nadu",
+            "West Bengal"
+          ],
+          "capital": [
+            "Chennai",
+            "Kolkata"
+          ],
+          "population": [
+            "72147030",
+            "91347736"
+          ],
+          "area_sq_km": [
+            "130058.0",
+            "88752.0"
+          ],
+          "official_language": [
+            "Tamil",
+            "Bengali"
+          ],
+          "founding_date": [
+            "1956-08-17",
+            "1950-01-26"
+          ],
+          "timezone": [
+            "IST"
+          ],
+          "geographic_region": [
+            "South",
+            "East"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "tag_revisions": {
+        "rows": 2,
+        "sample_values": {
+          "revision_id": [
+            "0",
+            "1"
+          ],
+          "tag_id": [
+            "1",
+            "0"
+          ],
+          "revision_date": [
+            "2023-01-15",
+            "2023-01-20"
+          ],
+          "revision_description": [
+            "Updated tag name",
+            "Revised tag description"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "tags": {
+        "rows": 2,
+        "sample_values": {
+          "tag_id": [
+            "0",
+            "1"
+          ],
+          "report_id": [
+            "1",
+            "0"
+          ],
+          "tag_name": [
+            "state capitals",
+            "governance performance"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "administrator",
+            "data analyst"
+          ],
+          "password_hash": [
+            "hashed_password_1",
+            "hashed_password_2"
+          ],
+          "last_login": [
+            "2023-10-01 10:00:00",
+            "2023-10-02 11:00:00"
+          ],
+          "status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

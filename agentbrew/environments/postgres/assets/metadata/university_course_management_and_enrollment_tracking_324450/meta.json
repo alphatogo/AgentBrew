@@ -1,0 +1,571 @@
+{
+  "db_id": "university_course_management_and_enrollment_tracking_324450",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/university_course_management_and_enrollment_tracking_324450",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"assignment_submissions\" {\n  \"submission_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"assignment_id\" INTEGER\n  \"submission_date\" TEXT\n  \"grade\" TEXT\n  \"feedback\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"class_id\" INTEGER\n  \"assignment_name\" TEXT\n  \"due_date\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"attendance\" {\n  \"attendance_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"class_id\" INTEGER\n  \"attendance_date\" TEXT\n  \"present\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"class_instructors\" {\n  \"class_instructor_id\" INTEGER [pk]\n  \"class_id\" INTEGER\n  \"instructor_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"classes\" {\n  \"class_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"semester_id\" INTEGER\n  \"class_number\" TEXT\n  \"class_start_date\" TEXT\n  \"last_day_to_enroll\" TEXT\n  \"census_date\" TEXT\n  \"class_end_date\" TEXT\n  \"mode_of_delivery\" TEXT\n  \"class_summary\" TEXT\n  \"meeting_days\" TEXT\n  \"meeting_time\" TEXT\n  \"classroom_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"classrooms\" {\n  \"classroom_id\" INTEGER [pk]\n  \"room_number\" TEXT\n  \"capacity\" INTEGER\n  \"equipment\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"corequisites\" {\n  \"corequisite_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"corequisite_course_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_code\" TEXT\n  \"course_name\" TEXT\n  \"department_id\" INTEGER\n  \"credit_hours\" INTEGER\n  \"description\" TEXT\n  \"grading_scale\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"contact_email\" TEXT\n  \"location\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"class_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"final_grade\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"instructors\" {\n  \"instructor_id\" INTEGER [pk]\n  \"instructor_name\" TEXT\n  \"email\" TEXT\n  \"department_id\" INTEGER\n  \"office_location\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"prerequisites\" {\n  \"prerequisite_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"prerequisite_course_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"program_requirements\" {\n  \"program_requirement_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"course_id\" INTEGER\n  \"minimum_grade\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"semesters\" {\n  \"semester_id\" INTEGER [pk]\n  \"semester_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"students\" {\n  \"student_id\" INTEGER [pk]\n  \"student_name\" TEXT\n  \"email\" TEXT\n  \"major\" TEXT\n  \"enrollment_status\" TEXT\n  \"date_of_birth\" TEXT\n  \"program_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"user_permissions\" {\n  \"user_permission_id\" INTEGER [pk]\n  \"role\" TEXT\n  \"permission\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department_id\" INTEGER\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"assignment_submissions\".\"assignment_id\" > \"public\".\"assignments\".\"assignment_id\"\nRef: \"public\".\"assignment_submissions\".\"student_id\" > \"public\".\"students\".\"student_id\"\nRef: \"public\".\"assignments\".\"class_id\" > \"public\".\"classes\".\"class_id\"\nRef: \"public\".\"attendance\".\"student_id\" > \"public\".\"students\".\"student_id\"\nRef: \"public\".\"attendance\".\"class_id\" > \"public\".\"classes\".\"class_id\"\nRef: \"public\".\"class_instructors\".\"class_id\" > \"public\".\"classes\".\"class_id\"\nRef: \"public\".\"class_instructors\".\"instructor_id\" > \"public\".\"instructors\".\"instructor_id\"\nRef: \"public\".\"classes\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"classes\".\"classroom_id\" > \"public\".\"classrooms\".\"classroom_id\"\nRef: \"public\".\"classes\".\"semester_id\" > \"public\".\"semesters\".\"semester_id\"\nRef: \"public\".\"corequisites\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"corequisites\".\"corequisite_course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"courses\".\"department_id\" > \"public\".\"departments\".\"department_id\"\nRef: \"public\".\"enrollments\".\"student_id\" > \"public\".\"students\".\"student_id\"\nRef: \"public\".\"enrollments\".\"class_id\" > \"public\".\"classes\".\"class_id\"\nRef: \"public\".\"prerequisites\".\"prerequisite_course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"prerequisites\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"program_requirements\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"program_requirements\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"students\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"users\".\"department_id\" > \"public\".\"departments\".\"department_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"assignment_submissions\" {\n  \"submission_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"assignment_id\" INTEGER\n  \"submission_date\" TEXT\n  \"grade\" TEXT\n  \"feedback\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"class_id\" INTEGER\n  \"assignment_name\" TEXT\n  \"due_date\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"attendance\" {\n  \"attendance_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"class_id\" INTEGER\n  \"attendance_date\" TEXT\n  \"present\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"class_instructors\" {\n  \"class_instructor_id\" INTEGER [pk]\n  \"class_id\" INTEGER\n  \"instructor_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"classes\" {\n  \"class_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"semester_id\" INTEGER\n  \"class_number\" TEXT\n  \"class_start_date\" TEXT\n  \"last_day_to_enroll\" TEXT\n  \"census_date\" TEXT\n  \"class_end_date\" TEXT\n  \"mode_of_delivery\" TEXT\n  \"class_summary\" TEXT\n  \"meeting_days\" TEXT\n  \"meeting_time\" TEXT\n  \"classroom_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"classrooms\" {\n  \"classroom_id\" INTEGER [pk]\n  \"room_number\" TEXT\n  \"capacity\" INTEGER\n  \"equipment\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"corequisites\" {\n  \"corequisite_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"corequisite_course_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_code\" TEXT\n  \"course_name\" TEXT\n  \"department_id\" INTEGER\n  \"credit_hours\" INTEGER\n  \"description\" TEXT\n  \"grading_scale\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"contact_email\" TEXT\n  \"location\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"class_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"final_grade\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"instructors\" {\n  \"instructor_id\" INTEGER [pk]\n  \"instructor_name\" TEXT\n  \"email\" TEXT\n  \"department_id\" INTEGER\n  \"office_location\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"prerequisites\" {\n  \"prerequisite_id\" INTEGER [pk]\n  \"course_id\" INTEGER\n  \"prerequisite_course_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"program_requirements\" {\n  \"program_requirement_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"course_id\" INTEGER\n  \"minimum_grade\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"semesters\" {\n  \"semester_id\" INTEGER [pk]\n  \"semester_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"students\" {\n  \"student_id\" INTEGER [pk]\n  \"student_name\" TEXT\n  \"email\" TEXT\n  \"major\" TEXT\n  \"enrollment_status\" TEXT\n  \"date_of_birth\" TEXT\n  \"program_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"user_permissions\" {\n  \"user_permission_id\" INTEGER [pk]\n  \"role\" TEXT\n  \"permission\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department_id\" INTEGER\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"assignment_submissions\".\"assignment_id\" > \"assignments\".\"assignment_id\"\n\nRef: \"assignment_submissions\".\"student_id\" > \"students\".\"student_id\"\n\nRef: \"assignments\".\"class_id\" > \"classes\".\"class_id\"\n\nRef: \"attendance\".\"student_id\" > \"students\".\"student_id\"\n\nRef: \"attendance\".\"class_id\" > \"classes\".\"class_id\"\n\nRef: \"class_instructors\".\"class_id\" > \"classes\".\"class_id\"\n\nRef: \"class_instructors\".\"instructor_id\" > \"instructors\".\"instructor_id\"\n\nRef: \"classes\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"classes\".\"classroom_id\" > \"classrooms\".\"classroom_id\"\n\nRef: \"classes\".\"semester_id\" > \"semesters\".\"semester_id\"\n\nRef: \"corequisites\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"corequisites\".\"corequisite_course_id\" > \"courses\".\"course_id\"\n\nRef: \"courses\".\"department_id\" > \"departments\".\"department_id\"\n\nRef: \"enrollments\".\"student_id\" > \"students\".\"student_id\"\n\nRef: \"enrollments\".\"class_id\" > \"classes\".\"class_id\"\n\nRef: \"prerequisites\".\"prerequisite_course_id\" > \"courses\".\"course_id\"\n\nRef: \"prerequisites\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"program_requirements\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"program_requirements\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"students\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"users\".\"department_id\" > \"departments\".\"department_id\"\n\n## Table Stats & Sample Values\n\nassignment_submissions: 2 rows\n  grade: 'A', 'B'\n  feedback: 'Excellent work!', 'Good effort, but some areas need improvement.'\n  submission_date: '2022-09-04'\n\nassignments: 2 rows\n  assignment_name: 'Homework 1', 'Midterm Exam'\n  description: 'Complete problems 1-5 from the textbook.', 'Open-book exam covering chapters 1-3.'\n  due_date: '2022-09-05', '2022-10-15'\n\nattendance: 2 rows\n  attendance_date: '2022-08-30'\n  created_at: '2022-01-01 00:00:00'\n  updated_at: '2022-01-01 00:00:00'\n\nclass_instructors: 2 rows\n  start_date: '2022-08-29'\n  end_date: '2022-12-16'\n  created_at: '2022-01-01 00:00:00'\n\nclasses: 2 rows\n  class_number: '6477', '6478'\n  class_summary: 'View'\n  class_start_date: '2022-08-29'\n\nclassrooms: 2 rows\n  capacity: '50', '75'\n  room_number: '101', '102'\n  equipment: 'Projector, Whiteboard, Desk', 'Projector, Whiteboard, Desk, Computer'\n\ncorequisites: 2 rows\n  created_at: '2022-01-01 00:00:00'\n  updated_at: '2022-01-01 00:00:00'\n  course_id: '1'\n\ncourses: 2 rows\n  course_name: 'Research Topics in Physics', 'Quantum Mechanics'\n  description: 'An advanced course exploring current research topi', 'An introduction to the principles of quantum mecha'\n  course_code: 'PHYS101', 'PHYS102'\n\ndepartments: 2 rows\n  department_name: 'Physics Department', 'Mathematics Department'\n  location: 'Main Campus, Science Building', 'Main Campus, Math Building'\n  contact_email: 'physics@university.edu', 'math@university.edu'\n\nenrollments: 2 rows\n  final_grade: 'A', 'B'\n  enrollment_date: '2022-08-29'\n  created_at: '2022-01-01 00:00:00'\n\ninstructors: 2 rows\n  instructor_name: 'Dr. John Doe', 'Dr. Jane Smith'\n  office_location: 'Main Campus, Science Building, Room 301', 'Main Campus, Math Building, Room 202'\n  email: 'johndoe@university.edu', 'janesmith@university.edu'\n\nprerequisites: 2 rows\n  created_at: '2022-01-01 00:00:00'\n  updated_at: '2022-01-01 00:00:00'\n  course_id: '0', '1'\n\nprogram_requirements: 2 rows\n  minimum_grade: 'C-'\n  created_at: '2022-01-01 00:00:00'\n  updated_at: '2022-01-01 00:00:00'\n\nprograms: 2 rows\n  program_name: 'Undergraduate', 'Graduate'\n  description: 'Bachelor's degree programs for undergraduate stude', 'Master's and doctoral degree programs for graduate'\n  created_at: '2022-01-01 00:00:00'\n\nsemesters: 2 rows\n  semester_name: 'Fall 2022', 'Spring 2023'\n  start_date: '2022-08-29', '2023-01-09'\n  end_date: '2022-12-16', '2023-05-05'\n\nstudents: 2 rows\n  student_name: 'Alice Johnson', 'Bob Williams'\n  enrollment_status: 'Full-Time'\n  major: 'Physics', 'Mathematics'\n\nuser_permissions: 2 rows\n  role: 'student', 'instructor'\n  permission: 'view courses', 'edit assignments'\n  created_at: '2022-01-01 00:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Dr. John Doe'\n  role: 'student', 'instructor'\n  email: 'alice.johnson@university.edu', 'johndoe@university.edu'",
+    "stateUrl": null,
+    "tableStats": {
+      "assignment_submissions": {
+        "rows": 2,
+        "sample_values": {
+          "submission_id": [
+            "0",
+            "1"
+          ],
+          "student_id": [
+            "0"
+          ],
+          "assignment_id": [
+            "0"
+          ],
+          "submission_date": [
+            "2022-09-04"
+          ],
+          "grade": [
+            "A",
+            "B"
+          ],
+          "feedback": [
+            "Excellent work!",
+            "Good effort, but some areas need improvement."
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "assignments": {
+        "rows": 2,
+        "sample_values": {
+          "assignment_id": [
+            "0",
+            "1"
+          ],
+          "class_id": [
+            "1",
+            "0"
+          ],
+          "assignment_name": [
+            "Homework 1",
+            "Midterm Exam"
+          ],
+          "due_date": [
+            "2022-09-05",
+            "2022-10-15"
+          ],
+          "description": [
+            "Complete problems 1-5 from the textbook.",
+            "Open-book exam covering chapters 1-3."
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "attendance": {
+        "rows": 2,
+        "sample_values": {
+          "attendance_id": [
+            "0",
+            "1"
+          ],
+          "student_id": [
+            "1"
+          ],
+          "class_id": [
+            "1"
+          ],
+          "attendance_date": [
+            "2022-08-30"
+          ],
+          "present": [
+            "1"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "class_instructors": {
+        "rows": 2,
+        "sample_values": {
+          "class_instructor_id": [
+            "0",
+            "1"
+          ],
+          "class_id": [
+            "0",
+            "1"
+          ],
+          "instructor_id": [
+            "1"
+          ],
+          "start_date": [
+            "2022-08-29"
+          ],
+          "end_date": [
+            "2022-12-16"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "classes": {
+        "rows": 2,
+        "sample_values": {
+          "class_id": [
+            "0",
+            "1"
+          ],
+          "course_id": [
+            "0"
+          ],
+          "semester_id": [
+            "1",
+            "0"
+          ],
+          "class_number": [
+            "6477",
+            "6478"
+          ],
+          "class_start_date": [
+            "2022-08-29"
+          ],
+          "last_day_to_enroll": [
+            "2022-09-02"
+          ],
+          "census_date": [
+            "2022-10-14"
+          ],
+          "class_end_date": [
+            "2022-12-16"
+          ],
+          "mode_of_delivery": [
+            "In Person"
+          ],
+          "class_summary": [
+            "View"
+          ],
+          "meeting_days": [
+            "MW"
+          ],
+          "meeting_time": [
+            "09:00-10:15"
+          ],
+          "classroom_id": [
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "classrooms": {
+        "rows": 2,
+        "sample_values": {
+          "classroom_id": [
+            "0",
+            "1"
+          ],
+          "room_number": [
+            "101",
+            "102"
+          ],
+          "capacity": [
+            "50",
+            "75"
+          ],
+          "equipment": [
+            "Projector, Whiteboard, Desk",
+            "Projector, Whiteboard, Desk, Computer"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "corequisites": {
+        "rows": 2,
+        "sample_values": {
+          "corequisite_id": [
+            "0",
+            "1"
+          ],
+          "course_id": [
+            "1"
+          ],
+          "corequisite_course_id": [
+            "1"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "courses": {
+        "rows": 2,
+        "sample_values": {
+          "course_id": [
+            "0",
+            "1"
+          ],
+          "course_code": [
+            "PHYS101",
+            "PHYS102"
+          ],
+          "course_name": [
+            "Research Topics in Physics",
+            "Quantum Mechanics"
+          ],
+          "department_id": [
+            "0"
+          ],
+          "credit_hours": [
+            "3",
+            "4"
+          ],
+          "description": [
+            "An advanced course exploring current research topi",
+            "An introduction to the principles of quantum mecha"
+          ],
+          "grading_scale": [
+            "Letter Grades"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "departments": {
+        "rows": 2,
+        "sample_values": {
+          "department_id": [
+            "0",
+            "1"
+          ],
+          "department_name": [
+            "Physics Department",
+            "Mathematics Department"
+          ],
+          "contact_email": [
+            "physics@university.edu",
+            "math@university.edu"
+          ],
+          "location": [
+            "Main Campus, Science Building",
+            "Main Campus, Math Building"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "enrollments": {
+        "rows": 2,
+        "sample_values": {
+          "enrollment_id": [
+            "0",
+            "1"
+          ],
+          "student_id": [
+            "0"
+          ],
+          "class_id": [
+            "0"
+          ],
+          "enrollment_date": [
+            "2022-08-29"
+          ],
+          "final_grade": [
+            "A",
+            "B"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "instructors": {
+        "rows": 2,
+        "sample_values": {
+          "instructor_id": [
+            "0",
+            "1"
+          ],
+          "instructor_name": [
+            "Dr. John Doe",
+            "Dr. Jane Smith"
+          ],
+          "email": [
+            "johndoe@university.edu",
+            "janesmith@university.edu"
+          ],
+          "department_id": [
+            "101",
+            "102"
+          ],
+          "office_location": [
+            "Main Campus, Science Building, Room 301",
+            "Main Campus, Math Building, Room 202"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prerequisites": {
+        "rows": 2,
+        "sample_values": {
+          "prerequisite_id": [
+            "0",
+            "1"
+          ],
+          "course_id": [
+            "0",
+            "1"
+          ],
+          "prerequisite_course_id": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "program_requirements": {
+        "rows": 2,
+        "sample_values": {
+          "program_requirement_id": [
+            "0",
+            "1"
+          ],
+          "program_id": [
+            "0",
+            "1"
+          ],
+          "course_id": [
+            "1",
+            "0"
+          ],
+          "minimum_grade": [
+            "C-"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "programs": {
+        "rows": 2,
+        "sample_values": {
+          "program_id": [
+            "0",
+            "1"
+          ],
+          "program_name": [
+            "Undergraduate",
+            "Graduate"
+          ],
+          "description": [
+            "Bachelor's degree programs for undergraduate stude",
+            "Master's and doctoral degree programs for graduate"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "semesters": {
+        "rows": 2,
+        "sample_values": {
+          "semester_id": [
+            "0",
+            "1"
+          ],
+          "semester_name": [
+            "Fall 2022",
+            "Spring 2023"
+          ],
+          "start_date": [
+            "2022-08-29",
+            "2023-01-09"
+          ],
+          "end_date": [
+            "2022-12-16",
+            "2023-05-05"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "students": {
+        "rows": 2,
+        "sample_values": {
+          "student_id": [
+            "0",
+            "1"
+          ],
+          "student_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@university.edu",
+            "bob.williams@university.edu"
+          ],
+          "major": [
+            "Physics",
+            "Mathematics"
+          ],
+          "enrollment_status": [
+            "Full-Time"
+          ],
+          "date_of_birth": [
+            "2000-05-15",
+            "2000-06-20"
+          ],
+          "program_id": [
+            "0",
+            "1"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_permissions": {
+        "rows": 2,
+        "sample_values": {
+          "user_permission_id": [
+            "0",
+            "1"
+          ],
+          "role": [
+            "student",
+            "instructor"
+          ],
+          "permission": [
+            "view courses",
+            "edit assignments"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Dr. John Doe"
+          ],
+          "email": [
+            "alice.johnson@university.edu",
+            "johndoe@university.edu"
+          ],
+          "role": [
+            "student",
+            "instructor"
+          ],
+          "department_id": [
+            "0"
+          ],
+          "password": [
+            "$2b$12$hash"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "SQL Snippet Practice Entry",
+  "capability": [
+    "reorganize_layout",
+    "insert_block_at_position",
+    "add_exact_blocks",
+    "preserve_relative_order"
+  ],
+  "question": "Find the page named \"Data Analytics Study Dashboard\" and add a new SQL column to the \"Query Snippets\" section.\n**Task Requirements:** 1. In the \"Query Snippets\" section, create (or locate) a column dedicated\n   to the SQL language. This column must appear between the existing Python\n   and R columns within the same column list.\n\n2. At the top of the SQL column, add a bold paragraph that contains exactly\n   the text SQL.\n\n3. Under the header paragraph, add three code-block blocks configured with\n   language set to sql:\n   a. Basic SELECT query - Caption must be Basic SELECT query and the code\n   content must be exactly:\n   ```sql\n   SELECT customer_id, order_total\n   FROM orders\n   WHERE order_total > 100;\n   ```\n   b. Grouped revenue summary - Caption must be Grouped revenue summary and\n   the code content must be exactly:\n   ```sql\n   SELECT region, SUM(order_total) AS revenue\n   FROM orders\n   GROUP BY region;\n   ```\n   c. Join customers to orders - Caption must be Join customers to orders\n   and the code content must be exactly:\n   ```sql\n   SELECT customers.name, orders.order_total\n   FROM customers\n   JOIN orders ON customers.id = orders.customer_id;\n   ```\n"
+}

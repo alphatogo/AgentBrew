@@ -1,0 +1,436 @@
+{
+  "db_id": "department_store",
+  "source": "sparc",
+  "tables": 14,
+  "total_rows": 167,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#department_store",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"address_details\" TEXT\n}\n\nTable \"Customer_Addresses\" {\n  \"customer_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Customer_Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_status_code\" TEXT [not null]\n  \"order_date\" TIMESTAMP [not null]\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT [not null]\n  \"customer_code\" TEXT\n  \"customer_name\" TEXT\n  \"customer_address\" TEXT\n  \"customer_phone\" TEXT\n  \"customer_email\" TEXT\n}\n\nTable \"Department_Store_Chain\" {\n  \"dept_store_chain_id\" INTEGER [pk]\n  \"dept_store_chain_name\" TEXT\n}\n\nTable \"Department_Stores\" {\n  \"dept_store_id\" INTEGER [pk]\n  \"dept_store_chain_id\" INTEGER\n  \"store_name\" TEXT\n  \"store_address\" TEXT\n  \"store_phone\" TEXT\n  \"store_email\" TEXT\n}\n\nTable \"Departments\" {\n  \"department_id\" INTEGER [pk]\n  \"dept_store_id\" INTEGER [not null]\n  \"department_name\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n}\n\nTable \"Product_Suppliers\" {\n  \"product_id\" INTEGER [pk, not null]\n  \"supplier_id\" INTEGER [pk, not null]\n  \"date_supplied_from\" TIMESTAMP [not null]\n  \"date_supplied_to\" TIMESTAMP\n  \"total_amount_purchased\" TEXT\n  \"total_value_purchased\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type_code\" TEXT [not null]\n  \"product_name\" TEXT\n  \"product_price\" TEXT\n}\n\nTable \"Staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"staff_gender\" TEXT\n  \"staff_name\" TEXT\n}\n\nTable \"Staff_Department_Assignments\" {\n  \"staff_id\" INTEGER [pk, not null]\n  \"department_id\" INTEGER [pk, not null]\n  \"date_assigned_from\" TIMESTAMP [not null]\n  \"job_title_code\" TEXT [not null]\n  \"date_assigned_to\" TIMESTAMP\n}\n\nTable \"Supplier_Addresses\" {\n  \"supplier_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"supplier_phone\" TEXT\n}\n\n\n\nRef: \"Supplier_Addresses\".\"supplier_id\" > \"Suppliers\".\"supplier_id\"\n\nRef: \"Supplier_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Addresses\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Department_Stores\".\"dept_store_chain_id\" > \"Department_Store_Chain\".\"dept_store_chain_id\"\n\nRef: \"Departments\".\"dept_store_id\" > \"Department_Stores\".\"dept_store_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Customer_Orders\".\"order_id\"\n\nRef: \"Product_Suppliers\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Product_Suppliers\".\"supplier_id\" > \"Suppliers\".\"supplier_id\"\n\nRef: \"Staff_Department_Assignments\".\"staff_id\" > \"Staff\".\"staff_id\"\n\nRef: \"Staff_Department_Assignments\".\"department_id\" > \"Departments\".\"department_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"address_details\" TEXT\n}\n\nTable \"Customer_Addresses\" {\n  \"customer_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Customer_Orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER [not null]\n  \"order_status_code\" TEXT [not null]\n  \"order_date\" TIMESTAMP [not null]\n}\n\nTable \"Customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"payment_method_code\" TEXT [not null]\n  \"customer_code\" TEXT\n  \"customer_name\" TEXT\n  \"customer_address\" TEXT\n  \"customer_phone\" TEXT\n  \"customer_email\" TEXT\n}\n\nTable \"Department_Store_Chain\" {\n  \"dept_store_chain_id\" INTEGER [pk]\n  \"dept_store_chain_name\" TEXT\n}\n\nTable \"Department_Stores\" {\n  \"dept_store_id\" INTEGER [pk]\n  \"dept_store_chain_id\" INTEGER\n  \"store_name\" TEXT\n  \"store_address\" TEXT\n  \"store_phone\" TEXT\n  \"store_email\" TEXT\n}\n\nTable \"Departments\" {\n  \"department_id\" INTEGER [pk]\n  \"dept_store_id\" INTEGER [not null]\n  \"department_name\" TEXT\n}\n\nTable \"Order_Items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER [not null]\n  \"product_id\" INTEGER [not null]\n}\n\nTable \"Product_Suppliers\" {\n  \"product_id\" INTEGER [pk, not null]\n  \"supplier_id\" INTEGER [pk, not null]\n  \"date_supplied_from\" TIMESTAMP [not null]\n  \"date_supplied_to\" TIMESTAMP\n  \"total_amount_purchased\" TEXT\n  \"total_value_purchased\" TEXT\n}\n\nTable \"Products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type_code\" TEXT [not null]\n  \"product_name\" TEXT\n  \"product_price\" TEXT\n}\n\nTable \"Staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"staff_gender\" TEXT\n  \"staff_name\" TEXT\n}\n\nTable \"Staff_Department_Assignments\" {\n  \"staff_id\" INTEGER [pk, not null]\n  \"department_id\" INTEGER [pk, not null]\n  \"date_assigned_from\" TIMESTAMP [not null]\n  \"job_title_code\" TEXT [not null]\n  \"date_assigned_to\" TIMESTAMP\n}\n\nTable \"Supplier_Addresses\" {\n  \"supplier_id\" INTEGER [pk, not null]\n  \"address_id\" INTEGER [pk, not null]\n  \"date_from\" TIMESTAMP [not null]\n  \"date_to\" TIMESTAMP\n}\n\nTable \"Suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"supplier_phone\" TEXT\n}\n\nRef: \"Supplier_Addresses\".\"supplier_id\" > \"Suppliers\".\"supplier_id\"\n\nRef: \"Supplier_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Addresses\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Customer_Addresses\".\"address_id\" > \"Addresses\".\"address_id\"\n\nRef: \"Customer_Orders\".\"customer_id\" > \"Customers\".\"customer_id\"\n\nRef: \"Department_Stores\".\"dept_store_chain_id\" > \"Department_Store_Chain\".\"dept_store_chain_id\"\n\nRef: \"Departments\".\"dept_store_id\" > \"Department_Stores\".\"dept_store_id\"\n\nRef: \"Order_Items\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Order_Items\".\"order_id\" > \"Customer_Orders\".\"order_id\"\n\nRef: \"Product_Suppliers\".\"product_id\" > \"Products\".\"product_id\"\n\nRef: \"Product_Suppliers\".\"supplier_id\" > \"Suppliers\".\"supplier_id\"\n\nRef: \"Staff_Department_Assignments\".\"staff_id\" > \"Staff\".\"staff_id\"\n\nRef: \"Staff_Department_Assignments\".\"department_id\" > \"Departments\".\"department_id\"\n\n## Table Stats & Sample Values\n\nAddresses: 0 rows\n\nCustomer_Addresses: 15 rows\n  date_from: '2017-12-11 05:00:22', '2017-10-07 23:00:26', '2017-04-04 20:00:27', ...\n  date_to: '2018-03-20 20:52:34', '2018-02-28 14:53:52', '2018-02-27 20:08:33', ...\n  customer_id: '2', '1', '10', ...\n\nCustomer_Orders: 15 rows\n  order_status_code: 'Completed', 'New', 'PartFilled', ...\n  order_date: '2018-02-10 15:44:48', '2018-01-31 17:49:18', '2018-02-26 12:39:33', ...\n  customer_id: '12', '4', '1', ...\n\nCustomers: 0 rows\n\nDepartment_Store_Chain: 4 rows\n  dept_store_chain_name: 'South', 'West', 'East', ...\n  dept_store_chain_id: '1', '2', '3', ...\n\nDepartment_Stores: 0 rows\n\nDepartments: 5 rows\n  department_name: 'human resource', 'purchasing', 'marketing', ...\n  dept_store_id: '5', '11', '4'\n  department_id: '1', '2', '3', ...\n\nOrder_Items: 15 rows\n  order_id: '9', '1', '5', ...\n  product_id: '7', '3', '2', ...\n  order_item_id: '1', '2', '3', ...\n\nProduct_Suppliers: 15 rows\n  total_amount_purchased: '89366.05', '25085.57', '15752.45', ...\n  total_value_purchased: '36014.6', '36274.56', '7273.74', ...\n  date_supplied_from: '2017-06-19 00:49:05', '2017-07-02 00:35:12', '2017-10-14 19:15:37', ...\n\nProducts: 15 rows\n  product_type_code: 'Clothes', 'Hardware'\n  product_name: 'red jeans', 'yellow jeans', 'black jeans', ...\n  product_price: '734.73', '687.23', '695.16', ...\n\nStaff: 15 rows\n  staff_name: 'Tom', 'Malika', 'Katelynn', ...\n  staff_gender: '1', '0'\n  staff_id: '1', '2', '3', ...\n\nStaff_Department_Assignments: 15 rows\n  job_title_code: 'Department Manager', 'Sales Person', 'Clerical Staff', ...\n  date_assigned_from: '2017-06-11 22:55:20', '2017-12-18 19:12:15', '2018-02-14 03:15:29', ...\n  date_assigned_to: '2018-03-23 21:59:11', '2018-03-23 20:25:24', '2018-03-24 19:57:56', ...\n\nSupplier_Addresses: 4 rows\n  date_from: '2016-09-22 16:41:31', '2014-11-07 19:18:49', '2008-11-22 12:01:25', ...\n  date_to: '2018-03-14 20:06:37', '2018-03-16 16:39:58', '2018-03-02 19:50:22', ...\n  supplier_id: '4', '3', '2'\n\nSuppliers: 4 rows\n  supplier_name: 'Lidl', 'AB Store', 'Tesco', ...\n  supplier_phone: '(692)009-5928', '1-483-283-4742', '287-071-1153x254', ...\n  supplier_id: '1', '2', '3', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#department_store",
+    "tableStats": {
+      "Addresses": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Customer_Addresses": {
+        "rows": 15,
+        "sample_values": {
+          "customer_id": [
+            "2",
+            "1",
+            "10",
+            "8",
+            "6",
+            "7",
+            "12",
+            "4"
+          ],
+          "address_id": [
+            "9",
+            "6",
+            "8",
+            "2",
+            "14",
+            "13",
+            "7",
+            "4"
+          ],
+          "date_from": [
+            "2017-12-11 05:00:22",
+            "2017-10-07 23:00:26",
+            "2017-04-04 20:00:27",
+            "2017-12-14 07:40:08",
+            "2017-07-31 20:18:52",
+            "2018-01-27 06:27:34",
+            "2017-08-06 20:57:36",
+            "2017-09-07 04:41:01"
+          ],
+          "date_to": [
+            "2018-03-20 20:52:34",
+            "2018-02-28 14:53:52",
+            "2018-02-27 20:08:33",
+            "2018-03-24 14:31:59",
+            "2018-03-12 05:32:28",
+            "2018-03-23 17:49:51",
+            "2018-03-05 21:19:53",
+            "2018-02-27 23:10:07"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer_Orders": {
+        "rows": 15,
+        "sample_values": {
+          "order_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "customer_id": [
+            "12",
+            "4",
+            "1",
+            "11",
+            "13",
+            "7",
+            "8",
+            "15"
+          ],
+          "order_status_code": [
+            "Completed",
+            "New",
+            "PartFilled",
+            "Pending",
+            "Cancelled"
+          ],
+          "order_date": [
+            "2018-02-10 15:44:48",
+            "2018-01-31 17:49:18",
+            "2018-02-26 12:39:33",
+            "2018-03-07 16:55:17",
+            "2018-02-12 19:34:12",
+            "2018-03-06 16:35:51",
+            "2018-02-15 02:25:32",
+            "2018-03-05 23:17:54"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Department_Store_Chain": {
+        "rows": 4,
+        "sample_values": {
+          "dept_store_chain_id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "dept_store_chain_name": [
+            "South",
+            "West",
+            "East",
+            "North"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Department_Stores": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Departments": {
+        "rows": 5,
+        "sample_values": {
+          "department_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "dept_store_id": [
+            "5",
+            "11",
+            "4"
+          ],
+          "department_name": [
+            "human resource",
+            "purchasing",
+            "marketing",
+            "advertising",
+            "managing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Order_Items": {
+        "rows": 15,
+        "sample_values": {
+          "order_item_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "order_id": [
+            "9",
+            "1",
+            "5",
+            "14",
+            "15",
+            "6",
+            "12",
+            "13"
+          ],
+          "product_id": [
+            "7",
+            "3",
+            "2",
+            "10",
+            "4",
+            "13",
+            "8",
+            "12"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Product_Suppliers": {
+        "rows": 15,
+        "sample_values": {
+          "product_id": [
+            "4",
+            "8",
+            "3",
+            "7",
+            "15",
+            "11",
+            "5",
+            "6"
+          ],
+          "supplier_id": [
+            "3",
+            "4",
+            "1",
+            "2"
+          ],
+          "date_supplied_from": [
+            "2017-06-19 00:49:05",
+            "2017-07-02 00:35:12",
+            "2017-10-14 19:15:37",
+            "2017-08-22 00:58:42",
+            "2017-12-08 09:14:05",
+            "2017-12-01 19:46:53",
+            "2017-07-13 15:02:24",
+            "2017-07-28 19:23:39"
+          ],
+          "date_supplied_to": [
+            "2018-03-24 19:29:18",
+            "2018-03-25 07:30:49",
+            "2018-03-24 02:29:44",
+            "2018-03-24 02:38:31",
+            "2018-03-24 23:03:30",
+            "2018-03-24 05:22:36",
+            "2018-03-24 23:01:03",
+            "2018-03-24 09:17:15"
+          ],
+          "total_amount_purchased": [
+            "89366.05",
+            "25085.57",
+            "15752.45",
+            "22332.08",
+            "25318.21",
+            "35149.74",
+            "31862.59",
+            "85922.86"
+          ],
+          "total_value_purchased": [
+            "36014.6",
+            "36274.56",
+            "7273.74",
+            "8042.78",
+            "29836.26",
+            "67216.31",
+            "76992.42",
+            "82524.95"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 15,
+        "sample_values": {
+          "product_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "product_type_code": [
+            "Clothes",
+            "Hardware"
+          ],
+          "product_name": [
+            "red jeans",
+            "yellow jeans",
+            "black jeans",
+            "blue jeans",
+            "red topping",
+            "black topping",
+            "yellow topping",
+            "blue topping"
+          ],
+          "product_price": [
+            "734.73",
+            "687.23",
+            "695.16",
+            "939.57",
+            "534.52",
+            "408.82",
+            "916.53",
+            "918.41"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Staff": {
+        "rows": 15,
+        "sample_values": {
+          "staff_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "staff_gender": [
+            "1",
+            "0"
+          ],
+          "staff_name": [
+            "Tom",
+            "Malika",
+            "Katelynn",
+            "Vanessa",
+            "Maximus",
+            "Tyson",
+            "Yolanda",
+            "Vito"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Staff_Department_Assignments": {
+        "rows": 15,
+        "sample_values": {
+          "staff_id": [
+            "5",
+            "10",
+            "1",
+            "8",
+            "15",
+            "2",
+            "9",
+            "3"
+          ],
+          "department_id": [
+            "4",
+            "5",
+            "1",
+            "2",
+            "3"
+          ],
+          "date_assigned_from": [
+            "2017-06-11 22:55:20",
+            "2017-12-18 19:12:15",
+            "2018-02-14 03:15:29",
+            "2017-05-14 12:30:33",
+            "2017-03-31 23:07:54",
+            "2017-11-14 04:38:44",
+            "2016-09-20 02:59:15",
+            "2017-05-10 02:32:17"
+          ],
+          "job_title_code": [
+            "Department Manager",
+            "Sales Person",
+            "Clerical Staff",
+            "Administration"
+          ],
+          "date_assigned_to": [
+            "2018-03-23 21:59:11",
+            "2018-03-23 20:25:24",
+            "2018-03-24 19:57:56",
+            "2018-03-25 03:15:31",
+            "2018-03-24 09:11:14",
+            "2018-03-24 07:04:28",
+            "2018-03-24 20:13:13",
+            "2018-03-24 02:36:57"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Supplier_Addresses": {
+        "rows": 4,
+        "sample_values": {
+          "supplier_id": [
+            "4",
+            "3",
+            "2"
+          ],
+          "address_id": [
+            "5",
+            "9",
+            "2",
+            "11"
+          ],
+          "date_from": [
+            "2016-09-22 16:41:31",
+            "2014-11-07 19:18:49",
+            "2008-11-22 12:01:25",
+            "2015-03-16 19:30:29"
+          ],
+          "date_to": [
+            "2018-03-14 20:06:37",
+            "2018-03-16 16:39:58",
+            "2018-03-02 19:50:22",
+            "2018-03-24 00:14:45"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Suppliers": {
+        "rows": 4,
+        "sample_values": {
+          "supplier_id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "supplier_name": [
+            "Lidl",
+            "AB Store",
+            "Tesco",
+            "Audi"
+          ],
+          "supplier_phone": [
+            "(692)009-5928",
+            "1-483-283-4742",
+            "287-071-1153x254",
+            "1-432-960-2402x1734"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

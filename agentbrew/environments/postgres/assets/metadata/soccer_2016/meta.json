@@ -1,0 +1,882 @@
+{
+  "db_id": "soccer_2016",
+  "source": "bird",
+  "tables": 21,
+  "total_rows": 297816,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#soccer_2016",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Ball_by_Ball\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Innings_No\" INTEGER [pk]\n  \"Team_Batting\" INTEGER\n  \"Team_Bowling\" INTEGER\n  \"Striker_Batting_Position\" INTEGER\n  \"Striker\" INTEGER\n  \"Non_Striker\" INTEGER\n  \"Bowler\" INTEGER\n}\n\nTable \"Batsman_Scored\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Runs_Scored\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Batting_Style\" {\n  \"Batting_Id\" INTEGER [pk]\n  \"Batting_hand\" TEXT\n}\n\nTable \"Bowling_Style\" {\n  \"Bowling_Id\" INTEGER [pk]\n  \"Bowling_skill\" TEXT\n}\n\nTable \"City\" {\n  \"City_Id\" INTEGER [pk]\n  \"City_Name\" TEXT\n  \"Country_id\" INTEGER\n}\n\nTable \"Country\" {\n  \"Country_Id\" INTEGER [pk]\n  \"Country_Name\" TEXT\n}\n\nTable \"Extra_Runs\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Extra_Type_Id\" INTEGER\n  \"Extra_Runs\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Extra_Type\" {\n  \"Extra_Id\" INTEGER [pk]\n  \"Extra_Name\" TEXT\n}\n\nTable \"Match\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Team_1\" INTEGER\n  \"Team_2\" INTEGER\n  \"Match_Date\" DATE\n  \"Season_Id\" INTEGER\n  \"Venue_Id\" INTEGER\n  \"Toss_Winner\" INTEGER\n  \"Toss_Decide\" INTEGER\n  \"Win_Type\" INTEGER\n  \"Win_Margin\" INTEGER\n  \"Outcome_type\" INTEGER\n  \"Match_Winner\" INTEGER\n  \"Man_of_the_Match\" INTEGER\n}\n\nTable \"Out_Type\" {\n  \"Out_Id\" INTEGER [pk]\n  \"Out_Name\" TEXT\n}\n\nTable \"Outcome\" {\n  \"Outcome_Id\" INTEGER [pk]\n  \"Outcome_Type\" TEXT\n}\n\nTable \"Player\" {\n  \"Player_Id\" INTEGER [pk]\n  \"Player_Name\" TEXT\n  \"DOB\" DATE\n  \"Batting_hand\" INTEGER\n  \"Bowling_skill\" INTEGER\n  \"Country_Name\" INTEGER\n}\n\nTable \"Player_Match\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Player_Id\" INTEGER [pk]\n  \"Role_Id\" INTEGER [pk]\n  \"Team_Id\" INTEGER\n}\n\nTable \"Rolee\" {\n  \"Role_Id\" INTEGER [pk]\n  \"Role_Desc\" TEXT\n}\n\nTable \"Season\" {\n  \"Season_Id\" INTEGER [pk]\n  \"Man_of_the_Series\" INTEGER\n  \"Orange_Cap\" INTEGER\n  \"Purple_Cap\" INTEGER\n  \"Season_Year\" INTEGER\n}\n\nTable \"Team\" {\n  \"Team_Id\" INTEGER [pk]\n  \"Team_Name\" TEXT\n}\n\nTable \"Toss_Decision\" {\n  \"Toss_Id\" INTEGER [pk]\n  \"Toss_Name\" TEXT\n}\n\nTable \"Umpire\" {\n  \"Umpire_Id\" INTEGER [pk]\n  \"Umpire_Name\" TEXT\n  \"Umpire_Country\" INTEGER\n}\n\nTable \"Venue\" {\n  \"Venue_Id\" INTEGER [pk]\n  \"Venue_Name\" TEXT\n  \"City_Id\" INTEGER\n}\n\nTable \"Wicket_Taken\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Player_Out\" INTEGER\n  \"Kind_Out\" INTEGER\n  \"Fielders\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Win_By\" {\n  \"Win_Id\" INTEGER [pk]\n  \"Win_Type\" TEXT\n}\n\n\n\nRef: \"Country\".\"Country_Id\" > \"Country\".\"Country_Id\"\n\nRef: \"Extra_Runs\".\"Extra_Type_Id\" > \"Extra_Type\".\"Extra_Id\"\n\nRef: \"Player\".\"Country_Name\" > \"Country\".\"Country_Id\"\n\nRef: \"Player\".\"Bowling_skill\" > \"Bowling_Style\".\"Bowling_Id\"\n\nRef: \"Player\".\"Batting_hand\" > \"Batting_Style\".\"Batting_Id\"\n\nRef: \"Umpire\".\"Umpire_Country\" > \"Country\".\"Country_Id\"\n\nRef: \"Venue\".\"City_Id\" > \"City\".\"City_Id\"\n\nRef: \"Match\".\"Man_of_the_Match\" > \"Player\".\"Player_Id\"\n\nRef: \"Match\".\"Match_Winner\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Outcome_type\" > \"Out_Type\".\"Out_Id\"\n\nRef: \"Match\".\"Win_Type\" > \"Win_By\".\"Win_Id\"\n\nRef: \"Match\".\"Toss_Decide\" > \"Toss_Decision\".\"Toss_Id\"\n\nRef: \"Match\".\"Toss_Winner\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Venue_Id\" > \"Venue\".\"Venue_Id\"\n\nRef: \"Match\".\"Season_Id\" > \"Season\".\"Season_Id\"\n\nRef: \"Match\".\"Team_2\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Team_1\" > \"Team\".\"Team_Id\"\n\nRef: \"Ball_by_Ball\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Batsman_Scored\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Player_Match\".\"Role_Id\" > \"Rolee\".\"Role_Id\"\n\nRef: \"Player_Match\".\"Team_Id\" > \"Team\".\"Team_Id\"\n\nRef: \"Player_Match\".\"Player_Id\" > \"Player\".\"Player_Id\"\n\nRef: \"Player_Match\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Wicket_Taken\".\"Fielders\" > \"Player\".\"Player_Id\"\n\nRef: \"Wicket_Taken\".\"Kind_Out\" > \"Out_Type\".\"Out_Id\"\n\nRef: \"Wicket_Taken\".\"Player_Out\" > \"Player\".\"Player_Id\"\n\nRef: \"Wicket_Taken\".\"Match_Id\" > \"Match\".\"Match_Id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Ball_by_Ball\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Innings_No\" INTEGER [pk]\n  \"Team_Batting\" INTEGER\n  \"Team_Bowling\" INTEGER\n  \"Striker_Batting_Position\" INTEGER\n  \"Striker\" INTEGER\n  \"Non_Striker\" INTEGER\n  \"Bowler\" INTEGER\n}\n\nTable \"Batsman_Scored\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Runs_Scored\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Batting_Style\" {\n  \"Batting_Id\" INTEGER [pk]\n  \"Batting_hand\" TEXT\n}\n\nTable \"Bowling_Style\" {\n  \"Bowling_Id\" INTEGER [pk]\n  \"Bowling_skill\" TEXT\n}\n\nTable \"City\" {\n  \"City_Id\" INTEGER [pk]\n  \"City_Name\" TEXT\n  \"Country_id\" INTEGER\n}\n\nTable \"Country\" {\n  \"Country_Id\" INTEGER [pk]\n  \"Country_Name\" TEXT\n}\n\nTable \"Extra_Runs\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Extra_Type_Id\" INTEGER\n  \"Extra_Runs\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Extra_Type\" {\n  \"Extra_Id\" INTEGER [pk]\n  \"Extra_Name\" TEXT\n}\n\nTable \"Match\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Team_1\" INTEGER\n  \"Team_2\" INTEGER\n  \"Match_Date\" DATE\n  \"Season_Id\" INTEGER\n  \"Venue_Id\" INTEGER\n  \"Toss_Winner\" INTEGER\n  \"Toss_Decide\" INTEGER\n  \"Win_Type\" INTEGER\n  \"Win_Margin\" INTEGER\n  \"Outcome_type\" INTEGER\n  \"Match_Winner\" INTEGER\n  \"Man_of_the_Match\" INTEGER\n}\n\nTable \"Out_Type\" {\n  \"Out_Id\" INTEGER [pk]\n  \"Out_Name\" TEXT\n}\n\nTable \"Outcome\" {\n  \"Outcome_Id\" INTEGER [pk]\n  \"Outcome_Type\" TEXT\n}\n\nTable \"Player\" {\n  \"Player_Id\" INTEGER [pk]\n  \"Player_Name\" TEXT\n  \"DOB\" DATE\n  \"Batting_hand\" INTEGER\n  \"Bowling_skill\" INTEGER\n  \"Country_Name\" INTEGER\n}\n\nTable \"Player_Match\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Player_Id\" INTEGER [pk]\n  \"Role_Id\" INTEGER [pk]\n  \"Team_Id\" INTEGER\n}\n\nTable \"Rolee\" {\n  \"Role_Id\" INTEGER [pk]\n  \"Role_Desc\" TEXT\n}\n\nTable \"Season\" {\n  \"Season_Id\" INTEGER [pk]\n  \"Man_of_the_Series\" INTEGER\n  \"Orange_Cap\" INTEGER\n  \"Purple_Cap\" INTEGER\n  \"Season_Year\" INTEGER\n}\n\nTable \"Team\" {\n  \"Team_Id\" INTEGER [pk]\n  \"Team_Name\" TEXT\n}\n\nTable \"Toss_Decision\" {\n  \"Toss_Id\" INTEGER [pk]\n  \"Toss_Name\" TEXT\n}\n\nTable \"Umpire\" {\n  \"Umpire_Id\" INTEGER [pk]\n  \"Umpire_Name\" TEXT\n  \"Umpire_Country\" INTEGER\n}\n\nTable \"Venue\" {\n  \"Venue_Id\" INTEGER [pk]\n  \"Venue_Name\" TEXT\n  \"City_Id\" INTEGER\n}\n\nTable \"Wicket_Taken\" {\n  \"Match_Id\" INTEGER [pk]\n  \"Over_Id\" INTEGER [pk]\n  \"Ball_Id\" INTEGER [pk]\n  \"Player_Out\" INTEGER\n  \"Kind_Out\" INTEGER\n  \"Fielders\" INTEGER\n  \"Innings_No\" INTEGER [pk]\n}\n\nTable \"Win_By\" {\n  \"Win_Id\" INTEGER [pk]\n  \"Win_Type\" TEXT\n}\n\nRef: \"Country\".\"Country_Id\" > \"Country\".\"Country_Id\"\n\nRef: \"Extra_Runs\".\"Extra_Type_Id\" > \"Extra_Type\".\"Extra_Id\"\n\nRef: \"Player\".\"Country_Name\" > \"Country\".\"Country_Id\"\n\nRef: \"Player\".\"Bowling_skill\" > \"Bowling_Style\".\"Bowling_Id\"\n\nRef: \"Player\".\"Batting_hand\" > \"Batting_Style\".\"Batting_Id\"\n\nRef: \"Umpire\".\"Umpire_Country\" > \"Country\".\"Country_Id\"\n\nRef: \"Venue\".\"City_Id\" > \"City\".\"City_Id\"\n\nRef: \"Match\".\"Man_of_the_Match\" > \"Player\".\"Player_Id\"\n\nRef: \"Match\".\"Match_Winner\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Outcome_type\" > \"Out_Type\".\"Out_Id\"\n\nRef: \"Match\".\"Win_Type\" > \"Win_By\".\"Win_Id\"\n\nRef: \"Match\".\"Toss_Decide\" > \"Toss_Decision\".\"Toss_Id\"\n\nRef: \"Match\".\"Toss_Winner\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Venue_Id\" > \"Venue\".\"Venue_Id\"\n\nRef: \"Match\".\"Season_Id\" > \"Season\".\"Season_Id\"\n\nRef: \"Match\".\"Team_2\" > \"Team\".\"Team_Id\"\n\nRef: \"Match\".\"Team_1\" > \"Team\".\"Team_Id\"\n\nRef: \"Ball_by_Ball\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Batsman_Scored\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Player_Match\".\"Role_Id\" > \"Rolee\".\"Role_Id\"\n\nRef: \"Player_Match\".\"Team_Id\" > \"Team\".\"Team_Id\"\n\nRef: \"Player_Match\".\"Player_Id\" > \"Player\".\"Player_Id\"\n\nRef: \"Player_Match\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\nRef: \"Wicket_Taken\".\"Fielders\" > \"Player\".\"Player_Id\"\n\nRef: \"Wicket_Taken\".\"Kind_Out\" > \"Out_Type\".\"Out_Id\"\n\nRef: \"Wicket_Taken\".\"Player_Out\" > \"Player\".\"Player_Id\"\n\nRef: \"Wicket_Taken\".\"Match_Id\" > \"Match\".\"Match_Id\"\n\n## Table Stats & Sample Values\n\nBall_by_Ball: 10000 rows\n  Team_Batting: '1', '2', '3', ...\n  Team_Bowling: '2', '1', '4', ...\n  Striker_Batting_Position: '1', '2', '3', ...\n\nBatsman_Scored: 10000 rows\n  Runs_Scored: '0', '1', '4', ...\n  Innings_No: '1', '2'\n  Match_Id: '335987', '335988', '335989', ...\n\nBatting_Style: 2 rows\n  Batting_hand: 'Left-hand bat', 'Right-hand bat'\n  Batting_Id: '1', '2'\n\nBowling_Style: 14 rows\n  Bowling_skill: 'Right-arm medium', 'Right-arm offbreak', 'Right-arm fast-medium', ...\n  Bowling_Id: '1', '2', '3', ...\n\nCity: 29 rows\n  City_Name: 'Bangalore', 'Chandigarh', 'Delhi', ...\n  Country_id: '1', '2', '3'\n  City_Id: '1', '2', '3', ...\n\nCountry: 12 rows\n  Country_Name: 'India', 'South Africa', 'U.A.E', ...\n  Country_Id: '1', '2', '3', ...\n\nExtra_Runs: 7469 rows\n  Extra_Runs: '1', '4', '5', ...\n  Extra_Type_Id: '1', '2', '3', ...\n  Innings_No: '1', '2', '3', ...\n\nExtra_Type: 5 rows\n  Extra_Name: 'legbyes', 'wides', 'byes', ...\n  Extra_Id: '1', '2', '3', ...\n\nMatch: 577 rows\n  Win_Type: '1', '2', '4', ...\n  Outcome_type: '1', '3', '2'\n  Team_1: '2', '4', '6', ...\n\nOut_Type: 9 rows\n  Out_Name: 'caught', 'bowled', 'run out', ...\n  Out_Id: '1', '2', '3', ...\n\nOutcome: 3 rows\n  Outcome_Type: 'Result', 'No Result', 'Superover'\n  Outcome_Id: '1', '2', '3'\n\nPlayer: 469 rows\n  Player_Name: 'SC Ganguly', 'BB McCullum', 'RT Ponting', ...\n  Country_Name: '1', '4', '5', ...\n  DOB: '1972-07-08', '1981-09-27', '1974-12-19', ...\n\nPlayer_Match: 10000 rows\n  Role_Id: '1', '3', '2', ...\n  Team_Id: '1', '2', '3', ...\n  Match_Id: '335987', '335988', '335989', ...\n\nRolee: 4 rows\n  Role_Desc: 'Captain', 'Keeper', 'Player', ...\n  Role_Id: '1', '2', '3', ...\n\nSeason: 9 rows\n  Man_of_the_Series: '32', '53', '133', ...\n  Orange_Cap: '100', '18', '133', ...\n  Purple_Cap: '102', '61', '131', ...\n\nTeam: 13 rows\n  Team_Name: 'Kolkata Knight Riders', 'Royal Challengers Bangalore', 'Chennai Super Kings', ...\n  Team_Id: '1', '2', '3', ...\n\nToss_Decision: 2 rows\n  Toss_Name: 'field', 'bat'\n  Toss_Id: '1', '2'\n\nUmpire: 52 rows\n  Umpire_Name: 'Asad Rauf', 'MR Benson', 'Aleem Dar', ...\n  Umpire_Country: '6', '10', '4', ...\n  Umpire_Id: '1', '2', '3', ...\n\nVenue: 35 rows\n  Venue_Name: 'M Chinnaswamy Stadium', 'Punjab Cricket Association Stadium', 'Feroz Shah Kotla', ...\n  City_Id: '1', '2', '3', ...\n  Venue_Id: '1', '2', '3', ...\n\nWicket_Taken: 6727 rows\n  Kind_Out: '2', '1', '3', ...\n  Player_Out: '6', '8', '9', ...\n  Fielders: '83', '9', '3', ...\n\nWin_By: 4 rows\n  Win_Type: 'runs', 'wickets', 'NO Result', ...\n  Win_Id: '1', '2', '3', ...",
+    "stateUrl": "https://bird-bench.github.io/#soccer_2016",
+    "tableStats": {
+      "Ball_by_Ball": {
+        "rows": 10000,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Over_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Ball_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Innings_No": [
+            "1",
+            "2"
+          ],
+          "Team_Batting": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Team_Bowling": [
+            "2",
+            "1",
+            "4",
+            "3",
+            "6",
+            "5",
+            "7",
+            "8"
+          ],
+          "Striker_Batting_Position": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Striker": [
+            "1",
+            "6",
+            "2",
+            "7",
+            "8",
+            "9",
+            "10",
+            "3"
+          ],
+          "Non_Striker": [
+            "2",
+            "7",
+            "1",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "Bowler": [
+            "14",
+            "106",
+            "15",
+            "84",
+            "13",
+            "82",
+            "1",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Batsman_Scored": {
+        "rows": 10000,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Over_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Ball_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Runs_Scored": [
+            "0",
+            "1",
+            "4",
+            "6",
+            "2",
+            "5",
+            "3"
+          ],
+          "Innings_No": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Batting_Style": {
+        "rows": 2,
+        "sample_values": {
+          "Batting_Id": [
+            "1",
+            "2"
+          ],
+          "Batting_hand": [
+            "Left-hand bat",
+            "Right-hand bat"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Bowling_Style": {
+        "rows": 14,
+        "sample_values": {
+          "Bowling_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Bowling_skill": [
+            "Right-arm medium",
+            "Right-arm offbreak",
+            "Right-arm fast-medium",
+            "Legbreak googly",
+            "Right-arm medium-fast",
+            "Left-arm fast-medium",
+            "Slow left-arm orthodox",
+            "Slow left-arm chinaman"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "City": {
+        "rows": 29,
+        "sample_values": {
+          "City_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "City_Name": [
+            "Bangalore",
+            "Chandigarh",
+            "Delhi",
+            "Mumbai",
+            "Kolkata",
+            "Jaipur",
+            "Hyderabad",
+            "Chennai"
+          ],
+          "Country_id": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Country": {
+        "rows": 12,
+        "sample_values": {
+          "Country_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Country_Name": [
+            "India",
+            "South Africa",
+            "U.A.E",
+            "New Zealand",
+            "Australia",
+            "Pakistan",
+            "Sri Lanka",
+            "West Indies"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Extra_Runs": {
+        "rows": 7469,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Over_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "Ball_Id": [
+            "1",
+            "2",
+            "3",
+            "7",
+            "5",
+            "4",
+            "6",
+            "8"
+          ],
+          "Extra_Type_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "Extra_Runs": [
+            "1",
+            "4",
+            "5",
+            "2",
+            "3"
+          ],
+          "Innings_No": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Extra_Type": {
+        "rows": 5,
+        "sample_values": {
+          "Extra_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "Extra_Name": [
+            "legbyes",
+            "wides",
+            "byes",
+            "noballs",
+            "penalty"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Match": {
+        "rows": 577,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Team_1": [
+            "2",
+            "4",
+            "6",
+            "7",
+            "1",
+            "5",
+            "8",
+            "3"
+          ],
+          "Team_2": [
+            "1",
+            "3",
+            "5",
+            "2",
+            "8",
+            "4",
+            "6",
+            "7"
+          ],
+          "Match_Date": [
+            "2008-04-18",
+            "2008-04-19",
+            "2008-04-20",
+            "2008-04-21",
+            "2008-04-22",
+            "2008-04-23",
+            "2008-04-24",
+            "2008-04-25"
+          ],
+          "Season_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Venue_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Toss_Winner": [
+            "2",
+            "3",
+            "5",
+            "7",
+            "8",
+            "4",
+            "1",
+            "6"
+          ],
+          "Toss_Decide": [
+            "1",
+            "2"
+          ],
+          "Win_Type": [
+            "1",
+            "2",
+            "4",
+            "3"
+          ],
+          "Win_Margin": [
+            "140",
+            "33",
+            "9",
+            "5",
+            "6",
+            "3",
+            "66",
+            "7"
+          ],
+          "Outcome_type": [
+            "1",
+            "3",
+            "2"
+          ],
+          "Match_Winner": [
+            "1",
+            "3",
+            "6",
+            "2",
+            "5",
+            "4",
+            "8",
+            "7"
+          ],
+          "Man_of_the_Match": [
+            "2",
+            "19",
+            "90",
+            "11",
+            "4",
+            "32",
+            "41",
+            "18"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Out_Type": {
+        "rows": 9,
+        "sample_values": {
+          "Out_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Out_Name": [
+            "caught",
+            "bowled",
+            "run out",
+            "lbw",
+            "retired hurt",
+            "stumped",
+            "caught and bowled",
+            "hit wicket"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Outcome": {
+        "rows": 3,
+        "sample_values": {
+          "Outcome_Id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Outcome_Type": [
+            "Result",
+            "No Result",
+            "Superover"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Player": {
+        "rows": 469,
+        "sample_values": {
+          "Player_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Player_Name": [
+            "SC Ganguly",
+            "BB McCullum",
+            "RT Ponting",
+            "DJ Hussey",
+            "Mohammad Hafeez",
+            "R Dravid",
+            "W Jaffer",
+            "V Kohli"
+          ],
+          "DOB": [
+            "1972-07-08",
+            "1981-09-27",
+            "1974-12-19",
+            "1977-07-15",
+            "1980-10-17",
+            "1973-01-11",
+            "1978-02-16",
+            "1988-11-05"
+          ],
+          "Batting_hand": [
+            "1",
+            "2"
+          ],
+          "Bowling_skill": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Country_Name": [
+            "1",
+            "4",
+            "5",
+            "6",
+            "2",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Player_Match": {
+        "rows": 10000,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Player_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Role_Id": [
+            "1",
+            "3",
+            "2",
+            "4"
+          ],
+          "Team_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Rolee": {
+        "rows": 4,
+        "sample_values": {
+          "Role_Id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Role_Desc": [
+            "Captain",
+            "Keeper",
+            "Player",
+            "CaptainKeeper"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Season": {
+        "rows": 9,
+        "sample_values": {
+          "Season_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Man_of_the_Series": [
+            "32",
+            "53",
+            "133",
+            "162",
+            "315",
+            "305",
+            "334",
+            "8"
+          ],
+          "Orange_Cap": [
+            "100",
+            "18",
+            "133",
+            "162",
+            "19",
+            "46",
+            "187",
+            "8"
+          ],
+          "Purple_Cap": [
+            "102",
+            "61",
+            "131",
+            "194",
+            "190",
+            "71",
+            "364",
+            "299"
+          ],
+          "Season_Year": [
+            "2008",
+            "2009",
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Team": {
+        "rows": 13,
+        "sample_values": {
+          "Team_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Team_Name": [
+            "Kolkata Knight Riders",
+            "Royal Challengers Bangalore",
+            "Chennai Super Kings",
+            "Kings XI Punjab",
+            "Rajasthan Royals",
+            "Delhi Daredevils",
+            "Mumbai Indians",
+            "Deccan Chargers"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Toss_Decision": {
+        "rows": 2,
+        "sample_values": {
+          "Toss_Id": [
+            "1",
+            "2"
+          ],
+          "Toss_Name": [
+            "field",
+            "bat"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Umpire": {
+        "rows": 52,
+        "sample_values": {
+          "Umpire_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Umpire_Name": [
+            "Asad Rauf",
+            "MR Benson",
+            "Aleem Dar",
+            "SJ Davis",
+            "BF Bowden",
+            "IL Howell",
+            "DJ Harper",
+            "RE Koertzen"
+          ],
+          "Umpire_Country": [
+            "6",
+            "10",
+            "4",
+            "2",
+            "5",
+            "8",
+            "1",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Venue": {
+        "rows": 35,
+        "sample_values": {
+          "Venue_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Venue_Name": [
+            "M Chinnaswamy Stadium",
+            "Punjab Cricket Association Stadium",
+            "Feroz Shah Kotla",
+            "Wankhede Stadium",
+            "Eden Gardens",
+            "Sawai Mansingh Stadium",
+            "Rajiv Gandhi International Stadium",
+            "MA Chidambaram Stadium"
+          ],
+          "City_Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Wicket_Taken": {
+        "rows": 6727,
+        "sample_values": {
+          "Match_Id": [
+            "335987",
+            "335988",
+            "335989",
+            "335990",
+            "335991",
+            "335992",
+            "335993",
+            "335994"
+          ],
+          "Over_Id": [
+            "2",
+            "3",
+            "5",
+            "6",
+            "8",
+            "9",
+            "12",
+            "13"
+          ],
+          "Ball_Id": [
+            "1",
+            "2",
+            "5",
+            "8",
+            "6",
+            "3",
+            "4",
+            "7"
+          ],
+          "Player_Out": [
+            "6",
+            "8",
+            "9",
+            "1",
+            "7",
+            "11",
+            "12",
+            "10"
+          ],
+          "Kind_Out": [
+            "2",
+            "1",
+            "3",
+            "4",
+            "5",
+            "7",
+            "6",
+            "8"
+          ],
+          "Fielders": [
+            "83",
+            "9",
+            "3",
+            "62",
+            "82",
+            "14",
+            "2",
+            "10"
+          ],
+          "Innings_No": [
+            "2",
+            "1",
+            "3",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Win_By": {
+        "rows": 4,
+        "sample_values": {
+          "Win_Id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Win_Type": [
+            "runs",
+            "wickets",
+            "NO Result",
+            "Tie"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Training Metrics Dashboard",
+  "capability": [
+    "compute_aggregates",
+    "summarize_from_records",
+    "insert_block_at_position",
+    "add_exact_blocks",
+    "create_database",
+    "define_schema",
+    "build_relations",
+    "rollup_formula_schema",
+    "populate_rows"
+  ],
+  "question": "# Task: Training Metrics Dashboard\n## Objective Create a comprehensive Training Metrics Dashboard section in the Team Training Roadmap page that displays precise statistics and recommendations based on the Training Lessons database content.\n## Requirements\n### 1. Section Placement - Add new content immediately after the Learning Materials section (before\n  \"Use these lessons during onboarding\").\n\n### 2. Dashboard Header - **Type**: heading_3 - **Text**: \"📊 Training Metrics Dashboard\"\n### 3. Lesson Statistics Block - **Type**: callout - **Background Color**: Brown - **Icon**: None - **Title**: **Lesson Statistics** (bold, heading_3). Use the same color\n  scheme as other callout headings.\n- **Content**: Bulleted list with the following items in exact order:\n  - \"Total Lessons: [X]\" (count all entries in Training Lessons database)\n  - \"Completed: [X] ([Y]%)\" (count Status=\"Done\", calculate percentage to\n    1 decimal)\n  - \"In Progress: [X] ([Y]%)\" (count Status=\"In Progress\", calculate\n    percentage to 1 decimal)\n  - \"Beginner Level: [X] lessons ([Y] completed)\" (filter by Chapters\n    relation to Beginner Level)\n  - \"Intermediate Level: [X] lessons ([Y] completed)\" (filter by Chapters\n    relation to Intermediate Level)\n  - \"Advanced Level: [X] lessons ([Y] completed)\" (filter by Chapters\n    relation to Advanced Level)\n\n### 4. Completed Lessons Section - **Type**: toggle - **Text**: \"🏆 Completed Lessons (Click to expand)\" - **Nested Content**: Numbered list containing exactly 5 items\n  - List lessons with Status=\"Done\"\n\n### 5. Focus Areas Callout - Create a callout block immediately after the Completed Lessons toggle\n  with:\n  - Background color: blue_background\n  - Icon: 🎯 (target emoji)\n  - Content: \"Focus Areas: [3 training skills with lowest current\n    proficiency]\"\n"
+}

@@ -1,0 +1,36 @@
+{
+    "category": "lego",
+    "question": "Create a PostgreSQL function to handle inventory part transfers between LEGO sets with enhanced validation and audit capabilities. The LEGO warehouse management system needs to support transferring parts while maintaining data integrity and tracking transfer history.\n\n## Your Tasks:\n\n1. **Create the transfer function** — Implement a PostgreSQL function named `transfer_parts` with the following signature:\n   ```sql\n   CREATE OR REPLACE FUNCTION transfer_parts(\n       source_inventory_id INTEGER,\n       target_inventory_id INTEGER,\n       part_to_transfer_num VARCHAR,\n       color_to_transfer_id INTEGER,\n       quantity_to_transfer INTEGER,\n       transfer_reason VARCHAR DEFAULT 'manual_transfer'\n   ) RETURNS TEXT\n   ```\n\n2. **Create audit logging table** — Create a new table to track transfer history:\n   ```sql\n   CREATE TABLE inventory_transfer_log (\n       log_id SERIAL PRIMARY KEY,\n       transfer_timestamp TIMESTAMP DEFAULT NOW(),\n       source_inventory_id INTEGER NOT NULL,\n       target_inventory_id INTEGER NOT NULL,\n       part_num VARCHAR NOT NULL,\n       color_id INTEGER NOT NULL,\n       quantity_transferred INTEGER NOT NULL,\n       transfer_reason VARCHAR NOT NULL,\n       transfer_status VARCHAR NOT NULL CHECK (transfer_status IN ('success', 'failed')),\n       error_message TEXT\n   );\n   ```\n\n3. **Implement enhanced validation** — The function must perform these validations:\n\n   **Validation A: Basic Checks**\n   - Verify both inventory IDs exist in `lego_inventories` table\n   - Verify part exists in `lego_parts` table\n   - Verify color exists in `lego_colors` table\n   - Check source has sufficient quantity (including spare parts)\n   - Prevent self-transfers (source and target cannot be the same)\n\n   **Validation B: Business Rules**\n   - Maximum transfer quantity is 500 parts per operation\n   - Minimum transfer quantity is 1 part\n   - Source and target must be different inventories\n\n4. **Implement transactional logic** — The function must perform these operations within a single transaction:\n\n   **Step A: Pre-validation**\n   - Lock both inventory records using `SELECT ... FOR UPDATE`\n   - Perform all validation checks\n   - Calculate transfer feasibility\n\n   **Step B: Source Inventory Update**\n   - Decrease quantity in source inventory\n   - If quantity becomes zero, delete the row\n   - Handle spare parts appropriately (maintain `is_spare` flag)\n\n   **Step C: Target Inventory Update**\n   - Check if part exists in target inventory\n   - If exists: increase quantity\n   - If not exists: insert new record\n   - Handle spare parts appropriately\n\n   **Step D: Audit Logging**\n   - Log successful transfers with details\n   - Log failed transfers with error messages\n   - Include transfer reason and status\n\n5. **Error handling requirements**:\n   - Use `RAISE EXCEPTION` with descriptive error messages\n   - Handle all validation failures gracefully\n   - Ensure complete rollback on any failure\n   - Log all attempts (successful and failed)\n\n6. **Return value**:\n   - Return success message: `'Successfully transferred {quantity} parts ({part_num}, color_id: {color_id}) from inventory {source_id} to inventory {target_id}. Reason: {reason}'`\n   - Include transfer details and reason in the message\n\n## Function Requirements:\n\n- **Transaction Safety**: All operations wrapped in transaction block\n- **Data Integrity**: No partial updates possible\n- **Audit Trail**: Complete logging of all transfer attempts\n- **Validation**: Comprehensive input and business rule validation\n- **Error Recovery**: Failed transfers leave database unchanged\n- **Performance**: Use appropriate locking to prevent race conditions\n\n## Example Usage:\n\n```sql\n-- Basic transfer with reason\nSELECT transfer_parts(14469, 14686, '3024', 15, 100, 'inventory_adjustment');\n\n-- Transfer to new inventory (should create new record)\nSELECT transfer_parts(11124, 14686, '3001', 4, 50, 'part_redistribution');\n\n-- This should fail due to insufficient quantity\nSELECT transfer_parts(14469, 14686, '3024', 15, 2000, 'large_transfer');\n\n-- This should fail due to self-transfer\nSELECT transfer_parts(14469, 14469, '3024', 15, 10, 'self_transfer');\n```\n\n## Verification Criteria:\n\n- Function handles all validation rules correctly\n- Audit logging captures all transfer attempts\n- Failed transfers are properly logged with error details\n- Self-transfers are prevented\n- Quantity limits are enforced\n- Database state remains consistent after failures\n",
+    "use_specified_server": true,
+    "mcp_servers": [
+        {
+            "name": "postgres-pro"
+        }
+    ],
+    "output_format": {
+        "transfer_status": "Transactional inventory transfer function completion status"
+    },
+    "evaluators": [
+        {
+            "func": "raw",
+            "op": "postgres_transactional_inventory_transfer_verifier",
+            "value": "completed",
+            "op_args": {},
+            "desc": "Check if the AI agent implemented the transactional inventory transfer function with audit logging"
+        }
+    ],
+    "prepares": [
+        {
+            "prepare_func": "mcpmark_postgres_setup",
+            "prepare_args": {}
+        }
+    ],
+    "cleanups": [
+        {
+            "server": "mcpmark",
+            "tool": "",
+            "cleanup_func": "postgres_cleanup",
+            "cleanup_args": {}
+        }
+    ]
+}

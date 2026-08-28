@@ -1,0 +1,4002 @@
+[
+  {
+    "id": "lib_0001",
+    "target_repository": "BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0002",
+    "target_repository": "BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0003",
+    "target_repository": "ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0004",
+    "target_repository": "actions/starter-workflows"
+  },
+  {
+    "id": "lib_0005",
+    "target_repository": "aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0006",
+    "target_repository": "anchore/grype"
+  },
+  {
+    "id": "lib_0007",
+    "target_repository": "ansible-community/molecule"
+  },
+  {
+    "id": "lib_0008",
+    "target_repository": "aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0009",
+    "target_repository": "atuinsh/atuin"
+  },
+  {
+    "id": "lib_0010",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage"
+  },
+  {
+    "id": "lib_0011",
+    "target_repository": "axios/axios"
+  },
+  {
+    "id": "lib_0012",
+    "target_repository": "caddyserver/caddy"
+  },
+  {
+    "id": "lib_0013",
+    "target_repository": "chakra-ui/chakra-ui"
+  },
+  {
+    "id": "lib_0014",
+    "target_repository": "chalk/chalk"
+  },
+  {
+    "id": "lib_0015",
+    "target_repository": "charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0016",
+    "target_repository": "charmbracelet/glow"
+  },
+  {
+    "id": "lib_0017",
+    "target_repository": "charmbracelet/gum"
+  },
+  {
+    "id": "lib_0018",
+    "target_repository": "clap-rs/clap"
+  },
+  {
+    "id": "lib_0019",
+    "target_repository": "commander-js/commander.js"
+  },
+  {
+    "id": "lib_0020",
+    "target_repository": "cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0021",
+    "target_repository": "cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0022",
+    "target_repository": "dandavison/delta"
+  },
+  {
+    "id": "lib_0023",
+    "target_repository": "date-fns/date-fns"
+  },
+  {
+    "id": "lib_0024",
+    "target_repository": "docker/awesome-compose"
+  },
+  {
+    "id": "lib_0025",
+    "target_repository": "docker/compose"
+  },
+  {
+    "id": "lib_0026",
+    "target_repository": "encode/httpx"
+  },
+  {
+    "id": "lib_0027",
+    "target_repository": "encode/uvicorn"
+  },
+  {
+    "id": "lib_0028",
+    "target_repository": "eslint/eslint"
+  },
+  {
+    "id": "lib_0029",
+    "target_repository": "eza-community/eza"
+  },
+  {
+    "id": "lib_0030",
+    "target_repository": "facebook/react"
+  },
+  {
+    "id": "lib_0031",
+    "target_repository": "fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0032",
+    "target_repository": "gin-gonic/gin"
+  },
+  {
+    "id": "lib_0033",
+    "target_repository": "go-chi/chi"
+  },
+  {
+    "id": "lib_0034",
+    "target_repository": "gohugoio/hugo"
+  },
+  {
+    "id": "lib_0035",
+    "target_repository": "golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0036",
+    "target_repository": "google/zx"
+  },
+  {
+    "id": "lib_0037",
+    "target_repository": "grafana/loki"
+  },
+  {
+    "id": "lib_0038",
+    "target_repository": "hashicorp/packer"
+  },
+  {
+    "id": "lib_0039",
+    "target_repository": "hashicorp/vault"
+  },
+  {
+    "id": "lib_0040",
+    "target_repository": "helm/helm"
+  },
+  {
+    "id": "lib_0041",
+    "target_repository": "homebrew/brew"
+  },
+  {
+    "id": "lib_0042",
+    "target_repository": "httpie/httpie"
+  },
+  {
+    "id": "lib_0043",
+    "target_repository": "influxdata/telegraf"
+  },
+  {
+    "id": "lib_0044",
+    "target_repository": "jekyll/jekyll"
+  },
+  {
+    "id": "lib_0045",
+    "target_repository": "jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0046",
+    "target_repository": "jestjs/jest"
+  },
+  {
+    "id": "lib_0047",
+    "target_repository": "junegunn/fzf"
+  },
+  {
+    "id": "lib_0048",
+    "target_repository": "k3s-io/k3s"
+  },
+  {
+    "id": "lib_0049",
+    "target_repository": "kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0050",
+    "target_repository": "kubernetes/minikube"
+  },
+  {
+    "id": "lib_0051",
+    "target_repository": "laravel/laravel"
+  },
+  {
+    "id": "lib_0052",
+    "target_repository": "lodash/lodash"
+  },
+  {
+    "id": "lib_0053",
+    "target_repository": "nuxt/nuxt"
+  },
+  {
+    "id": "lib_0054",
+    "target_repository": "pallets/flask"
+  },
+  {
+    "id": "lib_0055",
+    "target_repository": "parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0056",
+    "target_repository": "pnpm/pnpm"
+  },
+  {
+    "id": "lib_0057",
+    "target_repository": "pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0058",
+    "target_repository": "prettier/prettier"
+  },
+  {
+    "id": "lib_0059",
+    "target_repository": "prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0060",
+    "target_repository": "prometheus/prometheus"
+  },
+  {
+    "id": "lib_0061",
+    "target_repository": "psf/black"
+  },
+  {
+    "id": "lib_0062",
+    "target_repository": "psf/requests"
+  },
+  {
+    "id": "lib_0063",
+    "target_repository": "pydantic/pydantic"
+  },
+  {
+    "id": "lib_0064",
+    "target_repository": "pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0065",
+    "target_repository": "python-poetry/poetry"
+  },
+  {
+    "id": "lib_0066",
+    "target_repository": "rails/rails"
+  },
+  {
+    "id": "lib_0067",
+    "target_repository": "react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0068",
+    "target_repository": "remix-run/remix"
+  },
+  {
+    "id": "lib_0069",
+    "target_repository": "restic/restic"
+  },
+  {
+    "id": "lib_0070",
+    "target_repository": "rollup/rollup"
+  },
+  {
+    "id": "lib_0071",
+    "target_repository": "rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0072",
+    "target_repository": "scrapy/scrapy"
+  },
+  {
+    "id": "lib_0073",
+    "target_repository": "serde-rs/serde"
+  },
+  {
+    "id": "lib_0074",
+    "target_repository": "sharkdp/bat"
+  },
+  {
+    "id": "lib_0075",
+    "target_repository": "sharkdp/fd"
+  },
+  {
+    "id": "lib_0076",
+    "target_repository": "sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0077",
+    "target_repository": "spf13/cobra"
+  },
+  {
+    "id": "lib_0078",
+    "target_repository": "spf13/viper"
+  },
+  {
+    "id": "lib_0079",
+    "target_repository": "sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0080",
+    "target_repository": "starship/starship"
+  },
+  {
+    "id": "lib_0081",
+    "target_repository": "sveltejs/svelte"
+  },
+  {
+    "id": "lib_0082",
+    "target_repository": "t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0083",
+    "target_repository": "tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0084",
+    "target_repository": "tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0085",
+    "target_repository": "testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0086",
+    "target_repository": "tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0087",
+    "target_repository": "tiangolo/typer"
+  },
+  {
+    "id": "lib_0088",
+    "target_repository": "tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0089",
+    "target_repository": "tox-dev/tox"
+  },
+  {
+    "id": "lib_0090",
+    "target_repository": "urllib3/urllib3"
+  },
+  {
+    "id": "lib_0091",
+    "target_repository": "vercel/next.js"
+  },
+  {
+    "id": "lib_0092",
+    "target_repository": "vercel/turbo"
+  },
+  {
+    "id": "lib_0093",
+    "target_repository": "vitejs/vite"
+  },
+  {
+    "id": "lib_0094",
+    "target_repository": "vitest-dev/vitest"
+  },
+  {
+    "id": "lib_0095",
+    "target_repository": "vuejs/vue"
+  },
+  {
+    "id": "lib_0096",
+    "target_repository": "withastro/astro"
+  },
+  {
+    "id": "lib_0097",
+    "target_repository": "yargs/yargs"
+  },
+  {
+    "id": "lib_0098",
+    "target_repository": "yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0099",
+    "target_repository": "zellij-org/zellij"
+  },
+  {
+    "id": "lib_0100",
+    "target_repository": "zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0101",
+    "target_repository": "kubernetes/minikube, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0102",
+    "target_repository": "serde-rs/serde, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0103",
+    "target_repository": "k3s-io/k3s, docker/compose"
+  },
+  {
+    "id": "lib_0104",
+    "target_repository": "vercel/turbo, chakra-ui/chakra-ui"
+  },
+  {
+    "id": "lib_0105",
+    "target_repository": "encode/httpx, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0106",
+    "target_repository": "lodash/lodash, jestjs/jest"
+  },
+  {
+    "id": "lib_0107",
+    "target_repository": "eslint/eslint, parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0108",
+    "target_repository": "pytest-dev/pytest, psf/black"
+  },
+  {
+    "id": "lib_0109",
+    "target_repository": "sharkdp/bat, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0110",
+    "target_repository": "aio-libs/aiohttp, encode/httpx"
+  },
+  {
+    "id": "lib_0111",
+    "target_repository": "spf13/viper, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0112",
+    "target_repository": "chakra-ui/chakra-ui, axios/axios"
+  },
+  {
+    "id": "lib_0113",
+    "target_repository": "t3-oss/create-t3-app, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0114",
+    "target_repository": "cookiecutter/cookiecutter, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0115",
+    "target_repository": "jesseduffield/lazygit, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0116",
+    "target_repository": "urllib3/urllib3, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0117",
+    "target_repository": "helm/helm, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0118",
+    "target_repository": "eza-community/eza, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0119",
+    "target_repository": "grafana/loki, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0120",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0121",
+    "target_repository": "restic/restic, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0122",
+    "target_repository": "spf13/cobra, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0123",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0124",
+    "target_repository": "urllib3/urllib3, psf/black"
+  },
+  {
+    "id": "lib_0125",
+    "target_repository": "prometheus/prometheus, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0126",
+    "target_repository": "spf13/viper, go-chi/chi"
+  },
+  {
+    "id": "lib_0127",
+    "target_repository": "gohugoio/hugo, spf13/cobra"
+  },
+  {
+    "id": "lib_0128",
+    "target_repository": "actions/starter-workflows, junegunn/fzf"
+  },
+  {
+    "id": "lib_0129",
+    "target_repository": "hashicorp/packer, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0130",
+    "target_repository": "BurntSushi/ripgrep, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0131",
+    "target_repository": "influxdata/telegraf, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0132",
+    "target_repository": "tokio-rs/tokio, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0133",
+    "target_repository": "serde-rs/serde, sharkdp/bat"
+  },
+  {
+    "id": "lib_0134",
+    "target_repository": "fish-shell/fish-shell, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0135",
+    "target_repository": "yt-dlp/yt-dlp, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0136",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0137",
+    "target_repository": "ansible-community/molecule, helm/helm"
+  },
+  {
+    "id": "lib_0138",
+    "target_repository": "zsh-users/zsh-autosuggestions, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0139",
+    "target_repository": "t3-oss/create-t3-app, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0140",
+    "target_repository": "charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0141",
+    "target_repository": "zsh-users/zsh-autosuggestions, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0142",
+    "target_repository": "withastro/astro, vitejs/vite"
+  },
+  {
+    "id": "lib_0143",
+    "target_repository": "spf13/cobra, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0144",
+    "target_repository": "jekyll/jekyll, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0145",
+    "target_repository": "atuinsh/atuin, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0146",
+    "target_repository": "hashicorp/packer, grafana/loki"
+  },
+  {
+    "id": "lib_0147",
+    "target_repository": "pre-commit/pre-commit, google/zx"
+  },
+  {
+    "id": "lib_0148",
+    "target_repository": "sharkdp/hyperfine, sharkdp/fd"
+  },
+  {
+    "id": "lib_0149",
+    "target_repository": "rails/rails, laravel/laravel"
+  },
+  {
+    "id": "lib_0150",
+    "target_repository": "k3s-io/k3s, anchore/grype"
+  },
+  {
+    "id": "lib_0151",
+    "target_repository": "vuejs/vue, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0152",
+    "target_repository": "withastro/astro, vitest-dev/vitest"
+  },
+  {
+    "id": "lib_0153",
+    "target_repository": "dandavison/delta, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0154",
+    "target_repository": "tokio-rs/tokio, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0155",
+    "target_repository": "jekyll/jekyll, junegunn/fzf"
+  },
+  {
+    "id": "lib_0156",
+    "target_repository": "charmbracelet/glow, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0157",
+    "target_repository": "react-hook-form/react-hook-form, jestjs/jest"
+  },
+  {
+    "id": "lib_0158",
+    "target_repository": "charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0159",
+    "target_repository": "parcel-bundler/parcel, vercel/turbo"
+  },
+  {
+    "id": "lib_0160",
+    "target_repository": "gin-gonic/gin, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0161",
+    "target_repository": "vuejs/vue, axios/axios"
+  },
+  {
+    "id": "lib_0162",
+    "target_repository": "testing-library/react-testing-library, rollup/rollup"
+  },
+  {
+    "id": "lib_0163",
+    "target_repository": "rails/rails, homebrew/brew"
+  },
+  {
+    "id": "lib_0164",
+    "target_repository": "sharkdp/hyperfine, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0165",
+    "target_repository": "encode/uvicorn, tox-dev/tox"
+  },
+  {
+    "id": "lib_0166",
+    "target_repository": "spf13/viper, spf13/cobra"
+  },
+  {
+    "id": "lib_0167",
+    "target_repository": "eza-community/eza, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0168",
+    "target_repository": "vuejs/vue, rollup/rollup"
+  },
+  {
+    "id": "lib_0169",
+    "target_repository": "clap-rs/clap, eza-community/eza"
+  },
+  {
+    "id": "lib_0170",
+    "target_repository": "dandavison/delta, sharkdp/fd"
+  },
+  {
+    "id": "lib_0171",
+    "target_repository": "helm/helm, anchore/grype"
+  },
+  {
+    "id": "lib_0172",
+    "target_repository": "gin-gonic/gin, go-chi/chi"
+  },
+  {
+    "id": "lib_0173",
+    "target_repository": "pre-commit/pre-commit, rails/rails"
+  },
+  {
+    "id": "lib_0174",
+    "target_repository": "yt-dlp/yt-dlp, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0175",
+    "target_repository": "charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0176",
+    "target_repository": "charmbracelet/gum, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0177",
+    "target_repository": "urllib3/urllib3, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0178",
+    "target_repository": "encode/uvicorn, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0179",
+    "target_repository": "prometheus/node_exporter, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0180",
+    "target_repository": "axios/axios, chalk/chalk"
+  },
+  {
+    "id": "lib_0181",
+    "target_repository": "t3-oss/create-t3-app, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0182",
+    "target_repository": "cookiecutter/cookiecutter-django, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0183",
+    "target_repository": "sharkdp/bat, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0184",
+    "target_repository": "kubernetes-sigs/kind, docker/compose"
+  },
+  {
+    "id": "lib_0185",
+    "target_repository": "react-hook-form/react-hook-form, eslint/eslint"
+  },
+  {
+    "id": "lib_0186",
+    "target_repository": "encode/uvicorn, audreyfeldroy/cookiecutter-pypackage"
+  },
+  {
+    "id": "lib_0187",
+    "target_repository": "gin-gonic/gin, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0188",
+    "target_repository": "vercel/turbo, facebook/react"
+  },
+  {
+    "id": "lib_0189",
+    "target_repository": "rails/rails, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0190",
+    "target_repository": "kubernetes/minikube, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0191",
+    "target_repository": "jekyll/jekyll, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0192",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0193",
+    "target_repository": "prometheus/node_exporter, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0194",
+    "target_repository": "tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0195",
+    "target_repository": "BurntSushi/ripgrep, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0196",
+    "target_repository": "charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0197",
+    "target_repository": "hashicorp/packer, anchore/grype"
+  },
+  {
+    "id": "lib_0198",
+    "target_repository": "scrapy/scrapy, encode/httpx"
+  },
+  {
+    "id": "lib_0199",
+    "target_repository": "restic/restic, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0200",
+    "target_repository": "grafana/loki, docker/compose"
+  },
+  {
+    "id": "lib_0201",
+    "target_repository": "date-fns/date-fns, jestjs/jest"
+  },
+  {
+    "id": "lib_0202",
+    "target_repository": "chakra-ui/chakra-ui, date-fns/date-fns"
+  },
+  {
+    "id": "lib_0203",
+    "target_repository": "sharkdp/fd, eza-community/eza"
+  },
+  {
+    "id": "lib_0204",
+    "target_repository": "tiangolo/fastapi, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0205",
+    "target_repository": "caddyserver/caddy, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0206",
+    "target_repository": "psf/requests, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0207",
+    "target_repository": "caddyserver/caddy, grafana/loki"
+  },
+  {
+    "id": "lib_0208",
+    "target_repository": "sveltejs/svelte, facebook/react"
+  },
+  {
+    "id": "lib_0209",
+    "target_repository": "clap-rs/clap, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0210",
+    "target_repository": "psf/requests, encode/httpx"
+  },
+  {
+    "id": "lib_0211",
+    "target_repository": "eza-community/eza, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0212",
+    "target_repository": "rust-lang/mdBook, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0213",
+    "target_repository": "cookiecutter/cookiecutter, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0214",
+    "target_repository": "laravel/laravel, restic/restic"
+  },
+  {
+    "id": "lib_0215",
+    "target_repository": "pydantic/pydantic, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0216",
+    "target_repository": "tauri-apps/tauri, sharkdp/bat"
+  },
+  {
+    "id": "lib_0217",
+    "target_repository": "eza-community/eza, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0218",
+    "target_repository": "ansible-community/molecule, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0219",
+    "target_repository": "sharkdp/bat, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0220",
+    "target_repository": "k3s-io/k3s, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0221",
+    "target_repository": "lodash/lodash, jestjs/jest"
+  },
+  {
+    "id": "lib_0222",
+    "target_repository": "gohugoio/hugo, spf13/cobra"
+  },
+  {
+    "id": "lib_0223",
+    "target_repository": "hashicorp/vault, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0224",
+    "target_repository": "cookiecutter/cookiecutter-django, urllib3/urllib3"
+  },
+  {
+    "id": "lib_0225",
+    "target_repository": "rails/rails, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0226",
+    "target_repository": "parcel-bundler/parcel, vitejs/vite"
+  },
+  {
+    "id": "lib_0227",
+    "target_repository": "rails/rails, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0228",
+    "target_repository": "clap-rs/clap, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0229",
+    "target_repository": "junegunn/fzf, restic/restic"
+  },
+  {
+    "id": "lib_0230",
+    "target_repository": "tiangolo/fastapi, httpie/httpie"
+  },
+  {
+    "id": "lib_0231",
+    "target_repository": "sharkdp/fd, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0232",
+    "target_repository": "hashicorp/vault, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0233",
+    "target_repository": "hashicorp/packer, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0234",
+    "target_repository": "k3s-io/k3s, anchore/grype"
+  },
+  {
+    "id": "lib_0235",
+    "target_repository": "restic/restic, google/zx"
+  },
+  {
+    "id": "lib_0236",
+    "target_repository": "spf13/viper, go-chi/chi"
+  },
+  {
+    "id": "lib_0237",
+    "target_repository": "jekyll/jekyll, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0238",
+    "target_repository": "testing-library/react-testing-library, parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0239",
+    "target_repository": "aio-libs/aiohttp, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0240",
+    "target_repository": "facebook/react, prettier/prettier"
+  },
+  {
+    "id": "lib_0241",
+    "target_repository": "jestjs/jest, rollup/rollup"
+  },
+  {
+    "id": "lib_0242",
+    "target_repository": "golang-standards/project-layout, spf13/viper"
+  },
+  {
+    "id": "lib_0243",
+    "target_repository": "vercel/next.js, lodash/lodash"
+  },
+  {
+    "id": "lib_0244",
+    "target_repository": "sveltejs/svelte, yargs/yargs"
+  },
+  {
+    "id": "lib_0245",
+    "target_repository": "charmbracelet/glow, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0246",
+    "target_repository": "docker/compose, anchore/grype"
+  },
+  {
+    "id": "lib_0247",
+    "target_repository": "sharkdp/fd, clap-rs/clap"
+  },
+  {
+    "id": "lib_0248",
+    "target_repository": "sharkdp/fd, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0249",
+    "target_repository": "k3s-io/k3s, hashicorp/packer"
+  },
+  {
+    "id": "lib_0250",
+    "target_repository": "date-fns/date-fns, rollup/rollup"
+  },
+  {
+    "id": "lib_0251",
+    "target_repository": "chakra-ui/chakra-ui, pnpm/pnpm"
+  },
+  {
+    "id": "lib_0252",
+    "target_repository": "rollup/rollup, facebook/react"
+  },
+  {
+    "id": "lib_0253",
+    "target_repository": "gin-gonic/gin, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0254",
+    "target_repository": "aquasecurity/trivy, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0255",
+    "target_repository": "vercel/next.js, testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0256",
+    "target_repository": "charmbracelet/bubbletea, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0257",
+    "target_repository": "golang-standards/project-layout, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0258",
+    "target_repository": "psf/requests, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0259",
+    "target_repository": "httpie/httpie, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0260",
+    "target_repository": "lodash/lodash, prettier/prettier"
+  },
+  {
+    "id": "lib_0261",
+    "target_repository": "tiangolo/fastapi, audreyfeldroy/cookiecutter-pypackage"
+  },
+  {
+    "id": "lib_0262",
+    "target_repository": "httpie/httpie, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0263",
+    "target_repository": "caddyserver/caddy, hashicorp/packer"
+  },
+  {
+    "id": "lib_0264",
+    "target_repository": "tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0265",
+    "target_repository": "pydantic/pydantic, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0266",
+    "target_repository": "spf13/viper, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0267",
+    "target_repository": "yt-dlp/yt-dlp, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0268",
+    "target_repository": "pydantic/pydantic, httpie/httpie"
+  },
+  {
+    "id": "lib_0269",
+    "target_repository": "charmbracelet/gum, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0270",
+    "target_repository": "facebook/react, jestjs/jest"
+  },
+  {
+    "id": "lib_0271",
+    "target_repository": "tokio-rs/tokio, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0272",
+    "target_repository": "eza-community/eza, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0273",
+    "target_repository": "psf/requests, aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0274",
+    "target_repository": "jekyll/jekyll, junegunn/fzf"
+  },
+  {
+    "id": "lib_0275",
+    "target_repository": "prometheus/prometheus, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0276",
+    "target_repository": "helm/helm, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0277",
+    "target_repository": "clap-rs/clap, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0278",
+    "target_repository": "charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0279",
+    "target_repository": "aquasecurity/trivy, grafana/loki"
+  },
+  {
+    "id": "lib_0280",
+    "target_repository": "restic/restic, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0281",
+    "target_repository": "pydantic/pydantic, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0282",
+    "target_repository": "psf/black, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0283",
+    "target_repository": "sharkdp/fd, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0284",
+    "target_repository": "psf/requests, pallets/flask"
+  },
+  {
+    "id": "lib_0285",
+    "target_repository": "homebrew/brew, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0286",
+    "target_repository": "eza-community/eza, dandavison/delta"
+  },
+  {
+    "id": "lib_0287",
+    "target_repository": "rust-lang/mdBook, sharkdp/fd"
+  },
+  {
+    "id": "lib_0288",
+    "target_repository": "pytest-dev/pytest, httpie/httpie"
+  },
+  {
+    "id": "lib_0289",
+    "target_repository": "sveltejs/svelte, pnpm/pnpm"
+  },
+  {
+    "id": "lib_0290",
+    "target_repository": "lodash/lodash, vuejs/vue"
+  },
+  {
+    "id": "lib_0291",
+    "target_repository": "atuinsh/atuin, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0292",
+    "target_repository": "yargs/yargs, eslint/eslint"
+  },
+  {
+    "id": "lib_0293",
+    "target_repository": "vitest-dev/vitest, vitejs/vite"
+  },
+  {
+    "id": "lib_0294",
+    "target_repository": "BurntSushi/xsv, starship/starship"
+  },
+  {
+    "id": "lib_0295",
+    "target_repository": "gin-gonic/gin, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0296",
+    "target_repository": "actions/starter-workflows, laravel/laravel"
+  },
+  {
+    "id": "lib_0297",
+    "target_repository": "pre-commit/pre-commit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0298",
+    "target_repository": "prometheus/node_exporter, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0299",
+    "target_repository": "date-fns/date-fns, sveltejs/svelte"
+  },
+  {
+    "id": "lib_0300",
+    "target_repository": "spf13/viper, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0301",
+    "target_repository": "golang-standards/project-layout, go-chi/chi"
+  },
+  {
+    "id": "lib_0302",
+    "target_repository": "sharkdp/fd, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0303",
+    "target_repository": "urllib3/urllib3, aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0304",
+    "target_repository": "rust-lang/mdBook, clap-rs/clap"
+  },
+  {
+    "id": "lib_0305",
+    "target_repository": "chakra-ui/chakra-ui, yargs/yargs"
+  },
+  {
+    "id": "lib_0306",
+    "target_repository": "fish-shell/fish-shell, restic/restic"
+  },
+  {
+    "id": "lib_0307",
+    "target_repository": "grafana/loki, docker/compose"
+  },
+  {
+    "id": "lib_0308",
+    "target_repository": "starship/starship, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0309",
+    "target_repository": "cookiecutter/cookiecutter-django, encode/httpx"
+  },
+  {
+    "id": "lib_0310",
+    "target_repository": "clap-rs/clap, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0311",
+    "target_repository": "gin-gonic/gin, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0312",
+    "target_repository": "encode/httpx, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0313",
+    "target_repository": "go-chi/chi, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0314",
+    "target_repository": "eslint/eslint, testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0315",
+    "target_repository": "vitejs/vite, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0316",
+    "target_repository": "withastro/astro, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0317",
+    "target_repository": "prometheus/prometheus, hashicorp/vault"
+  },
+  {
+    "id": "lib_0318",
+    "target_repository": "sharkdp/hyperfine, clap-rs/clap"
+  },
+  {
+    "id": "lib_0319",
+    "target_repository": "jesseduffield/lazygit, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0320",
+    "target_repository": "charmbracelet/gum, go-chi/chi"
+  },
+  {
+    "id": "lib_0321",
+    "target_repository": "prettier/prettier, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0322",
+    "target_repository": "t3-oss/create-t3-app, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0323",
+    "target_repository": "docker/awesome-compose, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0324",
+    "target_repository": "actions/starter-workflows, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0325",
+    "target_repository": "restic/restic, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0326",
+    "target_repository": "BurntSushi/ripgrep, clap-rs/clap"
+  },
+  {
+    "id": "lib_0327",
+    "target_repository": "laravel/laravel, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0328",
+    "target_repository": "caddyserver/caddy, hashicorp/vault"
+  },
+  {
+    "id": "lib_0329",
+    "target_repository": "dandavison/delta, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0330",
+    "target_repository": "aquasecurity/trivy, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0331",
+    "target_repository": "restic/restic, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0332",
+    "target_repository": "gin-gonic/gin, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0333",
+    "target_repository": "prettier/prettier, rollup/rollup"
+  },
+  {
+    "id": "lib_0334",
+    "target_repository": "testing-library/react-testing-library, facebook/react"
+  },
+  {
+    "id": "lib_0335",
+    "target_repository": "rollup/rollup, axios/axios"
+  },
+  {
+    "id": "lib_0336",
+    "target_repository": "fish-shell/fish-shell, remix-run/remix"
+  },
+  {
+    "id": "lib_0337",
+    "target_repository": "kubernetes-sigs/kind, grafana/loki"
+  },
+  {
+    "id": "lib_0338",
+    "target_repository": "tox-dev/tox, encode/uvicorn"
+  },
+  {
+    "id": "lib_0339",
+    "target_repository": "kubernetes-sigs/kind, docker/compose"
+  },
+  {
+    "id": "lib_0340",
+    "target_repository": "psf/requests, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0341",
+    "target_repository": "gin-gonic/gin, go-chi/chi"
+  },
+  {
+    "id": "lib_0342",
+    "target_repository": "golang-standards/project-layout, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0343",
+    "target_repository": "ClementTsang/bottom, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0344",
+    "target_repository": "golang-standards/project-layout, spf13/viper"
+  },
+  {
+    "id": "lib_0345",
+    "target_repository": "hashicorp/packer, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0346",
+    "target_repository": "cookiecutter/cookiecutter, aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0347",
+    "target_repository": "prometheus/prometheus, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0348",
+    "target_repository": "ansible-community/molecule, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0349",
+    "target_repository": "golang-standards/project-layout, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0350",
+    "target_repository": "dandavison/delta, clap-rs/clap"
+  },
+  {
+    "id": "lib_0351",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0352",
+    "target_repository": "rust-lang/mdBook, dandavison/delta"
+  },
+  {
+    "id": "lib_0353",
+    "target_repository": "ansible-community/molecule, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0354",
+    "target_repository": "pre-commit/pre-commit, rails/rails"
+  },
+  {
+    "id": "lib_0355",
+    "target_repository": "rails/rails, laravel/laravel"
+  },
+  {
+    "id": "lib_0356",
+    "target_repository": "encode/uvicorn, psf/requests"
+  },
+  {
+    "id": "lib_0357",
+    "target_repository": "chakra-ui/chakra-ui, date-fns/date-fns"
+  },
+  {
+    "id": "lib_0358",
+    "target_repository": "google/zx, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0359",
+    "target_repository": "jestjs/jest, vitejs/vite"
+  },
+  {
+    "id": "lib_0360",
+    "target_repository": "kubernetes/minikube, hashicorp/packer"
+  },
+  {
+    "id": "lib_0361",
+    "target_repository": "atuinsh/atuin, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0362",
+    "target_repository": "ansible-community/molecule, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0363",
+    "target_repository": "aquasecurity/trivy, anchore/grype"
+  },
+  {
+    "id": "lib_0364",
+    "target_repository": "kubernetes/minikube, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0365",
+    "target_repository": "urllib3/urllib3, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0366",
+    "target_repository": "charmbracelet/bubbletea, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0367",
+    "target_repository": "starship/starship, sharkdp/fd"
+  },
+  {
+    "id": "lib_0368",
+    "target_repository": "sqlalchemy/sqlalchemy, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0369",
+    "target_repository": "influxdata/telegraf, hashicorp/packer"
+  },
+  {
+    "id": "lib_0370",
+    "target_repository": "rust-lang/mdBook, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0371",
+    "target_repository": "kubernetes-sigs/kind, grafana/loki"
+  },
+  {
+    "id": "lib_0372",
+    "target_repository": "sharkdp/fd, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0373",
+    "target_repository": "BurntSushi/xsv, sharkdp/fd"
+  },
+  {
+    "id": "lib_0374",
+    "target_repository": "spf13/viper, spf13/cobra"
+  },
+  {
+    "id": "lib_0375",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0376",
+    "target_repository": "chalk/chalk, sveltejs/svelte"
+  },
+  {
+    "id": "lib_0377",
+    "target_repository": "tauri-apps/tauri, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0378",
+    "target_repository": "kubernetes/minikube, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0379",
+    "target_repository": "jesseduffield/lazygit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0380",
+    "target_repository": "psf/requests, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0381",
+    "target_repository": "tox-dev/tox, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0382",
+    "target_repository": "nuxt/nuxt, prettier/prettier"
+  },
+  {
+    "id": "lib_0383",
+    "target_repository": "gohugoio/hugo, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0384",
+    "target_repository": "golang-standards/project-layout, spf13/viper"
+  },
+  {
+    "id": "lib_0385",
+    "target_repository": "charmbracelet/bubbletea, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0386",
+    "target_repository": "gohugoio/hugo, go-chi/chi"
+  },
+  {
+    "id": "lib_0387",
+    "target_repository": "python-poetry/poetry, tiangolo/typer"
+  },
+  {
+    "id": "lib_0388",
+    "target_repository": "influxdata/telegraf, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0389",
+    "target_repository": "t3-oss/create-t3-app, restic/restic"
+  },
+  {
+    "id": "lib_0390",
+    "target_repository": "lodash/lodash, vercel/turbo"
+  },
+  {
+    "id": "lib_0391",
+    "target_repository": "cookiecutter/cookiecutter, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0392",
+    "target_repository": "encode/httpx, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0393",
+    "target_repository": "t3-oss/create-t3-app, homebrew/brew"
+  },
+  {
+    "id": "lib_0394",
+    "target_repository": "rails/rails, restic/restic"
+  },
+  {
+    "id": "lib_0395",
+    "target_repository": "hashicorp/packer, docker/compose"
+  },
+  {
+    "id": "lib_0396",
+    "target_repository": "vitejs/vite, pnpm/pnpm"
+  },
+  {
+    "id": "lib_0397",
+    "target_repository": "charmbracelet/glow, spf13/cobra"
+  },
+  {
+    "id": "lib_0398",
+    "target_repository": "serde-rs/serde, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0399",
+    "target_repository": "grafana/loki, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0400",
+    "target_repository": "sharkdp/bat, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0401",
+    "target_repository": "tailwindlabs/tailwindcss, eslint/eslint"
+  },
+  {
+    "id": "lib_0402",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0403",
+    "target_repository": "cookiecutter/cookiecutter-django, encode/uvicorn"
+  },
+  {
+    "id": "lib_0404",
+    "target_repository": "prometheus/node_exporter, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0405",
+    "target_repository": "gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0406",
+    "target_repository": "tiangolo/typer, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0407",
+    "target_repository": "pnpm/pnpm, vercel/next.js"
+  },
+  {
+    "id": "lib_0408",
+    "target_repository": "vitejs/vite, vercel/next.js"
+  },
+  {
+    "id": "lib_0409",
+    "target_repository": "gohugoio/hugo, go-chi/chi"
+  },
+  {
+    "id": "lib_0410",
+    "target_repository": "t3-oss/create-t3-app, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0411",
+    "target_repository": "encode/uvicorn, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0412",
+    "target_repository": "yargs/yargs, testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0413",
+    "target_repository": "eslint/eslint, yargs/yargs"
+  },
+  {
+    "id": "lib_0414",
+    "target_repository": "urllib3/urllib3, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0415",
+    "target_repository": "testing-library/react-testing-library, pnpm/pnpm"
+  },
+  {
+    "id": "lib_0416",
+    "target_repository": "httpie/httpie, encode/httpx"
+  },
+  {
+    "id": "lib_0417",
+    "target_repository": "gin-gonic/gin, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0418",
+    "target_repository": "ansible-community/molecule, helm/helm"
+  },
+  {
+    "id": "lib_0419",
+    "target_repository": "golang-standards/project-layout, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0420",
+    "target_repository": "lodash/lodash, chalk/chalk"
+  },
+  {
+    "id": "lib_0421",
+    "target_repository": "charmbracelet/bubbletea, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0422",
+    "target_repository": "prometheus/prometheus, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0423",
+    "target_repository": "go-chi/chi, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0424",
+    "target_repository": "spf13/cobra, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0425",
+    "target_repository": "t3-oss/create-t3-app, junegunn/fzf"
+  },
+  {
+    "id": "lib_0426",
+    "target_repository": "charmbracelet/gum, spf13/cobra"
+  },
+  {
+    "id": "lib_0427",
+    "target_repository": "date-fns/date-fns, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0428",
+    "target_repository": "pre-commit/pre-commit, homebrew/brew"
+  },
+  {
+    "id": "lib_0429",
+    "target_repository": "BurntSushi/ripgrep, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0430",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0431",
+    "target_repository": "ansible-community/molecule, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0432",
+    "target_repository": "cookiecutter/cookiecutter, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0433",
+    "target_repository": "sharkdp/fd, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0434",
+    "target_repository": "sharkdp/hyperfine, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0435",
+    "target_repository": "grafana/loki, hashicorp/vault"
+  },
+  {
+    "id": "lib_0436",
+    "target_repository": "axios/axios, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0437",
+    "target_repository": "zellij-org/zellij, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0438",
+    "target_repository": "tox-dev/tox, pallets/flask"
+  },
+  {
+    "id": "lib_0439",
+    "target_repository": "serde-rs/serde, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0440",
+    "target_repository": "hashicorp/packer, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0441",
+    "target_repository": "restic/restic, rails/rails"
+  },
+  {
+    "id": "lib_0442",
+    "target_repository": "anchore/grype, grafana/loki"
+  },
+  {
+    "id": "lib_0443",
+    "target_repository": "prometheus/node_exporter, hashicorp/packer"
+  },
+  {
+    "id": "lib_0444",
+    "target_repository": "atuinsh/atuin, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0445",
+    "target_repository": "go-chi/chi, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0446",
+    "target_repository": "vitejs/vite, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0447",
+    "target_repository": "anchore/grype, grafana/loki"
+  },
+  {
+    "id": "lib_0448",
+    "target_repository": "tox-dev/tox, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0449",
+    "target_repository": "spf13/viper, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0450",
+    "target_repository": "facebook/react, axios/axios"
+  },
+  {
+    "id": "lib_0451",
+    "target_repository": "BurntSushi/ripgrep, serde-rs/serde"
+  },
+  {
+    "id": "lib_0452",
+    "target_repository": "psf/requests, pallets/flask"
+  },
+  {
+    "id": "lib_0453",
+    "target_repository": "charmbracelet/glow, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0454",
+    "target_repository": "react-hook-form/react-hook-form, sveltejs/svelte"
+  },
+  {
+    "id": "lib_0455",
+    "target_repository": "vitest-dev/vitest, withastro/astro"
+  },
+  {
+    "id": "lib_0456",
+    "target_repository": "python-poetry/poetry, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0457",
+    "target_repository": "docker/compose, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0458",
+    "target_repository": "jekyll/jekyll, remix-run/remix"
+  },
+  {
+    "id": "lib_0459",
+    "target_repository": "BurntSushi/ripgrep, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0460",
+    "target_repository": "tokio-rs/tokio, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0461",
+    "target_repository": "prometheus/prometheus, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0462",
+    "target_repository": "golang-standards/project-layout, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0463",
+    "target_repository": "tailwindlabs/tailwindcss, jestjs/jest"
+  },
+  {
+    "id": "lib_0464",
+    "target_repository": "tiangolo/typer, audreyfeldroy/cookiecutter-pypackage"
+  },
+  {
+    "id": "lib_0465",
+    "target_repository": "laravel/laravel, google/zx"
+  },
+  {
+    "id": "lib_0466",
+    "target_repository": "pre-commit/pre-commit, remix-run/remix"
+  },
+  {
+    "id": "lib_0467",
+    "target_repository": "dandavison/delta, serde-rs/serde"
+  },
+  {
+    "id": "lib_0468",
+    "target_repository": "tauri-apps/tauri, starship/starship"
+  },
+  {
+    "id": "lib_0469",
+    "target_repository": "httpie/httpie, encode/uvicorn"
+  },
+  {
+    "id": "lib_0470",
+    "target_repository": "cookiecutter/cookiecutter, tiangolo/typer"
+  },
+  {
+    "id": "lib_0471",
+    "target_repository": "zellij-org/zellij, eza-community/eza"
+  },
+  {
+    "id": "lib_0472",
+    "target_repository": "docker/compose, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0473",
+    "target_repository": "encode/uvicorn, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0474",
+    "target_repository": "tokio-rs/tokio, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0475",
+    "target_repository": "ClementTsang/bottom, serde-rs/serde"
+  },
+  {
+    "id": "lib_0476",
+    "target_repository": "aio-libs/aiohttp, tox-dev/tox"
+  },
+  {
+    "id": "lib_0477",
+    "target_repository": "pytest-dev/pytest, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0478",
+    "target_repository": "homebrew/brew, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0479",
+    "target_repository": "psf/requests, encode/uvicorn"
+  },
+  {
+    "id": "lib_0480",
+    "target_repository": "google/zx, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0481",
+    "target_repository": "k3s-io/k3s, hashicorp/packer"
+  },
+  {
+    "id": "lib_0482",
+    "target_repository": "hashicorp/packer, docker/compose"
+  },
+  {
+    "id": "lib_0483",
+    "target_repository": "charmbracelet/glow, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0484",
+    "target_repository": "ansible-community/molecule, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0485",
+    "target_repository": "vuejs/vue, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0486",
+    "target_repository": "ClementTsang/bottom, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0487",
+    "target_repository": "prometheus/prometheus, grafana/loki"
+  },
+  {
+    "id": "lib_0488",
+    "target_repository": "k3s-io/k3s, grafana/loki"
+  },
+  {
+    "id": "lib_0489",
+    "target_repository": "clap-rs/clap, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0490",
+    "target_repository": "gohugoio/hugo, spf13/cobra"
+  },
+  {
+    "id": "lib_0491",
+    "target_repository": "golang-standards/project-layout, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0492",
+    "target_repository": "google/zx, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0493",
+    "target_repository": "fish-shell/fish-shell, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0494",
+    "target_repository": "aio-libs/aiohttp, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0495",
+    "target_repository": "junegunn/fzf, remix-run/remix"
+  },
+  {
+    "id": "lib_0496",
+    "target_repository": "dandavison/delta, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0497",
+    "target_repository": "psf/black, encode/uvicorn"
+  },
+  {
+    "id": "lib_0498",
+    "target_repository": "jesseduffield/lazygit, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0499",
+    "target_repository": "pydantic/pydantic, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0500",
+    "target_repository": "remix-run/remix, laravel/laravel"
+  },
+  {
+    "id": "lib_0501",
+    "target_repository": "tox-dev/tox, encode/uvicorn"
+  },
+  {
+    "id": "lib_0502",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0503",
+    "target_repository": "testing-library/react-testing-library, vuejs/vue"
+  },
+  {
+    "id": "lib_0504",
+    "target_repository": "rails/rails, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0505",
+    "target_repository": "lodash/lodash, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0506",
+    "target_repository": "kubernetes-sigs/kind, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0507",
+    "target_repository": "spf13/viper, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0508",
+    "target_repository": "t3-oss/create-t3-app, homebrew/brew"
+  },
+  {
+    "id": "lib_0509",
+    "target_repository": "spf13/cobra, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0510",
+    "target_repository": "dandavison/delta, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0511",
+    "target_repository": "anchore/grype, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0512",
+    "target_repository": "remix-run/remix, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0513",
+    "target_repository": "BurntSushi/ripgrep, clap-rs/clap"
+  },
+  {
+    "id": "lib_0514",
+    "target_repository": "tiangolo/fastapi, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0515",
+    "target_repository": "charmbracelet/glow, spf13/cobra"
+  },
+  {
+    "id": "lib_0516",
+    "target_repository": "jesseduffield/lazygit, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0517",
+    "target_repository": "eza-community/eza, sharkdp/fd"
+  },
+  {
+    "id": "lib_0518",
+    "target_repository": "kubernetes-sigs/kind, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0519",
+    "target_repository": "eza-community/eza, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0520",
+    "target_repository": "BurntSushi/xsv, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0521",
+    "target_repository": "ansible-community/molecule, helm/helm"
+  },
+  {
+    "id": "lib_0522",
+    "target_repository": "actions/starter-workflows, homebrew/brew"
+  },
+  {
+    "id": "lib_0523",
+    "target_repository": "charmbracelet/glow, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0524",
+    "target_repository": "remix-run/remix, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0525",
+    "target_repository": "sharkdp/hyperfine, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0526",
+    "target_repository": "vitejs/vite, withastro/astro"
+  },
+  {
+    "id": "lib_0527",
+    "target_repository": "atuinsh/atuin, dandavison/delta"
+  },
+  {
+    "id": "lib_0528",
+    "target_repository": "charmbracelet/bubbletea, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0529",
+    "target_repository": "hashicorp/vault, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0530",
+    "target_repository": "vitejs/vite, lodash/lodash"
+  },
+  {
+    "id": "lib_0531",
+    "target_repository": "fish-shell/fish-shell, homebrew/brew"
+  },
+  {
+    "id": "lib_0532",
+    "target_repository": "junegunn/fzf, remix-run/remix"
+  },
+  {
+    "id": "lib_0533",
+    "target_repository": "prettier/prettier, chalk/chalk"
+  },
+  {
+    "id": "lib_0534",
+    "target_repository": "eza-community/eza, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0535",
+    "target_repository": "anchore/grype, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0536",
+    "target_repository": "prometheus/prometheus, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0537",
+    "target_repository": "tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0538",
+    "target_repository": "cookiecutter/cookiecutter-django, encode/uvicorn"
+  },
+  {
+    "id": "lib_0539",
+    "target_repository": "spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0540",
+    "target_repository": "t3-oss/create-t3-app, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0541",
+    "target_repository": "psf/black, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0542",
+    "target_repository": "tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0543",
+    "target_repository": "vuejs/vue, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0544",
+    "target_repository": "sharkdp/bat, clap-rs/clap"
+  },
+  {
+    "id": "lib_0545",
+    "target_repository": "psf/requests, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0546",
+    "target_repository": "homebrew/brew, restic/restic"
+  },
+  {
+    "id": "lib_0547",
+    "target_repository": "scrapy/scrapy, pallets/flask"
+  },
+  {
+    "id": "lib_0548",
+    "target_repository": "golang-standards/project-layout, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0549",
+    "target_repository": "gin-gonic/gin, spf13/viper"
+  },
+  {
+    "id": "lib_0550",
+    "target_repository": "dandavison/delta, clap-rs/clap"
+  },
+  {
+    "id": "lib_0551",
+    "target_repository": "pydantic/pydantic, aio-libs/aiohttp, pallets/flask"
+  },
+  {
+    "id": "lib_0552",
+    "target_repository": "encode/httpx, encode/uvicorn, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0553",
+    "target_repository": "commander-js/commander.js, nuxt/nuxt, vercel/next.js"
+  },
+  {
+    "id": "lib_0554",
+    "target_repository": "charmbracelet/glow, spf13/cobra, spf13/viper"
+  },
+  {
+    "id": "lib_0555",
+    "target_repository": "eza-community/eza, tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0556",
+    "target_repository": "gin-gonic/gin, gohugoio/hugo, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0557",
+    "target_repository": "yt-dlp/yt-dlp, tiangolo/typer, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0558",
+    "target_repository": "charmbracelet/gum, golang-standards/project-layout, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0559",
+    "target_repository": "caddyserver/caddy, docker/compose, helm/helm"
+  },
+  {
+    "id": "lib_0560",
+    "target_repository": "kubernetes/minikube, kubernetes-sigs/kind, anchore/grype"
+  },
+  {
+    "id": "lib_0561",
+    "target_repository": "encode/uvicorn, aio-libs/aiohttp, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0562",
+    "target_repository": "golang-standards/project-layout, charmbracelet/glow, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0563",
+    "target_repository": "zsh-users/zsh-autosuggestions, remix-run/remix, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0564",
+    "target_repository": "tiangolo/typer, cookiecutter/cookiecutter, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0565",
+    "target_repository": "prometheus/prometheus, kubernetes-sigs/kind, helm/helm"
+  },
+  {
+    "id": "lib_0566",
+    "target_repository": "laravel/laravel, jesseduffield/lazygit, restic/restic"
+  },
+  {
+    "id": "lib_0567",
+    "target_repository": "atuinsh/atuin, serde-rs/serde, clap-rs/clap"
+  },
+  {
+    "id": "lib_0568",
+    "target_repository": "gin-gonic/gin, go-chi/chi, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0569",
+    "target_repository": "prometheus/prometheus, caddyserver/caddy, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0570",
+    "target_repository": "kubernetes/minikube, kubernetes-sigs/kind, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0571",
+    "target_repository": "encode/uvicorn, tox-dev/tox, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0572",
+    "target_repository": "cookiecutter/cookiecutter, scrapy/scrapy, encode/uvicorn"
+  },
+  {
+    "id": "lib_0573",
+    "target_repository": "gin-gonic/gin, spf13/viper, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0574",
+    "target_repository": "sveltejs/svelte, lodash/lodash, prettier/prettier"
+  },
+  {
+    "id": "lib_0575",
+    "target_repository": "vercel/next.js, chakra-ui/chakra-ui, lodash/lodash"
+  },
+  {
+    "id": "lib_0576",
+    "target_repository": "atuinsh/atuin, sharkdp/fd, ClementTsang/bottom"
+  },
+  {
+    "id": "lib_0577",
+    "target_repository": "t3-oss/create-t3-app, remix-run/remix, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0578",
+    "target_repository": "gin-gonic/gin, charmbracelet/bubbletea, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0579",
+    "target_repository": "charmbracelet/gum, go-chi/chi, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0580",
+    "target_repository": "sharkdp/fd, zellij-org/zellij, dandavison/delta"
+  },
+  {
+    "id": "lib_0581",
+    "target_repository": "junegunn/fzf, pre-commit/pre-commit, rails/rails"
+  },
+  {
+    "id": "lib_0582",
+    "target_repository": "docker/compose, influxdata/telegraf, helm/helm"
+  },
+  {
+    "id": "lib_0583",
+    "target_repository": "restic/restic, rails/rails, google/zx"
+  },
+  {
+    "id": "lib_0584",
+    "target_repository": "golang-standards/project-layout, gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0585",
+    "target_repository": "tokio-rs/tokio, rust-lang/mdBook, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0586",
+    "target_repository": "pytest-dev/pytest, urllib3/urllib3, audreyfeldroy/cookiecutter-pypackage"
+  },
+  {
+    "id": "lib_0587",
+    "target_repository": "go-chi/chi, spf13/viper, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0588",
+    "target_repository": "python-poetry/poetry, sqlalchemy/sqlalchemy, tox-dev/tox"
+  },
+  {
+    "id": "lib_0589",
+    "target_repository": "helm/helm, k3s-io/k3s, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0590",
+    "target_repository": "vuejs/vue, vitejs/vite, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0591",
+    "target_repository": "actions/starter-workflows, laravel/laravel, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0592",
+    "target_repository": "gin-gonic/gin, charmbracelet/gum, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0593",
+    "target_repository": "hashicorp/vault, prometheus/node_exporter, docker/compose"
+  },
+  {
+    "id": "lib_0594",
+    "target_repository": "axios/axios, vuejs/vue, facebook/react"
+  },
+  {
+    "id": "lib_0595",
+    "target_repository": "homebrew/brew, t3-oss/create-t3-app, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0596",
+    "target_repository": "pydantic/pydantic, python-poetry/poetry, psf/requests"
+  },
+  {
+    "id": "lib_0597",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage, yt-dlp/yt-dlp, encode/uvicorn"
+  },
+  {
+    "id": "lib_0598",
+    "target_repository": "restic/restic, google/zx, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0599",
+    "target_repository": "zellij-org/zellij, sharkdp/fd, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0600",
+    "target_repository": "clap-rs/clap, sharkdp/bat, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0601",
+    "target_repository": "zellij-org/zellij, sharkdp/hyperfine, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0602",
+    "target_repository": "prettier/prettier, chalk/chalk, react-hook-form/react-hook-form"
+  },
+  {
+    "id": "lib_0603",
+    "target_repository": "restic/restic, t3-oss/create-t3-app, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0604",
+    "target_repository": "junegunn/fzf, actions/starter-workflows, laravel/laravel"
+  },
+  {
+    "id": "lib_0605",
+    "target_repository": "ansible-community/molecule, docker/compose, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0606",
+    "target_repository": "golang-standards/project-layout, gohugoio/hugo, go-chi/chi"
+  },
+  {
+    "id": "lib_0607",
+    "target_repository": "clap-rs/clap, tokio-rs/tokio, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0608",
+    "target_repository": "sqlalchemy/sqlalchemy, encode/httpx, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0609",
+    "target_repository": "tauri-apps/tauri, starship/starship, sharkdp/bat"
+  },
+  {
+    "id": "lib_0610",
+    "target_repository": "spf13/viper, spf13/cobra, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0611",
+    "target_repository": "gohugoio/hugo, charmbracelet/gum, go-chi/chi"
+  },
+  {
+    "id": "lib_0612",
+    "target_repository": "go-chi/chi, gohugoio/hugo, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0613",
+    "target_repository": "commander-js/commander.js, withastro/astro, sveltejs/svelte"
+  },
+  {
+    "id": "lib_0614",
+    "target_repository": "vuejs/vue, eslint/eslint, testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0615",
+    "target_repository": "pydantic/pydantic, scrapy/scrapy, tox-dev/tox"
+  },
+  {
+    "id": "lib_0616",
+    "target_repository": "encode/uvicorn, cookiecutter/cookiecutter, psf/black"
+  },
+  {
+    "id": "lib_0617",
+    "target_repository": "ClementTsang/bottom, dandavison/delta, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0618",
+    "target_repository": "fish-shell/fish-shell, junegunn/fzf, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0619",
+    "target_repository": "zsh-users/zsh-autosuggestions, junegunn/fzf, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0620",
+    "target_repository": "actions/starter-workflows, t3-oss/create-t3-app, google/zx"
+  },
+  {
+    "id": "lib_0621",
+    "target_repository": "ansible-community/molecule, caddyserver/caddy, anchore/grype"
+  },
+  {
+    "id": "lib_0622",
+    "target_repository": "tauri-apps/tauri, ClementTsang/bottom, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0623",
+    "target_repository": "t3-oss/create-t3-app, restic/restic, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0624",
+    "target_repository": "cookiecutter/cookiecutter, psf/black, encode/uvicorn"
+  },
+  {
+    "id": "lib_0625",
+    "target_repository": "python-poetry/poetry, psf/black, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0626",
+    "target_repository": "kubernetes-sigs/kind, ansible-community/molecule, grafana/loki"
+  },
+  {
+    "id": "lib_0627",
+    "target_repository": "tauri-apps/tauri, tokio-rs/tokio, serde-rs/serde"
+  },
+  {
+    "id": "lib_0628",
+    "target_repository": "eslint/eslint, parcel-bundler/parcel, vercel/next.js"
+  },
+  {
+    "id": "lib_0629",
+    "target_repository": "vuejs/vue, yargs/yargs, date-fns/date-fns"
+  },
+  {
+    "id": "lib_0630",
+    "target_repository": "sharkdp/bat, serde-rs/serde, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0631",
+    "target_repository": "k3s-io/k3s, kubernetes-sigs/kind, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0632",
+    "target_repository": "dandavison/delta, sharkdp/bat, sharkdp/fd"
+  },
+  {
+    "id": "lib_0633",
+    "target_repository": "cookiecutter/cookiecutter-django, scrapy/scrapy, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0634",
+    "target_repository": "sharkdp/hyperfine, sharkdp/bat, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0635",
+    "target_repository": "rust-lang/mdBook, dandavison/delta, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0636",
+    "target_repository": "rails/rails, jesseduffield/lazygit, google/zx"
+  },
+  {
+    "id": "lib_0637",
+    "target_repository": "docker/awesome-compose, aquasecurity/trivy, helm/helm"
+  },
+  {
+    "id": "lib_0638",
+    "target_repository": "tauri-apps/tauri, BurntSushi/xsv, clap-rs/clap"
+  },
+  {
+    "id": "lib_0639",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea, go-chi/chi"
+  },
+  {
+    "id": "lib_0640",
+    "target_repository": "laravel/laravel, actions/starter-workflows, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0641",
+    "target_repository": "hashicorp/vault, ansible-community/molecule, hashicorp/packer"
+  },
+  {
+    "id": "lib_0642",
+    "target_repository": "tox-dev/tox, yt-dlp/yt-dlp, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0643",
+    "target_repository": "spf13/viper, charmbracelet/gum, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0644",
+    "target_repository": "spf13/cobra, charmbracelet/gum, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0645",
+    "target_repository": "chakra-ui/chakra-ui, chalk/chalk, vuejs/vue"
+  },
+  {
+    "id": "lib_0646",
+    "target_repository": "pytest-dev/pytest, pallets/flask, tox-dev/tox"
+  },
+  {
+    "id": "lib_0647",
+    "target_repository": "prometheus/node_exporter, kubernetes-sigs/kind, hashicorp/packer"
+  },
+  {
+    "id": "lib_0648",
+    "target_repository": "sharkdp/fd, rust-lang/mdBook, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0649",
+    "target_repository": "scrapy/scrapy, tiangolo/fastapi, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0650",
+    "target_repository": "vitejs/vite, jestjs/jest, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0651",
+    "target_repository": "junegunn/fzf, t3-oss/create-t3-app, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0652",
+    "target_repository": "gin-gonic/gin, charmbracelet/gum, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0653",
+    "target_repository": "jestjs/jest, eslint/eslint, parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0654",
+    "target_repository": "gin-gonic/gin, gohugoio/hugo, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0655",
+    "target_repository": "homebrew/brew, pre-commit/pre-commit, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0656",
+    "target_repository": "psf/requests, audreyfeldroy/cookiecutter-pypackage, tox-dev/tox"
+  },
+  {
+    "id": "lib_0657",
+    "target_repository": "psf/black, python-poetry/poetry, pallets/flask"
+  },
+  {
+    "id": "lib_0658",
+    "target_repository": "t3-oss/create-t3-app, pre-commit/pre-commit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0659",
+    "target_repository": "lodash/lodash, chalk/chalk, facebook/react"
+  },
+  {
+    "id": "lib_0660",
+    "target_repository": "zellij-org/zellij, serde-rs/serde, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0661",
+    "target_repository": "psf/black, urllib3/urllib3, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0662",
+    "target_repository": "withastro/astro, commander-js/commander.js, rollup/rollup"
+  },
+  {
+    "id": "lib_0663",
+    "target_repository": "spf13/viper, spf13/cobra, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0664",
+    "target_repository": "restic/restic, google/zx, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0665",
+    "target_repository": "go-chi/chi, charmbracelet/glow, spf13/viper"
+  },
+  {
+    "id": "lib_0666",
+    "target_repository": "actions/starter-workflows, pre-commit/pre-commit, google/zx"
+  },
+  {
+    "id": "lib_0667",
+    "target_repository": "BurntSushi/ripgrep, sharkdp/fd, sharkdp/bat"
+  },
+  {
+    "id": "lib_0668",
+    "target_repository": "zellij-org/zellij, sharkdp/hyperfine, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0669",
+    "target_repository": "pnpm/pnpm, nuxt/nuxt, date-fns/date-fns"
+  },
+  {
+    "id": "lib_0670",
+    "target_repository": "sveltejs/svelte, axios/axios, yargs/yargs"
+  },
+  {
+    "id": "lib_0671",
+    "target_repository": "restic/restic, actions/starter-workflows, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0672",
+    "target_repository": "commander-js/commander.js, pnpm/pnpm, chalk/chalk"
+  },
+  {
+    "id": "lib_0673",
+    "target_repository": "vercel/next.js, tailwindlabs/tailwindcss, nuxt/nuxt"
+  },
+  {
+    "id": "lib_0674",
+    "target_repository": "jekyll/jekyll, google/zx, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0675",
+    "target_repository": "tokio-rs/tokio, tauri-apps/tauri, serde-rs/serde"
+  },
+  {
+    "id": "lib_0676",
+    "target_repository": "anchore/grype, grafana/loki, hashicorp/vault"
+  },
+  {
+    "id": "lib_0677",
+    "target_repository": "python-poetry/poetry, pallets/flask, psf/requests"
+  },
+  {
+    "id": "lib_0678",
+    "target_repository": "remix-run/remix, jesseduffield/lazygit, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0679",
+    "target_repository": "helm/helm, docker/compose, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0680",
+    "target_repository": "withastro/astro, vitejs/vite, nuxt/nuxt"
+  },
+  {
+    "id": "lib_0681",
+    "target_repository": "jekyll/jekyll, rails/rails, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0682",
+    "target_repository": "prettier/prettier, vitest-dev/vitest, vitejs/vite"
+  },
+  {
+    "id": "lib_0683",
+    "target_repository": "fish-shell/fish-shell, pre-commit/pre-commit, remix-run/remix"
+  },
+  {
+    "id": "lib_0684",
+    "target_repository": "helm/helm, ansible-community/molecule, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0685",
+    "target_repository": "tiangolo/fastapi, pydantic/pydantic, psf/black"
+  },
+  {
+    "id": "lib_0686",
+    "target_repository": "starship/starship, tokio-rs/tokio, dandavison/delta"
+  },
+  {
+    "id": "lib_0687",
+    "target_repository": "jestjs/jest, date-fns/date-fns, parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0688",
+    "target_repository": "go-chi/chi, gin-gonic/gin, spf13/viper"
+  },
+  {
+    "id": "lib_0689",
+    "target_repository": "anchore/grype, hashicorp/packer, helm/helm"
+  },
+  {
+    "id": "lib_0690",
+    "target_repository": "chakra-ui/chakra-ui, jestjs/jest, prettier/prettier"
+  },
+  {
+    "id": "lib_0691",
+    "target_repository": "axios/axios, lodash/lodash, nuxt/nuxt"
+  },
+  {
+    "id": "lib_0692",
+    "target_repository": "go-chi/chi, charmbracelet/glow, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0693",
+    "target_repository": "rust-lang/mdBook, sharkdp/hyperfine, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0694",
+    "target_repository": "pytest-dev/pytest, audreyfeldroy/cookiecutter-pypackage, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0695",
+    "target_repository": "homebrew/brew, jesseduffield/lazygit, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0696",
+    "target_repository": "homebrew/brew, actions/starter-workflows, remix-run/remix"
+  },
+  {
+    "id": "lib_0697",
+    "target_repository": "spf13/viper, go-chi/chi, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0698",
+    "target_repository": "t3-oss/create-t3-app, fish-shell/fish-shell, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0699",
+    "target_repository": "golang-standards/project-layout, gohugoio/hugo, spf13/cobra"
+  },
+  {
+    "id": "lib_0700",
+    "target_repository": "encode/uvicorn, pytest-dev/pytest, psf/black"
+  },
+  {
+    "id": "lib_0701",
+    "target_repository": "homebrew/brew, google/zx, restic/restic"
+  },
+  {
+    "id": "lib_0702",
+    "target_repository": "BurntSushi/ripgrep, sharkdp/hyperfine, dandavison/delta"
+  },
+  {
+    "id": "lib_0703",
+    "target_repository": "zellij-org/zellij, ClementTsang/bottom, clap-rs/clap"
+  },
+  {
+    "id": "lib_0704",
+    "target_repository": "encode/httpx, httpie/httpie, psf/black"
+  },
+  {
+    "id": "lib_0705",
+    "target_repository": "pallets/flask, pydantic/pydantic, pytest-dev/pytest"
+  },
+  {
+    "id": "lib_0706",
+    "target_repository": "pre-commit/pre-commit, jesseduffield/lazygit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0707",
+    "target_repository": "fish-shell/fish-shell, jesseduffield/lazygit, google/zx"
+  },
+  {
+    "id": "lib_0708",
+    "target_repository": "pallets/flask, sqlalchemy/sqlalchemy, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0709",
+    "target_repository": "laravel/laravel, homebrew/brew, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0710",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0711",
+    "target_repository": "axios/axios, jestjs/jest, nuxt/nuxt"
+  },
+  {
+    "id": "lib_0712",
+    "target_repository": "spf13/cobra, gin-gonic/gin, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0713",
+    "target_repository": "sqlalchemy/sqlalchemy, tiangolo/typer, encode/httpx"
+  },
+  {
+    "id": "lib_0714",
+    "target_repository": "lodash/lodash, testing-library/react-testing-library, yargs/yargs"
+  },
+  {
+    "id": "lib_0715",
+    "target_repository": "gin-gonic/gin, charmbracelet/glow, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0716",
+    "target_repository": "golang-standards/project-layout, gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0717",
+    "target_repository": "golang-standards/project-layout, gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0718",
+    "target_repository": "charmbracelet/bubbletea, gin-gonic/gin, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0719",
+    "target_repository": "zsh-users/zsh-autosuggestions, restic/restic, rails/rails"
+  },
+  {
+    "id": "lib_0720",
+    "target_repository": "vuejs/vue, jestjs/jest, date-fns/date-fns"
+  },
+  {
+    "id": "lib_0721",
+    "target_repository": "ClementTsang/bottom, atuinsh/atuin, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0722",
+    "target_repository": "scrapy/scrapy, psf/requests, encode/uvicorn"
+  },
+  {
+    "id": "lib_0723",
+    "target_repository": "junegunn/fzf, laravel/laravel, remix-run/remix"
+  },
+  {
+    "id": "lib_0724",
+    "target_repository": "prometheus/node_exporter, caddyserver/caddy, helm/helm"
+  },
+  {
+    "id": "lib_0725",
+    "target_repository": "dandavison/delta, ClementTsang/bottom, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0726",
+    "target_repository": "vercel/next.js, withastro/astro, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0727",
+    "target_repository": "kubernetes-sigs/kind, aquasecurity/trivy, docker/compose"
+  },
+  {
+    "id": "lib_0728",
+    "target_repository": "docker/compose, docker/awesome-compose, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0729",
+    "target_repository": "dandavison/delta, atuinsh/atuin, sharkdp/fd"
+  },
+  {
+    "id": "lib_0730",
+    "target_repository": "withastro/astro, date-fns/date-fns, parcel-bundler/parcel"
+  },
+  {
+    "id": "lib_0731",
+    "target_repository": "lodash/lodash, chalk/chalk, nuxt/nuxt"
+  },
+  {
+    "id": "lib_0732",
+    "target_repository": "rollup/rollup, sveltejs/svelte, chakra-ui/chakra-ui"
+  },
+  {
+    "id": "lib_0733",
+    "target_repository": "cookiecutter/cookiecutter-django, pallets/flask, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0734",
+    "target_repository": "vitest-dev/vitest, rollup/rollup, vercel/turbo"
+  },
+  {
+    "id": "lib_0735",
+    "target_repository": "k3s-io/k3s, hashicorp/packer, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0736",
+    "target_repository": "docker/awesome-compose, hashicorp/packer, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0737",
+    "target_repository": "restic/restic, fish-shell/fish-shell, google/zx"
+  },
+  {
+    "id": "lib_0738",
+    "target_repository": "yt-dlp/yt-dlp, httpie/httpie, pallets/flask"
+  },
+  {
+    "id": "lib_0739",
+    "target_repository": "vuejs/vue, parcel-bundler/parcel, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0740",
+    "target_repository": "charmbracelet/glow, charmbracelet/bubbletea, go-chi/chi"
+  },
+  {
+    "id": "lib_0741",
+    "target_repository": "restic/restic, jesseduffield/lazygit, remix-run/remix"
+  },
+  {
+    "id": "lib_0742",
+    "target_repository": "actions/starter-workflows, laravel/laravel, restic/restic"
+  },
+  {
+    "id": "lib_0743",
+    "target_repository": "pnpm/pnpm, jestjs/jest, prettier/prettier"
+  },
+  {
+    "id": "lib_0744",
+    "target_repository": "parcel-bundler/parcel, withastro/astro, prettier/prettier"
+  },
+  {
+    "id": "lib_0745",
+    "target_repository": "golang-standards/project-layout, charmbracelet/bubbletea, spf13/viper"
+  },
+  {
+    "id": "lib_0746",
+    "target_repository": "golang-standards/project-layout, spf13/cobra, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0747",
+    "target_repository": "pre-commit/pre-commit, t3-oss/create-t3-app, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0748",
+    "target_repository": "gin-gonic/gin, spf13/cobra, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0749",
+    "target_repository": "zsh-users/zsh-autosuggestions, t3-oss/create-t3-app, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0750",
+    "target_repository": "charmbracelet/glow, gohugoio/hugo, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0751",
+    "target_repository": "rust-lang/mdBook, tauri-apps/tauri, dandavison/delta"
+  },
+  {
+    "id": "lib_0752",
+    "target_repository": "charmbracelet/gum, charmbracelet/glow, spf13/viper"
+  },
+  {
+    "id": "lib_0753",
+    "target_repository": "prometheus/prometheus, docker/compose, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0754",
+    "target_repository": "urllib3/urllib3, aio-libs/aiohttp, encode/uvicorn"
+  },
+  {
+    "id": "lib_0755",
+    "target_repository": "caddyserver/caddy, hashicorp/vault, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0756",
+    "target_repository": "sqlalchemy/sqlalchemy, cookiecutter/cookiecutter, encode/uvicorn"
+  },
+  {
+    "id": "lib_0757",
+    "target_repository": "rails/rails, jesseduffield/lazygit, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0758",
+    "target_repository": "google/zx, junegunn/fzf, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0759",
+    "target_repository": "charmbracelet/glow, go-chi/chi, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0760",
+    "target_repository": "withastro/astro, vercel/turbo, chakra-ui/chakra-ui"
+  },
+  {
+    "id": "lib_0761",
+    "target_repository": "eza-community/eza, tokio-rs/tokio, sharkdp/fd"
+  },
+  {
+    "id": "lib_0762",
+    "target_repository": "gin-gonic/gin, gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0763",
+    "target_repository": "remix-run/remix, jekyll/jekyll, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0764",
+    "target_repository": "charmbracelet/glow, gohugoio/hugo, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0765",
+    "target_repository": "clap-rs/clap, zellij-org/zellij, sharkdp/fd"
+  },
+  {
+    "id": "lib_0766",
+    "target_repository": "sqlalchemy/sqlalchemy, psf/requests, encode/httpx"
+  },
+  {
+    "id": "lib_0767",
+    "target_repository": "python-poetry/poetry, sqlalchemy/sqlalchemy, httpie/httpie"
+  },
+  {
+    "id": "lib_0768",
+    "target_repository": "vercel/next.js, axios/axios, eslint/eslint"
+  },
+  {
+    "id": "lib_0769",
+    "target_repository": "ClementTsang/bottom, starship/starship, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0770",
+    "target_repository": "atuinsh/atuin, serde-rs/serde, sharkdp/bat"
+  },
+  {
+    "id": "lib_0771",
+    "target_repository": "sharkdp/fd, dandavison/delta, sharkdp/bat"
+  },
+  {
+    "id": "lib_0772",
+    "target_repository": "restic/restic, fish-shell/fish-shell, actions/starter-workflows"
+  },
+  {
+    "id": "lib_0773",
+    "target_repository": "docker/compose, prometheus/prometheus, hashicorp/vault"
+  },
+  {
+    "id": "lib_0774",
+    "target_repository": "actions/starter-workflows, t3-oss/create-t3-app, junegunn/fzf"
+  },
+  {
+    "id": "lib_0775",
+    "target_repository": "withastro/astro, yargs/yargs, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0776",
+    "target_repository": "remix-run/remix, pre-commit/pre-commit, junegunn/fzf"
+  },
+  {
+    "id": "lib_0777",
+    "target_repository": "tiangolo/typer, cookiecutter/cookiecutter, encode/httpx"
+  },
+  {
+    "id": "lib_0778",
+    "target_repository": "ansible-community/molecule, hashicorp/packer, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0779",
+    "target_repository": "charmbracelet/glow, charmbracelet/bubbletea, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0780",
+    "target_repository": "k3s-io/k3s, prometheus/prometheus, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0781",
+    "target_repository": "kubernetes-sigs/kind, influxdata/telegraf, hashicorp/packer"
+  },
+  {
+    "id": "lib_0782",
+    "target_repository": "spf13/viper, charmbracelet/gum, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0783",
+    "target_repository": "remix-run/remix, actions/starter-workflows, restic/restic"
+  },
+  {
+    "id": "lib_0784",
+    "target_repository": "gohugoio/hugo, spf13/viper, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0785",
+    "target_repository": "vitest-dev/vitest, tailwindlabs/tailwindcss, vercel/next.js"
+  },
+  {
+    "id": "lib_0786",
+    "target_repository": "influxdata/telegraf, grafana/loki, hashicorp/packer"
+  },
+  {
+    "id": "lib_0787",
+    "target_repository": "gin-gonic/gin, gohugoio/hugo, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0788",
+    "target_repository": "eza-community/eza, starship/starship, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0789",
+    "target_repository": "prettier/prettier, chalk/chalk, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0790",
+    "target_repository": "remix-run/remix, homebrew/brew, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0791",
+    "target_repository": "psf/black, tox-dev/tox, aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0792",
+    "target_repository": "tailwindlabs/tailwindcss, facebook/react, withastro/astro"
+  },
+  {
+    "id": "lib_0793",
+    "target_repository": "rails/rails, jekyll/jekyll, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0794",
+    "target_repository": "encode/httpx, tiangolo/fastapi, python-poetry/poetry"
+  },
+  {
+    "id": "lib_0795",
+    "target_repository": "tokio-rs/tokio, BurntSushi/xsv, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0796",
+    "target_repository": "prometheus/prometheus, prometheus/node_exporter, helm/helm"
+  },
+  {
+    "id": "lib_0797",
+    "target_repository": "urllib3/urllib3, scrapy/scrapy, psf/requests"
+  },
+  {
+    "id": "lib_0798",
+    "target_repository": "charmbracelet/gum, charmbracelet/bubbletea, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0799",
+    "target_repository": "go-chi/chi, gohugoio/hugo, spf13/viper"
+  },
+  {
+    "id": "lib_0800",
+    "target_repository": "kubernetes-sigs/kind, prometheus/prometheus, k3s-io/k3s"
+  },
+  {
+    "id": "lib_0801",
+    "target_repository": "restic/restic, pre-commit/pre-commit, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0802",
+    "target_repository": "serde-rs/serde, eza-community/eza, dandavison/delta"
+  },
+  {
+    "id": "lib_0803",
+    "target_repository": "jekyll/jekyll, actions/starter-workflows, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0804",
+    "target_repository": "go-chi/chi, golang-standards/project-layout, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0805",
+    "target_repository": "golang-standards/project-layout, charmbracelet/gum, spf13/viper"
+  },
+  {
+    "id": "lib_0806",
+    "target_repository": "hashicorp/packer, grafana/loki, hashicorp/vault"
+  },
+  {
+    "id": "lib_0807",
+    "target_repository": "sharkdp/fd, BurntSushi/xsv, dandavison/delta"
+  },
+  {
+    "id": "lib_0808",
+    "target_repository": "BurntSushi/ripgrep, BurntSushi/xsv, serde-rs/serde"
+  },
+  {
+    "id": "lib_0809",
+    "target_repository": "helm/helm, anchore/grype, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0810",
+    "target_repository": "urllib3/urllib3, cookiecutter/cookiecutter, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0811",
+    "target_repository": "spf13/cobra, charmbracelet/glow, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0812",
+    "target_repository": "BurntSushi/xsv, atuinsh/atuin, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0813",
+    "target_repository": "commander-js/commander.js, vercel/turbo, chalk/chalk"
+  },
+  {
+    "id": "lib_0814",
+    "target_repository": "pydantic/pydantic, cookiecutter/cookiecutter-django, tox-dev/tox"
+  },
+  {
+    "id": "lib_0815",
+    "target_repository": "react-hook-form/react-hook-form, date-fns/date-fns, prettier/prettier"
+  },
+  {
+    "id": "lib_0816",
+    "target_repository": "prometheus/prometheus, ansible-community/molecule, hashicorp/vault"
+  },
+  {
+    "id": "lib_0817",
+    "target_repository": "sharkdp/bat, eza-community/eza, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0818",
+    "target_repository": "rust-lang/mdBook, BurntSushi/ripgrep, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0819",
+    "target_repository": "grafana/loki, docker/awesome-compose, hashicorp/vault"
+  },
+  {
+    "id": "lib_0820",
+    "target_repository": "grafana/loki, influxdata/telegraf, anchore/grype"
+  },
+  {
+    "id": "lib_0821",
+    "target_repository": "date-fns/date-fns, eslint/eslint, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0822",
+    "target_repository": "jesseduffield/lazygit, pre-commit/pre-commit, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0823",
+    "target_repository": "dandavison/delta, sharkdp/hyperfine, clap-rs/clap"
+  },
+  {
+    "id": "lib_0824",
+    "target_repository": "python-poetry/poetry, cookiecutter/cookiecutter-django, psf/black"
+  },
+  {
+    "id": "lib_0825",
+    "target_repository": "go-chi/chi, gohugoio/hugo, spf13/cobra"
+  },
+  {
+    "id": "lib_0826",
+    "target_repository": "kubernetes-sigs/kind, docker/awesome-compose, prometheus/prometheus"
+  },
+  {
+    "id": "lib_0827",
+    "target_repository": "restic/restic, jesseduffield/lazygit, google/zx"
+  },
+  {
+    "id": "lib_0828",
+    "target_repository": "sveltejs/svelte, withastro/astro, lodash/lodash"
+  },
+  {
+    "id": "lib_0829",
+    "target_repository": "nuxt/nuxt, yargs/yargs, withastro/astro"
+  },
+  {
+    "id": "lib_0830",
+    "target_repository": "docker/awesome-compose, prometheus/prometheus, hashicorp/packer"
+  },
+  {
+    "id": "lib_0831",
+    "target_repository": "hashicorp/vault, helm/helm, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0832",
+    "target_repository": "dandavison/delta, rust-lang/mdBook, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0833",
+    "target_repository": "ClementTsang/bottom, rust-lang/mdBook, sharkdp/fd"
+  },
+  {
+    "id": "lib_0834",
+    "target_repository": "sveltejs/svelte, withastro/astro, lodash/lodash"
+  },
+  {
+    "id": "lib_0835",
+    "target_repository": "rails/rails, actions/starter-workflows, google/zx"
+  },
+  {
+    "id": "lib_0836",
+    "target_repository": "gohugoio/hugo, charmbracelet/glow, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0837",
+    "target_repository": "tiangolo/typer, python-poetry/poetry, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0838",
+    "target_repository": "k3s-io/k3s, docker/compose, helm/helm"
+  },
+  {
+    "id": "lib_0839",
+    "target_repository": "docker/compose, aquasecurity/trivy, helm/helm"
+  },
+  {
+    "id": "lib_0840",
+    "target_repository": "yt-dlp/yt-dlp, scrapy/scrapy, encode/uvicorn"
+  },
+  {
+    "id": "lib_0841",
+    "target_repository": "pallets/flask, httpie/httpie, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0842",
+    "target_repository": "gohugoio/hugo, charmbracelet/glow, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0843",
+    "target_repository": "psf/black, pallets/flask, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0844",
+    "target_repository": "hashicorp/vault, influxdata/telegraf, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0845",
+    "target_repository": "ansible-community/molecule, influxdata/telegraf, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0846",
+    "target_repository": "gin-gonic/gin, golang-standards/project-layout, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0847",
+    "target_repository": "scrapy/scrapy, cookiecutter/cookiecutter, encode/httpx"
+  },
+  {
+    "id": "lib_0848",
+    "target_repository": "caddyserver/caddy, prometheus/prometheus, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0849",
+    "target_repository": "helm/helm, k3s-io/k3s, ansible-community/molecule"
+  },
+  {
+    "id": "lib_0850",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage, psf/requests, encode/uvicorn"
+  },
+  {
+    "id": "lib_0851",
+    "target_repository": "serde-rs/serde, sharkdp/bat, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0852",
+    "target_repository": "actions/starter-workflows, homebrew/brew, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0853",
+    "target_repository": "kubernetes/minikube, k3s-io/k3s, hashicorp/vault"
+  },
+  {
+    "id": "lib_0854",
+    "target_repository": "jekyll/jekyll, homebrew/brew, remix-run/remix"
+  },
+  {
+    "id": "lib_0855",
+    "target_repository": "google/zx, junegunn/fzf, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0856",
+    "target_repository": "prometheus/node_exporter, docker/awesome-compose, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0857",
+    "target_repository": "jekyll/jekyll, fish-shell/fish-shell, junegunn/fzf"
+  },
+  {
+    "id": "lib_0858",
+    "target_repository": "ansible-community/molecule, kubernetes/minikube, anchore/grype"
+  },
+  {
+    "id": "lib_0859",
+    "target_repository": "spf13/cobra, gin-gonic/gin, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0860",
+    "target_repository": "tiangolo/fastapi, aio-libs/aiohttp, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0861",
+    "target_repository": "restic/restic, jesseduffield/lazygit, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0862",
+    "target_repository": "atuinsh/atuin, starship/starship, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0863",
+    "target_repository": "prometheus/node_exporter, kubernetes-sigs/kind, anchore/grype"
+  },
+  {
+    "id": "lib_0864",
+    "target_repository": "rails/rails, jesseduffield/lazygit, pre-commit/pre-commit"
+  },
+  {
+    "id": "lib_0865",
+    "target_repository": "spf13/viper, gohugoio/hugo, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0866",
+    "target_repository": "prometheus/node_exporter, anchore/grype, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0867",
+    "target_repository": "remix-run/remix, laravel/laravel, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0868",
+    "target_repository": "actions/starter-workflows, google/zx, laravel/laravel"
+  },
+  {
+    "id": "lib_0869",
+    "target_repository": "pre-commit/pre-commit, jekyll/jekyll, jesseduffield/lazygit"
+  },
+  {
+    "id": "lib_0870",
+    "target_repository": "tiangolo/fastapi, pytest-dev/pytest, psf/requests"
+  },
+  {
+    "id": "lib_0871",
+    "target_repository": "rails/rails, junegunn/fzf, restic/restic"
+  },
+  {
+    "id": "lib_0872",
+    "target_repository": "junegunn/fzf, laravel/laravel, rails/rails"
+  },
+  {
+    "id": "lib_0873",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea, spf13/cobra"
+  },
+  {
+    "id": "lib_0874",
+    "target_repository": "restic/restic, t3-oss/create-t3-app, rails/rails"
+  },
+  {
+    "id": "lib_0875",
+    "target_repository": "junegunn/fzf, jesseduffield/lazygit, restic/restic"
+  },
+  {
+    "id": "lib_0876",
+    "target_repository": "spf13/cobra, gohugoio/hugo, go-chi/chi"
+  },
+  {
+    "id": "lib_0877",
+    "target_repository": "tailwindlabs/tailwindcss, lodash/lodash, yargs/yargs"
+  },
+  {
+    "id": "lib_0878",
+    "target_repository": "sharkdp/hyperfine, sharkdp/fd, dandavison/delta"
+  },
+  {
+    "id": "lib_0879",
+    "target_repository": "go-chi/chi, spf13/cobra, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0880",
+    "target_repository": "urllib3/urllib3, httpie/httpie, psf/black"
+  },
+  {
+    "id": "lib_0881",
+    "target_repository": "rust-lang/mdBook, tokio-rs/tokio, clap-rs/clap"
+  },
+  {
+    "id": "lib_0882",
+    "target_repository": "sqlalchemy/sqlalchemy, tiangolo/typer, encode/httpx"
+  },
+  {
+    "id": "lib_0883",
+    "target_repository": "laravel/laravel, fish-shell/fish-shell, remix-run/remix"
+  },
+  {
+    "id": "lib_0884",
+    "target_repository": "prometheus/prometheus, hashicorp/vault, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0885",
+    "target_repository": "date-fns/date-fns, facebook/react, jestjs/jest"
+  },
+  {
+    "id": "lib_0886",
+    "target_repository": "jesseduffield/lazygit, laravel/laravel, homebrew/brew"
+  },
+  {
+    "id": "lib_0887",
+    "target_repository": "golang-standards/project-layout, charmbracelet/glow, spf13/viper"
+  },
+  {
+    "id": "lib_0888",
+    "target_repository": "audreyfeldroy/cookiecutter-pypackage, tiangolo/fastapi, tiangolo/typer"
+  },
+  {
+    "id": "lib_0889",
+    "target_repository": "aio-libs/aiohttp, encode/uvicorn, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0890",
+    "target_repository": "golang-standards/project-layout, charmbracelet/gum, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0891",
+    "target_repository": "pnpm/pnpm, vuejs/vue, vitejs/vite"
+  },
+  {
+    "id": "lib_0892",
+    "target_repository": "anchore/grype, influxdata/telegraf, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0893",
+    "target_repository": "hashicorp/vault, k3s-io/k3s, grafana/loki"
+  },
+  {
+    "id": "lib_0894",
+    "target_repository": "serde-rs/serde, dandavison/delta, sharkdp/bat"
+  },
+  {
+    "id": "lib_0895",
+    "target_repository": "charmbracelet/bubbletea, charmbracelet/gum, go-chi/chi"
+  },
+  {
+    "id": "lib_0896",
+    "target_repository": "sharkdp/fd, tokio-rs/tokio, dandavison/delta"
+  },
+  {
+    "id": "lib_0897",
+    "target_repository": "charmbracelet/gum, spf13/cobra, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0898",
+    "target_repository": "charmbracelet/bubbletea, gohugoio/hugo, golang-standards/project-layout"
+  },
+  {
+    "id": "lib_0899",
+    "target_repository": "urllib3/urllib3, psf/black, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0900",
+    "target_repository": "sharkdp/hyperfine, sharkdp/fd, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0901",
+    "target_repository": "charmbracelet/gum, gin-gonic/gin, go-chi/chi"
+  },
+  {
+    "id": "lib_0902",
+    "target_repository": "caddyserver/caddy, influxdata/telegraf, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0903",
+    "target_repository": "starship/starship, dandavison/delta, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0904",
+    "target_repository": "encode/httpx, tiangolo/fastapi, yt-dlp/yt-dlp"
+  },
+  {
+    "id": "lib_0905",
+    "target_repository": "urllib3/urllib3, tox-dev/tox, cookiecutter/cookiecutter"
+  },
+  {
+    "id": "lib_0906",
+    "target_repository": "zsh-users/zsh-autosuggestions, jesseduffield/lazygit, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0907",
+    "target_repository": "gohugoio/hugo, charmbracelet/bubbletea, charmbracelet/glow"
+  },
+  {
+    "id": "lib_0908",
+    "target_repository": "hashicorp/vault, prometheus/node_exporter, aquasecurity/trivy"
+  },
+  {
+    "id": "lib_0909",
+    "target_repository": "encode/uvicorn, pydantic/pydantic, httpie/httpie"
+  },
+  {
+    "id": "lib_0910",
+    "target_repository": "hashicorp/packer, docker/awesome-compose, helm/helm"
+  },
+  {
+    "id": "lib_0911",
+    "target_repository": "starship/starship, atuinsh/atuin, BurntSushi/xsv"
+  },
+  {
+    "id": "lib_0912",
+    "target_repository": "docker/compose, grafana/loki, hashicorp/packer"
+  },
+  {
+    "id": "lib_0913",
+    "target_repository": "encode/httpx, urllib3/urllib3, psf/black"
+  },
+  {
+    "id": "lib_0914",
+    "target_repository": "google/zx, pre-commit/pre-commit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0915",
+    "target_repository": "tauri-apps/tauri, tokio-rs/tokio, sharkdp/fd"
+  },
+  {
+    "id": "lib_0916",
+    "target_repository": "charmbracelet/gum, spf13/cobra, spf13/viper"
+  },
+  {
+    "id": "lib_0917",
+    "target_repository": "charmbracelet/bubbletea, charmbracelet/gum, go-chi/chi"
+  },
+  {
+    "id": "lib_0918",
+    "target_repository": "junegunn/fzf, jesseduffield/lazygit, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0919",
+    "target_repository": "go-chi/chi, golang-standards/project-layout, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0920",
+    "target_repository": "grafana/loki, kubernetes/minikube, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0921",
+    "target_repository": "k3s-io/k3s, grafana/loki, helm/helm"
+  },
+  {
+    "id": "lib_0922",
+    "target_repository": "zellij-org/zellij, starship/starship, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0923",
+    "target_repository": "rust-lang/mdBook, sharkdp/hyperfine, serde-rs/serde"
+  },
+  {
+    "id": "lib_0924",
+    "target_repository": "kubernetes-sigs/kind, prometheus/prometheus, prometheus/node_exporter"
+  },
+  {
+    "id": "lib_0925",
+    "target_repository": "restic/restic, fish-shell/fish-shell, laravel/laravel"
+  },
+  {
+    "id": "lib_0926",
+    "target_repository": "pre-commit/pre-commit, laravel/laravel, zsh-users/zsh-autosuggestions"
+  },
+  {
+    "id": "lib_0927",
+    "target_repository": "tiangolo/typer, tiangolo/fastapi, encode/uvicorn"
+  },
+  {
+    "id": "lib_0928",
+    "target_repository": "hashicorp/packer, influxdata/telegraf, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0929",
+    "target_repository": "pydantic/pydantic, sqlalchemy/sqlalchemy, tiangolo/fastapi"
+  },
+  {
+    "id": "lib_0930",
+    "target_repository": "sqlalchemy/sqlalchemy, scrapy/scrapy, encode/uvicorn"
+  },
+  {
+    "id": "lib_0931",
+    "target_repository": "gin-gonic/gin, charmbracelet/glow, spf13/viper"
+  },
+  {
+    "id": "lib_0932",
+    "target_repository": "remix-run/remix, pre-commit/pre-commit, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0933",
+    "target_repository": "junegunn/fzf, jekyll/jekyll, laravel/laravel"
+  },
+  {
+    "id": "lib_0934",
+    "target_repository": "hashicorp/vault, kubernetes/minikube, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0935",
+    "target_repository": "aquasecurity/trivy, prometheus/node_exporter, caddyserver/caddy"
+  },
+  {
+    "id": "lib_0936",
+    "target_repository": "homebrew/brew, actions/starter-workflows, junegunn/fzf"
+  },
+  {
+    "id": "lib_0937",
+    "target_repository": "atuinsh/atuin, ClementTsang/bottom, clap-rs/clap"
+  },
+  {
+    "id": "lib_0938",
+    "target_repository": "restic/restic, junegunn/fzf, laravel/laravel"
+  },
+  {
+    "id": "lib_0939",
+    "target_repository": "hashicorp/vault, anchore/grype, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0940",
+    "target_repository": "serde-rs/serde, dandavison/delta, sharkdp/hyperfine"
+  },
+  {
+    "id": "lib_0941",
+    "target_repository": "sveltejs/svelte, lodash/lodash, facebook/react"
+  },
+  {
+    "id": "lib_0942",
+    "target_repository": "charmbracelet/gum, spf13/cobra, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0943",
+    "target_repository": "gin-gonic/gin, go-chi/chi, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0944",
+    "target_repository": "sharkdp/fd, starship/starship, dandavison/delta"
+  },
+  {
+    "id": "lib_0945",
+    "target_repository": "serde-rs/serde, clap-rs/clap, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0946",
+    "target_repository": "starship/starship, rust-lang/mdBook, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0947",
+    "target_repository": "gin-gonic/gin, gohugoio/hugo, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0948",
+    "target_repository": "python-poetry/poetry, httpie/httpie, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0949",
+    "target_repository": "BurntSushi/ripgrep, rust-lang/mdBook, starship/starship"
+  },
+  {
+    "id": "lib_0950",
+    "target_repository": "pallets/flask, encode/httpx, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0951",
+    "target_repository": "cookiecutter/cookiecutter-django, sqlalchemy/sqlalchemy, tox-dev/tox"
+  },
+  {
+    "id": "lib_0952",
+    "target_repository": "aio-libs/aiohttp, pallets/flask, scrapy/scrapy"
+  },
+  {
+    "id": "lib_0953",
+    "target_repository": "fish-shell/fish-shell, pre-commit/pre-commit, homebrew/brew"
+  },
+  {
+    "id": "lib_0954",
+    "target_repository": "rollup/rollup, vercel/turbo, testing-library/react-testing-library"
+  },
+  {
+    "id": "lib_0955",
+    "target_repository": "influxdata/telegraf, grafana/loki, hashicorp/vault"
+  },
+  {
+    "id": "lib_0956",
+    "target_repository": "gin-gonic/gin, spf13/cobra, gohugoio/hugo"
+  },
+  {
+    "id": "lib_0957",
+    "target_repository": "pydantic/pydantic, python-poetry/poetry, urllib3/urllib3"
+  },
+  {
+    "id": "lib_0958",
+    "target_repository": "kubernetes/minikube, prometheus/node_exporter, hashicorp/vault"
+  },
+  {
+    "id": "lib_0959",
+    "target_repository": "caddyserver/caddy, anchore/grype, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0960",
+    "target_repository": "rails/rails, zsh-users/zsh-autosuggestions, homebrew/brew"
+  },
+  {
+    "id": "lib_0961",
+    "target_repository": "charmbracelet/glow, gin-gonic/gin, spf13/viper"
+  },
+  {
+    "id": "lib_0962",
+    "target_repository": "eslint/eslint, withastro/astro, commander-js/commander.js"
+  },
+  {
+    "id": "lib_0963",
+    "target_repository": "grafana/loki, prometheus/node_exporter, docker/compose"
+  },
+  {
+    "id": "lib_0964",
+    "target_repository": "spf13/viper, spf13/cobra, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0965",
+    "target_repository": "atuinsh/atuin, ClementTsang/bottom, tauri-apps/tauri"
+  },
+  {
+    "id": "lib_0966",
+    "target_repository": "aquasecurity/trivy, caddyserver/caddy, docker/awesome-compose"
+  },
+  {
+    "id": "lib_0967",
+    "target_repository": "aquasecurity/trivy, kubernetes/minikube, hashicorp/packer"
+  },
+  {
+    "id": "lib_0968",
+    "target_repository": "encode/httpx, cookiecutter/cookiecutter, pydantic/pydantic"
+  },
+  {
+    "id": "lib_0969",
+    "target_repository": "vuejs/vue, eslint/eslint, tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "lib_0970",
+    "target_repository": "axios/axios, withastro/astro, sveltejs/svelte"
+  },
+  {
+    "id": "lib_0971",
+    "target_repository": "ClementTsang/bottom, sharkdp/fd, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0972",
+    "target_repository": "cookiecutter/cookiecutter, pydantic/pydantic, aio-libs/aiohttp"
+  },
+  {
+    "id": "lib_0973",
+    "target_repository": "go-chi/chi, golang-standards/project-layout, charmbracelet/bubbletea"
+  },
+  {
+    "id": "lib_0974",
+    "target_repository": "serde-rs/serde, sharkdp/bat, BurntSushi/ripgrep"
+  },
+  {
+    "id": "lib_0975",
+    "target_repository": "sharkdp/bat, eza-community/eza, zellij-org/zellij"
+  },
+  {
+    "id": "lib_0976",
+    "target_repository": "pydantic/pydantic, encode/uvicorn, sqlalchemy/sqlalchemy"
+  },
+  {
+    "id": "lib_0977",
+    "target_repository": "tox-dev/tox, pydantic/pydantic, encode/uvicorn"
+  },
+  {
+    "id": "lib_0978",
+    "target_repository": "google/zx, remix-run/remix, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0979",
+    "target_repository": "hashicorp/packer, hashicorp/vault, anchore/grype"
+  },
+  {
+    "id": "lib_0980",
+    "target_repository": "httpie/httpie, encode/httpx, cookiecutter/cookiecutter-django"
+  },
+  {
+    "id": "lib_0981",
+    "target_repository": "ansible-community/molecule, docker/compose, kubernetes-sigs/kind"
+  },
+  {
+    "id": "lib_0982",
+    "target_repository": "golang-standards/project-layout, charmbracelet/bubbletea, charmbracelet/gum"
+  },
+  {
+    "id": "lib_0983",
+    "target_repository": "hashicorp/packer, prometheus/prometheus, kubernetes/minikube"
+  },
+  {
+    "id": "lib_0984",
+    "target_repository": "junegunn/fzf, google/zx, rails/rails"
+  },
+  {
+    "id": "lib_0985",
+    "target_repository": "remix-run/remix, zsh-users/zsh-autosuggestions, t3-oss/create-t3-app"
+  },
+  {
+    "id": "lib_0986",
+    "target_repository": "sharkdp/hyperfine, rust-lang/mdBook, atuinsh/atuin"
+  },
+  {
+    "id": "lib_0987",
+    "target_repository": "golang-standards/project-layout, charmbracelet/bubbletea, gin-gonic/gin"
+  },
+  {
+    "id": "lib_0988",
+    "target_repository": "BurntSushi/xsv, sharkdp/hyperfine, tokio-rs/tokio"
+  },
+  {
+    "id": "lib_0989",
+    "target_repository": "actions/starter-workflows, remix-run/remix, jekyll/jekyll"
+  },
+  {
+    "id": "lib_0990",
+    "target_repository": "zellij-org/zellij, sharkdp/fd, eza-community/eza"
+  },
+  {
+    "id": "lib_0991",
+    "target_repository": "vercel/turbo, parcel-bundler/parcel, vitest-dev/vitest"
+  },
+  {
+    "id": "lib_0992",
+    "target_repository": "eza-community/eza, ClementTsang/bottom, sharkdp/fd"
+  },
+  {
+    "id": "lib_0993",
+    "target_repository": "restic/restic, t3-oss/create-t3-app, fish-shell/fish-shell"
+  },
+  {
+    "id": "lib_0994",
+    "target_repository": "BurntSushi/ripgrep, BurntSushi/xsv, rust-lang/mdBook"
+  },
+  {
+    "id": "lib_0995",
+    "target_repository": "kubernetes-sigs/kind, docker/compose, influxdata/telegraf"
+  },
+  {
+    "id": "lib_0996",
+    "target_repository": "date-fns/date-fns, withastro/astro, vuejs/vue"
+  },
+  {
+    "id": "lib_0997",
+    "target_repository": "influxdata/telegraf, aquasecurity/trivy, docker/compose"
+  },
+  {
+    "id": "lib_0998",
+    "target_repository": "restic/restic, google/zx, remix-run/remix"
+  },
+  {
+    "id": "lib_0999",
+    "target_repository": "kubernetes/minikube, kubernetes-sigs/kind, docker/compose"
+  },
+  {
+    "id": "lib_1000",
+    "target_repository": "yt-dlp/yt-dlp, audreyfeldroy/cookiecutter-pypackage, psf/black"
+  }
+]

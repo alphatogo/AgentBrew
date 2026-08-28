@@ -1,0 +1,36 @@
+postgres-pro:
+  stdio:
+    command: uvx
+    args:
+      - postgres-mcp
+      - "{{ POSTGRES_ADDRESS }}"
+      - --access-mode
+      - unrestricted
+
+postgres:
+  stdio:
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-postgres"
+      - "{{ POSTGRES_ADDRESS }}"
+
+_postgres:
+  connection:
+    host: localhost
+    port: 5432
+    username: postgres
+    password: password
+    admin_database: postgres
+    docker_container: mcpmark-postgres
+  assets:
+    backup_dir: assets/postgres_state
+    sql_dir: assets/postgres_sql
+    metadata_root: assets/metadata
+    benchmark_task_root: benchmark/tasks/mcpmark
+    few_shot_root: task_sampling/few_shot
+  timeouts:
+    restore_seconds: 1800
+    verifier_seconds: 600
+  sampling:
+    max_meta_chars: 14000

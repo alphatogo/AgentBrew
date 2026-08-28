@@ -1,0 +1,614 @@
+{
+  "db_id": "logical_statements_and_misconceptions_analysis",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/logical_statements_and_misconceptions_analysis",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"assessment_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"assessment_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"sequence_number\" INTEGER\n  \"question_difficulty\" TEXT\n}\n\nTable \"public\".\"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n  \"icon_path\" TEXT\n}\n\nTable \"public\".\"explanations\" {\n  \"explanation_id\" INTEGER [pk]\n  \"statement_id\" INTEGER\n  \"explanation_text\" TEXT\n  \"correct_information\" TEXT\n  \"additional_context\" TEXT\n  \"references\" TEXT\n  \"multimedia_links\" TEXT\n}\n\nTable \"public\".\"statements\" {\n  \"statement_id\" INTEGER [pk]\n  \"category_id\" INTEGER\n  \"statement_text\" TEXT\n  \"is_correct\" INTEGER\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"statement_type\" TEXT\n  \"difficulty_level\" TEXT\n  \"source\" TEXT\n  \"tags\" TEXT\n}\n\nTable \"public\".\"user_achievements\" {\n  \"achievement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"achievement_name\" TEXT\n  \"date_reached\" TEXT\n  \"description\" TEXT\n  \"achievement_type\" TEXT\n}\n\nTable \"public\".\"user_assessment_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"assessment_id\" INTEGER\n  \"question_id\" INTEGER\n  \"response_text\" TEXT\n  \"is_correct\" INTEGER\n  \"response_time\" TEXT\n  \"response_time_taken\" TEXT\n}\n\nTable \"public\".\"user_assessments\" {\n  \"assessment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"assessment_type\" TEXT\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"total_questions\" INTEGER\n  \"correct_answers\" INTEGER\n  \"score\" REAL\n  \"assessment_difficulty\" TEXT\n  \"assessment_topic\" TEXT\n}\n\nTable \"public\".\"user_awards\" {\n  \"award_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"award_name\" TEXT\n  \"date_received\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n}\n\nTable \"public\".\"user_badges\" {\n  \"badge_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"badge_name\" TEXT\n  \"issue_date\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n  \"badge_type\" TEXT\n}\n\nTable \"public\".\"user_certificates\" {\n  \"certificate_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"certificate_name\" TEXT\n  \"issue_date\" TEXT\n  \"expiration_date\" TEXT\n  \"file_path\" TEXT\n  \"certificate_type\" TEXT\n}\n\nTable \"public\".\"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"feedback_text\" TEXT\n  \"created_at\" TEXT\n  \"feedback_type\" TEXT\n  \"resolved\" INTEGER\n}\n\nTable \"public\".\"user_goals\" {\n  \"goal_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"goal_text\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"status\" TEXT\n  \"goal_difficulty\" TEXT\n  \"goal_topic\" TEXT\n}\n\nTable \"public\".\"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"language\" TEXT\n  \"timezone\" TEXT\n  \"theme\" TEXT\n  \"notification_preference\" TEXT\n  \"font_size\" TEXT\n  \"text_color\" TEXT\n}\n\nTable \"public\".\"user_progress\" {\n  \"progress_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"category_id\" INTEGER\n  \"total_attempts\" INTEGER\n  \"correct_attempts\" INTEGER\n  \"last_practiced\" TEXT\n  \"last_assessment\" TEXT\n  \"current_level\" TEXT\n  \"next_level_target\" TEXT\n}\n\nTable \"public\".\"user_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_type\" TEXT\n  \"resource_name\" TEXT\n  \"access_time\" TEXT\n  \"duration\" TEXT\n  \"resource_difficulty\" TEXT\n  \"resource_topic\" TEXT\n}\n\nTable \"public\".\"user_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"response_text\" TEXT\n  \"is_correct\" INTEGER\n  \"response_time\" TEXT\n  \"session_id\" INTEGER\n  \"confidence_level\" TEXT\n  \"explanation_read\" INTEGER\n}\n\nTable \"public\".\"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"session_duration\" TEXT\n  \"session_type\" TEXT\n  \"device\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n  \"avatar_path\" TEXT\n}\n\nRef: \"public\".\"assessment_questions\".\"statement_id\" > \"public\".\"statements\".\"statement_id\"\nRef: \"public\".\"assessment_questions\".\"assessment_id\" > \"public\".\"user_assessments\".\"assessment_id\"\nRef: \"public\".\"explanations\".\"statement_id\" > \"public\".\"statements\".\"statement_id\"\nRef: \"public\".\"statements\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"statements\".\"created_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_achievements\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_assessment_responses\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_assessment_responses\".\"question_id\" > \"public\".\"assessment_questions\".\"question_id\"\nRef: \"public\".\"user_assessment_responses\".\"assessment_id\" > \"public\".\"user_assessments\".\"assessment_id\"\nRef: \"public\".\"user_assessments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_awards\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_badges\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_certificates\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_feedback\".\"statement_id\" > \"public\".\"statements\".\"statement_id\"\nRef: \"public\".\"user_feedback\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_goals\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_preferences\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_progress\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_progress\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"user_resources\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_responses\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_responses\".\"session_id\" > \"public\".\"user_sessions\".\"session_id\"\nRef: \"public\".\"user_responses\".\"statement_id\" > \"public\".\"statements\".\"statement_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"assessment_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"assessment_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"sequence_number\" INTEGER\n  \"question_difficulty\" TEXT\n}\n\nTable \"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n  \"icon_path\" TEXT\n}\n\nTable \"explanations\" {\n  \"explanation_id\" INTEGER [pk]\n  \"statement_id\" INTEGER\n  \"explanation_text\" TEXT\n  \"correct_information\" TEXT\n  \"additional_context\" TEXT\n  \"references\" TEXT\n  \"multimedia_links\" TEXT\n}\n\nTable \"statements\" {\n  \"statement_id\" INTEGER [pk]\n  \"category_id\" INTEGER\n  \"statement_text\" TEXT\n  \"is_correct\" INTEGER\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"statement_type\" TEXT\n  \"difficulty_level\" TEXT\n  \"source\" TEXT\n  \"tags\" TEXT\n}\n\nTable \"user_achievements\" {\n  \"achievement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"achievement_name\" TEXT\n  \"date_reached\" TEXT\n  \"description\" TEXT\n  \"achievement_type\" TEXT\n}\n\nTable \"user_assessment_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"assessment_id\" INTEGER\n  \"question_id\" INTEGER\n  \"response_text\" TEXT\n  \"is_correct\" INTEGER\n  \"response_time\" TEXT\n  \"response_time_taken\" TEXT\n}\n\nTable \"user_assessments\" {\n  \"assessment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"assessment_type\" TEXT\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"total_questions\" INTEGER\n  \"correct_answers\" INTEGER\n  \"score\" REAL\n  \"assessment_difficulty\" TEXT\n  \"assessment_topic\" TEXT\n}\n\nTable \"user_awards\" {\n  \"award_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"award_name\" TEXT\n  \"date_received\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n}\n\nTable \"user_badges\" {\n  \"badge_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"badge_name\" TEXT\n  \"issue_date\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n  \"badge_type\" TEXT\n}\n\nTable \"user_certificates\" {\n  \"certificate_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"certificate_name\" TEXT\n  \"issue_date\" TEXT\n  \"expiration_date\" TEXT\n  \"file_path\" TEXT\n  \"certificate_type\" TEXT\n}\n\nTable \"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"feedback_text\" TEXT\n  \"created_at\" TEXT\n  \"feedback_type\" TEXT\n  \"resolved\" INTEGER\n}\n\nTable \"user_goals\" {\n  \"goal_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"goal_text\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"status\" TEXT\n  \"goal_difficulty\" TEXT\n  \"goal_topic\" TEXT\n}\n\nTable \"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"language\" TEXT\n  \"timezone\" TEXT\n  \"theme\" TEXT\n  \"notification_preference\" TEXT\n  \"font_size\" TEXT\n  \"text_color\" TEXT\n}\n\nTable \"user_progress\" {\n  \"progress_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"category_id\" INTEGER\n  \"total_attempts\" INTEGER\n  \"correct_attempts\" INTEGER\n  \"last_practiced\" TEXT\n  \"last_assessment\" TEXT\n  \"current_level\" TEXT\n  \"next_level_target\" TEXT\n}\n\nTable \"user_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_type\" TEXT\n  \"resource_name\" TEXT\n  \"access_time\" TEXT\n  \"duration\" TEXT\n  \"resource_difficulty\" TEXT\n  \"resource_topic\" TEXT\n}\n\nTable \"user_responses\" {\n  \"response_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"statement_id\" INTEGER\n  \"response_text\" TEXT\n  \"is_correct\" INTEGER\n  \"response_time\" TEXT\n  \"session_id\" INTEGER\n  \"confidence_level\" TEXT\n  \"explanation_read\" INTEGER\n}\n\nTable \"user_sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"login_time\" TEXT\n  \"logout_time\" TEXT\n  \"session_duration\" TEXT\n  \"session_type\" TEXT\n  \"device\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n  \"avatar_path\" TEXT\n}\n\nRef: \"assessment_questions\".\"statement_id\" > \"statements\".\"statement_id\"\n\nRef: \"assessment_questions\".\"assessment_id\" > \"user_assessments\".\"assessment_id\"\n\nRef: \"explanations\".\"statement_id\" > \"statements\".\"statement_id\"\n\nRef: \"statements\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"statements\".\"created_by\" > \"users\".\"user_id\"\n\nRef: \"user_achievements\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_assessment_responses\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_assessment_responses\".\"question_id\" > \"assessment_questions\".\"question_id\"\n\nRef: \"user_assessment_responses\".\"assessment_id\" > \"user_assessments\".\"assessment_id\"\n\nRef: \"user_assessments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_awards\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_badges\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_certificates\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_feedback\".\"statement_id\" > \"statements\".\"statement_id\"\n\nRef: \"user_feedback\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_goals\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_preferences\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_progress\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_progress\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"user_resources\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_responses\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_responses\".\"session_id\" > \"user_sessions\".\"session_id\"\n\nRef: \"user_responses\".\"statement_id\" > \"statements\".\"statement_id\"\n\n## Table Stats & Sample Values\n\nassessment_questions: 2 rows\n  question_difficulty: 'easy', 'medium'\n  sequence_number: '1', '2'\n  statement_id: '0', '1'\n\ncategories: 2 rows\n  category_name: 'Everyday Life', 'Science'\n  description: 'Common everyday scenarios', 'Scientific concepts and facts'\n  icon_path: 'icons/everyday_life.png', 'icons/science.png'\n\nexplanations: 0 rows\n\nstatements: 2 rows\n  statement_type: 'true/false', 'yes/no'\n  difficulty_level: 'easy', 'medium'\n  statement_text: 'An elephant can fit into a fridge', 'My sister eats a stone after breakfast every day'\n\nuser_achievements: 2 rows\n  achievement_name: '1000 Correct Answers', '500 Assessed Statements'\n  description: 'Answered 1000 questions correctly', 'Assessed 500 statements'\n  achievement_type: 'milestone', 'completion'\n\nuser_assessment_responses: 2 rows\n  response_text: 'An elephant can fit into a fridge', 'My sister eats a stone after breakfast every day'\n  response_time: '2023-09-01 10:05:00', '2023-09-01 10:10:00'\n  response_time_taken: '00:01:00', '00:02:00'\n\nuser_assessments: 2 rows\n  assessment_type: 'practice', 'quiz'\n  assessment_difficulty: 'easy', 'medium'\n  assessment_topic: 'Everyday Life', 'Science'\n\nuser_awards: 2 rows\n  award_name: 'Top Performer', 'Outstanding Contribution'\n  description: 'Received for being the top performer in the Septem', 'Received for outstanding contribution to the platf'\n  file_path: 'awards/2023-09-01-user2.pdf', 'awards/2023-09-01-user1.pdf'\n\nuser_badges: 2 rows\n  badge_name: 'Logical Reasoning Expert', 'Critical Thinker'\n  badge_type: 'achievement', 'completion'\n  description: 'Earned by completing all assessments in the Logica', 'Earned by completing all assessments in the Critic'\n\nuser_certificates: 2 rows\n  certificate_name: 'Logical Reasoning Certificate', 'Critical Thinking Certificate'\n  certificate_type: 'completion', 'achievement'\n  file_path: 'certificates/2023-09-01-user2.pdf', 'certificates/2023-09-01-user1.pdf'\n\nuser_feedback: 2 rows\n  feedback_type: 'content', 'technical'\n  feedback_text: 'This statement is confusing', 'The explanation is not clear'\n  created_at: '2023-09-01 10:15:00', '2023-09-01 10:20:00'\n\nuser_goals: 2 rows\n  status: 'in progress'\n  goal_difficulty: 'medium', 'hard'\n  goal_topic: 'Everyday Life', 'Science'\n\nuser_preferences: 2 rows\n  language: 'en', 'es'\n  theme: 'light', 'dark'\n  notification_preference: 'email', 'push notifications'\n\nuser_progress: 2 rows\n  current_level: 'beginner', 'intermediate'\n  next_level_target: 'intermediate', 'advanced'\n  last_practiced: '2023-09-01 10:00:00', '2023-09-01 11:00:00'\n\nuser_resources: 2 rows\n  resource_type: 'article', 'video'\n  resource_name: 'Logical Fallacies 101', 'Critical Thinking Skills'\n  duration: '00:30:00', '00:45:00'\n\nuser_responses: 2 rows\n  confidence_level: 'low', 'medium'\n  response_text: 'An elephant can fit into a fridge', 'My sister eats a stone after breakfast every day'\n  response_time: '2023-09-01 10:05:00', '2023-09-01 10:10:00'\n\nuser_sessions: 2 rows\n  session_type: 'study', 'practice'\n  device: 'desktop', 'mobile'\n  login_time: '2023-09-01 09:00:00', '2023-09-01 10:00:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'educator', 'student'\n  status: 'active'",
+    "stateUrl": null,
+    "tableStats": {
+      "assessment_questions": {
+        "rows": 2,
+        "sample_values": {
+          "question_id": [
+            "0",
+            "1"
+          ],
+          "assessment_id": [
+            "0",
+            "1"
+          ],
+          "statement_id": [
+            "0",
+            "1"
+          ],
+          "sequence_number": [
+            "1",
+            "2"
+          ],
+          "question_difficulty": [
+            "easy",
+            "medium"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "category_name": [
+            "Everyday Life",
+            "Science"
+          ],
+          "description": [
+            "Common everyday scenarios",
+            "Scientific concepts and facts"
+          ],
+          "icon_path": [
+            "icons/everyday_life.png",
+            "icons/science.png"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "explanations": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "statements": {
+        "rows": 2,
+        "sample_values": {
+          "statement_id": [
+            "0",
+            "1"
+          ],
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "statement_text": [
+            "An elephant can fit into a fridge",
+            "My sister eats a stone after breakfast every day"
+          ],
+          "is_correct": [
+            "0"
+          ],
+          "created_by": [
+            "0"
+          ],
+          "created_at": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ],
+          "updated_at": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:05:00"
+          ],
+          "statement_type": [
+            "true/false",
+            "yes/no"
+          ],
+          "difficulty_level": [
+            "easy",
+            "medium"
+          ],
+          "source": [
+            "Expert",
+            "Book"
+          ],
+          "tags": [
+            "logic",
+            "fallacy"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_achievements": {
+        "rows": 2,
+        "sample_values": {
+          "achievement_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "achievement_name": [
+            "1000 Correct Answers",
+            "500 Assessed Statements"
+          ],
+          "date_reached": [
+            "2023-09-01"
+          ],
+          "description": [
+            "Answered 1000 questions correctly",
+            "Assessed 500 statements"
+          ],
+          "achievement_type": [
+            "milestone",
+            "completion"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_assessment_responses": {
+        "rows": 2,
+        "sample_values": {
+          "response_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "assessment_id": [
+            "0",
+            "1"
+          ],
+          "question_id": [
+            "0",
+            "1"
+          ],
+          "response_text": [
+            "An elephant can fit into a fridge",
+            "My sister eats a stone after breakfast every day"
+          ],
+          "is_correct": [
+            "0"
+          ],
+          "response_time": [
+            "2023-09-01 10:05:00",
+            "2023-09-01 10:10:00"
+          ],
+          "response_time_taken": [
+            "00:01:00",
+            "00:02:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_assessments": {
+        "rows": 2,
+        "sample_values": {
+          "assessment_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "assessment_type": [
+            "practice",
+            "quiz"
+          ],
+          "start_time": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 11:00:00"
+          ],
+          "end_time": [
+            "2023-09-01 11:00:00",
+            "2023-09-01 12:00:00"
+          ],
+          "total_questions": [
+            "10"
+          ],
+          "correct_answers": [
+            "5",
+            "7"
+          ],
+          "score": [
+            "50.0",
+            "70.0"
+          ],
+          "assessment_difficulty": [
+            "easy",
+            "medium"
+          ],
+          "assessment_topic": [
+            "Everyday Life",
+            "Science"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_awards": {
+        "rows": 2,
+        "sample_values": {
+          "award_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "award_name": [
+            "Top Performer",
+            "Outstanding Contribution"
+          ],
+          "date_received": [
+            "2023-09-01"
+          ],
+          "description": [
+            "Received for being the top performer in the Septem",
+            "Received for outstanding contribution to the platf"
+          ],
+          "file_path": [
+            "awards/2023-09-01-user2.pdf",
+            "awards/2023-09-01-user1.pdf"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_badges": {
+        "rows": 2,
+        "sample_values": {
+          "badge_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "badge_name": [
+            "Logical Reasoning Expert",
+            "Critical Thinker"
+          ],
+          "issue_date": [
+            "2023-09-01"
+          ],
+          "description": [
+            "Earned by completing all assessments in the Logica",
+            "Earned by completing all assessments in the Critic"
+          ],
+          "file_path": [
+            "badges/2023-09-01-user2.png",
+            "badges/2023-09-01-user1.png"
+          ],
+          "badge_type": [
+            "achievement",
+            "completion"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_certificates": {
+        "rows": 2,
+        "sample_values": {
+          "certificate_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "certificate_name": [
+            "Logical Reasoning Certificate",
+            "Critical Thinking Certificate"
+          ],
+          "issue_date": [
+            "2023-09-01"
+          ],
+          "expiration_date": [
+            "2024-09-01"
+          ],
+          "file_path": [
+            "certificates/2023-09-01-user2.pdf",
+            "certificates/2023-09-01-user1.pdf"
+          ],
+          "certificate_type": [
+            "completion",
+            "achievement"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "statement_id": [
+            "1"
+          ],
+          "feedback_text": [
+            "This statement is confusing",
+            "The explanation is not clear"
+          ],
+          "created_at": [
+            "2023-09-01 10:15:00",
+            "2023-09-01 10:20:00"
+          ],
+          "feedback_type": [
+            "content",
+            "technical"
+          ],
+          "resolved": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_goals": {
+        "rows": 2,
+        "sample_values": {
+          "goal_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "goal_text": [
+            "Improve logical reasoning skills",
+            "Complete all assessments in the Science category"
+          ],
+          "start_date": [
+            "2023-09-01"
+          ],
+          "end_date": [
+            "2023-12-31",
+            "2023-10-31"
+          ],
+          "status": [
+            "in progress"
+          ],
+          "goal_difficulty": [
+            "medium",
+            "hard"
+          ],
+          "goal_topic": [
+            "Everyday Life",
+            "Science"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sample_values": {
+          "preference_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "language": [
+            "en",
+            "es"
+          ],
+          "timezone": [
+            "UTC",
+            "America/New_York"
+          ],
+          "theme": [
+            "light",
+            "dark"
+          ],
+          "notification_preference": [
+            "email",
+            "push notifications"
+          ],
+          "font_size": [
+            "16px",
+            "14px"
+          ],
+          "text_color": [
+            "black",
+            "white"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_progress": {
+        "rows": 2,
+        "sample_values": {
+          "progress_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "category_id": [
+            "1"
+          ],
+          "total_attempts": [
+            "5",
+            "3"
+          ],
+          "correct_attempts": [
+            "2",
+            "1"
+          ],
+          "last_practiced": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 11:00:00"
+          ],
+          "last_assessment": [
+            "2023-09-01 11:00:00",
+            "2023-09-01 12:00:00"
+          ],
+          "current_level": [
+            "beginner",
+            "intermediate"
+          ],
+          "next_level_target": [
+            "intermediate",
+            "advanced"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_resources": {
+        "rows": 2,
+        "sample_values": {
+          "resource_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "resource_type": [
+            "article",
+            "video"
+          ],
+          "resource_name": [
+            "Logical Fallacies 101",
+            "Critical Thinking Skills"
+          ],
+          "access_time": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 10:30:00"
+          ],
+          "duration": [
+            "00:30:00",
+            "00:45:00"
+          ],
+          "resource_difficulty": [
+            "easy",
+            "medium"
+          ],
+          "resource_topic": [
+            "Everyday Life",
+            "Science"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_responses": {
+        "rows": 2,
+        "sample_values": {
+          "response_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "statement_id": [
+            "1"
+          ],
+          "response_text": [
+            "An elephant can fit into a fridge",
+            "My sister eats a stone after breakfast every day"
+          ],
+          "is_correct": [
+            "0"
+          ],
+          "response_time": [
+            "2023-09-01 10:05:00",
+            "2023-09-01 10:10:00"
+          ],
+          "session_id": [
+            "1"
+          ],
+          "confidence_level": [
+            "low",
+            "medium"
+          ],
+          "explanation_read": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_sessions": {
+        "rows": 2,
+        "sample_values": {
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "login_time": [
+            "2023-09-01 09:00:00",
+            "2023-09-01 10:00:00"
+          ],
+          "logout_time": [
+            "2023-09-01 10:00:00",
+            "2023-09-01 11:00:00"
+          ],
+          "session_duration": [
+            "01:00:00"
+          ],
+          "session_type": [
+            "study",
+            "practice"
+          ],
+          "device": [
+            "desktop",
+            "mobile"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "educator",
+            "student"
+          ],
+          "created_at": [
+            "2023-08-01 09:00:00",
+            "2023-08-02 10:00:00"
+          ],
+          "last_login": [
+            "2023-09-01 09:00:00",
+            "2023-09-01 10:00:00"
+          ],
+          "status": [
+            "active"
+          ],
+          "avatar_path": [
+            "avatars/alice.png",
+            "avatars/bob.png"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

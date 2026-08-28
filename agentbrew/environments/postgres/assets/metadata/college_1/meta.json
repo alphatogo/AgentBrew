@@ -1,0 +1,414 @@
+{
+  "db_id": "college_1",
+  "source": "sparc",
+  "tables": 7,
+  "total_rows": 103,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#college_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"CLASS\" {\n  \"CLASS_CODE\" TEXT [pk]\n  \"CRS_CODE\" TEXT\n  \"CLASS_SECTION\" TEXT\n  \"CLASS_TIME\" TEXT\n  \"CLASS_ROOM\" TEXT\n  \"PROF_NUM\" INTEGER\n}\n\nTable \"COURSE\" {\n  \"CRS_CODE\" TEXT [pk]\n  \"DEPT_CODE\" TEXT\n  \"CRS_DESCRIPTION\" TEXT\n  \"CRS_CREDIT\" TEXT\n}\n\nTable \"DEPARTMENT\" {\n  \"DEPT_CODE\" TEXT [pk]\n  \"DEPT_NAME\" TEXT\n  \"SCHOOL_CODE\" TEXT\n  \"EMP_NUM\" INTEGER\n  \"DEPT_ADDRESS\" TEXT\n  \"DEPT_EXTENSION\" TEXT\n}\n\nTable \"EMPLOYEE\" {\n  \"EMP_NUM\" INTEGER [pk]\n  \"EMP_LNAME\" TEXT\n  \"EMP_FNAME\" TEXT\n  \"EMP_INITIAL\" TEXT\n  \"EMP_JOBCODE\" TEXT\n  \"EMP_HIREDATE\" TIMESTAMP\n  \"EMP_DOB\" TIMESTAMP\n}\n\nTable \"ENROLL\" {\n  \"CLASS_CODE\" TEXT\n  \"STU_NUM\" INTEGER\n  \"ENROLL_GRADE\" TEXT\n}\n\nTable \"PROFESSOR\" {\n  \"EMP_NUM\" INTEGER\n  \"DEPT_CODE\" TEXT\n  \"PROF_OFFICE\" TEXT\n  \"PROF_EXTENSION\" TEXT\n  \"PROF_HIGH_DEGREE\" TEXT\n}\n\nTable \"STUDENT\" {\n  \"STU_NUM\" INTEGER [pk]\n  \"STU_LNAME\" TEXT\n  \"STU_FNAME\" TEXT\n  \"STU_INIT\" TEXT\n  \"STU_DOB\" TIMESTAMP\n  \"STU_HRS\" INTEGER\n  \"STU_CLASS\" TEXT\n  \"STU_GPA\" TEXT\n  \"STU_TRANSFER\" TEXT\n  \"DEPT_CODE\" TEXT\n  \"STU_PHONE\" TEXT\n  \"PROF_NUM\" INTEGER\n}\n\n\n\nRef: \"CLASS\".\"PROF_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"CLASS\".\"CRS_CODE\" > \"COURSE\".\"CRS_CODE\"\n\nRef: \"COURSE\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\"\n\nRef: \"DEPARTMENT\".\"EMP_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"ENROLL\".\"STU_NUM\" > \"STUDENT\".\"STU_NUM\"\n\nRef: \"ENROLL\".\"CLASS_CODE\" > \"CLASS\".\"CLASS_CODE\"\n\nRef: \"PROFESSOR\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\"\n\nRef: \"PROFESSOR\".\"EMP_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"STUDENT\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"CLASS\" {\n  \"CLASS_CODE\" TEXT [pk]\n  \"CRS_CODE\" TEXT\n  \"CLASS_SECTION\" TEXT\n  \"CLASS_TIME\" TEXT\n  \"CLASS_ROOM\" TEXT\n  \"PROF_NUM\" INTEGER\n}\n\nTable \"COURSE\" {\n  \"CRS_CODE\" TEXT [pk]\n  \"DEPT_CODE\" TEXT\n  \"CRS_DESCRIPTION\" TEXT\n  \"CRS_CREDIT\" TEXT\n}\n\nTable \"DEPARTMENT\" {\n  \"DEPT_CODE\" TEXT [pk]\n  \"DEPT_NAME\" TEXT\n  \"SCHOOL_CODE\" TEXT\n  \"EMP_NUM\" INTEGER\n  \"DEPT_ADDRESS\" TEXT\n  \"DEPT_EXTENSION\" TEXT\n}\n\nTable \"EMPLOYEE\" {\n  \"EMP_NUM\" INTEGER [pk]\n  \"EMP_LNAME\" TEXT\n  \"EMP_FNAME\" TEXT\n  \"EMP_INITIAL\" TEXT\n  \"EMP_JOBCODE\" TEXT\n  \"EMP_HIREDATE\" TIMESTAMP\n  \"EMP_DOB\" TIMESTAMP\n}\n\nTable \"ENROLL\" {\n  \"CLASS_CODE\" TEXT\n  \"STU_NUM\" INTEGER\n  \"ENROLL_GRADE\" TEXT\n}\n\nTable \"PROFESSOR\" {\n  \"EMP_NUM\" INTEGER\n  \"DEPT_CODE\" TEXT\n  \"PROF_OFFICE\" TEXT\n  \"PROF_EXTENSION\" TEXT\n  \"PROF_HIGH_DEGREE\" TEXT\n}\n\nTable \"STUDENT\" {\n  \"STU_NUM\" INTEGER [pk]\n  \"STU_LNAME\" TEXT\n  \"STU_FNAME\" TEXT\n  \"STU_INIT\" TEXT\n  \"STU_DOB\" TIMESTAMP\n  \"STU_HRS\" INTEGER\n  \"STU_CLASS\" TEXT\n  \"STU_GPA\" TEXT\n  \"STU_TRANSFER\" TEXT\n  \"DEPT_CODE\" TEXT\n  \"STU_PHONE\" TEXT\n  \"PROF_NUM\" INTEGER\n}\n\nRef: \"CLASS\".\"PROF_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"CLASS\".\"CRS_CODE\" > \"COURSE\".\"CRS_CODE\"\n\nRef: \"COURSE\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\"\n\nRef: \"DEPARTMENT\".\"EMP_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"ENROLL\".\"STU_NUM\" > \"STUDENT\".\"STU_NUM\"\n\nRef: \"ENROLL\".\"CLASS_CODE\" > \"CLASS\".\"CLASS_CODE\"\n\nRef: \"PROFESSOR\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\"\n\nRef: \"PROFESSOR\".\"EMP_NUM\" > \"EMPLOYEE\".\"EMP_NUM\"\n\nRef: \"STUDENT\".\"DEPT_CODE\" > \"DEPARTMENT\".\"DEPT_CODE\"\n\n## Table Stats & Sample Values\n\nCLASS: 13 rows\n  CLASS_SECTION: '1', '2', '3'\n  CLASS_ROOM: 'BUS311', 'BUS200', 'BUS252', ...\n  CLASS_TIME: 'MWF 8:00-8:50 a.m.', 'MWF 9:00-9:50 a.m.', 'TTh 2:30-3:45 p.m.', ...\n\nCOURSE: 6 rows\n  CRS_DESCRIPTION: 'Accounting I', 'Accounting II', 'Intro. to Microcomputing', ...\n  DEPT_CODE: 'ACCT', 'CIS'\n  CRS_CREDIT: '3.0', '4.0'\n\nDEPARTMENT: 11 rows\n  DEPT_NAME: 'Accounting', 'Fine Arts', 'Biology', ...\n  SCHOOL_CODE: 'BUS', 'A&SCI'\n  DEPT_ADDRESS: 'KLR 211, Box 52', 'BBG 185, Box 128', 'AAK 230, Box 415', ...\n\nEMPLOYEE: 37 rows\n  EMP_LNAME: 'Worley', 'Ramso', 'Edwards', ...\n  EMP_FNAME: 'James', 'Henry', 'Rosemary', ...\n  EMP_INITIAL: 'F', 'B', 'D', ...\n\nENROLL: 6 rows\n  CLASS_CODE: '10014', '10018', '10021'\n  ENROLL_GRADE: 'C', 'B', 'A'\n  STU_NUM: '321452', '324257'\n\nPROFESSOR: 22 rows\n  DEPT_CODE: 'HIST', 'ENG', 'ACCT', ...\n  PROF_OFFICE: 'DRE 156', 'DRE 102', 'KLR 229D', ...\n  PROF_EXTENSION: '6783', '5561', '8665', ...\n\nSTUDENT: 8 rows\n  STU_LNAME: 'Bowser', 'Smithson', 'Brewer', ...\n  STU_FNAME: 'William', 'Anne', 'Juliette', ...\n  STU_CLASS: 'So', 'Jr', 'Sr', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#college_1",
+    "tableStats": {
+      "CLASS": {
+        "rows": 13,
+        "sample_values": {
+          "CLASS_CODE": [
+            "10012",
+            "10013",
+            "10014",
+            "10015",
+            "10016",
+            "10017",
+            "10018",
+            "10019"
+          ],
+          "CRS_CODE": [
+            "ACCT-211",
+            "ACCT-212",
+            "CIS-220",
+            "CIS-420",
+            "QM-261",
+            "QM-362"
+          ],
+          "CLASS_SECTION": [
+            "1",
+            "2",
+            "3"
+          ],
+          "CLASS_TIME": [
+            "MWF 8:00-8:50 a.m.",
+            "MWF 9:00-9:50 a.m.",
+            "TTh 2:30-3:45 p.m.",
+            "MWF 10:00-10:50 a.m.",
+            "Th 6:00-8:40 p.m.",
+            "W 6:00-8:40 p.m.",
+            "TTh 1:00-2:15 p.m.",
+            "MWF 11:00-11:50 a.m."
+          ],
+          "CLASS_ROOM": [
+            "BUS311",
+            "BUS200",
+            "BUS252",
+            "KLR209",
+            "KLR211",
+            "KLR200"
+          ],
+          "PROF_NUM": [
+            "105",
+            "342",
+            "301",
+            "228",
+            "114",
+            "162"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "COURSE": {
+        "rows": 6,
+        "sample_values": {
+          "CRS_CODE": [
+            "ACCT-211",
+            "ACCT-212",
+            "CIS-220",
+            "CIS-420",
+            "QM-261",
+            "QM-362"
+          ],
+          "DEPT_CODE": [
+            "ACCT",
+            "CIS"
+          ],
+          "CRS_DESCRIPTION": [
+            "Accounting I",
+            "Accounting II",
+            "Intro. to Microcomputing",
+            "Database Design and Implementation",
+            "Intro. to Statistics",
+            "Statistical Applications"
+          ],
+          "CRS_CREDIT": [
+            "3.0",
+            "4.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "DEPARTMENT": {
+        "rows": 11,
+        "sample_values": {
+          "DEPT_CODE": [
+            "ACCT",
+            "ART",
+            "BIOL",
+            "CIS",
+            "ECON/FIN",
+            "ENG",
+            "HIST",
+            "MATH"
+          ],
+          "DEPT_NAME": [
+            "Accounting",
+            "Fine Arts",
+            "Biology",
+            "Computer Info. Systems",
+            "Economics/Finance",
+            "English",
+            "History",
+            "Mathematics"
+          ],
+          "SCHOOL_CODE": [
+            "BUS",
+            "A&SCI"
+          ],
+          "EMP_NUM": [
+            "114",
+            "435",
+            "387",
+            "209",
+            "299",
+            "160",
+            "103",
+            "297"
+          ],
+          "DEPT_ADDRESS": [
+            "KLR 211, Box 52",
+            "BBG 185, Box 128",
+            "AAK 230, Box 415",
+            "KLR 333, Box 56",
+            "KLR 284, Box 63",
+            "DRE 102, Box 223",
+            "DRE 156, Box 284",
+            "AAK 194, Box 422"
+          ],
+          "DEPT_EXTENSION": [
+            "3119",
+            "2278",
+            "4117",
+            "3245",
+            "3126",
+            "1004",
+            "1867",
+            "4234"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "EMPLOYEE": {
+        "rows": 37,
+        "sample_values": {
+          "EMP_NUM": [
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "108"
+          ],
+          "EMP_LNAME": [
+            "Worley",
+            "Ramso",
+            "Edwards",
+            "Donelly",
+            "Yukon",
+            "Heffington",
+            "Washington",
+            "Robertson"
+          ],
+          "EMP_FNAME": [
+            "James",
+            "Henry",
+            "Rosemary",
+            "Ronald",
+            "Preston",
+            "Arnelle",
+            "Ross",
+            "Elaine"
+          ],
+          "EMP_INITIAL": [
+            "F",
+            "B",
+            "D",
+            "O",
+            "E",
+            "W",
+            "S",
+            "H"
+          ],
+          "EMP_JOBCODE": [
+            "CUST",
+            "TECH",
+            "PROF",
+            "CLRK"
+          ],
+          "EMP_HIREDATE": [
+            "1978-2-23",
+            "1994-11-15",
+            "1990-7-23",
+            "1987-7-1",
+            "1992-5-1",
+            "1991-7-1",
+            "1976-8-1",
+            "1983-10-18"
+          ],
+          "EMP_DOB": [
+            "1950-6-12",
+            "1961-11-2",
+            "1953-7-3",
+            "1952-10-2",
+            "1948-2-23",
+            "1950-11-2",
+            "1941-3-4",
+            "1961-6-20"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ENROLL": {
+        "rows": 6,
+        "sample_values": {
+          "CLASS_CODE": [
+            "10014",
+            "10018",
+            "10021"
+          ],
+          "STU_NUM": [
+            "321452",
+            "324257"
+          ],
+          "ENROLL_GRADE": [
+            "C",
+            "B",
+            "A"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PROFESSOR": {
+        "rows": 22,
+        "sample_values": {
+          "EMP_NUM": [
+            "103",
+            "104",
+            "105",
+            "106",
+            "110",
+            "114",
+            "155",
+            "160"
+          ],
+          "DEPT_CODE": [
+            "HIST",
+            "ENG",
+            "ACCT",
+            "MKT/MGT",
+            "BIOL",
+            "MATH",
+            "CIS",
+            "PSYCH"
+          ],
+          "PROF_OFFICE": [
+            "DRE 156",
+            "DRE 102",
+            "KLR 229D",
+            "KLR 126",
+            "AAK 160",
+            "KLR 211",
+            "AAK 201",
+            "KLR 203E"
+          ],
+          "PROF_EXTENSION": [
+            "6783",
+            "5561",
+            "8665",
+            "3899",
+            "3412",
+            "4436",
+            "4440",
+            "2248"
+          ],
+          "PROF_HIGH_DEGREE": [
+            "Ph.D.",
+            "MA",
+            "DBA",
+            "MBA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "STUDENT": {
+        "rows": 8,
+        "sample_values": {
+          "STU_NUM": [
+            "321452",
+            "324257",
+            "324258",
+            "324269",
+            "324273",
+            "324274",
+            "324291",
+            "324299"
+          ],
+          "STU_LNAME": [
+            "Bowser",
+            "Smithson",
+            "Brewer",
+            "Oblonski",
+            "Smith",
+            "Katinga",
+            "Robertson"
+          ],
+          "STU_FNAME": [
+            "William",
+            "Anne",
+            "Juliette",
+            "Walter",
+            "John",
+            "Raphael",
+            "Gerald"
+          ],
+          "STU_INIT": [
+            "C",
+            "K",
+            "H",
+            "D",
+            "P",
+            "T",
+            "B"
+          ],
+          "STU_DOB": [
+            "1975-2-12",
+            "1981-11-15",
+            "1969-8-23",
+            "1976-9-16",
+            "1958-12-30",
+            "1979-10-21",
+            "1973-4-8",
+            "1986-11-30"
+          ],
+          "STU_HRS": [
+            "42",
+            "81",
+            "36",
+            "66",
+            "102",
+            "114",
+            "120",
+            "15"
+          ],
+          "STU_CLASS": [
+            "So",
+            "Jr",
+            "Sr",
+            "Fr"
+          ],
+          "STU_GPA": [
+            "2.84",
+            "3.27",
+            "2.26",
+            "3.09",
+            "2.11",
+            "3.15",
+            "3.87",
+            "2.92"
+          ],
+          "STU_TRANSFER": [
+            "0",
+            "1"
+          ],
+          "DEPT_CODE": [
+            "BIOL",
+            "CIS",
+            "ACCT",
+            "ENGL",
+            "EDU"
+          ],
+          "STU_PHONE": [
+            "2134",
+            "2256",
+            "2114",
+            "2231",
+            "2267",
+            "2315"
+          ],
+          "PROF_NUM": [
+            "205",
+            "222",
+            "228",
+            "199",
+            "311",
+            "230"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

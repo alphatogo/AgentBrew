@@ -1,0 +1,594 @@
+{
+  "db_id": "world_development_indicators",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 6195691,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#world_development_indicators",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Country\" {\n  \"CountryCode\" TEXT [pk, not null]\n  \"ShortName\" TEXT\n  \"TableName\" TEXT\n  \"LongName\" TEXT\n  \"Alpha2Code\" TEXT\n  \"CurrencyUnit\" TEXT\n  \"SpecialNotes\" TEXT\n  \"Region\" TEXT\n  \"IncomeGroup\" TEXT\n  \"Wb2Code\" TEXT\n  \"NationalAccountsBaseYear\" TEXT\n  \"NationalAccountsReferenceYear\" TEXT\n  \"SnaPriceValuation\" TEXT\n  \"LendingCategory\" TEXT\n  \"OtherGroups\" TEXT\n  \"SystemOfNationalAccounts\" TEXT\n  \"AlternativeConversionFactor\" TEXT\n  \"PppSurveyYear\" TEXT\n  \"BalanceOfPaymentsManualInUse\" TEXT\n  \"ExternalDebtReportingStatus\" TEXT\n  \"SystemOfTrade\" TEXT\n  \"GovernmentAccountingConcept\" TEXT\n  \"ImfDataDisseminationStandard\" TEXT\n  \"LatestPopulationCensus\" TEXT\n  \"LatestHouseholdSurvey\" TEXT\n  \"SourceOfMostRecentIncomeAndExpenditureData\" TEXT\n  \"VitalRegistrationComplete\" TEXT\n  \"LatestAgriculturalCensus\" TEXT\n  \"LatestIndustrialData\" INTEGER\n  \"LatestTradeData\" INTEGER\n  \"LatestWaterWithdrawalData\" INTEGER\n}\n\nTable \"CountryNotes\" {\n  \"Countrycode\" TEXT [pk, not null]\n  \"Seriescode\" TEXT [pk, not null]\n  \"Description\" TEXT\n}\n\nTable \"Footnotes\" {\n  \"Countrycode\" TEXT [pk, not null]\n  \"Seriescode\" TEXT [pk, not null]\n  \"Year\" TEXT [pk]\n  \"Description\" TEXT\n}\n\nTable \"Indicators\" {\n  \"CountryName\" TEXT\n  \"CountryCode\" TEXT [pk, not null]\n  \"IndicatorName\" TEXT\n  \"IndicatorCode\" TEXT [pk, not null]\n  \"Year\" INTEGER [pk, not null]\n  \"Value\" INTEGER\n}\n\nTable \"Series\" {\n  \"SeriesCode\" TEXT [pk, not null]\n  \"Topic\" TEXT\n  \"IndicatorName\" TEXT\n  \"ShortDefinition\" TEXT\n  \"LongDefinition\" TEXT\n  \"UnitOfMeasure\" TEXT\n  \"Periodicity\" TEXT\n  \"BasePeriod\" TEXT\n  \"OtherNotes\" INTEGER\n  \"AggregationMethod\" TEXT\n  \"LimitationsAndExceptions\" TEXT\n  \"NotesFromOriginalSource\" TEXT\n  \"GeneralComments\" TEXT\n  \"Source\" TEXT\n  \"StatisticalConceptAndMethodology\" TEXT\n  \"DevelopmentRelevance\" TEXT\n  \"RelatedSourceLinks\" TEXT\n  \"OtherWebLinks\" INTEGER\n  \"RelatedIndicators\" INTEGER\n  \"LicenseType\" TEXT\n}\n\nTable \"SeriesNotes\" {\n  \"Seriescode\" TEXT [pk, not null]\n  \"Year\" TEXT [pk, not null]\n  \"Description\" TEXT\n}\n\n\n\nRef: \"CountryNotes\".\"Countrycode\" > \"Country\".\"CountryCode\"\n\nRef: \"CountryNotes\".\"Seriescode\" > \"Series\".\"SeriesCode\"\n\nRef: \"Footnotes\".\"Countrycode\" > \"Country\".\"CountryCode\"\n\nRef: \"Footnotes\".\"Seriescode\" > \"Series\".\"SeriesCode\"\n\nRef: \"Indicators\".\"CountryCode\" > \"Country\".\"CountryCode\"\n\nRef: \"SeriesNotes\".\"Seriescode\" > \"Series\".\"SeriesCode\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Country\" {\n  \"CountryCode\" TEXT [pk, not null]\n  \"ShortName\" TEXT\n  \"TableName\" TEXT\n  \"LongName\" TEXT\n  \"Alpha2Code\" TEXT\n  \"CurrencyUnit\" TEXT\n  \"SpecialNotes\" TEXT\n  \"Region\" TEXT\n  \"IncomeGroup\" TEXT\n  \"Wb2Code\" TEXT\n  \"NationalAccountsBaseYear\" TEXT\n  \"NationalAccountsReferenceYear\" TEXT\n  \"SnaPriceValuation\" TEXT\n  \"LendingCategory\" TEXT\n  \"OtherGroups\" TEXT\n  \"SystemOfNationalAccounts\" TEXT\n  \"AlternativeConversionFactor\" TEXT\n  \"PppSurveyYear\" TEXT\n  \"BalanceOfPaymentsManualInUse\" TEXT\n  \"ExternalDebtReportingStatus\" TEXT\n  \"SystemOfTrade\" TEXT\n  \"GovernmentAccountingConcept\" TEXT\n  \"ImfDataDisseminationStandard\" TEXT\n  \"LatestPopulationCensus\" TEXT\n  \"LatestHouseholdSurvey\" TEXT\n  \"SourceOfMostRecentIncomeAndExpenditureData\" TEXT\n  \"VitalRegistrationComplete\" TEXT\n  \"LatestAgriculturalCensus\" TEXT\n  \"LatestIndustrialData\" INTEGER\n  \"LatestTradeData\" INTEGER\n  \"LatestWaterWithdrawalData\" INTEGER\n}\n\nTable \"CountryNotes\" {\n  \"Countrycode\" TEXT [pk, not null]\n  \"Seriescode\" TEXT [pk, not null]\n  \"Description\" TEXT\n}\n\nTable \"Footnotes\" {\n  \"Countrycode\" TEXT [pk, not null]\n  \"Seriescode\" TEXT [pk, not null]\n  \"Year\" TEXT [pk]\n  \"Description\" TEXT\n}\n\nTable \"Indicators\" {\n  \"CountryName\" TEXT\n  \"CountryCode\" TEXT [pk, not null]\n  \"IndicatorName\" TEXT\n  \"IndicatorCode\" TEXT [pk, not null]\n  \"Year\" INTEGER [pk, not null]\n  \"Value\" INTEGER\n}\n\nTable \"Series\" {\n  \"SeriesCode\" TEXT [pk, not null]\n  \"Topic\" TEXT\n  \"IndicatorName\" TEXT\n  \"ShortDefinition\" TEXT\n  \"LongDefinition\" TEXT\n  \"UnitOfMeasure\" TEXT\n  \"Periodicity\" TEXT\n  \"BasePeriod\" TEXT\n  \"OtherNotes\" INTEGER\n  \"AggregationMethod\" TEXT\n  \"LimitationsAndExceptions\" TEXT\n  \"NotesFromOriginalSource\" TEXT\n  \"GeneralComments\" TEXT\n  \"Source\" TEXT\n  \"StatisticalConceptAndMethodology\" TEXT\n  \"DevelopmentRelevance\" TEXT\n  \"RelatedSourceLinks\" TEXT\n  \"OtherWebLinks\" INTEGER\n  \"RelatedIndicators\" INTEGER\n  \"LicenseType\" TEXT\n}\n\nTable \"SeriesNotes\" {\n  \"Seriescode\" TEXT [pk, not null]\n  \"Year\" TEXT [pk, not null]\n  \"Description\" TEXT\n}\n\nRef: \"CountryNotes\".\"Countrycode\" > \"Country\".\"CountryCode\"\n\nRef: \"CountryNotes\".\"Seriescode\" > \"Series\".\"SeriesCode\"\n\nRef: \"Footnotes\".\"Countrycode\" > \"Country\".\"CountryCode\"\n\nRef: \"Footnotes\".\"Seriescode\" > \"Series\".\"SeriesCode\"\n\nRef: \"Indicators\".\"CountryCode\" > \"Country\".\"CountryCode\"\n\nRef: \"SeriesNotes\".\"Seriescode\" > \"Series\".\"SeriesCode\"\n\n## Table Stats & Sample Values\n\nCountry: 247 rows\n  ShortName: 'Afghanistan', 'Albania', 'Algeria', ...\n  TableName: 'Afghanistan', 'Albania', 'Algeria', ...\n  Region: 'South Asia', 'Europe & Central Asia', 'Middle East & North Africa', ...\n\nCountryNotes: 4857 rows\n  Description: 'Sources: Estimated based on UN Energy Statistics (', 'Sources: UN Energy Statistics (2014)', 'Data sources : United Nations World Population Pro', ...\n  Countrycode: 'ABW', 'ADO', 'AFG', ...\n  Seriescode: 'EG.EGY.PRIM.PP.KD', 'EG.ELC.RNEW.ZS', 'EG.FEC.RNEW.ZS', ...\n\nFootnotes: 9986 rows\n  Description: 'Not specified', 'Source: United Nations Conference on Trade and Dev', 'Data are classified as official aid.', ...\n  Countrycode: 'ABW', 'ADO', 'AFG', ...\n  Seriescode: 'AG.LND.FRST.K2', 'BX.KLT.DINV.CD.WD', 'DC.DAC.AUSL.CD', ...\n\nIndicators: 10000 rows\n  CountryName: 'Arab World', 'Caribbean small states', 'Central Europe and the Baltics', ...\n  IndicatorName: 'Adolescent fertility rate (births per 1,000 women', 'Age dependency ratio (% of working-age population)', 'Age dependency ratio, old (% of working-age popula', ...\n  CountryCode: 'ARB', 'CSS', 'CEB', ...\n\nSeries: 1151 rows\n  LicenseType: 'Open', 'Restricted'\n  IndicatorName: 'Foreign direct investment, net (BoP, current US$)', 'Foreign direct investment, net inflows (% of GDP)', 'Foreign direct investment, net inflows (BoP, curre', ...\n  Periodicity: 'Annual'\n\nSeriesNotes: 369 rows\n  Description: 'Interpolated using data for 1957 and 1962.', 'Interpolated using data for 1957 and 1962, if the', 'The data refer to 1960-1965.', ...\n  Seriescode: 'SP.ADO.TFRT', 'SP.DYN.AMRT.FE', 'SP.DYN.AMRT.MA', ...\n  Year: 'YR1960', 'YR1961', 'YR1962', ...",
+    "stateUrl": "https://bird-bench.github.io/#world_development_indicators",
+    "tableStats": {
+      "Country": {
+        "rows": 247,
+        "sample_values": {
+          "CountryCode": [
+            "AFG",
+            "ALB",
+            "DZA",
+            "ASM",
+            "ADO",
+            "AGO",
+            "ATG",
+            "ARB"
+          ],
+          "ShortName": [
+            "Afghanistan",
+            "Albania",
+            "Algeria",
+            "American Samoa",
+            "Andorra",
+            "Angola",
+            "Antigua and Barbuda",
+            "Arab World"
+          ],
+          "TableName": [
+            "Afghanistan",
+            "Albania",
+            "Algeria",
+            "American Samoa",
+            "Andorra",
+            "Angola",
+            "Antigua and Barbuda",
+            "Arab World"
+          ],
+          "LongName": [
+            "Islamic State of Afghanistan",
+            "Republic of Albania",
+            "People's Democratic Republic of Algeria",
+            "American Samoa",
+            "Principality of Andorra",
+            "People's Republic of Angola",
+            "Antigua and Barbuda",
+            "Arab World"
+          ],
+          "Alpha2Code": [
+            "AF",
+            "AL",
+            "DZ",
+            "AS",
+            "AD",
+            "AO",
+            "AG",
+            "1A"
+          ],
+          "CurrencyUnit": [
+            "Afghan afghani",
+            "Albanian lek",
+            "Algerian dinar",
+            "U.S. dollar",
+            "Euro",
+            "Angolan kwanza",
+            "East Caribbean dollar",
+            "Argentine peso"
+          ],
+          "SpecialNotes": [
+            "Fiscal year end: March 20; reporting period for na",
+            "April 2013 database update: Based on IMF data, nat",
+            "April 2012 database update: Based on official gove",
+            "Arab World aggregate. Arab World is composed of me",
+            "The base year has changed to 2004.",
+            "SNA data for 2000-2011 are updated from official g",
+            "Fiscal year end: June 30; reporting period for nat",
+            "A simple multiplier is used to convert the nationa"
+          ],
+          "Region": [
+            "South Asia",
+            "Europe & Central Asia",
+            "Middle East & North Africa",
+            "East Asia & Pacific",
+            "Sub-Saharan Africa",
+            "Latin America & Caribbean",
+            "North America"
+          ],
+          "IncomeGroup": [
+            "Low income",
+            "Upper middle income",
+            "High income: nonOECD",
+            "Lower middle income",
+            "High income: OECD"
+          ],
+          "Wb2Code": [
+            "AF",
+            "AL",
+            "DZ",
+            "AS",
+            "AD",
+            "AO",
+            "AG",
+            "1A"
+          ],
+          "NationalAccountsBaseYear": [
+            "2002/03",
+            "Original chained constant price data are rescaled.",
+            "1980",
+            "2000",
+            "2002",
+            "2006",
+            "2004",
+            "2010"
+          ],
+          "NationalAccountsReferenceYear": [
+            "1996",
+            "2013/14",
+            "2010",
+            "2000",
+            "2007",
+            "2005",
+            "2013",
+            "1995"
+          ],
+          "SnaPriceValuation": [
+            "Value added at basic prices (VAB)",
+            "Value added at producer prices (VAP)"
+          ],
+          "LendingCategory": [
+            "IDA",
+            "IBRD",
+            "Blend"
+          ],
+          "OtherGroups": [
+            "HIPC",
+            "Euro area"
+          ],
+          "SystemOfNationalAccounts": [
+            "Country uses the 1993 System of National Accounts ",
+            "Country uses the 1968 System of National Accounts ",
+            "Country uses the 2008 System of National Accounts "
+          ],
+          "AlternativeConversionFactor": [
+            "199196",
+            "197184",
+            "199095",
+            "199295",
+            "1992",
+            "196085",
+            "197889, 199192",
+            "199293"
+          ],
+          "PppSurveyYear": [
+            "Rolling",
+            "2011",
+            "2011 (household consumption only)."
+          ],
+          "BalanceOfPaymentsManualInUse": [
+            "IMF Balance of Payments Manual, 6th edition."
+          ],
+          "ExternalDebtReportingStatus": [
+            "Actual",
+            "Preliminary",
+            "Estimate"
+          ],
+          "SystemOfTrade": [
+            "General trade system",
+            "Special trade system"
+          ],
+          "GovernmentAccountingConcept": [
+            "Consolidated central government",
+            "Budgetary central government"
+          ],
+          "ImfDataDisseminationStandard": [
+            "General Data Dissemination System (GDDS)",
+            "Special Data Dissemination Standard (SDDS)"
+          ],
+          "LatestPopulationCensus": [
+            "1979",
+            "2011",
+            "2008",
+            "2010",
+            "2011. Population data compiled from administrative",
+            "2014",
+            "2009",
+            "2013"
+          ],
+          "LatestHouseholdSurvey": [
+            "Multiple Indicator Cluster Survey (MICS), 2010/11",
+            "Demographic and Health Survey (DHS), 2008/09",
+            "Multiple Indicator Cluster Survey (MICS), 2012",
+            "Malaria Indicator Survey (MIS), 2011",
+            "Multiple Indicator Cluster Survey (MICS), 2011/12",
+            "Demographic and Health Survey (DHS), 2010",
+            "Demographic and Health Survey (DHS), 2006",
+            "Demographic and Health Survey (DHS), 2014; HIV/Mat"
+          ],
+          "SourceOfMostRecentIncomeAndExpenditureData": [
+            "Integrated household survey (IHS), 2008",
+            "Living Standards Measurement Study Survey (LSMS), ",
+            "Integrated household survey (IHS), 1995",
+            "Integrated household survey (IHS), 2008/09",
+            "Integrated household survey (IHS), 2012",
+            "Expenditure survey/budget survey (ES/BS), 2003",
+            "Integrated household survey (IHS), 2004",
+            "Integrated household survey (IHS), 2010"
+          ],
+          "VitalRegistrationComplete": [
+            "Yes",
+            "Yes. Vital registration for Guernsey and Jersey."
+          ],
+          "LatestAgriculturalCensus": [
+            "2013/14",
+            "2012",
+            "2007",
+            "2015",
+            "2013",
+            "2011",
+            "2010",
+            "2008"
+          ],
+          "LatestIndustrialData": [
+            "2011",
+            "2010",
+            "2002",
+            "2008",
+            "2007",
+            "2009",
+            "2003",
+            "2005"
+          ],
+          "LatestTradeData": [
+            "2013",
+            "2006",
+            "2012",
+            "2011",
+            "2007",
+            "1995",
+            "2009",
+            "2003"
+          ],
+          "LatestWaterWithdrawalData": [
+            "2000",
+            "2006",
+            "2001",
+            "2005",
+            "2011",
+            "2012",
+            "2002",
+            "2003"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CountryNotes": {
+        "rows": 4857,
+        "sample_values": {
+          "Countrycode": [
+            "ABW",
+            "ADO",
+            "AFG",
+            "AGO",
+            "ALB",
+            "ARE",
+            "ARG",
+            "ARM"
+          ],
+          "Seriescode": [
+            "EG.EGY.PRIM.PP.KD",
+            "EG.ELC.RNEW.ZS",
+            "EG.FEC.RNEW.ZS",
+            "SM.POP.NETM",
+            "SM.POP.TOTL",
+            "SP.DYN.AMRT.FE",
+            "SP.DYN.AMRT.MA",
+            "SP.DYN.CBRT.IN"
+          ],
+          "Description": [
+            "Sources: Estimated based on UN Energy Statistics (",
+            "Sources: UN Energy Statistics (2014)",
+            "Data sources : United Nations World Population Pro",
+            "Estimates are derived from data on foreign-born po",
+            "Data source : United Nations World Population Pros",
+            "Derived using male and female life expectancy",
+            "Data sources: United Nations World Population Pros",
+            "Estimates are derived from data on foreign populat"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Footnotes": {
+        "rows": 9986,
+        "sample_values": {
+          "Countrycode": [
+            "ABW",
+            "ADO",
+            "AFG",
+            "AGO",
+            "ALB",
+            "ARB",
+            "ARE",
+            "ARG"
+          ],
+          "Seriescode": [
+            "AG.LND.FRST.K2",
+            "BX.KLT.DINV.CD.WD",
+            "DC.DAC.AUSL.CD",
+            "DC.DAC.AUTL.CD",
+            "DC.DAC.BELL.CD",
+            "DC.DAC.CANL.CD",
+            "DC.DAC.CECL.CD",
+            "DC.DAC.CHEL.CD"
+          ],
+          "Year": [
+            "YR1990",
+            "YR2000",
+            "YR2005",
+            "YR1987",
+            "YR1988",
+            "YR1989",
+            "YR2013",
+            "YR2001"
+          ],
+          "Description": [
+            "Not specified",
+            "Source: United Nations Conference on Trade and Dev",
+            "Data are classified as official aid.",
+            "Source: Estimate",
+            "Source:Estimate",
+            "Data are from the UNCTAD secretariat, derived from",
+            "Oct-06",
+            "Dec-07"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Indicators": {
+        "rows": 10000,
+        "sample_values": {
+          "CountryName": [
+            "Arab World",
+            "Caribbean small states",
+            "Central Europe and the Baltics",
+            "East Asia & Pacific (all income levels)",
+            "East Asia & Pacific (developing only)",
+            "Euro area",
+            "Europe & Central Asia (all income levels)",
+            "Europe & Central Asia (developing only)"
+          ],
+          "CountryCode": [
+            "ARB",
+            "CSS",
+            "CEB",
+            "EAS",
+            "EAP",
+            "EMU",
+            "ECS",
+            "ECA"
+          ],
+          "IndicatorName": [
+            "Adolescent fertility rate (births per 1,000 women ",
+            "Age dependency ratio (% of working-age population)",
+            "Age dependency ratio, old (% of working-age popula",
+            "Age dependency ratio, young (% of working-age popu",
+            "Arms exports (SIPRI trend indicator values)",
+            "Arms imports (SIPRI trend indicator values)",
+            "Birth rate, crude (per 1,000 people)",
+            "CO2 emissions (kt)"
+          ],
+          "IndicatorCode": [
+            "SP.ADO.TFRT",
+            "SP.POP.DPND",
+            "SP.POP.DPND.OL",
+            "SP.POP.DPND.YG",
+            "MS.MIL.XPRT.KD",
+            "MS.MIL.MPRT.KD",
+            "SP.DYN.CBRT.IN",
+            "EN.ATM.CO2E.KT"
+          ],
+          "Year": [
+            "1960"
+          ],
+          "Value": [
+            "133",
+            "87",
+            "6",
+            "81",
+            "3000000",
+            "538000000",
+            "47",
+            "59563"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Series": {
+        "rows": 1151,
+        "sample_values": {
+          "SeriesCode": [
+            "BN.KLT.DINV.CD",
+            "BX.KLT.DINV.WD.GD.ZS",
+            "BX.KLT.DINV.CD.WD",
+            "BM.KLT.DINV.GD.ZS",
+            "BN.TRF.KOGT.CD",
+            "BN.KAC.EOMS.CD",
+            "BN.FIN.TOTL.CD",
+            "BN.KLT.PTXL.CD"
+          ],
+          "Topic": [
+            "Economic Policy & Debt: Balance of payments: Capit",
+            "Economic Policy & Debt: Balance of payments: Curre",
+            "Economic Policy & Debt: Balance of payments: Reser",
+            "Economic Policy & Debt: External debt: Amortizatio",
+            "Economic Policy & Debt: External debt: Arrears, re",
+            "Economic Policy & Debt: External debt: Commitments",
+            "Economic Policy & Debt: External debt: Currency co",
+            "Economic Policy & Debt: External debt: Debt outsta"
+          ],
+          "IndicatorName": [
+            "Foreign direct investment, net (BoP, current US$)",
+            "Foreign direct investment, net inflows (% of GDP)",
+            "Foreign direct investment, net inflows (BoP, curre",
+            "Foreign direct investment, net outflows (% of GDP)",
+            "Net capital account (BoP, current US$)",
+            "Net errors and omissions (BoP, current US$)",
+            "Net financial account (BoP, current US$)",
+            "Portfolio Investment, net (BoP, current US$)"
+          ],
+          "ShortDefinition": [
+            "Total external debt is debt owed to nonresidents r",
+            "Debt service is the sum of principle repayments an",
+            "Total external debt stocks to gross national incom",
+            "Multilateral debt service is the repayment of prin",
+            "Net official development assistance is disbursemen",
+            "Net official development assistance per capita is ",
+            "Net official flows from UN agencies are the net di",
+            "Cereal yield, measured as kilograms per hectare of"
+          ],
+          "LongDefinition": [
+            "Foreign direct investment are the net inflows of i",
+            "Foreign direct investment refers to direct investm",
+            "Net capital account records acquisitions and dispo",
+            "Net errors and omissions constitute a residual cat",
+            "The net financial account shows net acquisition an",
+            "Portfolio investment covers transactions in equity",
+            "Primary income on foreign direct investment covers",
+            "Reserves and related items is the net change in a "
+          ],
+          "UnitOfMeasure": [
+            "`",
+            "%",
+            "2005 PPP $",
+            "2011 PPP $"
+          ],
+          "Periodicity": [
+            "Annual"
+          ],
+          "BasePeriod": [
+            "2005",
+            "varies by country",
+            "2011",
+            "2004-06",
+            "2010",
+            "2000",
+            "1990"
+          ],
+          "AggregationMethod": [
+            "Weighted average",
+            "Sum",
+            "Gap-filled total",
+            "Median",
+            "Linear mixed-effect model estimates",
+            "Unweighted average"
+          ],
+          "LimitationsAndExceptions": [
+            "FDI data do not give a complete picture of interna",
+            "Discrepancies may arise in the balance of payments",
+            "Data on ODA is for aid-receiving countries. The da",
+            "The DRS encourages debtor countries to voluntarily",
+            "The present value of external debt provides a meas",
+            "The IMF's loan instruments have changed over time ",
+            "Data on external debt are gathered through the Wor",
+            "Although some outstanding IBRD loans have a low en"
+          ],
+          "NotesFromOriginalSource": [
+            "Estimates are presented with uncertainty intervals",
+            "All the indicators refer to expenditures by financ",
+            "Depending on the source and means of monitoring, d",
+            "Estimates of maternal mortality are presented alon",
+            "All surveys were administered using the Enterprise",
+            "Most surveys were administered using the Enterpris",
+            "SIPRI statistical data on arms transfers relates t",
+            "The 2007-2011 refugee population category also inc"
+          ],
+          "GeneralComments": [
+            "Note: Data are based on the sixth edition of the I",
+            "Note: Data starting from 2005 are based on the six",
+            "Note: Data for OECD countries are based on ISIC, r",
+            "Data for net official flows from UNECE at present ",
+            "Data for net official flows from WHO at present ar",
+            "Restricted use: Please contact the International E",
+            "Electricity production shares may not sum to 100 p",
+            "Country-specific metadata can be found on the IMF"
+          ],
+          "Source": [
+            "International Monetary Fund, Balance of Payments S",
+            "International Monetary Fund, International Financi",
+            "International Monetary Fund, Balance of Payments d",
+            "World Bank, International Debt Statistics.",
+            "World Bank staff estimates based on IMF balance of",
+            "World Bank, International Debt Statistics, and OEC",
+            "World Bank.",
+            "World Bank staff estimates based on sources and me"
+          ],
+          "StatisticalConceptAndMethodology": [
+            "Data on equity flows are based on balance of payme",
+            "The balance of payments (BoP) is a double-entry ac",
+            "Grants are transfers made in cash, goods or servic",
+            "Technical cooperation contributions take the form ",
+            "Data on external debt are gathered through the Wor",
+            "Data related to the operations of the IMF come fro",
+            "Commercial banks include all commercial banks, whe",
+            "Data show concessional and nonconcessional financi"
+          ],
+          "DevelopmentRelevance": [
+            "Private financial flows - equity and debt - accoun",
+            "The balance of payments records an economys trans",
+            "DAC exists to help its members coordinate their de",
+            "External indebtedness affects a country's creditwo",
+            "External debt is that part of the total debt in a ",
+            "Adjusted net savings measure the change in value o",
+            "Gross savings is used as a starting point for calc",
+            "Air pollution places a major burden on world healt"
+          ],
+          "RelatedSourceLinks": [
+            "World Bank, PovcalNet: an online poverty analysis "
+          ],
+          "LicenseType": [
+            "Open",
+            "Restricted"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SeriesNotes": {
+        "rows": 369,
+        "sample_values": {
+          "Seriescode": [
+            "SP.ADO.TFRT",
+            "SP.DYN.AMRT.FE",
+            "SP.DYN.AMRT.MA",
+            "SP.DYN.TO65.FE.ZS",
+            "SP.DYN.TO65.MA.ZS",
+            "SM.POP.NETM",
+            "IC.GOV.DURS.ZS",
+            "IC.FRM.OUTG.ZS"
+          ],
+          "Year": [
+            "YR1960",
+            "YR1961",
+            "YR1962",
+            "YR1963",
+            "YR1964",
+            "YR1965",
+            "YR1966",
+            "YR1967"
+          ],
+          "Description": [
+            "Interpolated using data for 1957 and 1962.",
+            "Interpolated using data for 1957 and 1962, if the ",
+            "The data refer to 1960-1965.",
+            "The data refer to 1960-1965, if the data source is",
+            "The data refer to five-year periods running from 1",
+            "Interpolated using data for 1962 and 1967.",
+            "Interpolated using data for 1962 and 1967, if the ",
+            "The data refer to 1965-1970."
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

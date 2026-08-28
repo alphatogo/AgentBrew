@@ -1,0 +1,716 @@
+{
+  "db_id": "gaming_statistics_and_performance_tracking_870007",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/gaming_statistics_and_performance_tracking_870007",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"game_modes\" {\n  \"mode_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"mode_name\" TEXT\n  \"description\" TEXT\n  \"player_count\" INTEGER\n  \"duration\" INTEGER\n}\n\nTable \"public\".\"game_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"rating\" INTEGER\n  \"review_text\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"game_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"version_number\" TEXT\n  \"release_date\" TEXT\n  \"patch_notes\" TEXT\n  \"download_link\" TEXT\n}\n\nTable \"public\".\"games\" {\n  \"game_id\" INTEGER [pk]\n  \"game_name\" TEXT\n  \"description\" TEXT\n  \"release_date\" TEXT\n  \"developer\" TEXT\n  \"publisher\" TEXT\n  \"genre\" TEXT\n  \"platforms\" TEXT\n  \"rating\" TEXT\n}\n\nTable \"public\".\"kits\" {\n  \"kit_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"kit_name\" TEXT\n  \"description\" TEXT\n  \"health\" INTEGER\n  \"speed\" INTEGER\n  \"damage\" INTEGER\n}\n\nTable \"public\".\"leaderboards\" {\n  \"leaderboard_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"mode_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"player_id\" INTEGER\n  \"rank\" INTEGER\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"spm\" REAL\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"draws\" INTEGER\n}\n\nTable \"public\".\"player_achievements\" {\n  \"achievement_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"achievement_name\" TEXT\n  \"description\" TEXT\n  \"achieved_at\" TEXT\n  \"reward\" TEXT\n}\n\nTable \"public\".\"player_bans\" {\n  \"ban_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"reason\" TEXT\n  \"ban_start\" TEXT\n  \"ban_end\" TEXT\n  \"banned_by\" INTEGER\n  \"ban_reason_text\" TEXT\n  \"appeal_status\" TEXT\n}\n\nTable \"public\".\"player_friends\" {\n  \"friend_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"friend_player_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"friend_since\" TEXT\n}\n\nTable \"public\".\"player_kit_stats\" {\n  \"stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"time_played\" TEXT\n  \"spm\" REAL\n  \"last_updated\" TEXT\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"draws\" INTEGER\n}\n\nTable \"public\".\"player_referrals\" {\n  \"referral_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"referred_player_id\" INTEGER\n  \"referral_date\" TEXT\n  \"reward\" TEXT\n}\n\nTable \"public\".\"player_rewards\" {\n  \"reward_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"reward_type\" TEXT\n  \"reward_amount\" INTEGER\n  \"reward_date\" TEXT\n}\n\nTable \"public\".\"player_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"transaction_type\" TEXT\n  \"amount\" REAL\n  \"currency\" TEXT\n  \"transaction_time\" TEXT\n  \"status\" TEXT\n  \"item_purchased\" TEXT\n}\n\nTable \"public\".\"players\" {\n  \"player_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password_hash\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n  \"country\" TEXT\n  \"age\" INTEGER\n  \"gender\" TEXT\n  \"profile_picture\" TEXT\n  \"biography\" TEXT\n  \"language\" TEXT\n  \"timezone\" TEXT\n}\n\nTable \"public\".\"sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"mode_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"duration\" TEXT\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"spm\" REAL\n  \"game_result\" TEXT\n}\n\nTable \"public\".\"support_staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"staff_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"status\" TEXT\n  \"specialization\" TEXT\n}\n\nTable \"public\".\"support_tickets\" {\n  \"ticket_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"issue_type\" TEXT\n  \"issue_description\" TEXT\n  \"created_at\" TEXT\n  \"status\" TEXT\n  \"resolved_by\" INTEGER\n  \"resolved_at\" TEXT\n  \"additional_comments\" TEXT\n}\n\nTable \"public\".\"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"feedback_type\" TEXT\n  \"feedback_text\" TEXT\n  \"created_at\" TEXT\n  \"status\" TEXT\n  \"resolved_at\" TEXT\n  \"additional_comments\" TEXT\n}\n\nRef: \"public\".\"game_reviews\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"game_reviews\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"game_versions\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"leaderboards\".\"mode_id\" > \"public\".\"game_modes\".\"mode_id\"\nRef: \"public\".\"leaderboards\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"leaderboards\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"leaderboards\".\"kit_id\" > \"public\".\"kits\".\"kit_id\"\nRef: \"public\".\"player_achievements\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"player_achievements\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_bans\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_bans\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"player_bans\".\"banned_by\" > \"public\".\"support_staff\".\"staff_id\"\nRef: \"public\".\"player_friends\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_friends\".\"friend_player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_kit_stats\".\"kit_id\" > \"public\".\"kits\".\"kit_id\"\nRef: \"public\".\"player_kit_stats\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_referrals\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_referrals\".\"referred_player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_rewards\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_transactions\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"player_transactions\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"sessions\".\"mode_id\" > \"public\".\"game_modes\".\"mode_id\"\nRef: \"public\".\"sessions\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"sessions\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"sessions\".\"kit_id\" > \"public\".\"kits\".\"kit_id\"\nRef: \"public\".\"support_tickets\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"support_tickets\".\"resolved_by\" > \"public\".\"support_staff\".\"staff_id\"\nRef: \"public\".\"support_tickets\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"user_feedback\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"user_feedback\".\"player_id\" > \"public\".\"players\".\"player_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"game_modes\" {\n  \"mode_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"mode_name\" TEXT\n  \"description\" TEXT\n  \"player_count\" INTEGER\n  \"duration\" INTEGER\n}\n\nTable \"game_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"rating\" INTEGER\n  \"review_text\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"game_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"version_number\" TEXT\n  \"release_date\" TEXT\n  \"patch_notes\" TEXT\n  \"download_link\" TEXT\n}\n\nTable \"games\" {\n  \"game_id\" INTEGER [pk]\n  \"game_name\" TEXT\n  \"description\" TEXT\n  \"release_date\" TEXT\n  \"developer\" TEXT\n  \"publisher\" TEXT\n  \"genre\" TEXT\n  \"platforms\" TEXT\n  \"rating\" TEXT\n}\n\nTable \"kits\" {\n  \"kit_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"kit_name\" TEXT\n  \"description\" TEXT\n  \"health\" INTEGER\n  \"speed\" INTEGER\n  \"damage\" INTEGER\n}\n\nTable \"leaderboards\" {\n  \"leaderboard_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"mode_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"player_id\" INTEGER\n  \"rank\" INTEGER\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"spm\" REAL\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"draws\" INTEGER\n}\n\nTable \"player_achievements\" {\n  \"achievement_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"achievement_name\" TEXT\n  \"description\" TEXT\n  \"achieved_at\" TEXT\n  \"reward\" TEXT\n}\n\nTable \"player_bans\" {\n  \"ban_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"reason\" TEXT\n  \"ban_start\" TEXT\n  \"ban_end\" TEXT\n  \"banned_by\" INTEGER\n  \"ban_reason_text\" TEXT\n  \"appeal_status\" TEXT\n}\n\nTable \"player_friends\" {\n  \"friend_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"friend_player_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"friend_since\" TEXT\n}\n\nTable \"player_kit_stats\" {\n  \"stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"time_played\" TEXT\n  \"spm\" REAL\n  \"last_updated\" TEXT\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"draws\" INTEGER\n}\n\nTable \"player_referrals\" {\n  \"referral_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"referred_player_id\" INTEGER\n  \"referral_date\" TEXT\n  \"reward\" TEXT\n}\n\nTable \"player_rewards\" {\n  \"reward_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"reward_type\" TEXT\n  \"reward_amount\" INTEGER\n  \"reward_date\" TEXT\n}\n\nTable \"player_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"transaction_type\" TEXT\n  \"amount\" REAL\n  \"currency\" TEXT\n  \"transaction_time\" TEXT\n  \"status\" TEXT\n  \"item_purchased\" TEXT\n}\n\nTable \"players\" {\n  \"player_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password_hash\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"status\" TEXT\n  \"country\" TEXT\n  \"age\" INTEGER\n  \"gender\" TEXT\n  \"profile_picture\" TEXT\n  \"biography\" TEXT\n  \"language\" TEXT\n  \"timezone\" TEXT\n}\n\nTable \"sessions\" {\n  \"session_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"mode_id\" INTEGER\n  \"kit_id\" INTEGER\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"duration\" TEXT\n  \"score\" INTEGER\n  \"kills\" INTEGER\n  \"kpm\" REAL\n  \"spm\" REAL\n  \"game_result\" TEXT\n}\n\nTable \"support_staff\" {\n  \"staff_id\" INTEGER [pk]\n  \"staff_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"status\" TEXT\n  \"specialization\" TEXT\n}\n\nTable \"support_tickets\" {\n  \"ticket_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"issue_type\" TEXT\n  \"issue_description\" TEXT\n  \"created_at\" TEXT\n  \"status\" TEXT\n  \"resolved_by\" INTEGER\n  \"resolved_at\" TEXT\n  \"additional_comments\" TEXT\n}\n\nTable \"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"feedback_type\" TEXT\n  \"feedback_text\" TEXT\n  \"created_at\" TEXT\n  \"status\" TEXT\n  \"resolved_at\" TEXT\n  \"additional_comments\" TEXT\n}\n\nRef: \"game_reviews\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"game_reviews\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"game_versions\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"leaderboards\".\"mode_id\" > \"game_modes\".\"mode_id\"\n\nRef: \"leaderboards\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"leaderboards\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"leaderboards\".\"kit_id\" > \"kits\".\"kit_id\"\n\nRef: \"player_achievements\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"player_achievements\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_bans\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_bans\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"player_bans\".\"banned_by\" > \"support_staff\".\"staff_id\"\n\nRef: \"player_friends\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_friends\".\"friend_player_id\" > \"players\".\"player_id\"\n\nRef: \"player_kit_stats\".\"kit_id\" > \"kits\".\"kit_id\"\n\nRef: \"player_kit_stats\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_referrals\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_referrals\".\"referred_player_id\" > \"players\".\"player_id\"\n\nRef: \"player_rewards\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_transactions\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"player_transactions\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"sessions\".\"mode_id\" > \"game_modes\".\"mode_id\"\n\nRef: \"sessions\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"sessions\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"sessions\".\"kit_id\" > \"kits\".\"kit_id\"\n\nRef: \"support_tickets\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"support_tickets\".\"resolved_by\" > \"support_staff\".\"staff_id\"\n\nRef: \"support_tickets\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"user_feedback\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"user_feedback\".\"player_id\" > \"players\".\"player_id\"\n\n## Table Stats & Sample Values\n\ngame_modes: 2 rows\n  mode_name: 'Team Deathmatch', 'Capture the Flag'\n  description: 'Competitive mode where teams compete to get the mo', 'Objective mode where teams try to capture the oppo'\n  duration: '30', '20'\n\ngame_reviews: 2 rows\n  review_text: 'Great game with lots of action!', 'Fun to play, but could use more content.'\n  created_at: '2023-10-01 12:00:00', '2023-10-01 13:00:00'\n  updated_at: '2023-10-01 12:00:00', '2023-10-01 13:00:00'\n\ngame_versions: 2 rows\n  version_number: '1.0.0', '1.1.0'\n  patch_notes: 'Initial release', 'Bug fixes and performance improvements'\n  download_link: 'https://example.com/download/1.0.0', 'https://example.com/download/1.1.0'\n\ngames: 2 rows\n  game_name: 'BattleFront', 'SpaceInvaders'\n  description: 'First-person shooter game', 'Top-down shooter game'\n  genre: 'Action', 'Arcade'\n\nkits: 2 rows\n  kit_name: 'Assault', 'Scout'\n  description: 'Kit for front-line combat', 'Kit for stealth and reconnaissance'\n  health: '100', '80'\n\nleaderboards: 2 rows\n  score: '331246', '219772'\n  kills: '651', '535'\n  spm: '342.52', '274.91'\n\nplayer_achievements: 2 rows\n  achievement_name: 'First Kill', '100 Kills'\n  description: 'Earn your first kill', 'Earn 100 kills'\n  achieved_at: '2023-10-01 10:00:00', '2023-10-01 12:00:00'\n\nplayer_bans: 2 rows\n  appeal_status: 'pending', 'approved'\n  reason: 'cheating', 'harassment'\n  ban_start: '2023-10-01 12:00:00', '2023-10-01 13:00:00'\n\nplayer_friends: 2 rows\n  status: 'accepted', 'pending'\n  created_at: '2023-10-01 12:00:00', '2023-10-01 13:00:00'\n  friend_since: '2023-09-01'\n\nplayer_kit_stats: 2 rows\n  time_played: '16h 7m', '13h 19m'\n  score: '331246', '219772'\n  kills: '651', '535'\n\nplayer_referrals: 2 rows\n  reward: '100 experience points', '200 experience points'\n  referral_date: '2023-09-01', '2023-09-15'\n  referred_player_id: '0', '1'\n\nplayer_rewards: 2 rows\n  reward_type: 'experience points', 'in-game currency'\n  reward_date: '2023-09-01', '2023-09-15'\n  reward_amount: '100', '1000'\n\nplayer_transactions: 2 rows\n  transaction_type: 'purchase', 'exchange'\n  status: 'completed'\n  currency: 'USD', 'in-game currency'\n\nplayers: 2 rows\n  username: 'PlayerOne', 'PlayerTwo'\n  country: 'US', 'CA'\n  status: 'active'\n\nsessions: 2 rows\n  game_result: 'win', 'loss'\n  start_time: '2023-10-01 10:00:00', '2023-10-01 12:00:00'\n  end_time: '2023-10-01 12:00:00', '2023-10-01 14:00:00'\n\nsupport_staff: 2 rows\n  staff_name: 'Alice Johnson', 'Bob Williams'\n  role: 'support', 'admin'\n  status: 'active'\n\nsupport_tickets: 2 rows\n  issue_type: 'account', 'technical'\n  issue_description: 'Cannot log in to my account', 'Game lags during online matches'\n  status: 'resolved', 'in progress'\n\nuser_feedback: 2 rows\n  feedback_type: 'bug', 'suggestion'\n  status: 'resolved', 'open'\n  feedback_text: 'Game crashes when joining a match', 'Add a new kit for snipers'",
+    "stateUrl": null,
+    "tableStats": {
+      "game_modes": {
+        "rows": 2,
+        "sample_values": {
+          "mode_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "1"
+          ],
+          "mode_name": [
+            "Team Deathmatch",
+            "Capture the Flag"
+          ],
+          "description": [
+            "Competitive mode where teams compete to get the mo",
+            "Objective mode where teams try to capture the oppo"
+          ],
+          "player_count": [
+            "4"
+          ],
+          "duration": [
+            "30",
+            "20"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "game_reviews": {
+        "rows": 2,
+        "sample_values": {
+          "review_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0"
+          ],
+          "game_id": [
+            "1",
+            "0"
+          ],
+          "rating": [
+            "5",
+            "4"
+          ],
+          "review_text": [
+            "Great game with lots of action!",
+            "Fun to play, but could use more content."
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "updated_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "game_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "0"
+          ],
+          "version_number": [
+            "1.0.0",
+            "1.1.0"
+          ],
+          "release_date": [
+            "2020-10-01",
+            "2020-11-01"
+          ],
+          "patch_notes": [
+            "Initial release",
+            "Bug fixes and performance improvements"
+          ],
+          "download_link": [
+            "https://example.com/download/1.0.0",
+            "https://example.com/download/1.1.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "games": {
+        "rows": 2,
+        "sample_values": {
+          "game_id": [
+            "0",
+            "1"
+          ],
+          "game_name": [
+            "BattleFront",
+            "SpaceInvaders"
+          ],
+          "description": [
+            "First-person shooter game",
+            "Top-down shooter game"
+          ],
+          "release_date": [
+            "2020-10-01",
+            "2021-05-01"
+          ],
+          "developer": [
+            "DevA",
+            "DevB"
+          ],
+          "publisher": [
+            "PubA",
+            "PubB"
+          ],
+          "genre": [
+            "Action",
+            "Arcade"
+          ],
+          "platforms": [
+            "PC, Xbox, PlayStation",
+            "PC, Mobile"
+          ],
+          "rating": [
+            "M",
+            "E"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "kits": {
+        "rows": 2,
+        "sample_values": {
+          "kit_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "1"
+          ],
+          "kit_name": [
+            "Assault",
+            "Scout"
+          ],
+          "description": [
+            "Kit for front-line combat",
+            "Kit for stealth and reconnaissance"
+          ],
+          "health": [
+            "100",
+            "80"
+          ],
+          "speed": [
+            "5",
+            "8"
+          ],
+          "damage": [
+            "20",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "leaderboards": {
+        "rows": 2,
+        "sample_values": {
+          "leaderboard_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "1"
+          ],
+          "mode_id": [
+            "0",
+            "1"
+          ],
+          "kit_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "1",
+            "0"
+          ],
+          "rank": [
+            "1"
+          ],
+          "score": [
+            "331246",
+            "219772"
+          ],
+          "kills": [
+            "651",
+            "535"
+          ],
+          "kpm": [
+            "0.67"
+          ],
+          "spm": [
+            "342.52",
+            "274.91"
+          ],
+          "wins": [
+            "50",
+            "30"
+          ],
+          "losses": [
+            "20",
+            "30"
+          ],
+          "draws": [
+            "5",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_achievements": {
+        "rows": 2,
+        "sample_values": {
+          "achievement_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "1",
+            "0"
+          ],
+          "achievement_name": [
+            "First Kill",
+            "100 Kills"
+          ],
+          "description": [
+            "Earn your first kill",
+            "Earn 100 kills"
+          ],
+          "achieved_at": [
+            "2023-10-01 10:00:00",
+            "2023-10-01 12:00:00"
+          ],
+          "reward": [
+            "100 experience points",
+            "1000 experience points"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_bans": {
+        "rows": 2,
+        "sample_values": {
+          "ban_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "1"
+          ],
+          "reason": [
+            "cheating",
+            "harassment"
+          ],
+          "ban_start": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "ban_end": [
+            "2023-10-05 12:00:00",
+            "2023-10-01 14:00:00"
+          ],
+          "banned_by": [
+            "0",
+            "1"
+          ],
+          "ban_reason_text": [
+            "Using a hack to gain unfair advantage",
+            "Sending inappropriate messages"
+          ],
+          "appeal_status": [
+            "pending",
+            "approved"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_friends": {
+        "rows": 2,
+        "sample_values": {
+          "friend_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "friend_player_id": [
+            "0",
+            "1"
+          ],
+          "status": [
+            "accepted",
+            "pending"
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "friend_since": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_kit_stats": {
+        "rows": 2,
+        "sample_values": {
+          "stat_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "kit_id": [
+            "0",
+            "1"
+          ],
+          "score": [
+            "331246",
+            "219772"
+          ],
+          "kills": [
+            "651",
+            "535"
+          ],
+          "kpm": [
+            "0.67"
+          ],
+          "time_played": [
+            "16h 7m",
+            "13h 19m"
+          ],
+          "spm": [
+            "342.52",
+            "274.91"
+          ],
+          "last_updated": [
+            "2023-10-01 12:00:00"
+          ],
+          "wins": [
+            "50",
+            "30"
+          ],
+          "losses": [
+            "20",
+            "30"
+          ],
+          "draws": [
+            "5",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_referrals": {
+        "rows": 2,
+        "sample_values": {
+          "referral_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0"
+          ],
+          "referred_player_id": [
+            "0",
+            "1"
+          ],
+          "referral_date": [
+            "2023-09-01",
+            "2023-09-15"
+          ],
+          "reward": [
+            "100 experience points",
+            "200 experience points"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_rewards": {
+        "rows": 2,
+        "sample_values": {
+          "reward_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "1",
+            "0"
+          ],
+          "reward_type": [
+            "experience points",
+            "in-game currency"
+          ],
+          "reward_amount": [
+            "100",
+            "1000"
+          ],
+          "reward_date": [
+            "2023-09-01",
+            "2023-09-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_transactions": {
+        "rows": 2,
+        "sample_values": {
+          "transaction_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "1",
+            "0"
+          ],
+          "game_id": [
+            "0",
+            "1"
+          ],
+          "transaction_type": [
+            "purchase",
+            "exchange"
+          ],
+          "amount": [
+            "19.99",
+            "500.0"
+          ],
+          "currency": [
+            "USD",
+            "in-game currency"
+          ],
+          "transaction_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "status": [
+            "completed"
+          ],
+          "item_purchased": [
+            "In-game currency",
+            "Premium item"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "players": {
+        "rows": 2,
+        "sample_values": {
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "PlayerOne",
+            "PlayerTwo"
+          ],
+          "email": [
+            "playerone@example.com",
+            "playertwo@example.com"
+          ],
+          "password_hash": [
+            "hashed_password"
+          ],
+          "created_at": [
+            "2022-01-01 00:00:00",
+            "2022-01-02 00:00:00"
+          ],
+          "last_login": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "status": [
+            "active"
+          ],
+          "country": [
+            "US",
+            "CA"
+          ],
+          "age": [
+            "25",
+            "30"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ],
+          "profile_picture": [
+            "profile_picture.jpg"
+          ],
+          "biography": [
+            "I'm a gamer!",
+            "I love gaming!"
+          ],
+          "language": [
+            "English"
+          ],
+          "timezone": [
+            "America/New_York",
+            "America/Toronto"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sessions": {
+        "rows": 2,
+        "sample_values": {
+          "session_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "0"
+          ],
+          "mode_id": [
+            "0",
+            "1"
+          ],
+          "kit_id": [
+            "1"
+          ],
+          "start_time": [
+            "2023-10-01 10:00:00",
+            "2023-10-01 12:00:00"
+          ],
+          "end_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 14:00:00"
+          ],
+          "duration": [
+            "2h 00m"
+          ],
+          "score": [
+            "5000",
+            "4000"
+          ],
+          "kills": [
+            "20",
+            "15"
+          ],
+          "kpm": [
+            "1.0",
+            "0.75"
+          ],
+          "spm": [
+            "2500.0",
+            "2000.0"
+          ],
+          "game_result": [
+            "win",
+            "loss"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "support_staff": {
+        "rows": 2,
+        "sample_values": {
+          "staff_id": [
+            "0",
+            "1"
+          ],
+          "staff_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "support",
+            "admin"
+          ],
+          "department": [
+            "Customer Support",
+            "Technical Support"
+          ],
+          "status": [
+            "active"
+          ],
+          "specialization": [
+            "technical",
+            "account"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "support_tickets": {
+        "rows": 2,
+        "sample_values": {
+          "ticket_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "0",
+            "1"
+          ],
+          "issue_type": [
+            "account",
+            "technical"
+          ],
+          "issue_description": [
+            "Cannot log in to my account",
+            "Game lags during online matches"
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "status": [
+            "resolved",
+            "in progress"
+          ],
+          "resolved_by": [
+            "1",
+            "0"
+          ],
+          "resolved_at": [
+            "2023-10-01 13:00:00"
+          ],
+          "additional_comments": [
+            "Issue resolved, password reset successfully!",
+            "Investigating the issue, will update soon."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0"
+          ],
+          "game_id": [
+            "1",
+            "0"
+          ],
+          "feedback_type": [
+            "bug",
+            "suggestion"
+          ],
+          "feedback_text": [
+            "Game crashes when joining a match",
+            "Add a new kit for snipers"
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 13:00:00"
+          ],
+          "status": [
+            "resolved",
+            "open"
+          ],
+          "resolved_at": [
+            "2023-10-01 13:00:00"
+          ],
+          "additional_comments": [
+            "Issue resolved, thank you for reporting!"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

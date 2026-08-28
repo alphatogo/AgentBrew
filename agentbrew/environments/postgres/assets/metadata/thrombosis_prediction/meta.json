@@ -1,0 +1,611 @@
+{
+  "db_id": "thrombosis_prediction",
+  "source": "bird_dev",
+  "tables": 3,
+  "total_rows": 15952,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#thrombosis_prediction",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Examination\" {\n  \"ID\" INTEGER\n  \"Examination Date\" DATE\n  \"aCL IgG\" REAL\n  \"aCL IgM\" REAL\n  \"ANA\" INTEGER\n  \"ANA Pattern\" TEXT\n  \"aCL IgA\" INTEGER\n  \"Diagnosis\" TEXT\n  \"KCT\" TEXT\n  \"RVVT\" TEXT\n  \"LAC\" TEXT\n  \"Symptoms\" TEXT\n  \"Thrombosis\" INTEGER\n}\n\nTable \"Laboratory\" {\n  \"ID\" INTEGER [pk, not null]\n  \"Date\" DATE [pk, not null]\n  \"GOT\" INTEGER\n  \"GPT\" INTEGER\n  \"LDH\" INTEGER\n  \"ALP\" INTEGER\n  \"TP\" REAL\n  \"ALB\" REAL\n  \"UA\" REAL\n  \"UN\" INTEGER\n  \"CRE\" REAL\n  \"T-BIL\" REAL\n  \"T-CHO\" INTEGER\n  \"TG\" INTEGER\n  \"CPK\" INTEGER\n  \"GLU\" INTEGER\n  \"WBC\" REAL\n  \"RBC\" REAL\n  \"HGB\" REAL\n  \"HCT\" REAL\n  \"PLT\" INTEGER\n  \"PT\" REAL\n  \"APTT\" INTEGER\n  \"FG\" REAL\n  \"PIC\" INTEGER\n  \"TAT\" INTEGER\n  \"TAT2\" INTEGER\n  \"U-PRO\" TEXT\n  \"IGG\" INTEGER\n  \"IGA\" INTEGER\n  \"IGM\" INTEGER\n  \"CRP\" TEXT\n  \"RA\" TEXT\n  \"RF\" TEXT\n  \"C3\" INTEGER\n  \"C4\" INTEGER\n  \"RNP\" TEXT\n  \"SM\" TEXT\n  \"SC170\" TEXT\n  \"SSA\" TEXT\n  \"SSB\" TEXT\n  \"CENTROMEA\" TEXT\n  \"DNA\" TEXT\n  \"DNA-II\" INTEGER\n}\n\nTable \"Patient\" {\n  \"ID\" INTEGER [pk, not null]\n  \"SEX\" TEXT\n  \"Birthday\" DATE\n  \"Description\" DATE\n  \"First Date\" DATE\n  \"Admission\" TEXT\n  \"Diagnosis\" TEXT\n}\n\n\n\nRef: \"Examination\".\"ID\" > \"Patient\".\"ID\"\n\nRef: \"Laboratory\".\"ID\" > \"Patient\".\"ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Examination\" {\n  \"ID\" INTEGER\n  \"Examination Date\" DATE\n  \"aCL IgG\" REAL\n  \"aCL IgM\" REAL\n  \"ANA\" INTEGER\n  \"ANA Pattern\" TEXT\n  \"aCL IgA\" INTEGER\n  \"Diagnosis\" TEXT\n  \"KCT\" TEXT\n  \"RVVT\" TEXT\n  \"LAC\" TEXT\n  \"Symptoms\" TEXT\n  \"Thrombosis\" INTEGER\n}\n\nTable \"Laboratory\" {\n  \"ID\" INTEGER [pk, not null]\n  \"Date\" DATE [pk, not null]\n  \"GOT\" INTEGER\n  \"GPT\" INTEGER\n  \"LDH\" INTEGER\n  \"ALP\" INTEGER\n  \"TP\" REAL\n  \"ALB\" REAL\n  \"UA\" REAL\n  \"UN\" INTEGER\n  \"CRE\" REAL\n  \"T-BIL\" REAL\n  \"T-CHO\" INTEGER\n  \"TG\" INTEGER\n  \"CPK\" INTEGER\n  \"GLU\" INTEGER\n  \"WBC\" REAL\n  \"RBC\" REAL\n  \"HGB\" REAL\n  \"HCT\" REAL\n  \"PLT\" INTEGER\n  \"PT\" REAL\n  \"APTT\" INTEGER\n  \"FG\" REAL\n  \"PIC\" INTEGER\n  \"TAT\" INTEGER\n  \"TAT2\" INTEGER\n  \"U-PRO\" TEXT\n  \"IGG\" INTEGER\n  \"IGA\" INTEGER\n  \"IGM\" INTEGER\n  \"CRP\" TEXT\n  \"RA\" TEXT\n  \"RF\" TEXT\n  \"C3\" INTEGER\n  \"C4\" INTEGER\n  \"RNP\" TEXT\n  \"SM\" TEXT\n  \"SC170\" TEXT\n  \"SSA\" TEXT\n  \"SSB\" TEXT\n  \"CENTROMEA\" TEXT\n  \"DNA\" TEXT\n  \"DNA-II\" INTEGER\n}\n\nTable \"Patient\" {\n  \"ID\" INTEGER [pk, not null]\n  \"SEX\" TEXT\n  \"Birthday\" DATE\n  \"Description\" DATE\n  \"First Date\" DATE\n  \"Admission\" TEXT\n  \"Diagnosis\" TEXT\n}\n\nRef: \"Examination\".\"ID\" > \"Patient\".\"ID\"\n\nRef: \"Laboratory\".\"ID\" > \"Patient\".\"ID\"\n\n## Table Stats & Sample Values\n\nExamination: 806 rows\n  ANA Pattern: 'P', 'P,S', 'S', ...\n  Diagnosis: 'MCTD, AMI', 'SLE', 'PSS', ...\n  KCT: '-', '+'\n\nLaboratory: 10000 rows\n  U-PRO: '-', '0', 'TR', ...\n  CRP: '0.6', '2.7', '1.2', ...\n  RA: '-', '+', '+-', ...\n\nPatient: 1238 rows\n  Description: '1994-02-14', '1996-12-01', '1991-08-13', ...\n  SEX: 'F', 'M'\n  Admission: '+', '-', '+('",
+    "stateUrl": "https://bird-bench.github.io/#thrombosis_prediction",
+    "tableStats": {
+      "Examination": {
+        "rows": 806,
+        "sample_values": {
+          "ID": [
+            "14872",
+            "48473",
+            "102490",
+            "108788",
+            "122405",
+            "133382",
+            "163109",
+            "174116"
+          ],
+          "Examination Date": [
+            "1997-05-27",
+            "1992-12-21",
+            "1995-04-20",
+            "1997-05-06",
+            "1998-04-02",
+            "1996-10-17",
+            "1997-07-01",
+            "1995-11-13"
+          ],
+          "aCL IgG": [
+            "1.3",
+            "4.3",
+            "2.3",
+            "0.0",
+            "1.0",
+            "6.1",
+            "3.7",
+            "1.7"
+          ],
+          "aCL IgM": [
+            "1.6",
+            "4.6",
+            "2.5",
+            "0.0",
+            "4.0",
+            "2.4",
+            "9.5",
+            "3.0"
+          ],
+          "ANA": [
+            "256",
+            "0",
+            "16",
+            "4",
+            "1024",
+            "4096",
+            "64",
+            "4094"
+          ],
+          "ANA Pattern": [
+            "P",
+            "P,S",
+            "S",
+            "D,P,S",
+            "P.S",
+            "S,P",
+            "S,D",
+            "D,P"
+          ],
+          "aCL IgA": [
+            "0",
+            "3",
+            "4",
+            "9",
+            "12",
+            "23",
+            "5",
+            "8"
+          ],
+          "Diagnosis": [
+            "MCTD, AMI",
+            "SLE",
+            "PSS",
+            "SLE, SjS, vertigo",
+            "SLE, AIHA",
+            "Raynaud",
+            "Cryoglobulin, RA",
+            "SLE, ITP, LA(-)"
+          ],
+          "KCT": [
+            "-",
+            "+"
+          ],
+          "RVVT": [
+            "-",
+            "+"
+          ],
+          "LAC": [
+            "-",
+            "+"
+          ],
+          "Symptoms": [
+            "AMI",
+            "CNS lupus",
+            "Apo",
+            "AP",
+            "thrombocytepenia",
+            "abortion",
+            "thrombocytopenia",
+            "thrombophlebitis"
+          ],
+          "Thrombosis": [
+            "1",
+            "0",
+            "2",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Laboratory": {
+        "rows": 10000,
+        "sample_values": {
+          "ID": [
+            "27654",
+            "30609",
+            "43003",
+            "48473",
+            "52199",
+            "57266",
+            "58139",
+            "71417"
+          ],
+          "Date": [
+            "1991-09-11",
+            "1991-09-17",
+            "1991-09-19",
+            "1991-09-20",
+            "1991-09-21",
+            "1991-09-24",
+            "1991-09-25",
+            "1991-09-26"
+          ],
+          "GOT": [
+            "34",
+            "29",
+            "26",
+            "23",
+            "24",
+            "30",
+            "47",
+            "50"
+          ],
+          "GPT": [
+            "36",
+            "31",
+            "22",
+            "18",
+            "4",
+            "1",
+            "7",
+            "29"
+          ],
+          "LDH": [
+            "567",
+            "579",
+            "684",
+            "552",
+            "701",
+            "756",
+            "1239",
+            "752"
+          ],
+          "ALP": [
+            "166",
+            "154",
+            "138",
+            "131",
+            "108",
+            "111",
+            "104",
+            "133"
+          ],
+          "TP": [
+            "4.5",
+            "5.1",
+            "5.5",
+            "4.2",
+            "4.7",
+            "5.3",
+            "4.9",
+            "5.7"
+          ],
+          "ALB": [
+            "3.3",
+            "3.4",
+            "3.6",
+            "2.9",
+            "3.2",
+            "3.7",
+            "3.5",
+            "3.1"
+          ],
+          "UA": [
+            "3.8",
+            "4.2",
+            "4.9",
+            "4.8",
+            "5.2",
+            "3.7",
+            "1.4",
+            "2.3"
+          ],
+          "UN": [
+            "29",
+            "36",
+            "34",
+            "22",
+            "8",
+            "7",
+            "9",
+            "10"
+          ],
+          "CRE": [
+            "0.8",
+            "0.9",
+            "0.7",
+            "0.6",
+            "1.0",
+            "1.1",
+            "1.3",
+            "0.4"
+          ],
+          "T-BIL": [
+            "0.3",
+            "0.2",
+            "0.4",
+            "0.5",
+            "0.6",
+            "0.7",
+            "0.8",
+            "1.5"
+          ],
+          "T-CHO": [
+            "165",
+            "134",
+            "140",
+            "123",
+            "107",
+            "141",
+            "175",
+            "185"
+          ],
+          "TG": [
+            "185",
+            "205",
+            "254",
+            "125",
+            "131",
+            "128",
+            "177",
+            "175"
+          ],
+          "CPK": [
+            "9",
+            "10",
+            "11",
+            "26",
+            "31",
+            "21",
+            "18",
+            "17"
+          ],
+          "GLU": [
+            "88",
+            "134",
+            "161",
+            "93",
+            "101",
+            "75",
+            "82",
+            "84"
+          ],
+          "WBC": [
+            "5.0",
+            "10.4",
+            "10.5",
+            "10.3",
+            "14.3",
+            "12.4",
+            "11.6",
+            "8.6"
+          ],
+          "RBC": [
+            "2.6",
+            "2.9",
+            "3.4",
+            "3.2",
+            "3.3",
+            "3.0",
+            "3.6",
+            "4.1"
+          ],
+          "HGB": [
+            "6.4",
+            "6.7",
+            "7.9",
+            "6.1",
+            "7.2",
+            "7.6",
+            "7.5",
+            "6.8"
+          ],
+          "HCT": [
+            "20.3",
+            "21.6",
+            "24.7",
+            "19.3",
+            "23.4",
+            "24.0",
+            "23.8",
+            "21.8"
+          ],
+          "PLT": [
+            "227",
+            "242",
+            "233",
+            "201",
+            "215",
+            "213",
+            "191",
+            "204"
+          ],
+          "PT": [
+            "11.3",
+            "12.0",
+            "11.8",
+            "12.6",
+            "12.2",
+            "11.5",
+            "11.4",
+            "12.1"
+          ],
+          "APTT": [
+            "108",
+            "84",
+            "76",
+            "90",
+            "120",
+            "106",
+            "99",
+            "101"
+          ],
+          "FG": [
+            "27.0",
+            "38.6",
+            "27.6",
+            "29.8",
+            "27.7",
+            "27.9",
+            "32.1",
+            "34.0"
+          ],
+          "PIC": [
+            "320",
+            "513",
+            "284",
+            "529",
+            "430",
+            "138",
+            "300",
+            "114"
+          ],
+          "TAT": [
+            "77",
+            "108",
+            "115",
+            "107",
+            "86",
+            "87",
+            "85",
+            "114"
+          ],
+          "TAT2": [
+            "113",
+            "88",
+            "104",
+            "101",
+            "109",
+            "119",
+            "136",
+            "124"
+          ],
+          "U-PRO": [
+            "-",
+            "0",
+            "TR",
+            "1",
+            "2",
+            "30",
+            "100",
+            "300"
+          ],
+          "IGG": [
+            "339",
+            "771",
+            "430",
+            "562",
+            "625",
+            "971",
+            "1176",
+            "1497"
+          ],
+          "IGA": [
+            "145",
+            "188",
+            "118",
+            "152",
+            "195",
+            "186",
+            "243",
+            "219"
+          ],
+          "IGM": [
+            "46",
+            "132",
+            "56",
+            "124",
+            "142",
+            "107",
+            "143",
+            "134"
+          ],
+          "CRP": [
+            "0.6",
+            "2.7",
+            "1.2",
+            "3.9",
+            "2.8",
+            "2.3",
+            "1.4",
+            "0.5"
+          ],
+          "RA": [
+            "-",
+            "+",
+            "+-",
+            "2+",
+            "7-"
+          ],
+          "RF": [
+            "<20.5",
+            "<20.8",
+            "<40",
+            "<17.0",
+            "<21.3",
+            "<16.3",
+            "<19.5",
+            "32"
+          ],
+          "C3": [
+            "30",
+            "82",
+            "103",
+            "63",
+            "53",
+            "64",
+            "55",
+            "49"
+          ],
+          "C4": [
+            "14",
+            "26",
+            "35",
+            "31",
+            "34",
+            "20",
+            "17",
+            "18"
+          ],
+          "RNP": [
+            "0",
+            "1",
+            "256",
+            "negative",
+            "16",
+            "64",
+            "4",
+            "15"
+          ],
+          "SM": [
+            "0",
+            "1",
+            "negative",
+            "2"
+          ],
+          "SC170": [
+            "16",
+            "1",
+            "0",
+            "negative"
+          ],
+          "SSA": [
+            "0",
+            "negative",
+            "16",
+            "4",
+            "256",
+            "1"
+          ],
+          "SSB": [
+            "0",
+            "negative",
+            "1",
+            "32"
+          ],
+          "CENTROMEA": [
+            "0",
+            "negative"
+          ],
+          "DNA": [
+            "41.9",
+            "18",
+            "4.3",
+            "5.56",
+            "9.88",
+            "15.2",
+            "9.3",
+            "185"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Patient": {
+        "rows": 1238,
+        "sample_values": {
+          "ID": [
+            "2110",
+            "11408",
+            "12052",
+            "14872",
+            "27654",
+            "30609",
+            "43003",
+            "48473"
+          ],
+          "SEX": [
+            "F",
+            "M"
+          ],
+          "Birthday": [
+            "1934-02-13",
+            "1937-05-02",
+            "1956-04-14",
+            "1953-09-21",
+            "1936-03-25",
+            "1944-07-13",
+            "1937-11-24",
+            "1948-10-07"
+          ],
+          "Description": [
+            "1994-02-14",
+            "1996-12-01",
+            "1991-08-13",
+            "1997-08-13",
+            "1994-03-08",
+            "1997-02-03",
+            "1996-12-03",
+            "1994-02-22"
+          ],
+          "First Date": [
+            "1993-02-10",
+            "1973-01-01",
+            "1992-02-03",
+            "1994-03-08",
+            "1993-02-05",
+            "1995-06-20",
+            "1989-03-17",
+            "1972-10-19"
+          ],
+          "Admission": [
+            "+",
+            "-",
+            "+("
+          ],
+          "Diagnosis": [
+            "RA susp.",
+            "PSS",
+            "SLE",
+            "MCTD",
+            "RA, SLE susp",
+            "SLE, MCTD",
+            "Raynaud's phenomenon",
+            "PM/DM"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

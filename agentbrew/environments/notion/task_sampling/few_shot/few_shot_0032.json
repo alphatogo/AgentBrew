@@ -1,0 +1,12 @@
+{
+  "title": "Research Profile Experience Refresh",
+  "capability": [
+    "insert_block_at_position",
+    "match_existing_format",
+    "reuse_existing_asset",
+    "rewrite_existing_blocks",
+    "preserve_order",
+    "lightweight_page_edit"
+  ],
+  "question": "Please update the page named \"Research Portfolio\" so the experience, methods, and reflection sections are consistent.\n**Task Requirements:** 1. Find the \"Research Portfolio\" page and locate the \"Client Experience\"\n   section.\n\n2. Add a new entry to the Client Experience section titled \"Service Design\n   Research Lead\".\n   - Date: Start \"2024-03-01\", End \"2024-12-31\"\n   - Description: \"Led mixed-methods research for enterprise service\n     design initiatives, combining interview synthesis, workflow mapping,\n     and executive storytelling to guide operational transformation.\"\n\n3. For the image or logo on the new Client Experience entry, reuse the\n   image from the \"Education\" section of the same Research Portfolio page.\n\n4. Make sure the new Client Experience entry matches the existing entries\n   in that section, including formatting, font style, image placement, and\n   layout. Preserve all existing Client Experience entries.\n\n5. Replace the usual closing note by rewriting every numbered list item in\n   the Reflection Checklist section so numeric prefixes become symbolic\n   prefixes (1. becomes ①, 2. becomes ②, 3. becomes ③, and so on), while\n   preserving item text and order.\n"
+}

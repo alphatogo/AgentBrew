@@ -1,0 +1,255 @@
+{
+  "db_id": "image_and_language",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 3589599,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#image_and_language",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"ATT_CLASSES\" {\n  \"ATT_CLASS_ID\" INTEGER [pk, not null]\n  \"ATT_CLASS\" TEXT [not null]\n}\n\nTable \"IMG_OBJ\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"OBJ_SAMPLE_ID\" INTEGER [pk, not null]\n  \"OBJ_CLASS_ID\" INTEGER\n  \"X\" INTEGER\n  \"Y\" INTEGER\n  \"W\" INTEGER\n  \"H\" INTEGER\n}\n\nTable \"IMG_OBJ_ATT\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"ATT_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ_SAMPLE_ID\" INTEGER [pk, not null]\n}\n\nTable \"IMG_REL\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"PRED_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ1_SAMPLE_ID\" INTEGER [pk, not null]\n  \"OBJ2_SAMPLE_ID\" INTEGER [pk, not null]\n}\n\nTable \"OBJ_CLASSES\" {\n  \"OBJ_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ_CLASS\" TEXT [not null]\n}\n\nTable \"PRED_CLASSES\" {\n  \"PRED_CLASS_ID\" INTEGER [pk, not null]\n  \"PRED_CLASS\" TEXT [not null]\n}\n\n\n\nRef: \"IMG_OBJ\".\"OBJ_CLASS_ID\" > \"OBJ_CLASSES\".\"OBJ_CLASS_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"OBJ_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"ATT_CLASS_ID\" > \"ATT_CLASSES\".\"ATT_CLASS_ID\"\n\nRef: \"IMG_REL\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_REL\".\"OBJ2_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_REL\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_REL\".\"OBJ1_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_REL\".\"PRED_CLASS_ID\" > \"PRED_CLASSES\".\"PRED_CLASS_ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"ATT_CLASSES\" {\n  \"ATT_CLASS_ID\" INTEGER [pk, not null]\n  \"ATT_CLASS\" TEXT [not null]\n}\n\nTable \"IMG_OBJ\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"OBJ_SAMPLE_ID\" INTEGER [pk, not null]\n  \"OBJ_CLASS_ID\" INTEGER\n  \"X\" INTEGER\n  \"Y\" INTEGER\n  \"W\" INTEGER\n  \"H\" INTEGER\n}\n\nTable \"IMG_OBJ_ATT\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"ATT_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ_SAMPLE_ID\" INTEGER [pk, not null]\n}\n\nTable \"IMG_REL\" {\n  \"IMG_ID\" INTEGER [pk, not null]\n  \"PRED_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ1_SAMPLE_ID\" INTEGER [pk, not null]\n  \"OBJ2_SAMPLE_ID\" INTEGER [pk, not null]\n}\n\nTable \"OBJ_CLASSES\" {\n  \"OBJ_CLASS_ID\" INTEGER [pk, not null]\n  \"OBJ_CLASS\" TEXT [not null]\n}\n\nTable \"PRED_CLASSES\" {\n  \"PRED_CLASS_ID\" INTEGER [pk, not null]\n  \"PRED_CLASS\" TEXT [not null]\n}\n\nRef: \"IMG_OBJ\".\"OBJ_CLASS_ID\" > \"OBJ_CLASSES\".\"OBJ_CLASS_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"OBJ_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_OBJ_ATT\".\"ATT_CLASS_ID\" > \"ATT_CLASSES\".\"ATT_CLASS_ID\"\n\nRef: \"IMG_REL\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_REL\".\"OBJ2_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_REL\".\"IMG_ID\" > \"IMG_OBJ\".\"IMG_ID\"\n\nRef: \"IMG_REL\".\"OBJ1_SAMPLE_ID\" > \"IMG_OBJ\".\"OBJ_SAMPLE_ID\"\n\nRef: \"IMG_REL\".\"PRED_CLASS_ID\" > \"PRED_CLASSES\".\"PRED_CLASS_ID\"\n\n## Table Stats & Sample Values\n\nATT_CLASSES: 699 rows\n  ATT_CLASS: 'building s', 'indoors', 'cluttered', ...\n  ATT_CLASS_ID: '0', '1', '2', ...\n\nIMG_OBJ: 10000 rows\n  X: '0', '78', '1', ...\n  Y: '0', '308', '283', ...\n  W: '799', '722', '222', ...\n\nIMG_OBJ_ATT: 10000 rows\n  ATT_CLASS_ID: '0', '1', '2', ...\n  IMG_ID: '1113', '1463', '1500', ...\n  OBJ_SAMPLE_ID: '21', '22', '23', ...\n\nIMG_REL: 10000 rows\n  PRED_CLASS_ID: '0', '1', '2', ...\n  IMG_ID: '675', '1193', '3447', ...\n  OBJ1_SAMPLE_ID: '13', '12', '4', ...\n\nOBJ_CLASSES: 300 rows\n  OBJ_CLASS: 'awning', 'goggles', 'dot', ...\n  OBJ_CLASS_ID: '0', '1', '2', ...\n\nPRED_CLASSES: 150 rows\n  PRED_CLASS: 'playing on', 'looking a', 'to left of', ...\n  PRED_CLASS_ID: '0', '1', '2', ...",
+    "stateUrl": "https://bird-bench.github.io/#image_and_language",
+    "tableStats": {
+      "ATT_CLASSES": {
+        "rows": 699,
+        "sample_values": {
+          "ATT_CLASS_ID": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "ATT_CLASS": [
+            "building s",
+            "indoors",
+            "cluttered",
+            "park",
+            "two story",
+            "very large",
+            "bike",
+            "cast"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "IMG_OBJ": {
+        "rows": 10000,
+        "sample_values": {
+          "IMG_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "OBJ_SAMPLE_ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "OBJ_CLASS_ID": [
+            "298",
+            "246",
+            "293",
+            "239",
+            "295",
+            "41",
+            "23",
+            "205"
+          ],
+          "X": [
+            "0",
+            "78",
+            "1",
+            "439",
+            "178",
+            "116",
+            "533",
+            "422"
+          ],
+          "Y": [
+            "0",
+            "308",
+            "283",
+            "1",
+            "344",
+            "278",
+            "63",
+            "264"
+          ],
+          "W": [
+            "799",
+            "722",
+            "222",
+            "359",
+            "135",
+            "476",
+            "274",
+            "241"
+          ],
+          "H": [
+            "557",
+            "290",
+            "538",
+            "258",
+            "535",
+            "360",
+            "189",
+            "176"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "IMG_OBJ_ATT": {
+        "rows": 10000,
+        "sample_values": {
+          "IMG_ID": [
+            "1113",
+            "1463",
+            "1500",
+            "1646",
+            "1719",
+            "1836",
+            "1846",
+            "1924"
+          ],
+          "ATT_CLASS_ID": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "OBJ_SAMPLE_ID": [
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "6",
+            "39",
+            "41"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "IMG_REL": {
+        "rows": 10000,
+        "sample_values": {
+          "IMG_ID": [
+            "675",
+            "1193",
+            "3447",
+            "2316535",
+            "2318367",
+            "2318591",
+            "2319288",
+            "2319725"
+          ],
+          "PRED_CLASS_ID": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "OBJ1_SAMPLE_ID": [
+            "13",
+            "12",
+            "4",
+            "17",
+            "33",
+            "7",
+            "6",
+            "15"
+          ],
+          "OBJ2_SAMPLE_ID": [
+            "1",
+            "34",
+            "5",
+            "9",
+            "8",
+            "3",
+            "7",
+            "15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "OBJ_CLASSES": {
+        "rows": 300,
+        "sample_values": {
+          "OBJ_CLASS_ID": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "OBJ_CLASS": [
+            "awning",
+            "goggles",
+            "dot",
+            "kitchen",
+            "feathers",
+            "beak",
+            "column",
+            "surface"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PRED_CLASSES": {
+        "rows": 150,
+        "sample_values": {
+          "PRED_CLASS_ID": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "PRED_CLASS": [
+            "playing on",
+            "looking a",
+            "to left of",
+            "beyond",
+            "covers",
+            "are",
+            "reading",
+            "enjoying"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

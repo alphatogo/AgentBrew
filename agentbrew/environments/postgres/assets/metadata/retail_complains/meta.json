@@ -1,0 +1,560 @@
+{
+  "db_id": "retail_complains",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 33289,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#retail_complains",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"callcenterlogs\" {\n  \"Date received\" DATE\n  \"Complaint ID\" TEXT [pk]\n  \"rand client\" TEXT\n  \"phonefinal\" TEXT\n  \"vru+line\" TEXT\n  \"call_id\" INTEGER\n  \"priority\" INTEGER\n  \"type\" TEXT\n  \"outcome\" TEXT\n  \"server\" TEXT\n  \"ser_start\" TEXT\n  \"ser_exit\" TEXT\n  \"ser_time\" TEXT\n}\n\nTable \"client\" {\n  \"client_id\" TEXT [pk]\n  \"sex\" TEXT\n  \"day\" INTEGER\n  \"month\" INTEGER\n  \"year\" INTEGER\n  \"age\" INTEGER\n  \"social\" TEXT\n  \"first\" TEXT\n  \"middle\" TEXT\n  \"last\" TEXT\n  \"phone\" TEXT\n  \"email\" TEXT\n  \"address_1\" TEXT\n  \"address_2\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zipcode\" INTEGER\n  \"district_id\" INTEGER\n}\n\nTable \"district\" {\n  \"district_id\" INTEGER [pk]\n  \"city\" TEXT\n  \"state_abbrev\" TEXT\n  \"division\" TEXT\n}\n\nTable \"events\" {\n  \"Date received\" DATE\n  \"Product\" TEXT\n  \"Sub-product\" TEXT\n  \"Issue\" TEXT\n  \"Sub-issue\" TEXT\n  \"Consumer complaint narrative\" TEXT\n  \"Tags\" TEXT\n  \"Consumer consent provided?\" TEXT\n  \"Submitted via\" TEXT\n  \"Date sent to company\" TEXT\n  \"Company response to consumer\" TEXT\n  \"Timely response?\" TEXT\n  \"Consumer disputed?\" TEXT\n  \"Complaint ID\" TEXT [pk]\n  \"Client_ID\" TEXT [pk]\n}\n\nTable \"reviews\" {\n  \"Date\" DATE [pk]\n  \"Stars\" INTEGER\n  \"Reviews\" TEXT\n  \"Product\" TEXT\n  \"district_id\" INTEGER\n}\n\nTable \"state\" {\n  \"StateCode\" TEXT [pk]\n  \"State\" TEXT\n  \"Region\" TEXT\n}\n\n\n\nRef: \"callcenterlogs\".\"rand client\" > \"client\".\"client_id\"\n\nRef: \"client\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"district\".\"state_abbrev\" > \"state\".\"StateCode\"\n\nRef: \"events\".\"Client_ID\" > \"client\".\"client_id\"\n\nRef: \"events\".\"Complaint ID\" > \"callcenterlogs\".\"Complaint ID\"\n\nRef: \"reviews\".\"district_id\" > \"district\".\"district_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"callcenterlogs\" {\n  \"Date received\" DATE\n  \"Complaint ID\" TEXT [pk]\n  \"rand client\" TEXT\n  \"phonefinal\" TEXT\n  \"vru+line\" TEXT\n  \"call_id\" INTEGER\n  \"priority\" INTEGER\n  \"type\" TEXT\n  \"outcome\" TEXT\n  \"server\" TEXT\n  \"ser_start\" TEXT\n  \"ser_exit\" TEXT\n  \"ser_time\" TEXT\n}\n\nTable \"client\" {\n  \"client_id\" TEXT [pk]\n  \"sex\" TEXT\n  \"day\" INTEGER\n  \"month\" INTEGER\n  \"year\" INTEGER\n  \"age\" INTEGER\n  \"social\" TEXT\n  \"first\" TEXT\n  \"middle\" TEXT\n  \"last\" TEXT\n  \"phone\" TEXT\n  \"email\" TEXT\n  \"address_1\" TEXT\n  \"address_2\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zipcode\" INTEGER\n  \"district_id\" INTEGER\n}\n\nTable \"district\" {\n  \"district_id\" INTEGER [pk]\n  \"city\" TEXT\n  \"state_abbrev\" TEXT\n  \"division\" TEXT\n}\n\nTable \"events\" {\n  \"Date received\" DATE\n  \"Product\" TEXT\n  \"Sub-product\" TEXT\n  \"Issue\" TEXT\n  \"Sub-issue\" TEXT\n  \"Consumer complaint narrative\" TEXT\n  \"Tags\" TEXT\n  \"Consumer consent provided?\" TEXT\n  \"Submitted via\" TEXT\n  \"Date sent to company\" TEXT\n  \"Company response to consumer\" TEXT\n  \"Timely response?\" TEXT\n  \"Consumer disputed?\" TEXT\n  \"Complaint ID\" TEXT [pk]\n  \"Client_ID\" TEXT [pk]\n}\n\nTable \"reviews\" {\n  \"Date\" DATE [pk]\n  \"Stars\" INTEGER\n  \"Reviews\" TEXT\n  \"Product\" TEXT\n  \"district_id\" INTEGER\n}\n\nTable \"state\" {\n  \"StateCode\" TEXT [pk]\n  \"State\" TEXT\n  \"Region\" TEXT\n}\n\nRef: \"callcenterlogs\".\"rand client\" > \"client\".\"client_id\"\n\nRef: \"client\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"district\".\"state_abbrev\" > \"state\".\"StateCode\"\n\nRef: \"events\".\"Client_ID\" > \"client\".\"client_id\"\n\nRef: \"events\".\"Complaint ID\" > \"callcenterlogs\".\"Complaint ID\"\n\nRef: \"reviews\".\"district_id\" > \"district\".\"district_id\"\n\n## Table Stats & Sample Values\n\ncallcenterlogs: 3999 rows\n  type: 'NW', 'PS', 'NE', ...\n  rand client: 'C00004587', 'C00003328', 'C00001685', ...\n  vru+line: 'AA0103', 'AA0205', 'AA0110', ...\n\nclient: 5369 rows\n  city: 'Albuquerque', 'New York City', 'Indianapolis', ...\n  state: 'NM', 'NY', 'IN', ...\n  sex: 'Female', 'Male'\n\ndistrict: 77 rows\n  city: 'New York City', 'Jacksonville', 'Columbus', ...\n  state_abbrev: 'NY', 'FL', 'OH', ...\n  division: 'Middle Atlantic', 'South Atlantic', 'East North Central', ...\n\nevents: 9508 rows\n  Product: 'Bank account or service', 'Credit card'\n  Sub-product: 'Checking account', 'Savings account', 'Other bank product/service', ...\n  Issue: 'Deposits and withdrawals', 'Account opening, closing, or management', 'Billing disputes', ...\n\nreviews: 371 rows\n  Product: 'Eagle National Mortgage', 'Eagle National Bank', 'Eagle Capital'\n  Reviews: 'Great job, Eagle National! Each person was profess', 'Matthew Richardson is professional and helpful. He', 'We had a past experience with Eagle National Mortg', ...\n  Stars: '5', '1', '2'\n\nstate: 48 rows\n  State: 'Alabama', 'Arkansas', 'Arizona', ...\n  Region: 'South', 'West', 'Northeast', ...\n  StateCode: 'AL', 'AR', 'AZ', ...",
+    "stateUrl": "https://bird-bench.github.io/#retail_complains",
+    "tableStats": {
+      "callcenterlogs": {
+        "rows": 3999,
+        "sample_values": {
+          "Date received": [
+            "2017-03-27",
+            "2017-03-23",
+            "2017-03-22",
+            "2017-03-21",
+            "2017-03-17",
+            "2017-03-16",
+            "2017-03-15",
+            "2017-03-14"
+          ],
+          "Complaint ID": [
+            "CR2406263",
+            "CR2405641",
+            "CR2405629",
+            "CR2400594",
+            "CR2399607",
+            "CR2398621",
+            "CR2398447",
+            "CR2398401"
+          ],
+          "rand client": [
+            "C00004587",
+            "C00003328",
+            "C00001685",
+            "C00001945",
+            "C00004303",
+            "C00010209",
+            "C00004248",
+            "C00000486"
+          ],
+          "phonefinal": [
+            "977-806-9726",
+            "322-598-7152",
+            "508-311-5237",
+            "265-394-2727",
+            "206-008-0460",
+            "617-060-9671",
+            "617-739-1926",
+            "478-749-3447"
+          ],
+          "vru+line": [
+            "AA0103",
+            "AA0205",
+            "AA0110",
+            "AA0113",
+            "AA0102",
+            "AA0203",
+            "AA0204",
+            "AA0101"
+          ],
+          "call_id": [
+            "34536",
+            "34537",
+            "34538",
+            "34540",
+            "34541",
+            "34542",
+            "34543",
+            "34544"
+          ],
+          "priority": [
+            "0",
+            "2",
+            "1"
+          ],
+          "type": [
+            "NW",
+            "PS",
+            "NE",
+            "TT",
+            "IN",
+            "PE"
+          ],
+          "outcome": [
+            "AGENT",
+            "HANG",
+            "PHANTOM"
+          ],
+          "server": [
+            "MICHAL",
+            "TOVA",
+            "YIFAT",
+            "AVNI",
+            "STEREN",
+            "ANAT",
+            "MIKI",
+            "DORIT"
+          ],
+          "ser_start": [
+            "13:34:11",
+            "10:58:22",
+            "13:00:54",
+            "16:18:21",
+            "14:48:22",
+            "09:15:43",
+            "11:33:16",
+            "15:05:09"
+          ],
+          "ser_exit": [
+            "13:40:23",
+            "11:16:10",
+            "13:13:31",
+            "16:19:40",
+            "14:55:19",
+            "09:32:44",
+            "11:41:36",
+            "15:17:45"
+          ],
+          "ser_time": [
+            "00:06:12",
+            "00:17:48",
+            "00:12:37",
+            "00:01:19",
+            "00:06:57",
+            "00:17:01",
+            "00:08:20",
+            "00:12:36"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "client": {
+        "rows": 5369,
+        "sample_values": {
+          "client_id": [
+            "C00000001",
+            "C00000002",
+            "C00000003",
+            "C00000004",
+            "C00000005",
+            "C00000006",
+            "C00000007",
+            "C00000008"
+          ],
+          "sex": [
+            "Female",
+            "Male"
+          ],
+          "day": [
+            "13",
+            "4",
+            "9",
+            "1",
+            "3",
+            "22",
+            "25",
+            "21"
+          ],
+          "month": [
+            "12",
+            "2",
+            "10",
+            "7",
+            "9",
+            "1",
+            "5",
+            "8"
+          ],
+          "year": [
+            "1990",
+            "1965",
+            "1960",
+            "1976",
+            "1980",
+            "1939",
+            "1949",
+            "1958"
+          ],
+          "age": [
+            "29",
+            "54",
+            "59",
+            "43",
+            "39",
+            "80",
+            "71",
+            "61"
+          ],
+          "social": [
+            "926-93-2157",
+            "806-94-5725",
+            "614-70-9100",
+            "580-20-3414",
+            "536-14-5809",
+            "430-17-5825",
+            "305-80-4254",
+            "425-96-6358"
+          ],
+          "first": [
+            "Emma",
+            "Noah",
+            "Olivia",
+            "Liam",
+            "Sophia",
+            "Mason",
+            "Jacob",
+            "Ava"
+          ],
+          "middle": [
+            "Avaya",
+            "Everest",
+            "Brooklynne",
+            "Irvin",
+            "Danae",
+            "Javen",
+            "Khai",
+            "Eliora"
+          ],
+          "last": [
+            "Smith",
+            "Thompson",
+            "Johnson",
+            "White",
+            "Williams",
+            "Lopez",
+            "Lee",
+            "Brown"
+          ],
+          "phone": [
+            "367-171-6840",
+            "212-423-7734",
+            "212-425-6932",
+            "951-567-8925",
+            "428-265-1568",
+            "813-629-5038",
+            "836-845-8120",
+            "413-444-9280"
+          ],
+          "email": [
+            "emma.smith@gmail.com",
+            "noah.thompson@gmail.com",
+            "olivia.johnson@outlook.com",
+            "liam.white@gmail.com",
+            "sophia.williams@gmail.com",
+            "mason.lopez7@gmail.com",
+            "jacob.lee7@gmail.com",
+            "ava.brown8@gmail.com"
+          ],
+          "address_1": [
+            "387 Wellington Ave.",
+            "75 W. Berkshire St.",
+            "36 Second St.",
+            "7607 Sunnyslope Street",
+            "755 Galvin Street",
+            "8266 Arnold Drive",
+            "827 N. Green Lake Court",
+            "817 Joy Ridge Dr."
+          ],
+          "address_2": [
+            "Unit 1",
+            "Unit 6",
+            "Unit 80",
+            "Unit 1B",
+            "Apt. 3D",
+            "Unit 81",
+            "Unit 7",
+            "Unit 77"
+          ],
+          "city": [
+            "Albuquerque",
+            "New York City",
+            "Indianapolis",
+            "Portland",
+            "Louisville",
+            "Springfield",
+            "Lynn",
+            "New Bedford"
+          ],
+          "state": [
+            "NM",
+            "NY",
+            "IN",
+            "OR",
+            "KY",
+            "MA",
+            "ND",
+            "TX"
+          ],
+          "zipcode": [
+            "47246",
+            "10040",
+            "10162",
+            "49047",
+            "40852",
+            "44987",
+            "44359",
+            "1101"
+          ],
+          "district_id": [
+            "18",
+            "1",
+            "5",
+            "12",
+            "15",
+            "51",
+            "60",
+            "57"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "district": {
+        "rows": 77,
+        "sample_values": {
+          "district_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "city": [
+            "New York City",
+            "Jacksonville",
+            "Columbus",
+            "Charlotte",
+            "Indianapolis",
+            "Seattle",
+            "Denver",
+            "Washington"
+          ],
+          "state_abbrev": [
+            "NY",
+            "FL",
+            "OH",
+            "NC",
+            "IN",
+            "WA",
+            "CO",
+            "DC"
+          ],
+          "division": [
+            "Middle Atlantic",
+            "South Atlantic",
+            "East North Central",
+            "Pacific",
+            "Mountain",
+            "New England",
+            "East South Central",
+            "West South Central"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "events": {
+        "rows": 9508,
+        "sample_values": {
+          "Date received": [
+            "2014-07-03",
+            "2012-04-12",
+            "2012-04-03",
+            "2012-03-14",
+            "2012-03-05",
+            "2012-02-23",
+            "2011-12-07",
+            "2017-03-27"
+          ],
+          "Product": [
+            "Bank account or service",
+            "Credit card"
+          ],
+          "Sub-product": [
+            "Checking account",
+            "Savings account",
+            "Other bank product/service",
+            "(CD) Certificate of deposit",
+            "Cashing a check without an account"
+          ],
+          "Issue": [
+            "Deposits and withdrawals",
+            "Account opening, closing, or management",
+            "Billing disputes",
+            "Problems caused by my funds being low",
+            "Other fee",
+            "Collection debt dispute",
+            "Other",
+            "Identity theft / Fraud / Embezzlement"
+          ],
+          "Consumer complaint narrative": [
+            "Deposited a XXXX check into my account, BOFA is te",
+            "I called Eagle National Bank 's customer service l",
+            "I was a victim of fraud involving my Eagle Nationa",
+            "On Thursday XX/XX/2017 I initiated a wire transfer",
+            "I am being charged a debt for a company that I hav",
+            "Someone use my Eagle National Bank visa debit card",
+            "Eagle National Bank sent me a notice via US mail a",
+            "I had an account with Eagle National Bank. I had a"
+          ],
+          "Tags": [
+            "Older American",
+            "Older American, Servicemember",
+            "Servicemember"
+          ],
+          "Consumer consent provided?": [
+            "N/A",
+            "Consent not provided",
+            "Consent provided",
+            "Other"
+          ],
+          "Submitted via": [
+            "Email",
+            "Fax",
+            "Postal mail",
+            "Referral",
+            "Web"
+          ],
+          "Date sent to company": [
+            "2014-07-09",
+            "2012-04-13",
+            "2012-04-03",
+            "2012-03-14",
+            "2012-03-06",
+            "2012-03-05",
+            "2012-02-24",
+            "2012-02-29"
+          ],
+          "Company response to consumer": [
+            "Closed with explanation",
+            "Closed with relief",
+            "Closed without relief",
+            "Closed with non-monetary relief",
+            "In progress",
+            "Closed with monetary relief",
+            "Closed",
+            "Untimely response"
+          ],
+          "Timely response?": [
+            "Yes",
+            "No"
+          ],
+          "Consumer disputed?": [
+            "No",
+            "Yes"
+          ],
+          "Complaint ID": [
+            "CR0922485",
+            "CR0057298",
+            "CR0043811",
+            "CR0035411",
+            "CR0030939",
+            "CR0030070",
+            "CR0013328",
+            "CR0003732"
+          ],
+          "Client_ID": [
+            "C00001925",
+            "C00003141",
+            "C00000297",
+            "C00004275",
+            "C00000900",
+            "C00011596",
+            "C00002716",
+            "C00000146"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reviews": {
+        "rows": 371,
+        "sample_values": {
+          "Date": [
+            "2017-10-04",
+            "2017-10-02",
+            "2017-08-21",
+            "2017-12-17",
+            "2016-05-27",
+            "2016-12-20",
+            "2016-08-16",
+            "2017-04-09"
+          ],
+          "Stars": [
+            "5",
+            "1",
+            "2"
+          ],
+          "Reviews": [
+            "Great job, Eagle National! Each person was profess",
+            "Matthew Richardson is professional and helpful. He",
+            "We had a past experience with Eagle National Mortg",
+            "We have been dealing with Brad Thomka from the beg",
+            "I can't express how grateful I am for the support ",
+            "I had the pleasure of working with Eagle National ",
+            "Patrick answered all my questions by email immedia",
+            "I loved working with this group of people! They la"
+          ],
+          "Product": [
+            "Eagle National Mortgage",
+            "Eagle National Bank",
+            "Eagle Capital"
+          ],
+          "district_id": [
+            "65",
+            "66",
+            "23",
+            "55",
+            "24",
+            "15",
+            "25",
+            "18"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state": {
+        "rows": 48,
+        "sample_values": {
+          "StateCode": [
+            "AL",
+            "AR",
+            "AZ",
+            "CA",
+            "CO",
+            "CT",
+            "DC",
+            "DE"
+          ],
+          "State": [
+            "Alabama",
+            "Arkansas",
+            "Arizona",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "District of Columbia",
+            "Delaware"
+          ],
+          "Region": [
+            "South",
+            "West",
+            "Northeast",
+            "Midwest"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

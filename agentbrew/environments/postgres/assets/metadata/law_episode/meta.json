@@ -1,0 +1,411 @@
+{
+  "db_id": "law_episode",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 3350,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#law_episode",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Award\" {\n  \"award_id\" INTEGER [pk]\n  \"organization\" TEXT\n  \"year\" INTEGER\n  \"award_category\" TEXT\n  \"award\" TEXT\n  \"series\" TEXT\n  \"episode_id\" TEXT\n  \"person_id\" TEXT\n  \"role\" TEXT\n  \"result\" TEXT\n}\n\nTable \"Credit\" {\n  \"episode_id\" TEXT [pk]\n  \"person_id\" TEXT [pk]\n  \"category\" TEXT\n  \"role\" TEXT\n  \"credited\" TEXT\n}\n\nTable \"Episode\" {\n  \"episode_id\" TEXT [pk]\n  \"series\" TEXT\n  \"season\" INTEGER\n  \"episode\" INTEGER\n  \"number_in_series\" INTEGER\n  \"title\" TEXT\n  \"summary\" TEXT\n  \"air_date\" DATE\n  \"episode_image\" TEXT\n  \"rating\" REAL\n  \"votes\" INTEGER\n}\n\nTable \"Keyword\" {\n  \"episode_id\" TEXT [pk]\n  \"keyword\" TEXT [pk]\n}\n\nTable \"Person\" {\n  \"person_id\" TEXT [pk]\n  \"name\" TEXT\n  \"birthdate\" DATE\n  \"birth_name\" TEXT\n  \"birth_place\" TEXT\n  \"birth_region\" TEXT\n  \"birth_country\" TEXT\n  \"height_meters\" REAL\n  \"nickname\" TEXT\n}\n\nTable \"Vote\" {\n  \"episode_id\" TEXT\n  \"stars\" INTEGER\n  \"votes\" INTEGER\n  \"percent\" REAL\n}\n\n\n\nRef: \"Keyword\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Award\".\"person_id\" > \"Person\".\"person_id\"\n\nRef: \"Award\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Credit\".\"person_id\" > \"Person\".\"person_id\"\n\nRef: \"Credit\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Vote\".\"episode_id\" > \"Episode\".\"episode_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Award\" {\n  \"award_id\" INTEGER [pk]\n  \"organization\" TEXT\n  \"year\" INTEGER\n  \"award_category\" TEXT\n  \"award\" TEXT\n  \"series\" TEXT\n  \"episode_id\" TEXT\n  \"person_id\" TEXT\n  \"role\" TEXT\n  \"result\" TEXT\n}\n\nTable \"Credit\" {\n  \"episode_id\" TEXT [pk]\n  \"person_id\" TEXT [pk]\n  \"category\" TEXT\n  \"role\" TEXT\n  \"credited\" TEXT\n}\n\nTable \"Episode\" {\n  \"episode_id\" TEXT [pk]\n  \"series\" TEXT\n  \"season\" INTEGER\n  \"episode\" INTEGER\n  \"number_in_series\" INTEGER\n  \"title\" TEXT\n  \"summary\" TEXT\n  \"air_date\" DATE\n  \"episode_image\" TEXT\n  \"rating\" REAL\n  \"votes\" INTEGER\n}\n\nTable \"Keyword\" {\n  \"episode_id\" TEXT [pk]\n  \"keyword\" TEXT [pk]\n}\n\nTable \"Person\" {\n  \"person_id\" TEXT [pk]\n  \"name\" TEXT\n  \"birthdate\" DATE\n  \"birth_name\" TEXT\n  \"birth_place\" TEXT\n  \"birth_region\" TEXT\n  \"birth_country\" TEXT\n  \"height_meters\" REAL\n  \"nickname\" TEXT\n}\n\nTable \"Vote\" {\n  \"episode_id\" TEXT\n  \"stars\" INTEGER\n  \"votes\" INTEGER\n  \"percent\" REAL\n}\n\nRef: \"Keyword\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Award\".\"person_id\" > \"Person\".\"person_id\"\n\nRef: \"Award\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Credit\".\"person_id\" > \"Person\".\"person_id\"\n\nRef: \"Credit\".\"episode_id\" > \"Episode\".\"episode_id\"\n\nRef: \"Vote\".\"episode_id\" > \"Episode\".\"episode_id\"\n\n## Table Stats & Sample Values\n\nAward: 22 rows\n  award_category: 'Monitor', 'Primetime Emmy', 'Silver Gavel Award', ...\n  role: 'Katrina Ludlow', 'production mixer', 're-recording mixer', ...\n  result: 'Winner', 'Nominee'\n\nCredit: 2231 rows\n  category: 'Additional Crew', 'Art Department', 'Camera and Electrical Department', ...\n  role: 'technical advisor', 'production accountant', 'president of NBC West Coast', ...\n  credited: 'true', 'false'\n\nEpisode: 24 rows\n  title: 'Cherished', 'DWB', 'Bait', ...\n  summary: 'New assistant DA Abbie Carmichael aggressively inv', 'White police officers are accused of beating and d', 'A teenager who was shot in a drug deal gone bad cl', ...\n  episode_image: 'https://m.media-amazon.com/images/M/MV5BODFmZmI2YT', 'https://m.media-amazon.com/images/M/MV5BNWEyM2NkZj', 'https://m.media-amazon.com/images/M/MV5BYzI5ZDU4Nz', ...\n\nKeyword: 33 rows\n  keyword: 'nun', 'priest', 'police officer', ...\n  episode_id: 'tt0629239', 'tt0629420', 'tt0629397'\n\nPerson: 800 rows\n  name: 'Julia Roberts', 'Rene Balcer', 'Billy Fox', ...\n  birth_name: 'Julia Fiona Roberts', 'Rene Chenevert Balcer', 'William M. Nicholson', ...\n  birth_region: 'Georgia', 'Quebec', 'Pennsylvania', ...\n\nVote: 240 rows\n  stars: '10', '9', '8', ...\n  votes: '36', '39', '64', ...\n  percent: '17.7', '19.2', '31.5', ...",
+    "stateUrl": "https://bird-bench.github.io/#law_episode",
+    "tableStats": {
+      "Award": {
+        "rows": 22,
+        "sample_values": {
+          "award_id": [
+            "258",
+            "259",
+            "260",
+            "261",
+            "262",
+            "270",
+            "271",
+            "272"
+          ],
+          "organization": [
+            "International Monitor Awards",
+            "Primetime Emmy Awards",
+            "American Bar Association Silver Gavel Awards for M",
+            "Edgar Allan Poe Awards"
+          ],
+          "year": [
+            "1999",
+            "2000"
+          ],
+          "award_category": [
+            "Monitor",
+            "Primetime Emmy",
+            "Silver Gavel Award",
+            "Edgar"
+          ],
+          "award": [
+            "Film Originated Television Series - Best Achieveme",
+            "Outstanding Costume Design for a Series",
+            "Outstanding Directing for a Drama Series",
+            "Outstanding Guest Actress in a Drama Series",
+            "Outstanding Sound Mixing for a Drama Series",
+            "Television",
+            "Best Television Episode"
+          ],
+          "series": [
+            "Law and Order"
+          ],
+          "episode_id": [
+            "tt0629149",
+            "tt0629398",
+            "tt0629248",
+            "tt0629422",
+            "tt0629228",
+            "tt0629291",
+            "tt0629397"
+          ],
+          "person_id": [
+            "nm0937725",
+            "nm0792309",
+            "nm0049569",
+            "nm0371065",
+            "nm0288886",
+            "nm0902683",
+            "nm0671992",
+            "nm0000210"
+          ],
+          "role": [
+            "Katrina Ludlow",
+            "production mixer",
+            "re-recording mixer",
+            "writer",
+            "director",
+            "teleplay, story",
+            "story",
+            "teleplay"
+          ],
+          "result": [
+            "Winner",
+            "Nominee"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Credit": {
+        "rows": 2231,
+        "sample_values": {
+          "episode_id": [
+            "tt0629204",
+            "tt0629228",
+            "tt0629170",
+            "tt0629266",
+            "tt0629149",
+            "tt0629409",
+            "tt0629487",
+            "tt0629391"
+          ],
+          "person_id": [
+            "nm0226352",
+            "nm0506974",
+            "nm4103116",
+            "nm0645048",
+            "nm5632505",
+            "nm0728643",
+            "nm0801283",
+            "nm10931519"
+          ],
+          "category": [
+            "Additional Crew",
+            "Art Department",
+            "Camera and Electrical Department",
+            "Cast",
+            "Casting Department",
+            "Costume and Wardrobe Department",
+            "General",
+            "Directed by"
+          ],
+          "role": [
+            "technical advisor",
+            "production accountant",
+            "president of NBC West Coast",
+            "executive assistant to executive producer",
+            "production coordinator",
+            "payroll accountant",
+            "first assistant accountant",
+            "assistant: Ed Sherin"
+          ],
+          "credited": [
+            "true",
+            "false"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Episode": {
+        "rows": 24,
+        "sample_values": {
+          "episode_id": [
+            "tt0629204",
+            "tt0629228",
+            "tt0629170",
+            "tt0629266",
+            "tt0629149",
+            "tt0629409",
+            "tt0629487",
+            "tt0629391"
+          ],
+          "series": [
+            "Law and Order"
+          ],
+          "season": [
+            "9"
+          ],
+          "episode": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "number_in_series": [
+            "182",
+            "183",
+            "184",
+            "185",
+            "186",
+            "187",
+            "188",
+            "189"
+          ],
+          "title": [
+            "Cherished",
+            "DWB",
+            "Bait",
+            "Flight",
+            "Agony",
+            "Scrambled",
+            "Venom",
+            "Punk"
+          ],
+          "summary": [
+            "New assistant DA Abbie Carmichael aggressively inv",
+            "White police officers are accused of beating and d",
+            "A teenager who was shot in a drug deal gone bad cl",
+            "Prosecutors have trouble making a case against a f",
+            "After a woman is brutally attacked, the police bel",
+            "A murder at a fertility clinic leads to a complica",
+            "A murder case leads detectives to a mother/son tea",
+            "An inmate accused of arranging a hit on a correcti"
+          ],
+          "air_date": [
+            "1998-09-23",
+            "1998-10-07",
+            "1998-10-14",
+            "1998-10-21",
+            "1998-11-04",
+            "1998-11-11",
+            "1998-11-18",
+            "1998-11-25"
+          ],
+          "episode_image": [
+            "https://m.media-amazon.com/images/M/MV5BODFmZmI2YT",
+            "https://m.media-amazon.com/images/M/MV5BNWEyM2NkZj",
+            "https://m.media-amazon.com/images/M/MV5BYzI5ZDU4Nz",
+            "https://m.media-amazon.com/images/M/MV5BMmVlZWZlOW",
+            "https://m.media-amazon.com/images/M/MV5BMzQ2ZmI1OG",
+            "https://m.media-amazon.com/images/M/MV5BYmJiZGIyMz",
+            "https://m.media-amazon.com/images/M/MV5BOGQ1YTQ1ND",
+            "https://m.media-amazon.com/images/M/MV5BNzg3Zjk4ZW"
+          ],
+          "rating": [
+            "7.9",
+            "7.6",
+            "8.2",
+            "7.7",
+            "7.8",
+            "8.0",
+            "7.5",
+            "7.4"
+          ],
+          "votes": [
+            "203",
+            "177",
+            "159",
+            "165",
+            "187",
+            "176",
+            "183",
+            "186"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Keyword": {
+        "rows": 33,
+        "sample_values": {
+          "episode_id": [
+            "tt0629239",
+            "tt0629420",
+            "tt0629397"
+          ],
+          "keyword": [
+            "nun",
+            "priest",
+            "police officer",
+            "police officer killed",
+            "police officer shot",
+            "russian",
+            "witness",
+            "mafia"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Person": {
+        "rows": 800,
+        "sample_values": {
+          "person_id": [
+            "nm0000210",
+            "nm0049569",
+            "nm0288886",
+            "nm0538744",
+            "nm0578294",
+            "nm0629779",
+            "nm0657970",
+            "nm0671992"
+          ],
+          "name": [
+            "Julia Roberts",
+            "Rene Balcer",
+            "Billy Fox",
+            "Constantine Makris",
+            "Thomas Meloeny",
+            "Bill Nicholson",
+            "Robert Palm",
+            "Matthew Penn"
+          ],
+          "birthdate": [
+            "1967-10-28",
+            "1954-02-09",
+            "1930-01-15",
+            "1946-12-20",
+            "1970-04-01",
+            "1971-02-07",
+            "2018-01-19",
+            "2029-03-25"
+          ],
+          "birth_name": [
+            "Julia Fiona Roberts",
+            "Rene Chenevert Balcer",
+            "William M. Nicholson",
+            "Richard A. Wolf",
+            "Sondra Karyl Kattlove",
+            "Ariane Rose Kamp",
+            "Joseph Charles John Piscopo",
+            "Donnell M. Rawlings"
+          ],
+          "birth_place": [
+            "Smyrna",
+            "Montreal",
+            "Harrisburg",
+            "New York City",
+            "Wilmington",
+            "White Plains",
+            "Le Compte",
+            "Des Moines"
+          ],
+          "birth_region": [
+            "Georgia",
+            "Quebec",
+            "Pennsylvania",
+            "New York",
+            "North Carolina",
+            "Louisiana",
+            "Iowa",
+            "Arizona"
+          ],
+          "birth_country": [
+            "USA",
+            "Canada",
+            "England",
+            "USSR",
+            "Italy",
+            "Romania",
+            "Scotland",
+            "Germany"
+          ],
+          "height_meters": [
+            "1.73",
+            "1.88",
+            "1.93",
+            "1.8",
+            "1.75",
+            "1.63",
+            "1.85",
+            "1.83"
+          ],
+          "nickname": [
+            "Jules",
+            "Gus",
+            "Ed",
+            "Dagmar",
+            "Mike Preston",
+            "Bobby Reed",
+            "Bobby",
+            "Tucci"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Vote": {
+        "rows": 240,
+        "sample_values": {
+          "episode_id": [
+            "tt0629204",
+            "tt0629228",
+            "tt0629170",
+            "tt0629266",
+            "tt0629149",
+            "tt0629409",
+            "tt0629487",
+            "tt0629391"
+          ],
+          "stars": [
+            "10",
+            "9",
+            "8",
+            "7",
+            "6",
+            "5",
+            "4",
+            "3"
+          ],
+          "votes": [
+            "36",
+            "39",
+            "64",
+            "35",
+            "13",
+            "9",
+            "3",
+            "0"
+          ],
+          "percent": [
+            "17.7",
+            "19.2",
+            "31.5",
+            "17.2",
+            "6.4",
+            "4.4",
+            "1.5",
+            "0.0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

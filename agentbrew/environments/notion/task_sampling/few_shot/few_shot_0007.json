@@ -1,0 +1,15 @@
+{
+  "title": "Content Archive Migration",
+  "capability": [
+    "query_and_filter_database",
+    "create_database",
+    "define_schema",
+    "migrate_rows",
+    "archive_or_delete_items",
+    "create_child_page",
+    "cross_database_sync",
+    "populate_rows",
+    "field_mapping"
+  ],
+  "question": "In the \"Content Operations Hub\" page, migrate retired content assets and record the review budget entries.\n\n---\nTask Steps\n1. Inside the \"Content Operations Hub\" page, locate the database named \"Content Inventory\".\n\n2. Query this database and collect every page whose \"Status\" property is \"Retired\" or \"Needs Archive\".\n\n3. Create a new full-page database directly under the same Content Operations Hub page called \"Content Archive Queue\" with exactly these properties:\n   - Asset Name - title\n   - Content Type - select\n   - Original Status - select\n   - Archive Date - date\n   - Migration Notes - rich text\n\n4. For every content asset gathered in step 2, create a corresponding page in Content Archive Queue. Copy the source asset's Name into Asset Name, copy Content Type and Status into the matching target properties, set Archive Date to \"2025-08-01\", and copy the source Description field into Migration Notes.\n\n5. Locate the \"Content Review Budget\" database and create one corresponding budget entry per migrated content asset:\n   - Date: \"2025-08-01\"\n   - Cost: 80\n   - Expense: the source content asset name\n   - Category: Review\n   - Comment: the Description from the corresponding content asset page\n   - Leave all other properties empty.\n\n6. After every matching asset has been migrated and recorded in the budget database, archive the original matching Content Inventory pages.\n\n7. Preserve every Content Inventory record that does not match the Status filter, and do not modify any of their properties."
+}

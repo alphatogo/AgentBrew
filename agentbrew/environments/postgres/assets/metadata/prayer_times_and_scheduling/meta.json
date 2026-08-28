@@ -1,0 +1,656 @@
+{
+  "db_id": "prayer_times_and_scheduling",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/prayer_times_and_scheduling",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"event_attendees\" {\n  \"attendance_id\" INTEGER [pk]\n  \"event_id\" INTEGER\n  \"user_id\" INTEGER\n  \"attendance_status\" TEXT\n  \"registration_date\" TEXT\n  \"attendance_timestamp\" TEXT\n}\n\nTable \"public\".\"events\" {\n  \"event_id\" INTEGER [pk]\n  \"mosque_id\" INTEGER\n  \"event_name\" TEXT\n  \"event_date\" TEXT\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"description\" TEXT\n  \"is_public\" INTEGER\n  \"event_type\" TEXT\n}\n\nTable \"public\".\"islamic_dates\" {\n  \"islamic_date_id\" INTEGER [pk]\n  \"gregorian_date\" TEXT\n  \"hijri_date\" TEXT\n  \"month_name\" TEXT\n  \"day_of_month\" INTEGER\n}\n\nTable \"public\".\"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"timezone\" TEXT\n  \"daylight_savings\" INTEGER\n  \"country\" TEXT\n  \"state\" TEXT\n  \"city\" TEXT\n  \"postal_code\" TEXT\n  \"altitude\" REAL\n  \"islamic_region\" TEXT\n}\n\nTable \"public\".\"mosques\" {\n  \"mosque_id\" INTEGER [pk]\n  \"mosque_name\" TEXT\n  \"location_id\" INTEGER\n  \"address\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n  \"imam_name\" TEXT\n  \"masjid_type\" TEXT\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"message\" TEXT\n  \"send_time\" TEXT\n  \"is_read\" INTEGER\n  \"notification_channel\" TEXT\n}\n\nTable \"public\".\"prayer_reminders\" {\n  \"reminder_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"prayer_time_id\" INTEGER\n  \"reminder_time_before_prayer\" INTEGER\n  \"is_active\" INTEGER\n  \"reminder_frequency\" TEXT\n}\n\nTable \"public\".\"prayer_time_adjustments\" {\n  \"adjustment_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"user_id\" INTEGER\n  \"prayer_time_id\" INTEGER\n  \"adjustment_amount\" INTEGER\n  \"adjustment_type\" TEXT\n}\n\nTable \"public\".\"prayer_time_history\" {\n  \"history_id\" INTEGER [pk]\n  \"prayer_time_id\" INTEGER\n  \"date\" TEXT\n  \"fajr\" TEXT\n  \"sunrise\" TEXT\n  \"dhuhr\" TEXT\n  \"asr\" TEXT\n  \"maghrib\" TEXT\n  \"isha\" TEXT\n  \"zawal\" TEXT\n  \"midsun\" TEXT\n  \"midnight\" TEXT\n}\n\nTable \"public\".\"prayer_times\" {\n  \"prayer_time_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"date\" TEXT\n  \"fajr\" TEXT\n  \"sunrise\" TEXT\n  \"dhuhr\" TEXT\n  \"asr\" TEXT\n  \"maghrib\" TEXT\n  \"isha\" TEXT\n  \"zawal\" TEXT\n  \"midsun\" TEXT\n  \"midnight\" TEXT\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_type\" TEXT\n  \"report_name\" TEXT\n  \"generated_date\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"generated_by_user_id\" INTEGER\n  \"report_format\" TEXT\n}\n\nTable \"public\".\"system_settings\" {\n  \"setting_id\" INTEGER [pk]\n  \"setting_key\" TEXT\n  \"setting_value\" TEXT\n  \"description\" TEXT\n  \"setting_type\" TEXT\n}\n\nTable \"public\".\"user_activity_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_type\" TEXT\n  \"activity_description\" TEXT\n  \"activity_date\" TEXT\n  \"activity_timestamp\" TEXT\n}\n\nTable \"public\".\"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"feedback_type\" TEXT\n  \"feedback_text\" TEXT\n  \"date_submitted\" TEXT\n  \"is_resolved\" INTEGER\n  \"resolution_notes\" TEXT\n}\n\nTable \"public\".\"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"location_id\" INTEGER\n  \"language\" TEXT\n  \"notification_enabled\" INTEGER\n  \"notification_time_before_prayer\" INTEGER\n  \"prayer_calculation_method\" TEXT\n  \"timezone_override\" TEXT\n}\n\nTable \"public\".\"user_role_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role_id\" INTEGER\n  \"assigned_date\" TEXT\n  \"expiration_date\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"role_description\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"password_hash\" TEXT\n  \"date_joined\" TEXT\n  \"last_login\" TEXT\n  \"is_active\" INTEGER\n  \"role\" TEXT\n  \"birth_date\" TEXT\n  \"gender\" TEXT\n  \"islamic_school\" TEXT\n}\n\nRef: \"public\".\"event_attendees\".\"event_id\" > \"public\".\"events\".\"event_id\"\nRef: \"public\".\"event_attendees\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"events\".\"mosque_id\" > \"public\".\"mosques\".\"mosque_id\"\nRef: \"public\".\"mosques\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"prayer_reminders\".\"prayer_time_id\" > \"public\".\"prayer_times\".\"prayer_time_id\"\nRef: \"public\".\"prayer_reminders\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"prayer_time_adjustments\".\"prayer_time_id\" > \"public\".\"prayer_times\".\"prayer_time_id\"\nRef: \"public\".\"prayer_time_adjustments\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"prayer_time_adjustments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"prayer_time_history\".\"prayer_time_id\" > \"public\".\"prayer_times\".\"prayer_time_id\"\nRef: \"public\".\"prayer_times\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"reports\".\"generated_by_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_activity_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_feedback\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_preferences\".\"location_id\" > \"public\".\"locations\".\"location_id\"\nRef: \"public\".\"user_preferences\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_role_assignments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"user_role_assignments\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"event_attendees\" {\n  \"attendance_id\" INTEGER [pk]\n  \"event_id\" INTEGER\n  \"user_id\" INTEGER\n  \"attendance_status\" TEXT\n  \"registration_date\" TEXT\n  \"attendance_timestamp\" TEXT\n}\n\nTable \"events\" {\n  \"event_id\" INTEGER [pk]\n  \"mosque_id\" INTEGER\n  \"event_name\" TEXT\n  \"event_date\" TEXT\n  \"start_time\" TEXT\n  \"end_time\" TEXT\n  \"description\" TEXT\n  \"is_public\" INTEGER\n  \"event_type\" TEXT\n}\n\nTable \"islamic_dates\" {\n  \"islamic_date_id\" INTEGER [pk]\n  \"gregorian_date\" TEXT\n  \"hijri_date\" TEXT\n  \"month_name\" TEXT\n  \"day_of_month\" INTEGER\n}\n\nTable \"locations\" {\n  \"location_id\" INTEGER [pk]\n  \"location_name\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"timezone\" TEXT\n  \"daylight_savings\" INTEGER\n  \"country\" TEXT\n  \"state\" TEXT\n  \"city\" TEXT\n  \"postal_code\" TEXT\n  \"altitude\" REAL\n  \"islamic_region\" TEXT\n}\n\nTable \"mosques\" {\n  \"mosque_id\" INTEGER [pk]\n  \"mosque_name\" TEXT\n  \"location_id\" INTEGER\n  \"address\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"website\" TEXT\n  \"imam_name\" TEXT\n  \"masjid_type\" TEXT\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"message\" TEXT\n  \"send_time\" TEXT\n  \"is_read\" INTEGER\n  \"notification_channel\" TEXT\n}\n\nTable \"prayer_reminders\" {\n  \"reminder_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"prayer_time_id\" INTEGER\n  \"reminder_time_before_prayer\" INTEGER\n  \"is_active\" INTEGER\n  \"reminder_frequency\" TEXT\n}\n\nTable \"prayer_time_adjustments\" {\n  \"adjustment_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"user_id\" INTEGER\n  \"prayer_time_id\" INTEGER\n  \"adjustment_amount\" INTEGER\n  \"adjustment_type\" TEXT\n}\n\nTable \"prayer_time_history\" {\n  \"history_id\" INTEGER [pk]\n  \"prayer_time_id\" INTEGER\n  \"date\" TEXT\n  \"fajr\" TEXT\n  \"sunrise\" TEXT\n  \"dhuhr\" TEXT\n  \"asr\" TEXT\n  \"maghrib\" TEXT\n  \"isha\" TEXT\n  \"zawal\" TEXT\n  \"midsun\" TEXT\n  \"midnight\" TEXT\n}\n\nTable \"prayer_times\" {\n  \"prayer_time_id\" INTEGER [pk]\n  \"location_id\" INTEGER\n  \"date\" TEXT\n  \"fajr\" TEXT\n  \"sunrise\" TEXT\n  \"dhuhr\" TEXT\n  \"asr\" TEXT\n  \"maghrib\" TEXT\n  \"isha\" TEXT\n  \"zawal\" TEXT\n  \"midsun\" TEXT\n  \"midnight\" TEXT\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_type\" TEXT\n  \"report_name\" TEXT\n  \"generated_date\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"generated_by_user_id\" INTEGER\n  \"report_format\" TEXT\n}\n\nTable \"system_settings\" {\n  \"setting_id\" INTEGER [pk]\n  \"setting_key\" TEXT\n  \"setting_value\" TEXT\n  \"description\" TEXT\n  \"setting_type\" TEXT\n}\n\nTable \"user_activity_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"activity_type\" TEXT\n  \"activity_description\" TEXT\n  \"activity_date\" TEXT\n  \"activity_timestamp\" TEXT\n}\n\nTable \"user_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"feedback_type\" TEXT\n  \"feedback_text\" TEXT\n  \"date_submitted\" TEXT\n  \"is_resolved\" INTEGER\n  \"resolution_notes\" TEXT\n}\n\nTable \"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"location_id\" INTEGER\n  \"language\" TEXT\n  \"notification_enabled\" INTEGER\n  \"notification_time_before_prayer\" INTEGER\n  \"prayer_calculation_method\" TEXT\n  \"timezone_override\" TEXT\n}\n\nTable \"user_role_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"role_id\" INTEGER\n  \"assigned_date\" TEXT\n  \"expiration_date\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"permissions\" TEXT\n  \"role_description\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"password_hash\" TEXT\n  \"date_joined\" TEXT\n  \"last_login\" TEXT\n  \"is_active\" INTEGER\n  \"role\" TEXT\n  \"birth_date\" TEXT\n  \"gender\" TEXT\n  \"islamic_school\" TEXT\n}\n\nRef: \"event_attendees\".\"event_id\" > \"events\".\"event_id\"\n\nRef: \"event_attendees\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"events\".\"mosque_id\" > \"mosques\".\"mosque_id\"\n\nRef: \"mosques\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"prayer_reminders\".\"prayer_time_id\" > \"prayer_times\".\"prayer_time_id\"\n\nRef: \"prayer_reminders\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"prayer_time_adjustments\".\"prayer_time_id\" > \"prayer_times\".\"prayer_time_id\"\n\nRef: \"prayer_time_adjustments\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"prayer_time_adjustments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"prayer_time_history\".\"prayer_time_id\" > \"prayer_times\".\"prayer_time_id\"\n\nRef: \"prayer_times\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"reports\".\"generated_by_user_id\" > \"users\".\"user_id\"\n\nRef: \"user_activity_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_feedback\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_preferences\".\"location_id\" > \"locations\".\"location_id\"\n\nRef: \"user_preferences\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_role_assignments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"user_role_assignments\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\nevent_attendees: 2 rows\n  attendance_status: 'attended', 'registered'\n  registration_date: '2023-05-01'\n  attendance_timestamp: '2023-05-05 13:00:00'\n\nevents: 2 rows\n  event_name: 'Friday Jumu'ah Prayer', 'Ramadan Iftar'\n  event_type: 'prayer', 'lecture'\n  description: 'Weekly Friday congregational prayer', 'Community iftar during Ramadan'\n\nislamic_dates: 2 rows\n  month_name: 'Ramadan'\n  gregorian_date: '2023-05-01', '2023-05-02'\n  hijri_date: '1444-09-10', '1444-09-11'\n\nlocations: 2 rows\n  location_name: 'New York City', 'London'\n  country: 'United States', 'United Kingdom'\n  state: 'New York', 'England'\n\nmosques: 2 rows\n  mosque_name: 'Masjid al-Falah', 'Masjid al-Noor'\n  imam_name: 'Imam Muhammad Ali', 'Imam Ahmed Hassan'\n  masjid_type: 'Sunni', 'Shia'\n\nnotifications: 2 rows\n  notification_type: 'prayer time', 'event reminder'\n  notification_channel: 'app', 'email'\n  message: 'Fajr prayer is in 10 minutes', 'Jumu'ah prayer starts at 12:30 PM'\n\nprayer_reminders: 2 rows\n  reminder_frequency: 'daily', 'weekly'\n  is_active: '1', '0'\n  reminder_time_before_prayer: '10', '5'\n\nprayer_time_adjustments: 2 rows\n  adjustment_type: 'forward', 'backward'\n  adjustment_amount: '5', '-3'\n  user_id: '0', '1'\n\nprayer_time_history: 2 rows\n  fajr: '02:28:00', '02:26:00'\n  sunrise: '04:37:00', '04:33:00'\n  asr: '17:16:00', '17:17:00'\n\nprayer_times: 2 rows\n  fajr: '02:28:00', '02:26:00'\n  sunrise: '04:37:00', '04:33:00'\n  asr: '17:16:00', '17:17:00'\n\nreports: 2 rows\n  report_type: 'user engagement', 'prayer time usage'\n  report_name: 'User Engagement Report - May 2023', 'Prayer Time Usage Report - May 2023'\n  report_format: 'PDF', 'CSV'\n\nsystem_settings: 2 rows\n  description: 'Default sound for notifications', 'Default language for the system'\n  setting_type: 'string'\n  setting_key: 'notification_sound', 'default_language'\n\nuser_activity_logs: 2 rows\n  activity_type: 'login', 'view prayer times'\n  activity_description: 'User logged in to the system', 'User viewed prayer times for New York City'\n  activity_timestamp: '2023-05-01 08:00:00', '2023-05-01 09:00:00'\n\nuser_feedback: 2 rows\n  feedback_type: 'bug report', 'suggestion'\n  feedback_text: 'Prayer times are not accurate for my location', 'Add support for multiple languages'\n  date_submitted: '2023-05-01', '2023-05-02'\n\nuser_preferences: 2 rows\n  language: 'en', 'ar'\n  prayer_calculation_method: 'Muslim World League', 'Islamic Society of North America'\n  timezone_override: 'America/New_York', 'Europe/London'\n\nuser_role_assignments: 2 rows\n  assigned_date: '2023-01-01'\n  expiration_date: '2023-12-31'\n  role_id: '0', '1'\n\nuser_roles: 2 rows\n  role_name: 'regular user', 'admin'\n  role_description: 'Basic user role with view and edit permissions', 'Administrative role with full permissions'\n  permissions: 'view, edit', 'view, edit, admin'\n\nusers: 2 rows\n  user_name: 'Ahmed Ali', 'Fatima Khan'\n  role: 'regular user', 'admin'\n  password_hash: 'hashed_password_1', 'hashed_password_2'",
+    "stateUrl": null,
+    "tableStats": {
+      "event_attendees": {
+        "rows": 2,
+        "sample_values": {
+          "attendance_id": [
+            "0",
+            "1"
+          ],
+          "event_id": [
+            "0"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "attendance_status": [
+            "attended",
+            "registered"
+          ],
+          "registration_date": [
+            "2023-05-01"
+          ],
+          "attendance_timestamp": [
+            "2023-05-05 13:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "events": {
+        "rows": 2,
+        "sample_values": {
+          "event_id": [
+            "0",
+            "1"
+          ],
+          "mosque_id": [
+            "0",
+            "1"
+          ],
+          "event_name": [
+            "Friday Jumu'ah Prayer",
+            "Ramadan Iftar"
+          ],
+          "event_date": [
+            "2023-05-05",
+            "2023-05-10"
+          ],
+          "start_time": [
+            "12:30:00",
+            "19:30:00"
+          ],
+          "end_time": [
+            "14:00:00",
+            "21:00:00"
+          ],
+          "description": [
+            "Weekly Friday congregational prayer",
+            "Community iftar during Ramadan"
+          ],
+          "is_public": [
+            "1"
+          ],
+          "event_type": [
+            "prayer",
+            "lecture"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "islamic_dates": {
+        "rows": 2,
+        "sample_values": {
+          "islamic_date_id": [
+            "0",
+            "1"
+          ],
+          "gregorian_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "hijri_date": [
+            "1444-09-10",
+            "1444-09-11"
+          ],
+          "month_name": [
+            "Ramadan"
+          ],
+          "day_of_month": [
+            "10",
+            "11"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "locations": {
+        "rows": 2,
+        "sample_values": {
+          "location_id": [
+            "0",
+            "1"
+          ],
+          "location_name": [
+            "New York City",
+            "London"
+          ],
+          "latitude": [
+            "40.7128",
+            "51.5074"
+          ],
+          "longitude": [
+            "-74.006",
+            "-0.1278"
+          ],
+          "timezone": [
+            "America/New_York",
+            "Europe/London"
+          ],
+          "daylight_savings": [
+            "1",
+            "0"
+          ],
+          "country": [
+            "United States",
+            "United Kingdom"
+          ],
+          "state": [
+            "New York",
+            "England"
+          ],
+          "city": [
+            "New York City",
+            "London"
+          ],
+          "postal_code": [
+            "10001",
+            "SW1A 0AA"
+          ],
+          "altitude": [
+            "10.5",
+            "25.0"
+          ],
+          "islamic_region": [
+            "North America",
+            "Europe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "mosques": {
+        "rows": 2,
+        "sample_values": {
+          "mosque_id": [
+            "0",
+            "1"
+          ],
+          "mosque_name": [
+            "Masjid al-Falah",
+            "Masjid al-Noor"
+          ],
+          "location_id": [
+            "1",
+            "0"
+          ],
+          "address": [
+            "123 Main St, New York, NY",
+            "456 High St, London, UK"
+          ],
+          "contact_email": [
+            "info@masjidalfalah.org",
+            "info@masjidalnoor.org"
+          ],
+          "contact_phone": [
+            "123-456-7890",
+            "020-1234-5678"
+          ],
+          "website": [
+            "https://masjidalfalah.org",
+            "https://masjidalnoor.org"
+          ],
+          "imam_name": [
+            "Imam Muhammad Ali",
+            "Imam Ahmed Hassan"
+          ],
+          "masjid_type": [
+            "Sunni",
+            "Shia"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "notification_type": [
+            "prayer time",
+            "event reminder"
+          ],
+          "message": [
+            "Fajr prayer is in 10 minutes",
+            "Jumu'ah prayer starts at 12:30 PM"
+          ],
+          "send_time": [
+            "2023-05-01 02:18:00",
+            "2023-05-05 12:00:00"
+          ],
+          "is_read": [
+            "0",
+            "1"
+          ],
+          "notification_channel": [
+            "app",
+            "email"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prayer_reminders": {
+        "rows": 2,
+        "sample_values": {
+          "reminder_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "prayer_time_id": [
+            "0"
+          ],
+          "reminder_time_before_prayer": [
+            "10",
+            "5"
+          ],
+          "is_active": [
+            "1",
+            "0"
+          ],
+          "reminder_frequency": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prayer_time_adjustments": {
+        "rows": 2,
+        "sample_values": {
+          "adjustment_id": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "prayer_time_id": [
+            "0",
+            "1"
+          ],
+          "adjustment_amount": [
+            "5",
+            "-3"
+          ],
+          "adjustment_type": [
+            "forward",
+            "backward"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prayer_time_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "prayer_time_id": [
+            "0",
+            "1"
+          ],
+          "date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "fajr": [
+            "02:28:00",
+            "02:26:00"
+          ],
+          "sunrise": [
+            "04:37:00",
+            "04:33:00"
+          ],
+          "dhuhr": [
+            "13:02:00"
+          ],
+          "asr": [
+            "17:16:00",
+            "17:17:00"
+          ],
+          "maghrib": [
+            "21:27:00",
+            "21:30:00"
+          ],
+          "isha": [
+            "23:29:00",
+            "23:30:00"
+          ],
+          "zawal": [
+            "09:35:00",
+            "09:34:00"
+          ],
+          "midsun": [
+            "16:36:00",
+            "16:35:00"
+          ],
+          "midnight": [
+            "01:03:00",
+            "01:04:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prayer_times": {
+        "rows": 2,
+        "sample_values": {
+          "prayer_time_id": [
+            "0",
+            "1"
+          ],
+          "location_id": [
+            "0"
+          ],
+          "date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "fajr": [
+            "02:28:00",
+            "02:26:00"
+          ],
+          "sunrise": [
+            "04:37:00",
+            "04:33:00"
+          ],
+          "dhuhr": [
+            "13:02:00"
+          ],
+          "asr": [
+            "17:16:00",
+            "17:17:00"
+          ],
+          "maghrib": [
+            "21:27:00",
+            "21:30:00"
+          ],
+          "isha": [
+            "23:29:00",
+            "23:30:00"
+          ],
+          "zawal": [
+            "09:35:00",
+            "09:34:00"
+          ],
+          "midsun": [
+            "16:36:00",
+            "16:35:00"
+          ],
+          "midnight": [
+            "01:03:00",
+            "01:04:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "report_type": [
+            "user engagement",
+            "prayer time usage"
+          ],
+          "report_name": [
+            "User Engagement Report - May 2023",
+            "Prayer Time Usage Report - May 2023"
+          ],
+          "generated_date": [
+            "2023-05-31"
+          ],
+          "file_path": [
+            "reports/user_engagement_2023-05.pdf",
+            "reports/prayer_time_usage_2023-05.csv"
+          ],
+          "file_size": [
+            "2.5",
+            "1.8"
+          ],
+          "generated_by_user_id": [
+            "0"
+          ],
+          "report_format": [
+            "PDF",
+            "CSV"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "system_settings": {
+        "rows": 2,
+        "sample_values": {
+          "setting_id": [
+            "0",
+            "1"
+          ],
+          "setting_key": [
+            "notification_sound",
+            "default_language"
+          ],
+          "setting_value": [
+            "default_sound.mp3",
+            "en"
+          ],
+          "description": [
+            "Default sound for notifications",
+            "Default language for the system"
+          ],
+          "setting_type": [
+            "string"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_activity_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "activity_type": [
+            "login",
+            "view prayer times"
+          ],
+          "activity_description": [
+            "User logged in to the system",
+            "User viewed prayer times for New York City"
+          ],
+          "activity_date": [
+            "2023-05-01"
+          ],
+          "activity_timestamp": [
+            "2023-05-01 08:00:00",
+            "2023-05-01 09:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "feedback_type": [
+            "bug report",
+            "suggestion"
+          ],
+          "feedback_text": [
+            "Prayer times are not accurate for my location",
+            "Add support for multiple languages"
+          ],
+          "date_submitted": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "is_resolved": [
+            "0",
+            "1"
+          ],
+          "resolution_notes": [
+            "Added support for Arabic and Urdu languages"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sample_values": {
+          "preference_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "location_id": [
+            "1"
+          ],
+          "language": [
+            "en",
+            "ar"
+          ],
+          "notification_enabled": [
+            "1",
+            "0"
+          ],
+          "notification_time_before_prayer": [
+            "10",
+            "5"
+          ],
+          "prayer_calculation_method": [
+            "Muslim World League",
+            "Islamic Society of North America"
+          ],
+          "timezone_override": [
+            "America/New_York",
+            "Europe/London"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_role_assignments": {
+        "rows": 2,
+        "sample_values": {
+          "assignment_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "assigned_date": [
+            "2023-01-01"
+          ],
+          "expiration_date": [
+            "2023-12-31"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "regular user",
+            "admin"
+          ],
+          "permissions": [
+            "view, edit",
+            "view, edit, admin"
+          ],
+          "role_description": [
+            "Basic user role with view and edit permissions",
+            "Administrative role with full permissions"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Ahmed Ali",
+            "Fatima Khan"
+          ],
+          "email": [
+            "ahmed.ali@example.com",
+            "fatima.khan@example.com"
+          ],
+          "phone_number": [
+            "1234567890",
+            "0987654321"
+          ],
+          "password_hash": [
+            "hashed_password_1",
+            "hashed_password_2"
+          ],
+          "date_joined": [
+            "2023-01-01"
+          ],
+          "last_login": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "role": [
+            "regular user",
+            "admin"
+          ],
+          "birth_date": [
+            "1990-01-01",
+            "1995-01-01"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ],
+          "islamic_school": [
+            "Hanafi",
+            "Shafi'i"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

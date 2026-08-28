@@ -1,0 +1,282 @@
+{
+  "db_id": "food_inspection",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 66172,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#food_inspection",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"businesses\" {\n  \"business_id\" INTEGER [pk, not null]\n  \"name\" TEXT [not null]\n  \"address\" TEXT\n  \"city\" TEXT\n  \"postal_code\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"phone_number\" INTEGER\n  \"tax_code\" TEXT\n  \"business_certificate\" INTEGER [not null]\n  \"application_date\" DATE\n  \"owner_name\" TEXT [not null]\n  \"owner_address\" TEXT\n  \"owner_city\" TEXT\n  \"owner_state\" TEXT\n  \"owner_zip\" TEXT\n}\n\nTable \"inspections\" {\n  \"business_id\" INTEGER [not null]\n  \"score\" INTEGER\n  \"date\" DATE [not null]\n  \"type\" TEXT [not null]\n}\n\nTable \"violations\" {\n  \"business_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"violation_type_id\" TEXT [not null]\n  \"risk_category\" TEXT [not null]\n  \"description\" TEXT [not null]\n}\n\n\n\nRef: \"inspections\".\"business_id\" > \"businesses\".\"business_id\"\n\nRef: \"violations\".\"business_id\" > \"businesses\".\"business_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"businesses\" {\n  \"business_id\" INTEGER [pk, not null]\n  \"name\" TEXT [not null]\n  \"address\" TEXT\n  \"city\" TEXT\n  \"postal_code\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"phone_number\" INTEGER\n  \"tax_code\" TEXT\n  \"business_certificate\" INTEGER [not null]\n  \"application_date\" DATE\n  \"owner_name\" TEXT [not null]\n  \"owner_address\" TEXT\n  \"owner_city\" TEXT\n  \"owner_state\" TEXT\n  \"owner_zip\" TEXT\n}\n\nTable \"inspections\" {\n  \"business_id\" INTEGER [not null]\n  \"score\" INTEGER\n  \"date\" DATE [not null]\n  \"type\" TEXT [not null]\n}\n\nTable \"violations\" {\n  \"business_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"violation_type_id\" TEXT [not null]\n  \"risk_category\" TEXT [not null]\n  \"description\" TEXT [not null]\n}\n\nRef: \"inspections\".\"business_id\" > \"businesses\".\"business_id\"\n\nRef: \"violations\".\"business_id\" > \"businesses\".\"business_id\"\n\n## Table Stats & Sample Values\n\nbusinesses: 6358 rows\n  name: 'Tiramisu Kitchen', 'OMNI S.F. Hotel - 2nd Floor Pantry', 'Norman's Ice Cream and Freezes', ...\n  city: 'San Francisco', 'S.F.', 'SAN FRANCISCO', ...\n  owner_name: 'Tiramisu LLC', 'OMNI San Francisco Hotel Corp', 'Norman Antiforda', ...\n\ninspections: 10000 rows\n  type: 'Routine - Unscheduled', 'Reinspection/Followup', 'Complaint Reinspection/Followup', ...\n  score: '92', '94', '82', ...\n  date: '2014-01-14', '2014-01-24', '2014-07-29', ...\n\nviolations: 10000 rows\n  risk_category: 'Moderate Risk', 'Low Risk', 'High Risk'\n  description: 'Insufficient hot water or running water', 'Unapproved or unmaintained equipment or utensils', 'Inadequate and inaccessible handwashing facilities', ...\n  violation_type_id: '103129', '103144', '103119', ...",
+    "stateUrl": "https://bird-bench.github.io/#food_inspection",
+    "tableStats": {
+      "businesses": {
+        "rows": 6358,
+        "sample_values": {
+          "business_id": [
+            "10",
+            "24",
+            "31",
+            "45",
+            "48",
+            "54",
+            "56",
+            "58"
+          ],
+          "name": [
+            "Tiramisu Kitchen",
+            "OMNI S.F. Hotel - 2nd Floor Pantry",
+            "Norman's Ice Cream and Freezes",
+            "CHARLIE'S DELI CAFE",
+            "ART'S CAFE",
+            "RHODA GOLDMAN PLAZA",
+            "CAFE X + O",
+            "Oasis Grill"
+          ],
+          "address": [
+            "033 Belden Pl",
+            "500 California St, 2nd Floor",
+            "2801 Leavenworth St",
+            "3202 FOLSOM St",
+            "747 IRVING St",
+            "2180 POST St",
+            "1799 Church St",
+            "91 Drumm St"
+          ],
+          "city": [
+            "San Francisco",
+            "S.F.",
+            "SAN FRANCISCO",
+            "SF",
+            "Sf",
+            "SAN FRANCICSO",
+            "SO. SAN FRANCISCO",
+            "HAYWARD"
+          ],
+          "postal_code": [
+            "94104",
+            "94133",
+            "94110",
+            "94122",
+            "94115",
+            "94131",
+            "94111",
+            "94109"
+          ],
+          "latitude": [
+            "37.7911",
+            "37.7929",
+            "37.8072",
+            "37.7471",
+            "37.764",
+            "37.7846",
+            "37.7423",
+            "37.7945"
+          ],
+          "longitude": [
+            "-122.404",
+            "-122.403",
+            "-122.419",
+            "-122.414",
+            "-122.466",
+            "-122.438",
+            "-122.426",
+            "-122.397"
+          ],
+          "phone_number": [
+            "14155345060",
+            "14155823535",
+            "14155344645",
+            "14155812403",
+            "14155288985",
+            "14155827659",
+            "14155374525",
+            "14155462023"
+          ],
+          "tax_code": [
+            "H24",
+            "H01",
+            "H25",
+            "H88",
+            "H26",
+            "H28",
+            "H86",
+            "H07"
+          ],
+          "business_certificate": [
+            "779059",
+            "352312",
+            "346882",
+            "340024",
+            "318022",
+            "417778",
+            "347603",
+            "954377"
+          ],
+          "application_date": [
+            "2001-10-10",
+            "1989-02-01",
+            "2003-05-23",
+            "1991-01-11",
+            "2002-12-09",
+            "2002-08-20",
+            "2001-10-30",
+            "1999-08-04"
+          ],
+          "owner_name": [
+            "Tiramisu LLC",
+            "OMNI San Francisco Hotel Corp",
+            "Norman Antiforda",
+            "HARB, CHARLES AND KRISTIN",
+            "YOON HAE RYONG",
+            "RHODA GOLDMAN PLAZA",
+            "BOUSIAKIS, ADAM",
+            "Mohammad Zughaiyir"
+          ],
+          "owner_address": [
+            "33 Belden St",
+            "500 California St, 2nd Floor",
+            "2801 Leavenworth St",
+            "1150 SANCHEZ",
+            "1567 FUNSTON AVE",
+            "2180 POST St",
+            "1799 CHURCH",
+            "91 Drumm St"
+          ],
+          "owner_city": [
+            "San Francisco",
+            "S.F.",
+            "SAN FRANCISCO",
+            "SF",
+            "Okland",
+            "DALY CITY",
+            "SO.S.F.",
+            "BERKELEY"
+          ],
+          "owner_state": [
+            "CA",
+            "DC",
+            "WA",
+            "TN",
+            "Ca",
+            "GA",
+            "SC",
+            "UT"
+          ],
+          "owner_zip": [
+            "94104",
+            "94133",
+            "94114",
+            "94122",
+            "94115",
+            "94131",
+            "94111",
+            "94618"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inspections": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "10",
+            "24",
+            "31",
+            "45",
+            "48",
+            "54",
+            "56",
+            "58"
+          ],
+          "score": [
+            "92",
+            "94",
+            "82",
+            "100",
+            "96",
+            "98",
+            "84",
+            "78"
+          ],
+          "date": [
+            "2014-01-14",
+            "2014-01-24",
+            "2014-07-29",
+            "2014-08-07",
+            "2016-05-03",
+            "2016-07-07",
+            "2013-11-18",
+            "2014-06-12"
+          ],
+          "type": [
+            "Routine - Unscheduled",
+            "Reinspection/Followup",
+            "Complaint Reinspection/Followup",
+            "Non-inspection site visit",
+            "Complaint",
+            "New Construction",
+            "Foodborne Illness Investigation",
+            "New Ownership"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "violations": {
+        "rows": 10000,
+        "sample_values": {
+          "business_id": [
+            "10",
+            "24",
+            "31",
+            "45",
+            "48",
+            "54",
+            "56",
+            "58"
+          ],
+          "date": [
+            "2014-07-29",
+            "2014-01-14",
+            "2016-05-03",
+            "2014-06-12",
+            "2014-11-24",
+            "2016-03-11",
+            "2016-08-16",
+            "2015-12-04"
+          ],
+          "violation_type_id": [
+            "103129",
+            "103144",
+            "103119",
+            "103145",
+            "103154",
+            "103114",
+            "103103",
+            "103148"
+          ],
+          "risk_category": [
+            "Moderate Risk",
+            "Low Risk",
+            "High Risk"
+          ],
+          "description": [
+            "Insufficient hot water or running water",
+            "Unapproved or unmaintained equipment or utensils",
+            "Inadequate and inaccessible handwashing facilities",
+            "Improper storage of equipment utensils or linens",
+            "Unclean or degraded floors walls or ceilings",
+            "High risk vermin infestation",
+            "High risk food holding temperature",
+            "No thermometers or uncalibrated thermometers"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

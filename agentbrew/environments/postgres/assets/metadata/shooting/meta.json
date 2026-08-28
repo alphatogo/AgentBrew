@@ -1,0 +1,212 @@
+{
+  "db_id": "shooting",
+  "source": "bird",
+  "tables": 3,
+  "total_rows": 812,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#shooting",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"incidents\" {\n  \"case_number\" TEXT [pk, not null]\n  \"date\" DATE [not null]\n  \"location\" TEXT [not null]\n  \"subject_statuses\" TEXT [not null]\n  \"subject_weapon\" TEXT [not null]\n  \"subjects\" TEXT [not null]\n  \"subject_count\" INTEGER [not null]\n  \"officers\" TEXT [not null]\n}\n\nTable \"officers\" {\n  \"case_number\" TEXT [not null]\n  \"race\" TEXT\n  \"gender\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT\n  \"full_name\" TEXT [not null]\n}\n\nTable \"subjects\" {\n  \"case_number\" TEXT [not null]\n  \"race\" TEXT [not null]\n  \"gender\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT\n  \"full_name\" TEXT [not null]\n}\n\n\n\nRef: \"officers\".\"case_number\" > \"incidents\".\"case_number\"\n\nRef: \"subjects\".\"case_number\" > \"incidents\".\"case_number\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"incidents\" {\n  \"case_number\" TEXT [pk, not null]\n  \"date\" DATE [not null]\n  \"location\" TEXT [not null]\n  \"subject_statuses\" TEXT [not null]\n  \"subject_weapon\" TEXT [not null]\n  \"subjects\" TEXT [not null]\n  \"subject_count\" INTEGER [not null]\n  \"officers\" TEXT [not null]\n}\n\nTable \"officers\" {\n  \"case_number\" TEXT [not null]\n  \"race\" TEXT\n  \"gender\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT\n  \"full_name\" TEXT [not null]\n}\n\nTable \"subjects\" {\n  \"case_number\" TEXT [not null]\n  \"race\" TEXT [not null]\n  \"gender\" TEXT [not null]\n  \"last_name\" TEXT [not null]\n  \"first_name\" TEXT\n  \"full_name\" TEXT [not null]\n}\n\nRef: \"officers\".\"case_number\" > \"incidents\".\"case_number\"\n\nRef: \"subjects\".\"case_number\" > \"incidents\".\"case_number\"\n\n## Table Stats & Sample Values\n\nincidents: 219 rows\n  subject_statuses: 'Deceased', 'Shoot and Miss', 'Injured', ...\n  location: '7400 Bonnie View Road', '8218 Willoughby Boulevard', '4800 Columbia Ave', ...\n  subject_weapon: 'Vehicle', 'Shotgun', 'Handgun', ...\n\nofficers: 370 rows\n  last_name: 'Patino', 'Fillingim', 'Padilla', ...\n  first_name: 'Michael', 'Brian', 'Gilbert', ...\n  full_name: 'Patino, Michael', 'Fillingim, Brian', 'Padilla, Gilbert', ...\n\nsubjects: 223 rows\n  last_name: 'Curry', 'Chavez', 'Salinas', ...\n  first_name: 'James', 'Gabriel', 'Nick', ...\n  full_name: 'Curry, James', 'Chavez, Gabriel', 'Salinas, Nick', ...",
+    "stateUrl": "https://bird-bench.github.io/#shooting",
+    "tableStats": {
+      "incidents": {
+        "rows": 219,
+        "sample_values": {
+          "case_number": [
+            "031347-2015",
+            "072458-2016",
+            "089985-2016",
+            "1004453N",
+            "100577T",
+            "1016667P",
+            "106454R",
+            "1066R"
+          ],
+          "date": [
+            "2015/2/9",
+            "2016/3/26",
+            "2016/4/16",
+            "2004/12/29",
+            "2007/2/12",
+            "2005/12/25",
+            "2006/2/11",
+            "2006/1/1"
+          ],
+          "location": [
+            "7400 Bonnie View Road",
+            "8218 Willoughby Boulevard",
+            "4800 Columbia Ave",
+            "2400 Walnut Hill Lane",
+            "3847 Timberglen Road, #3116",
+            "9850 Whitehurst Drive",
+            "200 S Madison Avenue",
+            "5423 Peterson Lane #259"
+          ],
+          "subject_statuses": [
+            "Deceased",
+            "Shoot and Miss",
+            "Injured",
+            "Other",
+            "Deceased Injured",
+            "1 Deceased 1 Injured",
+            "2 Injured"
+          ],
+          "subject_weapon": [
+            "Vehicle",
+            "Shotgun",
+            "Handgun",
+            "Toy Handun",
+            "Knife",
+            "Unarmed",
+            "Rifle",
+            "Rock"
+          ],
+          "subjects": [
+            "Luster, Desmond Dwayne B/M",
+            "Gilstrap, Bryan B/M",
+            "Unknown L/M",
+            "Evans, Jerry W/M",
+            "Mims, Carlton B/M",
+            "Rittenhouse, Tony B/M",
+            "Delesantos, Amanda L/F",
+            "Robles, Juan L/M"
+          ],
+          "subject_count": [
+            "1",
+            "2",
+            "0",
+            "3"
+          ],
+          "officers": [
+            "Tollerton, Aaron W/M",
+            "Cardenas, Steven L/M",
+            "Ruben, Fredirick W/M",
+            "Nguyen, Buu A/M",
+            "Ragsdale, Barry W/M",
+            "Cole, Bobby B/M",
+            "Jaquez, Christopher L/M",
+            "Tahbone, Jacqueline NA/F"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "officers": {
+        "rows": 370,
+        "sample_values": {
+          "case_number": [
+            "44523A",
+            "121982X",
+            "605484T",
+            "384832T",
+            "244659R",
+            "363184P",
+            "559487M",
+            "862009M"
+          ],
+          "race": [
+            "L",
+            "W",
+            "B",
+            "A"
+          ],
+          "gender": [
+            "M",
+            "F"
+          ],
+          "last_name": [
+            "Patino",
+            "Fillingim",
+            "Padilla",
+            "Poston",
+            "Mondy",
+            "Armstrong",
+            "Woods",
+            "Culp"
+          ],
+          "first_name": [
+            "Michael",
+            "Brian",
+            "Gilbert",
+            "Jerry",
+            "Jesse",
+            "Barrick",
+            "Mark",
+            "Douglas"
+          ],
+          "full_name": [
+            "Patino, Michael",
+            "Fillingim, Brian",
+            "Padilla, Gilbert",
+            "Poston, Jerry",
+            "Mondy, Michael",
+            "Armstrong, Michael",
+            "Woods, Jesse",
+            "Culp, Barrick"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "subjects": {
+        "rows": 223,
+        "sample_values": {
+          "case_number": [
+            "44523A",
+            "121982X",
+            "605484T",
+            "384832T",
+            "244659R",
+            "363184P",
+            "559487M",
+            "862009M"
+          ],
+          "race": [
+            "L",
+            "B",
+            "W",
+            "A"
+          ],
+          "gender": [
+            "M",
+            "F"
+          ],
+          "last_name": [
+            "Curry",
+            "Chavez",
+            "Salinas",
+            "Smith",
+            "Dews",
+            "Spearman",
+            "Watkins",
+            "Garcia"
+          ],
+          "first_name": [
+            "James",
+            "Gabriel",
+            "Nick",
+            "Antonio",
+            "Damion",
+            "Caleb",
+            "David",
+            "Tony"
+          ],
+          "full_name": [
+            "Curry, James",
+            "Chavez, Gabriel",
+            "Salinas, Nick",
+            "Smith, James",
+            "Dews, Antonio",
+            "Spearman, Damion",
+            "Watkins, Caleb",
+            "Garcia, David"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

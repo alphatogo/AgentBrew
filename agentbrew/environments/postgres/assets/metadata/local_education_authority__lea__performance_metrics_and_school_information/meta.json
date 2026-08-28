@@ -1,0 +1,618 @@
+{
+  "db_id": "local_education_authority__lea__performance_metrics_and_school_information",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/local_education_authority__lea__performance_metrics_and_school_information",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"lea_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"device_type\" TEXT\n  \"device_id\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"funding\" {\n  \"funding_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"funding_amount\" REAL\n  \"funding_year\" INTEGER\n  \"funding_type\" TEXT\n  \"funding_source_name\" TEXT\n  \"funding_source_id\" INTEGER\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"funding_sources\" {\n  \"funding_source_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"funding_source_name\" TEXT\n  \"funding_source_description\" TEXT\n  \"funding_type\" TEXT\n  \"funding_program\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"instructor_subjects\" {\n  \"instructor_subject_id\" INTEGER [pk]\n  \"instructor_id\" INTEGER\n  \"subject_name\" TEXT\n  \"subject_description\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"instructors\" {\n  \"instructor_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"instructor_name\" TEXT\n  \"subject\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"qualifications\" TEXT\n  \"years_of_experience\" INTEGER\n  \"previous_employment\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"lea_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"lea_performance\" {\n  \"lea_id\" INTEGER [pk]\n  \"metric_name\" TEXT [pk]\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"lea_schools\" {\n  \"lea_id\" INTEGER [pk]\n  \"school_count\" INTEGER\n  \"instructor_count\" INTEGER\n  \"average_metric_value\" REAL\n  \"average_attendance\" REAL\n  \"graduation_rate\" REAL\n  \"average_years_experience\" REAL\n  \"certification_rate\" REAL\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"leas\" {\n  \"lea_id\" INTEGER [pk]\n  \"lea_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"contact_address\" TEXT\n  \"population_size\" INTEGER\n  \"demographic_info\" TEXT\n  \"total_budget\" REAL\n  \"budget_allocation\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"metric_definitions\" {\n  \"metric_id\" INTEGER [pk]\n  \"metric_name\" TEXT\n  \"metric_description\" TEXT\n  \"metric_category\" TEXT\n  \"metric_units\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"school_instructor_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"instructor_id\" INTEGER\n  \"assignment_year\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"role\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"school_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"school_performance\" {\n  \"school_id\" INTEGER [pk]\n  \"metric_name\" TEXT [pk]\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"school_types\" {\n  \"school_type_id\" INTEGER [pk]\n  \"school_type_name\" TEXT\n  \"school_type_description\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"schools\" {\n  \"school_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"school_name\" TEXT\n  \"school_type\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"contact_address\" TEXT\n  \"total_students\" INTEGER\n  \"student_demographics\" TEXT\n  \"number_of_classrooms\" INTEGER\n  \"number_of_libraries\" INTEGER\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"position\" TEXT\n  \"permissions\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"lea_id\" > \"public\".\"leas\".\"lea_id\"\nRef: \"public\".\"funding\".\"lea_id\" > \"public\".\"leas\".\"lea_id\"\nRef: \"public\".\"funding_sources\".\"lea_id\" > \"public\".\"leas\".\"lea_id\"\nRef: \"public\".\"instructor_subjects\".\"instructor_id\" > \"public\".\"instructors\".\"instructor_id\"\nRef: \"public\".\"instructors\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"lea_metrics\".\"lea_id\" > \"public\".\"leas\".\"lea_id\"\nRef: \"public\".\"school_instructor_assignments\".\"instructor_id\" > \"public\".\"instructors\".\"instructor_id\"\nRef: \"public\".\"school_instructor_assignments\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"school_metrics\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"schools\".\"lea_id\" > \"public\".\"leas\".\"lea_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"lea_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"device_type\" TEXT\n  \"device_id\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"funding\" {\n  \"funding_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"funding_amount\" REAL\n  \"funding_year\" INTEGER\n  \"funding_type\" TEXT\n  \"funding_source_name\" TEXT\n  \"funding_source_id\" INTEGER\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"funding_sources\" {\n  \"funding_source_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"funding_source_name\" TEXT\n  \"funding_source_description\" TEXT\n  \"funding_type\" TEXT\n  \"funding_program\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"instructor_subjects\" {\n  \"instructor_subject_id\" INTEGER [pk]\n  \"instructor_id\" INTEGER\n  \"subject_name\" TEXT\n  \"subject_description\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"instructors\" {\n  \"instructor_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"instructor_name\" TEXT\n  \"subject\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"qualifications\" TEXT\n  \"years_of_experience\" INTEGER\n  \"previous_employment\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"lea_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"lea_performance\" {\n  \"lea_id\" INTEGER [pk]\n  \"metric_name\" TEXT [pk]\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"lea_schools\" {\n  \"lea_id\" INTEGER [pk]\n  \"school_count\" INTEGER\n  \"instructor_count\" INTEGER\n  \"average_metric_value\" REAL\n  \"average_attendance\" REAL\n  \"graduation_rate\" REAL\n  \"average_years_experience\" REAL\n  \"certification_rate\" REAL\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"leas\" {\n  \"lea_id\" INTEGER [pk]\n  \"lea_name\" TEXT\n  \"location\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"contact_address\" TEXT\n  \"population_size\" INTEGER\n  \"demographic_info\" TEXT\n  \"total_budget\" REAL\n  \"budget_allocation\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"metric_definitions\" {\n  \"metric_id\" INTEGER [pk]\n  \"metric_name\" TEXT\n  \"metric_description\" TEXT\n  \"metric_category\" TEXT\n  \"metric_units\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"school_instructor_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"instructor_id\" INTEGER\n  \"assignment_year\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"role\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"school_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"metric_name\" TEXT\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"school_performance\" {\n  \"school_id\" INTEGER [pk]\n  \"metric_name\" TEXT [pk]\n  \"metric_value\" REAL\n  \"metric_date\" TEXT\n  \"metric_source\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"school_types\" {\n  \"school_type_id\" INTEGER [pk]\n  \"school_type_name\" TEXT\n  \"school_type_description\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"schools\" {\n  \"school_id\" INTEGER [pk]\n  \"lea_id\" INTEGER\n  \"school_name\" TEXT\n  \"school_type\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"contact_address\" TEXT\n  \"total_students\" INTEGER\n  \"student_demographics\" TEXT\n  \"number_of_classrooms\" INTEGER\n  \"number_of_libraries\" INTEGER\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n  \"position\" TEXT\n  \"permissions\" TEXT\n  \"version_number\" INTEGER\n  \"last_updated\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"lea_id\" > \"leas\".\"lea_id\"\n\nRef: \"funding\".\"lea_id\" > \"leas\".\"lea_id\"\n\nRef: \"funding_sources\".\"lea_id\" > \"leas\".\"lea_id\"\n\nRef: \"instructor_subjects\".\"instructor_id\" > \"instructors\".\"instructor_id\"\n\nRef: \"instructors\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"lea_metrics\".\"lea_id\" > \"leas\".\"lea_id\"\n\nRef: \"school_instructor_assignments\".\"instructor_id\" > \"instructors\".\"instructor_id\"\n\nRef: \"school_instructor_assignments\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"school_metrics\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"schools\".\"lea_id\" > \"leas\".\"lea_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  device_type: 'desktop', 'mobile'\n  ip_address: '192.168.1.1', '192.168.1.2'\n\nfunding: 2 rows\n  funding_type: 'operational', 'capital'\n  funding_source_name: 'Central Government', 'Local Authority'\n  funding_amount: '100000.0', '50000.0'\n\nfunding_sources: 2 rows\n  funding_source_name: 'Central Government', 'Local Authority'\n  funding_type: 'operational', 'capital'\n  funding_source_description: 'Funding from the central government', 'Funding from the local authority'\n\ninstructor_subjects: 2 rows\n  subject_name: 'Mathematics', 'English'\n  subject_description: 'Mathematics is the study of numbers, quantities, a', 'English is the study of the English language and l'\n  last_updated: '2023-06-01'\n\ninstructors: 2 rows\n  instructor_name: 'John Smith', 'Jane Doe'\n  subject: 'Mathematics', 'English'\n  qualifications: 'BSc in Mathematics, MSc in Education', 'BA in English Literature, PGCE'\n\nlea_metrics: 2 rows\n  metric_name: 'average GCSE pass rate', 'average A-level pass rate'\n  metric_source: 'Standardized Test'\n  metric_value: '88.0', '82.0'\n\nlea_performance: 2 rows\n  metric_name: '0', '1'\n  metric_source: 'Standardized Test'\n  metric_value: '85.0', '80.0'\n\nlea_schools: 2 rows\n  school_count: '10', '20'\n  instructor_count: '50', '100'\n  average_metric_value: '85.0', '80.0'\n\nleas: 2 rows\n  lea_name: 'Antrim and Newtownabbey', 'Barnsley'\n  location: 'Northern Ireland', 'England'\n  contact_address: '123 Main St, Antrim', '456 High St, Barnsley'\n\nmetric_definitions: 2 rows\n  metric_name: 'GCSE pass rate', 'A-level pass rate'\n  metric_description: 'Percentage of students passing GCSE exams', 'Percentage of students passing A-level exams'\n  metric_category: 'academic'\n\nschool_instructor_assignments: 2 rows\n  role: 'teacher'\n  start_date: '2022-09-01'\n  end_date: '2023-08-31'\n\nschool_metrics: 2 rows\n  metric_name: 'GCSE pass rate', 'A-level pass rate'\n  metric_source: 'Standardized Test'\n  metric_value: '90.0', '85.0'\n\nschool_performance: 2 rows\n  metric_name: '0', '1'\n  metric_source: 'Standardized Test'\n  metric_value: '90.0', '85.0'\n\nschool_types: 2 rows\n  school_type_name: 'primary', 'secondary'\n  school_type_description: 'Primary school', 'Secondary school'\n  last_updated: '2023-06-01'\n\nschools: 2 rows\n  school_name: 'Antrim Primary School', 'Newtownabbey Secondary School'\n  school_type: 'primary', 'secondary'\n  number_of_classrooms: '20', '30'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  department: 'Research', 'Data Analytics'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "lea_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "device_type": [
+            "desktop",
+            "mobile"
+          ],
+          "device_id": [
+            "123456",
+            "654321"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "funding": {
+        "rows": 2,
+        "sample_values": {
+          "funding_id": [
+            "0",
+            "1"
+          ],
+          "lea_id": [
+            "1",
+            "0"
+          ],
+          "funding_amount": [
+            "100000.0",
+            "50000.0"
+          ],
+          "funding_year": [
+            "2022"
+          ],
+          "funding_type": [
+            "operational",
+            "capital"
+          ],
+          "funding_source_name": [
+            "Central Government",
+            "Local Authority"
+          ],
+          "funding_source_id": [
+            "1001",
+            "1002"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "funding_sources": {
+        "rows": 2,
+        "sample_values": {
+          "funding_source_id": [
+            "0",
+            "1"
+          ],
+          "lea_id": [
+            "0",
+            "1"
+          ],
+          "funding_source_name": [
+            "Central Government",
+            "Local Authority"
+          ],
+          "funding_source_description": [
+            "Funding from the central government",
+            "Funding from the local authority"
+          ],
+          "funding_type": [
+            "operational",
+            "capital"
+          ],
+          "funding_program": [
+            "National Education Grant",
+            "Local Infrastructure Fund"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "instructor_subjects": {
+        "rows": 2,
+        "sample_values": {
+          "instructor_subject_id": [
+            "0",
+            "1"
+          ],
+          "instructor_id": [
+            "1"
+          ],
+          "subject_name": [
+            "Mathematics",
+            "English"
+          ],
+          "subject_description": [
+            "Mathematics is the study of numbers, quantities, a",
+            "English is the study of the English language and l"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "instructors": {
+        "rows": 2,
+        "sample_values": {
+          "instructor_id": [
+            "0",
+            "1"
+          ],
+          "school_id": [
+            "1"
+          ],
+          "instructor_name": [
+            "John Smith",
+            "Jane Doe"
+          ],
+          "subject": [
+            "Mathematics",
+            "English"
+          ],
+          "contact_email": [
+            "john.smith@antrimprimary.com",
+            "jane.doe@newtownabbeysecondary.com"
+          ],
+          "contact_phone": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "qualifications": [
+            "BSc in Mathematics, MSc in Education",
+            "BA in English Literature, PGCE"
+          ],
+          "years_of_experience": [
+            "10",
+            "8"
+          ],
+          "previous_employment": [
+            "Antrim Primary School (5 years), Newtownabbey Seco",
+            "Newtownabbey Secondary School (8 years)"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lea_metrics": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "lea_id": [
+            "0"
+          ],
+          "metric_name": [
+            "average GCSE pass rate",
+            "average A-level pass rate"
+          ],
+          "metric_value": [
+            "88.0",
+            "82.0"
+          ],
+          "metric_date": [
+            "2022-06-01"
+          ],
+          "metric_source": [
+            "Standardized Test"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lea_performance": {
+        "rows": 2,
+        "sample_values": {
+          "lea_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "0",
+            "1"
+          ],
+          "metric_value": [
+            "85.0",
+            "80.0"
+          ],
+          "metric_date": [
+            "2022-06-01"
+          ],
+          "metric_source": [
+            "Standardized Test"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "lea_schools": {
+        "rows": 2,
+        "sample_values": {
+          "lea_id": [
+            "0",
+            "1"
+          ],
+          "school_count": [
+            "10",
+            "20"
+          ],
+          "instructor_count": [
+            "50",
+            "100"
+          ],
+          "average_metric_value": [
+            "85.0",
+            "80.0"
+          ],
+          "average_attendance": [
+            "95.0",
+            "93.0"
+          ],
+          "graduation_rate": [
+            "90.0",
+            "88.0"
+          ],
+          "average_years_experience": [
+            "10.0",
+            "12.0"
+          ],
+          "certification_rate": [
+            "98.0",
+            "95.0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "leas": {
+        "rows": 2,
+        "sample_values": {
+          "lea_id": [
+            "0",
+            "1"
+          ],
+          "lea_name": [
+            "Antrim and Newtownabbey",
+            "Barnsley"
+          ],
+          "location": [
+            "Northern Ireland",
+            "England"
+          ],
+          "contact_email": [
+            "contact@lea1.com",
+            "contact@lea2.com"
+          ],
+          "contact_phone": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "contact_address": [
+            "123 Main St, Antrim",
+            "456 High St, Barnsley"
+          ],
+          "population_size": [
+            "100000",
+            "200000"
+          ],
+          "demographic_info": [
+            "50% urban, 50% rural",
+            "70% urban, 30% rural"
+          ],
+          "total_budget": [
+            "1000000.0",
+            "2000000.0"
+          ],
+          "budget_allocation": [
+            "50% education, 50% infrastructure",
+            "60% education, 40% infrastructure"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "metric_definitions": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "GCSE pass rate",
+            "A-level pass rate"
+          ],
+          "metric_description": [
+            "Percentage of students passing GCSE exams",
+            "Percentage of students passing A-level exams"
+          ],
+          "metric_category": [
+            "academic"
+          ],
+          "metric_units": [
+            "percentage"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_instructor_assignments": {
+        "rows": 2,
+        "sample_values": {
+          "assignment_id": [
+            "0",
+            "1"
+          ],
+          "school_id": [
+            "1",
+            "0"
+          ],
+          "instructor_id": [
+            "1",
+            "0"
+          ],
+          "assignment_year": [
+            "2022"
+          ],
+          "start_date": [
+            "2022-09-01"
+          ],
+          "end_date": [
+            "2023-08-31"
+          ],
+          "role": [
+            "teacher"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_metrics": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "GCSE pass rate",
+            "A-level pass rate"
+          ],
+          "metric_value": [
+            "90.0",
+            "85.0"
+          ],
+          "metric_date": [
+            "2022-06-01"
+          ],
+          "metric_source": [
+            "Standardized Test"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_performance": {
+        "rows": 2,
+        "sample_values": {
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "0",
+            "1"
+          ],
+          "metric_value": [
+            "90.0",
+            "85.0"
+          ],
+          "metric_date": [
+            "2022-06-01"
+          ],
+          "metric_source": [
+            "Standardized Test"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_types": {
+        "rows": 2,
+        "sample_values": {
+          "school_type_id": [
+            "0",
+            "1"
+          ],
+          "school_type_name": [
+            "primary",
+            "secondary"
+          ],
+          "school_type_description": [
+            "Primary school",
+            "Secondary school"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "schools": {
+        "rows": 2,
+        "sample_values": {
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "lea_id": [
+            "0"
+          ],
+          "school_name": [
+            "Antrim Primary School",
+            "Newtownabbey Secondary School"
+          ],
+          "school_type": [
+            "primary",
+            "secondary"
+          ],
+          "contact_email": [
+            "contact@antrimprimary.com",
+            "contact@newtownabbeysecondary.com"
+          ],
+          "contact_phone": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "contact_address": [
+            "789 Oak St, Antrim",
+            "101 Pine St, Newtownabbey"
+          ],
+          "total_students": [
+            "500",
+            "1000"
+          ],
+          "student_demographics": [
+            "60% male, 40% female",
+            "45% male, 55% female"
+          ],
+          "number_of_classrooms": [
+            "20",
+            "30"
+          ],
+          "number_of_libraries": [
+            "2",
+            "3"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "department": [
+            "Research",
+            "Data Analytics"
+          ],
+          "position": [
+            "Researcher",
+            "Data Analyst"
+          ],
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-06-01"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "db_id": "university",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 32042,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#university",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"country\" {\n  \"id\" INTEGER [pk, not null]\n  \"country_name\" TEXT\n}\n\nTable \"ranking_criteria\" {\n  \"id\" INTEGER [pk, not null]\n  \"ranking_system_id\" INTEGER\n  \"criteria_name\" TEXT\n}\n\nTable \"ranking_system\" {\n  \"id\" INTEGER [pk, not null]\n  \"system_name\" TEXT\n}\n\nTable \"university\" {\n  \"id\" INTEGER [pk, not null]\n  \"country_id\" INTEGER\n  \"university_name\" TEXT\n}\n\nTable \"university_ranking_year\" {\n  \"university_id\" INTEGER\n  \"ranking_criteria_id\" INTEGER\n  \"year\" INTEGER\n  \"score\" INTEGER\n}\n\nTable \"university_year\" {\n  \"university_id\" INTEGER\n  \"year\" INTEGER\n  \"num_students\" INTEGER\n  \"student_staff_ratio\" REAL\n  \"pct_international_students\" INTEGER\n  \"pct_female_students\" INTEGER\n}\n\n\n\nRef: \"ranking_criteria\".\"ranking_system_id\" > \"ranking_system\".\"id\"\n\nRef: \"university\".\"country_id\" > \"country\".\"id\"\n\nRef: \"university_ranking_year\".\"university_id\" > \"university\".\"id\"\n\nRef: \"university_ranking_year\".\"ranking_criteria_id\" > \"ranking_criteria\".\"id\"\n\nRef: \"university_year\".\"university_id\" > \"university\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"country\" {\n  \"id\" INTEGER [pk, not null]\n  \"country_name\" TEXT\n}\n\nTable \"ranking_criteria\" {\n  \"id\" INTEGER [pk, not null]\n  \"ranking_system_id\" INTEGER\n  \"criteria_name\" TEXT\n}\n\nTable \"ranking_system\" {\n  \"id\" INTEGER [pk, not null]\n  \"system_name\" TEXT\n}\n\nTable \"university\" {\n  \"id\" INTEGER [pk, not null]\n  \"country_id\" INTEGER\n  \"university_name\" TEXT\n}\n\nTable \"university_ranking_year\" {\n  \"university_id\" INTEGER\n  \"ranking_criteria_id\" INTEGER\n  \"year\" INTEGER\n  \"score\" INTEGER\n}\n\nTable \"university_year\" {\n  \"university_id\" INTEGER\n  \"year\" INTEGER\n  \"num_students\" INTEGER\n  \"student_staff_ratio\" REAL\n  \"pct_international_students\" INTEGER\n  \"pct_female_students\" INTEGER\n}\n\nRef: \"ranking_criteria\".\"ranking_system_id\" > \"ranking_system\".\"id\"\n\nRef: \"university\".\"country_id\" > \"country\".\"id\"\n\nRef: \"university_ranking_year\".\"university_id\" > \"university\".\"id\"\n\nRef: \"university_ranking_year\".\"ranking_criteria_id\" > \"ranking_criteria\".\"id\"\n\nRef: \"university_year\".\"university_id\" > \"university\".\"id\"\n\n## Table Stats & Sample Values\n\ncountry: 74 rows\n  country_name: 'Argentina', 'Australia', 'Austria', ...\n  id: '1', '2', '3', ...\n\nranking_criteria: 21 rows\n  criteria_name: 'Teaching', 'International', 'Research', ...\n  ranking_system_id: '1', '2', '3'\n  id: '1', '2', '3', ...\n\nranking_system: 3 rows\n  system_name: 'Times Higher Education World University Ranking', 'Shanghai Ranking', 'Center for World University Rankings'\n  id: '1', '2', '3'\n\nuniversity: 1247 rows\n  university_name: 'Harvard University', 'Massachusetts Institute of Technology', 'Stanford University', ...\n  country_id: '73', '72', '33', ...\n  id: '1', '2', '3', ...\n\nuniversity_ranking_year: 10000 rows\n  year: '2011', '2012', '2013', ...\n  score: '100', '98', '91', ...\n  university_id: '1', '5', '2', ...\n\nuniversity_year: 1085 rows\n  year: '2011', '2012', '2013', ...\n  num_students: '20152', '2243', '11074', ...\n  student_staff_ratio: '8.9', '6.9', '9.0', ...",
+    "stateUrl": "https://bird-bench.github.io/#university",
+    "tableStats": {
+      "country": {
+        "rows": 74,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "country_name": [
+            "Argentina",
+            "Australia",
+            "Austria",
+            "Bangladesh",
+            "Belarus",
+            "Belgium",
+            "Brazil",
+            "Bulgaria"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ranking_criteria": {
+        "rows": 21,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ranking_system_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "criteria_name": [
+            "Teaching",
+            "International",
+            "Research",
+            "Citations",
+            "Income",
+            "Total Times",
+            "Alumni",
+            "Award"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ranking_system": {
+        "rows": 3,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "system_name": [
+            "Times Higher Education World University Ranking",
+            "Shanghai Ranking",
+            "Center for World University Rankings"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "university": {
+        "rows": 1247,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "country_id": [
+            "73",
+            "72",
+            "33",
+            "65",
+            "31",
+            "9",
+            "20",
+            "64"
+          ],
+          "university_name": [
+            "Harvard University",
+            "Massachusetts Institute of Technology",
+            "Stanford University",
+            "University of Cambridge",
+            "California Institute of Technology",
+            "Princeton University",
+            "University of Oxford",
+            "Yale University"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "university_ranking_year": {
+        "rows": 10000,
+        "sample_values": {
+          "university_id": [
+            "1",
+            "5",
+            "2",
+            "3",
+            "6",
+            "4",
+            "7",
+            "10"
+          ],
+          "ranking_criteria_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "year": [
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2005",
+            "2006"
+          ],
+          "score": [
+            "100",
+            "98",
+            "91",
+            "90",
+            "88",
+            "84",
+            "89",
+            "92"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "university_year": {
+        "rows": 1085,
+        "sample_values": {
+          "university_id": [
+            "1",
+            "5",
+            "2",
+            "3",
+            "6",
+            "4",
+            "7",
+            "10"
+          ],
+          "year": [
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016"
+          ],
+          "num_students": [
+            "20152",
+            "2243",
+            "11074",
+            "15596",
+            "7929",
+            "18812",
+            "19919",
+            "36186"
+          ],
+          "student_staff_ratio": [
+            "8.9",
+            "6.9",
+            "9.0",
+            "7.8",
+            "8.4",
+            "11.8",
+            "11.6",
+            "16.4"
+          ],
+          "pct_international_students": [
+            "25",
+            "27",
+            "33",
+            "22",
+            "34",
+            "15",
+            "51",
+            "20"
+          ],
+          "pct_female_students": [
+            "33",
+            "37",
+            "42",
+            "45",
+            "46",
+            "50",
+            "52",
+            "48"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

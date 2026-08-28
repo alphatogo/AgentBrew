@@ -1,0 +1,446 @@
+{
+  "db_id": "cre_Theme_park",
+  "source": "sparc",
+  "tables": 16,
+  "total_rows": 172,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#cre_Theme_park",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Features\" {\n  \"Feature_ID\" INTEGER [pk, not null]\n  \"Feature_Details\" TEXT\n}\n\nTable \"Hotels\" {\n  \"hotel_id\" INTEGER [pk, not null]\n  \"star_rating_code\" TEXT [not null]\n  \"pets_allowed_yn\" TEXT\n  \"price_range\" REAL\n  \"other_hotel_details\" TEXT\n}\n\nTable \"Locations\" {\n  \"Location_ID\" INTEGER [pk, not null]\n  \"Location_Name\" TEXT\n  \"Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Museums\" {\n  \"Museum_ID\" INTEGER [pk, not null]\n  \"Museum_Details\" TEXT\n}\n\nTable \"Photos\" {\n  \"Photo_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Name\" TEXT\n  \"Description\" TEXT\n  \"Filename\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Ref_Attraction_Types\" {\n  \"Attraction_Type_Code\" TEXT [pk, not null]\n  \"Attraction_Type_Description\" TEXT\n}\n\nTable \"Ref_Hotel_Star_Ratings\" {\n  \"star_rating_code\" TEXT [pk, not null]\n  \"star_rating_description\" TEXT\n}\n\nTable \"Royal_Family\" {\n  \"Royal_Family_ID\" INTEGER [pk, not null]\n  \"Royal_Family_Details\" TEXT\n}\n\nTable \"Shops\" {\n  \"Shop_ID\" INTEGER [pk, not null]\n  \"Shop_Details\" TEXT\n}\n\nTable \"Staff\" {\n  \"Staff_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Name\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Street_Markets\" {\n  \"Market_ID\" INTEGER [pk, not null]\n  \"Market_Details\" TEXT\n}\n\nTable \"Theme_Parks\" {\n  \"Theme_Park_ID\" INTEGER [pk, not null]\n  \"Theme_Park_Details\" TEXT\n}\n\nTable \"Tourist_Attraction_Features\" {\n  \"Tourist_Attraction_ID\" INTEGER [pk, not null]\n  \"Feature_ID\" INTEGER [pk, not null]\n}\n\nTable \"Tourist_Attractions\" {\n  \"Tourist_Attraction_ID\" INTEGER [pk, not null]\n  \"Attraction_Type_Code\" TEXT [not null]\n  \"Location_ID\" INTEGER [not null]\n  \"How_to_Get_There\" TEXT\n  \"Name\" TEXT\n  \"Description\" TEXT\n  \"Opening_Hours\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Visitors\" {\n  \"Tourist_ID\" INTEGER [pk, not null]\n  \"Tourist_Details\" TEXT\n}\n\nTable \"Visits\" {\n  \"Visit_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Tourist_ID\" INTEGER [not null]\n  \"Visit_Date\" TIMESTAMP [not null]\n  \"Visit_Details\" TEXT [not null]\n}\n\n\n\nRef: \"Hotels\".\"star_rating_code\" > \"Ref_Hotel_Star_Ratings\".\"star_rating_code\"\n\nRef: \"Tourist_Attractions\".\"Attraction_Type_Code\" > \"Ref_Attraction_Types\".\"Attraction_Type_Code\"\n\nRef: \"Tourist_Attractions\".\"Location_ID\" > \"Locations\".\"Location_ID\"\n\nRef: \"Street_Markets\".\"Market_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Shops\".\"Shop_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Museums\".\"Museum_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Royal_Family\".\"Royal_Family_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Theme_Parks\".\"Theme_Park_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Visits\".\"Tourist_ID\" > \"Visitors\".\"Tourist_ID\"\n\nRef: \"Visits\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Photos\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Staff\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Tourist_Attraction_Features\".\"Feature_ID\" > \"Features\".\"Feature_ID\"\n\nRef: \"Tourist_Attraction_Features\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Features\" {\n  \"Feature_ID\" INTEGER [pk, not null]\n  \"Feature_Details\" TEXT\n}\n\nTable \"Hotels\" {\n  \"hotel_id\" INTEGER [pk, not null]\n  \"star_rating_code\" TEXT [not null]\n  \"pets_allowed_yn\" TEXT\n  \"price_range\" REAL\n  \"other_hotel_details\" TEXT\n}\n\nTable \"Locations\" {\n  \"Location_ID\" INTEGER [pk, not null]\n  \"Location_Name\" TEXT\n  \"Address\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Museums\" {\n  \"Museum_ID\" INTEGER [pk, not null]\n  \"Museum_Details\" TEXT\n}\n\nTable \"Photos\" {\n  \"Photo_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Name\" TEXT\n  \"Description\" TEXT\n  \"Filename\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Ref_Attraction_Types\" {\n  \"Attraction_Type_Code\" TEXT [pk, not null]\n  \"Attraction_Type_Description\" TEXT\n}\n\nTable \"Ref_Hotel_Star_Ratings\" {\n  \"star_rating_code\" TEXT [pk, not null]\n  \"star_rating_description\" TEXT\n}\n\nTable \"Royal_Family\" {\n  \"Royal_Family_ID\" INTEGER [pk, not null]\n  \"Royal_Family_Details\" TEXT\n}\n\nTable \"Shops\" {\n  \"Shop_ID\" INTEGER [pk, not null]\n  \"Shop_Details\" TEXT\n}\n\nTable \"Staff\" {\n  \"Staff_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Name\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Street_Markets\" {\n  \"Market_ID\" INTEGER [pk, not null]\n  \"Market_Details\" TEXT\n}\n\nTable \"Theme_Parks\" {\n  \"Theme_Park_ID\" INTEGER [pk, not null]\n  \"Theme_Park_Details\" TEXT\n}\n\nTable \"Tourist_Attraction_Features\" {\n  \"Tourist_Attraction_ID\" INTEGER [pk, not null]\n  \"Feature_ID\" INTEGER [pk, not null]\n}\n\nTable \"Tourist_Attractions\" {\n  \"Tourist_Attraction_ID\" INTEGER [pk, not null]\n  \"Attraction_Type_Code\" TEXT [not null]\n  \"Location_ID\" INTEGER [not null]\n  \"How_to_Get_There\" TEXT\n  \"Name\" TEXT\n  \"Description\" TEXT\n  \"Opening_Hours\" TEXT\n  \"Other_Details\" TEXT\n}\n\nTable \"Visitors\" {\n  \"Tourist_ID\" INTEGER [pk, not null]\n  \"Tourist_Details\" TEXT\n}\n\nTable \"Visits\" {\n  \"Visit_ID\" INTEGER [pk, not null]\n  \"Tourist_Attraction_ID\" INTEGER [not null]\n  \"Tourist_ID\" INTEGER [not null]\n  \"Visit_Date\" TIMESTAMP [not null]\n  \"Visit_Details\" TEXT [not null]\n}\n\nRef: \"Hotels\".\"star_rating_code\" > \"Ref_Hotel_Star_Ratings\".\"star_rating_code\"\n\nRef: \"Tourist_Attractions\".\"Attraction_Type_Code\" > \"Ref_Attraction_Types\".\"Attraction_Type_Code\"\n\nRef: \"Tourist_Attractions\".\"Location_ID\" > \"Locations\".\"Location_ID\"\n\nRef: \"Street_Markets\".\"Market_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Shops\".\"Shop_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Museums\".\"Museum_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Royal_Family\".\"Royal_Family_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Theme_Parks\".\"Theme_Park_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Visits\".\"Tourist_ID\" > \"Visitors\".\"Tourist_ID\"\n\nRef: \"Visits\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Photos\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Staff\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\nRef: \"Tourist_Attraction_Features\".\"Feature_ID\" > \"Features\".\"Feature_ID\"\n\nRef: \"Tourist_Attraction_Features\".\"Tourist_Attraction_ID\" > \"Tourist_Attractions\".\"Tourist_Attraction_ID\"\n\n## Table Stats & Sample Values\n\nFeatures: 5 rows\n  Feature_Details: 'cafe', 'park', 'garden', ...\n  Feature_ID: '523', '528', '543', ...\n\nHotels: 20 rows\n  star_rating_code: '5', '4', '3', ...\n  pets_allowed_yn: '1'\n  price_range: '2914989.571', '17012.682586009', '48525.4530675', ...\n\nLocations: 15 rows\n  Location_Name: 'Astro Orbiter', 'African Animals', 'American Adventure', ...\n  Address: '660 Shea Crescent', '254 Ottilie Junction', '53815 Sawayn Tunnel Apt. 297', ...\n  Location_ID: '333', '368', '417', ...\n\nMuseums: 3 rows\n  Museum_Details: 'Yale Center for British Art', 'The Metropolitan Museum of Art', 'MoMA'\n  Museum_ID: '2113', '2701', '5076'\n\nPhotos: 15 rows\n  Name: 'game1', 'game2', 'game3', ...\n  Filename: '702', '762', '392', ...\n  Tourist_Attraction_ID: '8449', '7067', '5076', ...\n\nRef_Attraction_Types: 5 rows\n  Attraction_Type_Description: 'park', 'garden', 'gallery', ...\n  Attraction_Type_Code: '2', '3', '5', ...\n\nRef_Hotel_Star_Ratings: 5 rows\n  star_rating_description: 'star'\n  star_rating_code: '1', '2', '3', ...\n\nRoyal_Family: 2 rows\n  Royal_Family_ID: '9561', '9919'\n\nShops: 4 rows\n  Shop_Details: 'soup', 'coffee', 'Flower', ...\n  Shop_ID: '8429', '8449', '8698', ...\n\nStaff: 20 rows\n  Name: 'Whitney', 'Kaela', 'Eunice', ...\n  Tourist_Attraction_ID: '6476', '7067', '5265', ...\n  Staff_ID: '170', '219', '237', ...\n\nStreet_Markets: 2 rows\n  Market_Details: 'Broadway', 'Fish Farm Market'\n  Market_ID: '6852', '7067'\n\nTheme_Parks: 3 rows\n  Theme_Park_Details: 'Disney', 'Sea World', 'Universal Studios'\n  Theme_Park_ID: '5265', '6476', '6523'\n\nTourist_Attraction_Features: 18 rows\n  Tourist_Attraction_ID: '5076', '5265', '6476', ...\n  Feature_ID: '528', '681', '523', ...\n\nTourist_Attractions: 15 rows\n  Attraction_Type_Code: '2', '6', '5', ...\n  Name: 'art museum', 'UK gallery', 'flying elephant', ...\n  How_to_Get_There: 'bus', 'walk', 'shuttle'\n\nVisitors: 20 rows\n  Tourist_Details: 'Toney', 'Graciela', 'Vincent', ...\n  Tourist_ID: '164', '189', '204', ...\n\nVisits: 20 rows\n  Visit_Date: '2004-08-21 03:06:14', '2013-08-06 05:35:51', '2013-10-27 09:56:08', ...\n  Tourist_Attraction_ID: '6653', '5076', '9360', ...\n  Tourist_ID: '377', '204', '211', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#cre_Theme_park",
+    "tableStats": {
+      "Features": {
+        "rows": 5,
+        "sample_values": {
+          "Feature_ID": [
+            "523",
+            "528",
+            "543",
+            "681",
+            "955"
+          ],
+          "Feature_Details": [
+            "cafe",
+            "park",
+            "garden",
+            "shopping",
+            "parking"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Hotels": {
+        "rows": 20,
+        "sample_values": {
+          "hotel_id": [
+            "123",
+            "144",
+            "172",
+            "222",
+            "239",
+            "264",
+            "314",
+            "331"
+          ],
+          "star_rating_code": [
+            "5",
+            "4",
+            "3",
+            "1",
+            "2"
+          ],
+          "pets_allowed_yn": [
+            "1"
+          ],
+          "price_range": [
+            "2914989.571",
+            "17012.682586009",
+            "48525.4530675",
+            "766712918.96763",
+            "250548014.90329",
+            "38014975.47848",
+            "9393.86291219",
+            "5526556.6412"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Locations": {
+        "rows": 15,
+        "sample_values": {
+          "Location_ID": [
+            "333",
+            "368",
+            "417",
+            "579",
+            "603",
+            "650",
+            "655",
+            "661"
+          ],
+          "Location_Name": [
+            "Astro Orbiter",
+            "African Animals",
+            "American Adventure",
+            "The Barnstormer",
+            "African Adventure",
+            "UK Gallery",
+            "The Boneyard",
+            "Shark World"
+          ],
+          "Address": [
+            "660 Shea Crescent",
+            "254 Ottilie Junction",
+            "53815 Sawayn Tunnel Apt. 297",
+            "3374 Sarina Manor",
+            "88271 Barrows Union Suite 203",
+            "4411 Sabrina Radial Suite 582",
+            "0692 Georgiana Pass",
+            "2485 Mueller Squares Suite 537"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Museums": {
+        "rows": 3,
+        "sample_values": {
+          "Museum_ID": [
+            "2113",
+            "2701",
+            "5076"
+          ],
+          "Museum_Details": [
+            "Yale Center for British Art",
+            "The Metropolitan Museum of Art",
+            "MoMA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Photos": {
+        "rows": 15,
+        "sample_values": {
+          "Photo_ID": [
+            "211",
+            "280",
+            "303",
+            "327",
+            "332",
+            "428",
+            "435",
+            "437"
+          ],
+          "Tourist_Attraction_ID": [
+            "8449",
+            "7067",
+            "5076",
+            "9919",
+            "6523",
+            "8429",
+            "2701",
+            "5265"
+          ],
+          "Name": [
+            "game1",
+            "game2",
+            "game3",
+            "fun1",
+            "fun2",
+            "fun3",
+            "fun4",
+            "fun5"
+          ],
+          "Filename": [
+            "702",
+            "762",
+            "392",
+            "820",
+            "060",
+            "148",
+            "453",
+            "128"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Attraction_Types": {
+        "rows": 5,
+        "sample_values": {
+          "Attraction_Type_Code": [
+            "2",
+            "3",
+            "5",
+            "6",
+            "9"
+          ],
+          "Attraction_Type_Description": [
+            "park",
+            "garden",
+            "gallery",
+            "adventure",
+            "museum"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Ref_Hotel_Star_Ratings": {
+        "rows": 5,
+        "sample_values": {
+          "star_rating_code": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "star_rating_description": [
+            "star"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Royal_Family": {
+        "rows": 2,
+        "sample_values": {
+          "Royal_Family_ID": [
+            "9561",
+            "9919"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Shops": {
+        "rows": 4,
+        "sample_values": {
+          "Shop_ID": [
+            "8429",
+            "8449",
+            "8698",
+            "9360"
+          ],
+          "Shop_Details": [
+            "soup",
+            "coffee",
+            "Flower",
+            "see food"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Staff": {
+        "rows": 20,
+        "sample_values": {
+          "Staff_ID": [
+            "170",
+            "219",
+            "237",
+            "249",
+            "310",
+            "433",
+            "463",
+            "470"
+          ],
+          "Tourist_Attraction_ID": [
+            "6476",
+            "7067",
+            "5265",
+            "9561",
+            "9360",
+            "6653",
+            "6523",
+            "6852"
+          ],
+          "Name": [
+            "Whitney",
+            "Kaela",
+            "Eunice",
+            "Kiarra",
+            "Phoebe",
+            "Vickie",
+            "Jannie",
+            "Lenore"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Street_Markets": {
+        "rows": 2,
+        "sample_values": {
+          "Market_ID": [
+            "6852",
+            "7067"
+          ],
+          "Market_Details": [
+            "Broadway",
+            "Fish Farm Market"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Theme_Parks": {
+        "rows": 3,
+        "sample_values": {
+          "Theme_Park_ID": [
+            "5265",
+            "6476",
+            "6523"
+          ],
+          "Theme_Park_Details": [
+            "Disney",
+            "Sea World",
+            "Universal Studios"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Tourist_Attraction_Features": {
+        "rows": 18,
+        "sample_values": {
+          "Tourist_Attraction_ID": [
+            "5076",
+            "5265",
+            "6476",
+            "6523",
+            "6852",
+            "7067",
+            "8429",
+            "8449"
+          ],
+          "Feature_ID": [
+            "528",
+            "681",
+            "523",
+            "955",
+            "543"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Tourist_Attractions": {
+        "rows": 15,
+        "sample_values": {
+          "Tourist_Attraction_ID": [
+            "2113",
+            "2701",
+            "5076",
+            "5265",
+            "6476",
+            "6523",
+            "6653",
+            "6852"
+          ],
+          "Attraction_Type_Code": [
+            "2",
+            "6",
+            "5",
+            "3",
+            "9"
+          ],
+          "Location_ID": [
+            "579",
+            "417",
+            "868",
+            "603",
+            "858",
+            "655",
+            "867",
+            "661"
+          ],
+          "How_to_Get_There": [
+            "bus",
+            "walk",
+            "shuttle"
+          ],
+          "Name": [
+            "art museum",
+            "UK gallery",
+            "flying elephant",
+            "film festival",
+            "US museum",
+            "fun games",
+            "history gallery",
+            "exploration trial"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Visitors": {
+        "rows": 20,
+        "sample_values": {
+          "Tourist_ID": [
+            "164",
+            "189",
+            "204",
+            "211",
+            "241",
+            "295",
+            "359",
+            "377"
+          ],
+          "Tourist_Details": [
+            "Toney",
+            "Graciela",
+            "Vincent",
+            "Vivian",
+            "Nettie",
+            "Laurence",
+            "Newell",
+            "Marisol"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Visits": {
+        "rows": 20,
+        "sample_values": {
+          "Visit_ID": [
+            "183",
+            "268",
+            "273",
+            "302",
+            "356",
+            "381",
+            "416",
+            "479"
+          ],
+          "Tourist_Attraction_ID": [
+            "6653",
+            "5076",
+            "9360",
+            "6476",
+            "6523",
+            "6852",
+            "9919",
+            "8698"
+          ],
+          "Tourist_ID": [
+            "377",
+            "204",
+            "211",
+            "439",
+            "841",
+            "610",
+            "513",
+            "779"
+          ],
+          "Visit_Date": [
+            "2004-08-21 03:06:14",
+            "2013-08-06 05:35:51",
+            "2013-10-27 09:56:08",
+            "1990-08-15 14:24:10",
+            "1980-11-26 02:08:00",
+            "2017-03-19 08:48:19",
+            "2008-11-09 01:28:01",
+            "1989-08-24 20:26:37"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

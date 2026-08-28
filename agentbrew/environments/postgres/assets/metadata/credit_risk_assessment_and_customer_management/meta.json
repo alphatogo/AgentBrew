@@ -1,0 +1,651 @@
+{
+  "db_id": "credit_risk_assessment_and_customer_management",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/credit_risk_assessment_and_customer_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"public\".\"bill_amounts\" {\n  \"bill_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"bill_amt1\" INTEGER\n  \"bill_amt2\" INTEGER\n  \"bill_amt3\" INTEGER\n  \"bill_amt4\" INTEGER\n  \"bill_amt5\" INTEGER\n  \"bill_amt6\" INTEGER\n  \"bill_date_1\" TEXT\n  \"bill_date_2\" TEXT\n  \"bill_date_3\" TEXT\n  \"bill_date_4\" TEXT\n  \"bill_date_5\" TEXT\n  \"bill_date_6\" TEXT\n  \"due_date_1\" TEXT\n  \"due_date_2\" TEXT\n  \"due_date_3\" TEXT\n  \"due_date_4\" TEXT\n  \"due_date_5\" TEXT\n  \"due_date_6\" TEXT\n}\n\nTable \"public\".\"customer_contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"phone_number\" TEXT\n  \"email_address\" TEXT\n  \"physical_address\" TEXT\n  \"secondary_phone_number\" TEXT\n  \"secondary_email_address\" TEXT\n}\n\nTable \"public\".\"customer_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"feedback_text\" TEXT\n  \"feedback_date\" TEXT\n  \"resolved\" INTEGER\n  \"resolved_by\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"public\".\"customer_notes\" {\n  \"note_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"note_text\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_uuid\" TEXT\n  \"limit_bal\" INTEGER\n  \"sex\" TEXT\n  \"education\" TEXT\n  \"marriage\" TEXT\n  \"age\" INTEGER\n  \"address\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"employment_status\" TEXT\n  \"account_creation_date\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"public\".\"default_payments\" {\n  \"default_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"default_payment_next_month\" INTEGER\n  \"default_date\" TEXT\n}\n\nTable \"public\".\"education\" {\n  \"education_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"education_cat\" TEXT\n  \"graduate_school\" INTEGER\n  \"high_school\" INTEGER\n  \"others\" INTEGER\n  \"university\" INTEGER\n  \"year_completed\" TEXT\n  \"institution_attended\" TEXT\n}\n\nTable \"public\".\"employment\" {\n  \"employment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"employer_name\" TEXT\n  \"job_title\" TEXT\n  \"employment_start_date\" TEXT\n  \"employment_end_date\" TEXT\n  \"current_employment\" INTEGER\n}\n\nTable \"public\".\"income\" {\n  \"income_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"income_amount\" INTEGER\n  \"income_source\" TEXT\n  \"income_date\" TEXT\n}\n\nTable \"public\".\"payment_amounts\" {\n  \"payment_amt_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"pay_amt1\" INTEGER\n  \"pay_amt2\" INTEGER\n  \"pay_amt3\" INTEGER\n  \"pay_amt4\" INTEGER\n  \"pay_amt5\" INTEGER\n  \"pay_amt6\" INTEGER\n  \"pay_date_1\" TEXT\n  \"pay_date_2\" TEXT\n  \"pay_date_3\" TEXT\n  \"pay_date_4\" TEXT\n  \"pay_date_5\" TEXT\n  \"pay_date_6\" TEXT\n  \"payment_method_1\" TEXT\n  \"payment_method_2\" TEXT\n  \"payment_method_3\" TEXT\n  \"payment_method_4\" TEXT\n  \"payment_method_5\" TEXT\n  \"payment_method_6\" TEXT\n}\n\nTable \"public\".\"payment_history\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"pay_1\" INTEGER\n  \"pay_2\" INTEGER\n  \"pay_3\" INTEGER\n  \"pay_4\" INTEGER\n  \"pay_5\" INTEGER\n  \"pay_6\" INTEGER\n  \"pay_date_1\" TEXT\n  \"pay_date_2\" TEXT\n  \"pay_date_3\" TEXT\n  \"pay_date_4\" TEXT\n  \"pay_date_5\" TEXT\n  \"pay_date_6\" TEXT\n  \"payment_method_1\" TEXT\n  \"payment_method_2\" TEXT\n  \"payment_method_3\" TEXT\n  \"payment_method_4\" TEXT\n  \"payment_method_5\" TEXT\n  \"payment_method_6\" TEXT\n}\n\nTable \"public\".\"risk_assessment\" {\n  \"risk_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"risk_score\" REAL\n  \"prediction_date\" TEXT\n  \"risk_model\" TEXT\n  \"confidence_level\" REAL\n}\n\nTable \"public\".\"transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"transaction_amount\" INTEGER\n  \"transaction_date\" TEXT\n  \"transaction_type\" TEXT\n  \"merchant_name\" TEXT\n  \"merchant_category\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"access_level\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"password\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"bill_amounts\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_contacts\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_feedback\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_notes\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"default_payments\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"education\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"employment\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"income\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"payment_amounts\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"payment_history\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"risk_assessment\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"transactions\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"bill_amounts\" {\n  \"bill_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"bill_amt1\" INTEGER\n  \"bill_amt2\" INTEGER\n  \"bill_amt3\" INTEGER\n  \"bill_amt4\" INTEGER\n  \"bill_amt5\" INTEGER\n  \"bill_amt6\" INTEGER\n  \"bill_date_1\" TEXT\n  \"bill_date_2\" TEXT\n  \"bill_date_3\" TEXT\n  \"bill_date_4\" TEXT\n  \"bill_date_5\" TEXT\n  \"bill_date_6\" TEXT\n  \"due_date_1\" TEXT\n  \"due_date_2\" TEXT\n  \"due_date_3\" TEXT\n  \"due_date_4\" TEXT\n  \"due_date_5\" TEXT\n  \"due_date_6\" TEXT\n}\n\nTable \"customer_contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"phone_number\" TEXT\n  \"email_address\" TEXT\n  \"physical_address\" TEXT\n  \"secondary_phone_number\" TEXT\n  \"secondary_email_address\" TEXT\n}\n\nTable \"customer_feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"feedback_text\" TEXT\n  \"feedback_date\" TEXT\n  \"resolved\" INTEGER\n  \"resolved_by\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"customer_notes\" {\n  \"note_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"note_text\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_uuid\" TEXT\n  \"limit_bal\" INTEGER\n  \"sex\" TEXT\n  \"education\" TEXT\n  \"marriage\" TEXT\n  \"age\" INTEGER\n  \"address\" TEXT\n  \"phone_number\" TEXT\n  \"email\" TEXT\n  \"employment_status\" TEXT\n  \"account_creation_date\" TEXT\n  \"last_updated_date\" TEXT\n}\n\nTable \"default_payments\" {\n  \"default_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"default_payment_next_month\" INTEGER\n  \"default_date\" TEXT\n}\n\nTable \"education\" {\n  \"education_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"education_cat\" TEXT\n  \"graduate_school\" INTEGER\n  \"high_school\" INTEGER\n  \"others\" INTEGER\n  \"university\" INTEGER\n  \"year_completed\" TEXT\n  \"institution_attended\" TEXT\n}\n\nTable \"employment\" {\n  \"employment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"employer_name\" TEXT\n  \"job_title\" TEXT\n  \"employment_start_date\" TEXT\n  \"employment_end_date\" TEXT\n  \"current_employment\" INTEGER\n}\n\nTable \"income\" {\n  \"income_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"income_amount\" INTEGER\n  \"income_source\" TEXT\n  \"income_date\" TEXT\n}\n\nTable \"payment_amounts\" {\n  \"payment_amt_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"pay_amt1\" INTEGER\n  \"pay_amt2\" INTEGER\n  \"pay_amt3\" INTEGER\n  \"pay_amt4\" INTEGER\n  \"pay_amt5\" INTEGER\n  \"pay_amt6\" INTEGER\n  \"pay_date_1\" TEXT\n  \"pay_date_2\" TEXT\n  \"pay_date_3\" TEXT\n  \"pay_date_4\" TEXT\n  \"pay_date_5\" TEXT\n  \"pay_date_6\" TEXT\n  \"payment_method_1\" TEXT\n  \"payment_method_2\" TEXT\n  \"payment_method_3\" TEXT\n  \"payment_method_4\" TEXT\n  \"payment_method_5\" TEXT\n  \"payment_method_6\" TEXT\n}\n\nTable \"payment_history\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"pay_1\" INTEGER\n  \"pay_2\" INTEGER\n  \"pay_3\" INTEGER\n  \"pay_4\" INTEGER\n  \"pay_5\" INTEGER\n  \"pay_6\" INTEGER\n  \"pay_date_1\" TEXT\n  \"pay_date_2\" TEXT\n  \"pay_date_3\" TEXT\n  \"pay_date_4\" TEXT\n  \"pay_date_5\" TEXT\n  \"pay_date_6\" TEXT\n  \"payment_method_1\" TEXT\n  \"payment_method_2\" TEXT\n  \"payment_method_3\" TEXT\n  \"payment_method_4\" TEXT\n  \"payment_method_5\" TEXT\n  \"payment_method_6\" TEXT\n}\n\nTable \"risk_assessment\" {\n  \"risk_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"risk_score\" REAL\n  \"prediction_date\" TEXT\n  \"risk_model\" TEXT\n  \"confidence_level\" REAL\n}\n\nTable \"transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"transaction_amount\" INTEGER\n  \"transaction_date\" TEXT\n  \"transaction_type\" TEXT\n  \"merchant_name\" TEXT\n  \"merchant_category\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"access_level\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"password\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"bill_amounts\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_contacts\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_feedback\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_notes\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"default_payments\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"education\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"employment\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"income\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"payment_amounts\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"payment_history\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"risk_assessment\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"transactions\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'edit'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nbill_amounts: 2 rows\n  bill_amt1: '3913', '2682'\n  bill_amt2: '3102', '1725'\n  bill_amt3: '689', '2682'\n\ncustomer_contacts: 2 rows\n  physical_address: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'\n  phone_number: '123-456-7890', '987-654-3210'\n  email_address: 'customer1@example.com', 'customer2@example.com'\n\ncustomer_feedback: 2 rows\n  feedback_text: 'High interest rates are too expensive.', 'Customer service is excellent.'\n  feedback_date: '2023-05-01', '2023-05-02'\n  last_updated_date: '2023-05-01', '2023-05-02'\n\ncustomer_notes: 2 rows\n  note_text: 'Customer has a history of late payments.', 'Customer is a low-risk borrower.'\n  created_by: 'Alice Johnson', 'Bob Williams'\n  created_date: '2023-05-01', '2023-05-02'\n\ncustomers: 2 rows\n  employment_status: 'Employed', 'Unemployed'\n  marriage: '1', '2'\n  address: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'\n\ndefault_payments: 2 rows\n  default_date: '2023-05-01', '2023-05-02'\n  default_payment_next_month: '1'\n  customer_id: '1', '0'\n\neducation: 2 rows\n  year_completed: '2020', '2019'\n  education_cat: 'university'\n  institution_attended: 'University of Anytown'\n\nemployment: 2 rows\n  employer_name: 'TechCorp', 'FinanceInc'\n  job_title: 'Software Engineer', 'Financial Analyst'\n  employment_start_date: '2021-01-01', '2020-06-01'\n\nincome: 2 rows\n  income_source: 'Salary'\n  income_amount: '50000', '60000'\n  income_date: '2023-05-01'\n\npayment_amounts: 2 rows\n  payment_method_1: 'Credit Card'\n  payment_method_2: 'Credit Card'\n  payment_method_3: 'Bank Transfer'\n\npayment_history: 2 rows\n  payment_method_1: 'Credit Card'\n  payment_method_2: 'Credit Card'\n  payment_method_3: 'Bank Transfer'\n\nrisk_assessment: 2 rows\n  risk_model: 'Model A', 'Model B'\n  confidence_level: '0.9', '0.85'\n  prediction_date: '2023-05-01', '2023-05-02'\n\ntransactions: 2 rows\n  merchant_name: 'Grocery Store', 'Movie Theater'\n  merchant_category: 'grocery', 'entertainment'\n  transaction_type: 'purchase'\n\nuser_roles: 3 rows\n  role_name: 'analyst', 'manager', 'admin'\n  description: 'Data analyst role', 'Manager role', 'Administrator role'\n  access_level: 'read', 'write', 'admin'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  job_title: 'Data Analyst', 'Manager'\n  department: 'Data Science', 'Finance'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "edit"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "bill_amounts": {
+        "rows": 2,
+        "sample_values": {
+          "bill_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "bill_amt1": [
+            "3913",
+            "2682"
+          ],
+          "bill_amt2": [
+            "3102",
+            "1725"
+          ],
+          "bill_amt3": [
+            "689",
+            "2682"
+          ],
+          "bill_amt4": [
+            "0",
+            "3272"
+          ],
+          "bill_amt5": [
+            "0",
+            "3455"
+          ],
+          "bill_amt6": [
+            "0",
+            "3261"
+          ],
+          "bill_date_1": [
+            "2023-04-01"
+          ],
+          "bill_date_2": [
+            "2023-03-01"
+          ],
+          "bill_date_3": [
+            "2023-02-01"
+          ],
+          "bill_date_4": [
+            "2023-01-01"
+          ],
+          "bill_date_5": [
+            "2022-12-01"
+          ],
+          "bill_date_6": [
+            "2022-11-01"
+          ],
+          "due_date_1": [
+            "2023-04-10"
+          ],
+          "due_date_2": [
+            "2023-03-10"
+          ],
+          "due_date_3": [
+            "2023-02-10"
+          ],
+          "due_date_4": [
+            "2023-01-10"
+          ],
+          "due_date_5": [
+            "2022-12-10"
+          ],
+          "due_date_6": [
+            "2022-11-10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_contacts": {
+        "rows": 2,
+        "sample_values": {
+          "contact_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "email_address": [
+            "customer1@example.com",
+            "customer2@example.com"
+          ],
+          "physical_address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "secondary_phone_number": [
+            "123-456-7891",
+            "987-654-3211"
+          ],
+          "secondary_email_address": [
+            "customer1-secondary@example.com",
+            "customer2-secondary@example.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "feedback_text": [
+            "High interest rates are too expensive.",
+            "Customer service is excellent."
+          ],
+          "feedback_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "resolved": [
+            "0",
+            "1"
+          ],
+          "resolved_by": [
+            "Alice Johnson"
+          ],
+          "last_updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_notes": {
+        "rows": 2,
+        "sample_values": {
+          "note_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "note_text": [
+            "Customer has a history of late payments.",
+            "Customer is a low-risk borrower."
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "last_updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "customer_uuid": [
+            "798fc410-45c1",
+            "8a8c8f3b-8eb4"
+          ],
+          "limit_bal": [
+            "20000",
+            "120000"
+          ],
+          "sex": [
+            "2"
+          ],
+          "education": [
+            "2"
+          ],
+          "marriage": [
+            "1",
+            "2"
+          ],
+          "age": [
+            "24",
+            "26"
+          ],
+          "address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "email": [
+            "customer1@example.com",
+            "customer2@example.com"
+          ],
+          "employment_status": [
+            "Employed",
+            "Unemployed"
+          ],
+          "account_creation_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "last_updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "default_payments": {
+        "rows": 2,
+        "sample_values": {
+          "default_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "default_payment_next_month": [
+            "1"
+          ],
+          "default_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "education": {
+        "rows": 2,
+        "sample_values": {
+          "education_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "education_cat": [
+            "university"
+          ],
+          "graduate_school": [
+            "0"
+          ],
+          "high_school": [
+            "0"
+          ],
+          "others": [
+            "0"
+          ],
+          "university": [
+            "1"
+          ],
+          "year_completed": [
+            "2020",
+            "2019"
+          ],
+          "institution_attended": [
+            "University of Anytown"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employment": {
+        "rows": 2,
+        "sample_values": {
+          "employment_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "employer_name": [
+            "TechCorp",
+            "FinanceInc"
+          ],
+          "job_title": [
+            "Software Engineer",
+            "Financial Analyst"
+          ],
+          "employment_start_date": [
+            "2021-01-01",
+            "2020-06-01"
+          ],
+          "employment_end_date": [
+            "2022-06-01"
+          ],
+          "current_employment": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "income": {
+        "rows": 2,
+        "sample_values": {
+          "income_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "income_amount": [
+            "50000",
+            "60000"
+          ],
+          "income_source": [
+            "Salary"
+          ],
+          "income_date": [
+            "2023-05-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_amounts": {
+        "rows": 2,
+        "sample_values": {
+          "payment_amt_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "pay_amt1": [
+            "0"
+          ],
+          "pay_amt2": [
+            "689",
+            "1000"
+          ],
+          "pay_amt3": [
+            "0",
+            "1000"
+          ],
+          "pay_amt4": [
+            "0",
+            "1000"
+          ],
+          "pay_amt5": [
+            "0"
+          ],
+          "pay_amt6": [
+            "0",
+            "2000"
+          ],
+          "pay_date_1": [
+            "2023-04-01"
+          ],
+          "pay_date_2": [
+            "2023-03-01"
+          ],
+          "pay_date_3": [
+            "2023-02-01"
+          ],
+          "pay_date_4": [
+            "2023-01-01"
+          ],
+          "pay_date_5": [
+            "2022-12-01"
+          ],
+          "pay_date_6": [
+            "2022-11-01"
+          ],
+          "payment_method_1": [
+            "Credit Card"
+          ],
+          "payment_method_2": [
+            "Credit Card"
+          ],
+          "payment_method_3": [
+            "Bank Transfer"
+          ],
+          "payment_method_4": [
+            "Bank Transfer"
+          ],
+          "payment_method_5": [
+            "Bank Transfer"
+          ],
+          "payment_method_6": [
+            "Bank Transfer"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_history": {
+        "rows": 2,
+        "sample_values": {
+          "payment_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "pay_1": [
+            "2",
+            "-1"
+          ],
+          "pay_2": [
+            "2"
+          ],
+          "pay_3": [
+            "-1",
+            "0"
+          ],
+          "pay_4": [
+            "-1",
+            "0"
+          ],
+          "pay_5": [
+            "-2",
+            "0"
+          ],
+          "pay_6": [
+            "-2",
+            "2"
+          ],
+          "pay_date_1": [
+            "2023-04-01"
+          ],
+          "pay_date_2": [
+            "2023-03-01"
+          ],
+          "pay_date_3": [
+            "2023-02-01"
+          ],
+          "pay_date_4": [
+            "2023-01-01"
+          ],
+          "pay_date_5": [
+            "2022-12-01"
+          ],
+          "pay_date_6": [
+            "2022-11-01"
+          ],
+          "payment_method_1": [
+            "Credit Card"
+          ],
+          "payment_method_2": [
+            "Credit Card"
+          ],
+          "payment_method_3": [
+            "Bank Transfer"
+          ],
+          "payment_method_4": [
+            "Bank Transfer"
+          ],
+          "payment_method_5": [
+            "Bank Transfer"
+          ],
+          "payment_method_6": [
+            "Bank Transfer"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "risk_assessment": {
+        "rows": 2,
+        "sample_values": {
+          "risk_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "risk_score": [
+            "0.85",
+            "0.9"
+          ],
+          "prediction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "risk_model": [
+            "Model A",
+            "Model B"
+          ],
+          "confidence_level": [
+            "0.9",
+            "0.85"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transactions": {
+        "rows": 2,
+        "sample_values": {
+          "transaction_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "transaction_amount": [
+            "100",
+            "200"
+          ],
+          "transaction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "transaction_type": [
+            "purchase"
+          ],
+          "merchant_name": [
+            "Grocery Store",
+            "Movie Theater"
+          ],
+          "merchant_category": [
+            "grocery",
+            "entertainment"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 3,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "role_name": [
+            "analyst",
+            "manager",
+            "admin"
+          ],
+          "description": [
+            "Data analyst role",
+            "Manager role",
+            "Administrator role"
+          ],
+          "access_level": [
+            "read",
+            "write",
+            "admin"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role_id": [
+            "1"
+          ],
+          "department": [
+            "Data Science",
+            "Finance"
+          ],
+          "job_title": [
+            "Data Analyst",
+            "Manager"
+          ],
+          "password": [
+            "hashed_password"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

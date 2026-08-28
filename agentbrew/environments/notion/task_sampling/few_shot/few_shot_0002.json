@@ -1,0 +1,17 @@
+{
+  "title": "AI Curriculum Partnership Path",
+  "capability": [
+    "update_schema",
+    "build_relations",
+    "populate_rows",
+    "cross_database_linking",
+    "update_existing_rows",
+    "dependency_graph_editing",
+    "insert_ordered_sections",
+    "reorganize_layout",
+    "convert_block_type",
+    "move_existing_blocks",
+    "preserve_content_order"
+  ],
+  "question": "Open the page named \"AI Fellowship Dashboard\" and build the curriculum and partnership tracking updates below.\n\n**Task Requirements:**\n1. In the AI Fellowship Dashboard page, locate the \"Courses\" database and the \"Partner Placements\" database.\n\n2. Add a bidirectional relation between the two databases:\n   - Courses should have a relation property named \"Related Placements\" pointing to Partner Placements.\n   - Partner Placements should have a relation property named \"Related Courses\" pointing back to Courses.\n\n3. Create exactly three new Courses records and fill in every requested property for each record:\n   - \"Applied Evaluation Systems\" with Level \"Advanced\", Credits 4, Status \"Planned\"\n   - \"Product Analytics for AI Teams\" with Level \"Intermediate\", Credits 3, Status \"Active\"\n   - \"Responsible Deployment Studio\" with Level \"Advanced\", Credits 4, Status \"Planned\"\n\n4. Create exactly two new Partner Placements records and fill in every requested property for each record:\n   - \"Northwind AI Residency\" with Organization \"Northwind Labs\", Term \"Summer 2025\", Status \"Interviewing\"\n   - \"Civic Data Fellowship\" with Organization \"Civic Signal\", Term \"Fall 2025\", Status \"Drafting\"\n\n5. Link the new Courses and Partner Placements through the bidirectional relation:\n   - Applied Evaluation Systems should link to Northwind AI Residency\n   - Product Analytics for AI Teams should link to Northwind AI Residency and Civic Data Fellowship\n   - Responsible Deployment Studio should link to Civic Data Fellowship\n\n   Verify that the relation is visible from both database sides.\n\n6. In the same AI Fellowship Dashboard page, locate the \"Curriculum Chapters\" database and create one new chapter record titled \"Partner Readiness Practice\". Set its Icon property to \"🚀\" and place it after the existing chapter \"Model Evaluation Foundations\" in the chapter sequence.\n\n7. In the \"Quarterly Learning Goals\" section, collect the existing heading blocks in their current order. Add a new heading_3 block titled \"Partner Readiness\".\n\n8. Convert each existing goal heading and the new Partner Readiness heading into toggle blocks in the same order. Move the description blocks that originally belonged under each heading into its corresponding toggle, preserving text, formatting, and relative order.\n\n9. Under the Partner Readiness toggle, add a paragraph that references the Northwind AI Residency and Civic Data Fellowship records using @-mentions or link-to-page references."
+}

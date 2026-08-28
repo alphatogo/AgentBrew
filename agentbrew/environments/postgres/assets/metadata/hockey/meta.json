@@ -1,0 +1,2837 @@
+{
+  "db_id": "hockey",
+  "source": "bird",
+  "tables": 22,
+  "total_rows": 96061,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#hockey",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"AwardsCoaches\" {\n  \"coachID\" TEXT\n  \"award\" TEXT\n  \"year\" INTEGER\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"AwardsMisc\" {\n  \"name\" TEXT [pk, not null]\n  \"ID\" TEXT\n  \"award\" TEXT\n  \"year\" INTEGER\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"AwardsPlayers\" {\n  \"playerID\" TEXT [pk, not null]\n  \"award\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"note\" TEXT\n  \"pos\" TEXT\n}\n\nTable \"Coaches\" {\n  \"coachID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT [pk, not null]\n  \"lgID\" TEXT\n  \"stint\" INTEGER [pk, not null]\n  \"notes\" TEXT\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"t\" INTEGER\n  \"postg\" TEXT\n  \"postw\" TEXT\n  \"postl\" TEXT\n  \"postt\" TEXT\n}\n\nTable \"CombinedShutouts\" {\n  \"year\" INTEGER\n  \"month\" INTEGER\n  \"date\" INTEGER\n  \"tmID\" TEXT\n  \"oppID\" TEXT\n  \"R/P\" TEXT\n  \"IDgoalie1\" TEXT\n  \"IDgoalie2\" TEXT\n}\n\nTable \"Goalies\" {\n  \"playerID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"stint\" INTEGER [pk, not null]\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" TEXT\n  \"Min\" TEXT\n  \"W\" TEXT\n  \"L\" TEXT\n  \"T/OL\" TEXT\n  \"ENG\" TEXT\n  \"SHO\" TEXT\n  \"GA\" TEXT\n  \"SA\" TEXT\n  \"PostGP\" TEXT\n  \"PostMin\" TEXT\n  \"PostW\" TEXT\n  \"PostL\" TEXT\n  \"PostT\" TEXT\n  \"PostENG\" TEXT\n  \"PostSHO\" TEXT\n  \"PostGA\" TEXT\n  \"PostSA\" TEXT\n}\n\nTable \"GoaliesSC\" {\n  \"playerID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" INTEGER\n  \"Min\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"SHO\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"GoaliesShootout\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"SA\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"HOF\" {\n  \"year\" INTEGER\n  \"hofID\" TEXT [pk, not null]\n  \"name\" TEXT\n  \"category\" TEXT\n}\n\nTable \"Master\" {\n  \"playerID\" TEXT\n  \"coachID\" TEXT\n  \"hofID\" TEXT\n  \"firstName\" TEXT\n  \"lastName\" TEXT [not null]\n  \"nameNote\" TEXT\n  \"nameGiven\" TEXT\n  \"nameNick\" TEXT\n  \"height\" TEXT\n  \"weight\" TEXT\n  \"shootCatch\" TEXT\n  \"legendsID\" TEXT\n  \"ihdbID\" TEXT\n  \"hrefID\" TEXT\n  \"firstNHL\" TEXT\n  \"lastNHL\" TEXT\n  \"firstWHA\" TEXT\n  \"lastWHA\" TEXT\n  \"pos\" TEXT\n  \"birthYear\" TEXT\n  \"birthMon\" TEXT\n  \"birthDay\" TEXT\n  \"birthCountry\" TEXT\n  \"birthState\" TEXT\n  \"birthCity\" TEXT\n  \"deathYear\" TEXT\n  \"deathMon\" TEXT\n  \"deathDay\" TEXT\n  \"deathCountry\" TEXT\n  \"deathState\" TEXT\n  \"deathCity\" TEXT\n}\n\nTable \"Scoring\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"pos\" TEXT\n  \"GP\" INTEGER\n  \"G\" INTEGER\n  \"A\" INTEGER\n  \"Pts\" INTEGER\n  \"PIM\" INTEGER\n  \"+/-\" TEXT\n  \"PPG\" TEXT\n  \"PPA\" TEXT\n  \"SHG\" TEXT\n  \"SHA\" TEXT\n  \"GWG\" TEXT\n  \"GTG\" TEXT\n  \"SOG\" TEXT\n  \"PostGP\" TEXT\n  \"PostG\" TEXT\n  \"PostA\" TEXT\n  \"PostPts\" TEXT\n  \"PostPIM\" TEXT\n  \"Post+/-\" TEXT\n  \"PostPPG\" TEXT\n  \"PostPPA\" TEXT\n  \"PostSHG\" TEXT\n  \"PostSHA\" TEXT\n  \"PostGWG\" TEXT\n  \"PostSOG\" TEXT\n}\n\nTable \"ScoringSC\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"pos\" TEXT\n  \"GP\" INTEGER\n  \"G\" INTEGER\n  \"A\" INTEGER\n  \"Pts\" INTEGER\n  \"PIM\" INTEGER\n}\n\nTable \"ScoringShootout\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"S\" INTEGER\n  \"G\" INTEGER\n  \"GDG\" INTEGER\n}\n\nTable \"ScoringSup\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"PPA\" TEXT\n  \"SHA\" TEXT\n}\n\nTable \"SeriesPost\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"series\" TEXT\n  \"tmIDWinner\" TEXT\n  \"lgIDWinner\" TEXT\n  \"tmIDLoser\" TEXT\n  \"lgIDLoser\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GoalsWinner\" INTEGER\n  \"GoalsLoser\" INTEGER\n  \"note\" TEXT\n}\n\nTable \"TeamSplits\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"hW\" INTEGER\n  \"hL\" INTEGER\n  \"hT\" INTEGER\n  \"hOTL\" TEXT\n  \"rW\" INTEGER\n  \"rL\" INTEGER\n  \"rT\" INTEGER\n  \"rOTL\" TEXT\n  \"SepW\" TEXT\n  \"SepL\" TEXT\n  \"SepT\" TEXT\n  \"SepOL\" TEXT\n  \"OctW\" TEXT\n  \"OctL\" TEXT\n  \"OctT\" TEXT\n  \"OctOL\" TEXT\n  \"NovW\" TEXT\n  \"NovL\" TEXT\n  \"NovT\" TEXT\n  \"NovOL\" TEXT\n  \"DecW\" TEXT\n  \"DecL\" TEXT\n  \"DecT\" TEXT\n  \"DecOL\" TEXT\n  \"JanW\" INTEGER\n  \"JanL\" INTEGER\n  \"JanT\" INTEGER\n  \"JanOL\" TEXT\n  \"FebW\" INTEGER\n  \"FebL\" INTEGER\n  \"FebT\" INTEGER\n  \"FebOL\" TEXT\n  \"MarW\" TEXT\n  \"MarL\" TEXT\n  \"MarT\" TEXT\n  \"MarOL\" TEXT\n  \"AprW\" TEXT\n  \"AprL\" TEXT\n  \"AprT\" TEXT\n  \"AprOL\" TEXT\n}\n\nTable \"TeamVsTeam\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"oppID\" TEXT [pk, not null]\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"OTL\" TEXT\n}\n\nTable \"Teams\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"franchID\" TEXT\n  \"confID\" TEXT\n  \"divID\" TEXT\n  \"rank\" INTEGER\n  \"playoff\" TEXT\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"OTL\" TEXT\n  \"Pts\" INTEGER\n  \"SoW\" TEXT\n  \"SoL\" TEXT\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"name\" TEXT\n  \"PIM\" TEXT\n  \"BenchMinor\" TEXT\n  \"PPG\" TEXT\n  \"PPC\" TEXT\n  \"SHA\" TEXT\n  \"PKG\" TEXT\n  \"PKC\" TEXT\n  \"SHF\" TEXT\n}\n\nTable \"TeamsHalf\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"half\" INTEGER [pk, not null]\n  \"rank\" INTEGER\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"TeamsPost\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"PIM\" TEXT\n  \"BenchMinor\" TEXT\n  \"PPG\" TEXT\n  \"PPC\" TEXT\n  \"SHA\" TEXT\n  \"PKG\" TEXT\n  \"PKC\" TEXT\n  \"SHF\" TEXT\n}\n\nTable \"TeamsSC\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"PIM\" TEXT\n}\n\nTable \"abbrev\" {\n  \"Type\" TEXT [pk, not null]\n  \"Code\" TEXT [pk, not null]\n  \"Fullname\" TEXT\n}\n\n\n\nRef: \"Coaches\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Coaches\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"AwardsCoaches\".\"coachID\" > \"Coaches\".\"coachID\"\n\nRef: \"Master\".\"coachID\" > \"Coaches\".\"coachID\"\n\nRef: \"AwardsPlayers\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"CombinedShutouts\".\"IDgoalie2\" > \"Master\".\"playerID\"\n\nRef: \"CombinedShutouts\".\"IDgoalie1\" > \"Master\".\"playerID\"\n\nRef: \"Goalies\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"Goalies\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Goalies\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"GoaliesSC\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"GoaliesSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"GoaliesSC\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"GoaliesShootout\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"GoaliesShootout\".\"year\" > \"Teams\".\"year\"\n\nRef: \"GoaliesShootout\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"Scoring\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"Scoring\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Scoring\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringSC\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"ScoringSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"ScoringSC\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringShootout\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"ScoringShootout\".\"year\" > \"Teams\".\"year\"\n\nRef: \"ScoringShootout\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringSup\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"SeriesPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"SeriesPost\".\"tmIDLoser\" > \"Teams\".\"tmID\"\n\nRef: \"SeriesPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"SeriesPost\".\"tmIDWinner\" > \"Teams\".\"tmID\"\n\nRef: \"TeamSplits\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamSplits\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamVsTeam\".\"oppID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamVsTeam\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamVsTeam\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamVsTeam\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsHalf\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsHalf\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsPost\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsSC\".\"tmID\" > \"Teams\".\"tmID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"AwardsCoaches\" {\n  \"coachID\" TEXT\n  \"award\" TEXT\n  \"year\" INTEGER\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"AwardsMisc\" {\n  \"name\" TEXT [pk, not null]\n  \"ID\" TEXT\n  \"award\" TEXT\n  \"year\" INTEGER\n  \"lgID\" TEXT\n  \"note\" TEXT\n}\n\nTable \"AwardsPlayers\" {\n  \"playerID\" TEXT [pk, not null]\n  \"award\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"note\" TEXT\n  \"pos\" TEXT\n}\n\nTable \"Coaches\" {\n  \"coachID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT [pk, not null]\n  \"lgID\" TEXT\n  \"stint\" INTEGER [pk, not null]\n  \"notes\" TEXT\n  \"g\" INTEGER\n  \"w\" INTEGER\n  \"l\" INTEGER\n  \"t\" INTEGER\n  \"postg\" TEXT\n  \"postw\" TEXT\n  \"postl\" TEXT\n  \"postt\" TEXT\n}\n\nTable \"CombinedShutouts\" {\n  \"year\" INTEGER\n  \"month\" INTEGER\n  \"date\" INTEGER\n  \"tmID\" TEXT\n  \"oppID\" TEXT\n  \"R/P\" TEXT\n  \"IDgoalie1\" TEXT\n  \"IDgoalie2\" TEXT\n}\n\nTable \"Goalies\" {\n  \"playerID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"stint\" INTEGER [pk, not null]\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" TEXT\n  \"Min\" TEXT\n  \"W\" TEXT\n  \"L\" TEXT\n  \"T/OL\" TEXT\n  \"ENG\" TEXT\n  \"SHO\" TEXT\n  \"GA\" TEXT\n  \"SA\" TEXT\n  \"PostGP\" TEXT\n  \"PostMin\" TEXT\n  \"PostW\" TEXT\n  \"PostL\" TEXT\n  \"PostT\" TEXT\n  \"PostENG\" TEXT\n  \"PostSHO\" TEXT\n  \"PostGA\" TEXT\n  \"PostSA\" TEXT\n}\n\nTable \"GoaliesSC\" {\n  \"playerID\" TEXT [pk, not null]\n  \"year\" INTEGER [pk, not null]\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"GP\" INTEGER\n  \"Min\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"SHO\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"GoaliesShootout\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"SA\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"HOF\" {\n  \"year\" INTEGER\n  \"hofID\" TEXT [pk, not null]\n  \"name\" TEXT\n  \"category\" TEXT\n}\n\nTable \"Master\" {\n  \"playerID\" TEXT\n  \"coachID\" TEXT\n  \"hofID\" TEXT\n  \"firstName\" TEXT\n  \"lastName\" TEXT [not null]\n  \"nameNote\" TEXT\n  \"nameGiven\" TEXT\n  \"nameNick\" TEXT\n  \"height\" TEXT\n  \"weight\" TEXT\n  \"shootCatch\" TEXT\n  \"legendsID\" TEXT\n  \"ihdbID\" TEXT\n  \"hrefID\" TEXT\n  \"firstNHL\" TEXT\n  \"lastNHL\" TEXT\n  \"firstWHA\" TEXT\n  \"lastWHA\" TEXT\n  \"pos\" TEXT\n  \"birthYear\" TEXT\n  \"birthMon\" TEXT\n  \"birthDay\" TEXT\n  \"birthCountry\" TEXT\n  \"birthState\" TEXT\n  \"birthCity\" TEXT\n  \"deathYear\" TEXT\n  \"deathMon\" TEXT\n  \"deathDay\" TEXT\n  \"deathCountry\" TEXT\n  \"deathState\" TEXT\n  \"deathCity\" TEXT\n}\n\nTable \"Scoring\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"pos\" TEXT\n  \"GP\" INTEGER\n  \"G\" INTEGER\n  \"A\" INTEGER\n  \"Pts\" INTEGER\n  \"PIM\" INTEGER\n  \"+/-\" TEXT\n  \"PPG\" TEXT\n  \"PPA\" TEXT\n  \"SHG\" TEXT\n  \"SHA\" TEXT\n  \"GWG\" TEXT\n  \"GTG\" TEXT\n  \"SOG\" TEXT\n  \"PostGP\" TEXT\n  \"PostG\" TEXT\n  \"PostA\" TEXT\n  \"PostPts\" TEXT\n  \"PostPIM\" TEXT\n  \"Post+/-\" TEXT\n  \"PostPPG\" TEXT\n  \"PostPPA\" TEXT\n  \"PostSHG\" TEXT\n  \"PostSHA\" TEXT\n  \"PostGWG\" TEXT\n  \"PostSOG\" TEXT\n}\n\nTable \"ScoringSC\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"tmID\" TEXT\n  \"lgID\" TEXT\n  \"pos\" TEXT\n  \"GP\" INTEGER\n  \"G\" INTEGER\n  \"A\" INTEGER\n  \"Pts\" INTEGER\n  \"PIM\" INTEGER\n}\n\nTable \"ScoringShootout\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"stint\" INTEGER\n  \"tmID\" TEXT\n  \"S\" INTEGER\n  \"G\" INTEGER\n  \"GDG\" INTEGER\n}\n\nTable \"ScoringSup\" {\n  \"playerID\" TEXT\n  \"year\" INTEGER\n  \"PPA\" TEXT\n  \"SHA\" TEXT\n}\n\nTable \"SeriesPost\" {\n  \"year\" INTEGER\n  \"round\" TEXT\n  \"series\" TEXT\n  \"tmIDWinner\" TEXT\n  \"lgIDWinner\" TEXT\n  \"tmIDLoser\" TEXT\n  \"lgIDLoser\" TEXT\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GoalsWinner\" INTEGER\n  \"GoalsLoser\" INTEGER\n  \"note\" TEXT\n}\n\nTable \"TeamSplits\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"hW\" INTEGER\n  \"hL\" INTEGER\n  \"hT\" INTEGER\n  \"hOTL\" TEXT\n  \"rW\" INTEGER\n  \"rL\" INTEGER\n  \"rT\" INTEGER\n  \"rOTL\" TEXT\n  \"SepW\" TEXT\n  \"SepL\" TEXT\n  \"SepT\" TEXT\n  \"SepOL\" TEXT\n  \"OctW\" TEXT\n  \"OctL\" TEXT\n  \"OctT\" TEXT\n  \"OctOL\" TEXT\n  \"NovW\" TEXT\n  \"NovL\" TEXT\n  \"NovT\" TEXT\n  \"NovOL\" TEXT\n  \"DecW\" TEXT\n  \"DecL\" TEXT\n  \"DecT\" TEXT\n  \"DecOL\" TEXT\n  \"JanW\" INTEGER\n  \"JanL\" INTEGER\n  \"JanT\" INTEGER\n  \"JanOL\" TEXT\n  \"FebW\" INTEGER\n  \"FebL\" INTEGER\n  \"FebT\" INTEGER\n  \"FebOL\" TEXT\n  \"MarW\" TEXT\n  \"MarL\" TEXT\n  \"MarT\" TEXT\n  \"MarOL\" TEXT\n  \"AprW\" TEXT\n  \"AprL\" TEXT\n  \"AprT\" TEXT\n  \"AprOL\" TEXT\n}\n\nTable \"TeamVsTeam\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"oppID\" TEXT [pk, not null]\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"OTL\" TEXT\n}\n\nTable \"Teams\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"franchID\" TEXT\n  \"confID\" TEXT\n  \"divID\" TEXT\n  \"rank\" INTEGER\n  \"playoff\" TEXT\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"OTL\" TEXT\n  \"Pts\" INTEGER\n  \"SoW\" TEXT\n  \"SoL\" TEXT\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"name\" TEXT\n  \"PIM\" TEXT\n  \"BenchMinor\" TEXT\n  \"PPG\" TEXT\n  \"PPC\" TEXT\n  \"SHA\" TEXT\n  \"PKG\" TEXT\n  \"PKC\" TEXT\n  \"SHF\" TEXT\n}\n\nTable \"TeamsHalf\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"half\" INTEGER [pk, not null]\n  \"rank\" INTEGER\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n}\n\nTable \"TeamsPost\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"PIM\" TEXT\n  \"BenchMinor\" TEXT\n  \"PPG\" TEXT\n  \"PPC\" TEXT\n  \"SHA\" TEXT\n  \"PKG\" TEXT\n  \"PKC\" TEXT\n  \"SHF\" TEXT\n}\n\nTable \"TeamsSC\" {\n  \"year\" INTEGER [pk, not null]\n  \"lgID\" TEXT\n  \"tmID\" TEXT [pk, not null]\n  \"G\" INTEGER\n  \"W\" INTEGER\n  \"L\" INTEGER\n  \"T\" INTEGER\n  \"GF\" INTEGER\n  \"GA\" INTEGER\n  \"PIM\" TEXT\n}\n\nTable \"abbrev\" {\n  \"Type\" TEXT [pk, not null]\n  \"Code\" TEXT [pk, not null]\n  \"Fullname\" TEXT\n}\n\nRef: \"Coaches\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Coaches\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"AwardsCoaches\".\"coachID\" > \"Coaches\".\"coachID\"\n\nRef: \"Master\".\"coachID\" > \"Coaches\".\"coachID\"\n\nRef: \"AwardsPlayers\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"CombinedShutouts\".\"IDgoalie2\" > \"Master\".\"playerID\"\n\nRef: \"CombinedShutouts\".\"IDgoalie1\" > \"Master\".\"playerID\"\n\nRef: \"Goalies\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"Goalies\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Goalies\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"GoaliesSC\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"GoaliesSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"GoaliesSC\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"GoaliesShootout\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"GoaliesShootout\".\"year\" > \"Teams\".\"year\"\n\nRef: \"GoaliesShootout\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"Scoring\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"Scoring\".\"year\" > \"Teams\".\"year\"\n\nRef: \"Scoring\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringSC\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"ScoringSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"ScoringSC\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringShootout\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"ScoringShootout\".\"year\" > \"Teams\".\"year\"\n\nRef: \"ScoringShootout\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"ScoringSup\".\"playerID\" > \"Master\".\"playerID\"\n\nRef: \"SeriesPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"SeriesPost\".\"tmIDLoser\" > \"Teams\".\"tmID\"\n\nRef: \"SeriesPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"SeriesPost\".\"tmIDWinner\" > \"Teams\".\"tmID\"\n\nRef: \"TeamSplits\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamSplits\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamVsTeam\".\"oppID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamVsTeam\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamVsTeam\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamVsTeam\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsHalf\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsHalf\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsPost\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsPost\".\"tmID\" > \"Teams\".\"tmID\"\n\nRef: \"TeamsSC\".\"year\" > \"Teams\".\"year\"\n\nRef: \"TeamsSC\".\"tmID\" > \"Teams\".\"tmID\"\n\n## Table Stats & Sample Values\n\nAwardsCoaches: 77 rows\n  award: 'First Team All-Star', 'Second Team All-Star', 'Jack Adams', ...\n  coachID: 'patrile01c', 'irvindi01c', 'gormato01c', ...\n  lgID: 'NHL', 'WHA'\n\nAwardsMisc: 124 rows\n  name: '1960 U.S. Olympic Hockey Team', '1998 U.S. Olympic Women's Hockey Team', 'Al Arbour', ...\n  award: 'Patrick'\n  note: 'posthumous'\n\nAwardsPlayers: 2091 rows\n  note: 'tie', 'shared', 'Most Gentlemanly', ...\n  pos: 'C', 'LW', 'F', ...\n  lgID: 'NHL', 'WHA'\n\nCoaches: 1812 rows\n  notes: 'interim', 'co-coach with Barry Smith', 'co-coach with Dave Lewis'\n  postg: '7', '4', '6', ...\n  postw: '3', '0', '2', ...\n\nCombinedShutouts: 54 rows\n  R/P: 'R', 'P'\n  tmID: 'TOR', 'MTL', 'OAK', ...\n  oppID: 'NYA', 'BOS', 'PHI', ...\n\nGoalies: 4278 rows\n  GP: '1', '16', '41', ...\n  Min: '60', '870', '2385', ...\n  W: '0', '8', '18', ...\n\nGoaliesSC: 31 rows\n  tmID: 'OT1', 'OTS', 'MTM', ...\n  lgID: 'NHA', 'NHL', 'PCHA', ...\n  GP: '3', '5', '6', ...\n\nGoaliesShootout: 480 rows\n  playerID: 'aebisda01', 'andercr01', 'aubinje01', ...\n  tmID: 'COL', 'MTL', 'CHI', ...\n  year: '2005', '2006', '2008', ...\n\nHOF: 365 rows\n  name: 'Sid Abel', 'Charles Adams', 'Jack Adams', ...\n  category: 'Player', 'Builder', 'Referee/Linesman'\n  year: '1969', '1960', '1959', ...\n\nMaster: 7761 rows\n  firstName: 'Antti', 'Bruce', 'George', ...\n  lastName: 'Aalto', 'Abbey', 'Abbott', ...\n  nameNote: 'also known as Bellehumeur', 'also listed as Bourdginon', 'born Bodnarchuk', ...\n\nScoring: 10000 rows\n  pos: 'C', 'D', 'G', ...\n  +/-: '-1', '-12', '-13', ...\n  PPG: '0', '2', '1', ...\n\nScoringSC: 284 rows\n  pos: 'R', 'C', 'L', ...\n  playerID: 'adamsbi01', 'adamsja01', 'anderer02', ...\n  tmID: 'VML', 'CAT', 'VIC', ...\n\nScoringShootout: 2072 rows\n  playerID: 'adamske01', 'afanadm01', 'afinoma01', ...\n  tmID: 'PHO', 'TBL', 'BUF', ...\n  year: '2006', '2005', '2007', ...\n\nScoringSup: 137 rows\n  PPA: '1', '5', '4', ...\n  SHA: '1', '2', '4', ...\n  playerID: 'actonke01', 'adamsgr01', 'allismi01', ...\n\nSeriesPost: 832 rows\n  round: 'SCF', 'F', 'SF', ...\n  series: 'A', 'B', 'C', ...\n  note: 'EX', 'TG', 'ND', ...\n\nTeamSplits: 1519 rows\n  hOTL: '2', '3', '1', ...\n  rOTL: '1', '5', '3', ...\n  OctW: '0', '1', '2', ...\n\nTeamVsTeam: 10000 rows\n  lgID: 'NHA', 'PCHA', 'NHL', ...\n  W: '1', '2', '0', ...\n  L: '1', '0', '2', ...\n\nTeams: 1519 rows\n  name: 'Cobalt Silver Kings', 'Haileybury Hockey Club', 'Les Canadiens', ...\n  playoff: 'LCS', 'WCS', 'NHAF', ...\n  OTL: '3', '4', '6', ...\n\nTeamsHalf: 41 rows\n  lgID: 'NHA', 'NHL'\n  rank: '1', '3', '5', ...\n  G: '10', '4', '14', ...\n\nTeamsPost: 927 rows\n  PIM: '59', '68', '87', ...\n  BenchMinor: '0', '6', '2', ...\n  PPG: '1', '5', '9', ...\n\nTeamsSC: 30 rows\n  PIM: '24', '20', '75', ...\n  lgID: 'NHA', 'PCHA', 'NHL', ...\n  G: '3', '5', '4', ...\n\nabbrev: 58 rows\n  Fullname: 'Campbell Conference', 'Eastern Conference', 'Wales Conference', ...\n  Type: 'Conference', 'Division', 'Playoffs', ...\n  Code: 'CC', 'EC', 'WA', ...",
+    "stateUrl": "https://bird-bench.github.io/#hockey",
+    "tableStats": {
+      "AwardsCoaches": {
+        "rows": 77,
+        "sample_values": {
+          "coachID": [
+            "patrile01c",
+            "irvindi01c",
+            "gormato01c",
+            "adamsja01c",
+            "hartce01c",
+            "rossar01c",
+            "duttore01c",
+            "thomppa01c"
+          ],
+          "award": [
+            "First Team All-Star",
+            "Second Team All-Star",
+            "Jack Adams",
+            "Baldwin",
+            "Schmertz"
+          ],
+          "year": [
+            "1930",
+            "1931",
+            "1932",
+            "1933",
+            "1934",
+            "1935",
+            "1936",
+            "1937"
+          ],
+          "lgID": [
+            "NHL",
+            "WHA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "AwardsMisc": {
+        "rows": 124,
+        "sample_values": {
+          "name": [
+            "1960 U.S. Olympic Hockey Team",
+            "1998 U.S. Olympic Women's Hockey Team",
+            "Al Arbour",
+            "Alex Delvecchio",
+            "Art Berglund",
+            "Art Ross",
+            "Arthur Wirtz",
+            "Bill Chadwick"
+          ],
+          "ID": [
+            "arboual01",
+            "delveal01",
+            "rossar01",
+            "wirtzar01h",
+            "chadwbi01h",
+            "torrebi01h",
+            "johnsbo02c",
+            "pulfobo01"
+          ],
+          "award": [
+            "Patrick"
+          ],
+          "year": [
+            "2001",
+            "1998",
+            "1991",
+            "1973",
+            "1983",
+            "1984",
+            "1974",
+            "1996"
+          ],
+          "lgID": [
+            "NHL"
+          ],
+          "note": [
+            "posthumous"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "AwardsPlayers": {
+        "rows": 2091,
+        "sample_values": {
+          "playerID": [
+            "abelsi01",
+            "alfreda01",
+            "amontto01",
+            "anderto01",
+            "antonmi01",
+            "appssy01",
+            "arnasty01",
+            "arnotja01"
+          ],
+          "award": [
+            "First Team All-Star",
+            "Hart",
+            "Second Team All-Star",
+            "All-Rookie",
+            "Calder",
+            "King Clancy",
+            "Lady Byng",
+            "Crozier"
+          ],
+          "year": [
+            "1948",
+            "1949",
+            "1941",
+            "1950",
+            "1995",
+            "2011",
+            "2005",
+            "1991"
+          ],
+          "lgID": [
+            "NHL",
+            "WHA"
+          ],
+          "note": [
+            "tie",
+            "shared",
+            "Most Gentlemanly",
+            "Rookie",
+            "Best Goaltender",
+            "Scoring",
+            "MVP",
+            "Best Defenceman"
+          ],
+          "pos": [
+            "C",
+            "LW",
+            "F",
+            "RW",
+            "D",
+            "G",
+            "W"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Coaches": {
+        "rows": 1812,
+        "sample_values": {
+          "coachID": [
+            "abelsi01c",
+            "adamsja01c",
+            "agnewga01c",
+            "allenke01c",
+            "allisda01c",
+            "anderji01c",
+            "anderjo01c",
+            "angotlo01c"
+          ],
+          "year": [
+            "1952",
+            "1953",
+            "1957",
+            "1958",
+            "1959",
+            "1960",
+            "1961",
+            "1962"
+          ],
+          "tmID": [
+            "CHI",
+            "DET",
+            "STL",
+            "KCS",
+            "DTC",
+            "DTF",
+            "CBS",
+            "PHI"
+          ],
+          "lgID": [
+            "NHL",
+            "WHA",
+            "NHA",
+            "WCHL",
+            "PCHA"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3"
+          ],
+          "notes": [
+            "interim",
+            "co-coach with Barry Smith",
+            "co-coach with Dave Lewis"
+          ],
+          "g": [
+            "70",
+            "33",
+            "74",
+            "10",
+            "3",
+            "44",
+            "48",
+            "50"
+          ],
+          "w": [
+            "27",
+            "12",
+            "16",
+            "25",
+            "26",
+            "23",
+            "32",
+            "30"
+          ],
+          "l": [
+            "28",
+            "51",
+            "12",
+            "37",
+            "29",
+            "33",
+            "25",
+            "23"
+          ],
+          "t": [
+            "15",
+            "7",
+            "5",
+            "8",
+            "16",
+            "14",
+            "13",
+            "11"
+          ],
+          "postg": [
+            "7",
+            "4",
+            "6",
+            "11",
+            "14",
+            "12",
+            "2",
+            "9"
+          ],
+          "postw": [
+            "3",
+            "0",
+            "2",
+            "6",
+            "5",
+            "7",
+            "4",
+            "8"
+          ],
+          "postl": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "2",
+            "1",
+            "3",
+            "8"
+          ],
+          "postt": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CombinedShutouts": {
+        "rows": 54,
+        "sample_values": {
+          "year": [
+            "1929",
+            "1941",
+            "1955",
+            "1968",
+            "1970",
+            "1971",
+            "1972",
+            "1973"
+          ],
+          "month": [
+            "3",
+            "2",
+            "11",
+            "1",
+            "12",
+            "10",
+            "4",
+            "5"
+          ],
+          "date": [
+            "14",
+            "15",
+            "22",
+            "5",
+            "2",
+            "24",
+            "25",
+            "29"
+          ],
+          "tmID": [
+            "TOR",
+            "MTL",
+            "OAK",
+            "STL",
+            "QUN",
+            "TOT",
+            "CHI",
+            "WAS"
+          ],
+          "oppID": [
+            "NYA",
+            "BOS",
+            "PHI",
+            "DET",
+            "CLF",
+            "PIT",
+            "PHB",
+            "LAS"
+          ],
+          "R/P": [
+            "R",
+            "P"
+          ],
+          "IDgoalie1": [
+            "chabolo01",
+            "bibeapa01",
+            "plantja01",
+            "smithga01",
+            "hallgl01",
+            "aubryse01",
+            "binklle01",
+            "esposto01"
+          ],
+          "IDgoalie2": [
+            "grantbe01",
+            "gardibe01",
+            "hodgech01",
+            "wakeler01",
+            "gamblbr01",
+            "parenbe01",
+            "lowro01",
+            "broderi01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Goalies": {
+        "rows": 4278,
+        "sample_values": {
+          "playerID": [
+            "abbotge01",
+            "abrahch01",
+            "adamsjo02",
+            "aebisda01",
+            "aikendo01",
+            "aitkean01",
+            "allenbr01",
+            "almasre01"
+          ],
+          "year": [
+            "1943",
+            "1974",
+            "1975",
+            "1976",
+            "1972",
+            "2000",
+            "2001",
+            "2002"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3"
+          ],
+          "tmID": [
+            "BOS",
+            "NEW",
+            "WAS",
+            "COL",
+            "MTL",
+            "PHO",
+            "NYR",
+            "STL"
+          ],
+          "lgID": [
+            "NHL",
+            "WHA",
+            "NHA",
+            "WCHL",
+            "PCHA"
+          ],
+          "GP": [
+            "1",
+            "16",
+            "41",
+            "45",
+            "14",
+            "8",
+            "26",
+            "21"
+          ],
+          "Min": [
+            "60",
+            "870",
+            "2385",
+            "2484",
+            "780",
+            "400",
+            "1393",
+            "1184"
+          ],
+          "W": [
+            "0",
+            "8",
+            "18",
+            "15",
+            "9",
+            "12",
+            "13",
+            "7"
+          ],
+          "L": [
+            "1",
+            "6",
+            "18",
+            "22",
+            "3",
+            "7",
+            "12",
+            "19"
+          ],
+          "T/OL": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3",
+            "9",
+            "8",
+            "5"
+          ],
+          "ENG": [
+            "0",
+            "1",
+            "3",
+            "4",
+            "5",
+            "2",
+            "6",
+            "7"
+          ],
+          "SHO": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "5",
+            "8"
+          ],
+          "GA": [
+            "7",
+            "47",
+            "136",
+            "159",
+            "39",
+            "46",
+            "52",
+            "37"
+          ],
+          "SA": [
+            "504",
+            "1221",
+            "1438",
+            "538",
+            "593",
+            "1703",
+            "1233",
+            "240"
+          ],
+          "PostGP": [
+            "1",
+            "2",
+            "11",
+            "8",
+            "5",
+            "6",
+            "7",
+            "3"
+          ],
+          "PostMin": [
+            "1",
+            "90",
+            "34",
+            "662",
+            "488",
+            "120",
+            "263",
+            "366"
+          ],
+          "PostW": [
+            "0",
+            "6",
+            "1",
+            "2",
+            "3",
+            "7",
+            "5",
+            "4"
+          ],
+          "PostL": [
+            "0",
+            "1",
+            "5",
+            "3",
+            "4",
+            "2",
+            "7",
+            "6"
+          ],
+          "PostT": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4"
+          ],
+          "PostENG": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "4"
+          ],
+          "PostSHO": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "5",
+            "6"
+          ],
+          "PostGA": [
+            "0",
+            "5",
+            "1",
+            "23",
+            "13",
+            "2",
+            "16",
+            "14"
+          ],
+          "PostSA": [
+            "51",
+            "0",
+            "14",
+            "295",
+            "239",
+            "208",
+            "66",
+            "11"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "GoaliesSC": {
+        "rows": 31,
+        "sample_values": {
+          "playerID": [
+            "benedcl01",
+            "clancki01",
+            "holmeha01",
+            "lehmahu01",
+            "lindsbe01",
+            "moranpa01",
+            "murrato01",
+            "reidch01"
+          ],
+          "year": [
+            "1914",
+            "1919",
+            "1920",
+            "1922",
+            "1925",
+            "1913",
+            "1916",
+            "1917"
+          ],
+          "tmID": [
+            "OT1",
+            "OTS",
+            "MTM",
+            "TBS",
+            "SEA",
+            "TOA",
+            "VIC",
+            "VML"
+          ],
+          "lgID": [
+            "NHA",
+            "NHL",
+            "PCHA",
+            "WCHL"
+          ],
+          "GP": [
+            "3",
+            "5",
+            "6",
+            "4",
+            "1",
+            "2"
+          ],
+          "Min": [
+            "180",
+            "300",
+            "361",
+            "240",
+            "2",
+            "195",
+            "336",
+            "305"
+          ],
+          "W": [
+            "0",
+            "3",
+            "5",
+            "2",
+            "1",
+            "4"
+          ],
+          "L": [
+            "3",
+            "2",
+            "1",
+            "0"
+          ],
+          "T": [
+            "0",
+            "1"
+          ],
+          "SHO": [
+            "0",
+            "1",
+            "3",
+            "2"
+          ],
+          "GA": [
+            "26",
+            "11",
+            "12",
+            "8",
+            "3",
+            "0",
+            "21",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "GoaliesShootout": {
+        "rows": 480,
+        "sample_values": {
+          "playerID": [
+            "aebisda01",
+            "andercr01",
+            "aubinje01",
+            "auldal01",
+            "bacasja01",
+            "bachmri01",
+            "backsni01",
+            "belfoed01"
+          ],
+          "year": [
+            "2005",
+            "2006",
+            "2008",
+            "2009",
+            "2010",
+            "2011",
+            "2007"
+          ],
+          "stint": [
+            "1",
+            "2"
+          ],
+          "tmID": [
+            "COL",
+            "MTL",
+            "CHI",
+            "FLO",
+            "OTT",
+            "TOR",
+            "LAK",
+            "VAN"
+          ],
+          "W": [
+            "2",
+            "0",
+            "1",
+            "7",
+            "6",
+            "4",
+            "3",
+            "5"
+          ],
+          "L": [
+            "1",
+            "2",
+            "3",
+            "0",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "SA": [
+            "10",
+            "18",
+            "7",
+            "2",
+            "11",
+            "51",
+            "3",
+            "12"
+          ],
+          "GA": [
+            "2",
+            "6",
+            "5",
+            "0",
+            "7",
+            "16",
+            "1",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "HOF": {
+        "rows": 365,
+        "sample_values": {
+          "year": [
+            "1969",
+            "1960",
+            "1959",
+            "1972",
+            "1977",
+            "1962",
+            "1945",
+            "1992"
+          ],
+          "hofID": [
+            "abelsi01h",
+            "adamsch01h",
+            "adamsja01h",
+            "adamswe01h",
+            "ahearbu01h",
+            "ahearfr01h",
+            "allanmo01h",
+            "allenke01h"
+          ],
+          "name": [
+            "Sid Abel",
+            "Charles Adams",
+            "Jack Adams",
+            "Weston Adams",
+            "Bunny Ahearne",
+            "Frank Ahearn",
+            "Montagu Allan",
+            "Keith Allen"
+          ],
+          "category": [
+            "Player",
+            "Builder",
+            "Referee/Linesman"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Master": {
+        "rows": 7761,
+        "sample_values": {
+          "playerID": [
+            "aaltoan01",
+            "abbeybr01",
+            "abbotge01",
+            "abbotre01",
+            "abdelju01",
+            "abelcl01",
+            "abelge01",
+            "abelsi01"
+          ],
+          "coachID": [
+            "abelsi01c",
+            "adamsja01c",
+            "agnewga01c",
+            "allenke01c",
+            "allisda01c",
+            "anderji01c",
+            "anderjo01c",
+            "angotlo01c"
+          ],
+          "hofID": [
+            "abelsi01h",
+            "adamsch01h",
+            "adamsja01h",
+            "adamswe01h",
+            "ahearbu01h",
+            "ahearfr01h",
+            "allanmo01h",
+            "allenke01h"
+          ],
+          "firstName": [
+            "Antti",
+            "Bruce",
+            "George",
+            "Reg",
+            "Justin",
+            "Clarence",
+            "Gerry",
+            "Sid"
+          ],
+          "lastName": [
+            "Aalto",
+            "Abbey",
+            "Abbott",
+            "Abdelkader",
+            "Abel",
+            "Abgrall",
+            "Abid",
+            "Abrahamsson"
+          ],
+          "nameNote": [
+            "also known as Bellehumeur",
+            "also listed as Bourdginon",
+            "born Bodnarchuk",
+            "also known as Bowcher",
+            "also known as Burmeister",
+            "also known as Kahibaitche",
+            "born Tselios",
+            "also known as Couture"
+          ],
+          "nameGiven": [
+            "Antti",
+            "Bruce",
+            "George Henry",
+            "Reginald Stewart",
+            "Clarence John",
+            "Gerald Scott",
+            "Sidney Gerald",
+            "Dennis Harvey"
+          ],
+          "nameNick": [
+            "Preacher",
+            "Taffy",
+            "Boot Nose",
+            "Acky",
+            "Woody",
+            "Eddie",
+            "Gus/Hawk",
+            "Jolly Jack"
+          ],
+          "height": [
+            "73",
+            "67",
+            "71",
+            "74",
+            "72",
+            "68",
+            "70",
+            "75"
+          ],
+          "weight": [
+            "210",
+            "185",
+            "153",
+            "164",
+            "195",
+            "225",
+            "168",
+            "170"
+          ],
+          "shootCatch": [
+            "L",
+            "R",
+            "B"
+          ],
+          "legendsID": [
+            "14862",
+            "18411",
+            "11801",
+            "21661",
+            "11802",
+            "11803",
+            "P196901",
+            "11805"
+          ],
+          "ihdbID": [
+            "5928",
+            "11918",
+            "14591",
+            "11431",
+            "81002",
+            "18751",
+            "10017",
+            "5931"
+          ],
+          "hrefID": [
+            "aaltoan01",
+            "abbeybr01",
+            "abbotge01",
+            "abbotre01",
+            "abdelju01",
+            "abelcl01",
+            "abelge01",
+            "abelsi01"
+          ],
+          "firstNHL": [
+            "1997",
+            "1943",
+            "1952",
+            "2007",
+            "1926",
+            "1966",
+            "1938",
+            "1975"
+          ],
+          "lastNHL": [
+            "2000",
+            "1943",
+            "1952",
+            "2011",
+            "1933",
+            "1966",
+            "1953",
+            "1975"
+          ],
+          "firstWHA": [
+            "1975",
+            "1976",
+            "1974",
+            "1973",
+            "1978",
+            "1972",
+            "1977"
+          ],
+          "lastWHA": [
+            "1975",
+            "1977",
+            "1976",
+            "1973",
+            "1978",
+            "1972",
+            "1974"
+          ],
+          "pos": [
+            "C",
+            "D",
+            "G",
+            "L",
+            "R",
+            "L/D",
+            "D/L",
+            "D/R"
+          ],
+          "birthYear": [
+            "1975",
+            "1951",
+            "1911",
+            "1930",
+            "1987",
+            "1900",
+            "1944",
+            "1918"
+          ],
+          "birthMon": [
+            "3",
+            "8",
+            "2",
+            "5",
+            "12",
+            "4",
+            "9",
+            "6"
+          ],
+          "birthDay": [
+            "4",
+            "18",
+            "3",
+            "25",
+            "28",
+            "22",
+            "24",
+            "8"
+          ],
+          "birthCountry": [
+            "Finland",
+            "Canada",
+            "USA",
+            "Sweden",
+            "Brunei Darussalam",
+            "Switzerland",
+            "Russia",
+            "Ireland"
+          ],
+          "birthState": [
+            "ON",
+            "MB",
+            "MI",
+            "SK",
+            "QC",
+            "AB",
+            "NL",
+            "BC"
+          ],
+          "birthCity": [
+            "Lappeenranta",
+            "Toronto",
+            "Synenham",
+            "Winnipeg",
+            "Muskegon",
+            "Sault Ste. Marie",
+            "Detroit",
+            "Melville"
+          ],
+          "deathYear": [
+            "1964",
+            "2000",
+            "2001",
+            "1947",
+            "1968",
+            "1978",
+            "1973",
+            "1985"
+          ],
+          "deathMon": [
+            "8",
+            "2",
+            "12",
+            "5",
+            "3",
+            "4",
+            "11",
+            "9"
+          ],
+          "deathDay": [
+            "1",
+            "7",
+            "24",
+            "18",
+            "19",
+            "11",
+            "17",
+            "6"
+          ],
+          "deathCountry": [
+            "USA",
+            "Canada",
+            "France",
+            "Belgium",
+            "Russia",
+            "Czech Republic",
+            "Germany",
+            "Sweden"
+          ],
+          "deathState": [
+            "MI",
+            "AB",
+            "SK",
+            "MB",
+            "ON",
+            "FL",
+            "PA",
+            "MN"
+          ],
+          "deathCity": [
+            "Sault Ste. Marie",
+            "Farmington",
+            "Calgary",
+            "Swift Current",
+            "Red Deer",
+            "Winnipeg",
+            "Regina",
+            "Renfrew"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Scoring": {
+        "rows": 10000,
+        "sample_values": {
+          "playerID": [
+            "aaltoan01",
+            "abbeybr01",
+            "abbotge01",
+            "abbotre01",
+            "abdelju01",
+            "abelcl01",
+            "abelge01",
+            "abelsi01"
+          ],
+          "year": [
+            "1997",
+            "1998",
+            "1999",
+            "2000",
+            "1975",
+            "1943",
+            "1952",
+            "2007"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3"
+          ],
+          "tmID": [
+            "ANA",
+            "CIN",
+            "BOS",
+            "MTL",
+            "DET",
+            "NYR",
+            "CHI",
+            "LAK"
+          ],
+          "lgID": [
+            "NHL",
+            "WHA",
+            "PCHA",
+            "WCHL",
+            "NHA"
+          ],
+          "pos": [
+            "C",
+            "D",
+            "G",
+            "L",
+            "R",
+            "L/D",
+            "F",
+            "D/L"
+          ],
+          "GP": [
+            "3",
+            "73",
+            "63",
+            "12",
+            "17",
+            "1",
+            "2",
+            "50"
+          ],
+          "G": [
+            "0",
+            "3",
+            "7",
+            "1",
+            "8",
+            "4",
+            "2",
+            "11"
+          ],
+          "A": [
+            "0",
+            "5",
+            "11",
+            "1",
+            "3",
+            "12",
+            "14",
+            "4"
+          ],
+          "Pts": [
+            "0",
+            "8",
+            "18",
+            "2",
+            "1",
+            "6",
+            "19",
+            "22"
+          ],
+          "PIM": [
+            "0",
+            "24",
+            "26",
+            "2",
+            "12",
+            "35",
+            "61",
+            "62"
+          ],
+          "+/-": [
+            "-1",
+            "-12",
+            "-13",
+            "1",
+            "-3",
+            "0",
+            "-11",
+            "15"
+          ],
+          "PPG": [
+            "0",
+            "2",
+            "1",
+            "4",
+            "3",
+            "10",
+            "5",
+            "6"
+          ],
+          "PPA": [
+            "0",
+            "1",
+            "2",
+            "5",
+            "3",
+            "4",
+            "16",
+            "6"
+          ],
+          "SHG": [
+            "0",
+            "2",
+            "1",
+            "5",
+            "7",
+            "3",
+            "4",
+            "6"
+          ],
+          "SHA": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "GWG": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "5",
+            "4",
+            "7",
+            "6"
+          ],
+          "GTG": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "5",
+            "4",
+            "6"
+          ],
+          "SOG": [
+            "1",
+            "61",
+            "102",
+            "18",
+            "2",
+            "6",
+            "79",
+            "129"
+          ],
+          "PostGP": [
+            "4",
+            "10",
+            "11",
+            "5",
+            "2",
+            "9",
+            "6",
+            "8"
+          ],
+          "PostG": [
+            "0",
+            "2",
+            "1",
+            "4",
+            "5",
+            "3",
+            "6",
+            "7"
+          ],
+          "PostA": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "8",
+            "4",
+            "7",
+            "5"
+          ],
+          "PostPts": [
+            "0",
+            "3",
+            "2",
+            "1",
+            "4",
+            "6",
+            "13",
+            "8"
+          ],
+          "PostPIM": [
+            "2",
+            "0",
+            "36",
+            "22",
+            "8",
+            "14",
+            "10",
+            "21"
+          ],
+          "Post+/-": [
+            "0",
+            "2",
+            "1",
+            "-4",
+            "-5",
+            "-3",
+            "-1",
+            "4"
+          ],
+          "PostPPG": [
+            "0",
+            "1",
+            "5",
+            "2",
+            "3",
+            "4",
+            "6",
+            "9"
+          ],
+          "PostPPA": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "5",
+            "8",
+            "14"
+          ],
+          "PostSHG": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "PostSHA": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "PostGWG": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "PostSOG": [
+            "0",
+            "11",
+            "12",
+            "17",
+            "7",
+            "26",
+            "34",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ScoringSC": {
+        "rows": 284,
+        "sample_values": {
+          "playerID": [
+            "adamsbi01",
+            "adamsja01",
+            "anderer02",
+            "anderjo03",
+            "andrell01",
+            "arbouam01",
+            "arbouty01",
+            "barboal01"
+          ],
+          "year": [
+            "1920",
+            "1921",
+            "1923",
+            "1924",
+            "1925",
+            "1915",
+            "1922",
+            "1914"
+          ],
+          "tmID": [
+            "VML",
+            "CAT",
+            "VIC",
+            "TRS",
+            "MOC",
+            "EDE",
+            "PO1",
+            "MTL"
+          ],
+          "lgID": [
+            "PCHA",
+            "WCHL",
+            "NHL",
+            "NHA"
+          ],
+          "pos": [
+            "R",
+            "C",
+            "L",
+            "F",
+            "G",
+            "D",
+            "R/C",
+            "R/L"
+          ],
+          "GP": [
+            "4",
+            "5",
+            "2",
+            "1",
+            "3",
+            "6"
+          ],
+          "G": [
+            "0",
+            "2",
+            "6",
+            "1",
+            "3",
+            "5",
+            "9",
+            "7"
+          ],
+          "A": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6"
+          ],
+          "Pts": [
+            "0",
+            "3",
+            "7",
+            "1",
+            "2",
+            "6",
+            "4",
+            "5"
+          ],
+          "PIM": [
+            "0",
+            "6",
+            "18",
+            "2",
+            "10",
+            "3",
+            "8",
+            "13"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ScoringShootout": {
+        "rows": 2072,
+        "sample_values": {
+          "playerID": [
+            "adamske01",
+            "afanadm01",
+            "afinoma01",
+            "alexeni01",
+            "alfreda01",
+            "allisja01",
+            "amontto01",
+            "anisiar01"
+          ],
+          "year": [
+            "2006",
+            "2005",
+            "2007",
+            "2009",
+            "2008",
+            "2010",
+            "2011"
+          ],
+          "stint": [
+            "1",
+            "2",
+            "3"
+          ],
+          "tmID": [
+            "PHO",
+            "TBL",
+            "BUF",
+            "ATL",
+            "CHI",
+            "OTT",
+            "TOR",
+            "CAL"
+          ],
+          "S": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "3",
+            "8",
+            "7",
+            "9"
+          ],
+          "G": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "5",
+            "6",
+            "4",
+            "8"
+          ],
+          "GDG": [
+            "0",
+            "1",
+            "2",
+            "6",
+            "3",
+            "4",
+            "5",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ScoringSup": {
+        "rows": 137,
+        "sample_values": {
+          "playerID": [
+            "actonke01",
+            "adamsgr01",
+            "allismi01",
+            "archida01",
+            "bassebo01",
+            "bennibr01",
+            "bodgedo01",
+            "bradlbr01"
+          ],
+          "year": [
+            "1988",
+            "1989",
+            "1987",
+            "1990"
+          ],
+          "PPA": [
+            "1",
+            "5",
+            "4",
+            "25",
+            "10",
+            "3",
+            "24",
+            "13"
+          ],
+          "SHA": [
+            "1",
+            "2",
+            "4",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SeriesPost": {
+        "rows": 832,
+        "sample_values": {
+          "year": [
+            "1912",
+            "1913",
+            "1914",
+            "1915",
+            "1916",
+            "1917",
+            "1918",
+            "1919"
+          ],
+          "round": [
+            "SCF",
+            "F",
+            "SF",
+            "SCSF",
+            "WP",
+            "QF",
+            "Pre",
+            "DSF"
+          ],
+          "series": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+          ],
+          "tmIDWinner": [
+            "VA1",
+            "TBS",
+            "OT1",
+            "VML",
+            "MOC",
+            "SEA",
+            "TOA",
+            "MTL"
+          ],
+          "lgIDWinner": [
+            "PCHA",
+            "NHA",
+            "NHL",
+            "WCHL",
+            "WHA"
+          ],
+          "tmIDLoser": [
+            "QU1",
+            "MOC",
+            "VA1",
+            "MOW",
+            "OT1",
+            "PO1",
+            "MTL",
+            "SEA"
+          ],
+          "lgIDLoser": [
+            "NHA",
+            "PCHA",
+            "NHL",
+            "WCHL",
+            "WHA"
+          ],
+          "W": [
+            "2",
+            "1",
+            "3",
+            "4",
+            "0"
+          ],
+          "L": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4"
+          ],
+          "T": [
+            "0",
+            "1",
+            "2"
+          ],
+          "GoalsWinner": [
+            "16",
+            "6",
+            "13",
+            "4",
+            "26",
+            "15",
+            "7",
+            "23"
+          ],
+          "GoalsLoser": [
+            "12",
+            "2",
+            "8",
+            "1",
+            "13",
+            "6",
+            "11",
+            "7"
+          ],
+          "note": [
+            "EX",
+            "TG",
+            "ND",
+            "DEF"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TeamSplits": {
+        "rows": 1519,
+        "sample_values": {
+          "year": [
+            "1909",
+            "1910",
+            "1911",
+            "1912",
+            "1913",
+            "1914",
+            "1915",
+            "1916"
+          ],
+          "lgID": [
+            "NHA",
+            "PCHA",
+            "NHL",
+            "WCHL",
+            "WHA"
+          ],
+          "tmID": [
+            "COB",
+            "HAI",
+            "LES",
+            "MOS",
+            "MOW",
+            "OT1",
+            "REN",
+            "MOC"
+          ],
+          "hW": [
+            "2",
+            "3",
+            "6",
+            "5",
+            "4",
+            "7",
+            "8",
+            "9"
+          ],
+          "hL": [
+            "4",
+            "3",
+            "2",
+            "0",
+            "1",
+            "6",
+            "5",
+            "7"
+          ],
+          "hT": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3",
+            "5",
+            "6",
+            "7"
+          ],
+          "hOTL": [
+            "2",
+            "3",
+            "1",
+            "0",
+            "4",
+            "6",
+            "5",
+            "10"
+          ],
+          "rW": [
+            "2",
+            "1",
+            "0",
+            "5",
+            "4",
+            "3",
+            "6",
+            "8"
+          ],
+          "rL": [
+            "4",
+            "5",
+            "6",
+            "1",
+            "2",
+            "3",
+            "7",
+            "8"
+          ],
+          "rT": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "6",
+            "4",
+            "5",
+            "9"
+          ],
+          "rOTL": [
+            "1",
+            "5",
+            "3",
+            "4",
+            "0",
+            "2",
+            "6",
+            "8"
+          ],
+          "SepW": [
+            "1"
+          ],
+          "SepL": [
+            "1"
+          ],
+          "SepOL": [
+            "0"
+          ],
+          "OctW": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "8",
+            "6"
+          ],
+          "OctL": [
+            "1",
+            "0",
+            "2",
+            "4",
+            "5",
+            "3",
+            "6",
+            "7"
+          ],
+          "OctT": [
+            "0",
+            "1",
+            "4",
+            "2",
+            "3",
+            "5",
+            "6"
+          ],
+          "OctOL": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "5",
+            "4"
+          ],
+          "NovW": [
+            "5",
+            "1",
+            "2",
+            "0",
+            "4",
+            "3",
+            "6",
+            "7"
+          ],
+          "NovL": [
+            "1",
+            "4",
+            "3",
+            "2",
+            "0",
+            "5",
+            "7",
+            "8"
+          ],
+          "NovT": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "NovOL": [
+            "0",
+            "2",
+            "1",
+            "4",
+            "3"
+          ],
+          "DecW": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8"
+          ],
+          "DecL": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "8",
+            "7"
+          ],
+          "DecT": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "DecOL": [
+            "0",
+            "2",
+            "1",
+            "3",
+            "4",
+            "5"
+          ],
+          "JanW": [
+            "1",
+            "0",
+            "2",
+            "4",
+            "3",
+            "6",
+            "5",
+            "8"
+          ],
+          "JanL": [
+            "1",
+            "3",
+            "2",
+            "0",
+            "6",
+            "5",
+            "4",
+            "9"
+          ],
+          "JanT": [
+            "0",
+            "1",
+            "3",
+            "2",
+            "4",
+            "7",
+            "5",
+            "6"
+          ],
+          "JanOL": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "FebW": [
+            "2",
+            "1",
+            "6",
+            "5",
+            "4",
+            "3",
+            "8",
+            "0"
+          ],
+          "FebL": [
+            "3",
+            "5",
+            "0",
+            "1",
+            "2",
+            "6",
+            "7",
+            "4"
+          ],
+          "FebT": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "8",
+            "6"
+          ],
+          "FebOL": [
+            "0",
+            "1",
+            "4",
+            "2",
+            "3",
+            "5"
+          ],
+          "MarW": [
+            "1",
+            "3",
+            "0",
+            "2",
+            "5",
+            "4",
+            "9",
+            "6"
+          ],
+          "MarL": [
+            "4",
+            "0",
+            "2",
+            "1",
+            "3",
+            "5",
+            "6",
+            "7"
+          ],
+          "MarT": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3",
+            "5",
+            "7",
+            "6"
+          ],
+          "MarOL": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "AprW": [
+            "1",
+            "0",
+            "2",
+            "3",
+            "4",
+            "7",
+            "5",
+            "6"
+          ],
+          "AprL": [
+            "0",
+            "2",
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "AprT": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3",
+            "5"
+          ],
+          "AprOL": [
+            "1",
+            "0",
+            "2",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TeamVsTeam": {
+        "rows": 10000,
+        "sample_values": {
+          "year": [
+            "1909",
+            "1910",
+            "1911",
+            "1912",
+            "1913",
+            "1914",
+            "1915",
+            "1916"
+          ],
+          "lgID": [
+            "NHA",
+            "PCHA",
+            "NHL",
+            "WCHL",
+            "WHA"
+          ],
+          "tmID": [
+            "COB",
+            "HAI",
+            "LES",
+            "MOS",
+            "MOW",
+            "OT1",
+            "REN",
+            "MOC"
+          ],
+          "oppID": [
+            "HAI",
+            "LES",
+            "MOS",
+            "MOW",
+            "OT1",
+            "REN",
+            "COB",
+            "QU1"
+          ],
+          "W": [
+            "1",
+            "2",
+            "0",
+            "3",
+            "4",
+            "7",
+            "6",
+            "5"
+          ],
+          "L": [
+            "1",
+            "0",
+            "2",
+            "4",
+            "3",
+            "5",
+            "7",
+            "6"
+          ],
+          "T": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Teams": {
+        "rows": 1519,
+        "sample_values": {
+          "year": [
+            "1909",
+            "1910",
+            "1911",
+            "1912",
+            "1913",
+            "1914",
+            "1915",
+            "1916"
+          ],
+          "lgID": [
+            "NHA",
+            "PCHA",
+            "NHL",
+            "WCHL",
+            "WHA"
+          ],
+          "tmID": [
+            "COB",
+            "HAI",
+            "LES",
+            "MOS",
+            "MOW",
+            "OT1",
+            "REN",
+            "MOC"
+          ],
+          "franchID": [
+            "BKN",
+            "MTL",
+            "TBS",
+            "MOS",
+            "MTW",
+            "STE",
+            "REN",
+            "PO1"
+          ],
+          "confID": [
+            "CC",
+            "WA",
+            "WC",
+            "EC"
+          ],
+          "divID": [
+            "AM",
+            "CA",
+            "ED",
+            "WD",
+            "WW",
+            "EW",
+            "PT",
+            "AD"
+          ],
+          "rank": [
+            "4",
+            "5",
+            "7",
+            "6",
+            "1",
+            "2",
+            "3",
+            "8"
+          ],
+          "playoff": [
+            "LCS",
+            "WCS",
+            "NHAF",
+            "SC",
+            "F",
+            "NHLF",
+            "PF",
+            "ND"
+          ],
+          "G": [
+            "12",
+            "16",
+            "18",
+            "15",
+            "20",
+            "13",
+            "14",
+            "17"
+          ],
+          "W": [
+            "4",
+            "2",
+            "3",
+            "11",
+            "9",
+            "8",
+            "7",
+            "13"
+          ],
+          "L": [
+            "8",
+            "10",
+            "1",
+            "3",
+            "9",
+            "12",
+            "6",
+            "11"
+          ],
+          "T": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3",
+            "5",
+            "6",
+            "11"
+          ],
+          "OTL": [
+            "3",
+            "4",
+            "6",
+            "5",
+            "0",
+            "2",
+            "1",
+            "8"
+          ],
+          "Pts": [
+            "8",
+            "4",
+            "7",
+            "22",
+            "18",
+            "17",
+            "16",
+            "14"
+          ],
+          "SoW": [
+            "3",
+            "5",
+            "2",
+            "8",
+            "12",
+            "4",
+            "7",
+            "6"
+          ],
+          "SoL": [
+            "7",
+            "5",
+            "8",
+            "2",
+            "3",
+            "6",
+            "1",
+            "9"
+          ],
+          "GF": [
+            "79",
+            "77",
+            "59",
+            "52",
+            "91",
+            "89",
+            "96",
+            "66"
+          ],
+          "GA": [
+            "104",
+            "83",
+            "100",
+            "95",
+            "41",
+            "66",
+            "54",
+            "62"
+          ],
+          "name": [
+            "Cobalt Silver Kings",
+            "Haileybury Hockey Club",
+            "Les Canadiens",
+            "Montreal Shamrocks",
+            "Montreal Wanderers",
+            "Ottawa Senators",
+            "Renfrew Creamery Kings",
+            "Montreal Canadiens"
+          ],
+          "PIM": [
+            "336",
+            "27",
+            "333",
+            "355",
+            "253",
+            "241",
+            "269",
+            "297"
+          ],
+          "BenchMinor": [
+            "12",
+            "14",
+            "8",
+            "2",
+            "20",
+            "18",
+            "10",
+            "16"
+          ],
+          "PPG": [
+            "28",
+            "51",
+            "42",
+            "46",
+            "40",
+            "33",
+            "25",
+            "48"
+          ],
+          "PPC": [
+            "220",
+            "279",
+            "240",
+            "294",
+            "253",
+            "244",
+            "254",
+            "340"
+          ],
+          "SHA": [
+            "4",
+            "2",
+            "5",
+            "7",
+            "6",
+            "10",
+            "9",
+            "8"
+          ],
+          "PKG": [
+            "45",
+            "43",
+            "36",
+            "42",
+            "44",
+            "30",
+            "52",
+            "46"
+          ],
+          "PKC": [
+            "242",
+            "301",
+            "267",
+            "248",
+            "206",
+            "266",
+            "293",
+            "323"
+          ],
+          "SHF": [
+            "3",
+            "8",
+            "2",
+            "7",
+            "10",
+            "14",
+            "5",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TeamsHalf": {
+        "rows": 41,
+        "sample_values": {
+          "year": [
+            "1916",
+            "1917",
+            "1918",
+            "1919",
+            "1920"
+          ],
+          "lgID": [
+            "NHA",
+            "NHL"
+          ],
+          "tmID": [
+            "MOC",
+            "MOW",
+            "OT1",
+            "QU1",
+            "TBS",
+            "TOB",
+            "MTL",
+            "MTW"
+          ],
+          "half": [
+            "1",
+            "2"
+          ],
+          "rank": [
+            "1",
+            "3",
+            "5",
+            "4",
+            "2",
+            "6"
+          ],
+          "G": [
+            "10",
+            "4",
+            "14",
+            "8",
+            "6",
+            "12"
+          ],
+          "W": [
+            "7",
+            "3",
+            "2",
+            "8",
+            "5",
+            "6",
+            "1",
+            "10"
+          ],
+          "L": [
+            "3",
+            "7",
+            "8",
+            "2",
+            "5",
+            "4",
+            "9",
+            "6"
+          ],
+          "T": [
+            "0"
+          ],
+          "GF": [
+            "58",
+            "31",
+            "56",
+            "38",
+            "63",
+            "43",
+            "54",
+            "50"
+          ],
+          "GA": [
+            "38",
+            "42",
+            "72",
+            "65",
+            "41",
+            "22",
+            "80",
+            "46"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TeamsPost": {
+        "rows": 927,
+        "sample_values": {
+          "year": [
+            "1913",
+            "1914",
+            "1916",
+            "1917",
+            "1918",
+            "1919",
+            "1920",
+            "1921"
+          ],
+          "lgID": [
+            "NHA",
+            "NHL",
+            "PCHA",
+            "WCHL",
+            "WHA"
+          ],
+          "tmID": [
+            "MOC",
+            "TBS",
+            "MOW",
+            "OT1",
+            "MTL",
+            "SEA",
+            "TOA",
+            "VML"
+          ],
+          "G": [
+            "2",
+            "5",
+            "6",
+            "4",
+            "8",
+            "9",
+            "3",
+            "10"
+          ],
+          "W": [
+            "1",
+            "0",
+            "4",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7"
+          ],
+          "L": [
+            "1",
+            "0",
+            "4",
+            "2",
+            "3",
+            "5",
+            "7",
+            "6"
+          ],
+          "T": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3"
+          ],
+          "GF": [
+            "2",
+            "6",
+            "1",
+            "4",
+            "7",
+            "10",
+            "3",
+            "26"
+          ],
+          "GA": [
+            "6",
+            "2",
+            "4",
+            "1",
+            "7",
+            "10",
+            "3",
+            "18"
+          ],
+          "PIM": [
+            "59",
+            "68",
+            "87",
+            "69",
+            "31",
+            "24",
+            "30",
+            "28"
+          ],
+          "BenchMinor": [
+            "0",
+            "6",
+            "2",
+            "4",
+            "10",
+            "8",
+            "12",
+            "14"
+          ],
+          "PPG": [
+            "1",
+            "5",
+            "9",
+            "10",
+            "2",
+            "6",
+            "11",
+            "14"
+          ],
+          "PPC": [
+            "39",
+            "27",
+            "25",
+            "11",
+            "75",
+            "48",
+            "14",
+            "36"
+          ],
+          "SHA": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "PKG": [
+            "3",
+            "8",
+            "4",
+            "6",
+            "12",
+            "7",
+            "5",
+            "14"
+          ],
+          "PKC": [
+            "55",
+            "45",
+            "20",
+            "13",
+            "64",
+            "30",
+            "17",
+            "33"
+          ],
+          "SHF": [
+            "0",
+            "1",
+            "3",
+            "5",
+            "2",
+            "6",
+            "7",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TeamsSC": {
+        "rows": 30,
+        "sample_values": {
+          "year": [
+            "1912",
+            "1913",
+            "1914",
+            "1915",
+            "1916",
+            "1917",
+            "1918",
+            "1919"
+          ],
+          "lgID": [
+            "NHA",
+            "PCHA",
+            "NHL",
+            "WCHL"
+          ],
+          "tmID": [
+            "QU1",
+            "VA1",
+            "TBS",
+            "OT1",
+            "VML",
+            "MOC",
+            "PO1",
+            "SEA"
+          ],
+          "G": [
+            "3",
+            "5",
+            "4",
+            "2",
+            "6"
+          ],
+          "W": [
+            "1",
+            "2",
+            "3",
+            "0",
+            "5",
+            "4"
+          ],
+          "L": [
+            "2",
+            "1",
+            "0",
+            "3"
+          ],
+          "T": [
+            "0",
+            "1"
+          ],
+          "GF": [
+            "12",
+            "16",
+            "13",
+            "8",
+            "26",
+            "15",
+            "11",
+            "23"
+          ],
+          "GA": [
+            "16",
+            "12",
+            "8",
+            "13",
+            "26",
+            "15",
+            "23",
+            "11"
+          ],
+          "PIM": [
+            "24",
+            "20",
+            "75",
+            "53",
+            "50",
+            "18",
+            "49"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "abbrev": {
+        "rows": 58,
+        "sample_values": {
+          "Type": [
+            "Conference",
+            "Division",
+            "Playoffs",
+            "Round"
+          ],
+          "Code": [
+            "CC",
+            "EC",
+            "WA",
+            "WC",
+            "AD",
+            "AM",
+            "AT",
+            "CA"
+          ],
+          "Fullname": [
+            "Campbell Conference",
+            "Eastern Conference",
+            "Wales Conference",
+            "Western Conference",
+            "Adams Division",
+            "American Division",
+            "Atlantic Division",
+            "Canadian Division"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

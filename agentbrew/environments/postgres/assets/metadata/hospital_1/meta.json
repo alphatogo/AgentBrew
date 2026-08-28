@@ -1,0 +1,508 @@
+{
+  "db_id": "hospital_1",
+  "source": "sparc",
+  "tables": 15,
+  "total_rows": 132,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#hospital_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Affiliated_With\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Department\" INTEGER [pk, not null]\n  \"PrimaryAffiliation\" BOOLEAN [not null]\n}\n\nTable \"Appointment\" {\n  \"AppointmentID\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [not null]\n  \"PrepNurse\" INTEGER\n  \"Physician\" INTEGER [not null]\n  \"Start\" TIMESTAMP [not null]\n  \"End\" TIMESTAMP [not null]\n  \"ExaminationRoom\" TEXT [not null]\n}\n\nTable \"Block\" {\n  \"BlockFloor\" INTEGER [pk, not null]\n  \"BlockCode\" INTEGER [pk, not null]\n}\n\nTable \"Department\" {\n  \"DepartmentID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Head\" INTEGER [not null]\n}\n\nTable \"Medication\" {\n  \"Code\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Brand\" TEXT [not null]\n  \"Description\" TEXT [not null]\n}\n\nTable \"Nurse\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Position\" TEXT [not null]\n  \"Registered\" BOOLEAN [not null]\n  \"SSN\" INTEGER [not null]\n}\n\nTable \"On_Call\" {\n  \"Nurse\" INTEGER [pk, not null]\n  \"BlockFloor\" INTEGER [pk, not null]\n  \"BlockCode\" INTEGER [pk, not null]\n  \"OnCallStart\" TIMESTAMP [pk, not null]\n  \"OnCallEnd\" TIMESTAMP [pk, not null]\n}\n\nTable \"Patient\" {\n  \"SSN\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Address\" TEXT [not null]\n  \"Phone\" TEXT [not null]\n  \"InsuranceID\" INTEGER [not null]\n  \"PCP\" INTEGER [not null]\n}\n\nTable \"Physician\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Position\" TEXT [not null]\n  \"SSN\" INTEGER [not null]\n}\n\nTable \"Prescribes\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [pk, not null]\n  \"Medication\" INTEGER [pk, not null]\n  \"Date\" TIMESTAMP [pk, not null]\n  \"Appointment\" INTEGER\n  \"Dose\" TEXT [not null]\n}\n\nTable \"Procedures\" {\n  \"Code\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Cost\" REAL [not null]\n}\n\nTable \"Room\" {\n  \"RoomNumber\" INTEGER [pk, not null]\n  \"RoomType\" TEXT [not null]\n  \"BlockFloor\" INTEGER [not null]\n  \"BlockCode\" INTEGER [not null]\n  \"Unavailable\" BOOLEAN [not null]\n}\n\nTable \"Stay\" {\n  \"StayID\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [not null]\n  \"Room\" INTEGER [not null]\n  \"StayStart\" TIMESTAMP [not null]\n  \"StayEnd\" TIMESTAMP [not null]\n}\n\nTable \"Trained_In\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Treatment\" INTEGER [pk, not null]\n  \"CertificationDate\" TIMESTAMP [not null]\n  \"CertificationExpires\" TIMESTAMP [not null]\n}\n\nTable \"Undergoes\" {\n  \"Patient\" INTEGER [pk, not null]\n  \"Procedures\" INTEGER [pk, not null]\n  \"Stay\" INTEGER [pk, not null]\n  \"DateUndergoes\" TIMESTAMP [pk, not null]\n  \"Physician\" INTEGER [not null]\n  \"AssistingNurse\" INTEGER\n}\n\n\n\nRef: \"Department\".\"Head\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Affiliated_With\".\"Department\" > \"Department\".\"DepartmentID\"\n\nRef: \"Affiliated_With\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Trained_In\".\"Treatment\" > \"Procedures\".\"Code\"\n\nRef: \"Trained_In\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Patient\".\"PCP\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Appointment\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Appointment\".\"PrepNurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Appointment\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Prescribes\".\"Appointment\" > \"Appointment\".\"AppointmentID\"\n\nRef: \"Prescribes\".\"Medication\" > \"Medication\".\"Code\"\n\nRef: \"Prescribes\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Prescribes\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Room\".\"BlockFloor\" > \"Block\".\"BlockFloor\"\n\nRef: \"Room\".\"BlockCode\" > \"Block\".\"BlockCode\"\n\nRef: \"On_Call\".\"BlockFloor\" > \"Block\".\"BlockFloor\"\n\nRef: \"On_Call\".\"BlockCode\" > \"Block\".\"BlockCode\"\n\nRef: \"On_Call\".\"Nurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Stay\".\"Room\" > \"Room\".\"RoomNumber\"\n\nRef: \"Stay\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Undergoes\".\"AssistingNurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Undergoes\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Undergoes\".\"Stay\" > \"Stay\".\"StayID\"\n\nRef: \"Undergoes\".\"Procedures\" > \"Procedures\".\"Code\"\n\nRef: \"Undergoes\".\"Patient\" > \"Patient\".\"SSN\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Affiliated_With\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Department\" INTEGER [pk, not null]\n  \"PrimaryAffiliation\" BOOLEAN [not null]\n}\n\nTable \"Appointment\" {\n  \"AppointmentID\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [not null]\n  \"PrepNurse\" INTEGER\n  \"Physician\" INTEGER [not null]\n  \"Start\" TIMESTAMP [not null]\n  \"End\" TIMESTAMP [not null]\n  \"ExaminationRoom\" TEXT [not null]\n}\n\nTable \"Block\" {\n  \"BlockFloor\" INTEGER [pk, not null]\n  \"BlockCode\" INTEGER [pk, not null]\n}\n\nTable \"Department\" {\n  \"DepartmentID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Head\" INTEGER [not null]\n}\n\nTable \"Medication\" {\n  \"Code\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Brand\" TEXT [not null]\n  \"Description\" TEXT [not null]\n}\n\nTable \"Nurse\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Position\" TEXT [not null]\n  \"Registered\" BOOLEAN [not null]\n  \"SSN\" INTEGER [not null]\n}\n\nTable \"On_Call\" {\n  \"Nurse\" INTEGER [pk, not null]\n  \"BlockFloor\" INTEGER [pk, not null]\n  \"BlockCode\" INTEGER [pk, not null]\n  \"OnCallStart\" TIMESTAMP [pk, not null]\n  \"OnCallEnd\" TIMESTAMP [pk, not null]\n}\n\nTable \"Patient\" {\n  \"SSN\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Address\" TEXT [not null]\n  \"Phone\" TEXT [not null]\n  \"InsuranceID\" INTEGER [not null]\n  \"PCP\" INTEGER [not null]\n}\n\nTable \"Physician\" {\n  \"EmployeeID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Position\" TEXT [not null]\n  \"SSN\" INTEGER [not null]\n}\n\nTable \"Prescribes\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [pk, not null]\n  \"Medication\" INTEGER [pk, not null]\n  \"Date\" TIMESTAMP [pk, not null]\n  \"Appointment\" INTEGER\n  \"Dose\" TEXT [not null]\n}\n\nTable \"Procedures\" {\n  \"Code\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Cost\" REAL [not null]\n}\n\nTable \"Room\" {\n  \"RoomNumber\" INTEGER [pk, not null]\n  \"RoomType\" TEXT [not null]\n  \"BlockFloor\" INTEGER [not null]\n  \"BlockCode\" INTEGER [not null]\n  \"Unavailable\" BOOLEAN [not null]\n}\n\nTable \"Stay\" {\n  \"StayID\" INTEGER [pk, not null]\n  \"Patient\" INTEGER [not null]\n  \"Room\" INTEGER [not null]\n  \"StayStart\" TIMESTAMP [not null]\n  \"StayEnd\" TIMESTAMP [not null]\n}\n\nTable \"Trained_In\" {\n  \"Physician\" INTEGER [pk, not null]\n  \"Treatment\" INTEGER [pk, not null]\n  \"CertificationDate\" TIMESTAMP [not null]\n  \"CertificationExpires\" TIMESTAMP [not null]\n}\n\nTable \"Undergoes\" {\n  \"Patient\" INTEGER [pk, not null]\n  \"Procedures\" INTEGER [pk, not null]\n  \"Stay\" INTEGER [pk, not null]\n  \"DateUndergoes\" TIMESTAMP [pk, not null]\n  \"Physician\" INTEGER [not null]\n  \"AssistingNurse\" INTEGER\n}\n\nRef: \"Department\".\"Head\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Affiliated_With\".\"Department\" > \"Department\".\"DepartmentID\"\n\nRef: \"Affiliated_With\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Trained_In\".\"Treatment\" > \"Procedures\".\"Code\"\n\nRef: \"Trained_In\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Patient\".\"PCP\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Appointment\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Appointment\".\"PrepNurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Appointment\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Prescribes\".\"Appointment\" > \"Appointment\".\"AppointmentID\"\n\nRef: \"Prescribes\".\"Medication\" > \"Medication\".\"Code\"\n\nRef: \"Prescribes\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Prescribes\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Room\".\"BlockFloor\" > \"Block\".\"BlockFloor\"\n\nRef: \"Room\".\"BlockCode\" > \"Block\".\"BlockCode\"\n\nRef: \"On_Call\".\"BlockFloor\" > \"Block\".\"BlockFloor\"\n\nRef: \"On_Call\".\"BlockCode\" > \"Block\".\"BlockCode\"\n\nRef: \"On_Call\".\"Nurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Stay\".\"Room\" > \"Room\".\"RoomNumber\"\n\nRef: \"Stay\".\"Patient\" > \"Patient\".\"SSN\"\n\nRef: \"Undergoes\".\"AssistingNurse\" > \"Nurse\".\"EmployeeID\"\n\nRef: \"Undergoes\".\"Physician\" > \"Physician\".\"EmployeeID\"\n\nRef: \"Undergoes\".\"Stay\" > \"Stay\".\"StayID\"\n\nRef: \"Undergoes\".\"Procedures\" > \"Procedures\".\"Code\"\n\nRef: \"Undergoes\".\"Patient\" > \"Patient\".\"SSN\"\n\n## Table Stats & Sample Values\n\nAffiliated_With: 11 rows\n  PrimaryAffiliation: '1', '0'\n  Physician: '1', '2', '3', ...\n  Department: '1', '2', '3'\n\nAppointment: 9 rows\n  ExaminationRoom: 'A', 'B', 'C'\n  Start: '2008-04-24 10:00', '2008-04-25 10:00', '2008-04-26 10:00', ...\n  End: '2008-04-24 11:00', '2008-04-25 11:00', '2008-04-26 11:00', ...\n\nBlock: 12 rows\n  BlockFloor: '1', '2', '3', ...\n  BlockCode: '1', '2', '3'\n\nDepartment: 3 rows\n  Name: 'General Medicine', 'Surgery', 'Psychiatry'\n  Head: '4', '7', '9'\n  DepartmentID: '1', '2', '3'\n\nMedication: 5 rows\n  Name: 'Procrastin-X', 'Thesisin', 'Awakin', ...\n  Brand: 'X', 'Foo Labs', 'Bar Laboratories', ...\n  Description: 'N/A'\n\nNurse: 3 rows\n  Name: 'Carla Espinosa', 'Laverne Roberts', 'Paul Flowers'\n  Position: 'Head Nurse', 'Nurse'\n  Registered: '1', '0'\n\nOn_Call: 6 rows\n  OnCallStart: '2008-11-04 11:00', '2008-11-04 19:00'\n  OnCallEnd: '2008-11-04 19:00', '2008-11-05 03:00'\n  Nurse: '101', '102', '103'\n\nPatient: 4 rows\n  Name: 'John Smith', 'Grace Ritchie', 'Random J. Patient', ...\n  Address: '42 Foobar Lane', '37 Snafu Drive', '101 Omgbbq Street', ...\n  Phone: '555-0256', '555-0512', '555-1204', ...\n\nPhysician: 9 rows\n  Name: 'John Dorian', 'Elliot Reid', 'Christopher Turk', ...\n  Position: 'Staff Internist', 'Attending Physician', 'Surgical Attending Physician', ...\n  SSN: '111111111', '222222222', '333333333', ...\n\nPrescribes: 3 rows\n  Dose: '5', '10'\n  Appointment: '13216584', '86213939'\n  Physician: '1', '9'\n\nProcedures: 7 rows\n  Name: 'Reverse Rhinopodoplasty', 'Obtuse Pyloric Recombobulation', 'Folded Demiophtalmectomy', ...\n  Cost: '1500.0', '3750.0', '4500.0', ...\n  Code: '1', '2', '3', ...\n\nRoom: 36 rows\n  RoomType: 'Single'\n  Unavailable: '0', '1'\n  BlockFloor: '1', '2', '3', ...\n\nStay: 3 rows\n  StayStart: '2008-05-01', '2008-05-03', '2008-05-02'\n  StayEnd: '2008-05-04', '2008-05-14', '2008-05-03'\n  Patient: '100000001', '100000003', '100000004'\n\nTrained_In: 15 rows\n  CertificationExpires: '2008-12-31', '2007-12-31'\n  CertificationDate: '2008-01-01', '2007-01-01'\n  Physician: '3', '6', '7'\n\nUndergoes: 6 rows\n  Physician: '3', '7', '6'\n  AssistingNurse: '101', '102', '105', ...\n  Patient: '100000001', '100000004'",
+    "stateUrl": "https://github.com/taoyds/sparc#hospital_1",
+    "tableStats": {
+      "Affiliated_With": {
+        "rows": 11,
+        "sample_values": {
+          "Physician": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Department": [
+            "1",
+            "2",
+            "3"
+          ],
+          "PrimaryAffiliation": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Appointment": {
+        "rows": 9,
+        "sample_values": {
+          "AppointmentID": [
+            "13216584",
+            "26548913",
+            "36549879",
+            "46846589",
+            "59871321",
+            "69879231",
+            "76983231",
+            "86213939"
+          ],
+          "Patient": [
+            "100000001",
+            "100000002",
+            "100000004",
+            "100000003"
+          ],
+          "PrepNurse": [
+            "101",
+            "102",
+            "103"
+          ],
+          "Physician": [
+            "1",
+            "2",
+            "4",
+            "3",
+            "9"
+          ],
+          "Start": [
+            "2008-04-24 10:00",
+            "2008-04-25 10:00",
+            "2008-04-26 10:00",
+            "2008-04-26 11:00",
+            "2008-04-26 12:00",
+            "2008-04-27 10:00"
+          ],
+          "End": [
+            "2008-04-24 11:00",
+            "2008-04-25 11:00",
+            "2008-04-26 11:00",
+            "2008-04-26 12:00",
+            "2008-04-26 13:00",
+            "2008-04-21 11:00",
+            "2008-04-27 11:00"
+          ],
+          "ExaminationRoom": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Block": {
+        "rows": 12,
+        "sample_values": {
+          "BlockFloor": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "BlockCode": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Department": {
+        "rows": 3,
+        "sample_values": {
+          "DepartmentID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Name": [
+            "General Medicine",
+            "Surgery",
+            "Psychiatry"
+          ],
+          "Head": [
+            "4",
+            "7",
+            "9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Medication": {
+        "rows": 5,
+        "sample_values": {
+          "Code": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "Name": [
+            "Procrastin-X",
+            "Thesisin",
+            "Awakin",
+            "Crescavitin",
+            "Melioraurin"
+          ],
+          "Brand": [
+            "X",
+            "Foo Labs",
+            "Bar Laboratories",
+            "Baz Industries",
+            "Snafu Pharmaceuticals"
+          ],
+          "Description": [
+            "N/A"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Nurse": {
+        "rows": 3,
+        "sample_values": {
+          "EmployeeID": [
+            "101",
+            "102",
+            "103"
+          ],
+          "Name": [
+            "Carla Espinosa",
+            "Laverne Roberts",
+            "Paul Flowers"
+          ],
+          "Position": [
+            "Head Nurse",
+            "Nurse"
+          ],
+          "Registered": [
+            "1",
+            "0"
+          ],
+          "SSN": [
+            "111111110",
+            "222222220",
+            "333333330"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "On_Call": {
+        "rows": 6,
+        "sample_values": {
+          "Nurse": [
+            "101",
+            "102",
+            "103"
+          ],
+          "BlockFloor": [
+            "1"
+          ],
+          "BlockCode": [
+            "1",
+            "2",
+            "3"
+          ],
+          "OnCallStart": [
+            "2008-11-04 11:00",
+            "2008-11-04 19:00"
+          ],
+          "OnCallEnd": [
+            "2008-11-04 19:00",
+            "2008-11-05 03:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Patient": {
+        "rows": 4,
+        "sample_values": {
+          "SSN": [
+            "100000001",
+            "100000002",
+            "100000003",
+            "100000004"
+          ],
+          "Name": [
+            "John Smith",
+            "Grace Ritchie",
+            "Random J. Patient",
+            "Dennis Doe"
+          ],
+          "Address": [
+            "42 Foobar Lane",
+            "37 Snafu Drive",
+            "101 Omgbbq Street",
+            "1100 Foobaz Avenue"
+          ],
+          "Phone": [
+            "555-0256",
+            "555-0512",
+            "555-1204",
+            "555-2048"
+          ],
+          "InsuranceID": [
+            "68476213",
+            "36546321",
+            "65465421",
+            "68421879"
+          ],
+          "PCP": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Physician": {
+        "rows": 9,
+        "sample_values": {
+          "EmployeeID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "John Dorian",
+            "Elliot Reid",
+            "Christopher Turk",
+            "Percival Cox",
+            "Bob Kelso",
+            "Todd Quinlan",
+            "John Wen",
+            "Keith Dudemeister"
+          ],
+          "Position": [
+            "Staff Internist",
+            "Attending Physician",
+            "Surgical Attending Physician",
+            "Senior Attending Physician",
+            "Head Chief of Medicine",
+            "MD Resident",
+            "Attending Psychiatrist"
+          ],
+          "SSN": [
+            "111111111",
+            "222222222",
+            "333333333",
+            "444444444",
+            "555555555",
+            "666666666",
+            "777777777",
+            "888888888"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Prescribes": {
+        "rows": 3,
+        "sample_values": {
+          "Physician": [
+            "1",
+            "9"
+          ],
+          "Patient": [
+            "100000001",
+            "100000004"
+          ],
+          "Medication": [
+            "1",
+            "2"
+          ],
+          "Date": [
+            "2008-04-24 10:47",
+            "2008-04-27 10:53",
+            "2008-04-30 16:53"
+          ],
+          "Appointment": [
+            "13216584",
+            "86213939"
+          ],
+          "Dose": [
+            "5",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Procedures": {
+        "rows": 7,
+        "sample_values": {
+          "Code": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "Name": [
+            "Reverse Rhinopodoplasty",
+            "Obtuse Pyloric Recombobulation",
+            "Folded Demiophtalmectomy",
+            "Complete Walletectomy",
+            "Obfuscated Dermogastrotomy",
+            "Reversible Pancreomyoplasty",
+            "Follicular Demiectomy"
+          ],
+          "Cost": [
+            "1500.0",
+            "3750.0",
+            "4500.0",
+            "10000.0",
+            "4899.0",
+            "5600.0",
+            "25.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Room": {
+        "rows": 36,
+        "sample_values": {
+          "RoomNumber": [
+            "101",
+            "102",
+            "103",
+            "111",
+            "112",
+            "113",
+            "121",
+            "122"
+          ],
+          "RoomType": [
+            "Single"
+          ],
+          "BlockFloor": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "BlockCode": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Unavailable": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Stay": {
+        "rows": 3,
+        "sample_values": {
+          "StayID": [
+            "3215",
+            "3216",
+            "3217"
+          ],
+          "Patient": [
+            "100000001",
+            "100000003",
+            "100000004"
+          ],
+          "Room": [
+            "111",
+            "123",
+            "112"
+          ],
+          "StayStart": [
+            "2008-05-01",
+            "2008-05-03",
+            "2008-05-02"
+          ],
+          "StayEnd": [
+            "2008-05-04",
+            "2008-05-14",
+            "2008-05-03"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Trained_In": {
+        "rows": 15,
+        "sample_values": {
+          "Physician": [
+            "3",
+            "6",
+            "7"
+          ],
+          "Treatment": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "7",
+            "3",
+            "4"
+          ],
+          "CertificationDate": [
+            "2008-01-01",
+            "2007-01-01"
+          ],
+          "CertificationExpires": [
+            "2008-12-31",
+            "2007-12-31"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Undergoes": {
+        "rows": 6,
+        "sample_values": {
+          "Patient": [
+            "100000001",
+            "100000004"
+          ],
+          "Procedures": [
+            "6",
+            "2",
+            "1",
+            "5",
+            "7",
+            "4"
+          ],
+          "Stay": [
+            "3215",
+            "3217"
+          ],
+          "DateUndergoes": [
+            "2008-05-02",
+            "2008-05-03",
+            "2008-05-07",
+            "2008-05-09",
+            "2008-05-10",
+            "2008-05-13"
+          ],
+          "Physician": [
+            "3",
+            "7",
+            "6"
+          ],
+          "AssistingNurse": [
+            "101",
+            "102",
+            "105",
+            "103"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

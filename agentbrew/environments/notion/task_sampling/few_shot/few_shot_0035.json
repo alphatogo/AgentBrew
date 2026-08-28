@@ -1,0 +1,10 @@
+{
+  "title": "Support Owner Rebalance",
+  "capability": [
+    "query_existing_data",
+    "compute_aggregates",
+    "update_existing_rows",
+    "coordinated_multirow_edit"
+  ],
+  "question": "Go to the \"Support Sprint Board\" page, find the person responsible for the most active support tasks and the person responsible for the fewest active support tasks, then swap their assigned tasks.\n"
+}

@@ -1,0 +1,588 @@
+{
+  "db_id": "educational_learning_path_and_recommendation_system",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/educational_learning_path_and_recommendation_system",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"learner_node_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"node_id\" INTEGER\n  \"interaction_date\" TEXT\n  \"interaction_type\" TEXT\n  \"duration_minutes\" INTEGER\n  \"score\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"public\".\"learner_resource_access\" {\n  \"access_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"score\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"public\".\"learner_site_visits\" {\n  \"visit_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"site_id\" INTEGER\n  \"visit_date\" TEXT\n  \"duration_minutes\" INTEGER\n  \"interaction_type\" TEXT\n  \"feedback\" TEXT\n}\n\nTable \"public\".\"learner_step_progress\" {\n  \"progress_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"step_id\" INTEGER\n  \"status\" TEXT\n  \"completion_date\" TEXT\n  \"pr_rr\" REAL\n  \"pr_fr\" REAL\n  \"pr_sr\" REAL\n  \"start_date\" TEXT\n  \"attempts\" INTEGER\n}\n\nTable \"public\".\"learners\" {\n  \"learner_id\" INTEGER [pk]\n  \"full_name\" TEXT\n  \"email\" TEXT\n  \"date_of_birth\" TEXT\n  \"registration_date\" TEXT\n  \"learning_path_id\" INTEGER\n  \"user_role_id\" INTEGER\n  \"last_login\" TEXT\n  \"timezone\" TEXT\n  \"language\" TEXT\n  \"preferences\" TEXT\n}\n\nTable \"public\".\"learning_nodes\" {\n  \"node_id\" INTEGER [pk]\n  \"node_name\" TEXT\n  \"description\" TEXT\n  \"type\" TEXT\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"difficulty_level\" TEXT\n  \"estimated_duration\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"public\".\"learning_paths\" {\n  \"path_id\" INTEGER [pk]\n  \"path_name\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"estimated_duration\" INTEGER\n  \"difficulty_level\" TEXT\n  \"prerequisites\" TEXT\n}\n\nTable \"public\".\"learning_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"resource_name\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"difficulty_level\" TEXT\n  \"estimated_duration\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"public\".\"learning_sites\" {\n  \"site_id\" INTEGER [pk]\n  \"site_name\" TEXT\n  \"description\" TEXT\n  \"url\" TEXT\n  \"category_id\" INTEGER\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"last_updated\" TEXT\n  \"rating\" REAL\n  \"num_reviews\" INTEGER\n}\n\nTable \"public\".\"learning_steps\" {\n  \"step_id\" INTEGER [pk]\n  \"path_id\" INTEGER\n  \"step_name\" TEXT\n  \"description\" TEXT\n  \"step_order\" INTEGER\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"estimated_duration\" INTEGER\n  \"resources_required\" TEXT\n}\n\nTable \"public\".\"node_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"public\".\"node_recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"node_id\" INTEGER\n  \"recommendation_date\" TEXT\n  \"random_number\" REAL\n  \"reason\" TEXT\n}\n\nTable \"public\".\"node_site_associations\" {\n  \"association_id\" INTEGER [pk]\n  \"node_id\" INTEGER\n  \"site_id\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"public\".\"site_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"public\".\"user_profiles\" {\n  \"profile_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"profile_picture\" TEXT\n  \"bio\" TEXT\n  \"interests\" TEXT\n  \"educational_background\" TEXT\n  \"privacy_settings\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nRef: \"public\".\"learner_node_interactions\".\"node_id\" > \"public\".\"learning_nodes\".\"node_id\"\nRef: \"public\".\"learner_node_interactions\".\"learner_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learner_resource_access\".\"learner_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learner_resource_access\".\"resource_id\" > \"public\".\"learning_resources\".\"resource_id\"\nRef: \"public\".\"learner_site_visits\".\"site_id\" > \"public\".\"learning_sites\".\"site_id\"\nRef: \"public\".\"learner_site_visits\".\"learner_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learner_step_progress\".\"learner_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learner_step_progress\".\"step_id\" > \"public\".\"learning_steps\".\"step_id\"\nRef: \"public\".\"learners\".\"user_role_id\" > \"public\".\"user_roles\".\"role_id\"\nRef: \"public\".\"learners\".\"learning_path_id\" > \"public\".\"learning_paths\".\"path_id\"\nRef: \"public\".\"learning_nodes\".\"creator_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learning_resources\".\"creator_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learning_sites\".\"category_id\" > \"public\".\"site_categories\".\"category_id\"\nRef: \"public\".\"learning_sites\".\"creator_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learning_steps\".\"creator_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"learning_steps\".\"path_id\" > \"public\".\"learning_paths\".\"path_id\"\nRef: \"public\".\"node_categories\".\"parent_category_id\" > \"public\".\"node_categories\".\"category_id\"\nRef: \"public\".\"node_recommendations\".\"learner_id\" > \"public\".\"learners\".\"learner_id\"\nRef: \"public\".\"node_recommendations\".\"node_id\" > \"public\".\"learning_nodes\".\"node_id\"\nRef: \"public\".\"node_site_associations\".\"site_id\" > \"public\".\"learning_sites\".\"site_id\"\nRef: \"public\".\"node_site_associations\".\"node_id\" > \"public\".\"learning_nodes\".\"node_id\"\nRef: \"public\".\"site_categories\".\"parent_category_id\" > \"public\".\"site_categories\".\"category_id\"\nRef: \"public\".\"user_profiles\".\"user_id\" > \"public\".\"learners\".\"learner_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"learner_node_interactions\" {\n  \"interaction_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"node_id\" INTEGER\n  \"interaction_date\" TEXT\n  \"interaction_type\" TEXT\n  \"duration_minutes\" INTEGER\n  \"score\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"learner_resource_access\" {\n  \"access_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"score\" REAL\n  \"feedback\" TEXT\n}\n\nTable \"learner_site_visits\" {\n  \"visit_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"site_id\" INTEGER\n  \"visit_date\" TEXT\n  \"duration_minutes\" INTEGER\n  \"interaction_type\" TEXT\n  \"feedback\" TEXT\n}\n\nTable \"learner_step_progress\" {\n  \"progress_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"step_id\" INTEGER\n  \"status\" TEXT\n  \"completion_date\" TEXT\n  \"pr_rr\" REAL\n  \"pr_fr\" REAL\n  \"pr_sr\" REAL\n  \"start_date\" TEXT\n  \"attempts\" INTEGER\n}\n\nTable \"learners\" {\n  \"learner_id\" INTEGER [pk]\n  \"full_name\" TEXT\n  \"email\" TEXT\n  \"date_of_birth\" TEXT\n  \"registration_date\" TEXT\n  \"learning_path_id\" INTEGER\n  \"user_role_id\" INTEGER\n  \"last_login\" TEXT\n  \"timezone\" TEXT\n  \"language\" TEXT\n  \"preferences\" TEXT\n}\n\nTable \"learning_nodes\" {\n  \"node_id\" INTEGER [pk]\n  \"node_name\" TEXT\n  \"description\" TEXT\n  \"type\" TEXT\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"difficulty_level\" TEXT\n  \"estimated_duration\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"learning_paths\" {\n  \"path_id\" INTEGER [pk]\n  \"path_name\" TEXT\n  \"description\" TEXT\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"estimated_duration\" INTEGER\n  \"difficulty_level\" TEXT\n  \"prerequisites\" TEXT\n}\n\nTable \"learning_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"resource_name\" TEXT\n  \"description\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"difficulty_level\" TEXT\n  \"estimated_duration\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"learning_sites\" {\n  \"site_id\" INTEGER [pk]\n  \"site_name\" TEXT\n  \"description\" TEXT\n  \"url\" TEXT\n  \"category_id\" INTEGER\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"last_updated\" TEXT\n  \"rating\" REAL\n  \"num_reviews\" INTEGER\n}\n\nTable \"learning_steps\" {\n  \"step_id\" INTEGER [pk]\n  \"path_id\" INTEGER\n  \"step_name\" TEXT\n  \"description\" TEXT\n  \"step_order\" INTEGER\n  \"created_date\" TEXT\n  \"creator_id\" INTEGER\n  \"is_active\" INTEGER\n  \"estimated_duration\" INTEGER\n  \"resources_required\" TEXT\n}\n\nTable \"node_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"node_recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"learner_id\" INTEGER\n  \"node_id\" INTEGER\n  \"recommendation_date\" TEXT\n  \"random_number\" REAL\n  \"reason\" TEXT\n}\n\nTable \"node_site_associations\" {\n  \"association_id\" INTEGER [pk]\n  \"node_id\" INTEGER\n  \"site_id\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"site_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"user_profiles\" {\n  \"profile_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"profile_picture\" TEXT\n  \"bio\" TEXT\n  \"interests\" TEXT\n  \"educational_background\" TEXT\n  \"privacy_settings\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nRef: \"learner_node_interactions\".\"node_id\" > \"learning_nodes\".\"node_id\"\n\nRef: \"learner_node_interactions\".\"learner_id\" > \"learners\".\"learner_id\"\n\nRef: \"learner_resource_access\".\"learner_id\" > \"learners\".\"learner_id\"\n\nRef: \"learner_resource_access\".\"resource_id\" > \"learning_resources\".\"resource_id\"\n\nRef: \"learner_site_visits\".\"site_id\" > \"learning_sites\".\"site_id\"\n\nRef: \"learner_site_visits\".\"learner_id\" > \"learners\".\"learner_id\"\n\nRef: \"learner_step_progress\".\"learner_id\" > \"learners\".\"learner_id\"\n\nRef: \"learner_step_progress\".\"step_id\" > \"learning_steps\".\"step_id\"\n\nRef: \"learners\".\"user_role_id\" > \"user_roles\".\"role_id\"\n\nRef: \"learners\".\"learning_path_id\" > \"learning_paths\".\"path_id\"\n\nRef: \"learning_nodes\".\"creator_id\" > \"learners\".\"learner_id\"\n\nRef: \"learning_resources\".\"creator_id\" > \"learners\".\"learner_id\"\n\nRef: \"learning_sites\".\"category_id\" > \"site_categories\".\"category_id\"\n\nRef: \"learning_sites\".\"creator_id\" > \"learners\".\"learner_id\"\n\nRef: \"learning_steps\".\"creator_id\" > \"learners\".\"learner_id\"\n\nRef: \"learning_steps\".\"path_id\" > \"learning_paths\".\"path_id\"\n\nRef: \"node_categories\".\"parent_category_id\" > \"node_categories\".\"category_id\"\n\nRef: \"node_recommendations\".\"learner_id\" > \"learners\".\"learner_id\"\n\nRef: \"node_recommendations\".\"node_id\" > \"learning_nodes\".\"node_id\"\n\nRef: \"node_site_associations\".\"site_id\" > \"learning_sites\".\"site_id\"\n\nRef: \"node_site_associations\".\"node_id\" > \"learning_nodes\".\"node_id\"\n\nRef: \"site_categories\".\"parent_category_id\" > \"site_categories\".\"category_id\"\n\nRef: \"user_profiles\".\"user_id\" > \"learners\".\"learner_id\"\n\n## Table Stats & Sample Values\n\nlearner_node_interactions: 2 rows\n  interaction_type: 'view', 'submit'\n  feedback: 'Great video, very clear!', 'Quiz was a bit challenging, but I learned a lot.'\n  interaction_date: '2023-05-01', '2023-05-02'\n\nlearner_resource_access: 2 rows\n  access_type: 'view', 'download'\n  feedback: 'Very helpful notes, thanks!', 'Lab manual was very useful for my experiments.'\n  access_date: '2023-05-01', '2023-05-02'\n\nlearner_site_visits: 2 rows\n  interaction_type: 'view', 'submit'\n  feedback: 'Great content, very helpful!', 'Enjoyed the course, but some videos were too long.'\n  visit_date: '2023-05-01', '2023-05-02'\n\nlearner_step_progress: 2 rows\n  status: 'completed', 'in progress'\n  completion_date: '2023-05-01', '2023-05-02'\n  start_date: '2023-04-25', '2023-04-26'\n\nlearners: 2 rows\n  full_name: 'Alice Johnson', 'Bob Williams'\n  last_login: '2023-10-01', '2023-10-02'\n  language: 'en', 'es'\n\nlearning_nodes: 2 rows\n  node_name: 'Introduction to Algebra Video', 'Linear Equations Quiz'\n  type: 'video', 'quiz'\n  difficulty_level: 'beginner', 'intermediate'\n\nlearning_paths: 2 rows\n  path_name: 'Math Fundamentals', 'Advanced Physics'\n  difficulty_level: 'beginner', 'advanced'\n  description: 'A comprehensive path for learning basic math conce', 'A path for advanced physics topics'\n\nlearning_resources: 2 rows\n  resource_name: 'Algebra Notes', 'Physics Lab Manual'\n  difficulty_level: 'beginner', 'intermediate'\n  description: 'Detailed notes on algebra concepts', 'Lab manual for physics experiments'\n\nlearning_sites: 2 rows\n  site_name: 'Khan Academy', 'Coursera'\n  description: 'A leading online learning platform', 'A platform for online courses'\n  url: 'https://www.khanacademy.org', 'https://www.coursera.org'\n\nlearning_steps: 2 rows\n  step_name: 'Introduction to Algebra', 'Solving Linear Equations'\n  description: 'An introduction to basic algebra concepts', 'Techniques for solving linear equations'\n  resources_required: '{\"resources\": [\"video\", \"notes\"]}', '{\"resources\": [\"video\", \"quiz\"]}'\n\nnode_categories: 3 rows\n  category_name: 'Video', 'Quiz', 'Math Video'\n  description: 'Video-based learning content', 'Interactive quizzes for assessment', 'Video content for math topics'\n  parent_category_id: '2', '1'\n\nnode_recommendations: 2 rows\n  reason: 'Based on performance', 'Based on preferences'\n  random_number: '0.866486', '0.323639'\n  recommendation_date: '2023-05-01'\n\nnode_site_associations: 2 rows\n  is_active: '1'\n  node_id: '1', '0'\n  site_id: '1', '0'\n\nsite_categories: 3 rows\n  category_name: 'Mathematics', 'Science', 'Algebra'\n  description: 'Sites focused on math education', 'Sites focused on science education', 'Subcategory for algebra topics'\n  parent_category_id: '2', '1'\n\nuser_profiles: 2 rows\n  profile_picture: 'profile_pictures/alice.jpg', 'profile_pictures/bob.jpg'\n  interests: 'Math, Physics', 'Computer Science, Math'\n  educational_background: 'Bachelor's in Mathematics', 'Master's in Computer Science'\n\nuser_roles: 2 rows\n  role_name: 'Student', 'Educator'\n  description: 'Learners who are using the platform for education', 'Teachers who create and manage learning paths and'\n  permissions: '{\"can_create_paths\": false, \"can_edit_paths\": fals', '{\"can_create_paths\": true, \"can_edit_paths\": true,'",
+    "stateUrl": null,
+    "tableStats": {
+      "learner_node_interactions": {
+        "rows": 2,
+        "sample_values": {
+          "interaction_id": [
+            "0",
+            "1"
+          ],
+          "learner_id": [
+            "1"
+          ],
+          "node_id": [
+            "0"
+          ],
+          "interaction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "interaction_type": [
+            "view",
+            "submit"
+          ],
+          "duration_minutes": [
+            "15",
+            "10"
+          ],
+          "score": [
+            "85.5"
+          ],
+          "feedback": [
+            "Great video, very clear!",
+            "Quiz was a bit challenging, but I learned a lot."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learner_resource_access": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "learner_id": [
+            "1",
+            "0"
+          ],
+          "resource_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "feedback": [
+            "Very helpful notes, thanks!",
+            "Lab manual was very useful for my experiments."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learner_site_visits": {
+        "rows": 2,
+        "sample_values": {
+          "visit_id": [
+            "0",
+            "1"
+          ],
+          "learner_id": [
+            "1"
+          ],
+          "site_id": [
+            "0"
+          ],
+          "visit_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "duration_minutes": [
+            "30",
+            "45"
+          ],
+          "interaction_type": [
+            "view",
+            "submit"
+          ],
+          "feedback": [
+            "Great content, very helpful!",
+            "Enjoyed the course, but some videos were too long."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learner_step_progress": {
+        "rows": 2,
+        "sample_values": {
+          "progress_id": [
+            "0",
+            "1"
+          ],
+          "learner_id": [
+            "1"
+          ],
+          "step_id": [
+            "1"
+          ],
+          "status": [
+            "completed",
+            "in progress"
+          ],
+          "completion_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "pr_rr": [
+            "0.238",
+            "0.201"
+          ],
+          "pr_fr": [
+            "0.877",
+            "0.881"
+          ],
+          "pr_sr": [
+            "0.163",
+            "0.16"
+          ],
+          "start_date": [
+            "2023-04-25",
+            "2023-04-26"
+          ],
+          "attempts": [
+            "3",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learners": {
+        "rows": 2,
+        "sample_values": {
+          "learner_id": [
+            "0",
+            "1"
+          ],
+          "full_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "date_of_birth": [
+            "2000-01-01",
+            "2001-02-02"
+          ],
+          "registration_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "learning_path_id": [
+            "0"
+          ],
+          "user_role_id": [
+            "0",
+            "1"
+          ],
+          "last_login": [
+            "2023-10-01",
+            "2023-10-02"
+          ],
+          "timezone": [
+            "UTC",
+            "America/New_York"
+          ],
+          "language": [
+            "en",
+            "es"
+          ],
+          "preferences": [
+            "{\"learning_style\": \"visual\", \"notifications\": {\"em",
+            "{\"learning_style\": \"auditory\", \"notifications\": {\""
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learning_nodes": {
+        "rows": 2,
+        "sample_values": {
+          "node_id": [
+            "0",
+            "1"
+          ],
+          "node_name": [
+            "Introduction to Algebra Video",
+            "Linear Equations Quiz"
+          ],
+          "description": [
+            "An introductory video on algebra",
+            "A quiz on solving linear equations"
+          ],
+          "type": [
+            "video",
+            "quiz"
+          ],
+          "created_date": [
+            "2023-01-10",
+            "2023-01-15"
+          ],
+          "creator_id": [
+            "1",
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "difficulty_level": [
+            "beginner",
+            "intermediate"
+          ],
+          "estimated_duration": [
+            "15",
+            "10"
+          ],
+          "prerequisites": [
+            "{\"topics\": [\"arithmetic\"]}",
+            "{\"topics\": [\"algebra\"]}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learning_paths": {
+        "rows": 2,
+        "sample_values": {
+          "path_id": [
+            "0",
+            "1"
+          ],
+          "path_name": [
+            "Math Fundamentals",
+            "Advanced Physics"
+          ],
+          "description": [
+            "A comprehensive path for learning basic math conce",
+            "A path for advanced physics topics"
+          ],
+          "created_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "creator_id": [
+            "101",
+            "102"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "estimated_duration": [
+            "20",
+            "40"
+          ],
+          "difficulty_level": [
+            "beginner",
+            "advanced"
+          ],
+          "prerequisites": [
+            "{\"topics\": [\"arithmetic\", \"algebra\"]}",
+            "{\"topics\": [\"quantum mechanics\", \"relativity\"]}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learning_resources": {
+        "rows": 2,
+        "sample_values": {
+          "resource_id": [
+            "0",
+            "1"
+          ],
+          "resource_name": [
+            "Algebra Notes",
+            "Physics Lab Manual"
+          ],
+          "description": [
+            "Detailed notes on algebra concepts",
+            "Lab manual for physics experiments"
+          ],
+          "file_path": [
+            "notes/algebra_notes.pdf",
+            "manuals/physics_lab_manual.pdf"
+          ],
+          "file_size": [
+            "2.5",
+            "4.0"
+          ],
+          "created_date": [
+            "2023-01-10",
+            "2023-02-15"
+          ],
+          "creator_id": [
+            "1"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "difficulty_level": [
+            "beginner",
+            "intermediate"
+          ],
+          "estimated_duration": [
+            "30",
+            "60"
+          ],
+          "prerequisites": [
+            "{\"topics\": [\"arithmetic\"]}",
+            "{\"topics\": [\"mechanics\"]}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learning_sites": {
+        "rows": 2,
+        "sample_values": {
+          "site_id": [
+            "0",
+            "1"
+          ],
+          "site_name": [
+            "Khan Academy",
+            "Coursera"
+          ],
+          "description": [
+            "A leading online learning platform",
+            "A platform for online courses"
+          ],
+          "url": [
+            "https://www.khanacademy.org",
+            "https://www.coursera.org"
+          ],
+          "category_id": [
+            "0"
+          ],
+          "created_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "creator_id": [
+            "1",
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "last_updated": [
+            "2023-10-01",
+            "2023-10-02"
+          ],
+          "rating": [
+            "4.5",
+            "4.7"
+          ],
+          "num_reviews": [
+            "100",
+            "200"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "learning_steps": {
+        "rows": 2,
+        "sample_values": {
+          "step_id": [
+            "0",
+            "1"
+          ],
+          "path_id": [
+            "0",
+            "1"
+          ],
+          "step_name": [
+            "Introduction to Algebra",
+            "Solving Linear Equations"
+          ],
+          "description": [
+            "An introduction to basic algebra concepts",
+            "Techniques for solving linear equations"
+          ],
+          "step_order": [
+            "1",
+            "2"
+          ],
+          "created_date": [
+            "2023-01-10",
+            "2023-01-15"
+          ],
+          "creator_id": [
+            "1"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "estimated_duration": [
+            "15",
+            "20"
+          ],
+          "resources_required": [
+            "{\"resources\": [\"video\", \"notes\"]}",
+            "{\"resources\": [\"video\", \"quiz\"]}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "node_categories": {
+        "rows": 3,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "category_name": [
+            "Video",
+            "Quiz",
+            "Math Video"
+          ],
+          "description": [
+            "Video-based learning content",
+            "Interactive quizzes for assessment",
+            "Video content for math topics"
+          ],
+          "parent_category_id": [
+            "2",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "node_recommendations": {
+        "rows": 2,
+        "sample_values": {
+          "recommendation_id": [
+            "0",
+            "1"
+          ],
+          "learner_id": [
+            "0",
+            "1"
+          ],
+          "node_id": [
+            "1"
+          ],
+          "recommendation_date": [
+            "2023-05-01"
+          ],
+          "random_number": [
+            "0.866486",
+            "0.323639"
+          ],
+          "reason": [
+            "Based on performance",
+            "Based on preferences"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "node_site_associations": {
+        "rows": 2,
+        "sample_values": {
+          "association_id": [
+            "0",
+            "1"
+          ],
+          "node_id": [
+            "1",
+            "0"
+          ],
+          "site_id": [
+            "1",
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "site_categories": {
+        "rows": 3,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "category_name": [
+            "Mathematics",
+            "Science",
+            "Algebra"
+          ],
+          "description": [
+            "Sites focused on math education",
+            "Sites focused on science education",
+            "Subcategory for algebra topics"
+          ],
+          "parent_category_id": [
+            "2",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_profiles": {
+        "rows": 2,
+        "sample_values": {
+          "profile_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "profile_picture": [
+            "profile_pictures/alice.jpg",
+            "profile_pictures/bob.jpg"
+          ],
+          "bio": [
+            "Passionate about math and science",
+            "Enjoys coding and problem-solving"
+          ],
+          "interests": [
+            "Math, Physics",
+            "Computer Science, Math"
+          ],
+          "educational_background": [
+            "Bachelor's in Mathematics",
+            "Master's in Computer Science"
+          ],
+          "privacy_settings": [
+            "{\"profile_visible\": true, \"email_notifications\": f",
+            "{\"profile_visible\": true, \"email_notifications\": t"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "Student",
+            "Educator"
+          ],
+          "description": [
+            "Learners who are using the platform for education",
+            "Teachers who create and manage learning paths and "
+          ],
+          "permissions": [
+            "{\"can_create_paths\": false, \"can_edit_paths\": fals",
+            "{\"can_create_paths\": true, \"can_edit_paths\": true,"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

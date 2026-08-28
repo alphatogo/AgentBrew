@@ -1,0 +1,776 @@
+{
+  "db_id": "legislator",
+  "source": "bird",
+  "tables": 5,
+  "total_rows": 27826,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#legislator",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"current\" {\n  \"ballotpedia_id\" TEXT\n  \"bioguide_id\" TEXT [pk]\n  \"birthday_bio\" DATE\n  \"cspan_id\" REAL [pk]\n  \"fec_id\" TEXT\n  \"first_name\" TEXT\n  \"gender_bio\" TEXT\n  \"google_entity_id_id\" TEXT\n  \"govtrack_id\" INTEGER\n  \"house_history_id\" REAL\n  \"icpsr_id\" REAL\n  \"last_name\" TEXT\n  \"lis_id\" TEXT\n  \"maplight_id\" REAL\n  \"middle_name\" TEXT\n  \"nickname_name\" TEXT\n  \"official_full_name\" TEXT\n  \"opensecrets_id\" TEXT\n  \"religion_bio\" TEXT\n  \"suffix_name\" TEXT\n  \"thomas_id\" INTEGER\n  \"votesmart_id\" REAL\n  \"wikidata_id\" TEXT\n  \"wikipedia_id\" TEXT\n}\n\nTable \"current-terms\" {\n  \"address\" TEXT\n  \"bioguide\" TEXT [pk]\n  \"caucus\" TEXT\n  \"chamber\" TEXT\n  \"class\" REAL\n  \"contact_form\" TEXT\n  \"district\" REAL\n  \"end\" TEXT [pk]\n  \"fax\" TEXT\n  \"last\" TEXT\n  \"name\" TEXT\n  \"office\" TEXT\n  \"party\" TEXT\n  \"party_affiliations\" TEXT\n  \"phone\" TEXT\n  \"relation\" TEXT\n  \"rss_url\" TEXT\n  \"start\" TEXT\n  \"state\" TEXT\n  \"state_rank\" TEXT\n  \"title\" TEXT\n  \"type\" TEXT\n  \"url\" TEXT\n}\n\nTable \"historical\" {\n  \"ballotpedia_id\" TEXT\n  \"bioguide_id\" TEXT [pk]\n  \"bioguide_previous_id\" TEXT\n  \"birthday_bio\" TEXT\n  \"cspan_id\" TEXT\n  \"fec_id\" TEXT\n  \"first_name\" TEXT\n  \"gender_bio\" TEXT\n  \"google_entity_id_id\" TEXT\n  \"govtrack_id\" INTEGER\n  \"house_history_alternate_id\" TEXT\n  \"house_history_id\" REAL\n  \"icpsr_id\" REAL\n  \"last_name\" TEXT\n  \"lis_id\" TEXT\n  \"maplight_id\" TEXT\n  \"middle_name\" TEXT\n  \"nickname_name\" TEXT\n  \"official_full_name\" TEXT\n  \"opensecrets_id\" TEXT\n  \"religion_bio\" TEXT\n  \"suffix_name\" TEXT\n  \"thomas_id\" TEXT\n  \"votesmart_id\" TEXT\n  \"wikidata_id\" TEXT\n  \"wikipedia_id\" TEXT\n}\n\nTable \"historical-terms\" {\n  \"address\" TEXT\n  \"bioguide\" TEXT [pk]\n  \"chamber\" TEXT\n  \"class\" REAL\n  \"contact_form\" TEXT\n  \"district\" REAL\n  \"end\" TEXT\n  \"fax\" TEXT\n  \"last\" TEXT\n  \"middle\" TEXT\n  \"name\" TEXT\n  \"office\" TEXT\n  \"party\" TEXT\n  \"party_affiliations\" TEXT\n  \"phone\" TEXT\n  \"relation\" TEXT\n  \"rss_url\" TEXT\n  \"start\" TEXT\n  \"state\" TEXT\n  \"state_rank\" TEXT\n  \"title\" TEXT\n  \"type\" TEXT\n  \"url\" TEXT\n}\n\nTable \"social-media\" {\n  \"bioguide\" TEXT [pk]\n  \"facebook\" TEXT\n  \"facebook_id\" REAL\n  \"govtrack\" REAL\n  \"instagram\" TEXT\n  \"instagram_id\" REAL\n  \"thomas\" INTEGER\n  \"twitter\" TEXT\n  \"twitter_id\" REAL\n  \"youtube\" TEXT\n  \"youtube_id\" TEXT\n}\n\n\n\nRef: \"current-terms\".\"bioguide\" > \"current\".\"bioguide_id\"\n\nRef: \"historical-terms\".\"bioguide\" > \"historical\".\"bioguide_id\"\n\nRef: \"social-media\".\"bioguide\" > \"current\".\"bioguide_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"current\" {\n  \"ballotpedia_id\" TEXT\n  \"bioguide_id\" TEXT [pk]\n  \"birthday_bio\" DATE\n  \"cspan_id\" REAL [pk]\n  \"fec_id\" TEXT\n  \"first_name\" TEXT\n  \"gender_bio\" TEXT\n  \"google_entity_id_id\" TEXT\n  \"govtrack_id\" INTEGER\n  \"house_history_id\" REAL\n  \"icpsr_id\" REAL\n  \"last_name\" TEXT\n  \"lis_id\" TEXT\n  \"maplight_id\" REAL\n  \"middle_name\" TEXT\n  \"nickname_name\" TEXT\n  \"official_full_name\" TEXT\n  \"opensecrets_id\" TEXT\n  \"religion_bio\" TEXT\n  \"suffix_name\" TEXT\n  \"thomas_id\" INTEGER\n  \"votesmart_id\" REAL\n  \"wikidata_id\" TEXT\n  \"wikipedia_id\" TEXT\n}\n\nTable \"current-terms\" {\n  \"address\" TEXT\n  \"bioguide\" TEXT [pk]\n  \"caucus\" TEXT\n  \"chamber\" TEXT\n  \"class\" REAL\n  \"contact_form\" TEXT\n  \"district\" REAL\n  \"end\" TEXT [pk]\n  \"fax\" TEXT\n  \"last\" TEXT\n  \"name\" TEXT\n  \"office\" TEXT\n  \"party\" TEXT\n  \"party_affiliations\" TEXT\n  \"phone\" TEXT\n  \"relation\" TEXT\n  \"rss_url\" TEXT\n  \"start\" TEXT\n  \"state\" TEXT\n  \"state_rank\" TEXT\n  \"title\" TEXT\n  \"type\" TEXT\n  \"url\" TEXT\n}\n\nTable \"historical\" {\n  \"ballotpedia_id\" TEXT\n  \"bioguide_id\" TEXT [pk]\n  \"bioguide_previous_id\" TEXT\n  \"birthday_bio\" TEXT\n  \"cspan_id\" TEXT\n  \"fec_id\" TEXT\n  \"first_name\" TEXT\n  \"gender_bio\" TEXT\n  \"google_entity_id_id\" TEXT\n  \"govtrack_id\" INTEGER\n  \"house_history_alternate_id\" TEXT\n  \"house_history_id\" REAL\n  \"icpsr_id\" REAL\n  \"last_name\" TEXT\n  \"lis_id\" TEXT\n  \"maplight_id\" TEXT\n  \"middle_name\" TEXT\n  \"nickname_name\" TEXT\n  \"official_full_name\" TEXT\n  \"opensecrets_id\" TEXT\n  \"religion_bio\" TEXT\n  \"suffix_name\" TEXT\n  \"thomas_id\" TEXT\n  \"votesmart_id\" TEXT\n  \"wikidata_id\" TEXT\n  \"wikipedia_id\" TEXT\n}\n\nTable \"historical-terms\" {\n  \"address\" TEXT\n  \"bioguide\" TEXT [pk]\n  \"chamber\" TEXT\n  \"class\" REAL\n  \"contact_form\" TEXT\n  \"district\" REAL\n  \"end\" TEXT\n  \"fax\" TEXT\n  \"last\" TEXT\n  \"middle\" TEXT\n  \"name\" TEXT\n  \"office\" TEXT\n  \"party\" TEXT\n  \"party_affiliations\" TEXT\n  \"phone\" TEXT\n  \"relation\" TEXT\n  \"rss_url\" TEXT\n  \"start\" TEXT\n  \"state\" TEXT\n  \"state_rank\" TEXT\n  \"title\" TEXT\n  \"type\" TEXT\n  \"url\" TEXT\n}\n\nTable \"social-media\" {\n  \"bioguide\" TEXT [pk]\n  \"facebook\" TEXT\n  \"facebook_id\" REAL\n  \"govtrack\" REAL\n  \"instagram\" TEXT\n  \"instagram_id\" REAL\n  \"thomas\" INTEGER\n  \"twitter\" TEXT\n  \"twitter_id\" REAL\n  \"youtube\" TEXT\n  \"youtube_id\" TEXT\n}\n\nRef: \"current-terms\".\"bioguide\" > \"current\".\"bioguide_id\"\n\nRef: \"historical-terms\".\"bioguide\" > \"historical\".\"bioguide_id\"\n\nRef: \"social-media\".\"bioguide\" > \"current\".\"bioguide_id\"\n\n## Table Stats & Sample Values\n\ncurrent: 541 rows\n  first_name: 'Sherrod', 'Maria', 'Benjamin', ...\n  last_name: 'Brown', 'Cantwell', 'Cardin', ...\n  nickname_name: 'Bob', 'Bernie', 'Jim', ...\n\ncurrent-terms: 3078 rows\n  name: 'Stewart Lee Udall', 'Morris K. Udall', 'Mark Udall', ...\n  party: 'Democrat', 'Republican', 'Independent'\n  state: 'OH', 'WA', 'MD', ...\n\nhistorical: 10000 rows\n  first_name: 'Richard', 'Theodorick', 'Aedanus', ...\n  last_name: 'Bassett', 'Bland', 'Burke', ...\n  nickname_name: 'of Carrollton', 'of Colchester', 'of Milton', ...\n\nhistorical-terms: 10000 rows\n  party: 'Anti-Administration', 'Pro-Administration', 'Republican', ...\n  state: 'DE', 'VA', 'SC', ...\n  type: 'sen', 'rep'\n\nsocial-media: 479 rows\n  facebook: 'congresswomanaumuaamata', 'RepToddYoung', 'senjoniernst', ...\n  instagram: 'senjoniernst', 'senatorwarner', 'SenWhitehouse', ...\n  twitter: 'RepAmata', 'RepToddYoung', 'SenJoniErnst', ...",
+    "stateUrl": "https://bird-bench.github.io/#legislator",
+    "tableStats": {
+      "current": {
+        "rows": 541,
+        "sample_values": {
+          "ballotpedia_id": [
+            "Sherrod Brown",
+            "Maria Cantwell",
+            "Ben Cardin",
+            "Tom Carper",
+            "Bob Casey, Jr.",
+            "Bob Corker",
+            "Dianne Feinstein",
+            "Orrin Hatch"
+          ],
+          "bioguide_id": [
+            "B000944",
+            "C000127",
+            "C000141",
+            "C000174",
+            "C001070",
+            "C001071",
+            "F000062",
+            "H000338"
+          ],
+          "birthday_bio": [
+            "1952-11-09",
+            "1958-10-13",
+            "1943-10-05",
+            "1947-01-23",
+            "1960-04-13",
+            "1952-08-24",
+            "1933-06-22",
+            "1934-03-22"
+          ],
+          "cspan_id": [
+            "5051.0",
+            "26137.0",
+            "4004.0",
+            "663.0",
+            "47036.0",
+            "1021114.0",
+            "13061.0",
+            "189.0"
+          ],
+          "fec_id": [
+            "['H2OH13033', 'S6OH00163']",
+            "['S8WA00194', 'H2WA01054']",
+            "['H6MD03177', 'S6MD03177']",
+            "['S8DE00079']",
+            "['S6PA00217']",
+            "['S6TN00216', 'S4TN00187']",
+            "['S0CA00199']",
+            "['S6UT00063', 'P00003806']"
+          ],
+          "first_name": [
+            "Sherrod",
+            "Maria",
+            "Benjamin",
+            "Thomas",
+            "Robert",
+            "Bob",
+            "Dianne",
+            "Orrin"
+          ],
+          "gender_bio": [
+            "M",
+            "F"
+          ],
+          "google_entity_id_id": [
+            "kg:/m/034s80",
+            "kg:/m/01x68t",
+            "kg:/m/025k3k",
+            "kg:/m/01xw7t",
+            "kg:/m/047ymw",
+            "kg:/m/0d9fz3",
+            "kg:/m/01gqws",
+            "kg:/m/016mj4"
+          ],
+          "govtrack_id": [
+            "400050",
+            "300018",
+            "400064",
+            "300019",
+            "412246",
+            "412248",
+            "300043",
+            "300052"
+          ],
+          "house_history_id": [
+            "9996.0",
+            "10608.0",
+            "10629.0",
+            "10671.0",
+            "13044.0",
+            "16558.0",
+            "18811.0",
+            "18124.0"
+          ],
+          "icpsr_id": [
+            "29389.0",
+            "39310.0",
+            "15408.0",
+            "15015.0",
+            "40703.0",
+            "40705.0",
+            "49300.0",
+            "14503.0"
+          ],
+          "last_name": [
+            "Brown",
+            "Cantwell",
+            "Cardin",
+            "Carper",
+            "Casey",
+            "Corker",
+            "Feinstein",
+            "Hatch"
+          ],
+          "lis_id": [
+            "S307",
+            "S275",
+            "S308",
+            "S277",
+            "S309",
+            "S310",
+            "S221",
+            "S118"
+          ],
+          "maplight_id": [
+            "168.0",
+            "544.0",
+            "182.0",
+            "545.0",
+            "727.0",
+            "729.0",
+            "567.0",
+            "574.0"
+          ],
+          "middle_name": [
+            "L.",
+            "Richard",
+            "P.",
+            "G.",
+            "Jean",
+            "Ann",
+            "A.",
+            "F."
+          ],
+          "nickname_name": [
+            "Bob",
+            "Bernie",
+            "Jim",
+            "Jack",
+            "Jeff",
+            "Al",
+            "G.K.",
+            "Rick"
+          ],
+          "official_full_name": [
+            "Sherrod Brown",
+            "Maria Cantwell",
+            "Benjamin L. Cardin",
+            "Thomas R. Carper",
+            "Robert P. Casey, Jr.",
+            "Bob Corker",
+            "Dianne Feinstein",
+            "Orrin G. Hatch"
+          ],
+          "opensecrets_id": [
+            "N00003535",
+            "N00007836",
+            "N00001955",
+            "N00012508",
+            "N00027503",
+            "N00027441",
+            "N00007364",
+            "N00009869"
+          ],
+          "religion_bio": [
+            "Lutheran",
+            "Roman Catholic",
+            "Jewish",
+            "Presbyterian",
+            "Latter Day Saints",
+            "United Methodist",
+            "Southern Baptist",
+            "Baptist"
+          ],
+          "suffix_name": [
+            "Jr.",
+            "III",
+            "II"
+          ],
+          "thomas_id": [
+            "136",
+            "172",
+            "174",
+            "179",
+            "1828",
+            "1825",
+            "1332",
+            "1351"
+          ],
+          "votesmart_id": [
+            "27018.0",
+            "27122.0",
+            "26888.0",
+            "22421.0",
+            "2541.0",
+            "65905.0",
+            "53273.0",
+            "53352.0"
+          ],
+          "wikidata_id": [
+            "Q381880",
+            "Q22250",
+            "Q723295",
+            "Q457432",
+            "Q887841",
+            "Q331719",
+            "Q230733",
+            "Q381157"
+          ],
+          "wikipedia_id": [
+            "Sherrod Brown",
+            "Maria Cantwell",
+            "Ben Cardin",
+            "Tom Carper",
+            "Bob Casey Jr.",
+            "Bob Corker",
+            "Dianne Feinstein",
+            "Orrin Hatch"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "current-terms": {
+        "rows": 3078,
+        "sample_values": {
+          "address": [
+            "713 HART SENATE OFFICE BUILDING WASHINGTON DC 2051",
+            "713 Hart Senate Office Building Washington DC 2051",
+            "311 HART SENATE OFFICE BUILDING WASHINGTON DC 2051",
+            "511 Hart Senate Office Building Washington DC 2051",
+            "509 HART SENATE OFFICE BUILDING WASHINGTON DC 2051",
+            "509 Hart Senate Office Building Washington DC 2051",
+            "513 HART SENATE OFFICE BUILDING WASHINGTON DC 2051",
+            "513 Hart Senate Office Building Washington DC 2051"
+          ],
+          "bioguide": [
+            "B000944",
+            "C000127",
+            "C000141",
+            "C000174",
+            "C001070",
+            "C001071",
+            "F000062",
+            "H000338"
+          ],
+          "caucus": [
+            "Democrat"
+          ],
+          "chamber": [
+            "senate",
+            "house"
+          ],
+          "class": [
+            "1.0",
+            "2.0",
+            "3.0"
+          ],
+          "contact_form": [
+            "http://www.brown.senate.gov/contact/",
+            "http://www.brown.senate.gov/contact",
+            "http://www.cantwell.senate.gov/contact/",
+            "http://www.cantwell.senate.gov/public/index.cfm/em",
+            "http://www.cardin.senate.gov/contact/",
+            "http://www.carper.senate.gov/contact/",
+            "http://www.carper.senate.gov/public/index.cfm/emai",
+            "http://www.casey.senate.gov/contact/"
+          ],
+          "district": [
+            "13.0",
+            "1.0",
+            "3.0",
+            "0.0",
+            "9.0",
+            "11.0",
+            "8.0",
+            "4.0"
+          ],
+          "end": [
+            "1995-01-03",
+            "1997-01-03",
+            "1999-01-03",
+            "2001-01-03",
+            "2003-01-03",
+            "2005-01-03",
+            "2007-01-03",
+            "2013-01-03"
+          ],
+          "fax": [
+            "202-228-6321",
+            "202-228-0514",
+            "202-224-1651",
+            "202-228-2190",
+            "202-228-0604",
+            "202-228-0566",
+            "202-228-3954",
+            "202-224-6331"
+          ],
+          "last": [
+            "Menendez"
+          ],
+          "name": [
+            "Stewart Lee Udall",
+            "Morris K. Udall",
+            "Mark Udall",
+            "Gordon H. Smith",
+            "Michael Bilirakis",
+            "Arch Alfred Moore Jr.",
+            "Julia Carson",
+            "William Lacy Clay Sr."
+          ],
+          "office": [
+            "713 Hart Senate Office Building",
+            "311 Hart Senate Office Building",
+            "511 Hart Senate Office Building",
+            "509 Hart Senate Office Building",
+            "513 Hart Senate Office Building",
+            "393 Russell Senate Office Building",
+            "185 Dirksen Senate Office Building",
+            "425 Dirksen Senate Office Building"
+          ],
+          "party": [
+            "Democrat",
+            "Republican",
+            "Independent"
+          ],
+          "party_affiliations": [
+            "{'start': '2009-01-06', 'end': '2009-02-23', 'part",
+            "{'start': '1993-01-05', 'end': '1994-11-09', 'part"
+          ],
+          "phone": [
+            "202-224-2315",
+            "202-224-3441",
+            "202-224-4524",
+            "202-224-2441",
+            "202-224-6324",
+            "202-224-3344",
+            "202-224-3841",
+            "202-224-5251"
+          ],
+          "relation": [
+            "son",
+            "nephew",
+            "cousin",
+            "daughter",
+            "grandson",
+            "relative",
+            "brother",
+            "great great grandson"
+          ],
+          "rss_url": [
+            "http://www.brown.senate.gov/rss/feeds/?type=all&am",
+            "http://www.cantwell.senate.gov/public/index.cfm/rs",
+            "http://www.cardin.senate.gov/rss/feeds/?type=all",
+            "http://www.carper.senate.gov/public/index.cfm/rss/",
+            "http://www.casey.senate.gov/rss/feeds/?all",
+            "http://www.corker.senate.gov/public/index.cfm/rss/",
+            "http://www.feinstein.senate.gov/public/?a=rss.feed",
+            "http://www.hatch.senate.gov/public/index.cfm/rss/f"
+          ],
+          "start": [
+            "1993-01-05",
+            "1995-01-04",
+            "1997-01-07",
+            "1999-01-06",
+            "2001-01-03",
+            "2003-01-07",
+            "2005-01-04",
+            "2007-01-04"
+          ],
+          "state": [
+            "OH",
+            "WA",
+            "MD",
+            "DE",
+            "PA",
+            "TN",
+            "CA",
+            "UT"
+          ],
+          "state_rank": [
+            "senior",
+            "junior"
+          ],
+          "title": [
+            "Minority Whip",
+            "Majority Whip",
+            "Minority Leader",
+            "Majority Leader",
+            "Speaker"
+          ],
+          "type": [
+            "rep",
+            "sen"
+          ],
+          "url": [
+            "http://www.house.gov/sherrodbrown",
+            "http://brown.senate.gov/",
+            "https://www.brown.senate.gov",
+            "http://cantwell.senate.gov",
+            "https://www.cantwell.senate.gov",
+            "http://www.house.gov/cardin",
+            "http://cardin.senate.gov/",
+            "https://www.cardin.senate.gov"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "historical": {
+        "rows": 10000,
+        "sample_values": {
+          "bioguide_id": [
+            "B000226",
+            "B000546",
+            "B001086",
+            "C000187",
+            "C000538",
+            "C000710",
+            "D000013",
+            "E000155"
+          ],
+          "bioguide_previous_id": [
+            "['F000246']",
+            "['L000266']"
+          ],
+          "birthday_bio": [
+            "1745-04-02",
+            "1742-03-21",
+            "1743-06-16",
+            "1730-07-22",
+            "1739-03-16",
+            "1738-05-28",
+            "1745-11-29",
+            "1748-06-08"
+          ],
+          "first_name": [
+            "Richard",
+            "Theodorick",
+            "Aedanus",
+            "Daniel",
+            "George",
+            "Benjamin",
+            "Tristram",
+            "Jonathan"
+          ],
+          "gender_bio": [
+            "M",
+            "F"
+          ],
+          "google_entity_id_id": [
+            "kg:/m/02pz46",
+            "kg:/m/033mf4",
+            "kg:/m/03yccv",
+            "kg:/m/02q22c",
+            "kg:/m/01mpsj",
+            "kg:/m/03xb7p",
+            "kg:/m/03ynvb",
+            "kg:/m/03zxl_"
+          ],
+          "govtrack_id": [
+            "401222",
+            "401521",
+            "402032",
+            "402334",
+            "402671",
+            "402834",
+            "403156",
+            "403846"
+          ],
+          "house_history_alternate_id": [
+            "13283.0"
+          ],
+          "house_history_id": [
+            "9479.0",
+            "10177.0",
+            "10687.0",
+            "11120.0",
+            "11343.0",
+            "12784.0",
+            "13100.0",
+            "13251.0"
+          ],
+          "icpsr_id": [
+            "507.0",
+            "786.0",
+            "1260.0",
+            "1538.0",
+            "1859.0",
+            "2010.0",
+            "2307.0",
+            "2943.0"
+          ],
+          "last_name": [
+            "Bassett",
+            "Bland",
+            "Burke",
+            "Carroll",
+            "Clymer",
+            "Contee",
+            "Dalton",
+            "Elmer"
+          ],
+          "middle_name": [
+            "Samuel",
+            "Henry",
+            "Jenifer",
+            "Baptista",
+            "Corneliusen",
+            "Tudor",
+            "Petters",
+            "Johnson"
+          ],
+          "nickname_name": [
+            "of Carrollton",
+            "of Colchester",
+            "of Milton",
+            "of Ohio",
+            "Aleck",
+            "Abram",
+            "Van",
+            "William Worth"
+          ],
+          "suffix_name": [
+            "Jr.",
+            "Sr.",
+            "II",
+            "III"
+          ],
+          "wikidata_id": [
+            "Q518823",
+            "Q1749152",
+            "Q380504",
+            "Q674371",
+            "Q708913",
+            "Q868334",
+            "Q1365791",
+            "Q929830"
+          ],
+          "wikipedia_id": [
+            "Richard Bassett (politician)",
+            "Theodorick Bland (congressman)",
+            "Aedanus Burke",
+            "Daniel Carroll",
+            "George Clymer",
+            "Benjamin Contee",
+            "Tristram Dalton",
+            "Jonathan Elmer"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "historical-terms": {
+        "rows": 10000,
+        "sample_values": {
+          "bioguide": [
+            "B000226",
+            "B000546",
+            "B001086",
+            "C000187",
+            "C000538",
+            "C000710",
+            "D000013",
+            "E000155"
+          ],
+          "class": [
+            "2.0",
+            "1.0",
+            "3.0"
+          ],
+          "district": [
+            "9.0",
+            "2.0",
+            "6.0",
+            "-1.0",
+            "3.0",
+            "1.0",
+            "5.0",
+            "8.0"
+          ],
+          "end": [
+            "1793-03-03",
+            "1791-03-03",
+            "1795-03-03",
+            "1791-12-31",
+            "1797-03-03",
+            "1796-10-15",
+            "1796-10-14",
+            "1797-12-31"
+          ],
+          "last": [
+            "Levy"
+          ],
+          "party": [
+            "Anti-Administration",
+            "Pro-Administration",
+            "Republican",
+            "Federalist",
+            "Democratic Republican",
+            "Pro-administration",
+            "Unknown",
+            "Jackson"
+          ],
+          "start": [
+            "1789-03-04",
+            "1790-01-01",
+            "1791-10-24",
+            "1792-01-01",
+            "1793-01-10",
+            "1793-12-02",
+            "1794-01-01",
+            "1795-11-16"
+          ],
+          "state": [
+            "DE",
+            "VA",
+            "SC",
+            "MD",
+            "PA",
+            "MA",
+            "NJ",
+            "GA"
+          ],
+          "type": [
+            "sen",
+            "rep"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "social-media": {
+        "rows": 479,
+        "sample_values": {
+          "bioguide": [
+            "R000600",
+            "Y000064",
+            "E000295",
+            "T000476",
+            "Y000063",
+            "Y000062",
+            "Y000033",
+            "W000809"
+          ],
+          "facebook": [
+            "congresswomanaumuaamata",
+            "RepToddYoung",
+            "senjoniernst",
+            "SenatorThomTillis",
+            "CongressmanKevinYoder",
+            "214258646163",
+            "RepDonYoung",
+            "RepSteveWomack"
+          ],
+          "facebook_id": [
+            "1537155909907320.0",
+            "186203844738421.0",
+            "351671691660938.0",
+            "1576257352609470.0",
+            "154026694650252.0",
+            "214258646163.0",
+            "7476269851.0",
+            "135898413136490.0"
+          ],
+          "govtrack": [
+            "412664.0",
+            "412428.0",
+            "412667.0",
+            "412668.0",
+            "412430.0",
+            "412211.0",
+            "400440.0",
+            "412402.0"
+          ],
+          "instagram": [
+            "senjoniernst",
+            "senatorwarner",
+            "SenWhitehouse",
+            "peterwelchvt",
+            "RepDWSTweets",
+            "repjoewilson",
+            "repgregwalden",
+            "wydenpress"
+          ],
+          "instagram_id": [
+            "1582702853.0",
+            "515327940.0",
+            "1559860900.0",
+            "519685522.0",
+            "382962594.0",
+            "9443881.0",
+            "367948073.0",
+            "268595235.0"
+          ],
+          "thomas": [
+            "2222",
+            "2019",
+            "2283",
+            "2291",
+            "2021",
+            "1853",
+            "1256",
+            "1991"
+          ],
+          "twitter": [
+            "RepAmata",
+            "RepToddYoung",
+            "SenJoniErnst",
+            "senthomtillis",
+            "RepKevinYoder",
+            "RepJohnYarmuth",
+            "RepDonYoung",
+            "Rep_SteveWomack"
+          ],
+          "twitter_id": [
+            "3026622545.0",
+            "234128524.0",
+            "2856787757.0",
+            "2964174789.0",
+            "252819642.0",
+            "384913290.0",
+            "37007274.0",
+            "234469322.0"
+          ],
+          "youtube": [
+            "RepToddYoung",
+            "RepYoder",
+            "RepJohnYarmuth",
+            "RepDonYoung",
+            "CongressmanWomack",
+            "repfredericawilson",
+            "repdanwebster",
+            "SenatorMarkWarner"
+          ],
+          "youtube_id": [
+            "UCGdrLQbt1PYDTPsampx4t1A",
+            "UCuknj4PGn91gHDNAfboZEgQ",
+            "UCLwrmtF_84FIcK3TyMs4MIw",
+            "UCUD9VGV4SSGWjGdbn37Ea2w",
+            "UCCeYmn4A8kZEHCcAfeUW9lQ",
+            "UCy5KW4yrEfEiyZRX45Eoxkg",
+            "UCg5ZIR5-82EbJiNeI1bqT-A",
+            "UCXJbUDLYX-wGIhRuN66hqZw"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

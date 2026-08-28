@@ -1,0 +1,246 @@
+{
+  "db_id": "activity_1",
+  "source": "sparc",
+  "tables": 5,
+  "total_rows": 218,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#activity_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Activity\" {\n  \"actid\" INTEGER [pk]\n  \"activity_name\" TEXT\n}\n\nTable \"Faculty\" {\n  \"FacID\" INTEGER [pk]\n  \"Lname\" TEXT\n  \"Fname\" TEXT\n  \"Rank\" TEXT\n  \"Sex\" TEXT\n  \"Phone\" INTEGER\n  \"Room\" TEXT\n  \"Building\" TEXT\n}\n\nTable \"Faculty_Participates_in\" {\n  \"FacID\" INTEGER\n  \"actid\" INTEGER\n}\n\nTable \"Participates_in\" {\n  \"stuid\" INTEGER\n  \"actid\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\n\n\nRef: \"Participates_in\".\"actid\" > \"Activity\".\"actid\"\n\nRef: \"Participates_in\".\"stuid\" > \"Student\".\"StuID\"\n\nRef: \"Faculty_Participates_in\".\"actid\" > \"Activity\".\"actid\"\n\nRef: \"Faculty_Participates_in\".\"FacID\" > \"Faculty\".\"FacID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Activity\" {\n  \"actid\" INTEGER [pk]\n  \"activity_name\" TEXT\n}\n\nTable \"Faculty\" {\n  \"FacID\" INTEGER [pk]\n  \"Lname\" TEXT\n  \"Fname\" TEXT\n  \"Rank\" TEXT\n  \"Sex\" TEXT\n  \"Phone\" INTEGER\n  \"Room\" TEXT\n  \"Building\" TEXT\n}\n\nTable \"Faculty_Participates_in\" {\n  \"FacID\" INTEGER\n  \"actid\" INTEGER\n}\n\nTable \"Participates_in\" {\n  \"stuid\" INTEGER\n  \"actid\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\nRef: \"Participates_in\".\"actid\" > \"Activity\".\"actid\"\n\nRef: \"Participates_in\".\"stuid\" > \"Student\".\"StuID\"\n\nRef: \"Faculty_Participates_in\".\"actid\" > \"Activity\".\"actid\"\n\nRef: \"Faculty_Participates_in\".\"FacID\" > \"Faculty\".\"FacID\"\n\n## Table Stats & Sample Values\n\nActivity: 16 rows\n  activity_name: 'Mountain Climbing', 'Canoeing', 'Kayaking', ...\n  actid: '770', '771', '772', ...\n\nFaculty: 58 rows\n  Lname: 'Giuliano', 'Goodrich', 'Masson', ...\n  Fname: 'Mark', 'Michael', 'Gerald', ...\n  Rank: 'Instructor', 'Professor', 'AssocProf', ...\n\nFaculty_Participates_in: 40 rows\n  FacID: '1082', '1121', '1193', ...\n  actid: '784', '785', '790', ...\n\nParticipates_in: 70 rows\n  stuid: '1001', '1002', '1003', ...\n  actid: '770', '771', '777', ...\n\nStudent: 34 rows\n  LName: 'Smith', 'Kim', 'Jones', ...\n  Fname: 'Linda', 'Tracy', 'Shiela', ...\n  city_code: 'BAL', 'HKG', 'WAS', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#activity_1",
+    "tableStats": {
+      "Activity": {
+        "rows": 16,
+        "sample_values": {
+          "actid": [
+            "770",
+            "771",
+            "772",
+            "773",
+            "776",
+            "777",
+            "778",
+            "779"
+          ],
+          "activity_name": [
+            "Mountain Climbing",
+            "Canoeing",
+            "Kayaking",
+            "Spelunking",
+            "Extreme Canasta",
+            "Soccer",
+            "Baseball",
+            "Accordion Ensemble"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Faculty": {
+        "rows": 58,
+        "sample_values": {
+          "FacID": [
+            "1082",
+            "1121",
+            "1148",
+            "1172",
+            "1177",
+            "1193",
+            "1823",
+            "2028"
+          ],
+          "Lname": [
+            "Giuliano",
+            "Goodrich",
+            "Masson",
+            "Runolfsson",
+            "Naiman",
+            "Jones",
+            "Davidson",
+            "Brody"
+          ],
+          "Fname": [
+            "Mark",
+            "Michael",
+            "Gerald",
+            "Thordur",
+            "Daniel",
+            "Stacey",
+            "Frederic",
+            "William"
+          ],
+          "Rank": [
+            "Instructor",
+            "Professor",
+            "AssocProf",
+            "AsstProf"
+          ],
+          "Sex": [
+            "M",
+            "F"
+          ],
+          "Phone": [
+            "2424",
+            "3593",
+            "3402",
+            "3121",
+            "3571",
+            "3550",
+            "5629",
+            "6073"
+          ],
+          "Room": [
+            "224",
+            "219",
+            "224B",
+            "119",
+            "288",
+            "324",
+            "318",
+            "328"
+          ],
+          "Building": [
+            "NEB",
+            "Barton",
+            "Krieger"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Faculty_Participates_in": {
+        "rows": 40,
+        "sample_values": {
+          "FacID": [
+            "1082",
+            "1121",
+            "1193",
+            "2192",
+            "3457",
+            "4230",
+            "6112",
+            "7723"
+          ],
+          "actid": [
+            "784",
+            "785",
+            "790",
+            "771",
+            "777",
+            "770",
+            "796",
+            "773"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Participates_in": {
+        "rows": 70,
+        "sample_values": {
+          "stuid": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "actid": [
+            "770",
+            "771",
+            "777",
+            "772",
+            "778",
+            "780",
+            "782",
+            "773"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student": {
+        "rows": 34,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "LName": [
+            "Smith",
+            "Kim",
+            "Jones",
+            "Kumar",
+            "Gompers",
+            "Schultz",
+            "Apap",
+            "Nelson"
+          ],
+          "Fname": [
+            "Linda",
+            "Tracy",
+            "Shiela",
+            "Dinesh",
+            "Paul",
+            "Andy",
+            "Lisa",
+            "Jandy"
+          ],
+          "Age": [
+            "18",
+            "19",
+            "21",
+            "20",
+            "26",
+            "17",
+            "22",
+            "16"
+          ],
+          "Sex": [
+            "F",
+            "M"
+          ],
+          "Major": [
+            "600",
+            "520",
+            "540",
+            "550",
+            "100",
+            "50"
+          ],
+          "Advisor": [
+            "1121",
+            "7712",
+            "7792",
+            "8423",
+            "1148",
+            "8918",
+            "9172",
+            "2192"
+          ],
+          "city_code": [
+            "BAL",
+            "HKG",
+            "WAS",
+            "CHI",
+            "YYZ",
+            "PIT",
+            "HOU",
+            "PHL"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

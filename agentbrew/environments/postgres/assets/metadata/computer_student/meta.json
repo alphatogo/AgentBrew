@@ -1,0 +1,139 @@
+{
+  "db_id": "computer_student",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 712,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#computer_student",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"advisedBy\" {\n  \"p_id\" INTEGER [pk]\n  \"p_id_dummy\" INTEGER [pk]\n}\n\nTable \"course\" {\n  \"course_id\" INTEGER [pk]\n  \"courseLevel\" TEXT\n}\n\nTable \"person\" {\n  \"p_id\" INTEGER [pk]\n  \"professor\" INTEGER\n  \"student\" INTEGER\n  \"hasPosition\" TEXT\n  \"inPhase\" TEXT\n  \"yearsInProgram\" TEXT\n}\n\nTable \"taughtBy\" {\n  \"course_id\" INTEGER [pk]\n  \"p_id\" INTEGER [pk]\n}\n\n\n\nRef: \"advisedBy\".\"p_id\" > \"person\".\"p_id\"\n\nRef: \"advisedBy\".\"p_id_dummy\" > \"person\".\"p_id\"\n\nRef: \"taughtBy\".\"course_id\" > \"course\".\"course_id\"\n\nRef: \"taughtBy\".\"p_id\" > \"person\".\"p_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"advisedBy\" {\n  \"p_id\" INTEGER [pk]\n  \"p_id_dummy\" INTEGER [pk]\n}\n\nTable \"course\" {\n  \"course_id\" INTEGER [pk]\n  \"courseLevel\" TEXT\n}\n\nTable \"person\" {\n  \"p_id\" INTEGER [pk]\n  \"professor\" INTEGER\n  \"student\" INTEGER\n  \"hasPosition\" TEXT\n  \"inPhase\" TEXT\n  \"yearsInProgram\" TEXT\n}\n\nTable \"taughtBy\" {\n  \"course_id\" INTEGER [pk]\n  \"p_id\" INTEGER [pk]\n}\n\nRef: \"advisedBy\".\"p_id\" > \"person\".\"p_id\"\n\nRef: \"advisedBy\".\"p_id_dummy\" > \"person\".\"p_id\"\n\nRef: \"taughtBy\".\"course_id\" > \"course\".\"course_id\"\n\nRef: \"taughtBy\".\"p_id\" > \"person\".\"p_id\"\n\n## Table Stats & Sample Values\n\nadvisedBy: 113 rows\n  p_id: '96', '118', '183', ...\n  p_id_dummy: '5', '7', '29', ...\n\ncourse: 132 rows\n  courseLevel: 'Level_500', 'Level_300', 'Level_400'\n  course_id: '0', '1', '2', ...\n\nperson: 278 rows\n  hasPosition: '0', 'Faculty', 'Faculty_adj', ...\n  inPhase: '0', 'Post_Quals', 'Post_Generals', ...\n  yearsInProgram: '0', 'Year_2', 'Year_5', ...\n\ntaughtBy: 189 rows\n  course_id: '0', '1', '2', ...\n  p_id: '40', '180', '279', ...",
+    "stateUrl": "https://bird-bench.github.io/#computer_student",
+    "tableStats": {
+      "advisedBy": {
+        "rows": 113,
+        "sample_values": {
+          "p_id": [
+            "96",
+            "118",
+            "183",
+            "263",
+            "362",
+            "266",
+            "272",
+            "6"
+          ],
+          "p_id_dummy": [
+            "5",
+            "7",
+            "29",
+            "57",
+            "72",
+            "79",
+            "98",
+            "101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "course": {
+        "rows": 132,
+        "sample_values": {
+          "course_id": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "courseLevel": [
+            "Level_500",
+            "Level_300",
+            "Level_400"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "person": {
+        "rows": 278,
+        "sample_values": {
+          "p_id": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "13",
+            "14"
+          ],
+          "professor": [
+            "0",
+            "1"
+          ],
+          "student": [
+            "1",
+            "0"
+          ],
+          "hasPosition": [
+            "0",
+            "Faculty",
+            "Faculty_adj",
+            "Faculty_eme",
+            "Faculty_aff"
+          ],
+          "inPhase": [
+            "0",
+            "Post_Quals",
+            "Post_Generals",
+            "Pre_Quals"
+          ],
+          "yearsInProgram": [
+            "0",
+            "Year_2",
+            "Year_5",
+            "Year_7",
+            "Year_10",
+            "Year_3",
+            "Year_1",
+            "Year_6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "taughtBy": {
+        "rows": 189,
+        "sample_values": {
+          "course_id": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "8",
+            "9"
+          ],
+          "p_id": [
+            "40",
+            "180",
+            "279",
+            "107",
+            "415",
+            "297",
+            "235",
+            "52"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

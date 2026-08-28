@@ -1,0 +1,822 @@
+{
+  "db_id": "soccer_1",
+  "source": "sparc",
+  "tables": 6,
+  "total_rows": 196817,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#soccer_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Country\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"League\" {\n  \"id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"name\" TEXT\n}\n\nTable \"Player\" {\n  \"id\" INTEGER [pk]\n  \"player_api_id\" INTEGER\n  \"player_name\" TEXT\n  \"player_fifa_api_id\" INTEGER\n  \"birthday\" TEXT\n  \"height\" INTEGER\n  \"weight\" INTEGER\n}\n\nTable \"Player_Attributes\" {\n  \"id\" INTEGER [pk]\n  \"player_fifa_api_id\" INTEGER\n  \"player_api_id\" INTEGER\n  \"date\" TEXT\n  \"overall_rating\" INTEGER\n  \"potential\" INTEGER\n  \"preferred_foot\" TEXT\n  \"attacking_work_rate\" TEXT\n  \"defensive_work_rate\" TEXT\n  \"crossing\" INTEGER\n  \"finishing\" INTEGER\n  \"heading_accuracy\" INTEGER\n  \"short_passing\" INTEGER\n  \"volleys\" INTEGER\n  \"dribbling\" INTEGER\n  \"curve\" INTEGER\n  \"free_kick_accuracy\" INTEGER\n  \"long_passing\" INTEGER\n  \"ball_control\" INTEGER\n  \"acceleration\" INTEGER\n  \"sprint_speed\" INTEGER\n  \"agility\" INTEGER\n  \"reactions\" INTEGER\n  \"balance\" INTEGER\n  \"shot_power\" INTEGER\n  \"jumping\" INTEGER\n  \"stamina\" INTEGER\n  \"strength\" INTEGER\n  \"long_shots\" INTEGER\n  \"aggression\" INTEGER\n  \"interceptions\" INTEGER\n  \"positioning\" INTEGER\n  \"vision\" INTEGER\n  \"penalties\" INTEGER\n  \"marking\" INTEGER\n  \"standing_tackle\" INTEGER\n  \"sliding_tackle\" INTEGER\n  \"gk_diving\" INTEGER\n  \"gk_handling\" INTEGER\n  \"gk_kicking\" INTEGER\n  \"gk_positioning\" INTEGER\n  \"gk_reflexes\" INTEGER\n}\n\nTable \"Team\" {\n  \"id\" INTEGER [pk]\n  \"team_api_id\" INTEGER\n  \"team_fifa_api_id\" INTEGER\n  \"team_long_name\" TEXT\n  \"team_short_name\" TEXT\n}\n\nTable \"Team_Attributes\" {\n  \"id\" INTEGER [pk]\n  \"team_fifa_api_id\" INTEGER\n  \"team_api_id\" INTEGER\n  \"date\" TEXT\n  \"buildUpPlaySpeed\" INTEGER\n  \"buildUpPlaySpeedClass\" TEXT\n  \"buildUpPlayDribbling\" INTEGER\n  \"buildUpPlayDribblingClass\" TEXT\n  \"buildUpPlayPassing\" INTEGER\n  \"buildUpPlayPassingClass\" TEXT\n  \"buildUpPlayPositioningClass\" TEXT\n  \"chanceCreationPassing\" INTEGER\n  \"chanceCreationPassingClass\" TEXT\n  \"chanceCreationCrossing\" INTEGER\n  \"chanceCreationCrossingClass\" TEXT\n  \"chanceCreationShooting\" INTEGER\n  \"chanceCreationShootingClass\" TEXT\n  \"chanceCreationPositioningClass\" TEXT\n  \"defencePressure\" INTEGER\n  \"defencePressureClass\" TEXT\n  \"defenceAggression\" INTEGER\n  \"defenceAggressionClass\" TEXT\n  \"defenceTeamWidth\" INTEGER\n  \"defenceTeamWidthClass\" TEXT\n  \"defenceDefenderLineClass\" TEXT\n}\n\n\n\nRef: \"Player_Attributes\".\"player_api_id\" > \"Player\".\"player_api_id\"\n\nRef: \"Player_Attributes\".\"player_fifa_api_id\" > \"Player\".\"player_fifa_api_id\"\n\nRef: \"League\".\"country_id\" > \"Country\".\"id\"\n\nRef: \"Team_Attributes\".\"team_api_id\" > \"Team\".\"team_api_id\"\n\nRef: \"Team_Attributes\".\"team_fifa_api_id\" > \"Team\".\"team_fifa_api_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Country\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n}\n\nTable \"League\" {\n  \"id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"name\" TEXT\n}\n\nTable \"Player\" {\n  \"id\" INTEGER [pk]\n  \"player_api_id\" INTEGER\n  \"player_name\" TEXT\n  \"player_fifa_api_id\" INTEGER\n  \"birthday\" TEXT\n  \"height\" INTEGER\n  \"weight\" INTEGER\n}\n\nTable \"Player_Attributes\" {\n  \"id\" INTEGER [pk]\n  \"player_fifa_api_id\" INTEGER\n  \"player_api_id\" INTEGER\n  \"date\" TEXT\n  \"overall_rating\" INTEGER\n  \"potential\" INTEGER\n  \"preferred_foot\" TEXT\n  \"attacking_work_rate\" TEXT\n  \"defensive_work_rate\" TEXT\n  \"crossing\" INTEGER\n  \"finishing\" INTEGER\n  \"heading_accuracy\" INTEGER\n  \"short_passing\" INTEGER\n  \"volleys\" INTEGER\n  \"dribbling\" INTEGER\n  \"curve\" INTEGER\n  \"free_kick_accuracy\" INTEGER\n  \"long_passing\" INTEGER\n  \"ball_control\" INTEGER\n  \"acceleration\" INTEGER\n  \"sprint_speed\" INTEGER\n  \"agility\" INTEGER\n  \"reactions\" INTEGER\n  \"balance\" INTEGER\n  \"shot_power\" INTEGER\n  \"jumping\" INTEGER\n  \"stamina\" INTEGER\n  \"strength\" INTEGER\n  \"long_shots\" INTEGER\n  \"aggression\" INTEGER\n  \"interceptions\" INTEGER\n  \"positioning\" INTEGER\n  \"vision\" INTEGER\n  \"penalties\" INTEGER\n  \"marking\" INTEGER\n  \"standing_tackle\" INTEGER\n  \"sliding_tackle\" INTEGER\n  \"gk_diving\" INTEGER\n  \"gk_handling\" INTEGER\n  \"gk_kicking\" INTEGER\n  \"gk_positioning\" INTEGER\n  \"gk_reflexes\" INTEGER\n}\n\nTable \"Team\" {\n  \"id\" INTEGER [pk]\n  \"team_api_id\" INTEGER\n  \"team_fifa_api_id\" INTEGER\n  \"team_long_name\" TEXT\n  \"team_short_name\" TEXT\n}\n\nTable \"Team_Attributes\" {\n  \"id\" INTEGER [pk]\n  \"team_fifa_api_id\" INTEGER\n  \"team_api_id\" INTEGER\n  \"date\" TEXT\n  \"buildUpPlaySpeed\" INTEGER\n  \"buildUpPlaySpeedClass\" TEXT\n  \"buildUpPlayDribbling\" INTEGER\n  \"buildUpPlayDribblingClass\" TEXT\n  \"buildUpPlayPassing\" INTEGER\n  \"buildUpPlayPassingClass\" TEXT\n  \"buildUpPlayPositioningClass\" TEXT\n  \"chanceCreationPassing\" INTEGER\n  \"chanceCreationPassingClass\" TEXT\n  \"chanceCreationCrossing\" INTEGER\n  \"chanceCreationCrossingClass\" TEXT\n  \"chanceCreationShooting\" INTEGER\n  \"chanceCreationShootingClass\" TEXT\n  \"chanceCreationPositioningClass\" TEXT\n  \"defencePressure\" INTEGER\n  \"defencePressureClass\" TEXT\n  \"defenceAggression\" INTEGER\n  \"defenceAggressionClass\" TEXT\n  \"defenceTeamWidth\" INTEGER\n  \"defenceTeamWidthClass\" TEXT\n  \"defenceDefenderLineClass\" TEXT\n}\n\nRef: \"Player_Attributes\".\"player_api_id\" > \"Player\".\"player_api_id\"\n\nRef: \"Player_Attributes\".\"player_fifa_api_id\" > \"Player\".\"player_fifa_api_id\"\n\nRef: \"League\".\"country_id\" > \"Country\".\"id\"\n\nRef: \"Team_Attributes\".\"team_api_id\" > \"Team\".\"team_api_id\"\n\nRef: \"Team_Attributes\".\"team_fifa_api_id\" > \"Team\".\"team_fifa_api_id\"\n\n## Table Stats & Sample Values\n\nCountry: 11 rows\n  name: 'Belgium', 'England', 'France', ...\n  id: '1', '1729', '4769', ...\n\nLeague: 11 rows\n  name: 'Belgium Jupiler League', 'England Premier League', 'France Ligue 1', ...\n  country_id: '1', '1729', '4769', ...\n  id: '1', '1729', '4769', ...\n\nPlayer: 10000 rows\n  player_name: 'Aaron Appindangoye', 'Aaron Cresswell', 'Aaron Doran', ...\n  birthday: '1992-02-29 00:00:00', '1989-12-15 00:00:00', '1991-05-13 00:00:00', ...\n  height: '182.88', '170.18', '172.72', ...\n\nPlayer_Attributes: 10000 rows\n  preferred_foot: 'right', 'left'\n  attacking_work_rate: 'medium', 'high', 'low', ...\n  defensive_work_rate: 'medium', 'high', 'low', ...\n\nTeam: 299 rows\n  team_short_name: 'GEN', 'BAC', 'ZUL', ...\n  team_long_name: 'KRC Genk', 'Beerschot AC', 'SV Zulte-Waregem', ...\n  team_api_id: '9987', '9993', '10000', ...\n\nTeam_Attributes: 1458 rows\n  buildUpPlaySpeedClass: 'Balanced', 'Fast', 'Slow'\n  buildUpPlayDribblingClass: 'Little', 'Normal', 'Lots'\n  buildUpPlayPassingClass: 'Mixed', 'Long', 'Short'",
+    "stateUrl": "https://github.com/taoyds/sparc#soccer_1",
+    "tableStats": {
+      "Country": {
+        "rows": 11,
+        "sample_values": {
+          "id": [
+            "1",
+            "1729",
+            "4769",
+            "7809",
+            "10257",
+            "13274",
+            "15722",
+            "17642"
+          ],
+          "name": [
+            "Belgium",
+            "England",
+            "France",
+            "Germany",
+            "Italy",
+            "Netherlands",
+            "Poland",
+            "Portugal"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "League": {
+        "rows": 11,
+        "sample_values": {
+          "id": [
+            "1",
+            "1729",
+            "4769",
+            "7809",
+            "10257",
+            "13274",
+            "15722",
+            "17642"
+          ],
+          "country_id": [
+            "1",
+            "1729",
+            "4769",
+            "7809",
+            "10257",
+            "13274",
+            "15722",
+            "17642"
+          ],
+          "name": [
+            "Belgium Jupiler League",
+            "England Premier League",
+            "France Ligue 1",
+            "Germany 1. Bundesliga",
+            "Italy Serie A",
+            "Netherlands Eredivisie",
+            "Poland Ekstraklasa",
+            "Portugal Liga ZON Sagres"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Player": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "player_api_id": [
+            "505942",
+            "155782",
+            "162549",
+            "30572",
+            "23780",
+            "27316",
+            "564793",
+            "30895"
+          ],
+          "player_name": [
+            "Aaron Appindangoye",
+            "Aaron Cresswell",
+            "Aaron Doran",
+            "Aaron Galindo",
+            "Aaron Hughes",
+            "Aaron Hunt",
+            "Aaron Kuhl",
+            "Aaron Lennon"
+          ],
+          "player_fifa_api_id": [
+            "218353",
+            "189615",
+            "186170",
+            "140161",
+            "17725",
+            "158138",
+            "221280",
+            "152747"
+          ],
+          "birthday": [
+            "1992-02-29 00:00:00",
+            "1989-12-15 00:00:00",
+            "1991-05-13 00:00:00",
+            "1982-05-08 00:00:00",
+            "1979-11-08 00:00:00",
+            "1986-09-04 00:00:00",
+            "1996-01-30 00:00:00",
+            "1987-04-16 00:00:00"
+          ],
+          "height": [
+            "182.88",
+            "170.18",
+            "172.72",
+            "165.1",
+            "190.5",
+            "175.26",
+            "187.96",
+            "177.8"
+          ],
+          "weight": [
+            "187",
+            "146",
+            "163",
+            "198",
+            "154",
+            "161",
+            "139",
+            "181"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Player_Attributes": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "player_fifa_api_id": [
+            "218353",
+            "189615",
+            "186170",
+            "140161",
+            "17725",
+            "158138",
+            "221280",
+            "152747"
+          ],
+          "player_api_id": [
+            "505942",
+            "155782",
+            "162549",
+            "30572",
+            "23780",
+            "27316",
+            "564793",
+            "30895"
+          ],
+          "date": [
+            "2016-02-18 00:00:00",
+            "2015-11-19 00:00:00",
+            "2015-09-21 00:00:00",
+            "2015-03-20 00:00:00",
+            "2007-02-22 00:00:00",
+            "2016-04-21 00:00:00",
+            "2016-04-07 00:00:00",
+            "2016-01-07 00:00:00"
+          ],
+          "overall_rating": [
+            "67",
+            "62",
+            "61",
+            "74",
+            "73",
+            "71",
+            "70",
+            "69"
+          ],
+          "potential": [
+            "71",
+            "66",
+            "65",
+            "76",
+            "75",
+            "77",
+            "78",
+            "79"
+          ],
+          "preferred_foot": [
+            "right",
+            "left"
+          ],
+          "attacking_work_rate": [
+            "medium",
+            "high",
+            "low",
+            "None",
+            "le",
+            "norm"
+          ],
+          "defensive_work_rate": [
+            "medium",
+            "high",
+            "low",
+            "_0",
+            "5",
+            "ean",
+            "o",
+            "1"
+          ],
+          "crossing": [
+            "49",
+            "48",
+            "80",
+            "79",
+            "78",
+            "77",
+            "74",
+            "58"
+          ],
+          "finishing": [
+            "44",
+            "43",
+            "53",
+            "52",
+            "51",
+            "50",
+            "40",
+            "39"
+          ],
+          "heading_accuracy": [
+            "71",
+            "70",
+            "58",
+            "57",
+            "56",
+            "51",
+            "50",
+            "52"
+          ],
+          "short_passing": [
+            "61",
+            "60",
+            "71",
+            "70",
+            "69",
+            "67",
+            "64",
+            "62"
+          ],
+          "volleys": [
+            "44",
+            "43",
+            "40",
+            "32",
+            "29",
+            "28",
+            "30",
+            "52"
+          ],
+          "dribbling": [
+            "51",
+            "50",
+            "73",
+            "71",
+            "67",
+            "66",
+            "65",
+            "64"
+          ],
+          "curve": [
+            "45",
+            "44",
+            "70",
+            "68",
+            "67",
+            "66",
+            "65",
+            "63"
+          ],
+          "free_kick_accuracy": [
+            "39",
+            "38",
+            "69",
+            "68",
+            "43",
+            "42",
+            "26",
+            "63"
+          ],
+          "long_passing": [
+            "64",
+            "63",
+            "68",
+            "67",
+            "65",
+            "46",
+            "45",
+            "49"
+          ],
+          "ball_control": [
+            "49",
+            "48",
+            "71",
+            "70",
+            "68",
+            "67",
+            "66",
+            "65"
+          ],
+          "acceleration": [
+            "60",
+            "79",
+            "80",
+            "84",
+            "85",
+            "69",
+            "43",
+            "42"
+          ],
+          "sprint_speed": [
+            "64",
+            "78",
+            "82",
+            "81",
+            "72",
+            "47",
+            "46",
+            "59"
+          ],
+          "agility": [
+            "59",
+            "78",
+            "79",
+            "81",
+            "77",
+            "74",
+            "85",
+            "76"
+          ],
+          "reactions": [
+            "47",
+            "46",
+            "67",
+            "71",
+            "69",
+            "70",
+            "66",
+            "62"
+          ],
+          "balance": [
+            "65",
+            "90",
+            "87",
+            "62",
+            "92",
+            "84",
+            "56",
+            "41"
+          ],
+          "shot_power": [
+            "55",
+            "54",
+            "71",
+            "70",
+            "65",
+            "48",
+            "47",
+            "61"
+          ],
+          "jumping": [
+            "58",
+            "85",
+            "84",
+            "77",
+            "73",
+            "64",
+            "48",
+            "65"
+          ],
+          "stamina": [
+            "54",
+            "79",
+            "80",
+            "77",
+            "76",
+            "74",
+            "73",
+            "63"
+          ],
+          "strength": [
+            "76",
+            "56",
+            "50",
+            "49",
+            "48",
+            "43",
+            "37",
+            "38"
+          ],
+          "long_shots": [
+            "35",
+            "34",
+            "62",
+            "60",
+            "59",
+            "58",
+            "56",
+            "55"
+          ],
+          "aggression": [
+            "71",
+            "63",
+            "62",
+            "68",
+            "67",
+            "66",
+            "64",
+            "60"
+          ],
+          "interceptions": [
+            "70",
+            "41",
+            "40",
+            "67",
+            "66",
+            "65",
+            "62",
+            "59"
+          ],
+          "positioning": [
+            "45",
+            "44",
+            "60",
+            "58",
+            "57",
+            "56",
+            "19",
+            "27"
+          ],
+          "vision": [
+            "54",
+            "53",
+            "66",
+            "65",
+            "64",
+            "61",
+            "58",
+            "63"
+          ],
+          "penalties": [
+            "48",
+            "47",
+            "59",
+            "58",
+            "35",
+            "28",
+            "29",
+            "61"
+          ],
+          "marking": [
+            "65",
+            "62",
+            "76",
+            "73",
+            "72",
+            "66",
+            "64",
+            "53"
+          ],
+          "standing_tackle": [
+            "69",
+            "66",
+            "63",
+            "75",
+            "72",
+            "68",
+            "64",
+            "60"
+          ],
+          "sliding_tackle": [
+            "69",
+            "66",
+            "78",
+            "72",
+            "67",
+            "63",
+            "24",
+            "21"
+          ],
+          "gk_diving": [
+            "6",
+            "5",
+            "14",
+            "13",
+            "16",
+            "15",
+            "8",
+            "7"
+          ],
+          "gk_handling": [
+            "11",
+            "10",
+            "7",
+            "6",
+            "22",
+            "21",
+            "12",
+            "5"
+          ],
+          "gk_kicking": [
+            "10",
+            "9",
+            "8",
+            "45",
+            "46",
+            "49",
+            "12",
+            "11"
+          ],
+          "gk_positioning": [
+            "8",
+            "7",
+            "9",
+            "22",
+            "21",
+            "12",
+            "11",
+            "20"
+          ],
+          "gk_reflexes": [
+            "8",
+            "7",
+            "12",
+            "11",
+            "22",
+            "13",
+            "21",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Team": {
+        "rows": 299,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "team_api_id": [
+            "9987",
+            "9993",
+            "10000",
+            "9994",
+            "9984",
+            "8635",
+            "9991",
+            "9998"
+          ],
+          "team_fifa_api_id": [
+            "673",
+            "675",
+            "15005",
+            "2007",
+            "1750",
+            "229",
+            "674",
+            "1747"
+          ],
+          "team_long_name": [
+            "KRC Genk",
+            "Beerschot AC",
+            "SV Zulte-Waregem",
+            "Sporting Lokeren",
+            "KSV Cercle Brugge",
+            "RSC Anderlecht",
+            "KAA Gent",
+            "RAEC Mons"
+          ],
+          "team_short_name": [
+            "GEN",
+            "BAC",
+            "ZUL",
+            "LOK",
+            "CEB",
+            "AND",
+            "MON",
+            "DEN"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Team_Attributes": {
+        "rows": 1458,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "team_fifa_api_id": [
+            "434",
+            "77",
+            "614",
+            "47",
+            "1901",
+            "650",
+            "245",
+            "1861"
+          ],
+          "team_api_id": [
+            "9930",
+            "8485",
+            "8576",
+            "8564",
+            "10215",
+            "10217",
+            "8593",
+            "9865"
+          ],
+          "date": [
+            "2010-02-22 00:00:00",
+            "2014-09-19 00:00:00",
+            "2015-09-10 00:00:00",
+            "2011-02-22 00:00:00",
+            "2012-02-22 00:00:00",
+            "2013-09-20 00:00:00"
+          ],
+          "buildUpPlaySpeed": [
+            "60",
+            "52",
+            "47",
+            "70",
+            "58",
+            "62",
+            "59",
+            "65"
+          ],
+          "buildUpPlaySpeedClass": [
+            "Balanced",
+            "Fast",
+            "Slow"
+          ],
+          "buildUpPlayDribbling": [
+            "48",
+            "41",
+            "64",
+            "57",
+            "70",
+            "53",
+            "47",
+            "40"
+          ],
+          "buildUpPlayDribblingClass": [
+            "Little",
+            "Normal",
+            "Lots"
+          ],
+          "buildUpPlayPassing": [
+            "50",
+            "56",
+            "54",
+            "70",
+            "52",
+            "62",
+            "45",
+            "53"
+          ],
+          "buildUpPlayPassingClass": [
+            "Mixed",
+            "Long",
+            "Short"
+          ],
+          "buildUpPlayPositioningClass": [
+            "Organised",
+            "Free Form"
+          ],
+          "chanceCreationPassing": [
+            "60",
+            "54",
+            "70",
+            "53",
+            "45",
+            "40",
+            "56",
+            "51"
+          ],
+          "chanceCreationPassingClass": [
+            "Normal",
+            "Risky",
+            "Safe"
+          ],
+          "chanceCreationCrossing": [
+            "65",
+            "63",
+            "70",
+            "48",
+            "50",
+            "68",
+            "72",
+            "35"
+          ],
+          "chanceCreationCrossingClass": [
+            "Normal",
+            "Lots",
+            "Little"
+          ],
+          "chanceCreationShooting": [
+            "55",
+            "64",
+            "70",
+            "52",
+            "57",
+            "63",
+            "50",
+            "75"
+          ],
+          "chanceCreationShootingClass": [
+            "Normal",
+            "Lots",
+            "Little"
+          ],
+          "chanceCreationPositioningClass": [
+            "Organised",
+            "Free Form"
+          ],
+          "defencePressure": [
+            "50",
+            "47",
+            "60",
+            "40",
+            "42",
+            "41",
+            "49",
+            "30"
+          ],
+          "defencePressureClass": [
+            "Medium",
+            "Deep",
+            "High"
+          ],
+          "defenceAggression": [
+            "55",
+            "44",
+            "70",
+            "47",
+            "40",
+            "42",
+            "45",
+            "35"
+          ],
+          "defenceAggressionClass": [
+            "Press",
+            "Double",
+            "Contain"
+          ],
+          "defenceTeamWidth": [
+            "45",
+            "54",
+            "70",
+            "52",
+            "60",
+            "63",
+            "30",
+            "50"
+          ],
+          "defenceTeamWidthClass": [
+            "Normal",
+            "Wide",
+            "Narrow"
+          ],
+          "defenceDefenderLineClass": [
+            "Cover",
+            "Offside Trap"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

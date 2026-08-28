@@ -1,0 +1,422 @@
+{
+  "db_id": "cookbook",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 10371,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#cookbook",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Ingredient\" {\n  \"ingredient_id\" INTEGER [pk]\n  \"category\" TEXT\n  \"name\" TEXT\n  \"plural\" TEXT\n}\n\nTable \"Nutrition\" {\n  \"recipe_id\" INTEGER [pk]\n  \"protein\" REAL\n  \"carbo\" REAL\n  \"alcohol\" REAL\n  \"total_fat\" REAL\n  \"sat_fat\" REAL\n  \"cholestrl\" REAL\n  \"sodium\" REAL\n  \"iron\" REAL\n  \"vitamin_c\" REAL\n  \"vitamin_a\" REAL\n  \"fiber\" REAL\n  \"pcnt_cal_carb\" REAL\n  \"pcnt_cal_fat\" REAL\n  \"pcnt_cal_prot\" REAL\n  \"calories\" REAL\n}\n\nTable \"Quantity\" {\n  \"quantity_id\" INTEGER [pk]\n  \"recipe_id\" INTEGER\n  \"ingredient_id\" INTEGER\n  \"max_qty\" REAL\n  \"min_qty\" REAL\n  \"unit\" TEXT\n  \"preparation\" TEXT\n  \"optional\" TEXT\n}\n\nTable \"Recipe\" {\n  \"recipe_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"subtitle\" TEXT\n  \"servings\" INTEGER\n  \"yield_unit\" TEXT\n  \"prep_min\" INTEGER\n  \"cook_min\" INTEGER\n  \"stnd_min\" INTEGER\n  \"source\" TEXT\n  \"intro\" TEXT\n  \"directions\" TEXT\n}\n\n\n\nRef: \"Nutrition\".\"recipe_id\" > \"Recipe\".\"recipe_id\"\n\nRef: \"Quantity\".\"recipe_id\" > \"Nutrition\".\"recipe_id\"\n\nRef: \"Quantity\".\"ingredient_id\" > \"Ingredient\".\"ingredient_id\"\n\nRef: \"Quantity\".\"recipe_id\" > \"Recipe\".\"recipe_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Ingredient\" {\n  \"ingredient_id\" INTEGER [pk]\n  \"category\" TEXT\n  \"name\" TEXT\n  \"plural\" TEXT\n}\n\nTable \"Nutrition\" {\n  \"recipe_id\" INTEGER [pk]\n  \"protein\" REAL\n  \"carbo\" REAL\n  \"alcohol\" REAL\n  \"total_fat\" REAL\n  \"sat_fat\" REAL\n  \"cholestrl\" REAL\n  \"sodium\" REAL\n  \"iron\" REAL\n  \"vitamin_c\" REAL\n  \"vitamin_a\" REAL\n  \"fiber\" REAL\n  \"pcnt_cal_carb\" REAL\n  \"pcnt_cal_fat\" REAL\n  \"pcnt_cal_prot\" REAL\n  \"calories\" REAL\n}\n\nTable \"Quantity\" {\n  \"quantity_id\" INTEGER [pk]\n  \"recipe_id\" INTEGER\n  \"ingredient_id\" INTEGER\n  \"max_qty\" REAL\n  \"min_qty\" REAL\n  \"unit\" TEXT\n  \"preparation\" TEXT\n  \"optional\" TEXT\n}\n\nTable \"Recipe\" {\n  \"recipe_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"subtitle\" TEXT\n  \"servings\" INTEGER\n  \"yield_unit\" TEXT\n  \"prep_min\" INTEGER\n  \"cook_min\" INTEGER\n  \"stnd_min\" INTEGER\n  \"source\" TEXT\n  \"intro\" TEXT\n  \"directions\" TEXT\n}\n\nRef: \"Nutrition\".\"recipe_id\" > \"Recipe\".\"recipe_id\"\n\nRef: \"Quantity\".\"recipe_id\" > \"Nutrition\".\"recipe_id\"\n\nRef: \"Quantity\".\"ingredient_id\" > \"Ingredient\".\"ingredient_id\"\n\nRef: \"Quantity\".\"recipe_id\" > \"Recipe\".\"recipe_id\"\n\n## Table Stats & Sample Values\n\nIngredient: 3346 rows\n  category: 'dairy', 'Mexican products', 'cereals', ...\n  name: '1% lowfat cottage cheese', '1% lowfat milk', '10-inch flour tortilla', ...\n  plural: 's', '#NAME?', 'es'\n\nNutrition: 878 rows\n  protein: '5.47', '5.7', '4.9', ...\n  carbo: '41.29', '23.75', '26.88', ...\n  alcohol: '0.0', '1.93', '2.7', ...\n\nQuantity: 5116 rows\n  unit: 'cup(s)', 'teaspoon(s)', '14 oz. can(s)', ...\n  preparation: 'melted', 'or water', 'divided', ...\n  optional: 'FALSE', 'TRUE'\n\nRecipe: 667 rows\n  title: 'Sweet Cherry Ice', 'Kiwifruit Popsicles', 'Peaches Amaretto', ...\n  subtitle: 'with Pecans', 'with Lemon and Parmesan', 'with Yogurt', ...\n  yield_unit: '2 quarts', '10 popsicles', '2 cups', ...",
+    "stateUrl": "https://bird-bench.github.io/#cookbook",
+    "tableStats": {
+      "Ingredient": {
+        "rows": 3346,
+        "sample_values": {
+          "ingredient_id": [
+            "1",
+            "6",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"
+          ],
+          "category": [
+            "dairy",
+            "Mexican products",
+            "cereals",
+            "breads",
+            "fresh vegetables",
+            "miscellaneous",
+            "vinegars",
+            "baking products"
+          ],
+          "name": [
+            "1% lowfat cottage cheese",
+            "1% lowfat milk",
+            "10-inch flour tortilla",
+            "100% bran cereal",
+            "2% lowfat milk",
+            "3-inch round pita bread",
+            "4-inch diameter rye roll",
+            "6-inch corn tortilla"
+          ],
+          "plural": [
+            "s",
+            "#NAME?",
+            "es"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Nutrition": {
+        "rows": 878,
+        "sample_values": {
+          "recipe_id": [
+            "214",
+            "215",
+            "216",
+            "217",
+            "218",
+            "219",
+            "220",
+            "221"
+          ],
+          "protein": [
+            "5.47",
+            "5.7",
+            "4.9",
+            "1.77",
+            "1.38",
+            "3.38",
+            "1.53",
+            "1.45"
+          ],
+          "carbo": [
+            "41.29",
+            "23.75",
+            "26.88",
+            "18.17",
+            "36.63",
+            "8.04",
+            "27.17",
+            "19.76"
+          ],
+          "alcohol": [
+            "0.0",
+            "1.93",
+            "2.7",
+            "1.95",
+            "5.8",
+            "1.13",
+            "4.12",
+            "14.63"
+          ],
+          "total_fat": [
+            "11.53",
+            "1.08",
+            "1.1",
+            "0.21",
+            "5.47",
+            "0.16",
+            "8.14",
+            "0.54"
+          ],
+          "sat_fat": [
+            "2.21",
+            "0.58",
+            "0.06",
+            "3.46",
+            "0.01",
+            "5.05",
+            "0.12",
+            "0.29"
+          ],
+          "cholestrl": [
+            "1.39",
+            "3.48",
+            "3.46",
+            "0.0",
+            "10.36",
+            "0.55",
+            "23.6",
+            "1.73"
+          ],
+          "sodium": [
+            "260.78",
+            "46.17",
+            "41.79",
+            "14.01",
+            "50.22",
+            "40.01",
+            "81.26",
+            "1.4"
+          ],
+          "iron": [
+            "0.81",
+            "0.57",
+            "0.37",
+            "0.19",
+            "0.66",
+            "0.18",
+            "0.22",
+            "0.3"
+          ],
+          "vitamin_c": [
+            "8.89",
+            "13.02",
+            "6.13",
+            "8.79",
+            "0.16",
+            "4.9",
+            "0.05",
+            "4.41"
+          ],
+          "vitamin_a": [
+            "586.2",
+            "2738.24",
+            "1521.1",
+            "478.09",
+            "229.16",
+            "37.26",
+            "304.92",
+            "122.93"
+          ],
+          "fiber": [
+            "0.87",
+            "0.62",
+            "0.34",
+            "0.69",
+            "1.05",
+            "0.47",
+            "0.08",
+            "0.36"
+          ],
+          "pcnt_cal_carb": [
+            "56.8",
+            "67.38",
+            "78.45",
+            "88.98",
+            "72.81",
+            "48.72",
+            "57.79",
+            "88.1"
+          ],
+          "pcnt_cal_fat": [
+            "35.68",
+            "6.89",
+            "7.24",
+            "2.35",
+            "24.46",
+            "2.18",
+            "38.96",
+            "5.46"
+          ],
+          "pcnt_cal_prot": [
+            "7.53",
+            "16.17",
+            "14.3",
+            "8.67",
+            "2.73",
+            "20.5",
+            "3.25",
+            "6.45"
+          ],
+          "calories": [
+            "290.79",
+            "141.01",
+            "137.06",
+            "81.7",
+            "201.23",
+            "66.03",
+            "188.1",
+            "89.74"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Quantity": {
+        "rows": 5116,
+        "sample_values": {
+          "quantity_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "recipe_id": [
+            "214",
+            "215",
+            "216",
+            "217",
+            "218",
+            "219",
+            "220",
+            "221"
+          ],
+          "ingredient_id": [
+            "1613",
+            "3334",
+            "2222",
+            "2797",
+            "3567",
+            "1414",
+            "2196",
+            "924"
+          ],
+          "max_qty": [
+            "2.0",
+            "0.25",
+            "0.5",
+            "3.0",
+            "0.67",
+            "1.0",
+            "1.5",
+            "4.0"
+          ],
+          "min_qty": [
+            "2.0",
+            "0.25",
+            "0.5",
+            "3.0",
+            "0.67",
+            "1.0",
+            "1.5",
+            "4.0"
+          ],
+          "unit": [
+            "cup(s)",
+            "teaspoon(s)",
+            "14 oz. can(s)",
+            "envelope(s)",
+            "tablespoon(s)",
+            "pound(s)",
+            "21 oz. can(s)",
+            "packet(s)"
+          ],
+          "preparation": [
+            "melted",
+            "or water",
+            "divided",
+            "crushed",
+            "sliced",
+            "ripe",
+            "uncooked",
+            "toasted"
+          ],
+          "optional": [
+            "FALSE",
+            "TRUE"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Recipe": {
+        "rows": 667,
+        "sample_values": {
+          "recipe_id": [
+            "221",
+            "223",
+            "227",
+            "231",
+            "235",
+            "240",
+            "241",
+            "242"
+          ],
+          "title": [
+            "Sweet Cherry Ice",
+            "Kiwifruit Popsicles",
+            "Peaches Amaretto",
+            "Oregon Hazelnut Crunch",
+            "Basic Blueberry Pie Filling",
+            "Citrus Pecan Topping",
+            "Brandy Pear Sorbet",
+            "Old-Fashioned Fresh Pear Pie"
+          ],
+          "subtitle": [
+            "with Pecans",
+            "with Lemon and Parmesan",
+            "with Yogurt",
+            "with Raspberry Yogurt Sauce",
+            "with California Avocado",
+            "Vegetarian Chili",
+            "with Flour Tortillas",
+            "with Honey-Lime Marinade"
+          ],
+          "servings": [
+            "8",
+            "10",
+            "4",
+            "32",
+            "6",
+            "12",
+            "36",
+            "9"
+          ],
+          "yield_unit": [
+            "2 quarts",
+            "10 popsicles",
+            "2 cups",
+            "1 pie",
+            "1 quart",
+            "3 dozen",
+            "3 dozen pieces",
+            "5 cups"
+          ],
+          "prep_min": [
+            "20",
+            "10",
+            "15",
+            "40",
+            "25",
+            "5",
+            "60",
+            "30"
+          ],
+          "cook_min": [
+            "5",
+            "0",
+            "10",
+            "50",
+            "15",
+            "45",
+            "60",
+            "30"
+          ],
+          "stnd_min": [
+            "240",
+            "300",
+            "0",
+            "20",
+            "210",
+            "30",
+            "10",
+            "60"
+          ],
+          "source": [
+            "Northwest Cherry Growers",
+            "New Zealand Fruit Company",
+            "The California Tree Fruit Agreement",
+            "The Hazelnut Marketing Board",
+            "Texas Department of Agriculture",
+            "The Sweet Potato Council of the U.S.",
+            "State of South Carolina Department of Agriculture",
+            "The California Dry Bean Advisory Board"
+          ],
+          "intro": [
+            "Cholesterol-free, lowfat and refreshing.",
+            "Great sprinkled on frozen yogurt.",
+            "Just a few ingredients turn out a luscious dessert",
+            "An interesting Texas topping.",
+            "This is a special treat in the late summer and ear",
+            "An easy to make dessert that's high in Vitamin A.",
+            "A summertime treat for hot days.",
+            "Whole wheat flour, orange peel and spices brighten"
+          ],
+          "directions": [
+            "Puree cherries in blender, food processor or food ",
+            "Peel kiwifruit. Process in blender or food process",
+            "In small saucepan, combine milk, cornstarch and sw",
+            "Combine sugar, hazelnut extract, corn syrup, water",
+            "Mix berries, sugar and lemon juice in heavy saucep",
+            "Peel and section 1 grapefruit and 1 orange over bo",
+            "In large saucepan, heat juice and sugar until suga",
+            "Stir sugar with flour, mace and cinnamon; mix with"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

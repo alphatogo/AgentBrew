@@ -1,0 +1,12 @@
+{
+  "title": "Member FAQ Column Refresh",
+  "capability": [
+    "reorganize_layout",
+    "move_existing_blocks",
+    "create_columns",
+    "preserve_format",
+    "convert_block_type",
+    "preserve_content_order"
+  ],
+  "question": "Navigate to the \"Member Support Playbook\" page and reorganize the content under the \"Common Member Questions\" FAQ toggle as follows:\n**Task Requirements:** 1. Add a column list with two columns inside the Common Member Questions\n   FAQ toggle.\n\n2. Move the first two existing Q&A pairs from the FAQ to the left column.\n3. Move the third existing Q&A pair to the right column.\n4. Add one additional Q&A pair in the right column to match the format, so\n   both columns have exactly 2 Q&A pairs:\n   - Question: \"How should escalations be routed?\"\n   - Answer: \"Escalations should be routed to the support owner listed in\n     the current member account plan.\"\n\n5. Ensure all Q&A pairs maintain consistent formatting (heading_3 for\n   questions, paragraph for answers).\n"
+}

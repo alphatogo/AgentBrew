@@ -1,0 +1,599 @@
+{
+  "db_id": "education_and_academic_performance_tracking",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/education_and_academic_performance_tracking",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"academic_years\" {\n  \"academic_year_id\" INTEGER [pk]\n  \"academic_year_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"aeas\" {\n  \"aea_id\" INTEGER [pk]\n  \"aea_name\" TEXT\n  \"description\" TEXT\n  \"aeairector_name\" TEXT\n  \"aea_address\" TEXT\n  \"aea_city\" TEXT\n  \"aea_state\" TEXT\n  \"aea_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"counties\" {\n  \"county_id\" INTEGER [pk]\n  \"county_name\" TEXT\n  \"county_population\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_name\" TEXT\n  \"school_id\" INTEGER\n  \"course_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"district_policies\" {\n  \"policy_id\" INTEGER [pk]\n  \"district_id\" INTEGER\n  \"policy_name\" TEXT\n  \"policy_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"districts\" {\n  \"district_id\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"description\" TEXT\n  \"superintendent_name\" TEXT\n  \"district_address\" TEXT\n  \"district_city\" TEXT\n  \"district_state\" TEXT\n  \"district_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"grades\" {\n  \"grade_id\" INTEGER [pk]\n  \"grade_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"ranks\" {\n  \"rank_id\" INTEGER [pk]\n  \"rank_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"school_budgets\" {\n  \"budget_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"budget_year\" INTEGER\n  \"budget_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"school_types\" {\n  \"school_type_id\" INTEGER [pk]\n  \"school_type_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"school_versions\" {\n  \"school_version_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"change_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"schools\" {\n  \"school_id\" INTEGER [pk]\n  \"aea_id\" INTEGER\n  \"county_id\" INTEGER\n  \"district_id\" INTEGER\n  \"school_name\" TEXT\n  \"district_code_school_code\" TEXT\n  \"school_type_id\" INTEGER\n  \"year_academic_id\" INTEGER\n  \"rank_id\" INTEGER\n  \"principal_name\" TEXT\n  \"school_address\" TEXT\n  \"school_city\" TEXT\n  \"school_state\" TEXT\n  \"school_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"student_courses\" {\n  \"student_course_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"course_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"student_grades\" {\n  \"student_grade_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"course_id\" INTEGER\n  \"grade\" TEXT\n  \"grade_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"students\" {\n  \"student_id\" INTEGER [pk]\n  \"student_name\" TEXT\n  \"grade_id\" INTEGER\n  \"school_id\" INTEGER\n  \"student_address\" TEXT\n  \"student_city\" TEXT\n  \"student_state\" TEXT\n  \"student_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"teachers\" {\n  \"teacher_id\" INTEGER [pk]\n  \"teacher_name\" TEXT\n  \"school_id\" INTEGER\n  \"teacher_address\" TEXT\n  \"teacher_city\" TEXT\n  \"teacher_state\" TEXT\n  \"teacher_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"courses\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"district_policies\".\"district_id\" > \"public\".\"districts\".\"district_id\"\nRef: \"public\".\"school_budgets\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"school_versions\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"schools\".\"district_id\" > \"public\".\"districts\".\"district_id\"\nRef: \"public\".\"schools\".\"county_id\" > \"public\".\"counties\".\"county_id\"\nRef: \"public\".\"schools\".\"school_type_id\" > \"public\".\"school_types\".\"school_type_id\"\nRef: \"public\".\"schools\".\"aea_id\" > \"public\".\"aeas\".\"aea_id\"\nRef: \"public\".\"student_courses\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"student_courses\".\"student_id\" > \"public\".\"students\".\"student_id\"\nRef: \"public\".\"student_grades\".\"student_id\" > \"public\".\"students\".\"student_id\"\nRef: \"public\".\"student_grades\".\"course_id\" > \"public\".\"courses\".\"course_id\"\nRef: \"public\".\"students\".\"school_id\" > \"public\".\"schools\".\"school_id\"\nRef: \"public\".\"teachers\".\"school_id\" > \"public\".\"schools\".\"school_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"academic_years\" {\n  \"academic_year_id\" INTEGER [pk]\n  \"academic_year_name\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"aeas\" {\n  \"aea_id\" INTEGER [pk]\n  \"aea_name\" TEXT\n  \"description\" TEXT\n  \"aeairector_name\" TEXT\n  \"aea_address\" TEXT\n  \"aea_city\" TEXT\n  \"aea_state\" TEXT\n  \"aea_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"counties\" {\n  \"county_id\" INTEGER [pk]\n  \"county_name\" TEXT\n  \"county_population\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"courses\" {\n  \"course_id\" INTEGER [pk]\n  \"course_name\" TEXT\n  \"school_id\" INTEGER\n  \"course_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"district_policies\" {\n  \"policy_id\" INTEGER [pk]\n  \"district_id\" INTEGER\n  \"policy_name\" TEXT\n  \"policy_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"districts\" {\n  \"district_id\" INTEGER [pk]\n  \"district_name\" TEXT\n  \"description\" TEXT\n  \"superintendent_name\" TEXT\n  \"district_address\" TEXT\n  \"district_city\" TEXT\n  \"district_state\" TEXT\n  \"district_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"grades\" {\n  \"grade_id\" INTEGER [pk]\n  \"grade_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"ranks\" {\n  \"rank_id\" INTEGER [pk]\n  \"rank_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"school_budgets\" {\n  \"budget_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"budget_year\" INTEGER\n  \"budget_amount\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"school_types\" {\n  \"school_type_id\" INTEGER [pk]\n  \"school_type_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"school_versions\" {\n  \"school_version_id\" INTEGER [pk]\n  \"school_id\" INTEGER\n  \"version_number\" INTEGER\n  \"change_date\" TEXT\n  \"change_description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"schools\" {\n  \"school_id\" INTEGER [pk]\n  \"aea_id\" INTEGER\n  \"county_id\" INTEGER\n  \"district_id\" INTEGER\n  \"school_name\" TEXT\n  \"district_code_school_code\" TEXT\n  \"school_type_id\" INTEGER\n  \"year_academic_id\" INTEGER\n  \"rank_id\" INTEGER\n  \"principal_name\" TEXT\n  \"school_address\" TEXT\n  \"school_city\" TEXT\n  \"school_state\" TEXT\n  \"school_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"student_courses\" {\n  \"student_course_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"course_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"student_grades\" {\n  \"student_grade_id\" INTEGER [pk]\n  \"student_id\" INTEGER\n  \"course_id\" INTEGER\n  \"grade\" TEXT\n  \"grade_date\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"students\" {\n  \"student_id\" INTEGER [pk]\n  \"student_name\" TEXT\n  \"grade_id\" INTEGER\n  \"school_id\" INTEGER\n  \"student_address\" TEXT\n  \"student_city\" TEXT\n  \"student_state\" TEXT\n  \"student_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"teachers\" {\n  \"teacher_id\" INTEGER [pk]\n  \"teacher_name\" TEXT\n  \"school_id\" INTEGER\n  \"teacher_address\" TEXT\n  \"teacher_city\" TEXT\n  \"teacher_state\" TEXT\n  \"teacher_zip\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"courses\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"district_policies\".\"district_id\" > \"districts\".\"district_id\"\n\nRef: \"school_budgets\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"school_versions\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"schools\".\"district_id\" > \"districts\".\"district_id\"\n\nRef: \"schools\".\"county_id\" > \"counties\".\"county_id\"\n\nRef: \"schools\".\"school_type_id\" > \"school_types\".\"school_type_id\"\n\nRef: \"schools\".\"aea_id\" > \"aeas\".\"aea_id\"\n\nRef: \"student_courses\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"student_courses\".\"student_id\" > \"students\".\"student_id\"\n\nRef: \"student_grades\".\"student_id\" > \"students\".\"student_id\"\n\nRef: \"student_grades\".\"course_id\" > \"courses\".\"course_id\"\n\nRef: \"students\".\"school_id\" > \"schools\".\"school_id\"\n\nRef: \"teachers\".\"school_id\" > \"schools\".\"school_id\"\n\n## Table Stats & Sample Values\n\nacademic_years: 2 rows\n  academic_year_name: '2014-2015', '2015-2016'\n  start_date: '2014-08-25', '2015-08-24'\n  end_date: '2015-05-29', '2016-05-27'\n\naccess_logs: 2 rows\n  access_type: 'view', 'edit'\n  access_date: '2023-05-01', '2023-05-02'\n  created_at: '2023-05-01 12:00:00'\n\naeas: 2 rows\n  aea_name: 'Heartland AEA', 'Grant Wood AEA'\n  aeairector_name: 'Ms. Smith', 'Mr. Johnson'\n  aea_city: 'Des Moines', 'Cedar Rapids'\n\ncounties: 2 rows\n  county_name: 'Story County', 'Polk County'\n  created_at: '2023-05-01 12:00:00'\n  updated_at: '2023-05-01 12:00:00'\n\ncourses: 2 rows\n  course_name: 'Math', 'Science'\n  course_description: 'Math course', 'Science course'\n  created_at: '2023-05-01 12:00:00'\n\ndistrict_policies: 2 rows\n  policy_name: 'Attendance Policy', 'Discipline Policy'\n  policy_description: 'Policy describing attendance requirements', 'Policy describing discipline procedures'\n  created_at: '2023-05-01 12:00:00'\n\ndistricts: 2 rows\n  district_name: 'Ames Community School District', 'Des Moines Public Schools'\n  description: 'Ames Community School District', 'Des Moines Public Schools'\n  superintendent_name: 'Ms. Davis', 'Mr. Brown'\n\ngrades: 2 rows\n  grade_name: 'KG', '01'\n  description: 'Kindergarten', 'First grade'\n  created_at: '2023-05-01 12:00:00'\n\nranks: 2 rows\n  rank_name: 'Commendable', 'Exceptional'\n  description: 'Commendable rank', 'Exceptional rank'\n  created_at: '2023-05-01 12:00:00'\n\nschool_budgets: 2 rows\n  budget_amount: '1000000.0', '1200000.0'\n  created_at: '2023-05-01 12:00:00'\n  updated_at: '2023-05-01 12:00:00'\n\nschool_types: 2 rows\n  school_type_name: 'Elementary', 'Middle'\n  description: 'Elementary school', 'Middle school'\n  created_at: '2023-05-01 12:00:00'\n\nschool_versions: 2 rows\n  change_description: 'Initial school record created', 'School address updated'\n  change_date: '2023-05-01', '2023-06-01'\n  version_number: '1', '2'\n\nschools: 2 rows\n  school_name: 'Edwards Elementary School', 'Fellows Elementary School'\n  principal_name: 'Ms. Johnson', 'Mr. Williams'\n  school_city: 'Ames'\n\nstudent_courses: 2 rows\n  enrollment_date: '2023-08-25', '2023-08-24'\n  created_at: '2023-05-01 12:00:00'\n  updated_at: '2023-05-01 12:00:00'\n\nstudent_grades: 2 rows\n  grade: 'A', 'B'\n  grade_date: '2023-12-15', '2023-12-14'\n  created_at: '2023-05-01 12:00:00'\n\nstudents: 2 rows\n  student_name: 'John Doe', 'Jane Smith'\n  student_city: 'Ames'\n  student_state: 'IA'\n\nteachers: 2 rows\n  teacher_name: 'Ms. Johnson', 'Mr. Williams'\n  teacher_city: 'Ames'\n  teacher_state: 'IA'\n\nusers: 2 rows\n  user_name: 'Ms. Johnson', 'Mr. Williams'\n  role: 'teacher', 'administrator'\n  email: 'ms.johnson@example.com', 'mr.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "academic_years": {
+        "rows": 2,
+        "sample_values": {
+          "academic_year_id": [
+            "0",
+            "1"
+          ],
+          "academic_year_name": [
+            "2014-2015",
+            "2015-2016"
+          ],
+          "start_date": [
+            "2014-08-25",
+            "2015-08-24"
+          ],
+          "end_date": [
+            "2015-05-29",
+            "2016-05-27"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "edit"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "aeas": {
+        "rows": 2,
+        "sample_values": {
+          "aea_id": [
+            "0",
+            "1"
+          ],
+          "aea_name": [
+            "Heartland AEA",
+            "Grant Wood AEA"
+          ],
+          "description": [
+            "Heartland Area Education Agency",
+            "Grant Wood Area Education Agency"
+          ],
+          "aeairector_name": [
+            "Ms. Smith",
+            "Mr. Johnson"
+          ],
+          "aea_address": [
+            "789 Oak St",
+            "321 Maple St"
+          ],
+          "aea_city": [
+            "Des Moines",
+            "Cedar Rapids"
+          ],
+          "aea_state": [
+            "IA"
+          ],
+          "aea_zip": [
+            "50309",
+            "52402"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "counties": {
+        "rows": 2,
+        "sample_values": {
+          "county_id": [
+            "0",
+            "1"
+          ],
+          "county_name": [
+            "Story County",
+            "Polk County"
+          ],
+          "county_population": [
+            "100000",
+            "500000"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "courses": {
+        "rows": 2,
+        "sample_values": {
+          "course_id": [
+            "0",
+            "1"
+          ],
+          "course_name": [
+            "Math",
+            "Science"
+          ],
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "course_description": [
+            "Math course",
+            "Science course"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "district_policies": {
+        "rows": 2,
+        "sample_values": {
+          "policy_id": [
+            "0",
+            "1"
+          ],
+          "district_id": [
+            "0",
+            "1"
+          ],
+          "policy_name": [
+            "Attendance Policy",
+            "Discipline Policy"
+          ],
+          "policy_description": [
+            "Policy describing attendance requirements",
+            "Policy describing discipline procedures"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "districts": {
+        "rows": 2,
+        "sample_values": {
+          "district_id": [
+            "0",
+            "1"
+          ],
+          "district_name": [
+            "Ames Community School District",
+            "Des Moines Public Schools"
+          ],
+          "description": [
+            "Ames Community School District",
+            "Des Moines Public Schools"
+          ],
+          "superintendent_name": [
+            "Ms. Davis",
+            "Mr. Brown"
+          ],
+          "district_address": [
+            "901 Broadway",
+            "2100 Fleur Dr"
+          ],
+          "district_city": [
+            "Ames",
+            "Des Moines"
+          ],
+          "district_state": [
+            "IA"
+          ],
+          "district_zip": [
+            "50010",
+            "50309"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "grades": {
+        "rows": 2,
+        "sample_values": {
+          "grade_id": [
+            "0",
+            "1"
+          ],
+          "grade_name": [
+            "KG",
+            "01"
+          ],
+          "description": [
+            "Kindergarten",
+            "First grade"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ranks": {
+        "rows": 2,
+        "sample_values": {
+          "rank_id": [
+            "0",
+            "1"
+          ],
+          "rank_name": [
+            "Commendable",
+            "Exceptional"
+          ],
+          "description": [
+            "Commendable rank",
+            "Exceptional rank"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_budgets": {
+        "rows": 2,
+        "sample_values": {
+          "budget_id": [
+            "0",
+            "1"
+          ],
+          "school_id": [
+            "1"
+          ],
+          "budget_year": [
+            "2023"
+          ],
+          "budget_amount": [
+            "1000000.0",
+            "1200000.0"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_types": {
+        "rows": 2,
+        "sample_values": {
+          "school_type_id": [
+            "0",
+            "1"
+          ],
+          "school_type_name": [
+            "Elementary",
+            "Middle"
+          ],
+          "description": [
+            "Elementary school",
+            "Middle school"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "school_versions": {
+        "rows": 2,
+        "sample_values": {
+          "school_version_id": [
+            "0",
+            "1"
+          ],
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "change_description": [
+            "Initial school record created",
+            "School address updated"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "schools": {
+        "rows": 2,
+        "sample_values": {
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "aea_id": [
+            "0"
+          ],
+          "county_id": [
+            "0"
+          ],
+          "district_id": [
+            "0",
+            "1"
+          ],
+          "school_name": [
+            "Edwards Elementary School",
+            "Fellows Elementary School"
+          ],
+          "district_code_school_code": [
+            "0225-0427",
+            "0225-0440"
+          ],
+          "school_type_id": [
+            "1"
+          ],
+          "year_academic_id": [
+            "1"
+          ],
+          "rank_id": [
+            "1"
+          ],
+          "principal_name": [
+            "Ms. Johnson",
+            "Mr. Williams"
+          ],
+          "school_address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "school_city": [
+            "Ames"
+          ],
+          "school_state": [
+            "IA"
+          ],
+          "school_zip": [
+            "50010"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "student_courses": {
+        "rows": 2,
+        "sample_values": {
+          "student_course_id": [
+            "0",
+            "1"
+          ],
+          "student_id": [
+            "1",
+            "0"
+          ],
+          "course_id": [
+            "0",
+            "1"
+          ],
+          "enrollment_date": [
+            "2023-08-25",
+            "2023-08-24"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "student_grades": {
+        "rows": 2,
+        "sample_values": {
+          "student_grade_id": [
+            "0",
+            "1"
+          ],
+          "student_id": [
+            "1",
+            "0"
+          ],
+          "course_id": [
+            "1",
+            "0"
+          ],
+          "grade": [
+            "A",
+            "B"
+          ],
+          "grade_date": [
+            "2023-12-15",
+            "2023-12-14"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "students": {
+        "rows": 2,
+        "sample_values": {
+          "student_id": [
+            "0",
+            "1"
+          ],
+          "student_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "grade_id": [
+            "1",
+            "2"
+          ],
+          "school_id": [
+            "0",
+            "1"
+          ],
+          "student_address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "student_city": [
+            "Ames"
+          ],
+          "student_state": [
+            "IA"
+          ],
+          "student_zip": [
+            "50010"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teachers": {
+        "rows": 2,
+        "sample_values": {
+          "teacher_id": [
+            "0",
+            "1"
+          ],
+          "teacher_name": [
+            "Ms. Johnson",
+            "Mr. Williams"
+          ],
+          "school_id": [
+            "1",
+            "0"
+          ],
+          "teacher_address": [
+            "789 Oak St",
+            "901 Maple St"
+          ],
+          "teacher_city": [
+            "Ames"
+          ],
+          "teacher_state": [
+            "IA"
+          ],
+          "teacher_zip": [
+            "50010"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Ms. Johnson",
+            "Mr. Williams"
+          ],
+          "email": [
+            "ms.johnson@example.com",
+            "mr.williams@example.com"
+          ],
+          "role": [
+            "teacher",
+            "administrator"
+          ],
+          "password": [
+            "password123"
+          ],
+          "created_at": [
+            "2023-05-01 12:00:00"
+          ],
+          "updated_at": [
+            "2023-05-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

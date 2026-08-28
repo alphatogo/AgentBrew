@@ -1,0 +1,35 @@
+mode: task_sample
+domain: github
+
+llm:
+  type: local_llm
+  config:
+    model_name: ./Qwen3-32B
+    base_url: http://localhost:2024/v1
+    api_key: ""
+    temperature: 0.7
+    max_completion_tokens: 10000
+    enable_thinking: false
+
+agent:
+  type: react_summary
+  config: {}
+
+task_sampling:
+  engine: agent
+  few_shot_path: agentbrew/environments/github/task_sampling/few_shot
+  seeds:
+    path: agentbrew/environments/github/task_sampling/libraries.json
+  num_tasks: 1000
+  output_task_dir: .
+
+evaluation:
+  enabled: false
+
+execution:
+  workers: 16
+
+output:
+  root: outputs/github_task_sample
+  reports: false
+  task_results: false

@@ -1,0 +1,562 @@
+{
+  "db_id": "academic_research_and_publication_management_865638",
+  "source": "synsql",
+  "tables": 17,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/academic_research_and_publication_management_865638",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"access_duration\" INTEGER\n}\n\nTable \"public\".\"authors\" {\n  \"author_id\" INTEGER [pk]\n  \"full_name\" TEXT\n  \"email\" TEXT\n  \"department\" TEXT\n  \"position\" TEXT\n  \"orcid\" TEXT\n  \"research_interests\" TEXT\n  \"phone_number\" TEXT\n  \"affiliation\" TEXT\n}\n\nTable \"public\".\"citations\" {\n  \"citation_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"cited_pub_id\" INTEGER\n  \"citation_year\" INTEGER\n  \"citation_type\" TEXT\n  \"citation_url\" TEXT\n  \"context\" TEXT\n}\n\nTable \"public\".\"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"head_of_department\" TEXT\n  \"email\" TEXT\n  \"department_url\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"public\".\"funding_sources\" {\n  \"funding_id\" INTEGER [pk]\n  \"funding_name\" TEXT\n  \"funding_amount\" REAL\n  \"funding_year\" INTEGER\n  \"funding_description\" TEXT\n  \"funding_url\" TEXT\n}\n\nTable \"public\".\"journals\" {\n  \"journal_id\" INTEGER [pk]\n  \"journal_name\" TEXT\n  \"issn\" TEXT\n  \"publisher_id\" INTEGER\n  \"impact_factor\" REAL\n  \"issn_electronic\" TEXT\n  \"h_index\" INTEGER\n  \"journal_url\" TEXT\n}\n\nTable \"public\".\"publication_authors\" {\n  \"pub_author_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"author_id\" INTEGER\n  \"author_order\" INTEGER\n  \"role\" TEXT\n  \"corresponding_author\" INTEGER\n}\n\nTable \"public\".\"publication_funding\" {\n  \"pub_funding_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"funding_id\" INTEGER\n  \"funding_amount\" REAL\n  \"funding_period\" TEXT\n}\n\nTable \"public\".\"publication_sdg\" {\n  \"pub_sdg_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"sdg_id\" INTEGER\n  \"contribution\" TEXT\n}\n\nTable \"public\".\"publication_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"abbreviation\" TEXT\n}\n\nTable \"public\".\"publication_ukä\" {\n  \"pub_ukä_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"ukä_id\" INTEGER\n  \"contribution\" TEXT\n}\n\nTable \"public\".\"publications\" {\n  \"pub_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"publication_year\" INTEGER\n  \"early_access\" INTEGER\n  \"journal_id\" INTEGER\n  \"publisher_id\" INTEGER\n  \"publication_type_id\" INTEGER\n  \"peer_review\" INTEGER\n  \"associated_slu_program_id\" INTEGER\n  \"sustainable_development_goals\" TEXT\n  \"ukä_subject_classification\" TEXT\n  \"doi\" TEXT\n  \"permanent_link\" TEXT\n  \"abstract\" TEXT\n  \"keywords\" TEXT\n  \"pages\" TEXT\n  \"volume\" TEXT\n  \"issue\" TEXT\n  \"date_submitted\" TEXT\n  \"date_published\" TEXT\n  \"date_accepted\" TEXT\n  \"funding_grant_number\" TEXT\n  \"project_id\" INTEGER\n}\n\nTable \"public\".\"publishers\" {\n  \"publisher_id\" INTEGER [pk]\n  \"publisher_name\" TEXT\n  \"contact_email\" TEXT\n  \"address\" TEXT\n  \"website_url\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"public\".\"slu_programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"description\" TEXT\n  \"program_url\" TEXT\n  \"program_head\" TEXT\n}\n\nTable \"public\".\"sustainable_development_goals\" {\n  \"sdg_id\" INTEGER [pk]\n  \"sdg_name\" TEXT\n  \"description\" TEXT\n  \"target\" TEXT\n}\n\nTable \"public\".\"ukä_subject_classifications\" {\n  \"ukä_id\" INTEGER [pk]\n  \"subject_name\" TEXT\n  \"description\" TEXT\n  \"subject_url\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_url\" TEXT\n  \"phone_number\" TEXT\n  \"affiliation\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"citations\".\"cited_pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"citations\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"publication_authors\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"publication_authors\".\"author_id\" > \"public\".\"authors\".\"author_id\"\nRef: \"public\".\"publication_funding\".\"funding_id\" > \"public\".\"funding_sources\".\"funding_id\"\nRef: \"public\".\"publication_funding\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"publication_sdg\".\"sdg_id\" > \"public\".\"sustainable_development_goals\".\"sdg_id\"\nRef: \"public\".\"publication_sdg\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"publication_ukä\".\"ukä_id\" > \"public\".\"ukä_subject_classifications\".\"ukä_id\"\nRef: \"public\".\"publication_ukä\".\"pub_id\" > \"public\".\"publications\".\"pub_id\"\nRef: \"public\".\"publications\".\"associated_slu_program_id\" > \"public\".\"slu_programs\".\"program_id\"\nRef: \"public\".\"publications\".\"publication_type_id\" > \"public\".\"publication_types\".\"type_id\"\nRef: \"public\".\"publications\".\"journal_id\" > \"public\".\"journals\".\"journal_id\"\nRef: \"public\".\"publications\".\"publisher_id\" > \"public\".\"publishers\".\"publisher_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"access_duration\" INTEGER\n}\n\nTable \"authors\" {\n  \"author_id\" INTEGER [pk]\n  \"full_name\" TEXT\n  \"email\" TEXT\n  \"department\" TEXT\n  \"position\" TEXT\n  \"orcid\" TEXT\n  \"research_interests\" TEXT\n  \"phone_number\" TEXT\n  \"affiliation\" TEXT\n}\n\nTable \"citations\" {\n  \"citation_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"cited_pub_id\" INTEGER\n  \"citation_year\" INTEGER\n  \"citation_type\" TEXT\n  \"citation_url\" TEXT\n  \"context\" TEXT\n}\n\nTable \"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"head_of_department\" TEXT\n  \"email\" TEXT\n  \"department_url\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"funding_sources\" {\n  \"funding_id\" INTEGER [pk]\n  \"funding_name\" TEXT\n  \"funding_amount\" REAL\n  \"funding_year\" INTEGER\n  \"funding_description\" TEXT\n  \"funding_url\" TEXT\n}\n\nTable \"journals\" {\n  \"journal_id\" INTEGER [pk]\n  \"journal_name\" TEXT\n  \"issn\" TEXT\n  \"publisher_id\" INTEGER\n  \"impact_factor\" REAL\n  \"issn_electronic\" TEXT\n  \"h_index\" INTEGER\n  \"journal_url\" TEXT\n}\n\nTable \"publication_authors\" {\n  \"pub_author_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"author_id\" INTEGER\n  \"author_order\" INTEGER\n  \"role\" TEXT\n  \"corresponding_author\" INTEGER\n}\n\nTable \"publication_funding\" {\n  \"pub_funding_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"funding_id\" INTEGER\n  \"funding_amount\" REAL\n  \"funding_period\" TEXT\n}\n\nTable \"publication_sdg\" {\n  \"pub_sdg_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"sdg_id\" INTEGER\n  \"contribution\" TEXT\n}\n\nTable \"publication_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"abbreviation\" TEXT\n}\n\nTable \"publication_ukä\" {\n  \"pub_ukä_id\" INTEGER [pk]\n  \"pub_id\" INTEGER\n  \"ukä_id\" INTEGER\n  \"contribution\" TEXT\n}\n\nTable \"publications\" {\n  \"pub_id\" INTEGER [pk]\n  \"title\" TEXT\n  \"publication_year\" INTEGER\n  \"early_access\" INTEGER\n  \"journal_id\" INTEGER\n  \"publisher_id\" INTEGER\n  \"publication_type_id\" INTEGER\n  \"peer_review\" INTEGER\n  \"associated_slu_program_id\" INTEGER\n  \"sustainable_development_goals\" TEXT\n  \"ukä_subject_classification\" TEXT\n  \"doi\" TEXT\n  \"permanent_link\" TEXT\n  \"abstract\" TEXT\n  \"keywords\" TEXT\n  \"pages\" TEXT\n  \"volume\" TEXT\n  \"issue\" TEXT\n  \"date_submitted\" TEXT\n  \"date_published\" TEXT\n  \"date_accepted\" TEXT\n  \"funding_grant_number\" TEXT\n  \"project_id\" INTEGER\n}\n\nTable \"publishers\" {\n  \"publisher_id\" INTEGER [pk]\n  \"publisher_name\" TEXT\n  \"contact_email\" TEXT\n  \"address\" TEXT\n  \"website_url\" TEXT\n  \"phone_number\" TEXT\n}\n\nTable \"slu_programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"description\" TEXT\n  \"program_url\" TEXT\n  \"program_head\" TEXT\n}\n\nTable \"sustainable_development_goals\" {\n  \"sdg_id\" INTEGER [pk]\n  \"sdg_name\" TEXT\n  \"description\" TEXT\n  \"target\" TEXT\n}\n\nTable \"ukä_subject_classifications\" {\n  \"ukä_id\" INTEGER [pk]\n  \"subject_name\" TEXT\n  \"description\" TEXT\n  \"subject_url\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_url\" TEXT\n  \"phone_number\" TEXT\n  \"affiliation\" TEXT\n}\n\nRef: \"access_logs\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"citations\".\"cited_pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"citations\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"publication_authors\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"publication_authors\".\"author_id\" > \"authors\".\"author_id\"\n\nRef: \"publication_funding\".\"funding_id\" > \"funding_sources\".\"funding_id\"\n\nRef: \"publication_funding\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"publication_sdg\".\"sdg_id\" > \"sustainable_development_goals\".\"sdg_id\"\n\nRef: \"publication_sdg\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"publication_ukä\".\"ukä_id\" > \"ukä_subject_classifications\".\"ukä_id\"\n\nRef: \"publication_ukä\".\"pub_id\" > \"publications\".\"pub_id\"\n\nRef: \"publications\".\"associated_slu_program_id\" > \"slu_programs\".\"program_id\"\n\nRef: \"publications\".\"publication_type_id\" > \"publication_types\".\"type_id\"\n\nRef: \"publications\".\"journal_id\" > \"journals\".\"journal_id\"\n\nRef: \"publications\".\"publisher_id\" > \"publishers\".\"publisher_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  access_date: '2023-05-01', '2023-05-02'\n\nauthors: 2 rows\n  full_name: 'Gustavsson, Eva', 'Gustavsson, Roland'\n  position: 'Professor', 'Researcher'\n  email: 'eva.gustavsson@slu.se', 'roland.gustavsson@slu.se'\n\ncitations: 2 rows\n  citation_type: 'journal', 'conference'\n  context: 'This publication is cited in a journal article for', 'This publication is cited in a conference paper fo'\n  citation_url: 'https://www.example.com/citation1', 'https://www.example.com/citation2'\n\ndepartments: 2 rows\n  department_name: 'Landscape Architecture', 'Environmental Sciences'\n  head_of_department: 'Eva Gustavsson', 'John Doe'\n  email: 'eva.gustavsson@slu.se', 'john.doe@slu.se'\n\nfunding_sources: 2 rows\n  funding_name: 'LENNE Tempus Curriculum Development Project', 'Swedish Research Council'\n  funding_description: 'Funding for the development of a teaching package', 'Funding for research in landscape architecture and'\n  funding_url: 'https://www.lenne-tempus.eu/funding/', 'https://www.vr.se/funding/'\n\njournals: 2 rows\n  journal_name: 'JOURNAL OF LANDSCAPE ARCHITECTURE', 'Tempus Project No CD_JEP_19106_2004'\n  issn: '1862-6033'\n  issn_electronic: '2222-3333'\n\npublication_authors: 2 rows\n  role: 'Lead Author', 'Co-Author'\n  corresponding_author: '1', '0'\n  author_order: '1'\n\npublication_funding: 2 rows\n  funding_period: '2008-2010', '2012-2014'\n  funding_amount: '500000.0', '250000.0'\n  pub_id: '0', '1'\n\npublication_sdg: 2 rows\n  contribution: 'This publication contributes to SDG4 by enhancing'\n  sdg_id: '0', '1'\n  pub_id: '1'\n\npublication_types: 2 rows\n  type_name: 'Research article', 'Report'\n  description: 'Peer-reviewed article in a journal', 'Research report or project report'\n  abbreviation: 'RA', 'RP'\n\npublication_ukä: 2 rows\n  contribution: 'This publication contributes to the UKÄ subject cl'\n  ukä_id: '1', '0'\n  pub_id: '1'\n\npublications: 2 rows\n  ukä_subject_classification: 'Landscape Architecture', 'Environmental Sciences related to Agriculture and'\n  title: 'Meaning versus signification: towards a more nuanc', 'LENNE Tempus Curriculum Development Project: Teach'\n  sustainable_development_goals: 'SDG4 Quality education', 'None'\n\npublishers: 2 rows\n  publisher_name: 'ROUTLEDGE JOURNALS, TAYLOR & FRANCIS LTD', 'LENNE TEMPUS Joint European Curriculum Development'\n  contact_email: 'contact@taylorandfrancis.com', 'contact@lenne-tempus.eu'\n  address: '2 Park Square, Milton Park, Abingdon, Oxon, OX14 4', 'LENNE TEMPUS Project Office, University of Applied'\n\nslu_programs: 2 rows\n  program_name: 'Landscape Architecture', 'Environmental Sciences'\n  description: 'Research and education in landscape architecture', 'Research and education in environmental sciences'\n  program_head: 'Eva Gustavsson', 'John Doe'\n\nsustainable_development_goals: 2 rows\n  sdg_name: 'SDG4 Quality education', 'SDG13 Climate action'\n  description: 'Ensure inclusive and equitable quality education a', 'Take urgent action to combat climate change and it'\n  target: 'Target 4.7: By 2030, ensure that all learners acqu', 'Target 13.1: Strengthen resilience and adaptive ca'\n\nukä_subject_classifications: 2 rows\n  subject_name: 'Landscape Architecture', 'Environmental Sciences related to Agriculture and'\n  description: 'Research and education in landscape architecture', 'Research and education in environmental sciences r'\n  subject_url: 'https://www.uka.se/landscape-architecture/', 'https://www.uka.se/environmental-sciences/'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'admin'\n  email: 'alice.johnson@slu.se', 'bob.williams@slu.se'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "0"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap"
+          ],
+          "access_duration": [
+            "30",
+            "60"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "authors": {
+        "rows": 2,
+        "sample_values": {
+          "author_id": [
+            "0",
+            "1"
+          ],
+          "full_name": [
+            "Gustavsson, Eva",
+            "Gustavsson, Roland"
+          ],
+          "email": [
+            "eva.gustavsson@slu.se",
+            "roland.gustavsson@slu.se"
+          ],
+          "department": [
+            "Landscape Architecture"
+          ],
+          "position": [
+            "Professor",
+            "Researcher"
+          ],
+          "orcid": [
+            "0000-0001-2345-6789",
+            "0000-0002-3456-7890"
+          ],
+          "research_interests": [
+            "Landscape architecture, urban design, sustainabili",
+            "Landscape management, environmental planning"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "affiliation": [
+            "SLU"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "citations": {
+        "rows": 2,
+        "sample_values": {
+          "citation_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "1",
+            "0"
+          ],
+          "cited_pub_id": [
+            "0",
+            "1"
+          ],
+          "citation_year": [
+            "2013",
+            "2010"
+          ],
+          "citation_type": [
+            "journal",
+            "conference"
+          ],
+          "citation_url": [
+            "https://www.example.com/citation1",
+            "https://www.example.com/citation2"
+          ],
+          "context": [
+            "This publication is cited in a journal article for",
+            "This publication is cited in a conference paper fo"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "departments": {
+        "rows": 2,
+        "sample_values": {
+          "department_id": [
+            "0",
+            "1"
+          ],
+          "department_name": [
+            "Landscape Architecture",
+            "Environmental Sciences"
+          ],
+          "head_of_department": [
+            "Eva Gustavsson",
+            "John Doe"
+          ],
+          "email": [
+            "eva.gustavsson@slu.se",
+            "john.doe@slu.se"
+          ],
+          "department_url": [
+            "https://www.slu.se/landscape-architecture/",
+            "https://www.slu.se/environmental-sciences/"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "funding_sources": {
+        "rows": 2,
+        "sample_values": {
+          "funding_id": [
+            "0",
+            "1"
+          ],
+          "funding_name": [
+            "LENNE Tempus Curriculum Development Project",
+            "Swedish Research Council"
+          ],
+          "funding_amount": [
+            "500000.0",
+            "250000.0"
+          ],
+          "funding_year": [
+            "2008",
+            "2012"
+          ],
+          "funding_description": [
+            "Funding for the development of a teaching package ",
+            "Funding for research in landscape architecture and"
+          ],
+          "funding_url": [
+            "https://www.lenne-tempus.eu/funding/",
+            "https://www.vr.se/funding/"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "journals": {
+        "rows": 2,
+        "sample_values": {
+          "journal_id": [
+            "0",
+            "1"
+          ],
+          "journal_name": [
+            "JOURNAL OF LANDSCAPE ARCHITECTURE",
+            "Tempus Project No CD_JEP_19106_2004"
+          ],
+          "issn": [
+            "1862-6033"
+          ],
+          "publisher_id": [
+            "201",
+            "202"
+          ],
+          "impact_factor": [
+            "2.5"
+          ],
+          "issn_electronic": [
+            "2222-3333"
+          ],
+          "h_index": [
+            "20"
+          ],
+          "journal_url": [
+            "https://www.tandfonline.com/toc/rlaa20/current",
+            "https://www.lenne-tempus.eu/"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publication_authors": {
+        "rows": 2,
+        "sample_values": {
+          "pub_author_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "0"
+          ],
+          "author_id": [
+            "1"
+          ],
+          "author_order": [
+            "1"
+          ],
+          "role": [
+            "Lead Author",
+            "Co-Author"
+          ],
+          "corresponding_author": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publication_funding": {
+        "rows": 2,
+        "sample_values": {
+          "pub_funding_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "0",
+            "1"
+          ],
+          "funding_id": [
+            "1"
+          ],
+          "funding_amount": [
+            "500000.0",
+            "250000.0"
+          ],
+          "funding_period": [
+            "2008-2010",
+            "2012-2014"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publication_sdg": {
+        "rows": 2,
+        "sample_values": {
+          "pub_sdg_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "1"
+          ],
+          "sdg_id": [
+            "0",
+            "1"
+          ],
+          "contribution": [
+            "This publication contributes to SDG4 by enhancing "
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publication_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "Research article",
+            "Report"
+          ],
+          "description": [
+            "Peer-reviewed article in a journal",
+            "Research report or project report"
+          ],
+          "abbreviation": [
+            "RA",
+            "RP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publication_ukä": {
+        "rows": 2,
+        "sample_values": {
+          "pub_ukä_id": [
+            "0",
+            "1"
+          ],
+          "pub_id": [
+            "1"
+          ],
+          "ukä_id": [
+            "1",
+            "0"
+          ],
+          "contribution": [
+            "This publication contributes to the UKÄ subject cl"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publications": {
+        "rows": 2,
+        "sample_values": {
+          "pub_id": [
+            "0",
+            "1"
+          ],
+          "title": [
+            "Meaning versus signification: towards a more nuanc",
+            "LENNE Tempus Curriculum Development Project: Teach"
+          ],
+          "publication_year": [
+            "2012",
+            "2008"
+          ],
+          "early_access": [
+            "0"
+          ],
+          "journal_id": [
+            "0",
+            "1"
+          ],
+          "publisher_id": [
+            "1",
+            "0"
+          ],
+          "publication_type_id": [
+            "0",
+            "1"
+          ],
+          "peer_review": [
+            "1",
+            "0"
+          ],
+          "associated_slu_program_id": [
+            "0",
+            "1"
+          ],
+          "sustainable_development_goals": [
+            "SDG4 Quality education",
+            "None"
+          ],
+          "ukä_subject_classification": [
+            "Landscape Architecture",
+            "Environmental Sciences related to Agriculture and "
+          ],
+          "doi": [
+            "10.1080/18626033.2012.746084"
+          ],
+          "permanent_link": [
+            "https://ribs.bib.slu.se/rb/?file=publ/show&id=6021",
+            "https://ribs.bib.slu.se/rb/?file=publ/show&id=2089"
+          ],
+          "abstract": [
+            "This paper explores the nuanced view of landscape ",
+            "This report details the development of a teaching "
+          ],
+          "keywords": [
+            "landscape, aesthetics, design, management",
+            "landscape, management, education, curriculum"
+          ],
+          "pages": [
+            "123-135"
+          ],
+          "volume": [
+            "5"
+          ],
+          "issue": [
+            "2"
+          ],
+          "date_submitted": [
+            "2011-06-01",
+            "2007-03-01"
+          ],
+          "date_published": [
+            "2012-06-01",
+            "2008-09-01"
+          ],
+          "date_accepted": [
+            "2012-05-15",
+            "2008-08-15"
+          ],
+          "funding_grant_number": [
+            "GRANT123",
+            "GRANT456"
+          ],
+          "project_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publishers": {
+        "rows": 2,
+        "sample_values": {
+          "publisher_id": [
+            "0",
+            "1"
+          ],
+          "publisher_name": [
+            "ROUTLEDGE JOURNALS, TAYLOR & FRANCIS LTD",
+            "LENNE TEMPUS Joint European Curriculum Development"
+          ],
+          "contact_email": [
+            "contact@taylorandfrancis.com",
+            "contact@lenne-tempus.eu"
+          ],
+          "address": [
+            "2 Park Square, Milton Park, Abingdon, Oxon, OX14 4",
+            "LENNE TEMPUS Project Office, University of Applied"
+          ],
+          "website_url": [
+            "https://www.taylorandfrancis.com/",
+            "https://www.lenne-tempus.eu/"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "slu_programs": {
+        "rows": 2,
+        "sample_values": {
+          "program_id": [
+            "0",
+            "1"
+          ],
+          "program_name": [
+            "Landscape Architecture",
+            "Environmental Sciences"
+          ],
+          "description": [
+            "Research and education in landscape architecture",
+            "Research and education in environmental sciences"
+          ],
+          "program_url": [
+            "https://www.slu.se/landscape-architecture/",
+            "https://www.slu.se/environmental-sciences/"
+          ],
+          "program_head": [
+            "Eva Gustavsson",
+            "John Doe"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sustainable_development_goals": {
+        "rows": 2,
+        "sample_values": {
+          "sdg_id": [
+            "0",
+            "1"
+          ],
+          "sdg_name": [
+            "SDG4 Quality education",
+            "SDG13 Climate action"
+          ],
+          "description": [
+            "Ensure inclusive and equitable quality education a",
+            "Take urgent action to combat climate change and it"
+          ],
+          "target": [
+            "Target 4.7: By 2030, ensure that all learners acqu",
+            "Target 13.1: Strengthen resilience and adaptive ca"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ukä_subject_classifications": {
+        "rows": 2,
+        "sample_values": {
+          "ukä_id": [
+            "0",
+            "1"
+          ],
+          "subject_name": [
+            "Landscape Architecture",
+            "Environmental Sciences related to Agriculture and "
+          ],
+          "description": [
+            "Research and education in landscape architecture",
+            "Research and education in environmental sciences r"
+          ],
+          "subject_url": [
+            "https://www.uka.se/landscape-architecture/",
+            "https://www.uka.se/environmental-sciences/"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@slu.se",
+            "bob.williams@slu.se"
+          ],
+          "role": [
+            "researcher",
+            "admin"
+          ],
+          "user_url": [
+            "https://www.slu.se/profile/alice-johnson/",
+            "https://www.slu.se/profile/bob-williams/"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "affiliation": [
+            "SLU"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

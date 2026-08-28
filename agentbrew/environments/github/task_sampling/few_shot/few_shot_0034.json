@@ -1,0 +1,4 @@
+{
+  "workflow_pattern": "This is a 'V1_2cand_compare_fork_conditional' style workflow. It requires the following operations, in roughly this order: select repo by comparison metric, fork repository preserving name, append conditional reference link readme. The task should combine these operations into one coherent, realistic request without listing them as separate steps.",
+  "question": "There are two repositories: duckdb's duckdb and pola-rs's polars. Fork the repository with the fewest open issues, maintaining the same name as the source repository. If duckdb is forked, add a reference link at the bottom of the README.md file: 'Related project: [polars](https://github.com/pola-rs/polars)'. If polars is forked, add a reference link at the bottom of the README.md file: 'Related project: [duckdb](https://github.com/duckdb/duckdb)'."
+}

@@ -1,0 +1,571 @@
+{
+  "db_id": "financial",
+  "source": "bird_dev",
+  "tables": 8,
+  "total_rows": 1079680,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#financial",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"account\" {\n  \"account_id\" INTEGER [pk, not null]\n  \"district_id\" INTEGER [not null]\n  \"frequency\" TEXT [not null]\n  \"date\" DATE [not null]\n}\n\nTable \"card\" {\n  \"card_id\" INTEGER [pk, not null]\n  \"disp_id\" INTEGER [not null]\n  \"type\" TEXT [not null]\n  \"issued\" DATE [not null]\n}\n\nTable \"client\" {\n  \"client_id\" INTEGER [pk, not null]\n  \"gender\" TEXT [not null]\n  \"birth_date\" DATE [not null]\n  \"district_id\" INTEGER [not null]\n}\n\nTable \"disp\" {\n  \"disp_id\" INTEGER [pk, not null]\n  \"client_id\" INTEGER [not null]\n  \"account_id\" INTEGER [not null]\n  \"type\" TEXT [not null]\n}\n\nTable \"district\" {\n  \"district_id\" INTEGER [pk, not null]\n  \"A2\" TEXT [not null]\n  \"A3\" TEXT [not null]\n  \"A4\" TEXT [not null]\n  \"A5\" TEXT [not null]\n  \"A6\" TEXT [not null]\n  \"A7\" TEXT [not null]\n  \"A8\" INTEGER [not null]\n  \"A9\" INTEGER [not null]\n  \"A10\" REAL [not null]\n  \"A11\" INTEGER [not null]\n  \"A12\" REAL\n  \"A13\" REAL [not null]\n  \"A14\" INTEGER [not null]\n  \"A15\" INTEGER\n  \"A16\" INTEGER [not null]\n}\n\nTable \"loan\" {\n  \"loan_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"amount\" INTEGER [not null]\n  \"duration\" INTEGER [not null]\n  \"payments\" REAL [not null]\n  \"status\" TEXT [not null]\n}\n\nTable \"order\" {\n  \"order_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"bank_to\" TEXT [not null]\n  \"account_to\" INTEGER [not null]\n  \"amount\" REAL [not null]\n  \"k_symbol\" TEXT [not null]\n}\n\nTable \"trans\" {\n  \"trans_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"type\" TEXT [not null]\n  \"operation\" TEXT\n  \"amount\" INTEGER [not null]\n  \"balance\" INTEGER [not null]\n  \"k_symbol\" TEXT\n  \"bank\" TEXT\n  \"account\" INTEGER\n}\n\n\n\nRef: \"account\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"card\".\"disp_id\" > \"disp\".\"disp_id\"\n\nRef: \"client\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"disp\".\"client_id\" > \"client\".\"client_id\"\n\nRef: \"disp\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"loan\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"order\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"trans\".\"account_id\" > \"account\".\"account_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"account\" {\n  \"account_id\" INTEGER [pk, not null]\n  \"district_id\" INTEGER [not null]\n  \"frequency\" TEXT [not null]\n  \"date\" DATE [not null]\n}\n\nTable \"card\" {\n  \"card_id\" INTEGER [pk, not null]\n  \"disp_id\" INTEGER [not null]\n  \"type\" TEXT [not null]\n  \"issued\" DATE [not null]\n}\n\nTable \"client\" {\n  \"client_id\" INTEGER [pk, not null]\n  \"gender\" TEXT [not null]\n  \"birth_date\" DATE [not null]\n  \"district_id\" INTEGER [not null]\n}\n\nTable \"disp\" {\n  \"disp_id\" INTEGER [pk, not null]\n  \"client_id\" INTEGER [not null]\n  \"account_id\" INTEGER [not null]\n  \"type\" TEXT [not null]\n}\n\nTable \"district\" {\n  \"district_id\" INTEGER [pk, not null]\n  \"A2\" TEXT [not null]\n  \"A3\" TEXT [not null]\n  \"A4\" TEXT [not null]\n  \"A5\" TEXT [not null]\n  \"A6\" TEXT [not null]\n  \"A7\" TEXT [not null]\n  \"A8\" INTEGER [not null]\n  \"A9\" INTEGER [not null]\n  \"A10\" REAL [not null]\n  \"A11\" INTEGER [not null]\n  \"A12\" REAL\n  \"A13\" REAL [not null]\n  \"A14\" INTEGER [not null]\n  \"A15\" INTEGER\n  \"A16\" INTEGER [not null]\n}\n\nTable \"loan\" {\n  \"loan_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"amount\" INTEGER [not null]\n  \"duration\" INTEGER [not null]\n  \"payments\" REAL [not null]\n  \"status\" TEXT [not null]\n}\n\nTable \"order\" {\n  \"order_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"bank_to\" TEXT [not null]\n  \"account_to\" INTEGER [not null]\n  \"amount\" REAL [not null]\n  \"k_symbol\" TEXT [not null]\n}\n\nTable \"trans\" {\n  \"trans_id\" INTEGER [pk, not null]\n  \"account_id\" INTEGER [not null]\n  \"date\" DATE [not null]\n  \"type\" TEXT [not null]\n  \"operation\" TEXT\n  \"amount\" INTEGER [not null]\n  \"balance\" INTEGER [not null]\n  \"k_symbol\" TEXT\n  \"bank\" TEXT\n  \"account\" INTEGER\n}\n\nRef: \"account\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"card\".\"disp_id\" > \"disp\".\"disp_id\"\n\nRef: \"client\".\"district_id\" > \"district\".\"district_id\"\n\nRef: \"disp\".\"client_id\" > \"client\".\"client_id\"\n\nRef: \"disp\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"loan\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"order\".\"account_id\" > \"account\".\"account_id\"\n\nRef: \"trans\".\"account_id\" > \"account\".\"account_id\"\n\n## Table Stats & Sample Values\n\naccount: 4500 rows\n  frequency: 'POPLATEK MESICNE', 'POPLATEK TYDNE', 'POPLATEK PO OBRATU'\n  date: '1995-03-24', '1993-02-26', '1997-07-07', ...\n  district_id: '18', '1', '5', ...\n\ncard: 892 rows\n  type: 'gold', 'classic', 'junior'\n  issued: '1998-10-16', '1998-03-13', '1995-09-03', ...\n  disp_id: '9', '19', '41', ...\n\nclient: 5369 rows\n  gender: 'F', 'M'\n  birth_date: '1970-12-13', '1945-02-04', '1940-10-09', ...\n  district_id: '18', '1', '5', ...\n\ndisp: 5369 rows\n  type: 'OWNER', 'DISPONENT'\n  client_id: '1', '2', '3', ...\n  account_id: '1', '2', '3', ...\n\ndistrict: 77 rows\n  A2: 'Hl.m. Praha', 'Benesov', 'Beroun', ...\n  A3: 'Prague', 'central Bohemia', 'south Bohemia', ...\n  A4: '1204953', '88884', '75232', ...\n\nloan: 682 rows\n  status: 'A', 'B', 'D', ...\n  date: '1994-01-05', '1996-04-29', '1997-12-08', ...\n  amount: '80952', '30276', '318480', ...\n\norder: 6471 rows\n  bank_to: 'YZ', 'ST', 'QR', ...\n  k_symbol: 'SIPO', 'UVER', 'POJISTNE', ...\n  account_to: '87144583', '89597016', '13943797', ...\n\ntrans: 10000 rows\n  type: 'PRIJEM', 'VYDAJ', 'VYBER'\n  operation: 'VKLAD', 'PREVOD Z UCTU', 'PREVOD NA UCET', ...\n  k_symbol: 'SIPO', 'SLUZBY', 'UVER', ...",
+    "stateUrl": "https://bird-bench.github.io/#financial",
+    "tableStats": {
+      "account": {
+        "rows": 4500,
+        "sample_values": {
+          "account_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "district_id": [
+            "18",
+            "1",
+            "5",
+            "12",
+            "15",
+            "51",
+            "60",
+            "57"
+          ],
+          "frequency": [
+            "POPLATEK MESICNE",
+            "POPLATEK TYDNE",
+            "POPLATEK PO OBRATU"
+          ],
+          "date": [
+            "1995-03-24",
+            "1993-02-26",
+            "1997-07-07",
+            "1996-02-21",
+            "1997-05-30",
+            "1994-09-27",
+            "1996-11-24",
+            "1995-09-21"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "card": {
+        "rows": 892,
+        "sample_values": {
+          "card_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9"
+          ],
+          "disp_id": [
+            "9",
+            "19",
+            "41",
+            "42",
+            "51",
+            "56",
+            "60",
+            "76"
+          ],
+          "type": [
+            "gold",
+            "classic",
+            "junior"
+          ],
+          "issued": [
+            "1998-10-16",
+            "1998-03-13",
+            "1995-09-03",
+            "1998-11-26",
+            "1995-04-24",
+            "1998-06-11",
+            "1998-05-20",
+            "1997-10-25"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "client": {
+        "rows": 5369,
+        "sample_values": {
+          "client_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "gender": [
+            "F",
+            "M"
+          ],
+          "birth_date": [
+            "1970-12-13",
+            "1945-02-04",
+            "1940-10-09",
+            "1956-12-01",
+            "1960-07-03",
+            "1919-09-22",
+            "1929-01-25",
+            "1938-02-21"
+          ],
+          "district_id": [
+            "18",
+            "1",
+            "5",
+            "12",
+            "15",
+            "51",
+            "60",
+            "57"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "disp": {
+        "rows": 5369,
+        "sample_values": {
+          "disp_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "client_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "account_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "type": [
+            "OWNER",
+            "DISPONENT"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "district": {
+        "rows": 77,
+        "sample_values": {
+          "district_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "A2": [
+            "Hl.m. Praha",
+            "Benesov",
+            "Beroun",
+            "Kladno",
+            "Kolin",
+            "Kutna Hora",
+            "Melnik",
+            "Mlada Boleslav"
+          ],
+          "A3": [
+            "Prague",
+            "central Bohemia",
+            "south Bohemia",
+            "west Bohemia",
+            "north Bohemia",
+            "east Bohemia",
+            "south Moravia",
+            "north Moravia"
+          ],
+          "A4": [
+            "1204953",
+            "88884",
+            "75232",
+            "149893",
+            "95616",
+            "77963",
+            "94725",
+            "112065"
+          ],
+          "A5": [
+            "0",
+            "80",
+            "55",
+            "63",
+            "65",
+            "60",
+            "38",
+            "95"
+          ],
+          "A6": [
+            "0",
+            "26",
+            "29",
+            "30",
+            "23",
+            "28",
+            "19",
+            "36"
+          ],
+          "A7": [
+            "0",
+            "6",
+            "4",
+            "1",
+            "7",
+            "9",
+            "10",
+            "2"
+          ],
+          "A8": [
+            "1",
+            "2",
+            "3",
+            "0",
+            "4",
+            "5"
+          ],
+          "A9": [
+            "1",
+            "5",
+            "6",
+            "4",
+            "8",
+            "7",
+            "2",
+            "9"
+          ],
+          "A10": [
+            "100.0",
+            "46.7",
+            "41.7",
+            "67.4",
+            "51.4",
+            "51.5",
+            "63.4",
+            "69.4"
+          ],
+          "A11": [
+            "12541",
+            "8507",
+            "8980",
+            "9753",
+            "9307",
+            "8546",
+            "9920",
+            "11277"
+          ],
+          "A12": [
+            "0.2",
+            "1.6",
+            "1.9",
+            "4.6",
+            "3.8",
+            "2.9",
+            "2.2",
+            "1.2"
+          ],
+          "A13": [
+            "0.43",
+            "1.85",
+            "2.21",
+            "5.05",
+            "4.43",
+            "4.02",
+            "2.87",
+            "1.44"
+          ],
+          "A14": [
+            "167",
+            "132",
+            "111",
+            "109",
+            "118",
+            "126",
+            "130",
+            "127"
+          ],
+          "A15": [
+            "85677",
+            "2159",
+            "2824",
+            "5244",
+            "2616",
+            "2640",
+            "4289",
+            "5179"
+          ],
+          "A16": [
+            "99107",
+            "2674",
+            "2813",
+            "5892",
+            "3040",
+            "3120",
+            "4846",
+            "4987"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "loan": {
+        "rows": 682,
+        "sample_values": {
+          "loan_id": [
+            "4959",
+            "4961",
+            "4962",
+            "4967",
+            "4968",
+            "4973",
+            "4986",
+            "4988"
+          ],
+          "account_id": [
+            "2",
+            "19",
+            "25",
+            "37",
+            "38",
+            "67",
+            "97",
+            "103"
+          ],
+          "date": [
+            "1994-01-05",
+            "1996-04-29",
+            "1997-12-08",
+            "1998-10-14",
+            "1998-04-19",
+            "1996-05-02",
+            "1997-08-10",
+            "1997-12-06"
+          ],
+          "amount": [
+            "80952",
+            "30276",
+            "318480",
+            "110736",
+            "165960",
+            "102876",
+            "265320",
+            "352704"
+          ],
+          "duration": [
+            "24",
+            "12",
+            "60",
+            "48",
+            "36"
+          ],
+          "payments": [
+            "3373.0",
+            "2523.0",
+            "5308.0",
+            "2307.0",
+            "6915.0",
+            "8573.0",
+            "7370.0",
+            "7348.0"
+          ],
+          "status": [
+            "A",
+            "B",
+            "D",
+            "C"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order": {
+        "rows": 6471,
+        "sample_values": {
+          "order_id": [
+            "29401",
+            "29402",
+            "29403",
+            "29404",
+            "29405",
+            "29406",
+            "29407",
+            "29408"
+          ],
+          "account_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "bank_to": [
+            "YZ",
+            "ST",
+            "QR",
+            "WX",
+            "CD",
+            "AB",
+            "UV",
+            "GH"
+          ],
+          "account_to": [
+            "87144583",
+            "89597016",
+            "13943797",
+            "83084338",
+            "24485939",
+            "59972357",
+            "26693541",
+            "5848086"
+          ],
+          "amount": [
+            "2452.0",
+            "3372.7",
+            "7266.0",
+            "1135.0",
+            "327.0",
+            "3539.0",
+            "2078.0",
+            "1285.0"
+          ],
+          "k_symbol": [
+            "SIPO",
+            "UVER",
+            "POJISTNE",
+            "LEASING"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "trans": {
+        "rows": 10000,
+        "sample_values": {
+          "trans_id": [
+            "1",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "account_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "date": [
+            "1995-03-24",
+            "1995-04-13",
+            "1995-05-13",
+            "1995-06-13",
+            "1995-07-13",
+            "1995-08-13",
+            "1995-09-13",
+            "1995-10-13"
+          ],
+          "type": [
+            "PRIJEM",
+            "VYDAJ",
+            "VYBER"
+          ],
+          "operation": [
+            "VKLAD",
+            "PREVOD Z UCTU",
+            "PREVOD NA UCET",
+            "VYBER",
+            "VYBER KARTOU"
+          ],
+          "amount": [
+            "1000",
+            "3679",
+            "2452",
+            "540",
+            "180",
+            "870",
+            "150",
+            "210"
+          ],
+          "balance": [
+            "1000",
+            "4679",
+            "20977",
+            "26835",
+            "30415",
+            "28903",
+            "22714",
+            "23318"
+          ],
+          "k_symbol": [
+            "SIPO",
+            "SLUZBY",
+            "UVER",
+            "POJISTNE",
+            "DUCHOD"
+          ],
+          "bank": [
+            "AB",
+            "YZ",
+            "ST",
+            "QR",
+            "WX",
+            "CD",
+            "UV",
+            "KL"
+          ],
+          "account": [
+            "41403269",
+            "87144583",
+            "66487163",
+            "0",
+            "89597016",
+            "13943797",
+            "83084338",
+            "24485939"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Privacy Training Audit Dashboard",
+  "capability": [
+    "query_and_filter_database",
+    "query_multiple_sources",
+    "populate_rows",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "compute_aggregates",
+    "insert_block_at_position",
+    "add_exact_blocks"
+  ],
+  "question": "Please help me create a privacy training audit ticket based on the data already stored in the Compliance Training Hub page.\nYour automation should: 1. In the Training Assets database, find every item whose Review Due Date\n   is before 2025-05-01.\n2. In the Policy FAQs database, look up any FAQ entries that have the\n   \"Privacy\" tag.\n3. Create a new page inside the Compliance Requests database with exact\n   title: Quarterly Privacy Training Audit - Overdue Assets Review.\n4. Set Priority to High and Due to 2025-04-18. 5. In the page body, add a bullet-list block that enumerates each overdue\n   training asset. Each bullet item must follow this exact text format\n   (including the dashes): <Asset Name> - <Owner> - <Recommendation>.\n   <Recommendation> is a brief action you suggest based on the privacy FAQ\n   entries (any text is acceptable).\n6. Immediately after the Audit Resources section, add a heading_3 block\n   with text \"Privacy Training Metrics Dashboard\".\n7. Under that heading, add a brown callout titled Course Statistics whose\n   content is a bulleted list in this exact order: Total Lessons, Completed\n   with percentage to 1 decimal, In Progress with percentage to 1 decimal,\n   Beginner Level, Intermediate Level, and Advanced Level.\n"
+}

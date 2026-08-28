@@ -1,0 +1,144 @@
+{
+  "db_id": "allergy_1",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 107,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#allergy_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Allergy_Type\" {\n  \"Allergy\" TEXT [pk]\n  \"AllergyType\" TEXT\n}\n\nTable \"Has_Allergy\" {\n  \"StuID\" INTEGER\n  \"Allergy\" TEXT\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\n\n\nRef: \"Has_Allergy\".\"Allergy\" > \"Allergy_Type\".\"Allergy\"\n\nRef: \"Has_Allergy\".\"StuID\" > \"Student\".\"StuID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Allergy_Type\" {\n  \"Allergy\" TEXT [pk]\n  \"AllergyType\" TEXT\n}\n\nTable \"Has_Allergy\" {\n  \"StuID\" INTEGER\n  \"Allergy\" TEXT\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\nRef: \"Has_Allergy\".\"Allergy\" > \"Allergy_Type\".\"Allergy\"\n\nRef: \"Has_Allergy\".\"StuID\" > \"Student\".\"StuID\"\n\n## Table Stats & Sample Values\n\nAllergy_Type: 14 rows\n  AllergyType: 'food', 'environmental', 'animal'\n  Allergy: 'Eggs', 'Nuts', 'Milk', ...\n\nHas_Allergy: 59 rows\n  Allergy: 'Cat', 'Shellfish', 'Tree Pollen', ...\n  StuID: '1001', '1002', '1003', ...\n\nStudent: 34 rows\n  LName: 'Smith', 'Kim', 'Jones', ...\n  Fname: 'Linda', 'Tracy', 'Shiela', ...\n  city_code: 'BAL', 'HKG', 'WAS', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#allergy_1",
+    "tableStats": {
+      "Allergy_Type": {
+        "rows": 14,
+        "sample_values": {
+          "Allergy": [
+            "Eggs",
+            "Nuts",
+            "Milk",
+            "Shellfish",
+            "Anchovies",
+            "Wheat",
+            "Soy",
+            "Ragweed"
+          ],
+          "AllergyType": [
+            "food",
+            "environmental",
+            "animal"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Has_Allergy": {
+        "rows": 59,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1009"
+          ],
+          "Allergy": [
+            "Cat",
+            "Shellfish",
+            "Tree Pollen",
+            "Dog",
+            "Nuts",
+            "Ragweed",
+            "Grass Pollen",
+            "Eggs"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student": {
+        "rows": 34,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "LName": [
+            "Smith",
+            "Kim",
+            "Jones",
+            "Kumar",
+            "Gompers",
+            "Schultz",
+            "Apap",
+            "Nelson"
+          ],
+          "Fname": [
+            "Linda",
+            "Tracy",
+            "Shiela",
+            "Dinesh",
+            "Paul",
+            "Andy",
+            "Lisa",
+            "Jandy"
+          ],
+          "Age": [
+            "18",
+            "19",
+            "21",
+            "20",
+            "26",
+            "17",
+            "22",
+            "16"
+          ],
+          "Sex": [
+            "F",
+            "M"
+          ],
+          "Major": [
+            "600",
+            "520",
+            "540",
+            "550",
+            "100",
+            "50"
+          ],
+          "Advisor": [
+            "1121",
+            "7712",
+            "7792",
+            "8423",
+            "1148",
+            "8918",
+            "9172",
+            "2192"
+          ],
+          "city_code": [
+            "BAL",
+            "HKG",
+            "WAS",
+            "CHI",
+            "YYZ",
+            "PIT",
+            "HOU",
+            "PHL"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

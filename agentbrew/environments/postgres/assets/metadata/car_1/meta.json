@@ -1,0 +1,273 @@
+{
+  "db_id": "car_1",
+  "source": "sparc",
+  "tables": 6,
+  "total_rows": 890,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#car_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"car_makers\" {\n  \"Id\" INTEGER [pk]\n  \"Maker\" TEXT\n  \"FullName\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"car_names\" {\n  \"MakeId\" INTEGER [pk]\n  \"Model\" TEXT\n  \"Make\" TEXT\n}\n\nTable \"cars_data\" {\n  \"Id\" INTEGER [pk]\n  \"MPG\" TEXT\n  \"Cylinders\" INTEGER\n  \"Edispl\" REAL\n  \"Horsepower\" TEXT\n  \"Weight\" INTEGER\n  \"Accelerate\" REAL\n  \"Year\" INTEGER\n}\n\nTable \"continents\" {\n  \"ContId\" INTEGER [pk]\n  \"Continent\" TEXT\n}\n\nTable \"countries\" {\n  \"CountryId\" INTEGER [pk]\n  \"CountryName\" TEXT\n  \"Continent\" INTEGER\n}\n\nTable \"model_list\" {\n  \"ModelId\" INTEGER [pk]\n  \"Maker\" INTEGER\n  \"Model\" TEXT\n}\n\n\n\nRef: \"countries\".\"Continent\" > \"continents\".\"ContId\"\n\nRef: \"car_makers\".\"Country\" > \"countries\".\"CountryId\"\n\nRef: \"model_list\".\"Maker\" > \"car_makers\".\"Id\"\n\nRef: \"car_names\".\"Model\" > \"model_list\".\"Model\"\n\nRef: \"cars_data\".\"Id\" > \"car_names\".\"MakeId\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"car_makers\" {\n  \"Id\" INTEGER [pk]\n  \"Maker\" TEXT\n  \"FullName\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"car_names\" {\n  \"MakeId\" INTEGER [pk]\n  \"Model\" TEXT\n  \"Make\" TEXT\n}\n\nTable \"cars_data\" {\n  \"Id\" INTEGER [pk]\n  \"MPG\" TEXT\n  \"Cylinders\" INTEGER\n  \"Edispl\" REAL\n  \"Horsepower\" TEXT\n  \"Weight\" INTEGER\n  \"Accelerate\" REAL\n  \"Year\" INTEGER\n}\n\nTable \"continents\" {\n  \"ContId\" INTEGER [pk]\n  \"Continent\" TEXT\n}\n\nTable \"countries\" {\n  \"CountryId\" INTEGER [pk]\n  \"CountryName\" TEXT\n  \"Continent\" INTEGER\n}\n\nTable \"model_list\" {\n  \"ModelId\" INTEGER [pk]\n  \"Maker\" INTEGER\n  \"Model\" TEXT\n}\n\nRef: \"countries\".\"Continent\" > \"continents\".\"ContId\"\n\nRef: \"car_makers\".\"Country\" > \"countries\".\"CountryId\"\n\nRef: \"model_list\".\"Maker\" > \"car_makers\".\"Id\"\n\nRef: \"car_names\".\"Model\" > \"model_list\".\"Model\"\n\nRef: \"cars_data\".\"Id\" > \"car_names\".\"MakeId\"\n\n## Table Stats & Sample Values\n\ncar_makers: 22 rows\n  FullName: 'American Motor Company', 'Volkswagen', 'BMW', ...\n  Country: '1', '2', '3', ...\n  Maker: 'amc', 'volkswagen', 'bmw', ...\n\ncar_names: 406 rows\n  Model: 'chevrolet', 'buick', 'plymouth', ...\n  Make: 'chevrolet chevelle malibu', 'buick skylark 320', 'plymouth satellite', ...\n  MakeId: '1', '2', '3', ...\n\ncars_data: 406 rows\n  MPG: '18', '15', '16', ...\n  Horsepower: '130', '165', '150', ...\n  Cylinders: '8', '4', '6', ...\n\ncontinents: 5 rows\n  Continent: 'america', 'europe', 'asia', ...\n  ContId: '1', '2', '3', ...\n\ncountries: 15 rows\n  CountryName: 'usa', 'germany', 'france', ...\n  Continent: '1', '2', '3', ...\n  CountryId: '1', '2', '3', ...\n\nmodel_list: 36 rows\n  Model: 'amc', 'audi', 'bmw', ...\n  Maker: '1', '2', '3', ...\n  ModelId: '1', '2', '3', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#car_1",
+    "tableStats": {
+      "car_makers": {
+        "rows": 22,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Maker": [
+            "amc",
+            "volkswagen",
+            "bmw",
+            "gm",
+            "ford",
+            "chrysler",
+            "citroen",
+            "nissan"
+          ],
+          "FullName": [
+            "American Motor Company",
+            "Volkswagen",
+            "BMW",
+            "General Motors",
+            "Ford Motor Company",
+            "Chrysler",
+            "Citroen",
+            "Nissan Motors"
+          ],
+          "Country": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "car_names": {
+        "rows": 406,
+        "sample_values": {
+          "MakeId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Model": [
+            "chevrolet",
+            "buick",
+            "plymouth",
+            "amc",
+            "ford",
+            "pontiac",
+            "citroen",
+            "dodge"
+          ],
+          "Make": [
+            "chevrolet chevelle malibu",
+            "buick skylark 320",
+            "plymouth satellite",
+            "amc rebel sst",
+            "ford torino",
+            "ford galaxie 500",
+            "chevrolet impala",
+            "plymouth fury iii"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "cars_data": {
+        "rows": 406,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "MPG": [
+            "18",
+            "15",
+            "16",
+            "17",
+            "14",
+            "null",
+            "24",
+            "22"
+          ],
+          "Cylinders": [
+            "8",
+            "4",
+            "6",
+            "3",
+            "5"
+          ],
+          "Edispl": [
+            "307.0",
+            "350.0",
+            "318.0",
+            "304.0",
+            "302.0",
+            "429.0",
+            "454.0",
+            "440.0"
+          ],
+          "Horsepower": [
+            "130",
+            "165",
+            "150",
+            "140",
+            "198",
+            "220",
+            "215",
+            "225"
+          ],
+          "Weight": [
+            "3504",
+            "3693",
+            "3436",
+            "3433",
+            "3449",
+            "4341",
+            "4354",
+            "4312"
+          ],
+          "Accelerate": [
+            "12.0",
+            "11.5",
+            "11.0",
+            "10.5",
+            "10.0",
+            "9.0",
+            "8.5",
+            "17.5"
+          ],
+          "Year": [
+            "1970",
+            "1971",
+            "1972",
+            "1973",
+            "1974",
+            "1975",
+            "1976",
+            "1977"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "continents": {
+        "rows": 5,
+        "sample_values": {
+          "ContId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "Continent": [
+            "america",
+            "europe",
+            "asia",
+            "africa",
+            "australia"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "countries": {
+        "rows": 15,
+        "sample_values": {
+          "CountryId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CountryName": [
+            "usa",
+            "germany",
+            "france",
+            "japan",
+            "italy",
+            "sweden",
+            "uk",
+            "korea"
+          ],
+          "Continent": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "model_list": {
+        "rows": 36,
+        "sample_values": {
+          "ModelId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Maker": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Model": [
+            "amc",
+            "audi",
+            "bmw",
+            "buick",
+            "cadillac",
+            "capri",
+            "chevrolet",
+            "chrysler"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

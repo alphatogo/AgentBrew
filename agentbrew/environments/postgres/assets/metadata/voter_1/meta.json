@@ -1,0 +1,100 @@
+{
+  "db_id": "voter_1",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 320,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#voter_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"AREA_CODE_STATE\" {\n  \"area_code\" INTEGER [pk, not null]\n  \"state\" TEXT [not null]\n}\n\nTable \"CONTESTANTS\" {\n  \"contestant_number\" INTEGER [pk]\n  \"contestant_name\" TEXT [not null]\n}\n\nTable \"VOTES\" {\n  \"vote_id\" INTEGER [pk, not null]\n  \"phone_number\" INTEGER [not null]\n  \"state\" TEXT [not null]\n  \"contestant_number\" INTEGER [not null]\n  \"created\" TEXT [not null]\n}\n\n\n\nRef: \"VOTES\".\"contestant_number\" > \"CONTESTANTS\".\"contestant_number\"\n\nRef: \"VOTES\".\"state\" > \"AREA_CODE_STATE\".\"state\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"AREA_CODE_STATE\" {\n  \"area_code\" INTEGER [pk, not null]\n  \"state\" TEXT [not null]\n}\n\nTable \"CONTESTANTS\" {\n  \"contestant_number\" INTEGER [pk]\n  \"contestant_name\" TEXT [not null]\n}\n\nTable \"VOTES\" {\n  \"vote_id\" INTEGER [pk, not null]\n  \"phone_number\" INTEGER [not null]\n  \"state\" TEXT [not null]\n  \"contestant_number\" INTEGER [not null]\n  \"created\" TEXT [not null]\n}\n\nRef: \"VOTES\".\"contestant_number\" > \"CONTESTANTS\".\"contestant_number\"\n\nRef: \"VOTES\".\"state\" > \"AREA_CODE_STATE\".\"state\"\n\n## Table Stats & Sample Values\n\nAREA_CODE_STATE: 305 rows\n  state: 'NJ', 'DC', 'CT', ...\n  area_code: '201', '202', '203', ...\n\nCONTESTANTS: 11 rows\n  contestant_name: 'Edwina Burnam', 'Tabatha Gehling', 'Kelly Clauss', ...\n  contestant_number: '1', '2', '3', ...\n\nVOTES: 3 rows\n  state: 'NY', 'CA'\n  created: '2018-03-09 19:03:21', '2018-03-09 19:03:36', '2018-03-09 19:03:39'\n  contestant_number: '2', '3'",
+    "stateUrl": "https://github.com/taoyds/sparc#voter_1",
+    "tableStats": {
+      "AREA_CODE_STATE": {
+        "rows": 305,
+        "sample_values": {
+          "area_code": [
+            "201",
+            "202",
+            "203",
+            "205",
+            "206",
+            "207",
+            "208",
+            "209"
+          ],
+          "state": [
+            "NJ",
+            "DC",
+            "CT",
+            "AL",
+            "WA",
+            "ME",
+            "ID",
+            "CA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CONTESTANTS": {
+        "rows": 11,
+        "sample_values": {
+          "contestant_number": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "contestant_name": [
+            "Edwina Burnam",
+            "Tabatha Gehling",
+            "Kelly Clauss",
+            "Jessie Alloway",
+            "Alana Bregman",
+            "Jessie Eichman",
+            "Allie Rogalski",
+            "Nita Coster"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "VOTES": {
+        "rows": 3,
+        "sample_values": {
+          "vote_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "phone_number": [
+            "7182887233",
+            "7148407040",
+            "6209222712"
+          ],
+          "state": [
+            "NY",
+            "CA"
+          ],
+          "contestant_number": [
+            "2",
+            "3"
+          ],
+          "created": [
+            "2018-03-09 19:03:21",
+            "2018-03-09 19:03:36",
+            "2018-03-09 19:03:39"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

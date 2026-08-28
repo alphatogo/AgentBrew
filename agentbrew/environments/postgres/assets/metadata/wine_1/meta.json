@@ -1,0 +1,209 @@
+{
+  "db_id": "wine_1",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 577,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#wine_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"appellations\" {\n  \"No\" INTEGER [pk]\n  \"Appelation\" TEXT\n  \"County\" TEXT\n  \"State\" TEXT\n  \"Area\" TEXT\n  \"isAVA\" TEXT\n}\n\nTable \"grapes\" {\n  \"ID\" INTEGER [pk]\n  \"Grape\" TEXT\n  \"Color\" TEXT\n}\n\nTable \"wine\" {\n  \"No\" INTEGER\n  \"Grape\" TEXT\n  \"Winery\" TEXT\n  \"Appelation\" TEXT\n  \"State\" TEXT\n  \"Name\" TEXT\n  \"Year\" INTEGER\n  \"Price\" INTEGER\n  \"Score\" INTEGER\n  \"Cases\" INTEGER\n  \"Drink\" TEXT\n}\n\n\n\nRef: \"wine\".\"Appelation\" > \"appellations\".\"Appelation\"\n\nRef: \"wine\".\"Grape\" > \"grapes\".\"Grape\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"appellations\" {\n  \"No\" INTEGER [pk]\n  \"Appelation\" TEXT\n  \"County\" TEXT\n  \"State\" TEXT\n  \"Area\" TEXT\n  \"isAVA\" TEXT\n}\n\nTable \"grapes\" {\n  \"ID\" INTEGER [pk]\n  \"Grape\" TEXT\n  \"Color\" TEXT\n}\n\nTable \"wine\" {\n  \"No\" INTEGER\n  \"Grape\" TEXT\n  \"Winery\" TEXT\n  \"Appelation\" TEXT\n  \"State\" TEXT\n  \"Name\" TEXT\n  \"Year\" INTEGER\n  \"Price\" INTEGER\n  \"Score\" INTEGER\n  \"Cases\" INTEGER\n  \"Drink\" TEXT\n}\n\nRef: \"wine\".\"Appelation\" > \"appellations\".\"Appelation\"\n\nRef: \"wine\".\"Grape\" > \"grapes\".\"Grape\"\n\n## Table Stats & Sample Values\n\nappellations: 57 rows\n  State: 'California'\n  County: 'Sonoma', 'Amador', 'N/A', ...\n  Area: 'North Coast', 'Sierra Foothills', 'N/A', ...\n\ngrapes: 20 rows\n  Grape: 'Barbera', 'Cabernet Franc', 'Cabernet Sauvingnon', ...\n  Color: 'Red', 'White'\n  ID: '1', '2', '3', ...\n\nwine: 500 rows\n  Name: 'Old Kraft Vineyard', 'Giana', 'Black Chicken', ...\n  State: 'California'\n  Grape: 'Zinfandel', 'Sauvignon Blanc', 'Cabernet Sauvingnon', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#wine_1",
+    "tableStats": {
+      "appellations": {
+        "rows": 57,
+        "sample_values": {
+          "No": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Appelation": [
+            "Alexander Valley",
+            "Amador County",
+            "Amador-Mendocino-Sonoma Counties",
+            "Anderson Valley",
+            "Arroyo Grande Valley",
+            "Atlas Peak",
+            "Bennett Valley",
+            "Calaveras County"
+          ],
+          "County": [
+            "Sonoma",
+            "Amador",
+            "N/A",
+            "Mendocino",
+            "San Luis Obispo",
+            "Napa",
+            "Calaveras",
+            "Monterey"
+          ],
+          "State": [
+            "California"
+          ],
+          "Area": [
+            "North Coast",
+            "Sierra Foothills",
+            "N/A",
+            "Central Coast",
+            "California",
+            "Santa Cruz Mountains",
+            "Central Valley"
+          ],
+          "isAVA": [
+            "Yes",
+            "No"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "grapes": {
+        "rows": 20,
+        "sample_values": {
+          "ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Grape": [
+            "Barbera",
+            "Cabernet Franc",
+            "Cabernet Sauvingnon",
+            "Chardonnay",
+            "Grenache",
+            "Malbec",
+            "Marsanne",
+            "Merlot"
+          ],
+          "Color": [
+            "Red",
+            "White"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "wine": {
+        "rows": 500,
+        "sample_values": {
+          "No": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Grape": [
+            "Zinfandel",
+            "Sauvignon Blanc",
+            "Cabernet Sauvingnon",
+            "Pinot Noir",
+            "Syrah",
+            "Merlot",
+            "Malbec",
+            "Grenache"
+          ],
+          "Winery": [
+            "Robert Biale",
+            "Chiarello Family",
+            "Pedroncelli",
+            "Rutherford Ranch",
+            "Altamura",
+            "Capture",
+            "Brander",
+            "John Anthony"
+          ],
+          "Appelation": [
+            "St. Helena",
+            "Napa Valley",
+            "Dry Creek Valley",
+            "Sonoma County",
+            "Santa Ynez Valley",
+            "California",
+            "Carneros",
+            "Knights Valley"
+          ],
+          "State": [
+            "California"
+          ],
+          "Name": [
+            "Old Kraft Vineyard",
+            "Giana",
+            "Black Chicken",
+            "Napa Ranches",
+            "Varozza Vineyard",
+            "Mother Clone",
+            "Zinfandel",
+            "Sauvignon Blanc"
+          ],
+          "Year": [
+            "2008",
+            "2007",
+            "2009",
+            "2006",
+            "2005",
+            "2004",
+            "2066"
+          ],
+          "Price": [
+            "44",
+            "35",
+            "40",
+            "38",
+            "15",
+            "18",
+            "48",
+            "36"
+          ],
+          "Score": [
+            "93",
+            "91",
+            "89",
+            "88",
+            "87",
+            "92",
+            "90",
+            "86"
+          ],
+          "Cases": [
+            "275",
+            "480",
+            "2700",
+            "525",
+            "6000",
+            "1552",
+            "500",
+            "360"
+          ],
+          "Drink": [
+            "now",
+            "2012",
+            "2010",
+            "2001",
+            "2011",
+            "2013",
+            "2008",
+            "2015"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

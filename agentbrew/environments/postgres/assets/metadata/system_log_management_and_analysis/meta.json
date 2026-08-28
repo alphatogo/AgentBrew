@@ -1,0 +1,646 @@
+{
+  "db_id": "system_log_management_and_analysis",
+  "source": "synsql",
+  "tables": 21,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/system_log_management_and_analysis",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"alert_resolutions\" {\n  \"resolution_id\" INTEGER [pk]\n  \"alert_id\" INTEGER\n  \"resolution_date\" TEXT\n  \"resolution_time\" TEXT\n  \"resolution_user_id\" INTEGER\n  \"resolution_notes\" TEXT\n  \"resolution_status\" TEXT\n}\n\nTable \"public\".\"alert_types\" {\n  \"alert_type_id\" INTEGER [pk]\n  \"alert_type_name\" TEXT\n  \"description\" TEXT\n  \"alert_type_color\" TEXT\n}\n\nTable \"public\".\"audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"action_time\" TEXT\n  \"action_user_id\" INTEGER\n}\n\nTable \"public\".\"compliance_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_time\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"public\".\"correlation_types\" {\n  \"correlation_type_id\" INTEGER [pk]\n  \"correlation_type_name\" TEXT\n  \"description\" TEXT\n  \"correlation_type_color\" TEXT\n}\n\nTable \"public\".\"data_retention_policies\" {\n  \"policy_id\" INTEGER [pk]\n  \"policy_name\" TEXT\n  \"description\" TEXT\n  \"retention_period\" INTEGER\n  \"archival_period\" INTEGER\n  \"policy_status\" TEXT\n}\n\nTable \"public\".\"log_alerts\" {\n  \"alert_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"alert_type_id\" INTEGER\n  \"alert_date\" TEXT\n  \"alert_time\" TEXT\n  \"alert_status\" TEXT\n  \"alert_severity\" TEXT\n}\n\nTable \"public\".\"log_analytics\" {\n  \"analytics_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"analytics_date\" TEXT\n  \"analytics_time\" TEXT\n  \"analytics_data\" TEXT\n}\n\nTable \"public\".\"log_attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"attribute_name\" TEXT\n  \"attribute_value\" TEXT\n  \"attribute_type\" TEXT\n}\n\nTable \"public\".\"log_correlations\" {\n  \"correlation_id\" INTEGER [pk]\n  \"log_id_1\" INTEGER\n  \"log_id_2\" INTEGER\n  \"correlation_type_id\" INTEGER\n  \"correlation_strength\" REAL\n}\n\nTable \"public\".\"log_files\" {\n  \"file_id\" INTEGER [pk]\n  \"file_name\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_date\" TEXT\n  \"modified_date\" TEXT\n  \"system_id\" INTEGER\n  \"file_format\" TEXT\n  \"file_compression\" TEXT\n  \"file_encryption\" TEXT\n}\n\nTable \"public\".\"log_levels\" {\n  \"log_level_id\" INTEGER [pk]\n  \"log_level_name\" TEXT\n  \"description\" TEXT\n  \"log_level_color\" TEXT\n}\n\nTable \"public\".\"log_retention\" {\n  \"retention_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"policy_id\" INTEGER\n  \"retention_start_date\" TEXT\n  \"retention_end_date\" TEXT\n  \"archival_start_date\" TEXT\n  \"archival_end_date\" TEXT\n  \"retention_status\" TEXT\n}\n\nTable \"public\".\"log_searches\" {\n  \"search_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n  \"search_time\" TEXT\n  \"search_results_count\" INTEGER\n}\n\nTable \"public\".\"log_tag_mappings\" {\n  \"mapping_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"tag_id\" INTEGER\n  \"mapping_date\" TEXT\n  \"mapping_user_id\" INTEGER\n}\n\nTable \"public\".\"log_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"tag_name\" TEXT\n  \"description\" TEXT\n  \"tag_color\" TEXT\n}\n\nTable \"public\".\"logs\" {\n  \"log_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"line_number\" INTEGER\n  \"user_id\" INTEGER\n  \"log_date\" TEXT\n  \"log_time\" TEXT\n  \"message\" TEXT\n  \"log_level_id\" INTEGER\n  \"system_id\" INTEGER\n  \"log_source\" TEXT\n  \"log_category\" TEXT\n  \"log_component\" TEXT\n  \"log_details\" TEXT\n}\n\nTable \"public\".\"search_results\" {\n  \"result_id\" INTEGER [pk]\n  \"search_id\" INTEGER\n  \"log_id\" INTEGER\n  \"rank\" INTEGER\n  \"relevance_score\" REAL\n}\n\nTable \"public\".\"systems\" {\n  \"system_id\" INTEGER [pk]\n  \"system_name\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n  \"location\" TEXT\n  \"system_type\" TEXT\n  \"operating_system\" TEXT\n  \"hardware_info\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"role_permissions\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n  \"location\" TEXT\n}\n\nRef: \"public\".\"alert_resolutions\".\"resolution_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"alert_resolutions\".\"alert_id\" > \"public\".\"log_alerts\".\"alert_id\"\nRef: \"public\".\"audit_trails\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"compliance_reports\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_alerts\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_alerts\".\"alert_type_id\" > \"public\".\"alert_types\".\"alert_type_id\"\nRef: \"public\".\"log_analytics\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_attributes\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_correlations\".\"log_id_2\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_correlations\".\"log_id_1\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"log_correlations\".\"correlation_type_id\" > \"public\".\"correlation_types\".\"correlation_type_id\"\nRef: \"public\".\"log_retention\".\"policy_id\" > \"public\".\"data_retention_policies\".\"policy_id\"\nRef: \"public\".\"log_retention\".\"file_id\" > \"public\".\"log_files\".\"file_id\"\nRef: \"public\".\"log_searches\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"log_tag_mappings\".\"tag_id\" > \"public\".\"log_tags\".\"tag_id\"\nRef: \"public\".\"log_tag_mappings\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"logs\".\"file_id\" > \"public\".\"log_files\".\"file_id\"\nRef: \"public\".\"logs\".\"system_id\" > \"public\".\"systems\".\"system_id\"\nRef: \"public\".\"logs\".\"log_level_id\" > \"public\".\"log_levels\".\"log_level_id\"\nRef: \"public\".\"search_results\".\"log_id\" > \"public\".\"logs\".\"log_id\"\nRef: \"public\".\"search_results\".\"search_id\" > \"public\".\"log_searches\".\"search_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"alert_resolutions\" {\n  \"resolution_id\" INTEGER [pk]\n  \"alert_id\" INTEGER\n  \"resolution_date\" TEXT\n  \"resolution_time\" TEXT\n  \"resolution_user_id\" INTEGER\n  \"resolution_notes\" TEXT\n  \"resolution_status\" TEXT\n}\n\nTable \"alert_types\" {\n  \"alert_type_id\" INTEGER [pk]\n  \"alert_type_name\" TEXT\n  \"description\" TEXT\n  \"alert_type_color\" TEXT\n}\n\nTable \"audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"action_time\" TEXT\n  \"action_user_id\" INTEGER\n}\n\nTable \"compliance_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"report_date\" TEXT\n  \"report_time\" TEXT\n  \"report_status\" TEXT\n}\n\nTable \"correlation_types\" {\n  \"correlation_type_id\" INTEGER [pk]\n  \"correlation_type_name\" TEXT\n  \"description\" TEXT\n  \"correlation_type_color\" TEXT\n}\n\nTable \"data_retention_policies\" {\n  \"policy_id\" INTEGER [pk]\n  \"policy_name\" TEXT\n  \"description\" TEXT\n  \"retention_period\" INTEGER\n  \"archival_period\" INTEGER\n  \"policy_status\" TEXT\n}\n\nTable \"log_alerts\" {\n  \"alert_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"alert_type_id\" INTEGER\n  \"alert_date\" TEXT\n  \"alert_time\" TEXT\n  \"alert_status\" TEXT\n  \"alert_severity\" TEXT\n}\n\nTable \"log_analytics\" {\n  \"analytics_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"analytics_date\" TEXT\n  \"analytics_time\" TEXT\n  \"analytics_data\" TEXT\n}\n\nTable \"log_attributes\" {\n  \"attribute_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"attribute_name\" TEXT\n  \"attribute_value\" TEXT\n  \"attribute_type\" TEXT\n}\n\nTable \"log_correlations\" {\n  \"correlation_id\" INTEGER [pk]\n  \"log_id_1\" INTEGER\n  \"log_id_2\" INTEGER\n  \"correlation_type_id\" INTEGER\n  \"correlation_strength\" REAL\n}\n\nTable \"log_files\" {\n  \"file_id\" INTEGER [pk]\n  \"file_name\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"created_date\" TEXT\n  \"modified_date\" TEXT\n  \"system_id\" INTEGER\n  \"file_format\" TEXT\n  \"file_compression\" TEXT\n  \"file_encryption\" TEXT\n}\n\nTable \"log_levels\" {\n  \"log_level_id\" INTEGER [pk]\n  \"log_level_name\" TEXT\n  \"description\" TEXT\n  \"log_level_color\" TEXT\n}\n\nTable \"log_retention\" {\n  \"retention_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"policy_id\" INTEGER\n  \"retention_start_date\" TEXT\n  \"retention_end_date\" TEXT\n  \"archival_start_date\" TEXT\n  \"archival_end_date\" TEXT\n  \"retention_status\" TEXT\n}\n\nTable \"log_searches\" {\n  \"search_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n  \"search_time\" TEXT\n  \"search_results_count\" INTEGER\n}\n\nTable \"log_tag_mappings\" {\n  \"mapping_id\" INTEGER [pk]\n  \"log_id\" INTEGER\n  \"tag_id\" INTEGER\n  \"mapping_date\" TEXT\n  \"mapping_user_id\" INTEGER\n}\n\nTable \"log_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"tag_name\" TEXT\n  \"description\" TEXT\n  \"tag_color\" TEXT\n}\n\nTable \"logs\" {\n  \"log_id\" INTEGER [pk]\n  \"file_id\" INTEGER\n  \"line_number\" INTEGER\n  \"user_id\" INTEGER\n  \"log_date\" TEXT\n  \"log_time\" TEXT\n  \"message\" TEXT\n  \"log_level_id\" INTEGER\n  \"system_id\" INTEGER\n  \"log_source\" TEXT\n  \"log_category\" TEXT\n  \"log_component\" TEXT\n  \"log_details\" TEXT\n}\n\nTable \"search_results\" {\n  \"result_id\" INTEGER [pk]\n  \"search_id\" INTEGER\n  \"log_id\" INTEGER\n  \"rank\" INTEGER\n  \"relevance_score\" REAL\n}\n\nTable \"systems\" {\n  \"system_id\" INTEGER [pk]\n  \"system_name\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n  \"location\" TEXT\n  \"system_type\" TEXT\n  \"operating_system\" TEXT\n  \"hardware_info\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"role_permissions\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n  \"location\" TEXT\n}\n\nRef: \"alert_resolutions\".\"resolution_user_id\" > \"users\".\"user_id\"\n\nRef: \"alert_resolutions\".\"alert_id\" > \"log_alerts\".\"alert_id\"\n\nRef: \"audit_trails\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"compliance_reports\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"log_alerts\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"log_alerts\".\"alert_type_id\" > \"alert_types\".\"alert_type_id\"\n\nRef: \"log_analytics\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"log_attributes\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"log_correlations\".\"log_id_2\" > \"logs\".\"log_id\"\n\nRef: \"log_correlations\".\"log_id_1\" > \"logs\".\"log_id\"\n\nRef: \"log_correlations\".\"correlation_type_id\" > \"correlation_types\".\"correlation_type_id\"\n\nRef: \"log_retention\".\"policy_id\" > \"data_retention_policies\".\"policy_id\"\n\nRef: \"log_retention\".\"file_id\" > \"log_files\".\"file_id\"\n\nRef: \"log_searches\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"log_tag_mappings\".\"tag_id\" > \"log_tags\".\"tag_id\"\n\nRef: \"log_tag_mappings\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"logs\".\"file_id\" > \"log_files\".\"file_id\"\n\nRef: \"logs\".\"system_id\" > \"systems\".\"system_id\"\n\nRef: \"logs\".\"log_level_id\" > \"log_levels\".\"log_level_id\"\n\nRef: \"search_results\".\"log_id\" > \"logs\".\"log_id\"\n\nRef: \"search_results\".\"search_id\" > \"log_searches\".\"search_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\nalert_resolutions: 2 rows\n  resolution_status: 'completed', 'pending'\n  resolution_notes: 'Resolved by restarting the service', 'User error, no action needed'\n  resolution_date: '2023-05-01', '2023-05-02'\n\nalert_types: 2 rows\n  alert_type_name: 'Critical', 'Warning'\n  description: 'Critical alerts', 'Warning alerts'\n  alert_type_color: 'red', 'yellow'\n\naudit_trails: 2 rows\n  action_type: 'create', 'update'\n  action_date: '2023-05-01', '2023-05-02'\n  action_time: '09:00:00', '10:00:00'\n\ncompliance_reports: 2 rows\n  report_status: 'pending', 'completed'\n  report_date: '2023-05-01', '2023-05-02'\n  report_time: '09:00:00', '10:00:00'\n\ncorrelation_types: 2 rows\n  description: 'Correlation based on time', 'Correlation based on cause and effect'\n  correlation_type_name: 'Temporal', 'Causality'\n  correlation_type_color: 'blue', 'orange'\n\ndata_retention_policies: 2 rows\n  policy_name: 'Standard', 'Extended'\n  description: 'Standard retention policy', 'Extended retention policy'\n  policy_status: 'active', 'inactive'\n\nlog_alerts: 2 rows\n  alert_status: 'triggered', 'resolved'\n  alert_severity: 'critical', 'warning'\n  alert_date: '2023-05-01', '2023-05-02'\n\nlog_analytics: 2 rows\n  analytics_data: 'chart data', 'graph data'\n  analytics_date: '2023-05-01', '2023-05-02'\n  analytics_time: '09:00:00', '10:00:00'\n\nlog_attributes: 2 rows\n  attribute_name: 'RequestID', 'UserID'\n  attribute_type: 'integer', 'string'\n  attribute_value: '12345', '67890'\n\nlog_correlations: 2 rows\n  correlation_strength: '0.8', '0.6'\n  correlation_type_id: '1'\n  log_id_1: '1', '0'\n\nlog_files: 2 rows\n  file_name: 'log1.txt', 'log2.txt'\n  file_format: 'CSV', 'JSON'\n  file_compression: 'gzip', 'zip'\n\nlog_levels: 2 rows\n  log_level_name: 'INFO', 'ERROR'\n  description: 'Informational messages', 'Error messages'\n  log_level_color: 'green', 'red'\n\nlog_retention: 2 rows\n  retention_status: 'active', 'expired'\n  retention_end_date: '2023-01-31', '2023-02-28'\n  archival_start_date: '2023-02-01', '2023-03-01'\n\nlog_searches: 2 rows\n  search_query: 'error logs', 'performance issues'\n  search_date: '2023-05-01', '2023-05-02'\n  search_time: '09:00:00', '10:00:00'\n\nlog_tag_mappings: 2 rows\n  mapping_date: '2023-05-01', '2023-05-02'\n  mapping_user_id: '1', '2'\n  log_id: '1'\n\nlog_tags: 2 rows\n  tag_name: 'Security', 'Performance'\n  description: 'Security-related logs', 'Performance-related logs'\n  tag_color: 'blue', 'orange'\n\nlogs: 2 rows\n  log_category: 'Security', 'Performance'\n  message: 'Some message 1', 'Some message 2'\n  log_source: 'process1', 'thread1'\n\nsearch_results: 2 rows\n  rank: '1', '2'\n  relevance_score: '0.8', '0.6'\n  search_id: '0', '1'\n\nsystems: 2 rows\n  system_name: 'Server1', 'Server2'\n  description: 'Primary server', 'Secondary server'\n  system_type: 'Server'\n\nuser_roles: 2 rows\n  role_name: 'Admin', 'User'\n  description: 'Administrative role', 'Regular user role'\n  role_permissions: 'read-write', 'read-only'\n\nusers: 2 rows\n  user_name: 'user1', 'user2'\n  job_title: 'System Administrator', 'Software Engineer'\n  department: 'IT', 'Development'",
+    "stateUrl": null,
+    "tableStats": {
+      "alert_resolutions": {
+        "rows": 2,
+        "sample_values": {
+          "resolution_id": [
+            "0",
+            "1"
+          ],
+          "alert_id": [
+            "1",
+            "0"
+          ],
+          "resolution_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "resolution_time": [
+            "10:00:00",
+            "11:00:00"
+          ],
+          "resolution_user_id": [
+            "0",
+            "1"
+          ],
+          "resolution_notes": [
+            "Resolved by restarting the service",
+            "User error, no action needed"
+          ],
+          "resolution_status": [
+            "completed",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "alert_types": {
+        "rows": 2,
+        "sample_values": {
+          "alert_type_id": [
+            "0",
+            "1"
+          ],
+          "alert_type_name": [
+            "Critical",
+            "Warning"
+          ],
+          "description": [
+            "Critical alerts",
+            "Warning alerts"
+          ],
+          "alert_type_color": [
+            "red",
+            "yellow"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_trails": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "action_type": [
+            "create",
+            "update"
+          ],
+          "action_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "action_time": [
+            "09:00:00",
+            "10:00:00"
+          ],
+          "action_user_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "compliance_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "1",
+            "0"
+          ],
+          "report_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "report_time": [
+            "09:00:00",
+            "10:00:00"
+          ],
+          "report_status": [
+            "pending",
+            "completed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "correlation_types": {
+        "rows": 2,
+        "sample_values": {
+          "correlation_type_id": [
+            "0",
+            "1"
+          ],
+          "correlation_type_name": [
+            "Temporal",
+            "Causality"
+          ],
+          "description": [
+            "Correlation based on time",
+            "Correlation based on cause and effect"
+          ],
+          "correlation_type_color": [
+            "blue",
+            "orange"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_retention_policies": {
+        "rows": 2,
+        "sample_values": {
+          "policy_id": [
+            "0",
+            "1"
+          ],
+          "policy_name": [
+            "Standard",
+            "Extended"
+          ],
+          "description": [
+            "Standard retention policy",
+            "Extended retention policy"
+          ],
+          "retention_period": [
+            "30",
+            "60"
+          ],
+          "archival_period": [
+            "90",
+            "180"
+          ],
+          "policy_status": [
+            "active",
+            "inactive"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_alerts": {
+        "rows": 2,
+        "sample_values": {
+          "alert_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "1"
+          ],
+          "alert_type_id": [
+            "0",
+            "1"
+          ],
+          "alert_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "alert_time": [
+            "09:00:00",
+            "10:00:00"
+          ],
+          "alert_status": [
+            "triggered",
+            "resolved"
+          ],
+          "alert_severity": [
+            "critical",
+            "warning"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_analytics": {
+        "rows": 2,
+        "sample_values": {
+          "analytics_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "0"
+          ],
+          "analytics_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "analytics_time": [
+            "09:00:00",
+            "10:00:00"
+          ],
+          "analytics_data": [
+            "chart data",
+            "graph data"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_attributes": {
+        "rows": 2,
+        "sample_values": {
+          "attribute_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "1"
+          ],
+          "attribute_name": [
+            "RequestID",
+            "UserID"
+          ],
+          "attribute_value": [
+            "12345",
+            "67890"
+          ],
+          "attribute_type": [
+            "integer",
+            "string"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_correlations": {
+        "rows": 2,
+        "sample_values": {
+          "correlation_id": [
+            "0",
+            "1"
+          ],
+          "log_id_1": [
+            "1",
+            "0"
+          ],
+          "log_id_2": [
+            "0"
+          ],
+          "correlation_type_id": [
+            "1"
+          ],
+          "correlation_strength": [
+            "0.8",
+            "0.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "file_name": [
+            "log1.txt",
+            "log2.txt"
+          ],
+          "file_path": [
+            "/var/log/"
+          ],
+          "file_size": [
+            "1.2",
+            "1.5"
+          ],
+          "created_date": [
+            "2010-01-01",
+            "2010-01-02"
+          ],
+          "modified_date": [
+            "2010-01-01",
+            "2010-01-02"
+          ],
+          "system_id": [
+            "101",
+            "102"
+          ],
+          "file_format": [
+            "CSV",
+            "JSON"
+          ],
+          "file_compression": [
+            "gzip",
+            "zip"
+          ],
+          "file_encryption": [
+            "AES",
+            "SSL"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_levels": {
+        "rows": 2,
+        "sample_values": {
+          "log_level_id": [
+            "0",
+            "1"
+          ],
+          "log_level_name": [
+            "INFO",
+            "ERROR"
+          ],
+          "description": [
+            "Informational messages",
+            "Error messages"
+          ],
+          "log_level_color": [
+            "green",
+            "red"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_retention": {
+        "rows": 2,
+        "sample_values": {
+          "retention_id": [
+            "0",
+            "1"
+          ],
+          "file_id": [
+            "0"
+          ],
+          "policy_id": [
+            "1"
+          ],
+          "retention_start_date": [
+            "2023-01-01"
+          ],
+          "retention_end_date": [
+            "2023-01-31",
+            "2023-02-28"
+          ],
+          "archival_start_date": [
+            "2023-02-01",
+            "2023-03-01"
+          ],
+          "archival_end_date": [
+            "2023-04-30",
+            "2023-08-31"
+          ],
+          "retention_status": [
+            "active",
+            "expired"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_searches": {
+        "rows": 2,
+        "sample_values": {
+          "search_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "search_query": [
+            "error logs",
+            "performance issues"
+          ],
+          "search_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "search_time": [
+            "09:00:00",
+            "10:00:00"
+          ],
+          "search_results_count": [
+            "10",
+            "20"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_tag_mappings": {
+        "rows": 2,
+        "sample_values": {
+          "mapping_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "1"
+          ],
+          "tag_id": [
+            "1"
+          ],
+          "mapping_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "mapping_user_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "log_tags": {
+        "rows": 2,
+        "sample_values": {
+          "tag_id": [
+            "0",
+            "1"
+          ],
+          "tag_name": [
+            "Security",
+            "Performance"
+          ],
+          "description": [
+            "Security-related logs",
+            "Performance-related logs"
+          ],
+          "tag_color": [
+            "blue",
+            "orange"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "line_number": [
+            "1",
+            "2"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "log_date": [
+            "2010-01-01"
+          ],
+          "log_time": [
+            "00:00:00",
+            "00:01:00"
+          ],
+          "message": [
+            "Some message 1",
+            "Some message 2"
+          ],
+          "log_level_id": [
+            "1",
+            "0"
+          ],
+          "system_id": [
+            "1",
+            "0"
+          ],
+          "log_source": [
+            "process1",
+            "thread1"
+          ],
+          "log_category": [
+            "Security",
+            "Performance"
+          ],
+          "log_component": [
+            "Database",
+            "Network"
+          ],
+          "log_details": [
+            "Failed login attempt",
+            "High memory usage"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "search_results": {
+        "rows": 2,
+        "sample_values": {
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "search_id": [
+            "0",
+            "1"
+          ],
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "rank": [
+            "1",
+            "2"
+          ],
+          "relevance_score": [
+            "0.8",
+            "0.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "systems": {
+        "rows": 2,
+        "sample_values": {
+          "system_id": [
+            "0",
+            "1"
+          ],
+          "system_name": [
+            "Server1",
+            "Server2"
+          ],
+          "description": [
+            "Primary server",
+            "Secondary server"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "location": [
+            "Data Center 1",
+            "Data Center 2"
+          ],
+          "system_type": [
+            "Server"
+          ],
+          "operating_system": [
+            "Linux",
+            "Windows"
+          ],
+          "hardware_info": [
+            "Intel Core i7, 16 GB RAM, 1 TB disk space",
+            "AMD Ryzen 9, 32 GB RAM, 2 TB disk space"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "Admin",
+            "User"
+          ],
+          "description": [
+            "Administrative role",
+            "Regular user role"
+          ],
+          "role_permissions": [
+            "read-write",
+            "read-only"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "user1",
+            "user2"
+          ],
+          "email": [
+            "user1@example.com",
+            "user2@example.com"
+          ],
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "department": [
+            "IT",
+            "Development"
+          ],
+          "job_title": [
+            "System Administrator",
+            "Software Engineer"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "location": [
+            "New York",
+            "San Francisco"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "db_id": "olympics",
+  "source": "bird",
+  "tables": 11,
+  "total_rows": 701801,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#olympics",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"city\" {\n  \"id\" INTEGER [pk, not null]\n  \"city_name\" TEXT\n}\n\nTable \"competitor_event\" {\n  \"event_id\" INTEGER\n  \"competitor_id\" INTEGER\n  \"medal_id\" INTEGER\n}\n\nTable \"event\" {\n  \"id\" INTEGER [pk, not null]\n  \"sport_id\" INTEGER\n  \"event_name\" TEXT\n}\n\nTable \"games\" {\n  \"id\" INTEGER [pk, not null]\n  \"games_year\" INTEGER\n  \"games_name\" TEXT\n  \"season\" TEXT\n}\n\nTable \"games_city\" {\n  \"games_id\" INTEGER\n  \"city_id\" INTEGER\n}\n\nTable \"games_competitor\" {\n  \"id\" INTEGER [pk, not null]\n  \"games_id\" INTEGER\n  \"person_id\" INTEGER\n  \"age\" INTEGER\n}\n\nTable \"medal\" {\n  \"id\" INTEGER [pk, not null]\n  \"medal_name\" TEXT\n}\n\nTable \"noc_region\" {\n  \"id\" INTEGER [pk, not null]\n  \"noc\" TEXT\n  \"region_name\" TEXT\n}\n\nTable \"person\" {\n  \"id\" INTEGER [pk, not null]\n  \"full_name\" TEXT\n  \"gender\" TEXT\n  \"height\" INTEGER\n  \"weight\" INTEGER\n}\n\nTable \"person_region\" {\n  \"person_id\" INTEGER\n  \"region_id\" INTEGER\n}\n\nTable \"sport\" {\n  \"id\" INTEGER [pk, not null]\n  \"sport_name\" TEXT\n}\n\n\n\nRef: \"games_city\".\"games_id\" > \"games\".\"id\"\n\nRef: \"games_city\".\"city_id\" > \"city\".\"id\"\n\nRef: \"games_competitor\".\"person_id\" > \"person\".\"id\"\n\nRef: \"games_competitor\".\"games_id\" > \"games\".\"id\"\n\nRef: \"person_region\".\"region_id\" > \"noc_region\".\"id\"\n\nRef: \"person_region\".\"person_id\" > \"person\".\"id\"\n\nRef: \"event\".\"sport_id\" > \"sport\".\"id\"\n\nRef: \"competitor_event\".\"medal_id\" > \"medal\".\"id\"\n\nRef: \"competitor_event\".\"event_id\" > \"event\".\"id\"\n\nRef: \"competitor_event\".\"competitor_id\" > \"games_competitor\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"city\" {\n  \"id\" INTEGER [pk, not null]\n  \"city_name\" TEXT\n}\n\nTable \"competitor_event\" {\n  \"event_id\" INTEGER\n  \"competitor_id\" INTEGER\n  \"medal_id\" INTEGER\n}\n\nTable \"event\" {\n  \"id\" INTEGER [pk, not null]\n  \"sport_id\" INTEGER\n  \"event_name\" TEXT\n}\n\nTable \"games\" {\n  \"id\" INTEGER [pk, not null]\n  \"games_year\" INTEGER\n  \"games_name\" TEXT\n  \"season\" TEXT\n}\n\nTable \"games_city\" {\n  \"games_id\" INTEGER\n  \"city_id\" INTEGER\n}\n\nTable \"games_competitor\" {\n  \"id\" INTEGER [pk, not null]\n  \"games_id\" INTEGER\n  \"person_id\" INTEGER\n  \"age\" INTEGER\n}\n\nTable \"medal\" {\n  \"id\" INTEGER [pk, not null]\n  \"medal_name\" TEXT\n}\n\nTable \"noc_region\" {\n  \"id\" INTEGER [pk, not null]\n  \"noc\" TEXT\n  \"region_name\" TEXT\n}\n\nTable \"person\" {\n  \"id\" INTEGER [pk, not null]\n  \"full_name\" TEXT\n  \"gender\" TEXT\n  \"height\" INTEGER\n  \"weight\" INTEGER\n}\n\nTable \"person_region\" {\n  \"person_id\" INTEGER\n  \"region_id\" INTEGER\n}\n\nTable \"sport\" {\n  \"id\" INTEGER [pk, not null]\n  \"sport_name\" TEXT\n}\n\nRef: \"games_city\".\"games_id\" > \"games\".\"id\"\n\nRef: \"games_city\".\"city_id\" > \"city\".\"id\"\n\nRef: \"games_competitor\".\"person_id\" > \"person\".\"id\"\n\nRef: \"games_competitor\".\"games_id\" > \"games\".\"id\"\n\nRef: \"person_region\".\"region_id\" > \"noc_region\".\"id\"\n\nRef: \"person_region\".\"person_id\" > \"person\".\"id\"\n\nRef: \"event\".\"sport_id\" > \"sport\".\"id\"\n\nRef: \"competitor_event\".\"medal_id\" > \"medal\".\"id\"\n\nRef: \"competitor_event\".\"event_id\" > \"event\".\"id\"\n\nRef: \"competitor_event\".\"competitor_id\" > \"games_competitor\".\"id\"\n\n## Table Stats & Sample Values\n\ncity: 42 rows\n  city_name: 'Barcelona', 'London', 'Antwerpen', ...\n  id: '1', '2', '3', ...\n\ncompetitor_event: 10000 rows\n  event_id: '1', '2', '3', ...\n  competitor_id: '1', '2', '3', ...\n  medal_id: '4', '1', '3', ...\n\nevent: 757 rows\n  event_name: 'Basketball Men's Basketball', 'Judo Men's Extra-Lightweight', 'Football Men's Football', ...\n  sport_id: '9', '33', '25', ...\n  id: '1', '2', '3', ...\n\ngames: 51 rows\n  games_name: '1992 Summer', '2012 Summer', '1920 Summer', ...\n  season: 'Summer', 'Winter'\n  games_year: '1992', '2012', '1920', ...\n\ngames_city: 52 rows\n  city_id: '1', '2', '3', ...\n  games_id: '1', '2', '3', ...\n\ngames_competitor: 10000 rows\n  age: '24', '23', '34', ...\n  games_id: '1', '2', '3', ...\n  person_id: '1', '2', '3', ...\n\nmedal: 4 rows\n  medal_name: 'Gold', 'Silver', 'Bronze', ...\n  id: '1', '2', '3', ...\n\nnoc_region: 231 rows\n  region_name: 'Afghanistan', 'Netherlands Antilles', 'Albania', ...\n  noc: 'AFG', 'AHO', 'ALB', ...\n  id: '1', '2', '3', ...\n\nperson: 10000 rows\n  full_name: 'A Dijiang', 'A Lamusi', 'Gunnar Nielsen Aaby', ...\n  gender: 'M', 'F'\n  height: '180', '170', '0', ...\n\nperson_region: 10000 rows\n  region_id: '42', '56', '146', ...\n  person_id: '1', '2', '3', ...\n\nsport: 66 rows\n  sport_name: 'Aeronautics', 'Alpine Skiing', 'Alpinism', ...\n  id: '1', '2', '3', ...",
+    "stateUrl": "https://bird-bench.github.io/#olympics",
+    "tableStats": {
+      "city": {
+        "rows": 42,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "city_name": [
+            "Barcelona",
+            "London",
+            "Antwerpen",
+            "Paris",
+            "Calgary",
+            "Albertville",
+            "Lillehammer",
+            "Los Angeles"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "competitor_event": {
+        "rows": 10000,
+        "sample_values": {
+          "event_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "competitor_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "medal_id": [
+            "4",
+            "1",
+            "3",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "event": {
+        "rows": 757,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "sport_id": [
+            "9",
+            "33",
+            "25",
+            "62",
+            "54",
+            "18",
+            "6",
+            "31"
+          ],
+          "event_name": [
+            "Basketball Men's Basketball",
+            "Judo Men's Extra-Lightweight",
+            "Football Men's Football",
+            "Tug-Of-War Men's Tug-Of-War",
+            "Speed Skating Women's 500 metres",
+            "Speed Skating Women's 1,000 metres",
+            "Cross Country Skiing Men's 10 kilometres",
+            "Cross Country Skiing Men's 50 kilometres"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "games": {
+        "rows": 51,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "games_year": [
+            "1992",
+            "2012",
+            "1920",
+            "1900",
+            "1988",
+            "1994",
+            "1932",
+            "2002"
+          ],
+          "games_name": [
+            "1992 Summer",
+            "2012 Summer",
+            "1920 Summer",
+            "1900 Summer",
+            "1988 Winter",
+            "1992 Winter",
+            "1994 Winter",
+            "1932 Summer"
+          ],
+          "season": [
+            "Summer",
+            "Winter"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "games_city": {
+        "rows": 52,
+        "sample_values": {
+          "games_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "city_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "games_competitor": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "games_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "person_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "age": [
+            "24",
+            "23",
+            "34",
+            "21",
+            "25",
+            "27",
+            "31",
+            "33"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "medal": {
+        "rows": 4,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "medal_name": [
+            "Gold",
+            "Silver",
+            "Bronze",
+            "NA"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "noc_region": {
+        "rows": 231,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "noc": [
+            "AFG",
+            "AHO",
+            "ALB",
+            "ALG",
+            "AND",
+            "ANG",
+            "ANT",
+            "ANZ"
+          ],
+          "region_name": [
+            "Afghanistan",
+            "Netherlands Antilles",
+            "Albania",
+            "Algeria",
+            "Andorra",
+            "Angola",
+            "Antigua and Barbuda",
+            "Australasia"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "person": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "full_name": [
+            "A Dijiang",
+            "A Lamusi",
+            "Gunnar Nielsen Aaby",
+            "Edgar Lindenau Aabye",
+            "Christine Jacoba Aaftink",
+            "Per Knut Aaland",
+            "John Aalberg",
+            "Cornelia \"Cor\"\" Aalten (-Strannood)\""
+          ],
+          "gender": [
+            "M",
+            "F"
+          ],
+          "height": [
+            "180",
+            "170",
+            "0",
+            "185",
+            "188",
+            "183",
+            "168",
+            "186"
+          ],
+          "weight": [
+            "80",
+            "60",
+            "0",
+            "82",
+            "75",
+            "72",
+            "96",
+            "77"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "person_region": {
+        "rows": 10000,
+        "sample_values": {
+          "person_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "region_id": [
+            "42",
+            "56",
+            "146",
+            "217",
+            "69",
+            "151",
+            "170",
+            "65"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sport": {
+        "rows": 66,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "sport_name": [
+            "Aeronautics",
+            "Alpine Skiing",
+            "Alpinism",
+            "Archery",
+            "Art Competitions",
+            "Athletics",
+            "Badminton",
+            "Baseball"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

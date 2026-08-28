@@ -1,0 +1,13 @@
+{
+  "title": "Launch Priority Table",
+  "capability": [
+    "query_and_filter_database",
+    "compute_aggregates",
+    "render_table_from_records",
+    "preserve_sort_order",
+    "summarize_from_records",
+    "insert_block_at_position",
+    "add_exact_blocks"
+  ],
+  "question": "Hi! In my \"Launch Program Board\" page, please create a five-column table block that lists all tasks meeting either of the following conditions: 1. The readiness progress is 45% or less, or 2. The task has priority Critical but is not yet completed (i.e., readiness\n   progress is not at 100%).\n\nYou should query this information from the existing \"Program Tasks\" database.\nIn the newly created table, each row should represent one task, and all information should be stored as plain text (not relations, formulas, or linked properties).\nIn the newly created table: - Each row should represent one task. - All fields should be stored as plain text (not relations, formulas, or\n  linked properties).\n- The table should be sorted by expected launch date (Launch Date) in\n  ascending order, so that the first entry is the one with the earliest\n  launch date.\n\nThe table should include the following headers: - Task - Owner Hours - Readiness - Start Date - Launch Date\nReplace the usual closing note with a brown callout titled **Launch Statistics** immediately after the table. Its content should include: \"Total Tasks: [X]\", \"Completed: [X] ([Y]%)\", and \"In Progress: [X] ([Y]%)\", with percentages calculated to 1 decimal.\n"
+}

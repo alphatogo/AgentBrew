@@ -1,0 +1,36 @@
+{
+    "category": "employees",
+    "question": "Create and manage a comprehensive employee project tracking system using database schema design and data manipulation operations. The IT team needs you to build the database structure from scratch and populate it with specific initial data to support project management workflows.\n\n## Your Tasks:\n\n1. **Create the project tracking tables** — build three new tables in the `employees` schema:\n\n   **Table 1: `employee_projects`**\n   * `project_id` (integer, primary key, auto-increment)\n   * `project_name` (varchar(100), not null)\n   * `start_date` (date, not null)\n   * `end_date` (date)\n   * `budget` (decimal(10,2))\n   * `status` (varchar(20), default 'active')\n\n   **Table 2: `project_assignments`**\n   * `assignment_id` (integer, primary key, auto-increment)\n   * `employee_id` (bigint, not null)\n   * `project_id` (integer, not null)\n   * `role` (varchar(50), not null)\n   * `allocation_percentage` (integer, check constraint: between 1 and 100)\n   * `assigned_date` (date, not null)\n\n   **Table 3: `project_milestones`**\n   * `milestone_id` (integer, primary key, auto-increment)\n   * `project_id` (integer, not null)\n   * `milestone_name` (varchar(100), not null)\n   * `due_date` (date, not null)\n   * `completed` (boolean, default false)\n\n2. **Add foreign key relationships**:\n   * `project_assignments.employee_id` → `employees.employee.id`\n   * `project_assignments.project_id` → `employees.employee_projects.project_id`\n   * `project_milestones.project_id` → `employees.employee_projects.project_id`\n\n3. **Create performance indexes**:\n   * Index named `idx_projects_status` on `employee_projects.status`\n   * Composite index named `idx_assignments_emp_proj` on `project_assignments(employee_id, project_id)`\n   * Index named `idx_milestones_due_date` on `project_milestones.due_date`\n\n4. **Insert exactly this initial data**:\n\n   **Into `employee_projects`:**\n   * Project 1: name='Database Modernization', start_date='2024-01-15', end_date='2024-06-30', budget=250000.00, status='active'\n   * Project 2: name='Employee Portal Upgrade', start_date='2024-02-01', end_date='2024-05-15', budget=180000.00, status='active'\n   * Project 3: name='HR Analytics Dashboard', start_date='2023-11-01', end_date='2024-01-31', budget=120000.00, status='active'\n\n   **Into `project_assignments` (assign ALL current employees):**\n   * All employees from Development department → Project 1 ('Database Modernization'), role='Developer', allocation=80%\n   * All employees from Human Resources department → Project 2 ('Employee Portal Upgrade'), role='Business Analyst', allocation=60%\n   * All employees from Marketing department → Project 3 ('HR Analytics Dashboard'), role='Marketing Specialist', allocation=40%\n   * All employees from Finance department → Project 1 ('Database Modernization'), role='Financial Analyst', allocation=30%\n   * All employees from Sales department → Project 2 ('Employee Portal Upgrade'), role='Sales Representative', allocation=50%\n   * All employees from Research department → Project 3 ('HR Analytics Dashboard'), role='Research Analyst', allocation=70%\n   * All employees from Production department → Project 1 ('Database Modernization'), role='Production Coordinator', allocation=45%\n   * All employees from Quality Management department → Project 2 ('Employee Portal Upgrade'), role='QA Specialist', allocation=85%\n   * All employees from Customer Service department → Project 3 ('HR Analytics Dashboard'), role='Customer Success', allocation=35%\n   * All employees should have assigned_date='2024-01-01'\n\n   **Into `project_milestones`:**\n   * Project 1: 'Design Phase Complete' due '2024-03-01', 'Implementation Complete' due '2024-05-15'\n   * Project 2: 'UI/UX Approval' due '2024-03-15', 'Beta Testing' due '2024-04-30'\n   * Project 3: 'Data Collection' due '2023-12-15', 'Dashboard Launch' due '2024-01-25'\n\n5. **Perform these exact data updates**:\n   * Update Project 3 ('HR Analytics Dashboard') status to 'completed'\n   * Increase budget by 15% for all projects with status 'active'\n   * Mark the milestone 'Data Collection' as completed (set completed = true)\n\n6. **Add new column to `employee_projects`**:\n   * Add `priority` column (varchar(10)) with check constraint allowing only 'low', 'medium', 'high'\n   * Update all existing projects: set priority='high' for 'Database Modernization', priority='medium' for others\n",
+    "use_specified_server": true,
+    "mcp_servers": [
+        {
+            "name": "postgres-pro"
+        }
+    ],
+    "output_format": {
+        "tracking_status": "Employee project tracking system completion status"
+    },
+    "evaluators": [
+        {
+            "func": "raw",
+            "op": "postgres_employee_project_tracking_verifier",
+            "value": "success",
+            "op_args": {},
+            "desc": "Check if the AI agent created the employee project tracking system"
+        }
+    ],
+    "prepares": [
+        {
+            "prepare_func": "mcpmark_postgres_setup",
+            "prepare_args": {}
+        }
+    ],
+    "cleanups": [
+        {
+            "server": "mcpmark",
+            "tool": "",
+            "cleanup_func": "postgres_cleanup",
+            "cleanup_args": {}
+        }
+    ]
+}

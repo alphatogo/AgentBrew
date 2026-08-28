@@ -1,0 +1,410 @@
+{
+  "db_id": "college_3",
+  "source": "sparc",
+  "tables": 8,
+  "total_rows": 490,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#college_3",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Course\" {\n  \"CID\" TEXT [pk]\n  \"CName\" TEXT\n  \"Credits\" INTEGER\n  \"Instructor\" INTEGER\n  \"Days\" TEXT\n  \"Hours\" TEXT\n  \"DNO\" INTEGER\n}\n\nTable \"Department\" {\n  \"DNO\" INTEGER [pk]\n  \"Division\" TEXT\n  \"DName\" TEXT\n  \"Room\" TEXT\n  \"Building\" TEXT\n  \"DPhone\" INTEGER\n}\n\nTable \"Enrolled_in\" {\n  \"StuID\" INTEGER\n  \"CID\" TEXT\n  \"Grade\" TEXT\n}\n\nTable \"Faculty\" {\n  \"FacID\" INTEGER [pk]\n  \"Lname\" TEXT\n  \"Fname\" TEXT\n  \"Rank\" TEXT\n  \"Sex\" TEXT\n  \"Phone\" INTEGER\n  \"Room\" TEXT\n  \"Building\" TEXT\n}\n\nTable \"Gradeconversion\" {\n  \"lettergrade\" TEXT [pk]\n  \"gradepoint\" REAL\n}\n\nTable \"Member_of\" {\n  \"FacID\" INTEGER\n  \"DNO\" INTEGER\n  \"Appt_Type\" TEXT\n}\n\nTable \"Minor_in\" {\n  \"StuID\" INTEGER\n  \"DNO\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\n\n\nRef: \"Member_of\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Member_of\".\"FacID\" > \"Faculty\".\"FacID\"\n\nRef: \"Course\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Course\".\"Instructor\" > \"Faculty\".\"FacID\"\n\nRef: \"Minor_in\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Minor_in\".\"StuID\" > \"Student\".\"StuID\"\n\nRef: \"Enrolled_in\".\"Grade\" > \"Gradeconversion\".\"lettergrade\"\n\nRef: \"Enrolled_in\".\"CID\" > \"Course\".\"CID\"\n\nRef: \"Enrolled_in\".\"StuID\" > \"Student\".\"StuID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Course\" {\n  \"CID\" TEXT [pk]\n  \"CName\" TEXT\n  \"Credits\" INTEGER\n  \"Instructor\" INTEGER\n  \"Days\" TEXT\n  \"Hours\" TEXT\n  \"DNO\" INTEGER\n}\n\nTable \"Department\" {\n  \"DNO\" INTEGER [pk]\n  \"Division\" TEXT\n  \"DName\" TEXT\n  \"Room\" TEXT\n  \"Building\" TEXT\n  \"DPhone\" INTEGER\n}\n\nTable \"Enrolled_in\" {\n  \"StuID\" INTEGER\n  \"CID\" TEXT\n  \"Grade\" TEXT\n}\n\nTable \"Faculty\" {\n  \"FacID\" INTEGER [pk]\n  \"Lname\" TEXT\n  \"Fname\" TEXT\n  \"Rank\" TEXT\n  \"Sex\" TEXT\n  \"Phone\" INTEGER\n  \"Room\" TEXT\n  \"Building\" TEXT\n}\n\nTable \"Gradeconversion\" {\n  \"lettergrade\" TEXT [pk]\n  \"gradepoint\" REAL\n}\n\nTable \"Member_of\" {\n  \"FacID\" INTEGER\n  \"DNO\" INTEGER\n  \"Appt_Type\" TEXT\n}\n\nTable \"Minor_in\" {\n  \"StuID\" INTEGER\n  \"DNO\" INTEGER\n}\n\nTable \"Student\" {\n  \"StuID\" INTEGER [pk]\n  \"LName\" TEXT\n  \"Fname\" TEXT\n  \"Age\" INTEGER\n  \"Sex\" TEXT\n  \"Major\" INTEGER\n  \"Advisor\" INTEGER\n  \"city_code\" TEXT\n}\n\nRef: \"Member_of\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Member_of\".\"FacID\" > \"Faculty\".\"FacID\"\n\nRef: \"Course\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Course\".\"Instructor\" > \"Faculty\".\"FacID\"\n\nRef: \"Minor_in\".\"DNO\" > \"Department\".\"DNO\"\n\nRef: \"Minor_in\".\"StuID\" > \"Student\".\"StuID\"\n\nRef: \"Enrolled_in\".\"Grade\" > \"Gradeconversion\".\"lettergrade\"\n\nRef: \"Enrolled_in\".\"CID\" > \"Course\".\"CID\"\n\nRef: \"Enrolled_in\".\"StuID\" > \"Student\".\"StuID\"\n\n## Table Stats & Sample Values\n\nCourse: 76 rows\n  CName: 'COMPUTER LITERACY', 'INTRODUCTION TO COMPUTER SCIENCE', 'INTRO TO PROGRAMMING IN JAVA', ...\n  Days: 'MTW', 'Th', 'ThF', ...\n  Hours: '3', '4', '12', ...\n\nDepartment: 26 rows\n  Division: 'AS', 'EN'\n  DName: 'History of Art', 'Biology', 'Chemistry', ...\n  Room: '268', '144', '113', ...\n\nEnrolled_in: 210 rows\n  Grade: 'A-', 'B', 'B+', ...\n  CID: '550.681', '600.303', '600.315', ...\n  StuID: '1001', '1002', '1003', ...\n\nFaculty: 58 rows\n  Lname: 'Giuliano', 'Goodrich', 'Masson', ...\n  Fname: 'Mark', 'Michael', 'Gerald', ...\n  Rank: 'Instructor', 'Professor', 'AssocProf', ...\n\nGradeconversion: 13 rows\n  gradepoint: '4.0', '3.7', '3.3', ...\n  lettergrade: 'A+', 'A', 'A-', ...\n\nMember_of: 63 rows\n  Appt_Type: 'Primary', 'Secondary'\n  DNO: '600', '520', '550', ...\n  FacID: '7792', '9210', '9811', ...\n\nMinor_in: 10 rows\n  DNO: '520', '550', '50', ...\n  StuID: '1004', '1005', '1006', ...\n\nStudent: 34 rows\n  LName: 'Smith', 'Kim', 'Jones', ...\n  Fname: 'Linda', 'Tracy', 'Shiela', ...\n  city_code: 'BAL', 'HKG', 'WAS', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#college_3",
+    "tableStats": {
+      "Course": {
+        "rows": 76,
+        "sample_values": {
+          "CID": [
+            "600.101",
+            "600.103",
+            "600.107",
+            "600.109",
+            "600.113",
+            "600.121",
+            "600.211",
+            "600.227"
+          ],
+          "CName": [
+            "COMPUTER LITERACY",
+            "INTRODUCTION TO COMPUTER SCIENCE",
+            "INTRO TO PROGRAMMING IN JAVA",
+            "INTRO TO PROGRAMMING IN C/C++",
+            "EXPLORING THE INTERNET",
+            "JAVA PROGRAMMING",
+            "UNIX SYSTEMS PROGRAMMING",
+            "DATA STRUCTURES in JAVA"
+          ],
+          "Credits": [
+            "3",
+            "1",
+            "4",
+            "2"
+          ],
+          "Instructor": [
+            "6112",
+            "4230",
+            "1193",
+            "1121",
+            "9826",
+            "9172",
+            "2192",
+            "1148"
+          ],
+          "Days": [
+            "MTW",
+            "Th",
+            "ThF",
+            "MW",
+            "W",
+            "M",
+            "T",
+            "MT"
+          ],
+          "Hours": [
+            "3",
+            "4",
+            "12",
+            "10:30-12",
+            "1-2:15",
+            "9",
+            "1-2:30",
+            "1"
+          ],
+          "DNO": [
+            "600",
+            "550",
+            "520",
+            "50"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Department": {
+        "rows": 26,
+        "sample_values": {
+          "DNO": [
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "90"
+          ],
+          "Division": [
+            "AS",
+            "EN"
+          ],
+          "DName": [
+            "History of Art",
+            "Biology",
+            "Chemistry",
+            "Classics",
+            "Cognitive Science",
+            "English",
+            "Anthropology",
+            "German"
+          ],
+          "Room": [
+            "268",
+            "144",
+            "113",
+            "121",
+            "381",
+            "146",
+            "404B",
+            "245"
+          ],
+          "Building": [
+            "Mergenthaler",
+            "Mudd",
+            "Remsen",
+            "Gilman",
+            "Krieger",
+            "Macaulay",
+            "Bloomberg",
+            "Ames"
+          ],
+          "DPhone": [
+            "7117",
+            "7330",
+            "7429",
+            "7556",
+            "7119",
+            "7544",
+            "7272",
+            "7508"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Enrolled_in": {
+        "rows": 210,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "CID": [
+            "550.681",
+            "600.303",
+            "600.315",
+            "600.337",
+            "600.461",
+            "600.465",
+            "520.213",
+            "600.211"
+          ],
+          "Grade": [
+            "A-",
+            "B",
+            "B+",
+            "A",
+            "B-",
+            "C",
+            "C+",
+            "C-"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Faculty": {
+        "rows": 58,
+        "sample_values": {
+          "FacID": [
+            "1082",
+            "1121",
+            "1148",
+            "1172",
+            "1177",
+            "1193",
+            "1823",
+            "2028"
+          ],
+          "Lname": [
+            "Giuliano",
+            "Goodrich",
+            "Masson",
+            "Runolfsson",
+            "Naiman",
+            "Jones",
+            "Davidson",
+            "Brody"
+          ],
+          "Fname": [
+            "Mark",
+            "Michael",
+            "Gerald",
+            "Thordur",
+            "Daniel",
+            "Stacey",
+            "Frederic",
+            "William"
+          ],
+          "Rank": [
+            "Instructor",
+            "Professor",
+            "AssocProf",
+            "AsstProf"
+          ],
+          "Sex": [
+            "M",
+            "F"
+          ],
+          "Phone": [
+            "2424",
+            "3593",
+            "3402",
+            "3121",
+            "3571",
+            "3550",
+            "5629",
+            "6073"
+          ],
+          "Room": [
+            "224",
+            "219",
+            "224B",
+            "119",
+            "288",
+            "324",
+            "318",
+            "328"
+          ],
+          "Building": [
+            "NEB",
+            "Barton",
+            "Krieger"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Gradeconversion": {
+        "rows": 13,
+        "sample_values": {
+          "lettergrade": [
+            "A+",
+            "A",
+            "A-",
+            "B+",
+            "B",
+            "B-",
+            "C+",
+            "C"
+          ],
+          "gradepoint": [
+            "4.0",
+            "3.7",
+            "3.3",
+            "3.0",
+            "2.7",
+            "2.3",
+            "2.0",
+            "1.7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Member_of": {
+        "rows": 63,
+        "sample_values": {
+          "FacID": [
+            "7792",
+            "9210",
+            "9811",
+            "9643",
+            "9379",
+            "8918",
+            "7712",
+            "1121"
+          ],
+          "DNO": [
+            "600",
+            "520",
+            "550",
+            "50"
+          ],
+          "Appt_Type": [
+            "Primary",
+            "Secondary"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Minor_in": {
+        "rows": 10,
+        "sample_values": {
+          "StuID": [
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008",
+            "1014",
+            "1015",
+            "1016"
+          ],
+          "DNO": [
+            "520",
+            "550",
+            "50",
+            "90",
+            "140",
+            "190",
+            "530",
+            "540"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Student": {
+        "rows": 34,
+        "sample_values": {
+          "StuID": [
+            "1001",
+            "1002",
+            "1003",
+            "1004",
+            "1005",
+            "1006",
+            "1007",
+            "1008"
+          ],
+          "LName": [
+            "Smith",
+            "Kim",
+            "Jones",
+            "Kumar",
+            "Gompers",
+            "Schultz",
+            "Apap",
+            "Nelson"
+          ],
+          "Fname": [
+            "Linda",
+            "Tracy",
+            "Shiela",
+            "Dinesh",
+            "Paul",
+            "Andy",
+            "Lisa",
+            "Jandy"
+          ],
+          "Age": [
+            "18",
+            "19",
+            "21",
+            "20",
+            "26",
+            "17",
+            "22",
+            "16"
+          ],
+          "Sex": [
+            "F",
+            "M"
+          ],
+          "Major": [
+            "600",
+            "520",
+            "540",
+            "550",
+            "100",
+            "50"
+          ],
+          "Advisor": [
+            "1121",
+            "7712",
+            "7792",
+            "8423",
+            "1148",
+            "8918",
+            "9172",
+            "2192"
+          ],
+          "city_code": [
+            "BAL",
+            "HKG",
+            "WAS",
+            "CHI",
+            "YYZ",
+            "PIT",
+            "HOU",
+            "PHL"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

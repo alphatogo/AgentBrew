@@ -1,0 +1,14 @@
+{
+  "title": "Neighborhood Demo Day Planner",
+  "capability": [
+    "query_multiple_sources",
+    "query_and_filter_database",
+    "create_child_page",
+    "insert_ordered_sections",
+    "add_exact_blocks",
+    "compute_aggregates",
+    "render_table_from_records",
+    "preserve_sort_order"
+  ],
+  "question": "Create a new planning page under the \"City Launch Guide\" page called \"Neighborhood Demo Day Plan\".\n**Task Requirements:** 1. Inside the new Neighborhood Demo Day Plan page, add a heading_1 block\n   with text \"Neighborhood Demo Day Plan\".\n\n2. Query the \"Venues\" database in the City Launch Guide page and find all\n   records whose Tags property contains \"Workshop\".\n\n3. Query the \"Food Partners\" database and find all records whose Tags\n   property contains either \"Breakfast\" or \"Catering\".\n\n4. Query the \"Launch Tasks\" database and include every task where\n   Confidence is less than or equal to 40%, or Priority is \"High\" and\n   Status is not \"Done\".\n\n5. Build the new page with the following sections in this exact order:\n   - \"Workshop Venues\"\n   - \"Food Partner Options\"\n   - \"At-Risk Launch Tasks\"\n\n6. Under \"Workshop Venues\", list every matching Venues record from step 2.\n   Each bullet must include the venue name, neighborhood, map link, and\n   capacity in this format:\n   - \"[Venue Name] - [Neighborhood] - [Map Link] - Capacity: [Capacity]\"\n\n7. Under \"Food Partner Options\", create a numbered list containing every\n   matching Food Partners record from step 3. Each item must include the\n   partner name, cuisine, city, and estimated cost in this format:\n   \"Partner Name - Cuisine - City - Cost: $X\".\n\n8. Sort the matching Launch Tasks by Due Date in ascending order.\n9. Create a plain table under \"At-Risk Launch Tasks\" using only plain text\n    values, not relations, formulas, mentions, rollups, or linked database\n    properties. The table must include all matching tasks and use exactly\n    these headers:\n    - Task\n    - Owner\n    - Priority\n    - Status\n    - Due Date\n    - Confidence\n\n10. Under \"Weekend Summary\", add the exact text: \"This demo day includes\n    [X] workshop venues, [Y] food partner options, and [Z] at-risk launch\n    tasks to review!\" where [X], [Y], and [Z] are the actual counts.\n"
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Launch Readiness Cleanup",
+  "capability": [
+    "update_existing_rows",
+    "compute_aggregates",
+    "insert_block_at_position",
+    "summarize_from_records",
+    "query_existing_data",
+    "coordinated_multirow_edit"
+  ],
+  "question": "Go to the page named \"Product Launch Readiness\" and clean up the launch checklist, task ownership, and page styling.\n**Step 1: Update Launch Checklist Items** In the \"Launch Checklist\" database, set Ready to checked for every item in the \"Collateral\" category except for the item named \"Executive Briefing Deck\". After this, also set Ready to checked for the \"Press Kit Review\" entry and the \"Demo Environment Smoke Test\" entry.\n**Step 2: Rebalance Launch Task Ownership** Replace the usual category summary with this ownership cleanup: in the \"Launch Tasks\" database, find the person assigned to the most active launch tasks and the person assigned to the fewest active launch tasks, then swap their assigned launch tasks. Only change Assignee and preserve every other property.\n"
+}

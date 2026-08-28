@@ -1,0 +1,4022 @@
+{
+  "db_id": "works_cycles",
+  "source": "bird",
+  "tables": 65,
+  "total_rows": 719435,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#works_cycles",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Address\" {\n  \"AddressID\" INTEGER [pk]\n  \"AddressLine1\" TEXT [not null]\n  \"AddressLine2\" TEXT\n  \"City\" TEXT [not null]\n  \"StateProvinceID\" INTEGER [not null]\n  \"PostalCode\" TEXT [not null]\n  \"SpatialLocation\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"AddressType\" {\n  \"AddressTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BillOfMaterials\" {\n  \"BillOfMaterialsID\" INTEGER [pk]\n  \"ProductAssemblyID\" INTEGER\n  \"ComponentID\" INTEGER [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP\n  \"UnitMeasureCode\" TEXT [not null]\n  \"BOMLevel\" INTEGER [not null]\n  \"PerAssemblyQty\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntity\" {\n  \"BusinessEntityID\" INTEGER [pk]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntityAddress\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AddressID\" INTEGER [pk, not null]\n  \"AddressTypeID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntityContact\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PersonID\" INTEGER [pk, not null]\n  \"ContactTypeID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ContactType\" {\n  \"ContactTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CountryRegion\" {\n  \"CountryRegionCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CountryRegionCurrency\" {\n  \"CountryRegionCode\" TEXT [pk, not null]\n  \"CurrencyCode\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CreditCard\" {\n  \"CreditCardID\" INTEGER [pk]\n  \"CardType\" TEXT [not null]\n  \"CardNumber\" TEXT [not null]\n  \"ExpMonth\" INTEGER [not null]\n  \"ExpYear\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Culture\" {\n  \"CultureID\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Currency\" {\n  \"CurrencyCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CurrencyRate\" {\n  \"CurrencyRateID\" INTEGER [pk]\n  \"CurrencyRateDate\" TIMESTAMP [not null]\n  \"FromCurrencyCode\" TEXT [not null]\n  \"ToCurrencyCode\" TEXT [not null]\n  \"AverageRate\" REAL [not null]\n  \"EndOfDayRate\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Customer\" {\n  \"CustomerID\" INTEGER [pk]\n  \"PersonID\" INTEGER\n  \"StoreID\" INTEGER\n  \"TerritoryID\" INTEGER\n  \"AccountNumber\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Department\" {\n  \"DepartmentID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"GroupName\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Document\" {\n  \"DocumentNode\" TEXT [pk, not null]\n  \"DocumentLevel\" INTEGER\n  \"Title\" TEXT [not null]\n  \"Owner\" INTEGER [not null]\n  \"FolderFlag\" INTEGER [not null]\n  \"FileName\" TEXT [not null]\n  \"FileExtension\" TEXT [not null]\n  \"Revision\" TEXT [not null]\n  \"ChangeNumber\" INTEGER [not null]\n  \"Status\" INTEGER [not null]\n  \"DocumentSummary\" TEXT\n  \"Document\" BYTEA\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmailAddress\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"EmailAddressID\" INTEGER [pk]\n  \"EmailAddress\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Employee\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"NationalIDNumber\" TEXT [not null]\n  \"LoginID\" TEXT [not null]\n  \"OrganizationNode\" TEXT\n  \"OrganizationLevel\" INTEGER\n  \"JobTitle\" TEXT [not null]\n  \"BirthDate\" DATE [not null]\n  \"MaritalStatus\" TEXT [not null]\n  \"Gender\" TEXT [not null]\n  \"HireDate\" DATE [not null]\n  \"SalariedFlag\" INTEGER [not null]\n  \"VacationHours\" INTEGER [not null]\n  \"SickLeaveHours\" INTEGER [not null]\n  \"CurrentFlag\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmployeeDepartmentHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"DepartmentID\" INTEGER [pk, not null]\n  \"ShiftID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmployeePayHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"RateChangeDate\" TIMESTAMP [pk, not null]\n  \"Rate\" REAL [not null]\n  \"PayFrequency\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"JobCandidate\" {\n  \"JobCandidateID\" INTEGER [pk]\n  \"BusinessEntityID\" INTEGER\n  \"Resume\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Location\" {\n  \"LocationID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CostRate\" REAL [not null]\n  \"Availability\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Password\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PasswordHash\" TEXT [not null]\n  \"PasswordSalt\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Person\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PersonType\" TEXT [not null]\n  \"NameStyle\" INTEGER [not null]\n  \"Title\" TEXT\n  \"FirstName\" TEXT [not null]\n  \"MiddleName\" TEXT\n  \"LastName\" TEXT [not null]\n  \"Suffix\" TEXT\n  \"EmailPromotion\" INTEGER [not null]\n  \"AdditionalContactInfo\" TEXT\n  \"Demographics\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PersonCreditCard\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"CreditCardID\" INTEGER [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PhoneNumberType\" {\n  \"PhoneNumberTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Product\" {\n  \"ProductID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ProductNumber\" TEXT [not null]\n  \"MakeFlag\" INTEGER [not null]\n  \"FinishedGoodsFlag\" INTEGER [not null]\n  \"Color\" TEXT\n  \"SafetyStockLevel\" INTEGER [not null]\n  \"ReorderPoint\" INTEGER [not null]\n  \"StandardCost\" REAL [not null]\n  \"ListPrice\" REAL [not null]\n  \"Size\" TEXT\n  \"SizeUnitMeasureCode\" TEXT\n  \"WeightUnitMeasureCode\" TEXT\n  \"Weight\" REAL\n  \"DaysToManufacture\" INTEGER [not null]\n  \"ProductLine\" TEXT\n  \"Class\" TEXT\n  \"Style\" TEXT\n  \"ProductSubcategoryID\" INTEGER\n  \"ProductModelID\" INTEGER\n  \"SellStartDate\" TIMESTAMP [not null]\n  \"SellEndDate\" TIMESTAMP\n  \"DiscontinuedDate\" TIMESTAMP\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductCategory\" {\n  \"ProductCategoryID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductCostHistory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"StandardCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductDescription\" {\n  \"ProductDescriptionID\" INTEGER [pk]\n  \"Description\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductDocument\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"DocumentNode\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductInventory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"LocationID\" INTEGER [pk, not null]\n  \"Shelf\" TEXT [not null]\n  \"Bin\" INTEGER [not null]\n  \"Quantity\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductListPriceHistory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"ListPrice\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductModel\" {\n  \"ProductModelID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CatalogDescription\" TEXT\n  \"Instructions\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductModelProductDescriptionCulture\" {\n  \"ProductModelID\" INTEGER [pk, not null]\n  \"ProductDescriptionID\" INTEGER [pk, not null]\n  \"CultureID\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductPhoto\" {\n  \"ProductPhotoID\" INTEGER [pk]\n  \"ThumbNailPhoto\" BYTEA\n  \"ThumbnailPhotoFileName\" TEXT\n  \"LargePhoto\" BYTEA\n  \"LargePhotoFileName\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductProductPhoto\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"ProductPhotoID\" INTEGER [pk, not null]\n  \"Primary\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductReview\" {\n  \"ProductReviewID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"ReviewerName\" TEXT [not null]\n  \"ReviewDate\" TIMESTAMP [not null]\n  \"EmailAddress\" TEXT [not null]\n  \"Rating\" INTEGER [not null]\n  \"Comments\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductSubcategory\" {\n  \"ProductSubcategoryID\" INTEGER [pk]\n  \"ProductCategoryID\" INTEGER [not null]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductVendor\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AverageLeadTime\" INTEGER [not null]\n  \"StandardPrice\" REAL [not null]\n  \"LastReceiptCost\" REAL\n  \"LastReceiptDate\" TIMESTAMP\n  \"MinOrderQty\" INTEGER [not null]\n  \"MaxOrderQty\" INTEGER [not null]\n  \"OnOrderQty\" INTEGER\n  \"UnitMeasureCode\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PurchaseOrderDetail\" {\n  \"PurchaseOrderID\" INTEGER [not null]\n  \"PurchaseOrderDetailID\" INTEGER [pk]\n  \"DueDate\" TIMESTAMP [not null]\n  \"OrderQty\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"UnitPrice\" REAL [not null]\n  \"LineTotal\" REAL [not null]\n  \"ReceivedQty\" REAL [not null]\n  \"RejectedQty\" REAL [not null]\n  \"StockedQty\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PurchaseOrderHeader\" {\n  \"PurchaseOrderID\" INTEGER [pk]\n  \"RevisionNumber\" INTEGER [not null]\n  \"Status\" INTEGER [not null]\n  \"EmployeeID\" INTEGER [not null]\n  \"VendorID\" INTEGER [not null]\n  \"ShipMethodID\" INTEGER [not null]\n  \"OrderDate\" TIMESTAMP [not null]\n  \"ShipDate\" TIMESTAMP\n  \"SubTotal\" REAL [not null]\n  \"TaxAmt\" REAL [not null]\n  \"Freight\" REAL [not null]\n  \"TotalDue\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderDetail\" {\n  \"SalesOrderID\" INTEGER [not null]\n  \"SalesOrderDetailID\" INTEGER [pk]\n  \"CarrierTrackingNumber\" TEXT\n  \"OrderQty\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"SpecialOfferID\" INTEGER [not null]\n  \"UnitPrice\" REAL [not null]\n  \"UnitPriceDiscount\" REAL [not null]\n  \"LineTotal\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderHeader\" {\n  \"SalesOrderID\" INTEGER [pk]\n  \"RevisionNumber\" INTEGER [not null]\n  \"OrderDate\" TIMESTAMP [not null]\n  \"DueDate\" TIMESTAMP [not null]\n  \"ShipDate\" TIMESTAMP\n  \"Status\" INTEGER [not null]\n  \"OnlineOrderFlag\" INTEGER [not null]\n  \"SalesOrderNumber\" TEXT [not null]\n  \"PurchaseOrderNumber\" TEXT\n  \"AccountNumber\" TEXT\n  \"CustomerID\" INTEGER [not null]\n  \"SalesPersonID\" INTEGER\n  \"TerritoryID\" INTEGER\n  \"BillToAddressID\" INTEGER [not null]\n  \"ShipToAddressID\" INTEGER [not null]\n  \"ShipMethodID\" INTEGER [not null]\n  \"CreditCardID\" INTEGER\n  \"CreditCardApprovalCode\" TEXT\n  \"CurrencyRateID\" INTEGER\n  \"SubTotal\" REAL [not null]\n  \"TaxAmt\" REAL [not null]\n  \"Freight\" REAL [not null]\n  \"TotalDue\" REAL [not null]\n  \"Comment\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderHeaderSalesReason\" {\n  \"SalesOrderID\" INTEGER [pk, not null]\n  \"SalesReasonID\" INTEGER [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesPerson\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"TerritoryID\" INTEGER\n  \"SalesQuota\" REAL\n  \"Bonus\" REAL [not null]\n  \"CommissionPct\" REAL [not null]\n  \"SalesYTD\" REAL [not null]\n  \"SalesLastYear\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesPersonQuotaHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"QuotaDate\" TIMESTAMP [pk, not null]\n  \"SalesQuota\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesReason\" {\n  \"SalesReasonID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ReasonType\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTaxRate\" {\n  \"SalesTaxRateID\" INTEGER [pk]\n  \"StateProvinceID\" INTEGER [not null]\n  \"TaxType\" INTEGER [not null]\n  \"TaxRate\" REAL [not null]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTerritory\" {\n  \"TerritoryID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CountryRegionCode\" TEXT [not null]\n  \"Group\" TEXT [not null]\n  \"SalesYTD\" REAL [not null]\n  \"SalesLastYear\" REAL [not null]\n  \"CostYTD\" REAL [not null]\n  \"CostLastYear\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTerritoryHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"TerritoryID\" INTEGER [pk, not null]\n  \"StartDate\" TIMESTAMP [pk, not null]\n  \"EndDate\" TIMESTAMP\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ScrapReason\" {\n  \"ScrapReasonID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Shift\" {\n  \"ShiftID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"StartTime\" TEXT [not null]\n  \"EndTime\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ShipMethod\" {\n  \"ShipMethodID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ShipBase\" REAL [not null]\n  \"ShipRate\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ShoppingCartItem\" {\n  \"ShoppingCartItemID\" INTEGER [pk]\n  \"ShoppingCartID\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"DateCreated\" TIMESTAMP [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SpecialOffer\" {\n  \"SpecialOfferID\" INTEGER [pk]\n  \"Description\" TEXT [not null]\n  \"DiscountPct\" REAL [not null]\n  \"Type\" TEXT [not null]\n  \"Category\" TEXT [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP [not null]\n  \"MinQty\" INTEGER [not null]\n  \"MaxQty\" INTEGER\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SpecialOfferProduct\" {\n  \"SpecialOfferID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"StateProvince\" {\n  \"StateProvinceID\" INTEGER [pk]\n  \"StateProvinceCode\" TEXT [not null]\n  \"CountryRegionCode\" TEXT [not null]\n  \"IsOnlyStateProvinceFlag\" INTEGER [not null]\n  \"Name\" TEXT [not null]\n  \"TerritoryID\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Store\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"SalesPersonID\" INTEGER\n  \"Demographics\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"TransactionHistory\" {\n  \"TransactionID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"ReferenceOrderID\" INTEGER [not null]\n  \"ReferenceOrderLineID\" INTEGER [not null]\n  \"TransactionDate\" TIMESTAMP [not null]\n  \"TransactionType\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ActualCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"TransactionHistoryArchive\" {\n  \"TransactionID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [not null]\n  \"ReferenceOrderID\" INTEGER [not null]\n  \"ReferenceOrderLineID\" INTEGER [not null]\n  \"TransactionDate\" TIMESTAMP [not null]\n  \"TransactionType\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ActualCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"UnitMeasure\" {\n  \"UnitMeasureCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Vendor\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AccountNumber\" TEXT [not null]\n  \"Name\" TEXT [not null]\n  \"CreditRating\" INTEGER [not null]\n  \"PreferredVendorStatus\" INTEGER [not null]\n  \"ActiveFlag\" INTEGER [not null]\n  \"PurchasingWebServiceURL\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"WorkOrder\" {\n  \"WorkOrderID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"OrderQty\" INTEGER [not null]\n  \"StockedQty\" INTEGER [not null]\n  \"ScrappedQty\" INTEGER [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP\n  \"DueDate\" TIMESTAMP [not null]\n  \"ScrapReasonID\" INTEGER\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"WorkOrderRouting\" {\n  \"WorkOrderID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [pk, not null]\n  \"OperationSequence\" INTEGER [pk, not null]\n  \"LocationID\" INTEGER [not null]\n  \"ScheduledStartDate\" TIMESTAMP [not null]\n  \"ScheduledEndDate\" TIMESTAMP [not null]\n  \"ActualStartDate\" TIMESTAMP\n  \"ActualEndDate\" TIMESTAMP\n  \"ActualResourceHrs\" REAL\n  \"PlannedCost\" REAL [not null]\n  \"ActualCost\" REAL\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\n\n\nRef: \"CountryRegionCurrency\".\"CurrencyCode\" > \"Currency\".\"CurrencyCode\"\n\nRef: \"CountryRegionCurrency\".\"CountryRegionCode\" > \"CountryRegion\".\"CountryRegionCode\"\n\nRef: \"Person\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityContact\".\"PersonID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityContact\".\"ContactTypeID\" > \"ContactType\".\"ContactTypeID\"\n\nRef: \"BusinessEntityContact\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"EmailAddress\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"Employee\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"Password\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"PersonCreditCard\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"PersonCreditCard\".\"CreditCardID\" > \"CreditCard\".\"CreditCardID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"CultureID\" > \"Culture\".\"CultureID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"ProductDescriptionID\" > \"ProductDescription\".\"ProductDescriptionID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"ProductModelID\" > \"ProductModel\".\"ProductModelID\"\n\nRef: \"ProductSubcategory\".\"ProductCategoryID\" > \"ProductCategory\".\"ProductCategoryID\"\n\nRef: \"SalesTerritory\".\"CountryRegionCode\" > \"CountryRegion\".\"CountryRegionCode\"\n\nRef: \"SalesPerson\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"SalesPerson\".\"BusinessEntityID\" > \"Employee\".\"BusinessEntityID\"\n\nRef: \"SalesPersonQuotaHistory\".\"BusinessEntityID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"SalesTerritoryHistory\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"SalesTerritoryHistory\".\"BusinessEntityID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityAddress\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityAddress\".\"AddressTypeID\" > \"AddressType\".\"AddressTypeID\"\n\nRef: \"BusinessEntityAddress\".\"AddressID\" > \"Address\".\"AddressID\"\n\nRef: \"SalesTaxRate\".\"StateProvinceID\" > \"StateProvince\".\"StateProvinceID\"\n\nRef: \"Store\".\"SalesPersonID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"Store\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"SalesOrderHeaderSalesReason\".\"SalesReasonID\" > \"SalesReason\".\"SalesReasonID\"\n\nRef: \"SalesOrderHeaderSalesReason\".\"SalesOrderID\" > \"SalesOrderHeader\".\"SalesOrderID\"\n\nRef: \"ProductCostHistory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductDocument\".\"DocumentNode\" > \"Document\".\"DocumentNode\"\n\nRef: \"ProductDocument\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductInventory\".\"LocationID\" > \"Location\".\"LocationID\"\n\nRef: \"ProductInventory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductProductPhoto\".\"ProductPhotoID\" > \"ProductPhoto\".\"ProductPhotoID\"\n\nRef: \"ProductProductPhoto\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductReview\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ShoppingCartItem\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"SpecialOfferProduct\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"SpecialOfferProduct\".\"SpecialOfferID\" > \"SpecialOffer\".\"SpecialOfferID\"\n\nRef: \"SalesOrderDetail\".\"SpecialOfferID\" > \"SpecialOfferProduct\".\"SpecialOfferID\"\n\nRef: \"SalesOrderDetail\".\"ProductID\" > \"SpecialOfferProduct\".\"ProductID\"\n\nRef: \"SalesOrderDetail\".\"SalesOrderID\" > \"SalesOrderHeader\".\"SalesOrderID\"\n\nRef: \"TransactionHistory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"Vendor\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"ProductVendor\".\"UnitMeasureCode\" > \"UnitMeasure\".\"UnitMeasureCode\"\n\nRef: \"ProductVendor\".\"BusinessEntityID\" > \"Vendor\".\"BusinessEntityID\"\n\nRef: \"ProductVendor\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"PurchaseOrderHeader\".\"ShipMethodID\" > \"ShipMethod\".\"ShipMethodID\"\n\nRef: \"PurchaseOrderHeader\".\"VendorID\" > \"Vendor\".\"BusinessEntityID\"\n\nRef: \"PurchaseOrderHeader\".\"EmployeeID\" > \"Employee\".\"BusinessEntityID\"\n\nRef: \"PurchaseOrderDetail\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"PurchaseOrderDetail\".\"PurchaseOrderID\" > \"PurchaseOrderHeader\".\"PurchaseOrderID\"\n\nRef: \"WorkOrder\".\"ScrapReasonID\" > \"ScrapReason\".\"ScrapReasonID\"\n\nRef: \"WorkOrder\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"WorkOrderRouting\".\"LocationID\" > \"Location\".\"LocationID\"\n\nRef: \"WorkOrderRouting\".\"WorkOrderID\" > \"WorkOrder\".\"WorkOrderID\"\n\nRef: \"Customer\".\"StoreID\" > \"Store\".\"BusinessEntityID\"\n\nRef: \"Customer\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"Customer\".\"PersonID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"ProductListPriceHistory\".\"ProductID\" > \"Product\".\"ProductID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Address\" {\n  \"AddressID\" INTEGER [pk]\n  \"AddressLine1\" TEXT [not null]\n  \"AddressLine2\" TEXT\n  \"City\" TEXT [not null]\n  \"StateProvinceID\" INTEGER [not null]\n  \"PostalCode\" TEXT [not null]\n  \"SpatialLocation\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"AddressType\" {\n  \"AddressTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BillOfMaterials\" {\n  \"BillOfMaterialsID\" INTEGER [pk]\n  \"ProductAssemblyID\" INTEGER\n  \"ComponentID\" INTEGER [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP\n  \"UnitMeasureCode\" TEXT [not null]\n  \"BOMLevel\" INTEGER [not null]\n  \"PerAssemblyQty\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntity\" {\n  \"BusinessEntityID\" INTEGER [pk]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntityAddress\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AddressID\" INTEGER [pk, not null]\n  \"AddressTypeID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"BusinessEntityContact\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PersonID\" INTEGER [pk, not null]\n  \"ContactTypeID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ContactType\" {\n  \"ContactTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CountryRegion\" {\n  \"CountryRegionCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CountryRegionCurrency\" {\n  \"CountryRegionCode\" TEXT [pk, not null]\n  \"CurrencyCode\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CreditCard\" {\n  \"CreditCardID\" INTEGER [pk]\n  \"CardType\" TEXT [not null]\n  \"CardNumber\" TEXT [not null]\n  \"ExpMonth\" INTEGER [not null]\n  \"ExpYear\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Culture\" {\n  \"CultureID\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Currency\" {\n  \"CurrencyCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"CurrencyRate\" {\n  \"CurrencyRateID\" INTEGER [pk]\n  \"CurrencyRateDate\" TIMESTAMP [not null]\n  \"FromCurrencyCode\" TEXT [not null]\n  \"ToCurrencyCode\" TEXT [not null]\n  \"AverageRate\" REAL [not null]\n  \"EndOfDayRate\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Customer\" {\n  \"CustomerID\" INTEGER [pk]\n  \"PersonID\" INTEGER\n  \"StoreID\" INTEGER\n  \"TerritoryID\" INTEGER\n  \"AccountNumber\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Department\" {\n  \"DepartmentID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"GroupName\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Document\" {\n  \"DocumentNode\" TEXT [pk, not null]\n  \"DocumentLevel\" INTEGER\n  \"Title\" TEXT [not null]\n  \"Owner\" INTEGER [not null]\n  \"FolderFlag\" INTEGER [not null]\n  \"FileName\" TEXT [not null]\n  \"FileExtension\" TEXT [not null]\n  \"Revision\" TEXT [not null]\n  \"ChangeNumber\" INTEGER [not null]\n  \"Status\" INTEGER [not null]\n  \"DocumentSummary\" TEXT\n  \"Document\" BYTEA\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmailAddress\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"EmailAddressID\" INTEGER [pk]\n  \"EmailAddress\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Employee\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"NationalIDNumber\" TEXT [not null]\n  \"LoginID\" TEXT [not null]\n  \"OrganizationNode\" TEXT\n  \"OrganizationLevel\" INTEGER\n  \"JobTitle\" TEXT [not null]\n  \"BirthDate\" DATE [not null]\n  \"MaritalStatus\" TEXT [not null]\n  \"Gender\" TEXT [not null]\n  \"HireDate\" DATE [not null]\n  \"SalariedFlag\" INTEGER [not null]\n  \"VacationHours\" INTEGER [not null]\n  \"SickLeaveHours\" INTEGER [not null]\n  \"CurrentFlag\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmployeeDepartmentHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"DepartmentID\" INTEGER [pk, not null]\n  \"ShiftID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"EmployeePayHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"RateChangeDate\" TIMESTAMP [pk, not null]\n  \"Rate\" REAL [not null]\n  \"PayFrequency\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"JobCandidate\" {\n  \"JobCandidateID\" INTEGER [pk]\n  \"BusinessEntityID\" INTEGER\n  \"Resume\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Location\" {\n  \"LocationID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CostRate\" REAL [not null]\n  \"Availability\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Password\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PasswordHash\" TEXT [not null]\n  \"PasswordSalt\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Person\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"PersonType\" TEXT [not null]\n  \"NameStyle\" INTEGER [not null]\n  \"Title\" TEXT\n  \"FirstName\" TEXT [not null]\n  \"MiddleName\" TEXT\n  \"LastName\" TEXT [not null]\n  \"Suffix\" TEXT\n  \"EmailPromotion\" INTEGER [not null]\n  \"AdditionalContactInfo\" TEXT\n  \"Demographics\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PersonCreditCard\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"CreditCardID\" INTEGER [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PhoneNumberType\" {\n  \"PhoneNumberTypeID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Product\" {\n  \"ProductID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ProductNumber\" TEXT [not null]\n  \"MakeFlag\" INTEGER [not null]\n  \"FinishedGoodsFlag\" INTEGER [not null]\n  \"Color\" TEXT\n  \"SafetyStockLevel\" INTEGER [not null]\n  \"ReorderPoint\" INTEGER [not null]\n  \"StandardCost\" REAL [not null]\n  \"ListPrice\" REAL [not null]\n  \"Size\" TEXT\n  \"SizeUnitMeasureCode\" TEXT\n  \"WeightUnitMeasureCode\" TEXT\n  \"Weight\" REAL\n  \"DaysToManufacture\" INTEGER [not null]\n  \"ProductLine\" TEXT\n  \"Class\" TEXT\n  \"Style\" TEXT\n  \"ProductSubcategoryID\" INTEGER\n  \"ProductModelID\" INTEGER\n  \"SellStartDate\" TIMESTAMP [not null]\n  \"SellEndDate\" TIMESTAMP\n  \"DiscontinuedDate\" TIMESTAMP\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductCategory\" {\n  \"ProductCategoryID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductCostHistory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"StandardCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductDescription\" {\n  \"ProductDescriptionID\" INTEGER [pk]\n  \"Description\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductDocument\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"DocumentNode\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductInventory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"LocationID\" INTEGER [pk, not null]\n  \"Shelf\" TEXT [not null]\n  \"Bin\" INTEGER [not null]\n  \"Quantity\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductListPriceHistory\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"StartDate\" DATE [pk, not null]\n  \"EndDate\" DATE\n  \"ListPrice\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductModel\" {\n  \"ProductModelID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CatalogDescription\" TEXT\n  \"Instructions\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductModelProductDescriptionCulture\" {\n  \"ProductModelID\" INTEGER [pk, not null]\n  \"ProductDescriptionID\" INTEGER [pk, not null]\n  \"CultureID\" TEXT [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductPhoto\" {\n  \"ProductPhotoID\" INTEGER [pk]\n  \"ThumbNailPhoto\" BYTEA\n  \"ThumbnailPhotoFileName\" TEXT\n  \"LargePhoto\" BYTEA\n  \"LargePhotoFileName\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductProductPhoto\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"ProductPhotoID\" INTEGER [pk, not null]\n  \"Primary\" INTEGER [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductReview\" {\n  \"ProductReviewID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"ReviewerName\" TEXT [not null]\n  \"ReviewDate\" TIMESTAMP [not null]\n  \"EmailAddress\" TEXT [not null]\n  \"Rating\" INTEGER [not null]\n  \"Comments\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductSubcategory\" {\n  \"ProductSubcategoryID\" INTEGER [pk]\n  \"ProductCategoryID\" INTEGER [not null]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ProductVendor\" {\n  \"ProductID\" INTEGER [pk, not null]\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AverageLeadTime\" INTEGER [not null]\n  \"StandardPrice\" REAL [not null]\n  \"LastReceiptCost\" REAL\n  \"LastReceiptDate\" TIMESTAMP\n  \"MinOrderQty\" INTEGER [not null]\n  \"MaxOrderQty\" INTEGER [not null]\n  \"OnOrderQty\" INTEGER\n  \"UnitMeasureCode\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PurchaseOrderDetail\" {\n  \"PurchaseOrderID\" INTEGER [not null]\n  \"PurchaseOrderDetailID\" INTEGER [pk]\n  \"DueDate\" TIMESTAMP [not null]\n  \"OrderQty\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"UnitPrice\" REAL [not null]\n  \"LineTotal\" REAL [not null]\n  \"ReceivedQty\" REAL [not null]\n  \"RejectedQty\" REAL [not null]\n  \"StockedQty\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"PurchaseOrderHeader\" {\n  \"PurchaseOrderID\" INTEGER [pk]\n  \"RevisionNumber\" INTEGER [not null]\n  \"Status\" INTEGER [not null]\n  \"EmployeeID\" INTEGER [not null]\n  \"VendorID\" INTEGER [not null]\n  \"ShipMethodID\" INTEGER [not null]\n  \"OrderDate\" TIMESTAMP [not null]\n  \"ShipDate\" TIMESTAMP\n  \"SubTotal\" REAL [not null]\n  \"TaxAmt\" REAL [not null]\n  \"Freight\" REAL [not null]\n  \"TotalDue\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderDetail\" {\n  \"SalesOrderID\" INTEGER [not null]\n  \"SalesOrderDetailID\" INTEGER [pk]\n  \"CarrierTrackingNumber\" TEXT\n  \"OrderQty\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"SpecialOfferID\" INTEGER [not null]\n  \"UnitPrice\" REAL [not null]\n  \"UnitPriceDiscount\" REAL [not null]\n  \"LineTotal\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderHeader\" {\n  \"SalesOrderID\" INTEGER [pk]\n  \"RevisionNumber\" INTEGER [not null]\n  \"OrderDate\" TIMESTAMP [not null]\n  \"DueDate\" TIMESTAMP [not null]\n  \"ShipDate\" TIMESTAMP\n  \"Status\" INTEGER [not null]\n  \"OnlineOrderFlag\" INTEGER [not null]\n  \"SalesOrderNumber\" TEXT [not null]\n  \"PurchaseOrderNumber\" TEXT\n  \"AccountNumber\" TEXT\n  \"CustomerID\" INTEGER [not null]\n  \"SalesPersonID\" INTEGER\n  \"TerritoryID\" INTEGER\n  \"BillToAddressID\" INTEGER [not null]\n  \"ShipToAddressID\" INTEGER [not null]\n  \"ShipMethodID\" INTEGER [not null]\n  \"CreditCardID\" INTEGER\n  \"CreditCardApprovalCode\" TEXT\n  \"CurrencyRateID\" INTEGER\n  \"SubTotal\" REAL [not null]\n  \"TaxAmt\" REAL [not null]\n  \"Freight\" REAL [not null]\n  \"TotalDue\" REAL [not null]\n  \"Comment\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesOrderHeaderSalesReason\" {\n  \"SalesOrderID\" INTEGER [pk, not null]\n  \"SalesReasonID\" INTEGER [pk, not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesPerson\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"TerritoryID\" INTEGER\n  \"SalesQuota\" REAL\n  \"Bonus\" REAL [not null]\n  \"CommissionPct\" REAL [not null]\n  \"SalesYTD\" REAL [not null]\n  \"SalesLastYear\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesPersonQuotaHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"QuotaDate\" TIMESTAMP [pk, not null]\n  \"SalesQuota\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesReason\" {\n  \"SalesReasonID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ReasonType\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTaxRate\" {\n  \"SalesTaxRateID\" INTEGER [pk]\n  \"StateProvinceID\" INTEGER [not null]\n  \"TaxType\" INTEGER [not null]\n  \"TaxRate\" REAL [not null]\n  \"Name\" TEXT [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTerritory\" {\n  \"TerritoryID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"CountryRegionCode\" TEXT [not null]\n  \"Group\" TEXT [not null]\n  \"SalesYTD\" REAL [not null]\n  \"SalesLastYear\" REAL [not null]\n  \"CostYTD\" REAL [not null]\n  \"CostLastYear\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SalesTerritoryHistory\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"TerritoryID\" INTEGER [pk, not null]\n  \"StartDate\" TIMESTAMP [pk, not null]\n  \"EndDate\" TIMESTAMP\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ScrapReason\" {\n  \"ScrapReasonID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Shift\" {\n  \"ShiftID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"StartTime\" TEXT [not null]\n  \"EndTime\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ShipMethod\" {\n  \"ShipMethodID\" INTEGER [pk]\n  \"Name\" TEXT [not null]\n  \"ShipBase\" REAL [not null]\n  \"ShipRate\" REAL [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"ShoppingCartItem\" {\n  \"ShoppingCartItemID\" INTEGER [pk]\n  \"ShoppingCartID\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ProductID\" INTEGER [not null]\n  \"DateCreated\" TIMESTAMP [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SpecialOffer\" {\n  \"SpecialOfferID\" INTEGER [pk]\n  \"Description\" TEXT [not null]\n  \"DiscountPct\" REAL [not null]\n  \"Type\" TEXT [not null]\n  \"Category\" TEXT [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP [not null]\n  \"MinQty\" INTEGER [not null]\n  \"MaxQty\" INTEGER\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"SpecialOfferProduct\" {\n  \"SpecialOfferID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [pk, not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"StateProvince\" {\n  \"StateProvinceID\" INTEGER [pk]\n  \"StateProvinceCode\" TEXT [not null]\n  \"CountryRegionCode\" TEXT [not null]\n  \"IsOnlyStateProvinceFlag\" INTEGER [not null]\n  \"Name\" TEXT [not null]\n  \"TerritoryID\" INTEGER [not null]\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Store\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"SalesPersonID\" INTEGER\n  \"Demographics\" TEXT\n  \"rowguid\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"TransactionHistory\" {\n  \"TransactionID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"ReferenceOrderID\" INTEGER [not null]\n  \"ReferenceOrderLineID\" INTEGER [not null]\n  \"TransactionDate\" TIMESTAMP [not null]\n  \"TransactionType\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ActualCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"TransactionHistoryArchive\" {\n  \"TransactionID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [not null]\n  \"ReferenceOrderID\" INTEGER [not null]\n  \"ReferenceOrderLineID\" INTEGER [not null]\n  \"TransactionDate\" TIMESTAMP [not null]\n  \"TransactionType\" TEXT [not null]\n  \"Quantity\" INTEGER [not null]\n  \"ActualCost\" REAL [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"UnitMeasure\" {\n  \"UnitMeasureCode\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"Vendor\" {\n  \"BusinessEntityID\" INTEGER [pk, not null]\n  \"AccountNumber\" TEXT [not null]\n  \"Name\" TEXT [not null]\n  \"CreditRating\" INTEGER [not null]\n  \"PreferredVendorStatus\" INTEGER [not null]\n  \"ActiveFlag\" INTEGER [not null]\n  \"PurchasingWebServiceURL\" TEXT\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"WorkOrder\" {\n  \"WorkOrderID\" INTEGER [pk]\n  \"ProductID\" INTEGER [not null]\n  \"OrderQty\" INTEGER [not null]\n  \"StockedQty\" INTEGER [not null]\n  \"ScrappedQty\" INTEGER [not null]\n  \"StartDate\" TIMESTAMP [not null]\n  \"EndDate\" TIMESTAMP\n  \"DueDate\" TIMESTAMP [not null]\n  \"ScrapReasonID\" INTEGER\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nTable \"WorkOrderRouting\" {\n  \"WorkOrderID\" INTEGER [pk, not null]\n  \"ProductID\" INTEGER [pk, not null]\n  \"OperationSequence\" INTEGER [pk, not null]\n  \"LocationID\" INTEGER [not null]\n  \"ScheduledStartDate\" TIMESTAMP [not null]\n  \"ScheduledEndDate\" TIMESTAMP [not null]\n  \"ActualStartDate\" TIMESTAMP\n  \"ActualEndDate\" TIMESTAMP\n  \"ActualResourceHrs\" REAL\n  \"PlannedCost\" REAL [not null]\n  \"ActualCost\" REAL\n  \"ModifiedDate\" TIMESTAMP [not null]\n}\n\nRef: \"CountryRegionCurrency\".\"CurrencyCode\" > \"Currency\".\"CurrencyCode\"\n\nRef: \"CountryRegionCurrency\".\"CountryRegionCode\" > \"CountryRegion\".\"CountryRegionCode\"\n\nRef: \"Person\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityContact\".\"PersonID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityContact\".\"ContactTypeID\" > \"ContactType\".\"ContactTypeID\"\n\nRef: \"BusinessEntityContact\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"EmailAddress\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"Employee\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"Password\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"PersonCreditCard\".\"BusinessEntityID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"PersonCreditCard\".\"CreditCardID\" > \"CreditCard\".\"CreditCardID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"CultureID\" > \"Culture\".\"CultureID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"ProductDescriptionID\" > \"ProductDescription\".\"ProductDescriptionID\"\n\nRef: \"ProductModelProductDescriptionCulture\".\"ProductModelID\" > \"ProductModel\".\"ProductModelID\"\n\nRef: \"ProductSubcategory\".\"ProductCategoryID\" > \"ProductCategory\".\"ProductCategoryID\"\n\nRef: \"SalesTerritory\".\"CountryRegionCode\" > \"CountryRegion\".\"CountryRegionCode\"\n\nRef: \"SalesPerson\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"SalesPerson\".\"BusinessEntityID\" > \"Employee\".\"BusinessEntityID\"\n\nRef: \"SalesPersonQuotaHistory\".\"BusinessEntityID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"SalesTerritoryHistory\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"SalesTerritoryHistory\".\"BusinessEntityID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityAddress\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"BusinessEntityAddress\".\"AddressTypeID\" > \"AddressType\".\"AddressTypeID\"\n\nRef: \"BusinessEntityAddress\".\"AddressID\" > \"Address\".\"AddressID\"\n\nRef: \"SalesTaxRate\".\"StateProvinceID\" > \"StateProvince\".\"StateProvinceID\"\n\nRef: \"Store\".\"SalesPersonID\" > \"SalesPerson\".\"BusinessEntityID\"\n\nRef: \"Store\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"SalesOrderHeaderSalesReason\".\"SalesReasonID\" > \"SalesReason\".\"SalesReasonID\"\n\nRef: \"SalesOrderHeaderSalesReason\".\"SalesOrderID\" > \"SalesOrderHeader\".\"SalesOrderID\"\n\nRef: \"ProductCostHistory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductDocument\".\"DocumentNode\" > \"Document\".\"DocumentNode\"\n\nRef: \"ProductDocument\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductInventory\".\"LocationID\" > \"Location\".\"LocationID\"\n\nRef: \"ProductInventory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductProductPhoto\".\"ProductPhotoID\" > \"ProductPhoto\".\"ProductPhotoID\"\n\nRef: \"ProductProductPhoto\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ProductReview\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"ShoppingCartItem\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"SpecialOfferProduct\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"SpecialOfferProduct\".\"SpecialOfferID\" > \"SpecialOffer\".\"SpecialOfferID\"\n\nRef: \"SalesOrderDetail\".\"SpecialOfferID\" > \"SpecialOfferProduct\".\"SpecialOfferID\"\n\nRef: \"SalesOrderDetail\".\"ProductID\" > \"SpecialOfferProduct\".\"ProductID\"\n\nRef: \"SalesOrderDetail\".\"SalesOrderID\" > \"SalesOrderHeader\".\"SalesOrderID\"\n\nRef: \"TransactionHistory\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"Vendor\".\"BusinessEntityID\" > \"BusinessEntity\".\"BusinessEntityID\"\n\nRef: \"ProductVendor\".\"UnitMeasureCode\" > \"UnitMeasure\".\"UnitMeasureCode\"\n\nRef: \"ProductVendor\".\"BusinessEntityID\" > \"Vendor\".\"BusinessEntityID\"\n\nRef: \"ProductVendor\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"PurchaseOrderHeader\".\"ShipMethodID\" > \"ShipMethod\".\"ShipMethodID\"\n\nRef: \"PurchaseOrderHeader\".\"VendorID\" > \"Vendor\".\"BusinessEntityID\"\n\nRef: \"PurchaseOrderHeader\".\"EmployeeID\" > \"Employee\".\"BusinessEntityID\"\n\nRef: \"PurchaseOrderDetail\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"PurchaseOrderDetail\".\"PurchaseOrderID\" > \"PurchaseOrderHeader\".\"PurchaseOrderID\"\n\nRef: \"WorkOrder\".\"ScrapReasonID\" > \"ScrapReason\".\"ScrapReasonID\"\n\nRef: \"WorkOrder\".\"ProductID\" > \"Product\".\"ProductID\"\n\nRef: \"WorkOrderRouting\".\"LocationID\" > \"Location\".\"LocationID\"\n\nRef: \"WorkOrderRouting\".\"WorkOrderID\" > \"WorkOrder\".\"WorkOrderID\"\n\nRef: \"Customer\".\"StoreID\" > \"Store\".\"BusinessEntityID\"\n\nRef: \"Customer\".\"TerritoryID\" > \"SalesTerritory\".\"TerritoryID\"\n\nRef: \"Customer\".\"PersonID\" > \"Person\".\"BusinessEntityID\"\n\nRef: \"ProductListPriceHistory\".\"ProductID\" > \"Product\".\"ProductID\"\n\n## Table Stats & Sample Values\n\nAddress: 10000 rows\n  City: 'Bothell', 'Portland', 'Seattle', ...\n  AddressLine1: '1970 Napa Ct.', '9833 Mt. Dias Blv.', '7484 Roundtree Drive', ...\n  AddressLine2: 'Unit E', '# 14', '# 207', ...\n\nAddressType: 6 rows\n  Name: 'Billing', 'Home', 'Main Office', ...\n  rowguid: 'B84F78B1-4EFE-4A0E-8CB7-70E9F112F886', '41BC2FF6-F0FC-475F-8EB9-CEC0805AA0F2', '8EEEC28C-07A2-4FB9-AD0A-42D4A0BBC575', ...\n  AddressTypeID: '1', '2', '3', ...\n\nBillOfMaterials: 2679 rows\n  BOMLevel: '2', '1', '0', ...\n  UnitMeasureCode: 'EA', 'IN', 'OZ'\n  StartDate: '2010-03-04 00:00:00.0', '2010-05-04 00:00:00.0', '2010-03-18 00:00:00.0', ...\n\nBusinessEntity: 10000 rows\n  rowguid: '0C7D8F81-D7B1-4CF0-9C0A-4CD8B6B50087', '6648747F-7843-4002-B317-65389684C398', '568204DA-93D7-42F4-8A7A-4446A144277D', ...\n  ModifiedDate: '2017-12-13 13:20:24.0', '2017-12-13 13:20:25.0', '2017-12-13 13:20:26.0', ...\n  BusinessEntityID: '1', '2', '3', ...\n\nBusinessEntityAddress: 10000 rows\n  rowguid: '3A5D0A00-6739-4DFE-A8F7-844CD9DEE3DF', '84AE7057-EDF4-4C51-8B8D-3AEAEFBFB4A1', '3C915B31-7C05-4A05-9859-0DF663677240', ...\n  ModifiedDate: '2014-09-12 11:15:06.0', '2011-08-01 00:00:00.0', '2013-07-31 00:00:00.0', ...\n  AddressTypeID: '2', '3', '5'\n\nBusinessEntityContact: 909 rows\n  rowguid: '7D4D2DBC-4A44-48F5-911D-A63ABAFD5120', '3EA25B65-9579-4260-977D-D6F00D7D20EE', 'DADAC1FF-3351-4827-9AE0-95004885C193', ...\n  ModifiedDate: '2017-12-13 13:21:02.0', '2017-12-13 13:21:03.0', '2017-12-13 13:21:04.0', ...\n  ContactTypeID: '11', '14', '15', ...\n\nContactType: 20 rows\n  Name: 'Accounting Manager', 'Assistant Sales Agent', 'Assistant Sales Representative', ...\n  ContactTypeID: '1', '2', '3', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nCountryRegion: 239 rows\n  Name: 'Name', 'Andorra', 'United Arab Emirates', ...\n  CountryRegionCode: 'Cou', 'AD', 'AE', ...\n  ModifiedDate: 'ModifiedDate', '2008-04-30 00:00:00.0'\n\nCountryRegionCurrency: 109 rows\n  CountryRegionCode: 'AE', 'AR', 'AT', ...\n  ModifiedDate: '2014-02-08 10:17:21.0', '2008-04-30 00:00:00.0'\n  CurrencyCode: 'AED', 'ARS', 'ATS', ...\n\nCreditCard: 10000 rows\n  CardType: 'SuperiorCard', 'Distinguish', 'ColonialVoice', ...\n  CardNumber: '33332664695310', '55552127249722', '77778344838353', ...\n  ExpMonth: '11', '8', '7', ...\n\nCulture: 8 rows\n  Name: 'Invariant Language (Invariant Country)', 'Arabic', 'English', ...\n  CultureID: 'ar', 'en', 'es', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nCurrency: 105 rows\n  Name: 'Emirati Dirham', 'Afghani', 'Lek', ...\n  CurrencyCode: 'AED', 'AFA', 'ALL', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nCurrencyRate: 10000 rows\n  ToCurrencyCode: 'ARS', 'AUD', 'BRL', ...\n  FromCurrencyCode: 'USD'\n  CurrencyRateDate: '2011-05-31 00:00:00.0', '2011-06-01 00:00:00.0', '2011-06-02 00:00:00.0', ...\n\nCustomer: 0 rows\n\nDepartment: 16 rows\n  Name: 'Engineering', 'Tool Design', 'Sales', ...\n  GroupName: 'Research and Development', 'Sales and Marketing', 'Inventory Management', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nDocument: 8 rows\n  Title: 'Documents', 'Overview', 'Introduction 1', ...\n  FileName: 'Documents', 'Overview', 'Introduction 1.doc', ...\n  DocumentLevel: '0', '1', '2'\n\nEmailAddress: 10000 rows\n  EmailAddress: 'ken0@adventure-works.com', 'terri0@adventure-works.com', 'roberto0@adventure-works.com', ...\n  rowguid: '8A1901E4-671B-431A-871C-EADB2942E9EE', 'B5FF9EFD-72A2-4F87-830B-F338FDD4D162', 'C8A51084-1C03-4C58-A8B3-55854AE7C499', ...\n  ModifiedDate: '2009-01-07 00:00:00.0', '2008-01-24 00:00:00.0', '2007-11-04 00:00:00.0', ...\n\nEmployee: 290 rows\n  JobTitle: 'Chief Executive Officer', 'Vice President of Engineering', 'Engineering Manager', ...\n  MaritalStatus: 'S', 'M'\n  OrganizationLevel: '1', '2', '3', ...\n\nEmployeeDepartmentHistory: 296 rows\n  EndDate: '2010-05-30', '2009-07-14', '2011-08-31', ...\n  ModifiedDate: '2009-01-13 00:00:00.0', '2008-01-30 00:00:00.0', '2007-11-10 00:00:00.0', ...\n  StartDate: '2009-01-14', '2008-01-31', '2007-11-11', ...\n\nEmployeePayHistory: 316 rows\n  Rate: '125.5', '63.4615', '43.2692', ...\n  PayFrequency: '2', '1'\n  ModifiedDate: '2014-06-30 00:00:00.0', '2007-11-21 00:00:00.0', '2010-05-16 00:00:00.0', ...\n\nJobCandidate: 0 rows\n\nLocation: 14 rows\n  Name: 'Tool Crib', 'Sheet Metal Racks', 'Paint Shop', ...\n  CostRate: '0.0', '22.5', '25.0', ...\n  Availability: '0.0', '96.0', '108.0', ...\n\nPassword: 10000 rows\n  PasswordSalt: 'bE3XiWw=', 'EjJaC3U=', 'wbPZqMw=', ...\n  PasswordHash: 'pbFwXWE99vobT6g+vPWFy93NtUU/orrIWafF01hccfM=', 'bawRVNrZQYQ05qF05Gz6VLilnviZmrqBReTTAGAudm0=', '8BUXrZfDqO1IyHCWOYzYmqN1IhTUn3CJMpdx/UCQ3iY=', ...\n  rowguid: '329EACBE-C883-4F48-B8B6-17AA4627EFFF', 'A4C82398-7466-4FE6-B9EE-CEC34D116F68', 'AC3F4536-BB2E-41C5-B70D-454BE460C1BD', ...\n\nPerson: 10000 rows\n  PersonType: 'EM', 'SP', 'SC', ...\n  Title: 'Ms.', 'Mr.', 'Sr.', ...\n  FirstName: 'Ken', 'Terri', 'Roberto', ...\n\nPersonCreditCard: 10000 rows\n  ModifiedDate: '2013-07-31 00:00:00.0', '2011-08-01 00:00:00.0', '2011-05-31 00:00:00.0', ...\n  BusinessEntityID: '293', '295', '297', ...\n  CreditCardID: '17038', '15369', '8010', ...\n\nPhoneNumberType: 3 rows\n  Name: 'Cell', 'Home', 'Work'\n  PhoneNumberTypeID: '1', '2', '3'\n  ModifiedDate: '2017-12-13 13:19:22.0'\n\nProduct: 504 rows\n  Name: 'Adjustable Race', 'Bearing Ball', 'BB Ball Bearing', ...\n  Class: 'L', 'M', 'H'\n  SafetyStockLevel: '1000', '800', '500', ...\n\nProductCategory: 4 rows\n  Name: 'Bikes', 'Components', 'Clothing', ...\n  rowguid: 'CFBDA25C-DF71-47A7-B81B-64EE161AA37C', 'C657828D-D808-4ABA-91A3-AF2CE02300E9', '10A7C342-CA82-48D4-8A38-46A2EB089B74', ...\n  ProductCategoryID: '1', '2', '3', ...\n\nProductCostHistory: 395 rows\n  EndDate: '2012-05-29 00:00:00.0', '2013-05-29 00:00:00.0'\n  StandardCost: '12.0278', '13.8782', '13.0863', ...\n  ModifiedDate: '2012-05-29 00:00:00.0', '2013-05-29 00:00:00.0', '2013-05-16 00:00:00.0'\n\nProductDescription: 762 rows\n  Description: 'Chromoly steel.', 'Aluminum alloy cups; large diameter spindle.', 'Aluminum alloy cups and a hollow axle.', ...\n  rowguid: '301EED3A-1A82-4855-99CB-2AFE8290D641', 'DFEBA528-DA11-4650-9D86-CAFDA7294EB0', 'F7178DA7-1A7E-4997-8470-06737181305E', ...\n  ModifiedDate: '2013-04-30 00:00:00.0', '2014-02-08 10:32:17.0'\n\nProductDocument: 32 rows\n  DocumentNode: '/2/1/', '/3/1/', '/3/2/', ...\n  ModifiedDate: '2013-12-29 13:51:58.0'\n  ProductID: '317', '318', '319', ...\n\nProductInventory: 1069 rows\n  Shelf: 'A', 'B', 'C', ...\n  rowguid: '47A24246-6C43-48EB-968F-025738A8A410', 'D4544D7D-CAF5-46B3-AB22-5718DCC26B5E', 'BFF7DC60-96A8-43CA-81A7-D6D2ED3000A8', ...\n  Bin: '1', '5', '2', ...\n\nProductListPriceHistory: 395 rows\n  EndDate: '2012-05-29 00:00:00.0', '2013-05-29 00:00:00.0'\n  ListPrice: '33.6442', '34.99', '9.5', ...\n  ModifiedDate: '2012-05-29 00:00:00.0', '2013-05-29 00:00:00.0', '2013-05-09 00:00:00.0'\n\nProductModel: 113 rows\n  Name: 'Classic Vest', 'Cycling Cap', 'Full-Finger Gloves', ...\n  rowguid: '29321D47-1E4C-4AAC-887C-19634328C25E', '474FB654-3C96-4CB9-82DF-2152EEFFBDB0', 'A75483FE-3C47-4AA4-93CF-664B51192987', ...\n  ModifiedDate: '2013-04-30 00:00:00.0', '2011-05-01 00:00:00.0', '2012-04-30 00:00:00.0', ...\n\nProductModelProductDescriptionCulture: 762 rows\n  ProductModelID: '1', '2', '3', ...\n  ProductDescriptionID: '1199', '1467', '1589', ...\n  CultureID: 'en', 'ar', 'fr', ...\n\nProductPhoto: 100 rows\n  ThumbnailPhotoFileName: 'racer02_black_f_small.gif', 'racer02_black_small.gif', 'racer02_blue_f_small.gif', ...\n  LargePhotoFileName: 'racer02_black_f_large.gif', 'racer02_black_large.gif', 'racer02_blue_f_large.gif', ...\n  ModifiedDate: '2008-04-30 00:00:00.0', '2012-10-19 09:56:38.0', '2012-04-30 00:00:00.0', ...\n\nProductProductPhoto: 504 rows\n  ModifiedDate: '2008-03-31 00:00:00.0', '2011-05-01 00:00:00.0', '2012-04-30 00:00:00.0', ...\n  Primary: '1'\n  ProductID: '1', '2', '3', ...\n\nProductReview: 0 rows\n\nProductSubcategory: 37 rows\n  Name: 'Mountain Bikes', 'Road Bikes', 'Touring Bikes', ...\n  ProductCategoryID: '1', '2', '3', ...\n  rowguid: '2D364ADE-264A-433C-B092-4FCBF3804E01', '000310C0-BCC8-42C4-B0C3-45AE611AF06B', '02C5061D-ECDC-4274-B5F1-E91D76BC3F37', ...\n\nProductVendor: 460 rows\n  UnitMeasureCode: 'CS', 'CTN', 'EA', ...\n  StandardPrice: '47.87', '39.92', '54.31', ...\n  LastReceiptCost: '50.2635', '41.916', '57.0255', ...\n\nPurchaseOrderDetail: 8845 rows\n  DueDate: '2011-04-30 00:00:00.0', '2011-05-14 00:00:00.0', '2011-12-28 00:00:00.0', ...\n  OrderQty: '4', '3', '550', ...\n  UnitPrice: '50.0', '45.0', '46.0', ...\n\nPurchaseOrderHeader: 4012 rows\n  Status: '4', '1', '3', ...\n  RevisionNumber: '4', '5', '6', ...\n  OrderDate: '2011-04-16 00:00:00.0', '2011-04-30 00:00:00.0', '2011-12-14 00:00:00.0', ...\n\nSalesOrderDetail: 10000 rows\n  CarrierTrackingNumber: '4911-403C-98', '6431-4D57-83', '4E0A-4F89-AE', ...\n  rowguid: 'B207C96D-D9E6-402B-8470-2CC176C42283', '7ABB600D-1E77-41BE-9FE5-B9142CFC08FA', '475CF8C6-49F6-486E-B0AD-AFC6A50CDD2F', ...\n  OrderQty: '1', '3', '2', ...\n\nSalesOrderHeader: 10000 rows\n  SalesOrderNumber: 'SO43659', 'SO43660', 'SO43661', ...\n  PurchaseOrderNumber: 'PO522145787', 'PO18850127500', 'PO18473189620', ...\n  AccountNumber: '10-4020-000676', '10-4020-000117', '10-4020-000442', ...\n\nSalesOrderHeaderSalesReason: 10000 rows\n  ModifiedDate: '2011-05-31 00:00:00.0', '2011-06-01 00:00:00.0', '2011-06-02 00:00:00.0', ...\n  SalesOrderID: '43697', '43702', '43703', ...\n  SalesReasonID: '5', '9', '2', ...\n\nSalesPerson: 17 rows\n  rowguid: '48754992-9EE0-4C0E-8C94-9451604E3E02', '1E0A7274-3064-4F58-88EE-4C6586C87169', '4DD9EEE4-8E81-4F8C-AF97-683394C1F7C0', ...\n  SalesQuota: '300000.0', '250000.0'\n  Bonus: '0.0', '4100.0', '2000.0', ...\n\nSalesPersonQuotaHistory: 163 rows\n  rowguid: '99109BBF-8693-4587-BC23-6036EC89E1BE', 'DFD01444-8900-461C-8D6F-04598DAE01D4', '0A69F453-9689-4CCF-A08C-C644670F5668', ...\n  SalesQuota: '28000.0', '7000.0', '91000.0', ...\n  ModifiedDate: '2011-04-16 00:00:00.0', '2011-07-17 00:00:00.0', '2011-10-17 00:00:00.0', ...\n\nSalesReason: 10 rows\n  Name: 'Price', 'On Promotion', 'Magazine Advertisement', ...\n  ReasonType: 'Other', 'Promotion', 'Marketing'\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nSalesTaxRate: 29 rows\n  Name: 'Canadian GST + Alberta Provincial Tax', 'Canadian GST + Ontario Provincial Tax', 'Canadian GST + Quebec Provincial Tax', ...\n  TaxType: '1', '2', '3'\n  StateProvinceID: '1', '57', '63', ...\n\nSalesTerritory: 10 rows\n  Name: 'Northwest', 'Northeast', 'Central', ...\n  CountryRegionCode: 'US', 'CA', 'FR', ...\n  Group: 'North America', 'Europe', 'Pacific'\n\nSalesTerritoryHistory: 17 rows\n  rowguid: '8563CE6A-00FF-47D7-BA4D-3C3E1CDEF531', '2F44304C-EE87-4C72-813E-CA75C5F61F4C', '64BCB1B3-A793-40BA-9859-D90F78C3F167', ...\n  EndDate: '2012-11-29 00:00:00.0', '2012-09-29 00:00:00.0', '2012-05-29 00:00:00.0'\n  ModifiedDate: '2012-11-22 00:00:00.0', '2012-11-23 00:00:00.0', '2011-05-24 00:00:00.0', ...\n\nScrapReason: 16 rows\n  Name: 'Brake assembly not as ordered', 'Color incorrect', 'Gouge in metal', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n  ScrapReasonID: '1', '2', '3', ...\n\nShift: 3 rows\n  Name: 'Day', 'Evening', 'Night'\n  StartTime: '07:00:00', '15:00:00', '23:00:00'\n  EndTime: '15:00:00', '23:00:00', '07:00:00'\n\nShipMethod: 5 rows\n  Name: 'XRQ - TRUCK GROUND', 'ZY - EXPRESS', 'OVERSEAS - DELUXE', ...\n  rowguid: '6BE756D9-D7BE-4463-8F2C-AE60C710D606', '3455079B-F773-4DC6-8F1E-2A58649C4AB8', '22F4E461-28CF-4ACE-A980-F686CF112EC8', ...\n  ShipBase: '3.95', '9.95', '29.95', ...\n\nShoppingCartItem: 3 rows\n  ShoppingCartID: '14951', '20621'\n  Quantity: '3', '4', '7'\n  ProductID: '862', '881', '874'\n\nSpecialOffer: 16 rows\n  Description: 'No Discount', 'Volume Discount 11 to 14', 'Volume Discount 15 to 24', ...\n  Type: 'No Discount', 'Volume Discount', 'Discontinued Product', ...\n  Category: 'No Discount', 'Reseller', 'Customer'\n\nSpecialOfferProduct: 538 rows\n  rowguid: 'BB30B868-D86C-4557-8DB2-4B2D0A83A0FB', 'B3C9A4B1-2AE6-4CBA-B552-1F206C9F4C1F', '27B711FE-0B77-4EA4-AD1A-7C239956BEF4', ...\n  ModifiedDate: '2011-04-01 00:00:00.0', '2011-05-01 00:00:00.0', '2012-03-14 00:00:00.0', ...\n  SpecialOfferID: '1', '2', '3', ...\n\nStateProvince: 181 rows\n  StateProvinceCode: 'AB', 'AK', 'AL', ...\n  CountryRegionCode: 'CA', 'US', 'AS', ...\n  Name: 'Alberta', 'Alaska', 'Alabama', ...\n\nStore: 701 rows\n  Name: 'Next-Door Bike Store', 'Professional Sales and Service', 'Riders Company', ...\n  rowguid: 'A22517E3-848D-4EBE-B9D9-7437F3432304', 'B50CA50B-C601-4A13-B07E-2C63862D71B4', '337C3688-1339-4E1A-A08A-B54B23566E49', ...\n  Demographics: '<StoreSurvey xmlns=\"http://schemas.microsoft.com/s'\n\nTransactionHistory: 10000 rows\n  TransactionType: 'W', 'S', 'P'\n  TransactionDate: '2013-07-31 00:00:00.0', '2013-08-01 00:00:00.0', '2013-08-02 00:00:00.0', ...\n  Quantity: '2', '1', '3', ...\n\nTransactionHistoryArchive: 10000 rows\n  TransactionType: 'P', 'S', 'W'\n  TransactionDate: '2011-04-16 00:00:00.0', '2011-04-30 00:00:00.0', '2011-05-31 00:00:00.0', ...\n  Quantity: '4', '3', '550', ...\n\nUnitMeasure: 38 rows\n  Name: 'Boxes', 'Bottle', 'Celsius', ...\n  UnitMeasureCode: 'BOX', 'BTL', 'C', ...\n  ModifiedDate: '2008-04-30 00:00:00.0'\n\nVendor: 104 rows\n  Name: 'Australia Bike Retailer', 'Allenson Cycles', 'Advanced Bicycles', ...\n  PreferredVendorStatus: '1', '0'\n  AccountNumber: 'AUSTRALI0001', 'ALLENSON0001', 'ADVANCED0001', ...\n\nWorkOrder: 10000 rows\n  OrderQty: '8', '15', '9', ...\n  StockedQty: '8', '15', '9', ...\n  ScrappedQty: '0', '1', '3', ...\n\nWorkOrderRouting: 10000 rows\n  ScheduledStartDate: '2011-06-03 00:00:00.0', '2011-06-04 00:00:00.0', '2011-06-05 00:00:00.0', ...\n  ScheduledEndDate: '2011-06-14 00:00:00.0', '2011-06-15 00:00:00.0', '2011-06-16 00:00:00.0', ...\n  ActualStartDate: '2011-06-03 00:00:00.0', '2011-06-09 00:00:00.0', '2011-06-05 00:00:00.0', ...",
+    "stateUrl": "https://bird-bench.github.io/#works_cycles",
+    "tableStats": {
+      "Address": {
+        "rows": 10000,
+        "sample_values": {
+          "AddressID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "AddressLine1": [
+            "1970 Napa Ct.",
+            "9833 Mt. Dias Blv.",
+            "7484 Roundtree Drive",
+            "9539 Glenside Dr",
+            "1226 Shoe St.",
+            "1399 Firestone Drive",
+            "5672 Hale Dr.",
+            "6387 Scenic Avenue"
+          ],
+          "AddressLine2": [
+            "Unit E",
+            "# 14",
+            "# 207",
+            "# 2",
+            "# 4",
+            "Unit A",
+            "# 495",
+            "# 141"
+          ],
+          "City": [
+            "Bothell",
+            "Portland",
+            "Seattle",
+            "Duluth",
+            "Dallas",
+            "San Francisco",
+            "Nevada",
+            "Phoenix"
+          ],
+          "StateProvinceID": [
+            "79",
+            "58",
+            "36",
+            "73",
+            "9",
+            "74",
+            "6",
+            "72"
+          ],
+          "PostalCode": [
+            "98011",
+            "97205",
+            "98104",
+            "55802",
+            "75201",
+            "94109",
+            "84407",
+            "85004"
+          ],
+          "SpatialLocation": [
+            "0x00000000010100000067A89189898A5EC0AE8BFC28BCE447",
+            "0x000000000101000000BC262A0A03905EC0D6FA851AE6D747",
+            "0x000000000101000000DA930C7893915EC018E304C4ADE147",
+            "0x00000000010100000011A5C28A7C955EC0813A0D5F9FDE47",
+            "0x000000000101000000C460EA3FD8855EC061C64D8ABBD947",
+            "0x0000000001010000002F12A5F80C975EC0E0B4E50458DA47",
+            "0x00000000010100000011A5C28A7C955EC018E304C4ADE147",
+            "0x000000000101000000E248962FD5975EC00029A5D93BDF47"
+          ],
+          "rowguid": [
+            "9AADCB0D-36CF-483F-84D8-585C2D4EC6E9",
+            "32A54B9E-E034-4BFB-B573-A71CDE60D8C0",
+            "4C506923-6D1B-452C-A07C-BAA6F5B142A4",
+            "E5946C78-4BCC-477F-9FA1-CC09DE16A880",
+            "FBAFF937-4A97-4AF0-81FD-B849900E9BB0",
+            "FEBF8191-9804-44C8-877A-33FDE94F0075",
+            "0175A174-6C34-4D41-B3C1-4419CD6A0446",
+            "3715E813-4DCA-49E0-8F1C-31857D21F269"
+          ],
+          "ModifiedDate": [
+            "2007-12-04 00:00:00.0",
+            "2008-11-30 00:00:00.0",
+            "2013-03-07 00:00:00.0",
+            "2009-02-03 00:00:00.0",
+            "2008-12-19 00:00:00.0",
+            "2009-02-13 00:00:00.0",
+            "2009-12-11 00:00:00.0",
+            "2008-12-17 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "AddressType": {
+        "rows": 6,
+        "sample_values": {
+          "AddressTypeID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "Name": [
+            "Billing",
+            "Home",
+            "Main Office",
+            "Primary",
+            "Shipping",
+            "Archive"
+          ],
+          "rowguid": [
+            "B84F78B1-4EFE-4A0E-8CB7-70E9F112F886",
+            "41BC2FF6-F0FC-475F-8EB9-CEC0805AA0F2",
+            "8EEEC28C-07A2-4FB9-AD0A-42D4A0BBC575",
+            "24CB3088-4345-47C4-86C5-17B535133D1E",
+            "B29DA3F8-19A3-47DA-9DAA-15C84F4A83A5",
+            "A67F238A-5BA2-444B-966C-0467ED9C427F"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "BillOfMaterials": {
+        "rows": 2679,
+        "sample_values": {
+          "BillOfMaterialsID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductAssemblyID": [
+            "807",
+            "782",
+            "950",
+            "984",
+            "775",
+            "822",
+            "944",
+            "748"
+          ],
+          "ComponentID": [
+            "1",
+            "995",
+            "989",
+            "785",
+            "775",
+            "322",
+            "949",
+            "951"
+          ],
+          "StartDate": [
+            "2010-03-04 00:00:00.0",
+            "2010-05-04 00:00:00.0",
+            "2010-03-18 00:00:00.0",
+            "2010-05-18 00:00:00.0",
+            "2010-05-06 00:00:00.0",
+            "2010-05-26 00:00:00.0",
+            "2010-07-26 00:00:00.0",
+            "2010-08-09 00:00:00.0"
+          ],
+          "EndDate": [
+            "2010-05-03 00:00:00.0",
+            "2010-05-17 00:00:00.0",
+            "2010-07-25 00:00:00.0",
+            "2010-08-08 00:00:00.0",
+            "2010-08-18 00:00:00.0",
+            "2010-09-06 00:00:00.0",
+            "2010-10-04 00:00:00.0",
+            "2010-11-14 00:00:00.0"
+          ],
+          "UnitMeasureCode": [
+            "EA",
+            "IN",
+            "OZ"
+          ],
+          "BOMLevel": [
+            "2",
+            "1",
+            "0",
+            "3",
+            "4"
+          ],
+          "PerAssemblyQty": [
+            "1.0",
+            "3.0",
+            "2.0",
+            "40.0",
+            "36.0",
+            "8.0",
+            "4.0",
+            "37.0"
+          ],
+          "ModifiedDate": [
+            "2010-02-18 00:00:00.0",
+            "2010-04-20 00:00:00.0",
+            "2010-05-03 00:00:00.0",
+            "2010-03-04 00:00:00.0",
+            "2010-05-04 00:00:00.0",
+            "2010-05-17 00:00:00.0",
+            "2010-04-22 00:00:00.0",
+            "2010-05-12 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "BusinessEntity": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "rowguid": [
+            "0C7D8F81-D7B1-4CF0-9C0A-4CD8B6B50087",
+            "6648747F-7843-4002-B317-65389684C398",
+            "568204DA-93D7-42F4-8A7A-4446A144277D",
+            "0EFF57B9-4F4F-41A6-8867-658C199A5FC0",
+            "B82F88D1-FF79-4FD9-8C54-9D24C140F647",
+            "1B3D077A-1941-4D6E-8328-F7DC03595565",
+            "C1898370-A36F-43A2-987C-0BF24FE3FB82",
+            "2B50ABB8-ABAB-412B-A4D0-4FD5EBEB5CBE"
+          ],
+          "ModifiedDate": [
+            "2017-12-13 13:20:24.0",
+            "2017-12-13 13:20:25.0",
+            "2017-12-13 13:20:26.0",
+            "2017-12-13 13:20:27.0",
+            "2017-12-13 13:20:28.0",
+            "2017-12-13 13:20:29.0",
+            "2017-12-13 13:20:30.0",
+            "2017-12-13 13:20:31.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "BusinessEntityAddress": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "AddressID": [
+            "249",
+            "293",
+            "224",
+            "11387",
+            "190",
+            "286",
+            "49",
+            "230"
+          ],
+          "AddressTypeID": [
+            "2",
+            "3",
+            "5"
+          ],
+          "rowguid": [
+            "3A5D0A00-6739-4DFE-A8F7-844CD9DEE3DF",
+            "84AE7057-EDF4-4C51-8B8D-3AEAEFBFB4A1",
+            "3C915B31-7C05-4A05-9859-0DF663677240",
+            "3DC70CC4-3AE8-424F-8B1F-481C5478E941",
+            "C0ED2F68-937B-4594-9459-581AC53C98E3",
+            "4CA1686A-A7DF-4BD8-9D7D-82A63210208A",
+            "1528E305-3E34-4DEA-BDD7-C7DDCDD11EF8",
+            "38F80F8F-5CA7-4D06-AEFA-CD930A0A7B3F"
+          ],
+          "ModifiedDate": [
+            "2014-09-12 11:15:06.0",
+            "2011-08-01 00:00:00.0",
+            "2013-07-31 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2012-07-31 00:00:00.0",
+            "2012-10-30 00:00:00.0",
+            "2011-07-01 00:00:00.0",
+            "2013-06-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "BusinessEntityContact": {
+        "rows": 909,
+        "sample_values": {
+          "BusinessEntityID": [
+            "292",
+            "294",
+            "296",
+            "298",
+            "300",
+            "302",
+            "304",
+            "306"
+          ],
+          "PersonID": [
+            "291",
+            "293",
+            "295",
+            "297",
+            "299",
+            "301",
+            "303",
+            "305"
+          ],
+          "ContactTypeID": [
+            "11",
+            "14",
+            "15",
+            "18",
+            "19",
+            "17",
+            "2"
+          ],
+          "rowguid": [
+            "7D4D2DBC-4A44-48F5-911D-A63ABAFD5120",
+            "3EA25B65-9579-4260-977D-D6F00D7D20EE",
+            "DADAC1FF-3351-4827-9AE0-95004885C193",
+            "B924F26F-6446-45D1-A92B-6F418374F075",
+            "5BA4E7BE-8D29-46A2-B68D-67B1615B124A",
+            "6CC8F248-8D96-4AFD-ADCC-61D93E8DE3B1",
+            "33B4DA81-4448-481F-BF7C-357EA4D23F21",
+            "70D35526-7C2F-470F-98CB-F9299A754F16"
+          ],
+          "ModifiedDate": [
+            "2017-12-13 13:21:02.0",
+            "2017-12-13 13:21:03.0",
+            "2017-12-13 13:21:04.0",
+            "2017-12-13 13:21:05.0",
+            "2017-12-13 13:21:06.0",
+            "2017-12-13 13:21:07.0",
+            "2017-12-13 13:21:08.0",
+            "2017-12-13 13:21:09.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ContactType": {
+        "rows": 20,
+        "sample_values": {
+          "ContactTypeID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Accounting Manager",
+            "Assistant Sales Agent",
+            "Assistant Sales Representative",
+            "Coordinator Foreign Markets",
+            "Export Administrator",
+            "International Marketing Manager",
+            "Marketing Assistant",
+            "Marketing Manager"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CountryRegion": {
+        "rows": 239,
+        "sample_values": {
+          "CountryRegionCode": [
+            "Cou",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM"
+          ],
+          "Name": [
+            "Name",
+            "Andorra",
+            "United Arab Emirates",
+            "Afghanistan",
+            "Antigua and Barbuda",
+            "Anguilla",
+            "Albania",
+            "Armenia"
+          ],
+          "ModifiedDate": [
+            "ModifiedDate",
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CountryRegionCurrency": {
+        "rows": 109,
+        "sample_values": {
+          "CountryRegionCode": [
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BB",
+            "BD",
+            "BE",
+            "BG"
+          ],
+          "CurrencyCode": [
+            "AED",
+            "ARS",
+            "ATS",
+            "EUR",
+            "AUD",
+            "BBD",
+            "BDT",
+            "BEF"
+          ],
+          "ModifiedDate": [
+            "2014-02-08 10:17:21.0",
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CreditCard": {
+        "rows": 10000,
+        "sample_values": {
+          "CreditCardID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CardType": [
+            "SuperiorCard",
+            "Distinguish",
+            "ColonialVoice",
+            "Vista"
+          ],
+          "CardNumber": [
+            "33332664695310",
+            "55552127249722",
+            "77778344838353",
+            "77774915718248",
+            "11114404600042",
+            "55557132036181",
+            "55553635401028",
+            "33336081193101"
+          ],
+          "ExpMonth": [
+            "11",
+            "8",
+            "7",
+            "4",
+            "9",
+            "6",
+            "2",
+            "10"
+          ],
+          "ExpYear": [
+            "2006",
+            "2005",
+            "2007",
+            "2008"
+          ],
+          "ModifiedDate": [
+            "2013-07-29 00:00:00.0",
+            "2013-12-05 00:00:00.0",
+            "2014-01-14 00:00:00.0",
+            "2013-05-20 00:00:00.0",
+            "2013-02-01 00:00:00.0",
+            "2014-04-10 00:00:00.0",
+            "2013-06-30 00:00:00.0",
+            "2013-09-23 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Culture": {
+        "rows": 8,
+        "sample_values": {
+          "CultureID": [
+            "ar",
+            "en",
+            "es",
+            "fr",
+            "he",
+            "th",
+            "zh-cht"
+          ],
+          "Name": [
+            "Invariant Language (Invariant Country)",
+            "Arabic",
+            "English",
+            "Spanish",
+            "French",
+            "Hebrew",
+            "Thai",
+            "Chinese"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Currency": {
+        "rows": 105,
+        "sample_values": {
+          "CurrencyCode": [
+            "AED",
+            "AFA",
+            "ALL",
+            "AMD",
+            "ANG",
+            "AOA",
+            "ARS",
+            "ATS"
+          ],
+          "Name": [
+            "Emirati Dirham",
+            "Afghani",
+            "Lek",
+            "Armenian Dram",
+            "Netherlands Antillian Guilder",
+            "Kwanza",
+            "Argentine Peso",
+            "Shilling"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "CurrencyRate": {
+        "rows": 10000,
+        "sample_values": {
+          "CurrencyRateID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CurrencyRateDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0"
+          ],
+          "FromCurrencyCode": [
+            "USD"
+          ],
+          "ToCurrencyCode": [
+            "ARS",
+            "AUD",
+            "BRL",
+            "CAD",
+            "CNY",
+            "DEM",
+            "EUR",
+            "FRF"
+          ],
+          "AverageRate": [
+            "1.0",
+            "1.5491",
+            "1.9379",
+            "1.4641",
+            "8.2781",
+            "1.8967",
+            "0.9697",
+            "6.3611"
+          ],
+          "EndOfDayRate": [
+            "1.0002",
+            "1.55",
+            "1.9419",
+            "1.4683",
+            "8.2784",
+            "1.8976",
+            "0.9703",
+            "6.3613"
+          ],
+          "ModifiedDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customer": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Department": {
+        "rows": 16,
+        "sample_values": {
+          "DepartmentID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Engineering",
+            "Tool Design",
+            "Sales",
+            "Marketing",
+            "Purchasing",
+            "Research and Development",
+            "Production",
+            "Production Control"
+          ],
+          "GroupName": [
+            "Research and Development",
+            "Sales and Marketing",
+            "Inventory Management",
+            "Manufacturing",
+            "Executive General and Administration",
+            "Quality Assurance"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Document": {
+        "rows": 8,
+        "sample_values": {
+          "DocumentNode": [
+            "/",
+            "/1/",
+            "/1/1/",
+            "/2/",
+            "/2/1/",
+            "/3/",
+            "/3/1/",
+            "/3/5/"
+          ],
+          "DocumentLevel": [
+            "0",
+            "1",
+            "2"
+          ],
+          "Title": [
+            "Documents",
+            "Overview",
+            "Introduction 1",
+            "Maintenance",
+            "Crank Arm and Tire Maintenance",
+            "Assembly",
+            "Front Reflector Bracket and Reflector Assembly 3",
+            "Training Wheels 2"
+          ],
+          "Owner": [
+            "217",
+            "219",
+            "220"
+          ],
+          "FolderFlag": [
+            "1",
+            "0"
+          ],
+          "FileName": [
+            "Documents",
+            "Overview",
+            "Introduction 1.doc",
+            "Maintenance",
+            "Crank Arm and Tire Maintenance.doc",
+            "Assembly",
+            "Front Reflector Bracket and Reflector Assembly 3.d",
+            "Training Wheels 2.doc"
+          ],
+          "FileExtension": [
+            ".doc"
+          ],
+          "Revision": [
+            "0",
+            "4",
+            "3",
+            "1"
+          ],
+          "ChangeNumber": [
+            "0",
+            "28",
+            "25",
+            "288"
+          ],
+          "Status": [
+            "2",
+            "1",
+            "3"
+          ],
+          "Document": [
+            "0xD0CF11E0A1B11AE100000000000000000000000000000000"
+          ],
+          "rowguid": [
+            "27CF33AF-C338-4842-966C-75CA11AAA6A3",
+            "26A266F1-1D23-40E2-AF48-6AB8D954FE37",
+            "48265174-8451-4967-973A-639C2276CFAF",
+            "5184D96A-EE8C-499A-9316-625496784DE6",
+            "D11B82B0-EB40-4A66-8193-15F765A61F05",
+            "F4F544AE-381A-4323-9A59-F5A629E21F46",
+            "82F61D73-0BF5-44FF-AB99-DD73AEE9B9CC",
+            "B706C1D6-FB99-40B5-844C-6EE54701BA0D"
+          ],
+          "ModifiedDate": [
+            "2017-12-13 13:58:03.0",
+            "2013-05-30 00:00:00.0",
+            "2017-12-13 13:58:04.0",
+            "2012-10-19 09:56:38.0",
+            "2012-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "EmailAddress": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "EmailAddressID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "EmailAddress": [
+            "ken0@adventure-works.com",
+            "terri0@adventure-works.com",
+            "roberto0@adventure-works.com",
+            "rob0@adventure-works.com",
+            "gail0@adventure-works.com",
+            "jossef0@adventure-works.com",
+            "dylan0@adventure-works.com",
+            "diane1@adventure-works.com"
+          ],
+          "rowguid": [
+            "8A1901E4-671B-431A-871C-EADB2942E9EE",
+            "B5FF9EFD-72A2-4F87-830B-F338FDD4D162",
+            "C8A51084-1C03-4C58-A8B3-55854AE7C499",
+            "17703ED1-0031-4B4A-AFD2-77487A556B3B",
+            "E76D2EA3-08E5-409C-BBE2-5DD1CDF89A3B",
+            "A9C4093A-4F4A-4CAD-BBB4-2C4E920BACCB",
+            "70429DE4-C3BF-4F19-A00A-E976C8017FB3",
+            "37F02A87-058D-49F8-A20D-965738B0A71F"
+          ],
+          "ModifiedDate": [
+            "2009-01-07 00:00:00.0",
+            "2008-01-24 00:00:00.0",
+            "2007-11-04 00:00:00.0",
+            "2007-11-28 00:00:00.0",
+            "2007-12-30 00:00:00.0",
+            "2013-12-16 00:00:00.0",
+            "2009-02-01 00:00:00.0",
+            "2008-12-22 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Employee": {
+        "rows": 290,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "NationalIDNumber": [
+            "295847284",
+            "245797967",
+            "509647174",
+            "112457891",
+            "695256908",
+            "998320692",
+            "134969118",
+            "811994146"
+          ],
+          "LoginID": [
+            "adventure-works\\ken0",
+            "adventure-works\\terri0",
+            "adventure-works\\roberto0",
+            "adventure-works\\rob0",
+            "adventure-works\\gail0",
+            "adventure-works\\jossef0",
+            "adventure-works\\dylan0",
+            "adventure-works\\diane1"
+          ],
+          "OrganizationNode": [
+            "/1/",
+            "/1/1/",
+            "/1/1/1/",
+            "/1/1/2/",
+            "/1/1/3/",
+            "/1/1/4/",
+            "/1/1/4/1/",
+            "/1/1/4/2/"
+          ],
+          "OrganizationLevel": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "JobTitle": [
+            "Chief Executive Officer",
+            "Vice President of Engineering",
+            "Engineering Manager",
+            "Senior Tool Designer",
+            "Design Engineer",
+            "Research and Development Manager",
+            "Research and Development Engineer",
+            "Tool Designer"
+          ],
+          "BirthDate": [
+            "1969-01-29",
+            "1971-08-01",
+            "1974-11-12",
+            "1974-12-23",
+            "1952-09-27",
+            "1959-03-11",
+            "1987-02-24",
+            "1986-06-05"
+          ],
+          "MaritalStatus": [
+            "S",
+            "M"
+          ],
+          "Gender": [
+            "M",
+            "F"
+          ],
+          "HireDate": [
+            "2009-01-14",
+            "2008-01-31",
+            "2007-11-11",
+            "2007-12-05",
+            "2008-01-06",
+            "2008-01-24",
+            "2009-02-08",
+            "2008-12-29"
+          ],
+          "SalariedFlag": [
+            "1",
+            "0"
+          ],
+          "VacationHours": [
+            "99",
+            "1",
+            "2",
+            "48",
+            "5",
+            "6",
+            "61",
+            "62"
+          ],
+          "SickLeaveHours": [
+            "69",
+            "20",
+            "21",
+            "80",
+            "22",
+            "23",
+            "50",
+            "51"
+          ],
+          "CurrentFlag": [
+            "1"
+          ],
+          "rowguid": [
+            "F01251E5-96A3-448D-981E-0F99D789110D",
+            "45E8F437-670D-4409-93CB-F9424A40D6EE",
+            "9BBBFB2C-EFBB-4217-9AB7-F97689328841",
+            "59747955-87B8-443F-8ED4-F8AD3AFDF3A9",
+            "EC84AE09-F9B8-4A15-B4A9-6CCBAB919B08",
+            "E39056F1-9CD5-478D-8945-14ACA7FBDCDD",
+            "4F46DECA-EF01-41FD-9829-0ADAB368E431",
+            "31112635-663B-4018-B4A2-A685C0BF48A4"
+          ],
+          "ModifiedDate": [
+            "2014-06-30 00:00:00.0",
+            "2014-12-26 09:17:08.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "EmployeeDepartmentHistory": {
+        "rows": 296,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "DepartmentID": [
+            "16",
+            "1",
+            "2",
+            "6",
+            "5",
+            "4",
+            "7",
+            "8"
+          ],
+          "ShiftID": [
+            "1",
+            "3",
+            "2"
+          ],
+          "StartDate": [
+            "2009-01-14",
+            "2008-01-31",
+            "2007-11-11",
+            "2007-12-05",
+            "2010-05-31",
+            "2008-01-06",
+            "2008-01-24",
+            "2009-02-08"
+          ],
+          "EndDate": [
+            "2010-05-30",
+            "2009-07-14",
+            "2011-08-31",
+            "2013-11-13",
+            "2011-07-30",
+            "2012-07-14"
+          ],
+          "ModifiedDate": [
+            "2009-01-13 00:00:00.0",
+            "2008-01-30 00:00:00.0",
+            "2007-11-10 00:00:00.0",
+            "2010-05-28 00:00:00.0",
+            "2010-05-30 00:00:00.0",
+            "2008-01-05 00:00:00.0",
+            "2008-01-23 00:00:00.0",
+            "2009-02-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "EmployeePayHistory": {
+        "rows": 316,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "RateChangeDate": [
+            "2009-01-14 00:00:00.0",
+            "2008-01-31 00:00:00.0",
+            "2007-11-11 00:00:00.0",
+            "2007-12-05 00:00:00.0",
+            "2010-05-31 00:00:00.0",
+            "2011-12-15 00:00:00.0",
+            "2008-01-06 00:00:00.0",
+            "2008-01-24 00:00:00.0"
+          ],
+          "Rate": [
+            "125.5",
+            "63.4615",
+            "43.2692",
+            "8.62",
+            "23.72",
+            "29.8462",
+            "32.6923",
+            "50.4808"
+          ],
+          "PayFrequency": [
+            "2",
+            "1"
+          ],
+          "ModifiedDate": [
+            "2014-06-30 00:00:00.0",
+            "2007-11-21 00:00:00.0",
+            "2010-05-16 00:00:00.0",
+            "2011-12-01 00:00:00.0",
+            "2007-12-06 00:00:00.0",
+            "2009-07-01 00:00:00.0",
+            "2012-04-16 00:00:00.0",
+            "2008-11-18 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "JobCandidate": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "Location": {
+        "rows": 14,
+        "sample_values": {
+          "LocationID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "Name": [
+            "Tool Crib",
+            "Sheet Metal Racks",
+            "Paint Shop",
+            "Paint Storage",
+            "Metal Storage",
+            "Miscellaneous Storage",
+            "Finished Goods Storage",
+            "Frame Forming"
+          ],
+          "CostRate": [
+            "0.0",
+            "22.5",
+            "25.0",
+            "14.5",
+            "15.75",
+            "18.0",
+            "12.25"
+          ],
+          "Availability": [
+            "0.0",
+            "96.0",
+            "108.0",
+            "120.0",
+            "80.0"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Password": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "PasswordHash": [
+            "pbFwXWE99vobT6g+vPWFy93NtUU/orrIWafF01hccfM=",
+            "bawRVNrZQYQ05qF05Gz6VLilnviZmrqBReTTAGAudm0=",
+            "8BUXrZfDqO1IyHCWOYzYmqN1IhTUn3CJMpdx/UCQ3iY=",
+            "SjLXpiarHSlz+6AG+H+4QpB/IPRzras/+9q/5Wr7tf8=",
+            "8FYdAiY6gWuBsgjCFdg0UibtsqOcWHf9TyaHIP7+paA=",
+            "u5kbN5n84NRE1h/a+ktdRrXucjgrmfF6wZC4g82rjHM=",
+            "zSqerln8T8eq3nYHC4Lx4vMuxZaxkDylVwWnP2ZT6QA=",
+            "s+FUWADIZzXBKpcbxe4OwL2uiJmjLogJNYXXHvc1X/k="
+          ],
+          "PasswordSalt": [
+            "bE3XiWw=",
+            "EjJaC3U=",
+            "wbPZqMw=",
+            "PwSunQU=",
+            "qYhZRiM=",
+            "a9GiLUA=",
+            "13mu8BA=",
+            "FlCpzTU="
+          ],
+          "rowguid": [
+            "329EACBE-C883-4F48-B8B6-17AA4627EFFF",
+            "A4C82398-7466-4FE6-B9EE-CEC34D116F68",
+            "AC3F4536-BB2E-41C5-B70D-454BE460C1BD",
+            "B3FA4C24-2E96-477C-A923-0CB0F6FA5C80",
+            "C4D13BCF-0209-44C7-AC67-6F817FDD7F16",
+            "BBE788B9-8D6D-4799-87A7-7B85B6BD67DC",
+            "AFD3A20A-787B-4069-92DB-AEE666C02847",
+            "4FE51B60-130E-4209-9E67-28DC4D91446C"
+          ],
+          "ModifiedDate": [
+            "2009-01-07 00:00:00.0",
+            "2008-01-24 00:00:00.0",
+            "2007-11-04 00:00:00.0",
+            "2007-11-28 00:00:00.0",
+            "2007-12-30 00:00:00.0",
+            "2013-12-16 00:00:00.0",
+            "2009-02-01 00:00:00.0",
+            "2008-12-22 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Person": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "PersonType": [
+            "EM",
+            "SP",
+            "SC",
+            "VC",
+            "IN",
+            "GC"
+          ],
+          "NameStyle": [
+            "0"
+          ],
+          "Title": [
+            "Ms.",
+            "Mr.",
+            "Sr.",
+            "Sra."
+          ],
+          "FirstName": [
+            "Ken",
+            "Terri",
+            "Roberto",
+            "Rob",
+            "Gail",
+            "Jossef",
+            "Dylan",
+            "Diane"
+          ],
+          "MiddleName": [
+            "J",
+            "Lee",
+            "A",
+            "H",
+            "L",
+            "N",
+            "V",
+            "B"
+          ],
+          "LastName": [
+            "Sánchez",
+            "Duffy",
+            "Tamburello",
+            "Walters",
+            "Erickson",
+            "Goldberg",
+            "Miller",
+            "Margheim"
+          ],
+          "Suffix": [
+            "III",
+            "Jr.",
+            "II",
+            "IV",
+            "Sr.",
+            "PhD"
+          ],
+          "EmailPromotion": [
+            "0",
+            "1",
+            "2"
+          ],
+          "AdditionalContactInfo": [
+            "<AdditionalContactInfo xmlns=\"http://schemas.micro"
+          ],
+          "Demographics": [
+            "<IndividualSurvey xmlns=\"http://schemas.microsoft."
+          ],
+          "rowguid": [
+            "92C4279F-1207-48A3-8448-4636514EB7E2",
+            "D8763459-8AA8-47CC-AFF7-C9079AF79033",
+            "E1A2555E-0828-434B-A33B-6F38136A37DE",
+            "F2D7CE06-38B3-4357-805B-F4B6B71C01FF",
+            "F3A3F6B4-AE3B-430C-A754-9F2231BA6FEF",
+            "0DEA28FD-EFFE-482A-AFD3-B7E8F199D56F",
+            "C45E8AB8-01BE-4B76-B215-820C8368181A",
+            "A948E590-4A56-45A9-BC9A-160A1CC9D990"
+          ],
+          "ModifiedDate": [
+            "2009-01-07 00:00:00.0",
+            "2008-01-24 00:00:00.0",
+            "2007-11-04 00:00:00.0",
+            "2007-11-28 00:00:00.0",
+            "2007-12-30 00:00:00.0",
+            "2013-12-16 00:00:00.0",
+            "2009-02-01 00:00:00.0",
+            "2008-12-22 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PersonCreditCard": {
+        "rows": 10000,
+        "sample_values": {
+          "BusinessEntityID": [
+            "293",
+            "295",
+            "297",
+            "299",
+            "301",
+            "303",
+            "305",
+            "307"
+          ],
+          "CreditCardID": [
+            "17038",
+            "15369",
+            "8010",
+            "5316",
+            "6653",
+            "9010",
+            "8937",
+            "16124"
+          ],
+          "ModifiedDate": [
+            "2013-07-31 00:00:00.0",
+            "2011-08-01 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2012-07-31 00:00:00.0",
+            "2012-10-30 00:00:00.0",
+            "2011-07-01 00:00:00.0",
+            "2013-06-30 00:00:00.0",
+            "2012-05-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PhoneNumberType": {
+        "rows": 3,
+        "sample_values": {
+          "PhoneNumberTypeID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Name": [
+            "Cell",
+            "Home",
+            "Work"
+          ],
+          "ModifiedDate": [
+            "2017-12-13 13:19:22.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Product": {
+        "rows": 504,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "316",
+            "317",
+            "318",
+            "319"
+          ],
+          "Name": [
+            "Adjustable Race",
+            "Bearing Ball",
+            "BB Ball Bearing",
+            "Headset Ball Bearings",
+            "Blade",
+            "LL Crankarm",
+            "ML Crankarm",
+            "HL Crankarm"
+          ],
+          "ProductNumber": [
+            "AR-5381",
+            "BA-8327",
+            "BE-2349",
+            "BE-2908",
+            "BL-2036",
+            "CA-5965",
+            "CA-6738",
+            "CA-7457"
+          ],
+          "MakeFlag": [
+            "0",
+            "1"
+          ],
+          "FinishedGoodsFlag": [
+            "0",
+            "1"
+          ],
+          "Color": [
+            "Black",
+            "Silver",
+            "Red",
+            "White",
+            "Blue",
+            "Multi",
+            "Yellow",
+            "Grey"
+          ],
+          "SafetyStockLevel": [
+            "1000",
+            "800",
+            "500",
+            "60",
+            "4",
+            "100"
+          ],
+          "ReorderPoint": [
+            "750",
+            "600",
+            "375",
+            "45",
+            "3",
+            "75"
+          ],
+          "StandardCost": [
+            "0.0",
+            "98.77",
+            "108.99",
+            "145.87",
+            "1059.31",
+            "13.0863",
+            "3.3963",
+            "6.9223"
+          ],
+          "ListPrice": [
+            "0.0",
+            "133.34",
+            "147.14",
+            "196.92",
+            "1431.5",
+            "34.99",
+            "9.5",
+            "8.99"
+          ],
+          "Size": [
+            "58",
+            "M",
+            "L",
+            "S",
+            "XL",
+            "62",
+            "44",
+            "48"
+          ],
+          "SizeUnitMeasureCode": [
+            "CM"
+          ],
+          "WeightUnitMeasureCode": [
+            "G",
+            "LB"
+          ],
+          "Weight": [
+            "435.0",
+            "450.0",
+            "400.0",
+            "445.0",
+            "460.0",
+            "2.24",
+            "2.3",
+            "2.12"
+          ],
+          "DaysToManufacture": [
+            "0",
+            "1",
+            "2",
+            "4"
+          ],
+          "ProductLine": [
+            "R",
+            "S",
+            "M",
+            "T"
+          ],
+          "Class": [
+            "L",
+            "M",
+            "H"
+          ],
+          "Style": [
+            "U",
+            "W",
+            "M"
+          ],
+          "ProductSubcategoryID": [
+            "14",
+            "31",
+            "23",
+            "19",
+            "21",
+            "12",
+            "2",
+            "1"
+          ],
+          "ProductModelID": [
+            "6",
+            "33",
+            "18",
+            "2",
+            "11",
+            "9",
+            "16",
+            "5"
+          ],
+          "SellStartDate": [
+            "2008-04-30 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2013-05-30 00:00:00.0"
+          ],
+          "SellEndDate": [
+            "2012-05-29 00:00:00.0",
+            "2013-05-29 00:00:00.0"
+          ],
+          "rowguid": [
+            "694215B7-08F7-4C0D-ACB1-D734BA44C0C8",
+            "58AE3C20-4F3A-4749-A7D4-D568806CC537",
+            "9C21AED2-5BFA-4F18-BCB8-F11638DC2E4E",
+            "ECFED6CB-51FF-49B5-B06C-7D8AC834DB8B",
+            "E73E9750-603B-4131-89F5-3DD15ED5FF80",
+            "3C9D10B7-A6B2-4774-9963-C19DCEE72FEA",
+            "EABB9A92-FA07-4EAB-8955-F0517B4A4CA7",
+            "7D3FD384-4F29-484B-86FA-4206E276FE58"
+          ],
+          "ModifiedDate": [
+            "2014-02-08 10:01:36.0",
+            "2014-02-08 10:03:55.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductCategory": {
+        "rows": 4,
+        "sample_values": {
+          "ProductCategoryID": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Name": [
+            "Bikes",
+            "Components",
+            "Clothing",
+            "Accessories"
+          ],
+          "rowguid": [
+            "CFBDA25C-DF71-47A7-B81B-64EE161AA37C",
+            "C657828D-D808-4ABA-91A3-AF2CE02300E9",
+            "10A7C342-CA82-48D4-8A38-46A2EB089B74",
+            "2BE3BE36-D9A2-4EEE-B593-ED895D97C2A6"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductCostHistory": {
+        "rows": 395,
+        "sample_values": {
+          "ProductID": [
+            "707",
+            "708",
+            "709",
+            "710",
+            "711",
+            "712",
+            "713",
+            "714"
+          ],
+          "StartDate": [
+            "2011-05-31 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2013-05-30 00:00:00.0"
+          ],
+          "EndDate": [
+            "2012-05-29 00:00:00.0",
+            "2013-05-29 00:00:00.0"
+          ],
+          "StandardCost": [
+            "12.0278",
+            "13.8782",
+            "13.0863",
+            "3.3963",
+            "5.7052",
+            "5.2297",
+            "6.9223",
+            "31.7244"
+          ],
+          "ModifiedDate": [
+            "2012-05-29 00:00:00.0",
+            "2013-05-29 00:00:00.0",
+            "2013-05-16 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductDescription": {
+        "rows": 762,
+        "sample_values": {
+          "ProductDescriptionID": [
+            "3",
+            "4",
+            "5",
+            "8",
+            "64",
+            "88",
+            "128",
+            "168"
+          ],
+          "Description": [
+            "Chromoly steel.",
+            "Aluminum alloy cups; large diameter spindle.",
+            "Aluminum alloy cups and a hollow axle.",
+            "Suitable for any type of riding, on or off-road. F",
+            "This bike delivers a high-level of performance on ",
+            "For true trail addicts. An extremely durable bike ",
+            "Serious back-country riding. Perfect for all level",
+            "Top-of-the-line competition mountain bike. Perform"
+          ],
+          "rowguid": [
+            "301EED3A-1A82-4855-99CB-2AFE8290D641",
+            "DFEBA528-DA11-4650-9D86-CAFDA7294EB0",
+            "F7178DA7-1A7E-4997-8470-06737181305E",
+            "8E6746E5-AD97-46E2-BD24-FCEA075C3B52",
+            "7B1C4E90-85E2-4792-B47B-E0C424E2EC94",
+            "4C1AD253-357E-4A98-B02E-02180AA406F6",
+            "130709E6-8512-49B9-9F62-1F5C99152056",
+            "DB979DA6-4CC8-4171-9ECF-65003FF8178A"
+          ],
+          "ModifiedDate": [
+            "2013-04-30 00:00:00.0",
+            "2014-02-08 10:32:17.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductDocument": {
+        "rows": 32,
+        "sample_values": {
+          "ProductID": [
+            "317",
+            "318",
+            "319",
+            "506",
+            "514",
+            "515",
+            "516",
+            "517"
+          ],
+          "DocumentNode": [
+            "/2/1/",
+            "/3/1/",
+            "/3/2/",
+            "/3/4/",
+            "/3/3/",
+            "/1/1/"
+          ],
+          "ModifiedDate": [
+            "2013-12-29 13:51:58.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductInventory": {
+        "rows": 1069,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "316",
+            "317",
+            "318",
+            "319"
+          ],
+          "LocationID": [
+            "1",
+            "6",
+            "50",
+            "5",
+            "10",
+            "60",
+            "20",
+            "2"
+          ],
+          "Shelf": [
+            "A",
+            "B",
+            "C",
+            "H",
+            "G",
+            "K",
+            "F",
+            "D"
+          ],
+          "Bin": [
+            "1",
+            "5",
+            "2",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11"
+          ],
+          "Quantity": [
+            "408",
+            "324",
+            "353",
+            "427",
+            "318",
+            "364",
+            "585",
+            "443"
+          ],
+          "rowguid": [
+            "47A24246-6C43-48EB-968F-025738A8A410",
+            "D4544D7D-CAF5-46B3-AB22-5718DCC26B5E",
+            "BFF7DC60-96A8-43CA-81A7-D6D2ED3000A8",
+            "F407C07A-CA14-4684-A02C-608BD00C2233",
+            "CA1FF2F4-48FB-4960-8D92-3940B633E4C1",
+            "D38CFBEE-6347-47B1-B033-0E278CCA03E2",
+            "E18A519B-FB5E-4051-874C-58CD58436C95",
+            "3C860C96-15FF-4DF4-91D7-B237FF64480F"
+          ],
+          "ModifiedDate": [
+            "2014-08-08 00:00:00.0",
+            "2008-03-31 00:00:00.0",
+            "2014-08-09 00:00:00.0",
+            "2014-08-12 00:00:00.0",
+            "2014-08-10 00:00:00.0",
+            "2014-08-05 00:00:00.0",
+            "2014-07-28 00:00:00.0",
+            "2014-08-03 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductListPriceHistory": {
+        "rows": 395,
+        "sample_values": {
+          "ProductID": [
+            "707",
+            "708",
+            "709",
+            "710",
+            "711",
+            "712",
+            "713",
+            "714"
+          ],
+          "StartDate": [
+            "2011-05-31 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2013-05-30 00:00:00.0"
+          ],
+          "EndDate": [
+            "2012-05-29 00:00:00.0",
+            "2013-05-29 00:00:00.0"
+          ],
+          "ListPrice": [
+            "33.6442",
+            "34.99",
+            "9.5",
+            "8.6442",
+            "8.99",
+            "48.0673",
+            "49.99",
+            "1263.4598"
+          ],
+          "ModifiedDate": [
+            "2012-05-29 00:00:00.0",
+            "2013-05-29 00:00:00.0",
+            "2013-05-09 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductModel": {
+        "rows": 113,
+        "sample_values": {
+          "ProductModelID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "Name": [
+            "Classic Vest",
+            "Cycling Cap",
+            "Full-Finger Gloves",
+            "Half-Finger Gloves",
+            "HL Mountain Frame",
+            "HL Road Frame",
+            "LL Mountain Frame",
+            "LL Road Frame"
+          ],
+          "rowguid": [
+            "29321D47-1E4C-4AAC-887C-19634328C25E",
+            "474FB654-3C96-4CB9-82DF-2152EEFFBDB0",
+            "A75483FE-3C47-4AA4-93CF-664B51192987",
+            "14B56F2A-D4AA-40A4-B9A2-984F165ED702",
+            "FDD5407B-C2DB-49D1-A86B-C13A2E3582A2",
+            "4D332ECC-48B3-4E04-B7E7-227F3AC2A7EC",
+            "65BF3F6D-BCF2-4DB6-8515-FC5C57423037",
+            "DDC67A2F-024A-4446-9B54-3C679BABA708"
+          ],
+          "ModifiedDate": [
+            "2013-04-30 00:00:00.0",
+            "2011-05-01 00:00:00.0",
+            "2012-04-30 00:00:00.0",
+            "2008-03-31 00:00:00.0",
+            "2012-10-19 09:56:38.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductModelProductDescriptionCulture": {
+        "rows": 762,
+        "sample_values": {
+          "ProductModelID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductDescriptionID": [
+            "1199",
+            "1467",
+            "1589",
+            "1712",
+            "1838",
+            "1965",
+            "1210",
+            "1476"
+          ],
+          "CultureID": [
+            "en",
+            "ar",
+            "fr",
+            "th",
+            "he",
+            "zh-cht"
+          ],
+          "ModifiedDate": [
+            "2013-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductPhoto": {
+        "rows": 100,
+        "sample_values": {
+          "ProductPhotoID": [
+            "69",
+            "70",
+            "72",
+            "73",
+            "76",
+            "77",
+            "78",
+            "79"
+          ],
+          "ThumbNailPhoto": [
+            "0x47494638396150003100F70000E3E3FCA6ACB3F5F6FE303D",
+            "0x47494638396150003100F70000E3E3FCEBECF3F5F6FE999B",
+            "0x47494638396150003100F70000F1F2FEE3E3FCA3ACB6EBEB",
+            "0x47494638396150003100F700004978A7E2E3F3FAFCFE3435",
+            "0x47494638396150003100F700007689B3B1D5A475777BECEB",
+            "0x47494638396150003100F70000B8D3C4E2E3F397A5A94559",
+            "0x47494638396150003100F700009A9CA3BEC2C79DA3ACF1F0",
+            "0x47494638396150003100F70000393B4685A8CEB4BCC50093"
+          ],
+          "ThumbnailPhotoFileName": [
+            "racer02_black_f_small.gif",
+            "racer02_black_small.gif",
+            "racer02_blue_f_small.gif",
+            "racer02_blue_small.gif",
+            "racer02_green_f_small.gif",
+            "racer02_green_small.gif",
+            "hotrodbike_black_small.gif",
+            "hotrodbike_blue_small.gif"
+          ],
+          "LargePhoto": [
+            "0x474946383961F0009500F70000D3D3FEE2E3FE86878ADBDC",
+            "0x474946383961F0009500F7000086878AECEDFED7D8E7D3D3",
+            "0x474946383961F0009500F700008EAFC785868991A5B2B5C7",
+            "0x474946383961F0009500F700008B99A9708FAEA5A7AA8CAE",
+            "0x474946383961F0009500F70000CACBF8D6E4EFA3D19EECED",
+            "0x474946383961F0009500F70000444549309407CACAF8D6E4",
+            "0x474946383961F0009500F70000F3F3FD5B626EB7C5CF6468",
+            "0x474946383961F0009500F70000F4F4F57783993538432B2E"
+          ],
+          "LargePhotoFileName": [
+            "racer02_black_f_large.gif",
+            "racer02_black_large.gif",
+            "racer02_blue_f_large.gif",
+            "racer02_blue_large.gif",
+            "racer02_green_f_large.gif",
+            "racer02_green_large.gif",
+            "hotrodbike_black_large.gif",
+            "hotrodbike_blue_large.gif"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0",
+            "2012-10-19 09:56:38.0",
+            "2012-04-30 00:00:00.0",
+            "2013-04-30 00:00:00.0",
+            "2011-05-01 00:00:00.0",
+            "2008-03-31 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductProductPhoto": {
+        "rows": 504,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "316",
+            "317",
+            "318",
+            "319"
+          ],
+          "ProductPhotoID": [
+            "1",
+            "160",
+            "162",
+            "143",
+            "139",
+            "126",
+            "111",
+            "118"
+          ],
+          "Primary": [
+            "1"
+          ],
+          "ModifiedDate": [
+            "2008-03-31 00:00:00.0",
+            "2011-05-01 00:00:00.0",
+            "2012-04-30 00:00:00.0",
+            "2013-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductReview": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "ProductSubcategory": {
+        "rows": 37,
+        "sample_values": {
+          "ProductSubcategoryID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductCategoryID": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "Name": [
+            "Mountain Bikes",
+            "Road Bikes",
+            "Touring Bikes",
+            "Handlebars",
+            "Bottom Brackets",
+            "Brakes",
+            "Chains",
+            "Cranksets"
+          ],
+          "rowguid": [
+            "2D364ADE-264A-433C-B092-4FCBF3804E01",
+            "000310C0-BCC8-42C4-B0C3-45AE611AF06B",
+            "02C5061D-ECDC-4274-B5F1-E91D76BC3F37",
+            "3EF2C725-7135-4C85-9AE6-AE9A3BDD9283",
+            "A9E54089-8A1E-4CF5-8646-E3801F685934",
+            "D43BA4A3-EF0D-426B-90EB-4BE4547DD30C",
+            "E93A7231-F16C-4B0F-8C41-C73FDEC62DA0",
+            "4F644521-422B-4F19-974A-E3DF6102567E"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ProductVendor": {
+        "rows": 460,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "4",
+            "317",
+            "318",
+            "319",
+            "320",
+            "321"
+          ],
+          "BusinessEntityID": [
+            "1580",
+            "1688",
+            "1650",
+            "1578",
+            "1678",
+            "1556",
+            "1514",
+            "1602"
+          ],
+          "AverageLeadTime": [
+            "17",
+            "19",
+            "15",
+            "18",
+            "16",
+            "30",
+            "12",
+            "45"
+          ],
+          "StandardPrice": [
+            "47.87",
+            "39.92",
+            "54.31",
+            "28.17",
+            "25.77",
+            "34.38",
+            "31.98",
+            "44.21"
+          ],
+          "LastReceiptCost": [
+            "50.2635",
+            "41.916",
+            "57.0255",
+            "29.5785",
+            "27.0585",
+            "36.099",
+            "33.579",
+            "46.4205"
+          ],
+          "LastReceiptDate": [
+            "2011-08-29 00:00:00.0",
+            "2011-08-25 00:00:00.0",
+            "2011-08-19 00:00:00.0",
+            "2011-08-24 00:00:00.0",
+            "2011-08-26 00:00:00.0",
+            "2011-08-28 00:00:00.0",
+            "2011-08-22 00:00:00.0",
+            "2011-08-07 00:00:00.0"
+          ],
+          "MinOrderQty": [
+            "1",
+            "100",
+            "20",
+            "500",
+            "4",
+            "50",
+            "75",
+            "150"
+          ],
+          "MaxOrderQty": [
+            "5",
+            "1000",
+            "100",
+            "2000",
+            "200",
+            "500",
+            "750",
+            "600"
+          ],
+          "OnOrderQty": [
+            "3",
+            "300",
+            "60",
+            "25",
+            "150",
+            "630",
+            "600",
+            "350"
+          ],
+          "UnitMeasureCode": [
+            "CS",
+            "CTN",
+            "EA",
+            "CAN",
+            "DZ",
+            "PAK",
+            "GAL"
+          ],
+          "ModifiedDate": [
+            "2011-08-29 00:00:00.0",
+            "2011-08-25 00:00:00.0",
+            "2011-08-19 00:00:00.0",
+            "2011-08-24 00:00:00.0",
+            "2011-08-26 00:00:00.0",
+            "2011-08-28 00:00:00.0",
+            "2011-08-22 00:00:00.0",
+            "2011-08-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PurchaseOrderDetail": {
+        "rows": 8845,
+        "sample_values": {
+          "PurchaseOrderID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "PurchaseOrderDetailID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "DueDate": [
+            "2011-04-30 00:00:00.0",
+            "2011-05-14 00:00:00.0",
+            "2011-12-28 00:00:00.0",
+            "2011-12-29 00:00:00.0",
+            "2012-01-22 00:00:00.0",
+            "2012-01-30 00:00:00.0",
+            "2012-02-03 00:00:00.0",
+            "2012-02-07 00:00:00.0"
+          ],
+          "OrderQty": [
+            "4",
+            "3",
+            "550",
+            "60",
+            "1250",
+            "25",
+            "300",
+            "150"
+          ],
+          "ProductID": [
+            "1",
+            "359",
+            "360",
+            "530",
+            "4",
+            "512",
+            "513",
+            "317"
+          ],
+          "UnitPrice": [
+            "50.0",
+            "45.0",
+            "46.0",
+            "16.0",
+            "57.0",
+            "37.0",
+            "27.0",
+            "34.0"
+          ],
+          "LineTotal": [
+            "201.0",
+            "135.0",
+            "137.0",
+            "8847.0",
+            "171.0",
+            "20397.0",
+            "14628.0",
+            "14882.0"
+          ],
+          "ReceivedQty": [
+            "3.0",
+            "550.0",
+            "2.0",
+            "468.0",
+            "60.0",
+            "523.0",
+            "1250.0",
+            "51.0"
+          ],
+          "RejectedQty": [
+            "0.0",
+            "1.0",
+            "82.0",
+            "3.0",
+            "27.0",
+            "550.0",
+            "55.0",
+            "125.0"
+          ],
+          "StockedQty": [
+            "3.0",
+            "550.0",
+            "1.0",
+            "468.0",
+            "60.0",
+            "0.0",
+            "523.0",
+            "495.0"
+          ],
+          "ModifiedDate": [
+            "2011-04-23 00:00:00.0",
+            "2011-05-07 00:00:00.0",
+            "2011-12-21 00:00:00.0",
+            "2011-12-22 00:00:00.0",
+            "2012-01-15 00:00:00.0",
+            "2012-01-23 00:00:00.0",
+            "2012-01-27 00:00:00.0",
+            "2012-01-31 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "PurchaseOrderHeader": {
+        "rows": 4012,
+        "sample_values": {
+          "PurchaseOrderID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "RevisionNumber": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "7",
+            "8",
+            "12",
+            "14"
+          ],
+          "Status": [
+            "4",
+            "1",
+            "3",
+            "2"
+          ],
+          "EmployeeID": [
+            "258",
+            "254",
+            "257",
+            "261",
+            "251",
+            "253",
+            "255",
+            "256"
+          ],
+          "VendorID": [
+            "1580",
+            "1496",
+            "1494",
+            "1650",
+            "1654",
+            "1664",
+            "1678",
+            "1616"
+          ],
+          "ShipMethodID": [
+            "3",
+            "5",
+            "2",
+            "4",
+            "1"
+          ],
+          "OrderDate": [
+            "2011-04-16 00:00:00.0",
+            "2011-04-30 00:00:00.0",
+            "2011-12-14 00:00:00.0",
+            "2011-12-15 00:00:00.0",
+            "2012-01-08 00:00:00.0",
+            "2012-01-16 00:00:00.0",
+            "2012-01-20 00:00:00.0",
+            "2012-01-24 00:00:00.0"
+          ],
+          "ShipDate": [
+            "2011-04-25 00:00:00.0",
+            "2011-05-09 00:00:00.0",
+            "2011-12-23 00:00:00.0",
+            "2011-12-24 00:00:00.0",
+            "2012-01-17 00:00:00.0",
+            "2012-01-25 00:00:00.0",
+            "2012-01-29 00:00:00.0",
+            "2012-02-02 00:00:00.0"
+          ],
+          "SubTotal": [
+            "201.04",
+            "272.1015",
+            "8847.3",
+            "171.0765",
+            "20397.3",
+            "14628.075",
+            "58685.55",
+            "693.378"
+          ],
+          "TaxAmt": [
+            "16.0832",
+            "21.7681",
+            "707.784",
+            "13.6861",
+            "1631.784",
+            "1170.246",
+            "4694.844",
+            "55.4702"
+          ],
+          "Freight": [
+            "5.026",
+            "6.8025",
+            "221.1825",
+            "4.2769",
+            "509.9325",
+            "365.7019",
+            "1467.1388",
+            "17.3345"
+          ],
+          "TotalDue": [
+            "222.1492",
+            "300.6721",
+            "9776.2665",
+            "189.0395",
+            "22539.0165",
+            "16164.0229",
+            "64847.5328",
+            "766.1827"
+          ],
+          "ModifiedDate": [
+            "2011-04-25 00:00:00.0",
+            "2011-05-09 00:00:00.0",
+            "2011-12-23 00:00:00.0",
+            "2011-12-24 00:00:00.0",
+            "2012-01-17 00:00:00.0",
+            "2012-01-25 00:00:00.0",
+            "2012-01-29 00:00:00.0",
+            "2012-02-02 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesOrderDetail": {
+        "rows": 10000,
+        "sample_values": {
+          "SalesOrderID": [
+            "43659",
+            "43660",
+            "43661",
+            "43662",
+            "43663",
+            "43664",
+            "43665",
+            "43666"
+          ],
+          "SalesOrderDetailID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CarrierTrackingNumber": [
+            "4911-403C-98",
+            "6431-4D57-83",
+            "4E0A-4F89-AE",
+            "2E53-4802-85",
+            "1E90-4FBF-B6",
+            "2F44-4BA1-BB",
+            "19F0-4638-8E",
+            "D46A-40CA-8D"
+          ],
+          "OrderQty": [
+            "1",
+            "3",
+            "2",
+            "6",
+            "4",
+            "5",
+            "7",
+            "9"
+          ],
+          "ProductID": [
+            "776",
+            "777",
+            "778",
+            "771",
+            "772",
+            "773",
+            "774",
+            "714"
+          ],
+          "SpecialOfferID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "7"
+          ],
+          "UnitPrice": [
+            "2025.0",
+            "2040.0",
+            "29.0",
+            "6.0",
+            "5.0",
+            "20.0",
+            "419.0",
+            "875.0"
+          ],
+          "UnitPriceDiscount": [
+            "0.0"
+          ],
+          "LineTotal": [
+            "2025.0",
+            "6075.0",
+            "2040.0",
+            "4080.0",
+            "87.0",
+            "29.0",
+            "34.0",
+            "10.0"
+          ],
+          "rowguid": [
+            "B207C96D-D9E6-402B-8470-2CC176C42283",
+            "7ABB600D-1E77-41BE-9FE5-B9142CFC08FA",
+            "475CF8C6-49F6-486E-B0AD-AFC6A50CDD2F",
+            "04C4DE91-5815-45D6-8670-F462719FBCE3",
+            "5A74C7D2-E641-438E-A7AC-37BF23280301",
+            "CE472532-A4C0-45BA-816E-EEFD3FD848B3",
+            "80667840-F962-4EE3-96E0-AECA108E0D4F",
+            "E9D54907-E7B7-4969-80D9-76BA69F8A836"
+          ],
+          "ModifiedDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesOrderHeader": {
+        "rows": 10000,
+        "sample_values": {
+          "SalesOrderID": [
+            "43659",
+            "43660",
+            "43661",
+            "43662",
+            "43663",
+            "43664",
+            "43665",
+            "43666"
+          ],
+          "RevisionNumber": [
+            "8",
+            "9"
+          ],
+          "OrderDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0"
+          ],
+          "DueDate": [
+            "2011-06-12 00:00:00.0",
+            "2011-06-13 00:00:00.0",
+            "2011-06-14 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-16 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-18 00:00:00.0",
+            "2011-06-19 00:00:00.0"
+          ],
+          "ShipDate": [
+            "2011-06-07 00:00:00.0",
+            "2011-06-08 00:00:00.0",
+            "2011-06-09 00:00:00.0",
+            "2011-06-10 00:00:00.0",
+            "2011-06-11 00:00:00.0",
+            "2011-06-12 00:00:00.0",
+            "2011-06-13 00:00:00.0",
+            "2011-06-14 00:00:00.0"
+          ],
+          "Status": [
+            "5"
+          ],
+          "OnlineOrderFlag": [
+            "0",
+            "1"
+          ],
+          "SalesOrderNumber": [
+            "SO43659",
+            "SO43660",
+            "SO43661",
+            "SO43662",
+            "SO43663",
+            "SO43664",
+            "SO43665",
+            "SO43666"
+          ],
+          "PurchaseOrderNumber": [
+            "PO522145787",
+            "PO18850127500",
+            "PO18473189620",
+            "PO18444174044",
+            "PO18009186470",
+            "PO16617121983",
+            "PO16588191572",
+            "PO16008173883"
+          ],
+          "AccountNumber": [
+            "10-4020-000676",
+            "10-4020-000117",
+            "10-4020-000442",
+            "10-4020-000227",
+            "10-4020-000510",
+            "10-4020-000397",
+            "10-4020-000146",
+            "10-4020-000511"
+          ],
+          "CustomerID": [
+            "29825",
+            "29672",
+            "29734",
+            "29994",
+            "29565",
+            "29898",
+            "29580",
+            "30052"
+          ],
+          "SalesPersonID": [
+            "279",
+            "282",
+            "276",
+            "280",
+            "283",
+            "277",
+            "275",
+            "278"
+          ],
+          "TerritoryID": [
+            "5",
+            "6",
+            "4",
+            "1",
+            "3",
+            "2",
+            "7",
+            "9"
+          ],
+          "BillToAddressID": [
+            "985",
+            "921",
+            "517",
+            "482",
+            "1073",
+            "876",
+            "849",
+            "1074"
+          ],
+          "ShipToAddressID": [
+            "985",
+            "921",
+            "517",
+            "482",
+            "1073",
+            "876",
+            "849",
+            "1074"
+          ],
+          "ShipMethodID": [
+            "5",
+            "1"
+          ],
+          "CreditCardID": [
+            "16281",
+            "5618",
+            "1346",
+            "10456",
+            "4322",
+            "806",
+            "15232",
+            "13349"
+          ],
+          "CreditCardApprovalCode": [
+            "105041Vi84182",
+            "115213Vi29411",
+            "85274Vi6854",
+            "125295Vi53935",
+            "45303Vi22691",
+            "95555Vi4081",
+            "35568Vi78804",
+            "105623Vi69217"
+          ],
+          "CurrencyRateID": [
+            "4",
+            "8",
+            "2",
+            "15",
+            "35",
+            "28",
+            "45",
+            "61"
+          ],
+          "SubTotal": [
+            "20565.6206",
+            "1294.2529",
+            "32726.4786",
+            "28832.5289",
+            "419.4589",
+            "24432.6088",
+            "14352.7713",
+            "5056.4896"
+          ],
+          "TaxAmt": [
+            "1971.5149",
+            "124.2483",
+            "3153.7696",
+            "2775.1646",
+            "40.2681",
+            "2344.9921",
+            "1375.9427",
+            "486.3747"
+          ],
+          "Freight": [
+            "616.0984",
+            "38.8276",
+            "985.553",
+            "867.2389",
+            "12.5838",
+            "732.81",
+            "429.9821",
+            "151.9921"
+          ],
+          "TotalDue": [
+            "23153.2339",
+            "1457.3288",
+            "36865.8012",
+            "32474.9324",
+            "472.3108",
+            "27510.4109",
+            "16158.6961",
+            "5694.8564"
+          ],
+          "rowguid": [
+            "79B65321-39CA-4115-9CBA-8FE0903E12E6",
+            "738DC42D-D03B-48A1-9822-F95A67EA7389",
+            "D91B9131-18A4-4A11-BC3A-90B6F53E9D74",
+            "4A1ECFC0-CC3A-4740-B028-1C50BB48711C",
+            "9B1E7A40-6AE0-4AD3-811C-A64951857C4B",
+            "22A8A5DA-8C22-42AD-9241-839489B6EF0D",
+            "5602C304-853C-43D7-9E79-76E320D476CF",
+            "E2A90057-1366-4487-8A7E-8085845FF770"
+          ],
+          "ModifiedDate": [
+            "2011-06-07 00:00:00.0",
+            "2011-06-08 00:00:00.0",
+            "2011-06-09 00:00:00.0",
+            "2011-06-10 00:00:00.0",
+            "2011-06-11 00:00:00.0",
+            "2011-06-12 00:00:00.0",
+            "2011-06-13 00:00:00.0",
+            "2011-06-14 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesOrderHeaderSalesReason": {
+        "rows": 10000,
+        "sample_values": {
+          "SalesOrderID": [
+            "43697",
+            "43702",
+            "43703",
+            "43706",
+            "43707",
+            "43709",
+            "43710",
+            "43711"
+          ],
+          "SalesReasonID": [
+            "5",
+            "9",
+            "2",
+            "6",
+            "1",
+            "10",
+            "4"
+          ],
+          "ModifiedDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesPerson": {
+        "rows": 17,
+        "sample_values": {
+          "BusinessEntityID": [
+            "274",
+            "275",
+            "276",
+            "277",
+            "278",
+            "279",
+            "280",
+            "281"
+          ],
+          "TerritoryID": [
+            "2",
+            "4",
+            "3",
+            "6",
+            "5",
+            "1",
+            "9",
+            "8"
+          ],
+          "SalesQuota": [
+            "300000.0",
+            "250000.0"
+          ],
+          "Bonus": [
+            "0.0",
+            "4100.0",
+            "2000.0",
+            "2500.0",
+            "500.0",
+            "6700.0",
+            "5000.0",
+            "3550.0"
+          ],
+          "CommissionPct": [
+            "0.0",
+            "0.012",
+            "0.015",
+            "0.01",
+            "0.019",
+            "0.018",
+            "0.02",
+            "0.016"
+          ],
+          "SalesYTD": [
+            "559697.5639",
+            "3763178.1787",
+            "4251368.5497",
+            "3189418.3662",
+            "1453719.4653",
+            "2315185.611",
+            "1352577.1325",
+            "2458535.6169"
+          ],
+          "SalesLastYear": [
+            "0.0",
+            "1750406.4785",
+            "1439156.0291",
+            "1997186.2037",
+            "1620276.8966",
+            "1849640.9418",
+            "1927059.178",
+            "2073505.9999"
+          ],
+          "rowguid": [
+            "48754992-9EE0-4C0E-8C94-9451604E3E02",
+            "1E0A7274-3064-4F58-88EE-4C6586C87169",
+            "4DD9EEE4-8E81-4F8C-AF97-683394C1F7C0",
+            "39012928-BFEC-4242-874D-423162C3F567",
+            "7A0AE1AB-B283-40F9-91D1-167ABF06D720",
+            "52A5179D-3239-4157-AE29-17E868296DC0",
+            "BE941A4A-FB50-4947-BDA4-BB8972365B08",
+            "35326DDB-7278-4FEF-B3BA-EA137B69094E"
+          ],
+          "ModifiedDate": [
+            "2010-12-28 00:00:00.0",
+            "2011-05-24 00:00:00.0",
+            "2012-09-23 00:00:00.0",
+            "2013-03-07 00:00:00.0",
+            "2013-05-23 00:00:00.0",
+            "2012-04-09 00:00:00.0",
+            "2012-05-23 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesPersonQuotaHistory": {
+        "rows": 163,
+        "sample_values": {
+          "BusinessEntityID": [
+            "274",
+            "275",
+            "276",
+            "277",
+            "278",
+            "279",
+            "280",
+            "281"
+          ],
+          "QuotaDate": [
+            "2011-05-31 00:00:00.0",
+            "2011-08-31 00:00:00.0",
+            "2011-12-01 00:00:00.0",
+            "2012-02-29 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2012-08-30 00:00:00.0",
+            "2012-11-30 00:00:00.0",
+            "2013-02-28 00:00:00.0"
+          ],
+          "SalesQuota": [
+            "28000.0",
+            "7000.0",
+            "91000.0",
+            "140000.0",
+            "70000.0",
+            "154000.0",
+            "107000.0",
+            "58000.0"
+          ],
+          "rowguid": [
+            "99109BBF-8693-4587-BC23-6036EC89E1BE",
+            "DFD01444-8900-461C-8D6F-04598DAE01D4",
+            "0A69F453-9689-4CCF-A08C-C644670F5668",
+            "DA8D1458-5FB9-4C3E-9EAD-8F5CE1393047",
+            "760CEF84-B980-417B-A667-7358C38857F0",
+            "FB29E024-F26A-49AA-A7CC-C99AE7BA4853",
+            "13947D2C-A254-47C9-8817-CBD186FFA526",
+            "BC1A222F-47A0-48D1-9C56-AC873269DC98"
+          ],
+          "ModifiedDate": [
+            "2011-04-16 00:00:00.0",
+            "2011-07-17 00:00:00.0",
+            "2011-10-17 00:00:00.0",
+            "2012-01-15 00:00:00.0",
+            "2012-04-15 00:00:00.0",
+            "2012-07-16 00:00:00.0",
+            "2012-10-16 00:00:00.0",
+            "2013-01-14 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesReason": {
+        "rows": 10,
+        "sample_values": {
+          "SalesReasonID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Price",
+            "On Promotion",
+            "Magazine Advertisement",
+            "Television Advertisement",
+            "Manufacturer",
+            "Review",
+            "Demo Event",
+            "Sponsorship"
+          ],
+          "ReasonType": [
+            "Other",
+            "Promotion",
+            "Marketing"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesTaxRate": {
+        "rows": 29,
+        "sample_values": {
+          "SalesTaxRateID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "StateProvinceID": [
+            "1",
+            "57",
+            "63",
+            "7",
+            "29",
+            "31",
+            "41",
+            "45"
+          ],
+          "TaxType": [
+            "1",
+            "2",
+            "3"
+          ],
+          "TaxRate": [
+            "14.0",
+            "14.25",
+            "7.0",
+            "7.75",
+            "8.75",
+            "8.0",
+            "7.25",
+            "6.75"
+          ],
+          "Name": [
+            "Canadian GST + Alberta Provincial Tax",
+            "Canadian GST + Ontario Provincial Tax",
+            "Canadian GST + Quebec Provincial Tax",
+            "Canadian GST",
+            "Arizona State Sales Tax",
+            "California State Sales Tax",
+            "Florida State Sales Tax",
+            "Massachusetts State Sales Tax"
+          ],
+          "rowguid": [
+            "683DE5DD-521A-47D4-A573-06A3CDB1BC5D",
+            "05C4FFDB-4F84-4CDF-ABE5-FDF3216EA74E",
+            "D4EDB557-56D7-403C-B538-4DF5E7302588",
+            "F0D76907-B433-453F-B95E-16FCE73B807A",
+            "7E0E97A2-878B-476F-A648-05A3DD4450ED",
+            "1E285D2C-8AF7-47AA-B06A-762CF4D93ACD",
+            "590CCB14-CB20-49BF-8FEE-E0C3ABC4C2B1",
+            "A8365F30-78B7-4DBE-8985-F8260560126B"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesTerritory": {
+        "rows": 10,
+        "sample_values": {
+          "TerritoryID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Northwest",
+            "Northeast",
+            "Central",
+            "Southwest",
+            "Southeast",
+            "Canada",
+            "France",
+            "Germany"
+          ],
+          "CountryRegionCode": [
+            "US",
+            "CA",
+            "FR",
+            "DE",
+            "AU",
+            "GB"
+          ],
+          "Group": [
+            "North America",
+            "Europe",
+            "Pacific"
+          ],
+          "SalesYTD": [
+            "7887186.7882",
+            "2402176.8476",
+            "3072175.118",
+            "10510853.8739",
+            "2538667.2515",
+            "6771829.1376",
+            "4772398.3078",
+            "3805202.3478"
+          ],
+          "SalesLastYear": [
+            "3298694.4938",
+            "3607148.9371",
+            "3205014.0767",
+            "5366575.7098",
+            "3925071.4318",
+            "5693988.86",
+            "2396539.7601",
+            "1307949.7917"
+          ],
+          "CostYTD": [
+            "0.0"
+          ],
+          "CostLastYear": [
+            "0.0"
+          ],
+          "rowguid": [
+            "43689A10-E30B-497F-B0DE-11DE20267FF7",
+            "00FB7309-96CC-49E2-8363-0A1BA72486F2",
+            "DF6E7FD8-1A8D-468C-B103-ED8ADDB452C1",
+            "DC3E9EA0-7950-4431-9428-99DBCBC33865",
+            "6DC4165A-5E4C-42D2-809D-4344E0AC75E7",
+            "06B4AF8A-1639-476E-9266-110461D66B00",
+            "BF806804-9B4C-4B07-9D19-706F2E689552",
+            "6D2450DB-8159-414F-A917-E73EE91C38A9"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SalesTerritoryHistory": {
+        "rows": 17,
+        "sample_values": {
+          "BusinessEntityID": [
+            "275",
+            "276",
+            "277",
+            "278",
+            "279",
+            "280",
+            "281",
+            "282"
+          ],
+          "TerritoryID": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "5",
+            "1",
+            "10",
+            "9"
+          ],
+          "StartDate": [
+            "2011-05-31 00:00:00.0",
+            "2012-11-30 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2012-09-30 00:00:00.0",
+            "2013-05-30 00:00:00.0"
+          ],
+          "EndDate": [
+            "2012-11-29 00:00:00.0",
+            "2012-09-29 00:00:00.0",
+            "2012-05-29 00:00:00.0"
+          ],
+          "rowguid": [
+            "8563CE6A-00FF-47D7-BA4D-3C3E1CDEF531",
+            "2F44304C-EE87-4C72-813E-CA75C5F61F4C",
+            "64BCB1B3-A793-40BA-9859-D90F78C3F167",
+            "3E9F893D-5142-46C9-A76A-867D1E3D6F90",
+            "132E4721-32DD-4A73-B556-1837F3A2B9AE",
+            "B7C8F9F5-5FB8-47B3-BE73-1B9A14BDF8B9",
+            "57D1CDCF-62CE-499F-8BE8-1BB71C4BB7EF",
+            "FD3F5566-10E2-4960-BE12-0365E5665881"
+          ],
+          "ModifiedDate": [
+            "2012-11-22 00:00:00.0",
+            "2012-11-23 00:00:00.0",
+            "2011-05-24 00:00:00.0",
+            "2012-09-22 00:00:00.0",
+            "2012-05-22 00:00:00.0",
+            "2012-05-23 00:00:00.0",
+            "2012-09-23 00:00:00.0",
+            "2013-05-23 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ScrapReason": {
+        "rows": 16,
+        "sample_values": {
+          "ScrapReasonID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Brake assembly not as ordered",
+            "Color incorrect",
+            "Gouge in metal",
+            "Drill pattern incorrect",
+            "Drill size too large",
+            "Drill size too small",
+            "Handling damage",
+            "Paint process failed"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Shift": {
+        "rows": 3,
+        "sample_values": {
+          "ShiftID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "Name": [
+            "Day",
+            "Evening",
+            "Night"
+          ],
+          "StartTime": [
+            "07:00:00",
+            "15:00:00",
+            "23:00:00"
+          ],
+          "EndTime": [
+            "15:00:00",
+            "23:00:00",
+            "07:00:00"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ShipMethod": {
+        "rows": 5,
+        "sample_values": {
+          "ShipMethodID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "Name": [
+            "XRQ - TRUCK GROUND",
+            "ZY - EXPRESS",
+            "OVERSEAS - DELUXE",
+            "OVERNIGHT J-FAST",
+            "CARGO TRANSPORT 5"
+          ],
+          "ShipBase": [
+            "3.95",
+            "9.95",
+            "29.95",
+            "21.95",
+            "8.99"
+          ],
+          "ShipRate": [
+            "0.99",
+            "1.99",
+            "2.99",
+            "1.29",
+            "1.49"
+          ],
+          "rowguid": [
+            "6BE756D9-D7BE-4463-8F2C-AE60C710D606",
+            "3455079B-F773-4DC6-8F1E-2A58649C4AB8",
+            "22F4E461-28CF-4ACE-A980-F686CF112EC8",
+            "107E8356-E7A8-463D-B60C-079FFF467F3F",
+            "B166019A-B134-4E76-B957-2B0490C610ED"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ShoppingCartItem": {
+        "rows": 3,
+        "sample_values": {
+          "ShoppingCartItemID": [
+            "2",
+            "4",
+            "5"
+          ],
+          "ShoppingCartID": [
+            "14951",
+            "20621"
+          ],
+          "Quantity": [
+            "3",
+            "4",
+            "7"
+          ],
+          "ProductID": [
+            "862",
+            "881",
+            "874"
+          ],
+          "DateCreated": [
+            "2013-11-09 17:54:07.0"
+          ],
+          "ModifiedDate": [
+            "2013-11-09 17:54:07.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SpecialOffer": {
+        "rows": 16,
+        "sample_values": {
+          "SpecialOfferID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Description": [
+            "No Discount",
+            "Volume Discount 11 to 14",
+            "Volume Discount 15 to 24",
+            "Volume Discount 25 to 40",
+            "Volume Discount 41 to 60",
+            "Volume Discount over 60",
+            "Mountain-100 Clearance Sale",
+            "Sport Helmet Discount-2002"
+          ],
+          "DiscountPct": [
+            "0.0"
+          ],
+          "Type": [
+            "No Discount",
+            "Volume Discount",
+            "Discontinued Product",
+            "Seasonal Discount",
+            "Excess Inventory",
+            "New Product"
+          ],
+          "Category": [
+            "No Discount",
+            "Reseller",
+            "Customer"
+          ],
+          "StartDate": [
+            "2011-05-01 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2012-04-13 00:00:00.0",
+            "2012-05-30 00:00:00.0",
+            "2013-05-14 00:00:00.0",
+            "2013-05-30 00:00:00.0",
+            "2013-07-14 00:00:00.0",
+            "2014-03-31 00:00:00.0"
+          ],
+          "EndDate": [
+            "2014-11-30 00:00:00.0",
+            "2014-05-30 00:00:00.0",
+            "2012-05-29 00:00:00.0",
+            "2012-06-29 00:00:00.0",
+            "2012-07-30 00:00:00.0",
+            "2013-07-29 00:00:00.0",
+            "2013-06-29 00:00:00.0",
+            "2013-07-14 00:00:00.0"
+          ],
+          "MinQty": [
+            "0",
+            "11",
+            "15",
+            "25",
+            "41",
+            "61"
+          ],
+          "MaxQty": [
+            "14",
+            "24",
+            "40",
+            "60"
+          ],
+          "rowguid": [
+            "0290C4F5-191F-4337-AB6B-0A2DDE03CBF9",
+            "D7542EE7-15DB-4541-985C-5CC27AEF26D6",
+            "4BDBCC01-8CF7-40A9-B643-40EC5B717491",
+            "504B5E85-8F3F-4EBC-9E1D-C1BC5DEA9AA8",
+            "677E1D9D-944F-4E81-90E8-47EB0A82D48C",
+            "8157F569-4E8D-46B6-9347-5D0F726A9439",
+            "7DF15BF5-6C05-47E7-80A4-22BD1CE59A72",
+            "20C5D2CC-A38F-48F8-AC9A-8F15943E52AE"
+          ],
+          "ModifiedDate": [
+            "2011-04-01 00:00:00.0",
+            "2011-05-01 00:00:00.0",
+            "2012-03-14 00:00:00.0",
+            "2012-04-30 00:00:00.0",
+            "2013-04-14 00:00:00.0",
+            "2013-04-30 00:00:00.0",
+            "2013-06-14 00:00:00.0",
+            "2014-03-01 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "SpecialOfferProduct": {
+        "rows": 538,
+        "sample_values": {
+          "SpecialOfferID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9"
+          ],
+          "ProductID": [
+            "680",
+            "706",
+            "707",
+            "708",
+            "709",
+            "710",
+            "711",
+            "712"
+          ],
+          "rowguid": [
+            "BB30B868-D86C-4557-8DB2-4B2D0A83A0FB",
+            "B3C9A4B1-2AE6-4CBA-B552-1F206C9F4C1F",
+            "27B711FE-0B77-4EA4-AD1A-7C239956BEF4",
+            "46CBB78B-246E-4D69-9BD6-E521277C1078",
+            "CF102AA0-055F-4D2B-8B98-04B161758EA8",
+            "63718DA1-464B-4325-9514-CDEE46CB124F",
+            "457EB971-D1C9-48CA-B947-AE7E1B114377",
+            "5B948448-BAE5-4F2A-A1F3-8203E892FD24"
+          ],
+          "ModifiedDate": [
+            "2011-04-01 00:00:00.0",
+            "2011-05-01 00:00:00.0",
+            "2012-03-14 00:00:00.0",
+            "2012-04-30 00:00:00.0",
+            "2013-04-14 00:00:00.0",
+            "2013-04-30 00:00:00.0",
+            "2013-06-14 00:00:00.0",
+            "2014-03-01 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "StateProvince": {
+        "rows": 181,
+        "sample_values": {
+          "StateProvinceID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "StateProvinceCode": [
+            "AB",
+            "AK",
+            "AL",
+            "AR",
+            "AS",
+            "AZ",
+            "BC",
+            "BY"
+          ],
+          "CountryRegionCode": [
+            "CA",
+            "US",
+            "AS",
+            "DE",
+            "GB",
+            "FM",
+            "MH",
+            "MP"
+          ],
+          "IsOnlyStateProvinceFlag": [
+            "0",
+            "1"
+          ],
+          "Name": [
+            "Alberta",
+            "Alaska",
+            "Alabama",
+            "Arkansas",
+            "American Samoa",
+            "Arizona",
+            "British Columbia",
+            "Bayern"
+          ],
+          "TerritoryID": [
+            "6",
+            "1",
+            "5",
+            "3",
+            "4",
+            "8",
+            "2",
+            "10"
+          ],
+          "rowguid": [
+            "298C2880-AB1C-4982-A5AD-A36EB4BA0D34",
+            "5B7B8462-A888-4E0B-A3E1-7278F8AF107E",
+            "41B328BE-21AE-45D0-841D-6F8DD71CE626",
+            "54656A80-06F2-4C70-BA10-247179FC246E",
+            "255D15E1-9F6E-4CF8-9E5F-6B3858AD9B6A",
+            "FB8BE18E-F441-44F0-A4A9-1D0F204CB701",
+            "D27FCC6E-BB99-438B-BA86-285CEEB2FA53",
+            "D54E5000-A0DA-46D1-86B0-B8FE16C9F781"
+          ],
+          "ModifiedDate": [
+            "2014-02-08 10:17:21.0",
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Store": {
+        "rows": 701,
+        "sample_values": {
+          "BusinessEntityID": [
+            "292",
+            "294",
+            "296",
+            "298",
+            "300",
+            "302",
+            "304",
+            "306"
+          ],
+          "Name": [
+            "Next-Door Bike Store",
+            "Professional Sales and Service",
+            "Riders Company",
+            "The Bike Mechanics",
+            "Nationwide Supply",
+            "Area Bike Accessories",
+            "Bicycle Accessories and Kits",
+            "Clamps & Brackets Co."
+          ],
+          "SalesPersonID": [
+            "279",
+            "276",
+            "277",
+            "275",
+            "286",
+            "281",
+            "283",
+            "282"
+          ],
+          "Demographics": [
+            "<StoreSurvey xmlns=\"http://schemas.microsoft.com/s"
+          ],
+          "rowguid": [
+            "A22517E3-848D-4EBE-B9D9-7437F3432304",
+            "B50CA50B-C601-4A13-B07E-2C63862D71B4",
+            "337C3688-1339-4E1A-A08A-B54B23566E49",
+            "7894F278-F0C8-4D16-BD75-213FDBF13023",
+            "C3FC9705-A8C4-4F3A-9550-EB2FA4B7B64D",
+            "368BE6DD-30E5-49BB-9A86-71FD49C58F4E",
+            "35F40636-5105-49D5-869E-27E231189150",
+            "64D06BFC-D060-405C-8C60-C067FE7C67DF"
+          ],
+          "ModifiedDate": [
+            "2014-09-12 11:15:07.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TransactionHistory": {
+        "rows": 10000,
+        "sample_values": {
+          "TransactionID": [
+            "100000",
+            "100001",
+            "100002",
+            "100003",
+            "100004",
+            "100005",
+            "100006",
+            "100007"
+          ],
+          "ProductID": [
+            "784",
+            "794",
+            "797",
+            "798",
+            "799",
+            "800",
+            "801",
+            "954"
+          ],
+          "ReferenceOrderID": [
+            "41590",
+            "41591",
+            "41592",
+            "41593",
+            "41594",
+            "41595",
+            "41596",
+            "41597"
+          ],
+          "ReferenceOrderLineID": [
+            "0",
+            "1",
+            "2",
+            "10",
+            "31",
+            "41",
+            "32",
+            "21"
+          ],
+          "TransactionDate": [
+            "2013-07-31 00:00:00.0",
+            "2013-08-01 00:00:00.0",
+            "2013-08-02 00:00:00.0",
+            "2013-08-03 00:00:00.0",
+            "2013-08-04 00:00:00.0",
+            "2013-08-05 00:00:00.0",
+            "2013-08-06 00:00:00.0",
+            "2013-08-07 00:00:00.0"
+          ],
+          "TransactionType": [
+            "W",
+            "S",
+            "P"
+          ],
+          "Quantity": [
+            "2",
+            "1",
+            "3",
+            "4",
+            "7",
+            "6",
+            "12",
+            "5"
+          ],
+          "ActualCost": [
+            "0.0",
+            "6.0",
+            "875.0",
+            "534.0",
+            "743.0",
+            "247.0",
+            "90.0",
+            "79.0"
+          ],
+          "ModifiedDate": [
+            "2013-07-31 00:00:00.0",
+            "2013-08-01 00:00:00.0",
+            "2013-08-02 00:00:00.0",
+            "2013-08-03 00:00:00.0",
+            "2013-08-04 00:00:00.0",
+            "2013-08-05 00:00:00.0",
+            "2013-08-06 00:00:00.0",
+            "2013-08-07 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "TransactionHistoryArchive": {
+        "rows": 10000,
+        "sample_values": {
+          "TransactionID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductID": [
+            "1",
+            "359",
+            "360",
+            "530",
+            "4",
+            "512",
+            "513",
+            "317"
+          ],
+          "ReferenceOrderID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ReferenceOrderLineID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "12",
+            "11"
+          ],
+          "TransactionDate": [
+            "2011-04-16 00:00:00.0",
+            "2011-04-30 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0"
+          ],
+          "TransactionType": [
+            "P",
+            "S",
+            "W"
+          ],
+          "Quantity": [
+            "4",
+            "3",
+            "550",
+            "6",
+            "2",
+            "1",
+            "5",
+            "7"
+          ],
+          "ActualCost": [
+            "50.0",
+            "45.0",
+            "46.0",
+            "16.0",
+            "57.0",
+            "37.0",
+            "27.0",
+            "34.0"
+          ],
+          "ModifiedDate": [
+            "2011-04-16 00:00:00.0",
+            "2011-04-30 00:00:00.0",
+            "2011-05-31 00:00:00.0",
+            "2011-06-01 00:00:00.0",
+            "2011-06-02 00:00:00.0",
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "UnitMeasure": {
+        "rows": 38,
+        "sample_values": {
+          "UnitMeasureCode": [
+            "BOX",
+            "BTL",
+            "C",
+            "CAN",
+            "CAR",
+            "CBM",
+            "CCM",
+            "CDM"
+          ],
+          "Name": [
+            "Boxes",
+            "Bottle",
+            "Celsius",
+            "Canister",
+            "Carton",
+            "Cubic meters",
+            "Cubic centimeter",
+            "Cubic decimeter"
+          ],
+          "ModifiedDate": [
+            "2008-04-30 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Vendor": {
+        "rows": 104,
+        "sample_values": {
+          "BusinessEntityID": [
+            "1492",
+            "1494",
+            "1496",
+            "1498",
+            "1500",
+            "1502",
+            "1504",
+            "1506"
+          ],
+          "AccountNumber": [
+            "AUSTRALI0001",
+            "ALLENSON0001",
+            "ADVANCED0001",
+            "TRIKES0001",
+            "MORGANB0001",
+            "CYCLING0001",
+            "CHICAGO0002",
+            "GREENWOO0001"
+          ],
+          "Name": [
+            "Australia Bike Retailer",
+            "Allenson Cycles",
+            "Advanced Bicycles",
+            "Trikes, Inc.",
+            "Morgan Bike Accessories",
+            "Cycling Master",
+            "Chicago Rent-All",
+            "Greenwood Athletic Company"
+          ],
+          "CreditRating": [
+            "1",
+            "2",
+            "4",
+            "3",
+            "5"
+          ],
+          "PreferredVendorStatus": [
+            "1",
+            "0"
+          ],
+          "ActiveFlag": [
+            "1",
+            "0"
+          ],
+          "PurchasingWebServiceURL": [
+            "www.litwareinc.com/",
+            "www.treyresearch.net/",
+            "www.adatum.com/",
+            "www.northwindtraders.com/",
+            "www.wideworldimporters.com/",
+            "www.proseware.com/"
+          ],
+          "ModifiedDate": [
+            "2011-12-23 00:00:00.0",
+            "2011-04-25 00:00:00.0",
+            "2012-02-03 00:00:00.0",
+            "2012-02-02 00:00:00.0",
+            "2011-12-24 00:00:00.0",
+            "2012-01-25 00:00:00.0",
+            "2012-01-29 00:00:00.0",
+            "2012-01-17 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "WorkOrder": {
+        "rows": 10000,
+        "sample_values": {
+          "WorkOrderID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductID": [
+            "722",
+            "725",
+            "726",
+            "729",
+            "730",
+            "732",
+            "733",
+            "738"
+          ],
+          "OrderQty": [
+            "8",
+            "15",
+            "9",
+            "16",
+            "14",
+            "4",
+            "19",
+            "2"
+          ],
+          "StockedQty": [
+            "8",
+            "15",
+            "9",
+            "16",
+            "14",
+            "4",
+            "19",
+            "2"
+          ],
+          "ScrappedQty": [
+            "0",
+            "1",
+            "3",
+            "4",
+            "12",
+            "2",
+            "21",
+            "42"
+          ],
+          "StartDate": [
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0",
+            "2011-06-08 00:00:00.0",
+            "2011-06-09 00:00:00.0",
+            "2011-06-10 00:00:00.0"
+          ],
+          "EndDate": [
+            "2011-06-13 00:00:00.0",
+            "2011-06-19 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-14 00:00:00.0",
+            "2011-06-23 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-16 00:00:00.0",
+            "2011-06-27 00:00:00.0"
+          ],
+          "DueDate": [
+            "2011-06-14 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-16 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-18 00:00:00.0",
+            "2011-06-19 00:00:00.0",
+            "2011-06-20 00:00:00.0",
+            "2011-06-21 00:00:00.0"
+          ],
+          "ScrapReasonID": [
+            "7",
+            "11",
+            "14",
+            "15",
+            "16",
+            "4",
+            "1",
+            "3"
+          ],
+          "ModifiedDate": [
+            "2011-06-13 00:00:00.0",
+            "2011-06-19 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-14 00:00:00.0",
+            "2011-06-23 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-16 00:00:00.0",
+            "2011-06-27 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "WorkOrderRouting": {
+        "rows": 10000,
+        "sample_values": {
+          "WorkOrderID": [
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"
+          ],
+          "ProductID": [
+            "747",
+            "748",
+            "749",
+            "753",
+            "754",
+            "755",
+            "756",
+            "758"
+          ],
+          "OperationSequence": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "5"
+          ],
+          "LocationID": [
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "45"
+          ],
+          "ScheduledStartDate": [
+            "2011-06-03 00:00:00.0",
+            "2011-06-04 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-06 00:00:00.0",
+            "2011-06-07 00:00:00.0",
+            "2011-06-08 00:00:00.0",
+            "2011-06-09 00:00:00.0",
+            "2011-06-10 00:00:00.0"
+          ],
+          "ScheduledEndDate": [
+            "2011-06-14 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-16 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-18 00:00:00.0",
+            "2011-06-19 00:00:00.0",
+            "2011-06-20 00:00:00.0",
+            "2011-06-21 00:00:00.0"
+          ],
+          "ActualStartDate": [
+            "2011-06-03 00:00:00.0",
+            "2011-06-09 00:00:00.0",
+            "2011-06-05 00:00:00.0",
+            "2011-06-13 00:00:00.0",
+            "2011-06-07 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-11 00:00:00.0",
+            "2011-06-15 00:00:00.0"
+          ],
+          "ActualEndDate": [
+            "2011-06-19 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-23 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-27 00:00:00.0",
+            "2011-07-01 00:00:00.0",
+            "2011-06-21 00:00:00.0",
+            "2011-07-05 00:00:00.0"
+          ],
+          "ActualResourceHrs": [
+            "4.1",
+            "3.5",
+            "1.0",
+            "2.0",
+            "3.0",
+            "4.0"
+          ],
+          "PlannedCost": [
+            "92.25",
+            "87.5",
+            "14.5",
+            "31.5",
+            "36.75",
+            "49.0",
+            "36.0"
+          ],
+          "ActualCost": [
+            "92.25",
+            "87.5",
+            "14.5",
+            "31.5",
+            "36.75",
+            "49.0",
+            "36.0"
+          ],
+          "ModifiedDate": [
+            "2011-06-19 00:00:00.0",
+            "2011-06-15 00:00:00.0",
+            "2011-06-23 00:00:00.0",
+            "2011-06-17 00:00:00.0",
+            "2011-06-27 00:00:00.0",
+            "2011-07-01 00:00:00.0",
+            "2011-06-21 00:00:00.0",
+            "2011-07-05 00:00:00.0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "db_id": "regional_sales",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 8531,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#regional_sales",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"Customer Names\" TEXT\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk]\n  \"Product Name\" TEXT\n}\n\nTable \"Regions\" {\n  \"StateCode\" TEXT [pk]\n  \"State\" TEXT\n  \"Region\" TEXT\n}\n\nTable \"Sales Orders\" {\n  \"OrderNumber\" TEXT [pk]\n  \"Sales Channel\" TEXT\n  \"WarehouseCode\" TEXT\n  \"ProcuredDate\" TEXT\n  \"OrderDate\" TEXT\n  \"ShipDate\" TEXT\n  \"DeliveryDate\" TEXT\n  \"CurrencyCode\" TEXT\n  \"_SalesTeamID\" INTEGER\n  \"_CustomerID\" INTEGER\n  \"_StoreID\" INTEGER\n  \"_ProductID\" INTEGER\n  \"Order Quantity\" INTEGER\n  \"Discount Applied\" REAL\n  \"Unit Price\" TEXT\n  \"Unit Cost\" TEXT\n}\n\nTable \"Sales Team\" {\n  \"SalesTeamID\" INTEGER [pk]\n  \"Sales Team\" TEXT\n  \"Region\" TEXT\n}\n\nTable \"Store Locations\" {\n  \"StoreID\" INTEGER [pk]\n  \"City Name\" TEXT\n  \"County\" TEXT\n  \"StateCode\" TEXT\n  \"State\" TEXT\n  \"Type\" TEXT\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n  \"AreaCode\" INTEGER\n  \"Population\" INTEGER\n  \"Household Income\" INTEGER\n  \"Median Income\" INTEGER\n  \"Land Area\" INTEGER\n  \"Water Area\" INTEGER\n  \"Time Zone\" TEXT\n}\n\n\n\nRef: \"Store Locations\".\"StateCode\" > \"Regions\".\"StateCode\"\n\nRef: \"Sales Orders\".\"_ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"Sales Orders\".\"_StoreID\" > \"Store Locations\".\"StoreID\"\n\nRef: \"Sales Orders\".\"_CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Sales Orders\".\"_SalesTeamID\" > \"Sales Team\".\"SalesTeamID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"Customer Names\" TEXT\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk]\n  \"Product Name\" TEXT\n}\n\nTable \"Regions\" {\n  \"StateCode\" TEXT [pk]\n  \"State\" TEXT\n  \"Region\" TEXT\n}\n\nTable \"Sales Orders\" {\n  \"OrderNumber\" TEXT [pk]\n  \"Sales Channel\" TEXT\n  \"WarehouseCode\" TEXT\n  \"ProcuredDate\" TEXT\n  \"OrderDate\" TEXT\n  \"ShipDate\" TEXT\n  \"DeliveryDate\" TEXT\n  \"CurrencyCode\" TEXT\n  \"_SalesTeamID\" INTEGER\n  \"_CustomerID\" INTEGER\n  \"_StoreID\" INTEGER\n  \"_ProductID\" INTEGER\n  \"Order Quantity\" INTEGER\n  \"Discount Applied\" REAL\n  \"Unit Price\" TEXT\n  \"Unit Cost\" TEXT\n}\n\nTable \"Sales Team\" {\n  \"SalesTeamID\" INTEGER [pk]\n  \"Sales Team\" TEXT\n  \"Region\" TEXT\n}\n\nTable \"Store Locations\" {\n  \"StoreID\" INTEGER [pk]\n  \"City Name\" TEXT\n  \"County\" TEXT\n  \"StateCode\" TEXT\n  \"State\" TEXT\n  \"Type\" TEXT\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n  \"AreaCode\" INTEGER\n  \"Population\" INTEGER\n  \"Household Income\" INTEGER\n  \"Median Income\" INTEGER\n  \"Land Area\" INTEGER\n  \"Water Area\" INTEGER\n  \"Time Zone\" TEXT\n}\n\nRef: \"Store Locations\".\"StateCode\" > \"Regions\".\"StateCode\"\n\nRef: \"Sales Orders\".\"_ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"Sales Orders\".\"_StoreID\" > \"Store Locations\".\"StoreID\"\n\nRef: \"Sales Orders\".\"_CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Sales Orders\".\"_SalesTeamID\" > \"Sales Team\".\"SalesTeamID\"\n\n## Table Stats & Sample Values\n\nCustomers: 50 rows\n  Customer Names: 'Avon Corp', 'WakeFern', 'Elorac, Corp', ...\n  CustomerID: '1', '2', '3', ...\n\nProducts: 47 rows\n  Product Name: 'Cookware', 'Photo Frames', 'Table Lamps', ...\n  ProductID: '1', '2', '3', ...\n\nRegions: 48 rows\n  State: 'Alabama', 'Arkansas', 'Arizona', ...\n  Region: 'South', 'West', 'Northeast', ...\n  StateCode: 'AL', 'AR', 'AZ', ...\n\nSales Orders: 7991 rows\n  WarehouseCode: 'WARE-UHY1004', 'WARE-NMK1003', 'WARE-PUJ1005', ...\n  Sales Channel: 'In-Store', 'Online', 'Distributor', ...\n  Unit Price: '1,963.10', '3,939.60', '1,775.50', ...\n\nSales Team: 28 rows\n  Region: 'Northeast', 'West', 'South', ...\n  Sales Team: 'Adam Hernandez', 'Keith Griffin', 'Jerry Green', ...\n  SalesTeamID: '1', '2', '3', ...\n\nStore Locations: 367 rows\n  City Name: 'Birmingham', 'Huntsville', 'Mobile', ...\n  StateCode: 'AL', 'AR', 'AZ', ...\n  State: 'Alabama', 'Arkansas', 'Arizona', ...",
+    "stateUrl": "https://bird-bench.github.io/#regional_sales",
+    "tableStats": {
+      "Customers": {
+        "rows": 50,
+        "sample_values": {
+          "CustomerID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Customer Names": [
+            "Avon Corp",
+            "WakeFern",
+            "Elorac, Corp",
+            "ETUDE Ltd",
+            "Procter Corp",
+            "PEDIFIX, Corp",
+            "New Ltd",
+            "Medsep Group"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 47,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Product Name": [
+            "Cookware",
+            "Photo Frames",
+            "Table Lamps",
+            "Serveware",
+            "Bathroom Furniture",
+            "Computers",
+            "Dinnerware",
+            "Cocktail Glasses"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Regions": {
+        "rows": 48,
+        "sample_values": {
+          "StateCode": [
+            "AL",
+            "AR",
+            "AZ",
+            "CA",
+            "CO",
+            "CT",
+            "DC",
+            "DE"
+          ],
+          "State": [
+            "Alabama",
+            "Arkansas",
+            "Arizona",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "District of Columbia",
+            "Delaware"
+          ],
+          "Region": [
+            "South",
+            "West",
+            "Northeast",
+            "Midwest"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Sales Orders": {
+        "rows": 7991,
+        "sample_values": {
+          "OrderNumber": [
+            "SO - 000101",
+            "SO - 000102",
+            "SO - 000103",
+            "SO - 000104",
+            "SO - 000105",
+            "SO - 000106",
+            "SO - 000107",
+            "SO - 000108"
+          ],
+          "Sales Channel": [
+            "In-Store",
+            "Online",
+            "Distributor",
+            "Wholesale"
+          ],
+          "WarehouseCode": [
+            "WARE-UHY1004",
+            "WARE-NMK1003",
+            "WARE-PUJ1005",
+            "WARE-XYS1001",
+            "WARE-MKL1006",
+            "WARE-NBV1002"
+          ],
+          "ProcuredDate": [
+            "12/31/17",
+            "4/10/18",
+            "7/19/18",
+            "10/27/18",
+            "2/4/19",
+            "5/15/19",
+            "8/23/19",
+            "12/1/19"
+          ],
+          "OrderDate": [
+            "5/31/18",
+            "6/1/18",
+            "6/2/18",
+            "6/3/18",
+            "6/4/18",
+            "6/5/18",
+            "6/6/18",
+            "6/7/18"
+          ],
+          "ShipDate": [
+            "6/14/18",
+            "6/22/18",
+            "6/21/18",
+            "6/2/18",
+            "6/16/18",
+            "6/8/18",
+            "6/26/18",
+            "6/29/18"
+          ],
+          "DeliveryDate": [
+            "6/19/18",
+            "7/2/18",
+            "7/1/18",
+            "6/7/18",
+            "6/26/18",
+            "6/13/18",
+            "6/14/18",
+            "6/21/18"
+          ],
+          "CurrencyCode": [
+            "USD"
+          ],
+          "_SalesTeamID": [
+            "6",
+            "14",
+            "21",
+            "28",
+            "22",
+            "12",
+            "10",
+            "4"
+          ],
+          "_CustomerID": [
+            "15",
+            "20",
+            "16",
+            "48",
+            "49",
+            "21",
+            "14",
+            "9"
+          ],
+          "_StoreID": [
+            "259",
+            "196",
+            "213",
+            "107",
+            "111",
+            "285",
+            "6",
+            "280"
+          ],
+          "_ProductID": [
+            "12",
+            "27",
+            "16",
+            "23",
+            "26",
+            "1",
+            "5",
+            "46"
+          ],
+          "Order Quantity": [
+            "5",
+            "3",
+            "1",
+            "8",
+            "4",
+            "6",
+            "7",
+            "2"
+          ],
+          "Discount Applied": [
+            "0.075",
+            "0.05",
+            "0.1",
+            "0.15",
+            "0.3",
+            "0.4",
+            "0.2"
+          ],
+          "Unit Price": [
+            "1,963.10",
+            "3,939.60",
+            "1,775.50",
+            "2,324.90",
+            "1,822.40",
+            "1,038.50",
+            "1,192.60",
+            "1,815.70"
+          ],
+          "Unit Cost": [
+            "1,001.18",
+            "3,348.66",
+            "781.22",
+            "1,464.69",
+            "1,476.14",
+            "446.56",
+            "536.67",
+            "1,525.19"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Sales Team": {
+        "rows": 28,
+        "sample_values": {
+          "SalesTeamID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Sales Team": [
+            "Adam Hernandez",
+            "Keith Griffin",
+            "Jerry Green",
+            "Chris Armstrong",
+            "Stephen Payne",
+            "Joshua Bennett",
+            "Shawn Cook",
+            "George Lewis"
+          ],
+          "Region": [
+            "Northeast",
+            "West",
+            "South",
+            "Midwest"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Store Locations": {
+        "rows": 367,
+        "sample_values": {
+          "StoreID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "City Name": [
+            "Birmingham",
+            "Huntsville",
+            "Mobile",
+            "Montgomery",
+            "Little Rock",
+            "Chandler",
+            "Gilbert",
+            "Glendale"
+          ],
+          "County": [
+            "Shelby County/Jefferson County",
+            "Limestone County/Madison County",
+            "Mobile County",
+            "Montgomery County",
+            "Pulaski County",
+            "Maricopa County",
+            "Maricopa County/Yavapai County",
+            "Pima County"
+          ],
+          "StateCode": [
+            "AL",
+            "AR",
+            "AZ",
+            "CA",
+            "CO",
+            "CT",
+            "DC",
+            "FL"
+          ],
+          "State": [
+            "Alabama",
+            "Arkansas",
+            "Arizona",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "District of Columbia",
+            "Florida"
+          ],
+          "Type": [
+            "City",
+            "Town",
+            "CDP",
+            "Unified Government",
+            "Consolidated Government",
+            "Other",
+            "Township",
+            "Urban County"
+          ],
+          "Latitude": [
+            "33.52744",
+            "34.69901",
+            "30.69436",
+            "32.36681",
+            "34.74648",
+            "33.30616",
+            "33.35283",
+            "33.53865"
+          ],
+          "Longitude": [
+            "-86.79905",
+            "-86.67298",
+            "-88.04305",
+            "-86.29997",
+            "-92.28959",
+            "-111.84125",
+            "-111.78903",
+            "-112.18599"
+          ],
+          "AreaCode": [
+            "205",
+            "256",
+            "251",
+            "334",
+            "501",
+            "480",
+            "623",
+            "928"
+          ],
+          "Population": [
+            "212461",
+            "190582",
+            "194288",
+            "200602",
+            "197992",
+            "260828",
+            "247542",
+            "240126"
+          ],
+          "Household Income": [
+            "89972",
+            "78554",
+            "76170",
+            "79866",
+            "79902",
+            "88973",
+            "73617",
+            "79152"
+          ],
+          "Median Income": [
+            "31061",
+            "48775",
+            "38776",
+            "42927",
+            "46085",
+            "72695",
+            "82424",
+            "46776"
+          ],
+          "Land Area": [
+            "378353942",
+            "552604579",
+            "361044263",
+            "413985435",
+            "307398785",
+            "168153308",
+            "176124143",
+            "153029354"
+          ],
+          "Water Area": [
+            "6591013",
+            "3452021",
+            "105325210",
+            "4411954",
+            "6758644",
+            "260378",
+            "510475",
+            "1003996"
+          ],
+          "Time Zone": [
+            "America/Chicago",
+            "America/Phoenix",
+            "America/Los Angeles",
+            "America/Denver",
+            "America/New York",
+            "Pacific/Honolulu",
+            "America/Boise",
+            "America/Indiana/Indianapolis"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

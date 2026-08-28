@@ -1,0 +1,568 @@
+{
+  "db_id": "electronics_testing_and_specification_management",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/electronics_testing_and_specification_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"components\" {\n  \"component_id\" INTEGER [pk]\n  \"component_name\" TEXT\n  \"component_type\" TEXT\n  \"description\" TEXT\n  \"manufacturer\" TEXT\n  \"part_number\" TEXT\n  \"date_added\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"parameters\" {\n  \"parameter_id\" INTEGER [pk]\n  \"test_condition_id\" INTEGER\n  \"parameter_name\" TEXT\n  \"symbol\" TEXT\n  \"units\" TEXT\n  \"parameter_range\" TEXT\n  \"test_method\" TEXT\n  \"tolerance\" TEXT\n}\n\nTable \"public\".\"test_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_ip\" TEXT\n  \"access_device\" TEXT\n}\n\nTable \"public\".\"test_conditions\" {\n  \"test_condition_id\" INTEGER [pk]\n  \"component_id\" INTEGER\n  \"test_condition_name\" TEXT\n  \"test_condition_description\" TEXT\n  \"test_type\" TEXT\n  \"test_duration\" TEXT\n  \"test_frequency\" TEXT\n  \"test_setup\" TEXT\n}\n\nTable \"public\".\"test_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"document_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"document_version\" TEXT\n  \"document_author\" TEXT\n  \"document_revision_date\" TEXT\n}\n\nTable \"public\".\"test_environment_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"environment_id\" INTEGER\n  \"usage_date\" TEXT\n  \"usage_comments\" TEXT\n  \"usage_temperature\" TEXT\n  \"usage_humidity\" TEXT\n  \"usage_pressure\" TEXT\n}\n\nTable \"public\".\"test_environments\" {\n  \"environment_id\" INTEGER [pk]\n  \"environment_name\" TEXT\n  \"environment_description\" TEXT\n  \"environment_location\" TEXT\n  \"environment_temperature\" TEXT\n  \"environment_humidity\" TEXT\n  \"environment_pressure\" TEXT\n}\n\nTable \"public\".\"test_equipment\" {\n  \"equipment_id\" INTEGER [pk]\n  \"equipment_name\" TEXT\n  \"equipment_type\" TEXT\n  \"calibration_date\" TEXT\n  \"next_calibration_date\" TEXT\n  \"equipment_model\" TEXT\n  \"equipment_serial_number\" TEXT\n  \"equipment_status\" TEXT\n}\n\nTable \"public\".\"test_equipment_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"equipment_id\" INTEGER\n  \"usage_date\" TEXT\n  \"usage_comments\" TEXT\n  \"usage_duration\" TEXT\n  \"usage_operator\" TEXT\n  \"usage_status\" TEXT\n}\n\nTable \"public\".\"test_results\" {\n  \"result_id\" INTEGER [pk]\n  \"parameter_id\" INTEGER\n  \"test_date\" TEXT\n  \"min_value\" REAL\n  \"typ_value\" REAL\n  \"max_value\" REAL\n  \"actual_value\" REAL\n  \"test_result_status\" TEXT\n  \"test_operator\" TEXT\n  \"test_notes\" TEXT\n}\n\nTable \"public\".\"test_standard_compliance\" {\n  \"compliance_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"standard_id\" INTEGER\n  \"compliance_date\" TEXT\n  \"compliance_status\" TEXT\n  \"compliance_operator\" TEXT\n  \"compliance_notes\" TEXT\n}\n\nTable \"public\".\"test_standards\" {\n  \"standard_id\" INTEGER [pk]\n  \"standard_name\" TEXT\n  \"standard_description\" TEXT\n  \"standard_version\" TEXT\n  \"standard_date\" TEXT\n  \"standard_status\" TEXT\n  \"standard_issuer\" TEXT\n  \"standard_revision_date\" TEXT\n}\n\nTable \"public\".\"test_team_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"team_id\" INTEGER\n  \"assignment_date\" TEXT\n  \"assignment_comments\" TEXT\n  \"assignment_status\" TEXT\n  \"assignment_priority\" TEXT\n}\n\nTable \"public\".\"test_teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"team_description\" TEXT\n  \"team_leader\" TEXT\n  \"team_size\" INTEGER\n  \"team_contact\" TEXT\n  \"team_specialization\" TEXT\n}\n\nTable \"public\".\"test_users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_phone\" TEXT\n  \"user_department\" TEXT\n  \"user_status\" TEXT\n}\n\nTable \"public\".\"test_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"version_description\" TEXT\n  \"version_author\" TEXT\n  \"version_reason\" TEXT\n}\n\nRef: \"public\".\"parameters\".\"test_condition_id\" > \"public\".\"test_conditions\".\"test_condition_id\"\nRef: \"public\".\"test_access_logs\".\"user_id\" > \"public\".\"test_users\".\"user_id\"\nRef: \"public\".\"test_access_logs\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_conditions\".\"component_id\" > \"public\".\"components\".\"component_id\"\nRef: \"public\".\"test_documents\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_environment_usage\".\"environment_id\" > \"public\".\"test_environments\".\"environment_id\"\nRef: \"public\".\"test_environment_usage\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_equipment_usage\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_equipment_usage\".\"equipment_id\" > \"public\".\"test_equipment\".\"equipment_id\"\nRef: \"public\".\"test_results\".\"parameter_id\" > \"public\".\"parameters\".\"parameter_id\"\nRef: \"public\".\"test_standard_compliance\".\"standard_id\" > \"public\".\"test_standards\".\"standard_id\"\nRef: \"public\".\"test_standard_compliance\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_team_assignments\".\"result_id\" > \"public\".\"test_results\".\"result_id\"\nRef: \"public\".\"test_team_assignments\".\"team_id\" > \"public\".\"test_teams\".\"team_id\"\nRef: \"public\".\"test_versions\".\"result_id\" > \"public\".\"test_results\".\"result_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"components\" {\n  \"component_id\" INTEGER [pk]\n  \"component_name\" TEXT\n  \"component_type\" TEXT\n  \"description\" TEXT\n  \"manufacturer\" TEXT\n  \"part_number\" TEXT\n  \"date_added\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"parameters\" {\n  \"parameter_id\" INTEGER [pk]\n  \"test_condition_id\" INTEGER\n  \"parameter_name\" TEXT\n  \"symbol\" TEXT\n  \"units\" TEXT\n  \"parameter_range\" TEXT\n  \"test_method\" TEXT\n  \"tolerance\" TEXT\n}\n\nTable \"test_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_ip\" TEXT\n  \"access_device\" TEXT\n}\n\nTable \"test_conditions\" {\n  \"test_condition_id\" INTEGER [pk]\n  \"component_id\" INTEGER\n  \"test_condition_name\" TEXT\n  \"test_condition_description\" TEXT\n  \"test_type\" TEXT\n  \"test_duration\" TEXT\n  \"test_frequency\" TEXT\n  \"test_setup\" TEXT\n}\n\nTable \"test_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"document_type\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"document_version\" TEXT\n  \"document_author\" TEXT\n  \"document_revision_date\" TEXT\n}\n\nTable \"test_environment_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"environment_id\" INTEGER\n  \"usage_date\" TEXT\n  \"usage_comments\" TEXT\n  \"usage_temperature\" TEXT\n  \"usage_humidity\" TEXT\n  \"usage_pressure\" TEXT\n}\n\nTable \"test_environments\" {\n  \"environment_id\" INTEGER [pk]\n  \"environment_name\" TEXT\n  \"environment_description\" TEXT\n  \"environment_location\" TEXT\n  \"environment_temperature\" TEXT\n  \"environment_humidity\" TEXT\n  \"environment_pressure\" TEXT\n}\n\nTable \"test_equipment\" {\n  \"equipment_id\" INTEGER [pk]\n  \"equipment_name\" TEXT\n  \"equipment_type\" TEXT\n  \"calibration_date\" TEXT\n  \"next_calibration_date\" TEXT\n  \"equipment_model\" TEXT\n  \"equipment_serial_number\" TEXT\n  \"equipment_status\" TEXT\n}\n\nTable \"test_equipment_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"equipment_id\" INTEGER\n  \"usage_date\" TEXT\n  \"usage_comments\" TEXT\n  \"usage_duration\" TEXT\n  \"usage_operator\" TEXT\n  \"usage_status\" TEXT\n}\n\nTable \"test_results\" {\n  \"result_id\" INTEGER [pk]\n  \"parameter_id\" INTEGER\n  \"test_date\" TEXT\n  \"min_value\" REAL\n  \"typ_value\" REAL\n  \"max_value\" REAL\n  \"actual_value\" REAL\n  \"test_result_status\" TEXT\n  \"test_operator\" TEXT\n  \"test_notes\" TEXT\n}\n\nTable \"test_standard_compliance\" {\n  \"compliance_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"standard_id\" INTEGER\n  \"compliance_date\" TEXT\n  \"compliance_status\" TEXT\n  \"compliance_operator\" TEXT\n  \"compliance_notes\" TEXT\n}\n\nTable \"test_standards\" {\n  \"standard_id\" INTEGER [pk]\n  \"standard_name\" TEXT\n  \"standard_description\" TEXT\n  \"standard_version\" TEXT\n  \"standard_date\" TEXT\n  \"standard_status\" TEXT\n  \"standard_issuer\" TEXT\n  \"standard_revision_date\" TEXT\n}\n\nTable \"test_team_assignments\" {\n  \"assignment_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"team_id\" INTEGER\n  \"assignment_date\" TEXT\n  \"assignment_comments\" TEXT\n  \"assignment_status\" TEXT\n  \"assignment_priority\" TEXT\n}\n\nTable \"test_teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"team_description\" TEXT\n  \"team_leader\" TEXT\n  \"team_size\" INTEGER\n  \"team_contact\" TEXT\n  \"team_specialization\" TEXT\n}\n\nTable \"test_users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"user_phone\" TEXT\n  \"user_department\" TEXT\n  \"user_status\" TEXT\n}\n\nTable \"test_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"result_id\" INTEGER\n  \"version_number\" INTEGER\n  \"version_date\" TEXT\n  \"version_description\" TEXT\n  \"version_author\" TEXT\n  \"version_reason\" TEXT\n}\n\nRef: \"parameters\".\"test_condition_id\" > \"test_conditions\".\"test_condition_id\"\n\nRef: \"test_access_logs\".\"user_id\" > \"test_users\".\"user_id\"\n\nRef: \"test_access_logs\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_conditions\".\"component_id\" > \"components\".\"component_id\"\n\nRef: \"test_documents\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_environment_usage\".\"environment_id\" > \"test_environments\".\"environment_id\"\n\nRef: \"test_environment_usage\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_equipment_usage\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_equipment_usage\".\"equipment_id\" > \"test_equipment\".\"equipment_id\"\n\nRef: \"test_results\".\"parameter_id\" > \"parameters\".\"parameter_id\"\n\nRef: \"test_standard_compliance\".\"standard_id\" > \"test_standards\".\"standard_id\"\n\nRef: \"test_standard_compliance\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_team_assignments\".\"result_id\" > \"test_results\".\"result_id\"\n\nRef: \"test_team_assignments\".\"team_id\" > \"test_teams\".\"team_id\"\n\nRef: \"test_versions\".\"result_id\" > \"test_results\".\"result_id\"\n\n## Table Stats & Sample Values\n\ncomponents: 2 rows\n  component_name: 'Input Amplifiers', 'Antialiasing Filter'\n  component_type: 'Amplifier', 'Filter'\n  description: 'Amplifiers for input signals', 'Filter to prevent aliasing in analog-to-digital co'\n\nparameters: 2 rows\n  parameter_name: 'High Output Voltage', 'Low Output Voltage'\n  symbol: 'VOUTHI', 'VOUTLO'\n  units: 'V', 'mV'\n\ntest_access_logs: 2 rows\n  access_type: 'view', 'download'\n  access_ip: '192.168.1.1', '192.168.1.2'\n  access_device: 'Desktop', 'Laptop'\n\ntest_conditions: 2 rows\n  test_condition_name: 'ISINK = 100µA, VDD = 5.0V', 'ISOURCE = 100µA; VDD = 5.0V'\n  test_condition_description: 'Test condition for high output voltage', 'Test condition for low output voltage'\n  test_type: 'Performance'\n\ntest_documents: 2 rows\n  document_type: 'Test Report', 'Readme'\n  file_path: 'docs/test_report_1.pdf', 'docs/readme_2.txt'\n  document_author: 'Alice Johnson', 'Bob Williams'\n\ntest_environment_usage: 2 rows\n  usage_comments: 'Used for high-precision measurements', 'Used for general testing'\n  usage_temperature: '25°C', '22°C'\n  usage_humidity: '50%', '40%'\n\ntest_environments: 2 rows\n  environment_name: 'Lab A', 'Lab B'\n  environment_description: 'Controlled environment for high-precision testing', 'General-purpose testing environment'\n  environment_location: 'Building 1, Room 101', 'Building 1, Room 201'\n\ntest_equipment: 2 rows\n  equipment_name: 'Oscilloscope', 'Function Generator'\n  equipment_type: 'Measurement', 'Signal Generation'\n  equipment_model: 'Model 123', 'Model 456'\n\ntest_equipment_usage: 2 rows\n  usage_status: 'Successful'\n  usage_operator: 'Alice Johnson', 'Bob Williams'\n  usage_comments: 'Used for measuring output voltage', 'Used for generating input signals'\n\ntest_results: 2 rows\n  test_result_status: 'Passed', 'Failed'\n  test_operator: 'Alice Johnson', 'Bob Williams'\n  test_notes: 'Test passed with flying colors', 'Output voltage too low'\n\ntest_standard_compliance: 2 rows\n  compliance_status: 'Passed', 'Failed'\n  compliance_operator: 'Alice Johnson', 'Bob Williams'\n  compliance_notes: 'Compliance verified', 'Non-compliant'\n\ntest_standards: 2 rows\n  standard_name: 'IEEE 1057', 'MIL-STD-810'\n  standard_description: 'Standard for Terminology and Test Methods for Anal', 'Environmental Engineering Considerations and Labor'\n  standard_status: 'Active'\n\ntest_team_assignments: 2 rows\n  assignment_status: 'Active'\n  assignment_comments: 'Assigned for initial testing'\n  assignment_priority: 'High'\n\ntest_teams: 2 rows\n  team_name: 'Team Alpha', 'Team Beta'\n  team_description: 'Specializes in amplifier testing', 'Specializes in filter testing'\n  team_leader: 'John Doe', 'Jane Smith'\n\ntest_users: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'engineer', 'tester'\n  user_status: 'Active'\n\ntest_versions: 2 rows\n  version_description: 'Initial test result'\n  version_author: 'Alice Johnson', 'Bob Williams'\n  version_reason: 'Initial setup'",
+    "stateUrl": null,
+    "tableStats": {
+      "components": {
+        "rows": 2,
+        "sample_values": {
+          "component_id": [
+            "0",
+            "1"
+          ],
+          "component_name": [
+            "Input Amplifiers",
+            "Antialiasing Filter"
+          ],
+          "component_type": [
+            "Amplifier",
+            "Filter"
+          ],
+          "description": [
+            "Amplifiers for input signals",
+            "Filter to prevent aliasing in analog-to-digital co"
+          ],
+          "manufacturer": [
+            "Acme Electronics",
+            "TechCorp"
+          ],
+          "part_number": [
+            "A12345",
+            "F67890"
+          ],
+          "date_added": [
+            "2023-01-01"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "parameters": {
+        "rows": 2,
+        "sample_values": {
+          "parameter_id": [
+            "0",
+            "1"
+          ],
+          "test_condition_id": [
+            "0"
+          ],
+          "parameter_name": [
+            "High Output Voltage",
+            "Low Output Voltage"
+          ],
+          "symbol": [
+            "VOUTHI",
+            "VOUTLO"
+          ],
+          "units": [
+            "V",
+            "mV"
+          ],
+          "parameter_range": [
+            "4.5-5.0",
+            "10-200"
+          ],
+          "test_method": [
+            "Oscilloscope measurement",
+            "Multimeter measurement"
+          ],
+          "tolerance": [
+            "±0.1",
+            "±10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-09-01"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_ip": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "access_device": [
+            "Desktop",
+            "Laptop"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_conditions": {
+        "rows": 2,
+        "sample_values": {
+          "test_condition_id": [
+            "0",
+            "1"
+          ],
+          "component_id": [
+            "1"
+          ],
+          "test_condition_name": [
+            "ISINK = 100µA, VDD = 5.0V",
+            "ISOURCE = 100µA; VDD = 5.0V"
+          ],
+          "test_condition_description": [
+            "Test condition for high output voltage",
+            "Test condition for low output voltage"
+          ],
+          "test_type": [
+            "Performance"
+          ],
+          "test_duration": [
+            "1 hour"
+          ],
+          "test_frequency": [
+            "Daily"
+          ],
+          "test_setup": [
+            "Standard setup"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_documents": {
+        "rows": 2,
+        "sample_values": {
+          "document_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "document_type": [
+            "Test Report",
+            "Readme"
+          ],
+          "file_path": [
+            "docs/test_report_1.pdf",
+            "docs/readme_2.txt"
+          ],
+          "file_size": [
+            "2.5",
+            "0.1"
+          ],
+          "upload_date": [
+            "2023-09-02"
+          ],
+          "document_version": [
+            "1.0"
+          ],
+          "document_author": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "document_revision_date": [
+            "2023-09-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_environment_usage": {
+        "rows": 2,
+        "sample_values": {
+          "usage_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "1",
+            "0"
+          ],
+          "environment_id": [
+            "0"
+          ],
+          "usage_date": [
+            "2023-09-01"
+          ],
+          "usage_comments": [
+            "Used for high-precision measurements",
+            "Used for general testing"
+          ],
+          "usage_temperature": [
+            "25°C",
+            "22°C"
+          ],
+          "usage_humidity": [
+            "50%",
+            "40%"
+          ],
+          "usage_pressure": [
+            "1013 hPa"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_environments": {
+        "rows": 2,
+        "sample_values": {
+          "environment_id": [
+            "0",
+            "1"
+          ],
+          "environment_name": [
+            "Lab A",
+            "Lab B"
+          ],
+          "environment_description": [
+            "Controlled environment for high-precision testing",
+            "General-purpose testing environment"
+          ],
+          "environment_location": [
+            "Building 1, Room 101",
+            "Building 1, Room 201"
+          ],
+          "environment_temperature": [
+            "25°C",
+            "22°C"
+          ],
+          "environment_humidity": [
+            "50%",
+            "40%"
+          ],
+          "environment_pressure": [
+            "1013 hPa"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_equipment": {
+        "rows": 2,
+        "sample_values": {
+          "equipment_id": [
+            "0",
+            "1"
+          ],
+          "equipment_name": [
+            "Oscilloscope",
+            "Function Generator"
+          ],
+          "equipment_type": [
+            "Measurement",
+            "Signal Generation"
+          ],
+          "calibration_date": [
+            "2023-08-01"
+          ],
+          "next_calibration_date": [
+            "2024-08-01"
+          ],
+          "equipment_model": [
+            "Model 123",
+            "Model 456"
+          ],
+          "equipment_serial_number": [
+            "SN12345",
+            "SN67890"
+          ],
+          "equipment_status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_equipment_usage": {
+        "rows": 2,
+        "sample_values": {
+          "usage_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "1"
+          ],
+          "equipment_id": [
+            "1",
+            "0"
+          ],
+          "usage_date": [
+            "2023-09-01"
+          ],
+          "usage_comments": [
+            "Used for measuring output voltage",
+            "Used for generating input signals"
+          ],
+          "usage_duration": [
+            "1 hour"
+          ],
+          "usage_operator": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "usage_status": [
+            "Successful"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_results": {
+        "rows": 2,
+        "sample_values": {
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "parameter_id": [
+            "0"
+          ],
+          "test_date": [
+            "2023-09-01"
+          ],
+          "min_value": [
+            "4.7"
+          ],
+          "typ_value": [
+            "4.9",
+            "15.0"
+          ],
+          "max_value": [
+            "200.0"
+          ],
+          "actual_value": [
+            "4.85",
+            "180.0"
+          ],
+          "test_result_status": [
+            "Passed",
+            "Failed"
+          ],
+          "test_operator": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "test_notes": [
+            "Test passed with flying colors",
+            "Output voltage too low"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_standard_compliance": {
+        "rows": 2,
+        "sample_values": {
+          "compliance_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "1"
+          ],
+          "standard_id": [
+            "0",
+            "1"
+          ],
+          "compliance_date": [
+            "2023-09-01"
+          ],
+          "compliance_status": [
+            "Passed",
+            "Failed"
+          ],
+          "compliance_operator": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "compliance_notes": [
+            "Compliance verified",
+            "Non-compliant"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_standards": {
+        "rows": 2,
+        "sample_values": {
+          "standard_id": [
+            "0",
+            "1"
+          ],
+          "standard_name": [
+            "IEEE 1057",
+            "MIL-STD-810"
+          ],
+          "standard_description": [
+            "Standard for Terminology and Test Methods for Anal",
+            "Environmental Engineering Considerations and Labor"
+          ],
+          "standard_version": [
+            "1.0",
+            "G"
+          ],
+          "standard_date": [
+            "2021-01-01",
+            "2019-01-01"
+          ],
+          "standard_status": [
+            "Active"
+          ],
+          "standard_issuer": [
+            "IEEE",
+            "DoD"
+          ],
+          "standard_revision_date": [
+            "2023-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_team_assignments": {
+        "rows": 2,
+        "sample_values": {
+          "assignment_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "team_id": [
+            "1",
+            "0"
+          ],
+          "assignment_date": [
+            "2023-09-01"
+          ],
+          "assignment_comments": [
+            "Assigned for initial testing"
+          ],
+          "assignment_status": [
+            "Active"
+          ],
+          "assignment_priority": [
+            "High"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_teams": {
+        "rows": 2,
+        "sample_values": {
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "team_name": [
+            "Team Alpha",
+            "Team Beta"
+          ],
+          "team_description": [
+            "Specializes in amplifier testing",
+            "Specializes in filter testing"
+          ],
+          "team_leader": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "team_size": [
+            "5",
+            "4"
+          ],
+          "team_contact": [
+            "teamalpha@example.com",
+            "teambeta@example.com"
+          ],
+          "team_specialization": [
+            "Amplifiers",
+            "Filters"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "engineer",
+            "tester"
+          ],
+          "user_phone": [
+            "555-1234",
+            "555-5678"
+          ],
+          "user_department": [
+            "Engineering",
+            "QA"
+          ],
+          "user_status": [
+            "Active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "result_id": [
+            "0"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "version_date": [
+            "2023-09-01"
+          ],
+          "version_description": [
+            "Initial test result"
+          ],
+          "version_author": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "version_reason": [
+            "Initial setup"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

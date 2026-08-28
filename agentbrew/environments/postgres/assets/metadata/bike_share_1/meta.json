@@ -1,0 +1,479 @@
+{
+  "db_id": "bike_share_1",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 72647070,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#bike_share_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"station\" {\n  \"id\" INTEGER [pk, not null]\n  \"name\" TEXT\n  \"lat\" REAL\n  \"long\" REAL\n  \"dock_count\" INTEGER\n  \"city\" TEXT\n  \"installation_date\" TEXT\n}\n\nTable \"status\" {\n  \"station_id\" INTEGER\n  \"bikes_available\" INTEGER\n  \"docks_available\" INTEGER\n  \"time\" TEXT\n}\n\nTable \"trip\" {\n  \"id\" INTEGER [pk, not null]\n  \"duration\" INTEGER\n  \"start_date\" TEXT\n  \"start_station_name\" TEXT\n  \"start_station_id\" INTEGER\n  \"end_date\" TEXT\n  \"end_station_name\" TEXT\n  \"end_station_id\" INTEGER\n  \"bike_id\" INTEGER\n  \"subscription_type\" TEXT\n  \"zip_code\" INTEGER\n}\n\nTable \"weather\" {\n  \"date\" TEXT\n  \"max_temperature_f\" INTEGER\n  \"mean_temperature_f\" INTEGER\n  \"min_temperature_f\" INTEGER\n  \"max_dew_point_f\" INTEGER\n  \"mean_dew_point_f\" INTEGER\n  \"min_dew_point_f\" INTEGER\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n  \"max_sea_level_pressure_inches\" REAL\n  \"mean_sea_level_pressure_inches\" REAL\n  \"min_sea_level_pressure_inches\" REAL\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n  \"max_wind_Speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"precipitation_inches\" TEXT\n  \"cloud_cover\" INTEGER\n  \"events\" TEXT\n  \"wind_dir_degrees\" INTEGER\n  \"zip_code\" TEXT\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"station\" {\n  \"id\" INTEGER [pk, not null]\n  \"name\" TEXT\n  \"lat\" REAL\n  \"long\" REAL\n  \"dock_count\" INTEGER\n  \"city\" TEXT\n  \"installation_date\" TEXT\n}\n\nTable \"status\" {\n  \"station_id\" INTEGER\n  \"bikes_available\" INTEGER\n  \"docks_available\" INTEGER\n  \"time\" TEXT\n}\n\nTable \"trip\" {\n  \"id\" INTEGER [pk, not null]\n  \"duration\" INTEGER\n  \"start_date\" TEXT\n  \"start_station_name\" TEXT\n  \"start_station_id\" INTEGER\n  \"end_date\" TEXT\n  \"end_station_name\" TEXT\n  \"end_station_id\" INTEGER\n  \"bike_id\" INTEGER\n  \"subscription_type\" TEXT\n  \"zip_code\" INTEGER\n}\n\nTable \"weather\" {\n  \"date\" TEXT\n  \"max_temperature_f\" INTEGER\n  \"mean_temperature_f\" INTEGER\n  \"min_temperature_f\" INTEGER\n  \"max_dew_point_f\" INTEGER\n  \"mean_dew_point_f\" INTEGER\n  \"min_dew_point_f\" INTEGER\n  \"max_humidity\" INTEGER\n  \"mean_humidity\" INTEGER\n  \"min_humidity\" INTEGER\n  \"max_sea_level_pressure_inches\" REAL\n  \"mean_sea_level_pressure_inches\" REAL\n  \"min_sea_level_pressure_inches\" REAL\n  \"max_visibility_miles\" INTEGER\n  \"mean_visibility_miles\" INTEGER\n  \"min_visibility_miles\" INTEGER\n  \"max_wind_Speed_mph\" INTEGER\n  \"mean_wind_speed_mph\" INTEGER\n  \"max_gust_speed_mph\" INTEGER\n  \"precipitation_inches\" TEXT\n  \"cloud_cover\" INTEGER\n  \"events\" TEXT\n  \"wind_dir_degrees\" INTEGER\n  \"zip_code\" TEXT\n}\n\n## Table Stats & Sample Values\n\nstation: 70 rows\n  name: 'San Jose Diridon Caltrain Station', 'San Jose Civic Center', 'Santa Clara at Almaden', ...\n  city: 'San Jose', 'Redwood City', 'Mountain View', ...\n  installation_date: '8/6/2013', '8/5/2013', '8/7/2013', ...\n\nstatus: 10000 rows\n  time: '2013/08/29 12:06:01', '2013/08/29 12:07:01', '2013/08/29 12:08:01', ...\n  bikes_available: '2', '3', '4', ...\n  docks_available: '25', '24', '23', ...\n\ntrip: 10000 rows\n  start_station_name: '2nd at South Park', 'South Van Ness at Market', 'Redwood City Caltrain Station', ...\n  end_station_name: '2nd at South Park', 'San Francisco Caltrain 2 (330 Townsend)', 'Redwood City Caltrain Station', ...\n  subscription_type: 'Subscriber', 'Customer'\n\nweather: 3665 rows\n  max_sea_level_pressure_inches: '30.07', '30.05', '30.0', ...\n  mean_sea_level_pressure_inches: '30.02', '30.0', '29.96', ...\n  min_sea_level_pressure_inches: '29.97', '29.93', '29.92', ...",
+    "stateUrl": "https://bird-bench.github.io/#bike_share_1",
+    "tableStats": {
+      "station": {
+        "rows": 70,
+        "sample_values": {
+          "id": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "name": [
+            "San Jose Diridon Caltrain Station",
+            "San Jose Civic Center",
+            "Santa Clara at Almaden",
+            "Adobe on Almaden",
+            "San Pedro Square",
+            "Paseo de San Antonio",
+            "San Salvador at 1st",
+            "Japantown"
+          ],
+          "lat": [
+            "37.329732",
+            "37.330698",
+            "37.333988",
+            "37.331415",
+            "37.336721000000004",
+            "37.333798",
+            "37.330165",
+            "37.348742"
+          ],
+          "long": [
+            "-121.90178200000001",
+            "-121.888979",
+            "-121.894902",
+            "-121.8932",
+            "-121.894074",
+            "-121.88694299999999",
+            "-121.88583100000001",
+            "-121.89471499999999"
+          ],
+          "dock_count": [
+            "27",
+            "15",
+            "11",
+            "19",
+            "25",
+            "23"
+          ],
+          "city": [
+            "San Jose",
+            "Redwood City",
+            "Mountain View",
+            "Palo Alto",
+            "San Francisco"
+          ],
+          "installation_date": [
+            "8/6/2013",
+            "8/5/2013",
+            "8/7/2013",
+            "8/12/2013",
+            "8/15/2013",
+            "8/16/2013",
+            "12/31/2013",
+            "8/14/2013"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "status": {
+        "rows": 10000,
+        "sample_values": {
+          "station_id": [
+            "2"
+          ],
+          "bikes_available": [
+            "2",
+            "3",
+            "4",
+            "1",
+            "5",
+            "8",
+            "9",
+            "10"
+          ],
+          "docks_available": [
+            "25",
+            "24",
+            "23",
+            "26",
+            "22",
+            "19",
+            "18",
+            "17"
+          ],
+          "time": [
+            "2013/08/29 12:06:01",
+            "2013/08/29 12:07:01",
+            "2013/08/29 12:08:01",
+            "2013/08/29 12:09:01",
+            "2013/08/29 12:10:01",
+            "2013/08/29 12:11:01",
+            "2013/08/29 12:12:01",
+            "2013/08/29 12:13:01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "trip": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "4069",
+            "4073",
+            "4074",
+            "4075",
+            "4076",
+            "4078",
+            "4079",
+            "4080"
+          ],
+          "duration": [
+            "174",
+            "1067",
+            "1131",
+            "1117",
+            "1118",
+            "3829",
+            "995",
+            "764"
+          ],
+          "start_date": [
+            "8/29/2013 9:08",
+            "8/29/2013 9:24",
+            "8/29/2013 9:25",
+            "8/29/2013 9:31",
+            "8/29/2013 9:35",
+            "8/29/2013 9:36",
+            "8/29/2013 9:38",
+            "8/29/2013 9:41"
+          ],
+          "start_station_name": [
+            "2nd at South Park",
+            "South Van Ness at Market",
+            "Redwood City Caltrain Station",
+            "Mountain View City Hall",
+            "Commercial at Montgomery",
+            "University and Emerson",
+            "Grant Avenue at Columbus Avenue",
+            "Mechanics Plaza (Market at Battery)"
+          ],
+          "start_station_id": [
+            "64",
+            "66",
+            "22",
+            "27",
+            "45",
+            "35",
+            "73",
+            "75"
+          ],
+          "end_date": [
+            "8/29/2013 9:11",
+            "8/29/2013 9:42",
+            "8/29/2013 9:43",
+            "8/29/2013 10:34",
+            "8/29/2013 9:52",
+            "8/29/2013 9:49",
+            "8/29/2013 9:41",
+            "8/29/2013 9:46"
+          ],
+          "end_station_name": [
+            "2nd at South Park",
+            "San Francisco Caltrain 2 (330 Townsend)",
+            "Redwood City Caltrain Station",
+            "South Van Ness at Market",
+            "Mountain View City Hall",
+            "Commercial at Montgomery",
+            "California Ave Caltrain Station",
+            "Clay at Battery"
+          ],
+          "end_station_id": [
+            "64",
+            "69",
+            "22",
+            "66",
+            "27",
+            "45",
+            "36",
+            "41"
+          ],
+          "bike_id": [
+            "288",
+            "321",
+            "317",
+            "316",
+            "322",
+            "228",
+            "327",
+            "315"
+          ],
+          "subscription_type": [
+            "Subscriber",
+            "Customer"
+          ],
+          "zip_code": [
+            "94114",
+            "94703",
+            "94115",
+            "94122",
+            "94597",
+            "94062",
+            "94102",
+            "94117"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "weather": {
+        "rows": 3665,
+        "sample_values": {
+          "date": [
+            "8/29/2013",
+            "8/30/2013",
+            "8/31/2013",
+            "9/1/2013",
+            "9/2/2013",
+            "9/3/2013",
+            "9/4/2013",
+            "9/5/2013"
+          ],
+          "max_temperature_f": [
+            "74",
+            "78",
+            "71",
+            "75",
+            "73",
+            "72",
+            "85",
+            "88"
+          ],
+          "mean_temperature_f": [
+            "68",
+            "69",
+            "64",
+            "66",
+            "67",
+            "71",
+            "73",
+            "65"
+          ],
+          "min_temperature_f": [
+            "61",
+            "60",
+            "57",
+            "58",
+            "62",
+            "56",
+            "55",
+            "59"
+          ],
+          "max_dew_point_f": [
+            "61",
+            "57",
+            "60",
+            "59",
+            "64",
+            "58",
+            "55",
+            "56"
+          ],
+          "mean_dew_point_f": [
+            "58",
+            "56",
+            "60",
+            "57",
+            "51",
+            "54",
+            "55",
+            "53"
+          ],
+          "min_dew_point_f": [
+            "56",
+            "54",
+            "53",
+            "58",
+            "51",
+            "45",
+            "46",
+            "52"
+          ],
+          "max_humidity": [
+            "93",
+            "90",
+            "87",
+            "84",
+            "86",
+            "78",
+            "77",
+            "83"
+          ],
+          "mean_humidity": [
+            "75",
+            "70",
+            "68",
+            "77",
+            "65",
+            "72",
+            "74",
+            "58"
+          ],
+          "min_humidity": [
+            "57",
+            "50",
+            "49",
+            "61",
+            "46",
+            "53",
+            "29",
+            "31"
+          ],
+          "max_sea_level_pressure_inches": [
+            "30.07",
+            "30.05",
+            "30.0",
+            "29.96",
+            "29.97",
+            "30.02",
+            "30.04",
+            "29.88"
+          ],
+          "mean_sea_level_pressure_inches": [
+            "30.02",
+            "30.0",
+            "29.96",
+            "29.93",
+            "29.94",
+            "29.98",
+            "30.01",
+            "29.92"
+          ],
+          "min_sea_level_pressure_inches": [
+            "29.97",
+            "29.93",
+            "29.92",
+            "29.91",
+            "29.9",
+            "29.95",
+            "29.83",
+            "29.81"
+          ],
+          "max_visibility_miles": [
+            "10",
+            "9",
+            "8",
+            "20",
+            "15",
+            "19",
+            "6",
+            "12"
+          ],
+          "mean_visibility_miles": [
+            "10",
+            "9",
+            "8",
+            "5",
+            "7",
+            "6",
+            "4",
+            "13"
+          ],
+          "min_visibility_miles": [
+            "10",
+            "7",
+            "6",
+            "9",
+            "2",
+            "0",
+            "8",
+            "4"
+          ],
+          "max_wind_Speed_mph": [
+            "23",
+            "29",
+            "26",
+            "25",
+            "24",
+            "31",
+            "21",
+            "17"
+          ],
+          "mean_wind_speed_mph": [
+            "11",
+            "13",
+            "15",
+            "12",
+            "19",
+            "21",
+            "8",
+            "9"
+          ],
+          "max_gust_speed_mph": [
+            "28",
+            "35",
+            "31",
+            "29",
+            "30",
+            "37",
+            "25",
+            "21"
+          ],
+          "precipitation_inches": [
+            "0",
+            "0.23",
+            "T",
+            "0.01",
+            "0.28",
+            "0.63",
+            "0.29",
+            "0.06"
+          ],
+          "cloud_cover": [
+            "4",
+            "2",
+            "6",
+            "3",
+            "0",
+            "1",
+            "5",
+            "7"
+          ],
+          "events": [
+            "Fog",
+            "Rain",
+            "Fog-Rain",
+            "rain",
+            "Rain-Thunderstorm"
+          ],
+          "wind_dir_degrees": [
+            "286",
+            "291",
+            "284",
+            "277",
+            "276",
+            "269",
+            "270",
+            "287"
+          ],
+          "zip_code": [
+            "94107",
+            "94063",
+            "94301",
+            "94041",
+            "95113"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,764 @@
+{
+  "db_id": "telecommunications_customer_services_and_subscriptions",
+  "source": "synsql",
+  "tables": 24,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/telecommunications_customer_services_and_subscriptions",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"add_ons\" {\n  \"add_on_id\" INTEGER [pk]\n  \"add_on_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"one_time_cost\" REAL\n}\n\nTable \"public\".\"billing_invoices\" {\n  \"invoice_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"invoice_date\" TEXT\n  \"due_date\" TEXT\n  \"total_amount\" REAL\n  \"status\" TEXT\n  \"payment_date\" TEXT\n  \"payment_method\" TEXT\n}\n\nTable \"public\".\"churn_predictions\" {\n  \"prediction_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"prediction_date\" TEXT\n  \"churn_probability\" REAL\n  \"churn_reason\" TEXT\n  \"recommended_action\" TEXT\n}\n\nTable \"public\".\"customer_add_ons\" {\n  \"customer_add_on_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"add_on_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"public\".\"customer_payments\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"payment_method_id\" INTEGER\n  \"payment_date\" TEXT\n  \"amount\" REAL\n  \"invoice_id\" INTEGER\n  \"payment_status\" TEXT\n}\n\nTable \"public\".\"customer_phone_services\" {\n  \"customer_phone_service_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"phone_service_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"public\".\"customer_promotions\" {\n  \"customer_promotion_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"promotion_id\" INTEGER\n  \"applied_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"customer_subscriptions\" {\n  \"subscription_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"plan_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"public\".\"customer_support_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"support_agent_id\" INTEGER\n  \"interaction_date\" TEXT\n  \"interaction_type\" TEXT\n  \"description\" TEXT\n  \"resolution_date\" TEXT\n  \"resolution\" TEXT\n}\n\nTable \"public\".\"customer_surveys\" {\n  \"customer_survey_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"survey_id\" INTEGER\n  \"response_date\" TEXT\n  \"response_data\" TEXT\n}\n\nTable \"public\".\"customer_value\" {\n  \"customer_id\" TEXT [pk]\n  \"clv_date\" TEXT [pk]\n  \"clv_score\" REAL\n  \"clv_segment\" TEXT\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" TEXT [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"account_creation_date\" TEXT\n  \"last_modified_date\" TEXT\n  \"language_preference\" TEXT\n  \"communication_preference\" TEXT\n  \"marketing_opt_in\" INTEGER\n}\n\nTable \"public\".\"feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"feedback_date\" TEXT\n  \"feedback_text\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"invoice_items\" {\n  \"item_id\" INTEGER [pk]\n  \"invoice_id\" INTEGER\n  \"description\" TEXT\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"total_price\" REAL\n}\n\nTable \"public\".\"payment_methods\" {\n  \"payment_method_id\" INTEGER [pk]\n  \"payment_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"phone_services\" {\n  \"phone_service_id\" INTEGER [pk]\n  \"phone_service_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"minutes_included\" INTEGER\n  \"text_messages_included\" INTEGER\n  \"data_allowance\" TEXT\n}\n\nTable \"public\".\"promotions\" {\n  \"promotion_id\" INTEGER [pk]\n  \"promotion_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"discount_amount\" REAL\n  \"discount_type\" TEXT\n  \"target_audience\" TEXT\n}\n\nTable \"public\".\"recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"recommendation_date\" TEXT\n  \"recommended_service\" TEXT\n  \"recommended_plan\" TEXT\n  \"recommended_add_on\" TEXT\n}\n\nTable \"public\".\"service_plans\" {\n  \"plan_id\" INTEGER [pk]\n  \"plan_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"annual_cost\" REAL\n  \"internet_service\" TEXT\n  \"data_limit\" TEXT\n  \"speed\" TEXT\n  \"contract_length\" INTEGER\n  \"early_termination_fee\" REAL\n}\n\nTable \"public\".\"support_agents\" {\n  \"agent_id\" INTEGER [pk]\n  \"agent_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"department\" TEXT\n  \"expertise\" TEXT\n}\n\nTable \"public\".\"surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"survey_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"system_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"password_hash\" TEXT\n  \"last_login_date\" TEXT\n}\n\nRef: \"public\".\"billing_invoices\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"churn_predictions\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_add_ons\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_add_ons\".\"add_on_id\" > \"public\".\"add_ons\".\"add_on_id\"\nRef: \"public\".\"customer_payments\".\"invoice_id\" > \"public\".\"billing_invoices\".\"invoice_id\"\nRef: \"public\".\"customer_payments\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_payments\".\"payment_method_id\" > \"public\".\"payment_methods\".\"payment_method_id\"\nRef: \"public\".\"customer_phone_services\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_phone_services\".\"phone_service_id\" > \"public\".\"phone_services\".\"phone_service_id\"\nRef: \"public\".\"customer_promotions\".\"promotion_id\" > \"public\".\"promotions\".\"promotion_id\"\nRef: \"public\".\"customer_promotions\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_subscriptions\".\"plan_id\" > \"public\".\"service_plans\".\"plan_id\"\nRef: \"public\".\"customer_subscriptions\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_support_logs\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"customer_support_logs\".\"support_agent_id\" > \"public\".\"support_agents\".\"agent_id\"\nRef: \"public\".\"customer_surveys\".\"survey_id\" > \"public\".\"surveys\".\"survey_id\"\nRef: \"public\".\"customer_surveys\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"feedback\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"invoice_items\".\"invoice_id\" > \"public\".\"billing_invoices\".\"invoice_id\"\nRef: \"public\".\"recommendations\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"system_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"add_ons\" {\n  \"add_on_id\" INTEGER [pk]\n  \"add_on_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"one_time_cost\" REAL\n}\n\nTable \"billing_invoices\" {\n  \"invoice_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"invoice_date\" TEXT\n  \"due_date\" TEXT\n  \"total_amount\" REAL\n  \"status\" TEXT\n  \"payment_date\" TEXT\n  \"payment_method\" TEXT\n}\n\nTable \"churn_predictions\" {\n  \"prediction_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"prediction_date\" TEXT\n  \"churn_probability\" REAL\n  \"churn_reason\" TEXT\n  \"recommended_action\" TEXT\n}\n\nTable \"customer_add_ons\" {\n  \"customer_add_on_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"add_on_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"customer_payments\" {\n  \"payment_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"payment_method_id\" INTEGER\n  \"payment_date\" TEXT\n  \"amount\" REAL\n  \"invoice_id\" INTEGER\n  \"payment_status\" TEXT\n}\n\nTable \"customer_phone_services\" {\n  \"customer_phone_service_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"phone_service_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"customer_promotions\" {\n  \"customer_promotion_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"promotion_id\" INTEGER\n  \"applied_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"customer_subscriptions\" {\n  \"subscription_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"plan_id\" INTEGER\n  \"subscription_start_date\" TEXT\n  \"subscription_end_date\" TEXT\n  \"status\" TEXT\n  \"auto_renew\" INTEGER\n  \"renewal_date\" TEXT\n}\n\nTable \"customer_support_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"support_agent_id\" INTEGER\n  \"interaction_date\" TEXT\n  \"interaction_type\" TEXT\n  \"description\" TEXT\n  \"resolution_date\" TEXT\n  \"resolution\" TEXT\n}\n\nTable \"customer_surveys\" {\n  \"customer_survey_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"survey_id\" INTEGER\n  \"response_date\" TEXT\n  \"response_data\" TEXT\n}\n\nTable \"customer_value\" {\n  \"customer_id\" TEXT [pk]\n  \"clv_date\" TEXT [pk]\n  \"clv_score\" REAL\n  \"clv_segment\" TEXT\n}\n\nTable \"customers\" {\n  \"customer_id\" TEXT [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"account_creation_date\" TEXT\n  \"last_modified_date\" TEXT\n  \"language_preference\" TEXT\n  \"communication_preference\" TEXT\n  \"marketing_opt_in\" INTEGER\n}\n\nTable \"feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"feedback_date\" TEXT\n  \"feedback_text\" TEXT\n  \"status\" TEXT\n}\n\nTable \"invoice_items\" {\n  \"item_id\" INTEGER [pk]\n  \"invoice_id\" INTEGER\n  \"description\" TEXT\n  \"quantity\" INTEGER\n  \"unit_price\" REAL\n  \"total_price\" REAL\n}\n\nTable \"payment_methods\" {\n  \"payment_method_id\" INTEGER [pk]\n  \"payment_method_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"phone_services\" {\n  \"phone_service_id\" INTEGER [pk]\n  \"phone_service_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"minutes_included\" INTEGER\n  \"text_messages_included\" INTEGER\n  \"data_allowance\" TEXT\n}\n\nTable \"promotions\" {\n  \"promotion_id\" INTEGER [pk]\n  \"promotion_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"discount_amount\" REAL\n  \"discount_type\" TEXT\n  \"target_audience\" TEXT\n}\n\nTable \"recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"customer_id\" TEXT\n  \"recommendation_date\" TEXT\n  \"recommended_service\" TEXT\n  \"recommended_plan\" TEXT\n  \"recommended_add_on\" TEXT\n}\n\nTable \"service_plans\" {\n  \"plan_id\" INTEGER [pk]\n  \"plan_name\" TEXT\n  \"description\" TEXT\n  \"monthly_cost\" REAL\n  \"annual_cost\" REAL\n  \"internet_service\" TEXT\n  \"data_limit\" TEXT\n  \"speed\" TEXT\n  \"contract_length\" INTEGER\n  \"early_termination_fee\" REAL\n}\n\nTable \"support_agents\" {\n  \"agent_id\" INTEGER [pk]\n  \"agent_name\" TEXT\n  \"email\" TEXT\n  \"phone_number\" TEXT\n  \"department\" TEXT\n  \"expertise\" TEXT\n}\n\nTable \"surveys\" {\n  \"survey_id\" INTEGER [pk]\n  \"survey_name\" TEXT\n  \"description\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"system_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"description\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"password_hash\" TEXT\n  \"last_login_date\" TEXT\n}\n\nRef: \"billing_invoices\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"churn_predictions\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_add_ons\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_add_ons\".\"add_on_id\" > \"add_ons\".\"add_on_id\"\n\nRef: \"customer_payments\".\"invoice_id\" > \"billing_invoices\".\"invoice_id\"\n\nRef: \"customer_payments\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_payments\".\"payment_method_id\" > \"payment_methods\".\"payment_method_id\"\n\nRef: \"customer_phone_services\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_phone_services\".\"phone_service_id\" > \"phone_services\".\"phone_service_id\"\n\nRef: \"customer_promotions\".\"promotion_id\" > \"promotions\".\"promotion_id\"\n\nRef: \"customer_promotions\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_subscriptions\".\"plan_id\" > \"service_plans\".\"plan_id\"\n\nRef: \"customer_subscriptions\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_support_logs\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"customer_support_logs\".\"support_agent_id\" > \"support_agents\".\"agent_id\"\n\nRef: \"customer_surveys\".\"survey_id\" > \"surveys\".\"survey_id\"\n\nRef: \"customer_surveys\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"feedback\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"invoice_items\".\"invoice_id\" > \"billing_invoices\".\"invoice_id\"\n\nRef: \"recommendations\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"system_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\nadd_ons: 6 rows\n  add_on_name: 'Online Security', 'Online Backup', 'Device Protection', ...\n  description: 'Online security and protection', 'Online data backup', 'Device protection and support', ...\n  monthly_cost: '5.0', '10.0'\n\nbilling_invoices: 2 rows\n  status: 'unpaid', 'paid'\n  payment_method: 'Credit Card'\n  total_amount: '50.0', '150.0'\n\nchurn_predictions: 2 rows\n  churn_reason: 'Poor internet quality', 'No issues detected'\n  recommended_action: 'Offer a discount on the next bill', 'Monitor usage and send a satisfaction survey'\n  prediction_date: '2023-05-01', '2023-05-02'\n\ncustomer_add_ons: 2 rows\n  status: 'active'\n  subscription_start_date: '2021-01-01', '2021-02-01'\n  auto_renew: '1', '0'\n\ncustomer_payments: 1 rows\n  payment_status: 'successful'\n  payment_date: '2023-05-10'\n  amount: '150.0'\n\ncustomer_phone_services: 2 rows\n  status: 'active'\n  subscription_start_date: '2021-01-01', '2021-02-01'\n  auto_renew: '1', '0'\n\ncustomer_promotions: 2 rows\n  status: 'applied', 'redeemed'\n  applied_date: '2023-06-01', '2023-05-01'\n  customer_id: '0'\n\ncustomer_subscriptions: 2 rows\n  status: 'active'\n  subscription_start_date: '2021-01-01', '2021-02-01'\n  auto_renew: '1', '0'\n\ncustomer_support_logs: 2 rows\n  interaction_type: 'phone call', 'email'\n  description: 'Trouble with internet connection', 'Billing inquiry'\n  interaction_date: '2023-05-01', '2023-05-02'\n\ncustomer_surveys: 2 rows\n  response_data: '{\"q1\": \"satisfied\", \"q2\": \"neutral\"}', '{\"q1\": \"very satisfied\", \"q2\": \"satisfied\"}'\n  response_date: '2023-05-05', '2023-06-05'\n  customer_id: '0'\n\ncustomer_value: 2 rows\n  clv_segment: 'high value', 'medium value'\n  clv_score: '0.8', '0.5'\n  clv_date: '0', '1'\n\ncustomers: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  city: 'Anytown', 'Othertown'\n\nfeedback: 2 rows\n  status: 'new', 'addressed'\n  feedback_text: 'Internet connection is slow', 'Love the new streaming TV service'\n  feedback_date: '2023-05-01', '2023-05-02'\n\ninvoice_items: 2 rows\n  description: 'Basic DSL Service', 'Online Backup'\n  unit_price: '30.0', '5.0'\n  total_price: '30.0', '5.0'\n\npayment_methods: 2 rows\n  payment_method_name: 'Credit Card', 'Bank Transfer'\n  description: 'Payment via credit card', 'Payment via bank transfer'\n  payment_method_id: '0', '1'\n\nphone_services: 2 rows\n  description: 'No phone service included', 'Basic phone service with limited features'\n  phone_service_name: 'No phone service', 'Basic phone service'\n  data_allowance: '0GB', '1GB'\n\npromotions: 2 rows\n  promotion_name: 'Summer Savings', 'New Customer Offer'\n  description: '10% off all services', 'Free first month of service'\n  discount_type: 'percentage', 'fixed amount'\n\nrecommendations: 2 rows\n  recommended_service: 'Internet', 'Phone'\n  recommended_plan: 'Premium', 'Basic'\n  recommended_add_on: 'Online Security', 'Streaming TV'\n\nservice_plans: 2 rows\n  plan_name: 'Basic DSL', 'Premium Fiber'\n  description: 'Basic internet service with limited data and speed', 'High-speed internet with unlimited data'\n  internet_service: 'DSL', 'Fiber optic'\n\nsupport_agents: 2 rows\n  agent_name: 'Alice Johnson', 'Bob Williams'\n  department: 'Technical Support', 'Billing Support'\n  expertise: 'Internet connectivity', 'Billing and payments'\n\nsurveys: 2 rows\n  survey_name: 'Customer Satisfaction Survey', 'New Service Feedback'\n  description: 'Survey to measure customer satisfaction', 'Survey to gather feedback on new services'\n  status: 'active'\n\nsystem_logs: 2 rows\n  description: 'User logged in', 'Updated customer subscription'\n  action: 'login', 'update customer'\n  ip_address: '192.168.1.100', '192.168.1.101'\n\nuser_roles: 3 rows\n  role_name: 'Customer Service Representative', 'Account Manager', 'System Administrator'\n  description: 'Handles customer inquiries and support', 'Manages customer accounts and subscriptions', 'Administers the system and manages user access'\n  role_id: '0', '1', '2'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  password_hash: 'hashed_password_123', 'hashed_password_456'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "add_ons": {
+        "rows": 6,
+        "sample_values": {
+          "add_on_id": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "add_on_name": [
+            "Online Security",
+            "Online Backup",
+            "Device Protection",
+            "Tech Support",
+            "Streaming TV",
+            "Streaming Movies"
+          ],
+          "description": [
+            "Online security and protection",
+            "Online data backup",
+            "Device protection and support",
+            "Technical support and assistance",
+            "Streaming TV service",
+            "Streaming movie service"
+          ],
+          "monthly_cost": [
+            "5.0",
+            "10.0"
+          ],
+          "one_time_cost": [
+            "0.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "billing_invoices": {
+        "rows": 2,
+        "sample_values": {
+          "invoice_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "invoice_date": [
+            "2023-05-01"
+          ],
+          "due_date": [
+            "2023-05-15"
+          ],
+          "total_amount": [
+            "50.0",
+            "150.0"
+          ],
+          "status": [
+            "unpaid",
+            "paid"
+          ],
+          "payment_date": [
+            "2023-05-10"
+          ],
+          "payment_method": [
+            "Credit Card"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "churn_predictions": {
+        "rows": 2,
+        "sample_values": {
+          "prediction_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "prediction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "churn_probability": [
+            "0.3",
+            "0.1"
+          ],
+          "churn_reason": [
+            "Poor internet quality",
+            "No issues detected"
+          ],
+          "recommended_action": [
+            "Offer a discount on the next bill",
+            "Monitor usage and send a satisfaction survey"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_add_ons": {
+        "rows": 2,
+        "sample_values": {
+          "customer_add_on_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "add_on_id": [
+            "4",
+            "3"
+          ],
+          "subscription_start_date": [
+            "2021-01-01",
+            "2021-02-01"
+          ],
+          "status": [
+            "active"
+          ],
+          "auto_renew": [
+            "1",
+            "0"
+          ],
+          "renewal_date": [
+            "2024-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_payments": {
+        "rows": 1,
+        "sample_values": {
+          "payment_id": [
+            "0"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "payment_method_id": [
+            "0"
+          ],
+          "payment_date": [
+            "2023-05-10"
+          ],
+          "amount": [
+            "150.0"
+          ],
+          "invoice_id": [
+            "1"
+          ],
+          "payment_status": [
+            "successful"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_phone_services": {
+        "rows": 2,
+        "sample_values": {
+          "customer_phone_service_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "phone_service_id": [
+            "0",
+            "1"
+          ],
+          "subscription_start_date": [
+            "2021-01-01",
+            "2021-02-01"
+          ],
+          "status": [
+            "active"
+          ],
+          "auto_renew": [
+            "1",
+            "0"
+          ],
+          "renewal_date": [
+            "2024-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_promotions": {
+        "rows": 2,
+        "sample_values": {
+          "customer_promotion_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "promotion_id": [
+            "1",
+            "0"
+          ],
+          "applied_date": [
+            "2023-06-01",
+            "2023-05-01"
+          ],
+          "status": [
+            "applied",
+            "redeemed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_subscriptions": {
+        "rows": 2,
+        "sample_values": {
+          "subscription_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "plan_id": [
+            "0"
+          ],
+          "subscription_start_date": [
+            "2021-01-01",
+            "2021-02-01"
+          ],
+          "status": [
+            "active"
+          ],
+          "auto_renew": [
+            "1",
+            "0"
+          ],
+          "renewal_date": [
+            "2024-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_support_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "support_agent_id": [
+            "1"
+          ],
+          "interaction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "interaction_type": [
+            "phone call",
+            "email"
+          ],
+          "description": [
+            "Trouble with internet connection",
+            "Billing inquiry"
+          ],
+          "resolution_date": [
+            "2023-05-02",
+            "2023-05-03"
+          ],
+          "resolution": [
+            "resolved"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_surveys": {
+        "rows": 2,
+        "sample_values": {
+          "customer_survey_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "response_date": [
+            "2023-05-05",
+            "2023-06-05"
+          ],
+          "response_data": [
+            "{\"q1\": \"satisfied\", \"q2\": \"neutral\"}",
+            "{\"q1\": \"very satisfied\", \"q2\": \"satisfied\"}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_value": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "clv_date": [
+            "0",
+            "1"
+          ],
+          "clv_score": [
+            "0.8",
+            "0.5"
+          ],
+          "clv_segment": [
+            "high value",
+            "medium value"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "state": [
+            "CA"
+          ],
+          "zip_code": [
+            "12345",
+            "67890"
+          ],
+          "account_creation_date": [
+            "2021-01-01",
+            "2021-02-01"
+          ],
+          "last_modified_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "language_preference": [
+            "English",
+            "Spanish"
+          ],
+          "communication_preference": [
+            "Email",
+            "Phone"
+          ],
+          "marketing_opt_in": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "feedback_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "feedback_text": [
+            "Internet connection is slow",
+            "Love the new streaming TV service"
+          ],
+          "status": [
+            "new",
+            "addressed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "invoice_items": {
+        "rows": 2,
+        "sample_values": {
+          "item_id": [
+            "0",
+            "1"
+          ],
+          "invoice_id": [
+            "0"
+          ],
+          "description": [
+            "Basic DSL Service",
+            "Online Backup"
+          ],
+          "quantity": [
+            "1"
+          ],
+          "unit_price": [
+            "30.0",
+            "5.0"
+          ],
+          "total_price": [
+            "30.0",
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_methods": {
+        "rows": 2,
+        "sample_values": {
+          "payment_method_id": [
+            "0",
+            "1"
+          ],
+          "payment_method_name": [
+            "Credit Card",
+            "Bank Transfer"
+          ],
+          "description": [
+            "Payment via credit card",
+            "Payment via bank transfer"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "phone_services": {
+        "rows": 2,
+        "sample_values": {
+          "phone_service_id": [
+            "0",
+            "1"
+          ],
+          "phone_service_name": [
+            "No phone service",
+            "Basic phone service"
+          ],
+          "description": [
+            "No phone service included",
+            "Basic phone service with limited features"
+          ],
+          "monthly_cost": [
+            "0.0",
+            "20.0"
+          ],
+          "minutes_included": [
+            "0",
+            "100"
+          ],
+          "text_messages_included": [
+            "0",
+            "100"
+          ],
+          "data_allowance": [
+            "0GB",
+            "1GB"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "promotions": {
+        "rows": 2,
+        "sample_values": {
+          "promotion_id": [
+            "0",
+            "1"
+          ],
+          "promotion_name": [
+            "Summer Savings",
+            "New Customer Offer"
+          ],
+          "description": [
+            "10% off all services",
+            "Free first month of service"
+          ],
+          "start_date": [
+            "2023-06-01",
+            "2023-05-01"
+          ],
+          "end_date": [
+            "2023-08-31",
+            "2023-12-31"
+          ],
+          "discount_amount": [
+            "10.0",
+            "30.0"
+          ],
+          "discount_type": [
+            "percentage",
+            "fixed amount"
+          ],
+          "target_audience": [
+            "new customers"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "recommendations": {
+        "rows": 2,
+        "sample_values": {
+          "recommendation_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "recommendation_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "recommended_service": [
+            "Internet",
+            "Phone"
+          ],
+          "recommended_plan": [
+            "Premium",
+            "Basic"
+          ],
+          "recommended_add_on": [
+            "Online Security",
+            "Streaming TV"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "service_plans": {
+        "rows": 2,
+        "sample_values": {
+          "plan_id": [
+            "0",
+            "1"
+          ],
+          "plan_name": [
+            "Basic DSL",
+            "Premium Fiber"
+          ],
+          "description": [
+            "Basic internet service with limited data and speed",
+            "High-speed internet with unlimited data"
+          ],
+          "monthly_cost": [
+            "30.0",
+            "100.0"
+          ],
+          "annual_cost": [
+            "360.0",
+            "1200.0"
+          ],
+          "internet_service": [
+            "DSL",
+            "Fiber optic"
+          ],
+          "data_limit": [
+            "100GB",
+            "Unlimited"
+          ],
+          "speed": [
+            "10Mbps",
+            "1000Mbps"
+          ],
+          "contract_length": [
+            "12",
+            "24"
+          ],
+          "early_termination_fee": [
+            "50.0",
+            "100.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "support_agents": {
+        "rows": 2,
+        "sample_values": {
+          "agent_id": [
+            "0",
+            "1"
+          ],
+          "agent_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "234-567-8901"
+          ],
+          "department": [
+            "Technical Support",
+            "Billing Support"
+          ],
+          "expertise": [
+            "Internet connectivity",
+            "Billing and payments"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "surveys": {
+        "rows": 2,
+        "sample_values": {
+          "survey_id": [
+            "0",
+            "1"
+          ],
+          "survey_name": [
+            "Customer Satisfaction Survey",
+            "New Service Feedback"
+          ],
+          "description": [
+            "Survey to measure customer satisfaction",
+            "Survey to gather feedback on new services"
+          ],
+          "start_date": [
+            "2023-05-01",
+            "2023-06-01"
+          ],
+          "end_date": [
+            "2023-05-31",
+            "2023-06-30"
+          ],
+          "status": [
+            "active"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "system_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "action": [
+            "login",
+            "update customer"
+          ],
+          "action_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "description": [
+            "User logged in",
+            "Updated customer subscription"
+          ],
+          "ip_address": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 3,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "role_name": [
+            "Customer Service Representative",
+            "Account Manager",
+            "System Administrator"
+          ],
+          "description": [
+            "Handles customer inquiries and support",
+            "Manages customer accounts and subscriptions",
+            "Administers the system and manages user access"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role_id": [
+            "2",
+            "1"
+          ],
+          "password_hash": [
+            "hashed_password_123",
+            "hashed_password_456"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

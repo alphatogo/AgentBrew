@@ -1,0 +1,592 @@
+{
+  "db_id": "educational_practices_in_legal_research_and_instruction",
+  "source": "synsql",
+  "tables": 17,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/educational_practices_in_legal_research_and_instruction",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"student_count\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"annual_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"year\" TEXT\n  \"report_date\" TEXT\n  \"summary\" TEXT\n  \"file_path\" TEXT\n  \"evaluator_id\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"class_periods\" {\n  \"period_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"class_date\" TEXT\n  \"duration\" TEXT\n  \"description\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"departmental_contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"department\" TEXT\n  \"contact_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"position\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"external_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"resource_name\" TEXT\n  \"type\" TEXT\n  \"description\" TEXT\n  \"cost\" REAL\n  \"accessibility\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"faculties\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"title\" TEXT\n  \"office_location\" TEXT\n  \"phone_number\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n}\n\nTable \"public\".\"research_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"requirement_type\" TEXT\n  \"description\" TEXT\n  \"due_date\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"resource_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"requirement_type\" TEXT\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"student_count\" INTEGER\n  \"impact\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"semester_instructions\" {\n  \"instruction_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"semester\" TEXT\n  \"description\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"student_engagement\" {\n  \"engagement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"engagement_type\" TEXT\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"student_count\" INTEGER\n  \"impact\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"teaching_evaluations\" {\n  \"evaluation_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"practice_id\" INTEGER\n  \"evaluation_date\" TEXT\n  \"score\" INTEGER\n  \"comments\" TEXT\n  \"evaluator_id\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"teaching_methods\" {\n  \"method_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"is_in_class\" INTEGER\n  \"estimated_duration\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"teaching_practices\" {\n  \"practice_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"method_id\" INTEGER\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"semester\" TEXT\n  \"class_size\" INTEGER\n  \"student_feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"preferred_format\" TEXT\n  \"notification_preferences\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n  \"is_admin\" INTEGER\n}\n\nTable \"public\".\"vendor_presentations\" {\n  \"presentation_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"vendor_id\" INTEGER\n  \"presentation_date\" TEXT\n  \"description\" TEXT\n  \"attendance_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"public\".\"vendors\" {\n  \"vendor_id\" INTEGER [pk]\n  \"vendor_name\" TEXT\n  \"contact_email\" TEXT\n  \"description\" TEXT\n  \"website\" TEXT\n  \"last_updated\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"access_logs\".\"resource_id\" > \"public\".\"external_resources\".\"resource_id\"\nRef: \"public\".\"annual_reports\".\"evaluator_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"class_periods\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"research_requirements\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"resource_usage\".\"resource_id\" > \"public\".\"external_resources\".\"resource_id\"\nRef: \"public\".\"resource_usage\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"semester_instructions\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"student_engagement\".\"resource_id\" > \"public\".\"external_resources\".\"resource_id\"\nRef: \"public\".\"student_engagement\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"teaching_evaluations\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"teaching_evaluations\".\"practice_id\" > \"public\".\"teaching_practices\".\"practice_id\"\nRef: \"public\".\"teaching_evaluations\".\"evaluator_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"teaching_practices\".\"method_id\" > \"public\".\"teaching_methods\".\"method_id\"\nRef: \"public\".\"teaching_practices\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"user_preferences\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"user_preferences\".\"resource_id\" > \"public\".\"external_resources\".\"resource_id\"\nRef: \"public\".\"vendor_presentations\".\"user_id\" > \"public\".\"faculties\".\"user_id\"\nRef: \"public\".\"vendor_presentations\".\"vendor_id\" > \"public\".\"vendors\".\"vendor_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"student_count\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"annual_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"year\" TEXT\n  \"report_date\" TEXT\n  \"summary\" TEXT\n  \"file_path\" TEXT\n  \"evaluator_id\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"class_periods\" {\n  \"period_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"class_date\" TEXT\n  \"duration\" TEXT\n  \"description\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"departmental_contacts\" {\n  \"contact_id\" INTEGER [pk]\n  \"department\" TEXT\n  \"contact_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"position\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"external_resources\" {\n  \"resource_id\" INTEGER [pk]\n  \"resource_name\" TEXT\n  \"type\" TEXT\n  \"description\" TEXT\n  \"cost\" REAL\n  \"accessibility\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"faculties\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"department\" TEXT\n  \"title\" TEXT\n  \"office_location\" TEXT\n  \"phone_number\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n}\n\nTable \"research_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"requirement_type\" TEXT\n  \"description\" TEXT\n  \"due_date\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"resource_usage\" {\n  \"usage_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"requirement_type\" TEXT\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"student_count\" INTEGER\n  \"impact\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"semester_instructions\" {\n  \"instruction_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"semester\" TEXT\n  \"description\" TEXT\n  \"student_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"student_engagement\" {\n  \"engagement_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"engagement_type\" TEXT\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"student_count\" INTEGER\n  \"impact\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"teaching_evaluations\" {\n  \"evaluation_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"practice_id\" INTEGER\n  \"evaluation_date\" TEXT\n  \"score\" INTEGER\n  \"comments\" TEXT\n  \"evaluator_id\" INTEGER\n  \"last_updated\" TEXT\n}\n\nTable \"teaching_methods\" {\n  \"method_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"is_in_class\" INTEGER\n  \"estimated_duration\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"teaching_practices\" {\n  \"practice_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"method_id\" INTEGER\n  \"frequency\" TEXT\n  \"percentage\" REAL\n  \"semester\" TEXT\n  \"class_size\" INTEGER\n  \"student_feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"user_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"resource_id\" INTEGER\n  \"preferred_format\" TEXT\n  \"notification_preferences\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n  \"is_admin\" INTEGER\n}\n\nTable \"vendor_presentations\" {\n  \"presentation_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"vendor_id\" INTEGER\n  \"presentation_date\" TEXT\n  \"description\" TEXT\n  \"attendance_count\" INTEGER\n  \"feedback\" TEXT\n  \"last_updated\" TEXT\n}\n\nTable \"vendors\" {\n  \"vendor_id\" INTEGER [pk]\n  \"vendor_name\" TEXT\n  \"contact_email\" TEXT\n  \"description\" TEXT\n  \"website\" TEXT\n  \"last_updated\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"access_logs\".\"resource_id\" > \"external_resources\".\"resource_id\"\n\nRef: \"annual_reports\".\"evaluator_id\" > \"faculties\".\"user_id\"\n\nRef: \"class_periods\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"research_requirements\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"resource_usage\".\"resource_id\" > \"external_resources\".\"resource_id\"\n\nRef: \"resource_usage\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"semester_instructions\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"student_engagement\".\"resource_id\" > \"external_resources\".\"resource_id\"\n\nRef: \"student_engagement\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"teaching_evaluations\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"teaching_evaluations\".\"practice_id\" > \"teaching_practices\".\"practice_id\"\n\nRef: \"teaching_evaluations\".\"evaluator_id\" > \"faculties\".\"user_id\"\n\nRef: \"teaching_practices\".\"method_id\" > \"teaching_methods\".\"method_id\"\n\nRef: \"teaching_practices\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"user_preferences\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"user_preferences\".\"resource_id\" > \"external_resources\".\"resource_id\"\n\nRef: \"vendor_presentations\".\"user_id\" > \"faculties\".\"user_id\"\n\nRef: \"vendor_presentations\".\"vendor_id\" > \"vendors\".\"vendor_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-05-01', '2023-05-02'\n  student_count: '30', '25'\n\nannual_reports: 2 rows\n  year: '2023', '2024'\n  file_path: 'reports/2023.pdf', 'reports/2024.pdf'\n  report_date: '2023-12-31', '2024-12-31'\n\nclass_periods: 2 rows\n  description: 'Introduction to Legal Research', 'Advanced Legal Research Techniques'\n  class_date: '2023-09-10', '2023-09-20'\n  duration: '2 hours', '1.5 hours'\n\ndepartmental_contacts: 2 rows\n  contact_name: 'John Doe', 'Jane Smith'\n  department: 'Law School', 'Law Library'\n  position: 'Professor', 'Librarian'\n\nexternal_resources: 2 rows\n  resource_name: 'WestLaw', 'CALI Lessons'\n  type: 'Vendor Module', 'CALI Lesson'\n  description: 'Instructional modules provided by WestLaw', 'Online lessons provided by the Center for Computer'\n\nfaculties: 2 rows\n  user_name: 'John Doe', 'Jane Smith'\n  title: 'Professor', 'Librarian'\n  department: 'Law School', 'Law Library'\n\nresearch_requirements: 2 rows\n  requirement_type: 'in-class', 'external'\n  description: 'Class project on legal research', 'Required to use WestLaw modules'\n  feedback: 'Students found it very challenging', 'Students appreciated the practical application'\n\nresource_usage: 2 rows\n  requirement_type: 'required'\n  impact: 'Improved research skills', 'Enhanced understanding of legal concepts'\n  frequency: 'outside class time'\n\nsemester_instructions: 2 rows\n  description: 'Weekly legal research sessions', 'Bi-weekly legal research workshops'\n  semester: 'Fall 2023', 'Spring 2024'\n  feedback: 'Students found it very helpful', 'Students appreciated the workshops'\n\nstudent_engagement: 2 rows\n  engagement_type: 'required'\n  impact: 'Improved research skills', 'Enhanced understanding of legal concepts'\n  frequency: 'outside class time'\n\nteaching_evaluations: 2 rows\n  comments: 'Effective use of class time', 'Well-structured throughout the semester'\n  evaluation_date: '2023-06-01', '2023-07-01'\n  score: '85', '90'\n\nteaching_methods: 2 rows\n  method_name: 'In-Class Instruction', 'Throughout the Semester'\n  description: 'Devoting one or more entire class periods to intro', 'Incorporating legal research instruction throughou'\n  is_in_class: '1', '0'\n\nteaching_practices: 2 rows\n  class_size: '30', '25'\n  frequency: 'one or more class periods', 'throughout the semester'\n  semester: 'Fall 2023', 'Spring 2023'\n\nuser_preferences: 2 rows\n  preferred_format: 'online', 'PDF'\n  notification_preferences: 'email', 'SMS'\n  last_updated: '2023-09-01'\n\nuser_roles: 2 rows\n  role_name: 'Legal Writing Faculty', 'Law Librarian'\n  description: 'Faculty members who teach legal writing', 'Librarians who support legal research'\n  permissions: 'Teaching, Research', 'Support, Research'\n\nvendor_presentations: 2 rows\n  description: 'Introduction to WestLaw Legal Research Tools', 'Using LexisNexis for Legal Research'\n  feedback: 'Very informative and engaging', 'Helpful for advanced research'\n  presentation_date: '2023-04-15', '2023-05-20'\n\nvendors: 2 rows\n  vendor_name: 'WestLaw', 'LexisNexis'\n  description: 'Leading provider of legal research tools', 'Comprehensive legal research platform'\n  website: 'https://www.westlaw.com', 'https://www.lexisnexis.com'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "resource_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "annual_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2023",
+            "2024"
+          ],
+          "report_date": [
+            "2023-12-31",
+            "2024-12-31"
+          ],
+          "summary": [
+            "Annual report on legal research teaching practices",
+            "Annual report on legal research resource usage"
+          ],
+          "file_path": [
+            "reports/2023.pdf",
+            "reports/2024.pdf"
+          ],
+          "evaluator_id": [
+            "0"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "class_periods": {
+        "rows": 2,
+        "sample_values": {
+          "period_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "class_date": [
+            "2023-09-10",
+            "2023-09-20"
+          ],
+          "duration": [
+            "2 hours",
+            "1.5 hours"
+          ],
+          "description": [
+            "Introduction to Legal Research",
+            "Advanced Legal Research Techniques"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "feedback": [
+            "Students found it very helpful",
+            "Students appreciated the advanced topics"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "departmental_contacts": {
+        "rows": 2,
+        "sample_values": {
+          "contact_id": [
+            "0",
+            "1"
+          ],
+          "department": [
+            "Law School",
+            "Law Library"
+          ],
+          "contact_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "jdoe@university.edu",
+            "jsmith@university.edu"
+          ],
+          "phone": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "position": [
+            "Professor",
+            "Librarian"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "external_resources": {
+        "rows": 2,
+        "sample_values": {
+          "resource_id": [
+            "0",
+            "1"
+          ],
+          "resource_name": [
+            "WestLaw",
+            "CALI Lessons"
+          ],
+          "type": [
+            "Vendor Module",
+            "CALI Lesson"
+          ],
+          "description": [
+            "Instructional modules provided by WestLaw",
+            "Online lessons provided by the Center for Computer"
+          ],
+          "cost": [
+            "100.0",
+            "0.0"
+          ],
+          "accessibility": [
+            "Online"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "faculties": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "jdoe@university.edu",
+            "jsmith@university.edu"
+          ],
+          "role_id": [
+            "1",
+            "2"
+          ],
+          "department": [
+            "Law School",
+            "Law Library"
+          ],
+          "title": [
+            "Professor",
+            "Librarian"
+          ],
+          "office_location": [
+            "Room 101",
+            "Room 202"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "start_date": [
+            "2020-01-01",
+            "2018-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "research_requirements": {
+        "rows": 2,
+        "sample_values": {
+          "requirement_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "requirement_type": [
+            "in-class",
+            "external"
+          ],
+          "description": [
+            "Class project on legal research",
+            "Required to use WestLaw modules"
+          ],
+          "due_date": [
+            "2023-12-15",
+            "2023-11-30"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "feedback": [
+            "Students found it very challenging",
+            "Students appreciated the practical application"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "resource_usage": {
+        "rows": 2,
+        "sample_values": {
+          "usage_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "resource_id": [
+            "0"
+          ],
+          "requirement_type": [
+            "required"
+          ],
+          "frequency": [
+            "outside class time"
+          ],
+          "percentage": [
+            "24.32",
+            "28.72"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "impact": [
+            "Improved research skills",
+            "Enhanced understanding of legal concepts"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "semester_instructions": {
+        "rows": 2,
+        "sample_values": {
+          "instruction_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "semester": [
+            "Fall 2023",
+            "Spring 2024"
+          ],
+          "description": [
+            "Weekly legal research sessions",
+            "Bi-weekly legal research workshops"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "feedback": [
+            "Students found it very helpful",
+            "Students appreciated the workshops"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "student_engagement": {
+        "rows": 2,
+        "sample_values": {
+          "engagement_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "resource_id": [
+            "1"
+          ],
+          "engagement_type": [
+            "required"
+          ],
+          "frequency": [
+            "outside class time"
+          ],
+          "percentage": [
+            "24.32",
+            "28.72"
+          ],
+          "student_count": [
+            "30",
+            "25"
+          ],
+          "impact": [
+            "Improved research skills",
+            "Enhanced understanding of legal concepts"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teaching_evaluations": {
+        "rows": 2,
+        "sample_values": {
+          "evaluation_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "practice_id": [
+            "0",
+            "1"
+          ],
+          "evaluation_date": [
+            "2023-06-01",
+            "2023-07-01"
+          ],
+          "score": [
+            "85",
+            "90"
+          ],
+          "comments": [
+            "Effective use of class time",
+            "Well-structured throughout the semester"
+          ],
+          "evaluator_id": [
+            "1",
+            "0"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teaching_methods": {
+        "rows": 2,
+        "sample_values": {
+          "method_id": [
+            "0",
+            "1"
+          ],
+          "method_name": [
+            "In-Class Instruction",
+            "Throughout the Semester"
+          ],
+          "description": [
+            "Devoting one or more entire class periods to intro",
+            "Incorporating legal research instruction throughou"
+          ],
+          "is_in_class": [
+            "1",
+            "0"
+          ],
+          "estimated_duration": [
+            "1-2 hours",
+            "Varies"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teaching_practices": {
+        "rows": 2,
+        "sample_values": {
+          "practice_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "method_id": [
+            "0",
+            "1"
+          ],
+          "frequency": [
+            "one or more class periods",
+            "throughout the semester"
+          ],
+          "percentage": [
+            "82.43",
+            "90.54"
+          ],
+          "semester": [
+            "Fall 2023",
+            "Spring 2023"
+          ],
+          "class_size": [
+            "30",
+            "25"
+          ],
+          "student_feedback": [
+            "Students found it very helpful",
+            "Students appreciated the continuous instruction"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sample_values": {
+          "preference_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "resource_id": [
+            "1",
+            "0"
+          ],
+          "preferred_format": [
+            "online",
+            "PDF"
+          ],
+          "notification_preferences": [
+            "email",
+            "SMS"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "Legal Writing Faculty",
+            "Law Librarian"
+          ],
+          "description": [
+            "Faculty members who teach legal writing",
+            "Librarians who support legal research"
+          ],
+          "permissions": [
+            "Teaching, Research",
+            "Support, Research"
+          ],
+          "is_admin": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "vendor_presentations": {
+        "rows": 2,
+        "sample_values": {
+          "presentation_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "vendor_id": [
+            "0"
+          ],
+          "presentation_date": [
+            "2023-04-15",
+            "2023-05-20"
+          ],
+          "description": [
+            "Introduction to WestLaw Legal Research Tools",
+            "Using LexisNexis for Legal Research"
+          ],
+          "attendance_count": [
+            "30",
+            "25"
+          ],
+          "feedback": [
+            "Very informative and engaging",
+            "Helpful for advanced research"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "vendors": {
+        "rows": 2,
+        "sample_values": {
+          "vendor_id": [
+            "0",
+            "1"
+          ],
+          "vendor_name": [
+            "WestLaw",
+            "LexisNexis"
+          ],
+          "contact_email": [
+            "contact@westlaw.com",
+            "contact@lexisnexis.com"
+          ],
+          "description": [
+            "Leading provider of legal research tools",
+            "Comprehensive legal research platform"
+          ],
+          "website": [
+            "https://www.westlaw.com",
+            "https://www.lexisnexis.com"
+          ],
+          "last_updated": [
+            "2023-09-01"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "db_id": "pharmaceutical_product_pricing_and_ordering",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/pharmaceutical_product_pricing_and_ordering",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"cart_items\" {\n  \"cart_item_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"added_date\" TEXT\n  \"is_saved_for_later\" INTEGER\n  \"last_modified_date\" TEXT\n}\n\nTable \"public\".\"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n  \"is_root_category\" INTEGER\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"date_joined\" TEXT\n  \"is_active\" INTEGER\n  \"customer_type\" TEXT\n  \"tax_id\" TEXT\n  \"loyalty_points\" INTEGER\n  \"last_purchase_date\" TEXT\n  \"total_spent\" TEXT\n}\n\nTable \"public\".\"inventory_levels\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"quantity_in_stock\" INTEGER\n  \"reorder_level\" INTEGER\n  \"last_updated\" TEXT\n  \"last_inventory_check_date\" TEXT\n  \"next_inventory_check_date\" TEXT\n  \"minimum_stock_level\" INTEGER\n  \"maximum_stock_level\" INTEGER\n}\n\nTable \"public\".\"manufacturers\" {\n  \"manufacturer_id\" INTEGER [pk]\n  \"manufacturer_name\" TEXT\n  \"contact_email\" TEXT\n  \"address\" TEXT\n  \"phone\" TEXT\n  \"website\" TEXT\n  \"logo_url\" TEXT\n}\n\nTable \"public\".\"order_history\" {\n  \"history_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"change_date\" TEXT\n  \"change_type\" TEXT\n  \"change_details\" TEXT\n  \"changed_by_user_id\" INTEGER\n  \"change_reason\" TEXT\n}\n\nTable \"public\".\"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"total_price\" TEXT\n  \"discount_amount\" TEXT\n  \"tax_amount\" TEXT\n}\n\nTable \"public\".\"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total_amount\" TEXT\n  \"status\" TEXT\n  \"shipping_address\" TEXT\n  \"billing_address\" TEXT\n  \"payment_method\" TEXT\n  \"order_number\" TEXT\n  \"coupon_code\" TEXT\n  \"discount_amount\" TEXT\n  \"tax_amount\" TEXT\n  \"shipping_method\" TEXT\n}\n\nTable \"public\".\"payment_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" TEXT\n  \"payment_method\" TEXT\n  \"status\" TEXT\n  \"transaction_id_external\" TEXT\n  \"authorization_code\" TEXT\n  \"refund_status\" TEXT\n}\n\nTable \"public\".\"pricing_tiers\" {\n  \"tier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"savings\" TEXT\n  \"total_price\" TEXT\n  \"is_active\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"discount_type\" TEXT\n}\n\nTable \"public\".\"product_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"rating\" INTEGER\n  \"review_text\" TEXT\n  \"review_date\" TEXT\n  \"review_title\" TEXT\n  \"is_approved\" INTEGER\n}\n\nTable \"public\".\"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_description\" TEXT\n  \"category_id\" INTEGER\n  \"manufacturer_id\" INTEGER\n  \"unit_of_measure\" TEXT\n  \"is_active\" INTEGER\n  \"product_code\" TEXT\n  \"expiry_date\" TEXT\n  \"recommended_usage\" TEXT\n  \"side_effects\" TEXT\n  \"prescription_required\" INTEGER\n  \"image_url\" TEXT\n}\n\nTable \"public\".\"shipping_details\" {\n  \"shipping_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"carrier\" TEXT\n  \"tracking_number\" TEXT\n  \"shipping_cost\" TEXT\n  \"estimated_delivery_date\" TEXT\n  \"shipping_method\" TEXT\n  \"delivery_status\" TEXT\n}\n\nTable \"public\".\"user_accounts\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"password_hash\" TEXT\n  \"role_id\" INTEGER\n  \"is_active\" INTEGER\n  \"phone_number\" TEXT\n  \"date_of_birth\" TEXT\n  \"last_login_date\" TEXT\n  \"profile_image_url\" TEXT\n}\n\nTable \"public\".\"user_permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n  \"is_default_permission\" INTEGER\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"is_default_role\" INTEGER\n}\n\nRef: \"public\".\"cart_items\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"cart_items\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"inventory_levels\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"order_history\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"order_items\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"order_items\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"orders\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"payment_transactions\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"pricing_tiers\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_reviews\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_reviews\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"products\".\"manufacturer_id\" > \"public\".\"manufacturers\".\"manufacturer_id\"\nRef: \"public\".\"products\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"shipping_details\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"user_accounts\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"cart_items\" {\n  \"cart_item_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"added_date\" TEXT\n  \"is_saved_for_later\" INTEGER\n  \"last_modified_date\" TEXT\n}\n\nTable \"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n  \"is_root_category\" INTEGER\n}\n\nTable \"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"customer_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"date_joined\" TEXT\n  \"is_active\" INTEGER\n  \"customer_type\" TEXT\n  \"tax_id\" TEXT\n  \"loyalty_points\" INTEGER\n  \"last_purchase_date\" TEXT\n  \"total_spent\" TEXT\n}\n\nTable \"inventory_levels\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"quantity_in_stock\" INTEGER\n  \"reorder_level\" INTEGER\n  \"last_updated\" TEXT\n  \"last_inventory_check_date\" TEXT\n  \"next_inventory_check_date\" TEXT\n  \"minimum_stock_level\" INTEGER\n  \"maximum_stock_level\" INTEGER\n}\n\nTable \"manufacturers\" {\n  \"manufacturer_id\" INTEGER [pk]\n  \"manufacturer_name\" TEXT\n  \"contact_email\" TEXT\n  \"address\" TEXT\n  \"phone\" TEXT\n  \"website\" TEXT\n  \"logo_url\" TEXT\n}\n\nTable \"order_history\" {\n  \"history_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"change_date\" TEXT\n  \"change_type\" TEXT\n  \"change_details\" TEXT\n  \"changed_by_user_id\" INTEGER\n  \"change_reason\" TEXT\n}\n\nTable \"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"total_price\" TEXT\n  \"discount_amount\" TEXT\n  \"tax_amount\" TEXT\n}\n\nTable \"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total_amount\" TEXT\n  \"status\" TEXT\n  \"shipping_address\" TEXT\n  \"billing_address\" TEXT\n  \"payment_method\" TEXT\n  \"order_number\" TEXT\n  \"coupon_code\" TEXT\n  \"discount_amount\" TEXT\n  \"tax_amount\" TEXT\n  \"shipping_method\" TEXT\n}\n\nTable \"payment_transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" TEXT\n  \"payment_method\" TEXT\n  \"status\" TEXT\n  \"transaction_id_external\" TEXT\n  \"authorization_code\" TEXT\n  \"refund_status\" TEXT\n}\n\nTable \"pricing_tiers\" {\n  \"tier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"savings\" TEXT\n  \"total_price\" TEXT\n  \"is_active\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"discount_type\" TEXT\n}\n\nTable \"product_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"rating\" INTEGER\n  \"review_text\" TEXT\n  \"review_date\" TEXT\n  \"review_title\" TEXT\n  \"is_approved\" INTEGER\n}\n\nTable \"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_description\" TEXT\n  \"category_id\" INTEGER\n  \"manufacturer_id\" INTEGER\n  \"unit_of_measure\" TEXT\n  \"is_active\" INTEGER\n  \"product_code\" TEXT\n  \"expiry_date\" TEXT\n  \"recommended_usage\" TEXT\n  \"side_effects\" TEXT\n  \"prescription_required\" INTEGER\n  \"image_url\" TEXT\n}\n\nTable \"shipping_details\" {\n  \"shipping_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"carrier\" TEXT\n  \"tracking_number\" TEXT\n  \"shipping_cost\" TEXT\n  \"estimated_delivery_date\" TEXT\n  \"shipping_method\" TEXT\n  \"delivery_status\" TEXT\n}\n\nTable \"user_accounts\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"password_hash\" TEXT\n  \"role_id\" INTEGER\n  \"is_active\" INTEGER\n  \"phone_number\" TEXT\n  \"date_of_birth\" TEXT\n  \"last_login_date\" TEXT\n  \"profile_image_url\" TEXT\n}\n\nTable \"user_permissions\" {\n  \"permission_id\" INTEGER [pk]\n  \"role_id\" INTEGER\n  \"permission_name\" TEXT\n  \"description\" TEXT\n  \"is_default_permission\" INTEGER\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"is_default_role\" INTEGER\n}\n\nRef: \"cart_items\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"cart_items\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"inventory_levels\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"order_history\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"order_items\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"order_items\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"orders\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"payment_transactions\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"pricing_tiers\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_reviews\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_reviews\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"products\".\"manufacturer_id\" > \"manufacturers\".\"manufacturer_id\"\n\nRef: \"products\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"shipping_details\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"user_accounts\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\ncart_items: 2 rows\n  added_date: '2023-05-01', '2023-05-02'\n  last_modified_date: '2023-05-01', '2023-05-02'\n  quantity: '10', '20'\n\ncategories: 2 rows\n  category_name: 'Pain Relief', 'Allergy'\n  description: 'Medications for pain relief', 'Medications for allergy relief'\n  is_root_category: '1'\n\ncustomers: 2 rows\n  customer_name: 'John Doe', 'Jane Smith'\n  customer_type: 'individual', 'healthcare provider'\n  address: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'\n\ninventory_levels: 2 rows\n  reorder_level: '50', '100'\n  minimum_stock_level: '30', '50'\n  maximum_stock_level: '200', '300'\n\nmanufacturers: 2 rows\n  manufacturer_name: 'PharmaCo A', 'PharmaCo B'\n  address: '123 Pharma St, Anytown, USA', '456 Pharma St, Anytown, USA'\n  website: 'https://pharmacoa.com', 'https://pharmacob.com'\n\norder_history: 2 rows\n  change_type: 'status update', 'address change'\n  change_details: 'Order status changed from pending to shipped', 'Shipping address updated'\n  change_reason: 'Customer requested expedited shipping', 'Customer moved to a new address'\n\norder_items: 2 rows\n  price_per_unit: '3.25', '4.13'\n  total_price: '65.02', '41.3'\n  discount_amount: '2.0', '0.0'\n\norders: 2 rows\n  status: 'pending', 'shipped'\n  total_amount: '102.6', '65.02'\n  shipping_address: '123 Main St, Anytown, USA', '456 Elm St, Anytown, USA'\n\npayment_transactions: 2 rows\n  refund_status: 'completed', 'pending'\n  status: 'success'\n  amount: '102.6', '65.02'\n\npricing_tiers: 2 rows\n  discount_type: 'fixed amount', 'percentage'\n  price_per_unit: '4.13', '3.25'\n  savings: '0.0', '17.59'\n\nproduct_reviews: 2 rows\n  review_title: 'Excellent Product', 'Very Effective'\n  review_text: 'Great product, fast shipping!', 'Effective and easy to use.'\n  review_date: '2023-05-01', '2023-05-02'\n\nproducts: 2 rows\n  product_name: 'Medication A', 'Medication B'\n  product_description: 'A description of Medication A', 'A description of Medication B'\n  product_code: 'SKU1234', 'SKU5678'\n\nshipping_details: 2 rows\n  delivery_status: 'in transit', 'delivered'\n  carrier: 'FedEx', 'UPS'\n  tracking_number: '1234567890', '9876543210'\n\nuser_accounts: 2 rows\n  user_name: 'admin', 'customer1'\n  email: 'admin@example.com', 'customer1@example.com'\n  phone_number: '123-456-7890', '987-654-3210'\n\nuser_permissions: 2 rows\n  permission_name: 'view_orders', 'edit_orders'\n  description: 'Permission to view all orders', 'Permission to edit orders'\n  is_default_permission: '1', '0'\n\nuser_roles: 2 rows\n  role_name: 'admin', 'customer'\n  description: 'Administrative user with full access', 'Regular customer with limited access'\n  is_default_role: '0', '1'",
+    "stateUrl": null,
+    "tableStats": {
+      "cart_items": {
+        "rows": 2,
+        "sample_values": {
+          "cart_item_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "quantity": [
+            "10",
+            "20"
+          ],
+          "added_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "is_saved_for_later": [
+            "0",
+            "1"
+          ],
+          "last_modified_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "category_name": [
+            "Pain Relief",
+            "Allergy"
+          ],
+          "description": [
+            "Medications for pain relief",
+            "Medications for allergy relief"
+          ],
+          "is_root_category": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "customer_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "date_joined": [
+            "2022-01-01",
+            "2022-02-01"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "customer_type": [
+            "individual",
+            "healthcare provider"
+          ],
+          "tax_id": [
+            "123456789",
+            "987654321"
+          ],
+          "loyalty_points": [
+            "500",
+            "1000"
+          ],
+          "last_purchase_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "total_spent": [
+            "102.6",
+            "65.02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory_levels": {
+        "rows": 2,
+        "sample_values": {
+          "inventory_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "quantity_in_stock": [
+            "100",
+            "200"
+          ],
+          "reorder_level": [
+            "50",
+            "100"
+          ],
+          "last_updated": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "last_inventory_check_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "next_inventory_check_date": [
+            "2023-05-15",
+            "2023-05-16"
+          ],
+          "minimum_stock_level": [
+            "30",
+            "50"
+          ],
+          "maximum_stock_level": [
+            "200",
+            "300"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "manufacturers": {
+        "rows": 2,
+        "sample_values": {
+          "manufacturer_id": [
+            "0",
+            "1"
+          ],
+          "manufacturer_name": [
+            "PharmaCo A",
+            "PharmaCo B"
+          ],
+          "contact_email": [
+            "contact@pharmacoa.com",
+            "contact@pharmacob.com"
+          ],
+          "address": [
+            "123 Pharma St, Anytown, USA",
+            "456 Pharma St, Anytown, USA"
+          ],
+          "phone": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "website": [
+            "https://pharmacoa.com",
+            "https://pharmacob.com"
+          ],
+          "logo_url": [
+            "https://example.com/logos/pharmacoa.jpg",
+            "https://example.com/logos/pharmacob.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "0"
+          ],
+          "change_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "change_type": [
+            "status update",
+            "address change"
+          ],
+          "change_details": [
+            "Order status changed from pending to shipped",
+            "Shipping address updated"
+          ],
+          "changed_by_user_id": [
+            "1",
+            "2"
+          ],
+          "change_reason": [
+            "Customer requested expedited shipping",
+            "Customer moved to a new address"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order_items": {
+        "rows": 2,
+        "sample_values": {
+          "order_item_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "1",
+            "0"
+          ],
+          "product_id": [
+            "1"
+          ],
+          "quantity": [
+            "20",
+            "10"
+          ],
+          "price_per_unit": [
+            "3.25",
+            "4.13"
+          ],
+          "total_price": [
+            "65.02",
+            "41.3"
+          ],
+          "discount_amount": [
+            "2.0",
+            "0.0"
+          ],
+          "tax_amount": [
+            "3.0",
+            "2.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orders": {
+        "rows": 2,
+        "sample_values": {
+          "order_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "order_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "total_amount": [
+            "102.6",
+            "65.02"
+          ],
+          "status": [
+            "pending",
+            "shipped"
+          ],
+          "shipping_address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "billing_address": [
+            "123 Main St, Anytown, USA",
+            "456 Elm St, Anytown, USA"
+          ],
+          "payment_method": [
+            "credit card",
+            "debit card"
+          ],
+          "order_number": [
+            "ORD123456",
+            "ORD789012"
+          ],
+          "coupon_code": [
+            "COUPON10"
+          ],
+          "discount_amount": [
+            "5.0",
+            "0.0"
+          ],
+          "tax_amount": [
+            "10.0",
+            "5.0"
+          ],
+          "shipping_method": [
+            "standard",
+            "express"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_transactions": {
+        "rows": 2,
+        "sample_values": {
+          "transaction_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "0"
+          ],
+          "transaction_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "amount": [
+            "102.6",
+            "65.02"
+          ],
+          "payment_method": [
+            "credit card",
+            "debit card"
+          ],
+          "status": [
+            "success"
+          ],
+          "transaction_id_external": [
+            "tx123456",
+            "tx789012"
+          ],
+          "authorization_code": [
+            "auth123456",
+            "auth789012"
+          ],
+          "refund_status": [
+            "completed",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pricing_tiers": {
+        "rows": 2,
+        "sample_values": {
+          "tier_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "quantity": [
+            "10",
+            "20"
+          ],
+          "price_per_unit": [
+            "4.13",
+            "3.25"
+          ],
+          "savings": [
+            "0.0",
+            "17.59"
+          ],
+          "total_price": [
+            "41.3",
+            "65.02"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "start_date": [
+            "2023-05-01"
+          ],
+          "end_date": [
+            "2023-12-31"
+          ],
+          "discount_type": [
+            "fixed amount",
+            "percentage"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_reviews": {
+        "rows": 2,
+        "sample_values": {
+          "review_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "rating": [
+            "5",
+            "4"
+          ],
+          "review_text": [
+            "Great product, fast shipping!",
+            "Effective and easy to use."
+          ],
+          "review_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "review_title": [
+            "Excellent Product",
+            "Very Effective"
+          ],
+          "is_approved": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 2,
+        "sample_values": {
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "product_name": [
+            "Medication A",
+            "Medication B"
+          ],
+          "product_description": [
+            "A description of Medication A",
+            "A description of Medication B"
+          ],
+          "category_id": [
+            "0"
+          ],
+          "manufacturer_id": [
+            "0",
+            "1"
+          ],
+          "unit_of_measure": [
+            "pills"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "product_code": [
+            "SKU1234",
+            "SKU5678"
+          ],
+          "expiry_date": [
+            "2025-12-31",
+            "2024-12-31"
+          ],
+          "recommended_usage": [
+            "Take 1 pill daily",
+            "Take 2 pills daily"
+          ],
+          "side_effects": [
+            "Drowsiness",
+            "Nausea"
+          ],
+          "prescription_required": [
+            "0",
+            "1"
+          ],
+          "image_url": [
+            "https://example.com/images/medication_a.jpg",
+            "https://example.com/images/medication_b.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shipping_details": {
+        "rows": 2,
+        "sample_values": {
+          "shipping_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "1",
+            "0"
+          ],
+          "carrier": [
+            "FedEx",
+            "UPS"
+          ],
+          "tracking_number": [
+            "1234567890",
+            "9876543210"
+          ],
+          "shipping_cost": [
+            "10.0",
+            "8.0"
+          ],
+          "estimated_delivery_date": [
+            "2023-05-05",
+            "2023-05-04"
+          ],
+          "shipping_method": [
+            "standard",
+            "express"
+          ],
+          "delivery_status": [
+            "in transit",
+            "delivered"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_accounts": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "admin",
+            "customer1"
+          ],
+          "email": [
+            "admin@example.com",
+            "customer1@example.com"
+          ],
+          "password_hash": [
+            "hashed_password"
+          ],
+          "role_id": [
+            "1",
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "date_of_birth": [
+            "1990-01-01",
+            "1995-02-02"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "profile_image_url": [
+            "https://example.com/images/profile/admin.jpg",
+            "https://example.com/images/profile/customer1.jpg"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_permissions": {
+        "rows": 2,
+        "sample_values": {
+          "permission_id": [
+            "0",
+            "1"
+          ],
+          "role_id": [
+            "1"
+          ],
+          "permission_name": [
+            "view_orders",
+            "edit_orders"
+          ],
+          "description": [
+            "Permission to view all orders",
+            "Permission to edit orders"
+          ],
+          "is_default_permission": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "admin",
+            "customer"
+          ],
+          "description": [
+            "Administrative user with full access",
+            "Regular customer with limited access"
+          ],
+          "is_default_role": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

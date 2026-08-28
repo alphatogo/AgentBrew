@@ -1,0 +1,15 @@
+{
+  "title": "Access Review Risk Report",
+  "capability": [
+    "query_and_filter_database",
+    "query_multiple_sources",
+    "populate_rows",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "compute_aggregates",
+    "query_existing_data",
+    "create_database"
+  ],
+  "question": "Please create an access review ticket and a risk report in the \"Operations Governance Hub\" page.\n\n**Task Requirements:**\n1. Locate the \"Review Sessions\" database in the Operations Governance Hub page and find every session where:\n   - Completion is greater than 80% (0.8)\n   - At least one access blocker is present in the Access Blockers field\n\n2. Find the child page named \"Quarterly Risk Themes\" under the Operations Governance Hub page. Extract every objective listed under the Risk, Process, Enablement, and Reporting headings.\n\n3. Locate the \"Governance Requests\" database and create a new ticket titled \"Access review follow-up remediation\".\n\n4. Set the new ticket's properties:\n   - Priority: High\n   - Due Date: \"2025-03-15\"\n\n5. At the top of the ticket body, add a callout block summarizing the number of qualifying review sessions from step 1 and mentioning all four theme groups: Risk, Process, Enablement, and Reporting.\n\n6. Add a bulleted list derived from every qualifying Review Sessions record from step 1. Each bullet must use fields from exactly one session record and follow this format:\n   - \"[Session Date] - [Primary Access Blocker] - Recommended action: [recommendation]\"\n\n   The recommendation should be a brief action you suggest based on the session's strategies field (any text is acceptable).\n\n7. Add a short section to the new ticket titled \"Quarterly Risk Themes Summary\". Under it, add one heading_3 block for each of the four groups and list the extracted objectives under the matching heading, preserving the group-to-objective mapping exactly."
+}

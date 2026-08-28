@@ -1,0 +1,400 @@
+{
+  "db_id": "food_inspection_2",
+  "source": "bird",
+  "tables": 5,
+  "total_rows": 701342,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#food_inspection_2",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"employee\" {\n  \"employee_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" INTEGER\n  \"phone\" TEXT\n  \"title\" TEXT\n  \"salary\" INTEGER\n  \"supervisor\" INTEGER\n}\n\nTable \"establishment\" {\n  \"license_no\" INTEGER [pk]\n  \"dba_name\" TEXT\n  \"aka_name\" TEXT\n  \"facility_type\" TEXT\n  \"risk_level\" INTEGER\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" INTEGER\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"ward\" INTEGER\n}\n\nTable \"inspection\" {\n  \"inspection_id\" INTEGER [pk]\n  \"inspection_date\" DATE\n  \"inspection_type\" TEXT\n  \"results\" TEXT\n  \"employee_id\" INTEGER\n  \"license_no\" INTEGER\n  \"followup_to\" INTEGER\n}\n\nTable \"inspection_point\" {\n  \"point_id\" INTEGER [pk]\n  \"Description\" TEXT\n  \"category\" TEXT\n  \"code\" TEXT\n  \"fine\" INTEGER\n  \"point_level\" TEXT\n}\n\nTable \"violation\" {\n  \"inspection_id\" INTEGER [pk]\n  \"point_id\" INTEGER [pk]\n  \"fine\" INTEGER\n  \"inspector_comment\" TEXT\n}\n\n\n\nRef: \"employee\".\"supervisor\" > \"employee\".\"employee_id\"\n\nRef: \"inspection\".\"followup_to\" > \"inspection\".\"inspection_id\"\n\nRef: \"inspection\".\"license_no\" > \"establishment\".\"license_no\"\n\nRef: \"inspection\".\"employee_id\" > \"employee\".\"employee_id\"\n\nRef: \"violation\".\"point_id\" > \"inspection_point\".\"point_id\"\n\nRef: \"violation\".\"inspection_id\" > \"inspection\".\"inspection_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"employee\" {\n  \"employee_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" INTEGER\n  \"phone\" TEXT\n  \"title\" TEXT\n  \"salary\" INTEGER\n  \"supervisor\" INTEGER\n}\n\nTable \"establishment\" {\n  \"license_no\" INTEGER [pk]\n  \"dba_name\" TEXT\n  \"aka_name\" TEXT\n  \"facility_type\" TEXT\n  \"risk_level\" INTEGER\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" INTEGER\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"ward\" INTEGER\n}\n\nTable \"inspection\" {\n  \"inspection_id\" INTEGER [pk]\n  \"inspection_date\" DATE\n  \"inspection_type\" TEXT\n  \"results\" TEXT\n  \"employee_id\" INTEGER\n  \"license_no\" INTEGER\n  \"followup_to\" INTEGER\n}\n\nTable \"inspection_point\" {\n  \"point_id\" INTEGER [pk]\n  \"Description\" TEXT\n  \"category\" TEXT\n  \"code\" TEXT\n  \"fine\" INTEGER\n  \"point_level\" TEXT\n}\n\nTable \"violation\" {\n  \"inspection_id\" INTEGER [pk]\n  \"point_id\" INTEGER [pk]\n  \"fine\" INTEGER\n  \"inspector_comment\" TEXT\n}\n\nRef: \"employee\".\"supervisor\" > \"employee\".\"employee_id\"\n\nRef: \"inspection\".\"followup_to\" > \"inspection\".\"inspection_id\"\n\nRef: \"inspection\".\"license_no\" > \"establishment\".\"license_no\"\n\nRef: \"inspection\".\"employee_id\" > \"employee\".\"employee_id\"\n\nRef: \"violation\".\"point_id\" > \"inspection_point\".\"point_id\"\n\nRef: \"violation\".\"inspection_id\" > \"inspection\".\"inspection_id\"\n\n## Table Stats & Sample Values\n\nemployee: 75 rows\n  first_name: 'Anastasia', 'Joshua', 'Zach', ...\n  last_name: 'Hansen', 'Rosa', 'Barber', ...\n  city: 'Chicago', 'Park Forest', 'Hoffman Estates'\n\nestablishment: 10000 rows\n  dba_name: 'HARVEST CRUSADES MINISTRIES', 'COSI', 'XANDO COFFEE & BAR / COSI SANDWICH BAR', ...\n  aka_name: 'COSI', 'KING'S CHINESE/PARK MANOR LOUNGE', 'MR BEEF ON HARLEM', ...\n  facility_type: 'Special Event', 'Restaurant', 'TAVERN', ...\n\ninspection: 10000 rows\n  inspection_type: 'Complaint', 'Canvass', 'Canvass Re-Inspection', ...\n  results: 'Pass', 'Pass w/ Conditions', 'Fail', ...\n  inspection_date: '2010-01-05', '2010-01-21', '2010-02-09', ...\n\ninspection_point: 46 rows\n  category: 'Food Protection', 'Food Equipment and Utensil Sanitation', 'Wash and Waste Water Disposal', ...\n  point_level: 'Critical', 'Serious', 'Minor'\n  Description: 'Source sound condition, no spoilage, foods properl', 'Facilities to maintain proper temperature', 'Potentially hazardous food meets temperature requi', ...\n\nviolation: 10000 rows\n  inspector_comment: 'All food not stored in the original container shal', 'OBSERVED TORN DOOR GASKET ON DOOR OF 'CHILL ISLE'', 'All food and non-food contact surfaces of equipmen', ...\n  fine: '100', '0', '500', ...\n  inspection_id: '44247', '44248', '44249', ...",
+    "stateUrl": "https://bird-bench.github.io/#food_inspection_2",
+    "tableStats": {
+      "employee": {
+        "rows": 75,
+        "sample_values": {
+          "employee_id": [
+            "103705",
+            "104633",
+            "106581",
+            "111559",
+            "112202",
+            "115790",
+            "117743",
+            "118150"
+          ],
+          "first_name": [
+            "Anastasia",
+            "Joshua",
+            "Zach",
+            "Lisa",
+            "Bob",
+            "Craig",
+            "Standard",
+            "Rosemary"
+          ],
+          "last_name": [
+            "Hansen",
+            "Rosa",
+            "Barber",
+            "Tillman",
+            "Benson",
+            "Kerr",
+            "Murray",
+            "Kennedy"
+          ],
+          "address": [
+            "6023 S Elizabeth St",
+            "5000 N Wolcott Ave",
+            "7522 N Oleander Ave",
+            "5529 S Dorchester Ave",
+            "7011 S Campbell Ave",
+            "300 N State St Apt 4801",
+            "8633 S Yates Blvd",
+            "3239 W Hirsch St Apt 1"
+          ],
+          "city": [
+            "Chicago",
+            "Park Forest",
+            "Hoffman Estates"
+          ],
+          "state": [
+            "IL"
+          ],
+          "zip": [
+            "60636",
+            "60640",
+            "60631",
+            "60637",
+            "60629",
+            "60654",
+            "60617",
+            "60651"
+          ],
+          "phone": [
+            "(773) 424-8729",
+            "(773) 293-6409",
+            "(219) 473-0757",
+            "(773) 424-5470",
+            "(773) 891-8653",
+            "(219) 473-9718",
+            "(773) 891-5230",
+            "(630) 859-3286"
+          ],
+          "title": [
+            "Sanitarian",
+            "Supervisor",
+            "Division Manager"
+          ],
+          "salary": [
+            "79300",
+            "82000",
+            "79900",
+            "84700",
+            "81900",
+            "72900",
+            "83300",
+            "64700"
+          ],
+          "supervisor": [
+            "177316",
+            "186742",
+            "179582",
+            "182205",
+            "192462",
+            "186498",
+            "201781",
+            "204603"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "establishment": {
+        "rows": 10000,
+        "sample_values": {
+          "license_no": [
+            "1",
+            "2",
+            "9",
+            "40",
+            "43",
+            "62",
+            "85",
+            "99"
+          ],
+          "dba_name": [
+            "HARVEST CRUSADES MINISTRIES",
+            "COSI",
+            "XANDO COFFEE & BAR / COSI SANDWICH BAR",
+            "VITO & NICK'S LOUNGE",
+            "JOHN SCHALLER",
+            "CAL'S 400 LIQUORS, INC.",
+            "KILDARE LIQUORS",
+            "GEORGE BOZIC"
+          ],
+          "aka_name": [
+            "COSI",
+            "KING'S CHINESE/PARK MANOR LOUNGE",
+            "MR BEEF ON HARLEM",
+            "LA UNICA FOOD MART",
+            "LE PETIT PARIS",
+            "ZACHARY'S FOR COCKTAILS",
+            "HEILEMAN'S OLD STYLE",
+            "PORRETTA'S BANQUETS"
+          ],
+          "facility_type": [
+            "Special Event",
+            "Restaurant",
+            "TAVERN",
+            "Grocery Store",
+            "Liquor",
+            "RESTAURANT/GROCERY STORE",
+            "LOUNGE/BANQUET HALL",
+            "GROCERY/LIQUOR"
+          ],
+          "risk_level": [
+            "2",
+            "1",
+            "3"
+          ],
+          "address": [
+            "118 N CENTRAL AVE",
+            "230 W MONROE ST",
+            "116 S MICHIGAN AVE",
+            "233 N MICHIGAN AVE",
+            "28 E JACKSON BLVD",
+            "230 W WASHINGTON ST",
+            "55 E GRAND AVE",
+            "203 N LA SALLE ST"
+          ],
+          "city": [
+            "CHICAGO",
+            "Chicago",
+            "chicago",
+            "CHicago",
+            "MAYWOOD",
+            "Maywood"
+          ],
+          "state": [
+            "IL"
+          ],
+          "zip": [
+            "60644",
+            "60606",
+            "60603",
+            "60601",
+            "60604",
+            "60611",
+            "60652",
+            "60609"
+          ],
+          "latitude": [
+            "41.8828450747188",
+            "41.8807571586472",
+            "41.8803958382596",
+            "41.8865673708869",
+            "41.8783416120634",
+            "41.8833178598508",
+            "41.8915907410835",
+            "41.885822047853"
+          ],
+          "longitude": [
+            "-87.7650954520439",
+            "-87.6347092983425",
+            "-87.6245017215946",
+            "-87.6243846705971",
+            "-87.6266749914868",
+            "-87.6347690946174",
+            "-87.6258671372446",
+            "-87.6323037350857"
+          ],
+          "ward": [
+            "29",
+            "42",
+            "18",
+            "11",
+            "25",
+            "39",
+            "47",
+            "32"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inspection": {
+        "rows": 10000,
+        "sample_values": {
+          "inspection_id": [
+            "44247",
+            "44248",
+            "44249",
+            "44250",
+            "44251",
+            "44252",
+            "44253",
+            "44254"
+          ],
+          "inspection_date": [
+            "2010-01-05",
+            "2010-01-21",
+            "2010-02-09",
+            "2010-03-18",
+            "2010-04-01",
+            "2010-05-05",
+            "2010-05-11",
+            "2010-05-12"
+          ],
+          "inspection_type": [
+            "Complaint",
+            "Canvass",
+            "Canvass Re-Inspection",
+            "Suspected Food Poisoning",
+            "License Re-Inspection",
+            "License",
+            "Consultation",
+            "Short Form Complaint"
+          ],
+          "results": [
+            "Pass",
+            "Pass w/ Conditions",
+            "Fail",
+            "Out of Business"
+          ],
+          "employee_id": [
+            "141319",
+            "143902",
+            "143487",
+            "104633",
+            "123538",
+            "135792",
+            "103705",
+            "153443"
+          ],
+          "license_no": [
+            "1222441",
+            "1336561",
+            "1334073",
+            "1144381",
+            "1144380",
+            "1193131",
+            "1875067",
+            "2026336"
+          ],
+          "followup_to": [
+            "67871",
+            "248210",
+            "233215",
+            "67744",
+            "176555",
+            "67902",
+            "52238",
+            "80257"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inspection_point": {
+        "rows": 46,
+        "sample_values": {
+          "point_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Description": [
+            "Source sound condition, no spoilage, foods properl",
+            "Facilities to maintain proper temperature",
+            "Potentially hazardous food meets temperature requi",
+            "Source of cross contamination controlled i.e. cutt",
+            "Personnel with infections restricted: no open sore",
+            "Hands washed and cleaned, good hygienic practices;",
+            "Wash and rinse water: clean and proper temperature",
+            "Sanitizing rinse for equipment and utensils: clean"
+          ],
+          "category": [
+            "Food Protection",
+            "Food Equipment and Utensil Sanitation",
+            "Wash and Waste Water Disposal",
+            "Toilet and Hand Washing Facilities for Staff",
+            "Compliance Insect and Rodent Control",
+            "Compliance",
+            "Insect and Rodent Control",
+            "Personnel"
+          ],
+          "code": [
+            "7-38-005 (B) (B-2)",
+            "7-38-005 (A)",
+            "7-38-010 (A) (B)",
+            "7-38-030",
+            "7-38-031",
+            "7-38-020",
+            "7-42-090",
+            "Garbage 7-38-020"
+          ],
+          "fine": [
+            "500",
+            "250",
+            "100"
+          ],
+          "point_level": [
+            "Critical",
+            "Serious",
+            "Minor"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "violation": {
+        "rows": 10000,
+        "sample_values": {
+          "inspection_id": [
+            "44247",
+            "44248",
+            "44249",
+            "44250",
+            "44251",
+            "44252",
+            "44253",
+            "44254"
+          ],
+          "point_id": [
+            "30",
+            "32",
+            "33",
+            "34",
+            "37",
+            "41",
+            "38",
+            "18"
+          ],
+          "fine": [
+            "100",
+            "0",
+            "500",
+            "250"
+          ],
+          "inspector_comment": [
+            "All food not stored in the original container shal",
+            "OBSERVED TORN DOOR GASKET ON DOOR OF 'CHILL ISLE' ",
+            "All food and non-food contact surfaces of equipmen",
+            "The floors shall be constructed per code, be smoot",
+            "Toilet rooms shall be completely enclosed and shal",
+            "All parts of the food establishment and all parts ",
+            "All food and non-food contact equipment and utensi",
+            "REPAIR THE DRAIN STOPPER FOR THE RIGHT COMPARTMENT"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

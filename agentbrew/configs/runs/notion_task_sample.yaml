@@ -1,0 +1,34 @@
+mode: task_sample
+domain: notion
+
+llm:
+  type: local_llm
+  config:
+    model_name: ./Qwen3-32B
+    base_url: http://localhost:2024/v1
+    api_key: ""
+    temperature: 0.7
+    max_completion_tokens: 10000
+    enable_thinking: false
+
+agent:
+  type: react_summary
+  config:
+    max_iterations: 12
+
+task_sampling:
+  few_shot_path: agentbrew/environments/notion/task_sampling/few_shot
+  num_tasks: 20000
+  output_task_dir: .
+
+evaluation:
+  enabled: false
+
+execution:
+  workers: 10
+  partition_by: category
+
+output:
+  root: outputs/notion_task_sample
+  reports: false
+  task_results: false

@@ -1,0 +1,590 @@
+{
+  "db_id": "superstore",
+  "source": "bird",
+  "tables": 6,
+  "total_rows": 27787,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#superstore",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"central_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"east_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"people\" {\n  \"Customer ID\" TEXT [pk]\n  \"Customer Name\" TEXT\n  \"Segment\" TEXT\n  \"Country\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"Postal Code\" INTEGER\n  \"Region\" TEXT [pk]\n}\n\nTable \"product\" {\n  \"Product ID\" TEXT [pk]\n  \"Product Name\" TEXT\n  \"Category\" TEXT\n  \"Sub-Category\" TEXT\n  \"Region\" TEXT [pk]\n}\n\nTable \"south_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"west_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\n\n\nRef: \"central_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"central_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"central_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"central_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"east_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"east_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"east_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"east_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"south_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"south_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"south_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"south_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"west_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"west_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"west_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"west_superstore\".\"Region\" > \"people\".\"Region\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"central_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"east_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"people\" {\n  \"Customer ID\" TEXT [pk]\n  \"Customer Name\" TEXT\n  \"Segment\" TEXT\n  \"Country\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"Postal Code\" INTEGER\n  \"Region\" TEXT [pk]\n}\n\nTable \"product\" {\n  \"Product ID\" TEXT [pk]\n  \"Product Name\" TEXT\n  \"Category\" TEXT\n  \"Sub-Category\" TEXT\n  \"Region\" TEXT [pk]\n}\n\nTable \"south_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nTable \"west_superstore\" {\n  \"Row ID\" INTEGER [pk]\n  \"Order ID\" TEXT\n  \"Order Date\" DATE\n  \"Ship Date\" DATE\n  \"Ship Mode\" TEXT\n  \"Customer ID\" TEXT\n  \"Region\" TEXT\n  \"Product ID\" TEXT\n  \"Sales\" REAL\n  \"Quantity\" INTEGER\n  \"Discount\" REAL\n  \"Profit\" REAL\n}\n\nRef: \"central_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"central_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"central_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"central_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"east_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"east_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"east_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"east_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"south_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"south_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"south_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"south_superstore\".\"Region\" > \"people\".\"Region\"\n\nRef: \"west_superstore\".\"Product ID\" > \"product\".\"Product ID\"\n\nRef: \"west_superstore\".\"Region\" > \"product\".\"Region\"\n\nRef: \"west_superstore\".\"Customer ID\" > \"people\".\"Customer ID\"\n\nRef: \"west_superstore\".\"Region\" > \"people\".\"Region\"\n\n## Table Stats & Sample Values\n\ncentral_superstore: 4646 rows\n  Region: 'Central'\n  Ship Mode: 'Standard Class', 'First Class', 'Second Class', ...\n  Order ID: 'CA-2011-103800', 'CA-2011-112326', 'CA-2011-105417', ...\n\neast_superstore: 5696 rows\n  Region: 'East'\n  Ship Mode: 'Standard Class', 'First Class', 'Second Class', ...\n  Order ID: 'CA-2011-141817', 'CA-2011-130092', 'CA-2011-118192', ...\n\npeople: 2501 rows\n  Customer Name: 'Alex Avila', 'Allen Armold', 'Andrew Allen', ...\n  City: 'Round Rock', 'Omaha', 'Springfield', ...\n  State: 'Texas', 'Nebraska', 'Missouri', ...\n\nproduct: 5298 rows\n  Category: 'Furniture', 'Office Supplies', 'Technology'\n  Sub-Category: 'Bookcases', 'Chairs', 'Furnishings', ...\n  Product Name: 'Sauder Camden County Barrister Bookcase, Planked C', 'Sauder Inglewood Library Bookcases', 'O'Sullivan 2-Shelf Heavy-Duty Bookcases', ...\n\nsouth_superstore: 3240 rows\n  Region: 'South'\n  Ship Mode: 'First Class', 'Standard Class', 'Second Class', ...\n  Order ID: 'CA-2011-106054', 'CA-2011-167199', 'CA-2011-149020', ...\n\nwest_superstore: 6406 rows\n  Region: 'West'\n  Ship Mode: 'Second Class', 'Standard Class', 'First Class', ...\n  Order ID: 'CA-2011-130813', 'CA-2011-157147', 'CA-2011-123477', ...",
+    "stateUrl": "https://bird-bench.github.io/#superstore",
+    "tableStats": {
+      "central_superstore": {
+        "rows": 4646,
+        "sample_values": {
+          "Row ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Order ID": [
+            "CA-2011-103800",
+            "CA-2011-112326",
+            "CA-2011-105417",
+            "CA-2011-135405",
+            "CA-2011-167927",
+            "CA-2011-146997",
+            "CA-2011-167997",
+            "CA-2011-134103"
+          ],
+          "Order Date": [
+            "2013-01-03",
+            "2013-01-04",
+            "2013-01-07",
+            "2013-01-09",
+            "2013-01-20",
+            "2013-01-23",
+            "2013-01-26",
+            "2013-01-30"
+          ],
+          "Ship Date": [
+            "2013-01-07",
+            "2013-01-08",
+            "2013-01-12",
+            "2013-01-13",
+            "2013-01-26",
+            "2013-01-27",
+            "2013-01-29",
+            "2013-02-04"
+          ],
+          "Ship Mode": [
+            "Standard Class",
+            "First Class",
+            "Second Class",
+            "Same Day"
+          ],
+          "Customer ID": [
+            "DP-13000",
+            "PO-19195",
+            "VS-21820",
+            "MS-17830",
+            "XP-21865",
+            "SG-20605",
+            "CA-11965",
+            "MV-18190"
+          ],
+          "Region": [
+            "Central"
+          ],
+          "Product ID": [
+            "OFF-PA-10000174",
+            "OFF-LA-10003223",
+            "OFF-ST-10002743",
+            "OFF-BI-10004094",
+            "FUR-FU-10004864",
+            "OFF-BI-10003708",
+            "OFF-AR-10004078",
+            "TEC-AC-10001266"
+          ],
+          "Sales": [
+            "16.448",
+            "11.784",
+            "272.736",
+            "3.54",
+            "76.728",
+            "10.43",
+            "9.344",
+            "31.2"
+          ],
+          "Quantity": [
+            "2",
+            "3",
+            "7",
+            "1",
+            "5",
+            "4",
+            "6",
+            "14"
+          ],
+          "Discount": [
+            "0.2",
+            "0.8",
+            "0.6",
+            "0.0",
+            "0.1",
+            "0.3",
+            "0.5",
+            "0.32"
+          ],
+          "Profit": [
+            "5.5512",
+            "4.2717",
+            "-64.7748",
+            "-5.487",
+            "-53.7096",
+            "-18.2525",
+            "1.168",
+            "9.75"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "east_superstore": {
+        "rows": 5696,
+        "sample_values": {
+          "Row ID": [
+            "4647",
+            "4648",
+            "4649",
+            "4650",
+            "4651",
+            "4652",
+            "4653",
+            "4654"
+          ],
+          "Order ID": [
+            "CA-2011-141817",
+            "CA-2011-130092",
+            "CA-2011-118192",
+            "CA-2011-149524",
+            "CA-2011-115791",
+            "CA-2011-100328",
+            "CA-2011-107755",
+            "US-2011-169390"
+          ],
+          "Order Date": [
+            "2013-01-05",
+            "2013-01-11",
+            "2013-01-13",
+            "2013-01-14",
+            "2013-01-16",
+            "2013-01-28",
+            "2013-02-07",
+            "2013-02-27"
+          ],
+          "Ship Date": [
+            "2013-01-12",
+            "2013-01-14",
+            "2013-01-18",
+            "2013-01-15",
+            "2013-02-03",
+            "2013-02-12",
+            "2013-02-10",
+            "2013-03-03"
+          ],
+          "Ship Mode": [
+            "Standard Class",
+            "First Class",
+            "Second Class",
+            "Same Day"
+          ],
+          "Customer ID": [
+            "MB-18085",
+            "SV-20365",
+            "MM-17920",
+            "BS-11590",
+            "DL-13315",
+            "JC-15340",
+            "CK-12760",
+            "CS-12250"
+          ],
+          "Region": [
+            "East"
+          ],
+          "Product ID": [
+            "OFF-AR-10003478",
+            "FUR-FU-10000010",
+            "OFF-PA-10002947",
+            "OFF-BI-10003476",
+            "FUR-BO-10003433",
+            "FUR-FU-10001095",
+            "TEC-PH-10004614",
+            "OFF-BI-10001575"
+          ],
+          "Sales": [
+            "19.536",
+            "9.94",
+            "37.408",
+            "3.438",
+            "61.96",
+            "127.104",
+            "124.2",
+            "18.588"
+          ],
+          "Quantity": [
+            "3",
+            "2",
+            "7",
+            "4",
+            "6",
+            "1",
+            "5",
+            "8"
+          ],
+          "Discount": [
+            "0.2",
+            "0.0",
+            "0.7",
+            "0.5",
+            "0.4",
+            "0.1",
+            "0.3"
+          ],
+          "Profit": [
+            "4.884",
+            "3.0814",
+            "13.0928",
+            "-2.5212",
+            "-53.2856",
+            "28.5984",
+            "-31.05",
+            "-13.6312"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "people": {
+        "rows": 2501,
+        "sample_values": {
+          "Customer ID": [
+            "AA-10315",
+            "AA-10375",
+            "AA-10480",
+            "AA-10645",
+            "AB-10015",
+            "AB-10060",
+            "AB-10105",
+            "AB-10150"
+          ],
+          "Customer Name": [
+            "Alex Avila",
+            "Allen Armold",
+            "Andrew Allen",
+            "Anna Andreadi",
+            "Aaron Bergman",
+            "Adam Bellavance",
+            "Adrian Barton",
+            "Aimee Bixby"
+          ],
+          "Segment": [
+            "Consumer",
+            "Home Office",
+            "Corporate"
+          ],
+          "Country": [
+            "United States"
+          ],
+          "City": [
+            "Round Rock",
+            "Omaha",
+            "Springfield",
+            "Oklahoma City",
+            "Arlington",
+            "Greenwood",
+            "Indianapolis",
+            "Tulsa"
+          ],
+          "State": [
+            "Texas",
+            "Nebraska",
+            "Missouri",
+            "Oklahoma",
+            "Indiana",
+            "Illinois",
+            "Minnesota",
+            "Michigan"
+          ],
+          "Postal Code": [
+            "78664",
+            "68104",
+            "65807",
+            "73120",
+            "76017",
+            "46142",
+            "46203",
+            "74133"
+          ],
+          "Region": [
+            "Central",
+            "East",
+            "West",
+            "South"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product": {
+        "rows": 5298,
+        "sample_values": {
+          "Product ID": [
+            "FUR-BO-10000330",
+            "FUR-BO-10000362",
+            "FUR-BO-10000468",
+            "FUR-BO-10001337",
+            "FUR-BO-10001519",
+            "FUR-BO-10001567",
+            "FUR-BO-10001601",
+            "FUR-BO-10001608"
+          ],
+          "Product Name": [
+            "Sauder Camden County Barrister Bookcase, Planked C",
+            "Sauder Inglewood Library Bookcases",
+            "O'Sullivan 2-Shelf Heavy-Duty Bookcases",
+            "O'Sullivan Living Dimensions 2-Shelf Bookcases",
+            "O'Sullivan 3-Shelf Heavy-Duty Bookcases",
+            "Bush Westfield Collection Bookcases, Dark Cherry F",
+            "Sauder Mission Library with Doors, Fruitwood Finis",
+            "Hon Metal Bookcases, Black"
+          ],
+          "Category": [
+            "Furniture",
+            "Office Supplies",
+            "Technology"
+          ],
+          "Sub-Category": [
+            "Bookcases",
+            "Chairs",
+            "Furnishings",
+            "Tables",
+            "Appliances",
+            "Art",
+            "Binders",
+            "Envelopes"
+          ],
+          "Region": [
+            "West",
+            "Central",
+            "East",
+            "South"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "south_superstore": {
+        "rows": 3240,
+        "sample_values": {
+          "Row ID": [
+            "10343",
+            "10344",
+            "10345",
+            "10346",
+            "10347",
+            "10348",
+            "10349",
+            "10350"
+          ],
+          "Order ID": [
+            "CA-2011-106054",
+            "CA-2011-167199",
+            "CA-2011-149020",
+            "CA-2011-162775",
+            "CA-2011-109232",
+            "CA-2011-103366",
+            "US-2011-147627",
+            "US-2011-147774"
+          ],
+          "Order Date": [
+            "2013-01-06",
+            "2013-01-10",
+            "2013-01-13",
+            "2013-01-15",
+            "2013-01-20",
+            "2013-01-21",
+            "2013-01-26",
+            "2013-02-02"
+          ],
+          "Ship Date": [
+            "2013-01-07",
+            "2013-01-10",
+            "2013-01-15",
+            "2013-01-16",
+            "2013-01-17",
+            "2013-01-26",
+            "2013-01-23",
+            "2013-01-31"
+          ],
+          "Ship Mode": [
+            "First Class",
+            "Standard Class",
+            "Second Class",
+            "Same Day"
+          ],
+          "Customer ID": [
+            "JO-15145",
+            "ME-17320",
+            "AJ-10780",
+            "CS-12250",
+            "ND-18370",
+            "EH-13990",
+            "HL-15040",
+            "MM-18280"
+          ],
+          "Region": [
+            "South"
+          ],
+          "Product ID": [
+            "OFF-AR-10002399",
+            "FUR-CH-10004063",
+            "OFF-BI-10004632",
+            "OFF-AR-10001662",
+            "TEC-PH-10004977",
+            "TEC-PH-10004539",
+            "OFF-FA-10001883",
+            "OFF-PA-10000955"
+          ],
+          "Sales": [
+            "12.78",
+            "2573.82",
+            "609.98",
+            "5.48",
+            "391.98",
+            "755.96",
+            "31.12",
+            "6.54"
+          ],
+          "Quantity": [
+            "3",
+            "9",
+            "2",
+            "4",
+            "1",
+            "6",
+            "5",
+            "7"
+          ],
+          "Discount": [
+            "0.0",
+            "0.7",
+            "0.2",
+            "0.5",
+            "0.45",
+            "0.4"
+          ],
+          "Profit": [
+            "5.2398",
+            "746.4078",
+            "274.491",
+            "1.4796",
+            "113.6742",
+            "204.1092",
+            "0.3112",
+            "3.0084"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "west_superstore": {
+        "rows": 6406,
+        "sample_values": {
+          "Row ID": [
+            "13583",
+            "13584",
+            "13585",
+            "13586",
+            "13587",
+            "13588",
+            "13589",
+            "13590"
+          ],
+          "Order ID": [
+            "CA-2011-130813",
+            "CA-2011-157147",
+            "CA-2011-123477",
+            "CA-2011-146591",
+            "CA-2011-148614",
+            "CA-2011-102645",
+            "US-2011-117163",
+            "CA-2011-115161"
+          ],
+          "Order Date": [
+            "2013-01-06",
+            "2013-01-13",
+            "2013-01-18",
+            "2013-01-19",
+            "2013-01-20",
+            "2013-01-23",
+            "2013-01-27",
+            "2013-01-31"
+          ],
+          "Ship Date": [
+            "2013-01-08",
+            "2013-01-18",
+            "2013-01-21",
+            "2013-01-20",
+            "2013-01-25",
+            "2013-01-28",
+            "2013-02-02",
+            "2013-02-06"
+          ],
+          "Ship Mode": [
+            "Second Class",
+            "Standard Class",
+            "First Class",
+            "Same Day"
+          ],
+          "Customer ID": [
+            "LS-17230",
+            "BD-11605",
+            "DW-13195",
+            "TS-21340",
+            "MV-17485",
+            "IM-15055",
+            "EJ-13720",
+            "LC-17050"
+          ],
+          "Region": [
+            "West"
+          ],
+          "Product ID": [
+            "OFF-PA-10002005",
+            "OFF-ST-10000078",
+            "FUR-BO-10003034",
+            "OFF-AR-10003514",
+            "OFF-AP-10000692",
+            "OFF-BI-10003676",
+            "OFF-PA-10000659",
+            "OFF-EN-10002504"
+          ],
+          "Sales": [
+            "19.44",
+            "1325.85",
+            "333.999",
+            "19.9",
+            "64.864",
+            "32.34",
+            "56.064",
+            "108.72"
+          ],
+          "Quantity": [
+            "3",
+            "5",
+            "4",
+            "10",
+            "2",
+            "6",
+            "1",
+            "12"
+          ],
+          "Discount": [
+            "0.0",
+            "0.15",
+            "0.2",
+            "0.7",
+            "0.5"
+          ],
+          "Profit": [
+            "9.3312",
+            "238.653",
+            "3.9294",
+            "6.567",
+            "6.4864",
+            "-23.716",
+            "19.6224",
+            "36.693"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "db_id": "instant_messaging_and_chat_application",
+  "source": "synsql",
+  "tables": 22,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/instant_messaging_and_chat_application",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"analytics\" {\n  \"analytic_id\" INTEGER [pk]\n  \"metric\" TEXT\n  \"value\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"blocked_users\" {\n  \"blocked_user_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"blocked_by_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"conversations\" {\n  \"conversation_id\" INTEGER [pk]\n  \"user1_id\" INTEGER\n  \"user2_id\" INTEGER\n  \"last_message_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"files\" {\n  \"file_id\" INTEGER [pk]\n  \"file_path\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"friend_requests\" {\n  \"friend_request_id\" INTEGER [pk]\n  \"sender_id\" INTEGER\n  \"receiver_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"friendships\" {\n  \"friendship_id\" INTEGER [pk]\n  \"user1_id\" INTEGER\n  \"user2_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"group_files\" {\n  \"group_file_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"group_images\" {\n  \"group_image_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"image_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"group_members\" {\n  \"group_member_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"joined_at\" TEXT\n}\n\nTable \"public\".\"group_message_attachments\" {\n  \"group_message_attachment_id\" INTEGER [pk]\n  \"group_message_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"group_messages\" {\n  \"group_message_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"sender_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n}\n\nTable \"public\".\"group_typing_indicators\" {\n  \"group_typing_indicator_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"user_id\" INTEGER\n  \"is_typing\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"groups\" {\n  \"group_id\" INTEGER [pk]\n  \"group_name\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"images\" {\n  \"image_id\" INTEGER [pk]\n  \"file_path\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"message_attachments\" {\n  \"message_attachment_id\" INTEGER [pk]\n  \"message_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"messages\" {\n  \"message_id\" INTEGER [pk]\n  \"conversation_id\" INTEGER\n  \"sender_id\" INTEGER\n  \"receiver_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n  \"is_delivered\" INTEGER\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"type\" TEXT\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n}\n\nTable \"public\".\"profiles\" {\n  \"profile_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"profile_picture\" TEXT\n  \"bio\" TEXT\n  \"headline\" TEXT\n  \"website\" TEXT\n}\n\nTable \"public\".\"push_notifications\" {\n  \"push_notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"spam_reports\" {\n  \"spam_report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"reported_user_id\" INTEGER\n  \"reason\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"typing_indicators\" {\n  \"typing_indicator_id\" INTEGER [pk]\n  \"conversation_id\" INTEGER\n  \"user_id\" INTEGER\n  \"is_typing\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"phone_number\" TEXT\n  \"last_login_at\" TEXT\n  \"last_activity_at\" TEXT\n  \"is_active\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"public\".\"blocked_users\".\"blocked_by_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"blocked_users\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"conversations\".\"user1_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"conversations\".\"user2_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"friend_requests\".\"sender_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"friend_requests\".\"receiver_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"friendships\".\"user2_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"friendships\".\"user1_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"group_files\".\"file_id\" > \"public\".\"files\".\"file_id\"\nRef: \"public\".\"group_files\".\"group_id\" > \"public\".\"groups\".\"group_id\"\nRef: \"public\".\"group_images\".\"group_id\" > \"public\".\"groups\".\"group_id\"\nRef: \"public\".\"group_images\".\"image_id\" > \"public\".\"images\".\"image_id\"\nRef: \"public\".\"group_members\".\"group_id\" > \"public\".\"groups\".\"group_id\"\nRef: \"public\".\"group_members\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"group_message_attachments\".\"group_message_id\" > \"public\".\"group_messages\".\"group_message_id\"\nRef: \"public\".\"group_message_attachments\".\"file_id\" > \"public\".\"files\".\"file_id\"\nRef: \"public\".\"group_messages\".\"sender_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"group_messages\".\"group_id\" > \"public\".\"groups\".\"group_id\"\nRef: \"public\".\"group_typing_indicators\".\"group_id\" > \"public\".\"groups\".\"group_id\"\nRef: \"public\".\"group_typing_indicators\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"images\".\"file_path\" > \"public\".\"files\".\"file_path\"\nRef: \"public\".\"message_attachments\".\"message_id\" > \"public\".\"messages\".\"message_id\"\nRef: \"public\".\"message_attachments\".\"file_id\" > \"public\".\"files\".\"file_id\"\nRef: \"public\".\"messages\".\"conversation_id\" > \"public\".\"conversations\".\"conversation_id\"\nRef: \"public\".\"messages\".\"receiver_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"messages\".\"sender_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"push_notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"spam_reports\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"spam_reports\".\"reported_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"typing_indicators\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"typing_indicators\".\"conversation_id\" > \"public\".\"conversations\".\"conversation_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"analytics\" {\n  \"analytic_id\" INTEGER [pk]\n  \"metric\" TEXT\n  \"value\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"blocked_users\" {\n  \"blocked_user_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"blocked_by_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"conversations\" {\n  \"conversation_id\" INTEGER [pk]\n  \"user1_id\" INTEGER\n  \"user2_id\" INTEGER\n  \"last_message_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"files\" {\n  \"file_id\" INTEGER [pk]\n  \"file_path\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"friend_requests\" {\n  \"friend_request_id\" INTEGER [pk]\n  \"sender_id\" INTEGER\n  \"receiver_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"friendships\" {\n  \"friendship_id\" INTEGER [pk]\n  \"user1_id\" INTEGER\n  \"user2_id\" INTEGER\n  \"status\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"group_files\" {\n  \"group_file_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"group_images\" {\n  \"group_image_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"image_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"group_members\" {\n  \"group_member_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"joined_at\" TEXT\n}\n\nTable \"group_message_attachments\" {\n  \"group_message_attachment_id\" INTEGER [pk]\n  \"group_message_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"group_messages\" {\n  \"group_message_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"sender_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n}\n\nTable \"group_typing_indicators\" {\n  \"group_typing_indicator_id\" INTEGER [pk]\n  \"group_id\" INTEGER\n  \"user_id\" INTEGER\n  \"is_typing\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"groups\" {\n  \"group_id\" INTEGER [pk]\n  \"group_name\" TEXT\n  \"created_by\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"images\" {\n  \"image_id\" INTEGER [pk]\n  \"file_path\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"message_attachments\" {\n  \"message_attachment_id\" INTEGER [pk]\n  \"message_id\" INTEGER\n  \"file_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"messages\" {\n  \"message_id\" INTEGER [pk]\n  \"conversation_id\" INTEGER\n  \"sender_id\" INTEGER\n  \"receiver_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n  \"is_delivered\" INTEGER\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"type\" TEXT\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"is_read\" INTEGER\n}\n\nTable \"profiles\" {\n  \"profile_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"profile_picture\" TEXT\n  \"bio\" TEXT\n  \"headline\" TEXT\n  \"website\" TEXT\n}\n\nTable \"push_notifications\" {\n  \"push_notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"content\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"spam_reports\" {\n  \"spam_report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"reported_user_id\" INTEGER\n  \"reason\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"typing_indicators\" {\n  \"typing_indicator_id\" INTEGER [pk]\n  \"conversation_id\" INTEGER\n  \"user_id\" INTEGER\n  \"is_typing\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"phone_number\" TEXT\n  \"last_login_at\" TEXT\n  \"last_activity_at\" TEXT\n  \"is_active\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nRef: \"blocked_users\".\"blocked_by_id\" > \"users\".\"user_id\"\n\nRef: \"blocked_users\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"conversations\".\"user1_id\" > \"users\".\"user_id\"\n\nRef: \"conversations\".\"user2_id\" > \"users\".\"user_id\"\n\nRef: \"friend_requests\".\"sender_id\" > \"users\".\"user_id\"\n\nRef: \"friend_requests\".\"receiver_id\" > \"users\".\"user_id\"\n\nRef: \"friendships\".\"user2_id\" > \"users\".\"user_id\"\n\nRef: \"friendships\".\"user1_id\" > \"users\".\"user_id\"\n\nRef: \"group_files\".\"file_id\" > \"files\".\"file_id\"\n\nRef: \"group_files\".\"group_id\" > \"groups\".\"group_id\"\n\nRef: \"group_images\".\"group_id\" > \"groups\".\"group_id\"\n\nRef: \"group_images\".\"image_id\" > \"images\".\"image_id\"\n\nRef: \"group_members\".\"group_id\" > \"groups\".\"group_id\"\n\nRef: \"group_members\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"group_message_attachments\".\"group_message_id\" > \"group_messages\".\"group_message_id\"\n\nRef: \"group_message_attachments\".\"file_id\" > \"files\".\"file_id\"\n\nRef: \"group_messages\".\"sender_id\" > \"users\".\"user_id\"\n\nRef: \"group_messages\".\"group_id\" > \"groups\".\"group_id\"\n\nRef: \"group_typing_indicators\".\"group_id\" > \"groups\".\"group_id\"\n\nRef: \"group_typing_indicators\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"images\".\"file_path\" > \"files\".\"file_path\"\n\nRef: \"message_attachments\".\"message_id\" > \"messages\".\"message_id\"\n\nRef: \"message_attachments\".\"file_id\" > \"files\".\"file_id\"\n\nRef: \"messages\".\"conversation_id\" > \"conversations\".\"conversation_id\"\n\nRef: \"messages\".\"receiver_id\" > \"users\".\"user_id\"\n\nRef: \"messages\".\"sender_id\" > \"users\".\"user_id\"\n\nRef: \"notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"push_notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"spam_reports\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"spam_reports\".\"reported_user_id\" > \"users\".\"user_id\"\n\nRef: \"typing_indicators\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"typing_indicators\".\"conversation_id\" > \"conversations\".\"conversation_id\"\n\n## Table Stats & Sample Values\n\nanalytics: 2 rows\n  metric: 'user engagement', 'message trends'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nblocked_users: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  user_id: '1'\n\nconversations: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  user1_id: '0', '1'\n\nfiles: 2 rows\n  file_path: 'files/file1.pdf', 'files/file2.docx'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nfriend_requests: 2 rows\n  status: 'pending', 'accepted'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nfriendships: 2 rows\n  status: 'accepted', 'pending'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\ngroup_files: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  group_id: '0', '1'\n\ngroup_images: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  group_id: '0', '1'\n\ngroup_members: 2 rows\n  role: 'admin', 'member'\n  joined_at: '2022-01-01 12:00:00'\n  group_id: '1', '0'\n\ngroup_message_attachments: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  group_message_id: '1', '0'\n\ngroup_messages: 2 rows\n  content: 'Hello, everyone!', 'Hi, group!'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\ngroup_typing_indicators: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  is_typing: '1', '0'\n\ngroups: 2 rows\n  group_name: 'Friends', 'Family'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nimages: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  file_path: '0'\n\nmessage_attachments: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  file_id: '1', '0'\n\nmessages: 2 rows\n  content: 'Hello!', 'Hi!'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nnotifications: 2 rows\n  type: 'friend request', 'message'\n  content: 'John wants to be your friend!', 'Jane sent you a message!'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nprofiles: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  profile_picture: 'profile_pictures/john_doe.jpg', 'profile_pictures/jane_smith.jpg'\n\npush_notifications: 2 rows\n  content: 'You have a new message!', 'You have a new friend request!'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\nspam_reports: 2 rows\n  reason: 'Sending unsolicited messages', 'Posting malicious content'\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n\ntyping_indicators: 2 rows\n  created_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  updated_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'\n  is_typing: '1', '0'\n\nusers: 2 rows\n  username: 'john_doe', 'jane_smith'\n  password: 'password123', 'password456'\n  last_login_at: '2022-01-01 12:00:00', '2022-01-02 12:00:00'",
+    "stateUrl": null,
+    "tableStats": {
+      "analytics": {
+        "rows": 2,
+        "sample_values": {
+          "analytic_id": [
+            "0",
+            "1"
+          ],
+          "metric": [
+            "user engagement",
+            "message trends"
+          ],
+          "value": [
+            "0.8",
+            "1000.0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "blocked_users": {
+        "rows": 2,
+        "sample_values": {
+          "blocked_user_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "blocked_by_id": [
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "conversations": {
+        "rows": 2,
+        "sample_values": {
+          "conversation_id": [
+            "0",
+            "1"
+          ],
+          "user1_id": [
+            "0",
+            "1"
+          ],
+          "user2_id": [
+            "1"
+          ],
+          "last_message_id": [
+            "10",
+            "20"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "files/file1.pdf",
+            "files/file2.docx"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "friend_requests": {
+        "rows": 2,
+        "sample_values": {
+          "friend_request_id": [
+            "0",
+            "1"
+          ],
+          "sender_id": [
+            "1"
+          ],
+          "receiver_id": [
+            "1"
+          ],
+          "status": [
+            "pending",
+            "accepted"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "friendships": {
+        "rows": 2,
+        "sample_values": {
+          "friendship_id": [
+            "0",
+            "1"
+          ],
+          "user1_id": [
+            "0",
+            "1"
+          ],
+          "user2_id": [
+            "1"
+          ],
+          "status": [
+            "accepted",
+            "pending"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_files": {
+        "rows": 2,
+        "sample_values": {
+          "group_file_id": [
+            "0",
+            "1"
+          ],
+          "group_id": [
+            "0",
+            "1"
+          ],
+          "file_id": [
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_images": {
+        "rows": 2,
+        "sample_values": {
+          "group_image_id": [
+            "0",
+            "1"
+          ],
+          "group_id": [
+            "0",
+            "1"
+          ],
+          "image_id": [
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_members": {
+        "rows": 2,
+        "sample_values": {
+          "group_member_id": [
+            "0",
+            "1"
+          ],
+          "group_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "role": [
+            "admin",
+            "member"
+          ],
+          "joined_at": [
+            "2022-01-01 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_message_attachments": {
+        "rows": 2,
+        "sample_values": {
+          "group_message_attachment_id": [
+            "0",
+            "1"
+          ],
+          "group_message_id": [
+            "1",
+            "0"
+          ],
+          "file_id": [
+            "1"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_messages": {
+        "rows": 2,
+        "sample_values": {
+          "group_message_id": [
+            "0",
+            "1"
+          ],
+          "group_id": [
+            "1",
+            "0"
+          ],
+          "sender_id": [
+            "0",
+            "1"
+          ],
+          "content": [
+            "Hello, everyone!",
+            "Hi, group!"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "is_read": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "group_typing_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "group_typing_indicator_id": [
+            "0",
+            "1"
+          ],
+          "group_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "is_typing": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "groups": {
+        "rows": 2,
+        "sample_values": {
+          "group_id": [
+            "0",
+            "1"
+          ],
+          "group_name": [
+            "Friends",
+            "Family"
+          ],
+          "created_by": [
+            "1",
+            "2"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "images": {
+        "rows": 2,
+        "sample_values": {
+          "image_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "message_attachments": {
+        "rows": 2,
+        "sample_values": {
+          "message_attachment_id": [
+            "0",
+            "1"
+          ],
+          "message_id": [
+            "0"
+          ],
+          "file_id": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "messages": {
+        "rows": 2,
+        "sample_values": {
+          "message_id": [
+            "0",
+            "1"
+          ],
+          "conversation_id": [
+            "0",
+            "1"
+          ],
+          "sender_id": [
+            "0"
+          ],
+          "receiver_id": [
+            "0"
+          ],
+          "content": [
+            "Hello!",
+            "Hi!"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "is_read": [
+            "1",
+            "0"
+          ],
+          "is_delivered": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "type": [
+            "friend request",
+            "message"
+          ],
+          "content": [
+            "John wants to be your friend!",
+            "Jane sent you a message!"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "is_read": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "profiles": {
+        "rows": 2,
+        "sample_values": {
+          "profile_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "profile_picture": [
+            "profile_pictures/john_doe.jpg",
+            "profile_pictures/jane_smith.jpg"
+          ],
+          "bio": [
+            "Software engineer",
+            "Marketing manager"
+          ],
+          "headline": [
+            "Full-stack developer",
+            "Marketing expert"
+          ],
+          "website": [
+            "https://johndoe.com",
+            "https://janesmith.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "push_notifications": {
+        "rows": 2,
+        "sample_values": {
+          "push_notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "content": [
+            "You have a new message!",
+            "You have a new friend request!"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "spam_reports": {
+        "rows": 2,
+        "sample_values": {
+          "spam_report_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "reported_user_id": [
+            "0"
+          ],
+          "reason": [
+            "Sending unsolicited messages",
+            "Posting malicious content"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "typing_indicators": {
+        "rows": 2,
+        "sample_values": {
+          "typing_indicator_id": [
+            "0",
+            "1"
+          ],
+          "conversation_id": [
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "is_typing": [
+            "1",
+            "0"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "john_doe",
+            "jane_smith"
+          ],
+          "email": [
+            "john@example.com",
+            "jane@example.com"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ],
+          "last_login_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "last_activity_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "created_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2022-01-01 12:00:00",
+            "2022-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

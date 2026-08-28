@@ -1,0 +1,780 @@
+{
+  "db_id": "baseball_player_performance_tracking_753994",
+  "source": "synsql",
+  "tables": 20,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/baseball_player_performance_tracking_753994",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"batting_stats\" {\n  \"batting_stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"month\" INTEGER\n  \"at_bats\" INTEGER\n  \"hits\" INTEGER\n  \"runs\" INTEGER\n  \"rbis\" INTEGER\n  \"walks\" INTEGER\n  \"strikeouts\" INTEGER\n  \"home_runs\" INTEGER\n  \"batting_average\" REAL\n  \"stolen_bases\" INTEGER\n  \"on_base_percentage\" REAL\n}\n\nTable \"public\".\"divisions\" {\n  \"division_id\" INTEGER [pk]\n  \"division_name\" TEXT\n  \"league_id\" INTEGER\n}\n\nTable \"public\".\"games\" {\n  \"game_id\" INTEGER [pk]\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"game_date\" TEXT\n  \"stadium\" TEXT\n  \"attendance\" INTEGER\n  \"weather_conditions\" TEXT\n  \"umpire_id\" INTEGER\n  \"game_type\" TEXT\n}\n\nTable \"public\".\"leagues\" {\n  \"league_id\" INTEGER [pk]\n  \"league_name\" TEXT\n  \"division_count\" INTEGER\n}\n\nTable \"public\".\"managers\" {\n  \"manager_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"experience_years\" INTEGER\n}\n\nTable \"public\".\"pitching_stats\" {\n  \"pitching_stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"month\" INTEGER\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"era\" REAL\n  \"cg\" INTEGER\n  \"ip\" REAL\n  \"so\" INTEGER\n  \"whip\" REAL\n  \"avg\" REAL\n  \"saves\" INTEGER\n  \"holds\" INTEGER\n}\n\nTable \"public\".\"player_games\" {\n  \"player_game_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"position\" TEXT\n  \"batting_order\" INTEGER\n  \"at_bats\" INTEGER\n  \"hits\" INTEGER\n  \"runs\" INTEGER\n  \"rbis\" INTEGER\n  \"walks\" INTEGER\n  \"strikeouts\" INTEGER\n  \"home_runs\" INTEGER\n  \"pitching_outcomes\" TEXT\n}\n\nTable \"public\".\"player_seasons\" {\n  \"player_season_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"season_id\" INTEGER\n  \"total_at_bats\" INTEGER\n  \"total_hits\" INTEGER\n  \"total_runs\" INTEGER\n  \"total_rbis\" INTEGER\n  \"total_walks\" INTEGER\n  \"total_strikeouts\" INTEGER\n  \"total_home_runs\" INTEGER\n  \"batting_average\" REAL\n  \"total_ip\" REAL\n  \"total_wins\" INTEGER\n  \"total_losses\" INTEGER\n  \"total_era\" REAL\n  \"total_whip\" REAL\n  \"awards\" TEXT\n}\n\nTable \"public\".\"players\" {\n  \"player_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"position\" TEXT\n  \"team_id\" INTEGER\n  \"date_of_birth\" TEXT\n  \"handedness\" TEXT\n  \"height\" REAL\n  \"weight\" INTEGER\n  \"experience_years\" INTEGER\n  \"jersey_number\" INTEGER\n}\n\nTable \"public\".\"playoff_games\" {\n  \"playoff_game_id\" INTEGER [pk]\n  \"series_id\" INTEGER\n  \"game_date\" TEXT\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"home_score\" INTEGER\n  \"away_score\" INTEGER\n  \"umpire_id\" INTEGER\n  \"game_type\" TEXT\n}\n\nTable \"public\".\"playoff_series\" {\n  \"series_id\" INTEGER [pk]\n  \"season_id\" INTEGER\n  \"round\" TEXT\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"winner_team_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"series_mvp\" INTEGER\n}\n\nTable \"public\".\"seasons\" {\n  \"season_id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"champion_team_id\" INTEGER\n  \"most_valuable_player\" INTEGER\n}\n\nTable \"public\".\"stadiums\" {\n  \"stadium_id\" INTEGER [pk]\n  \"stadium_name\" TEXT\n  \"city\" TEXT\n  \"capacity\" INTEGER\n  \"built_year\" INTEGER\n  \"grass_type\" TEXT\n  \"field_dimensions\" TEXT\n}\n\nTable \"public\".\"team_league_division\" {\n  \"team_id\" INTEGER [pk]\n  \"league_id\" INTEGER\n  \"division_id\" INTEGER\n}\n\nTable \"public\".\"team_records\" {\n  \"record_id\" INTEGER [pk]\n  \"team_id\" INTEGER\n  \"season_id\" INTEGER\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"ties\" INTEGER\n  \"win_percentage\" REAL\n  \"playoff_status\" TEXT\n  \"division_rank\" INTEGER\n}\n\nTable \"public\".\"teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"city\" TEXT\n  \"stadium\" TEXT\n  \"manager_id\" INTEGER\n  \"founded_year\" INTEGER\n  \"website\" TEXT\n  \"owner_name\" TEXT\n  \"general_manager\" TEXT\n}\n\nTable \"public\".\"umpires\" {\n  \"umpire_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"years_of_service\" INTEGER\n  \"experience_level\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"email\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"role_id\" INTEGER\n  \"last_login\" TEXT\n}\n\nTable \"public\".\"weather_data\" {\n  \"weather_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"temperature\" REAL\n  \"humidity\" REAL\n  \"wind_speed\" REAL\n  \"wind_direction\" TEXT\n  \"precipitation\" TEXT\n  \"conditions\" TEXT\n}\n\nRef: \"public\".\"batting_stats\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"games\".\"away_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"games\".\"umpire_id\" > \"public\".\"umpires\".\"umpire_id\"\nRef: \"public\".\"games\".\"home_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"pitching_stats\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_games\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_games\".\"game_id\" > \"public\".\"games\".\"game_id\"\nRef: \"public\".\"player_seasons\".\"player_id\" > \"public\".\"players\".\"player_id\"\nRef: \"public\".\"player_seasons\".\"season_id\" > \"public\".\"seasons\".\"season_id\"\nRef: \"public\".\"players\".\"team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"playoff_games\".\"home_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"playoff_games\".\"series_id\" > \"public\".\"playoff_series\".\"series_id\"\nRef: \"public\".\"playoff_games\".\"umpire_id\" > \"public\".\"umpires\".\"umpire_id\"\nRef: \"public\".\"playoff_games\".\"away_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"playoff_series\".\"season_id\" > \"public\".\"seasons\".\"season_id\"\nRef: \"public\".\"playoff_series\".\"winner_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"playoff_series\".\"away_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"playoff_series\".\"home_team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"team_league_division\".\"division_id\" > \"public\".\"divisions\".\"division_id\"\nRef: \"public\".\"team_league_division\".\"league_id\" > \"public\".\"leagues\".\"league_id\"\nRef: \"public\".\"team_records\".\"season_id\" > \"public\".\"seasons\".\"season_id\"\nRef: \"public\".\"team_records\".\"team_id\" > \"public\".\"teams\".\"team_id\"\nRef: \"public\".\"teams\".\"manager_id\" > \"public\".\"managers\".\"manager_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\"\nRef: \"public\".\"weather_data\".\"game_id\" > \"public\".\"games\".\"game_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"batting_stats\" {\n  \"batting_stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"month\" INTEGER\n  \"at_bats\" INTEGER\n  \"hits\" INTEGER\n  \"runs\" INTEGER\n  \"rbis\" INTEGER\n  \"walks\" INTEGER\n  \"strikeouts\" INTEGER\n  \"home_runs\" INTEGER\n  \"batting_average\" REAL\n  \"stolen_bases\" INTEGER\n  \"on_base_percentage\" REAL\n}\n\nTable \"divisions\" {\n  \"division_id\" INTEGER [pk]\n  \"division_name\" TEXT\n  \"league_id\" INTEGER\n}\n\nTable \"games\" {\n  \"game_id\" INTEGER [pk]\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"game_date\" TEXT\n  \"stadium\" TEXT\n  \"attendance\" INTEGER\n  \"weather_conditions\" TEXT\n  \"umpire_id\" INTEGER\n  \"game_type\" TEXT\n}\n\nTable \"leagues\" {\n  \"league_id\" INTEGER [pk]\n  \"league_name\" TEXT\n  \"division_count\" INTEGER\n}\n\nTable \"managers\" {\n  \"manager_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"experience_years\" INTEGER\n}\n\nTable \"pitching_stats\" {\n  \"pitching_stat_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"month\" INTEGER\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"era\" REAL\n  \"cg\" INTEGER\n  \"ip\" REAL\n  \"so\" INTEGER\n  \"whip\" REAL\n  \"avg\" REAL\n  \"saves\" INTEGER\n  \"holds\" INTEGER\n}\n\nTable \"player_games\" {\n  \"player_game_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"game_id\" INTEGER\n  \"position\" TEXT\n  \"batting_order\" INTEGER\n  \"at_bats\" INTEGER\n  \"hits\" INTEGER\n  \"runs\" INTEGER\n  \"rbis\" INTEGER\n  \"walks\" INTEGER\n  \"strikeouts\" INTEGER\n  \"home_runs\" INTEGER\n  \"pitching_outcomes\" TEXT\n}\n\nTable \"player_seasons\" {\n  \"player_season_id\" INTEGER [pk]\n  \"player_id\" INTEGER\n  \"season_id\" INTEGER\n  \"total_at_bats\" INTEGER\n  \"total_hits\" INTEGER\n  \"total_runs\" INTEGER\n  \"total_rbis\" INTEGER\n  \"total_walks\" INTEGER\n  \"total_strikeouts\" INTEGER\n  \"total_home_runs\" INTEGER\n  \"batting_average\" REAL\n  \"total_ip\" REAL\n  \"total_wins\" INTEGER\n  \"total_losses\" INTEGER\n  \"total_era\" REAL\n  \"total_whip\" REAL\n  \"awards\" TEXT\n}\n\nTable \"players\" {\n  \"player_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"position\" TEXT\n  \"team_id\" INTEGER\n  \"date_of_birth\" TEXT\n  \"handedness\" TEXT\n  \"height\" REAL\n  \"weight\" INTEGER\n  \"experience_years\" INTEGER\n  \"jersey_number\" INTEGER\n}\n\nTable \"playoff_games\" {\n  \"playoff_game_id\" INTEGER [pk]\n  \"series_id\" INTEGER\n  \"game_date\" TEXT\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"home_score\" INTEGER\n  \"away_score\" INTEGER\n  \"umpire_id\" INTEGER\n  \"game_type\" TEXT\n}\n\nTable \"playoff_series\" {\n  \"series_id\" INTEGER [pk]\n  \"season_id\" INTEGER\n  \"round\" TEXT\n  \"home_team_id\" INTEGER\n  \"away_team_id\" INTEGER\n  \"winner_team_id\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"series_mvp\" INTEGER\n}\n\nTable \"seasons\" {\n  \"season_id\" INTEGER [pk]\n  \"year\" INTEGER\n  \"start_date\" TEXT\n  \"end_date\" TEXT\n  \"champion_team_id\" INTEGER\n  \"most_valuable_player\" INTEGER\n}\n\nTable \"stadiums\" {\n  \"stadium_id\" INTEGER [pk]\n  \"stadium_name\" TEXT\n  \"city\" TEXT\n  \"capacity\" INTEGER\n  \"built_year\" INTEGER\n  \"grass_type\" TEXT\n  \"field_dimensions\" TEXT\n}\n\nTable \"team_league_division\" {\n  \"team_id\" INTEGER [pk]\n  \"league_id\" INTEGER\n  \"division_id\" INTEGER\n}\n\nTable \"team_records\" {\n  \"record_id\" INTEGER [pk]\n  \"team_id\" INTEGER\n  \"season_id\" INTEGER\n  \"wins\" INTEGER\n  \"losses\" INTEGER\n  \"ties\" INTEGER\n  \"win_percentage\" REAL\n  \"playoff_status\" TEXT\n  \"division_rank\" INTEGER\n}\n\nTable \"teams\" {\n  \"team_id\" INTEGER [pk]\n  \"team_name\" TEXT\n  \"city\" TEXT\n  \"stadium\" TEXT\n  \"manager_id\" INTEGER\n  \"founded_year\" INTEGER\n  \"website\" TEXT\n  \"owner_name\" TEXT\n  \"general_manager\" TEXT\n}\n\nTable \"umpires\" {\n  \"umpire_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"years_of_service\" INTEGER\n  \"experience_level\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password\" TEXT\n  \"email\" TEXT\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"role_id\" INTEGER\n  \"last_login\" TEXT\n}\n\nTable \"weather_data\" {\n  \"weather_id\" INTEGER [pk]\n  \"game_id\" INTEGER\n  \"temperature\" REAL\n  \"humidity\" REAL\n  \"wind_speed\" REAL\n  \"wind_direction\" TEXT\n  \"precipitation\" TEXT\n  \"conditions\" TEXT\n}\n\nRef: \"batting_stats\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"games\".\"away_team_id\" > \"teams\".\"team_id\"\n\nRef: \"games\".\"umpire_id\" > \"umpires\".\"umpire_id\"\n\nRef: \"games\".\"home_team_id\" > \"teams\".\"team_id\"\n\nRef: \"pitching_stats\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_games\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_games\".\"game_id\" > \"games\".\"game_id\"\n\nRef: \"player_seasons\".\"player_id\" > \"players\".\"player_id\"\n\nRef: \"player_seasons\".\"season_id\" > \"seasons\".\"season_id\"\n\nRef: \"players\".\"team_id\" > \"teams\".\"team_id\"\n\nRef: \"playoff_games\".\"home_team_id\" > \"teams\".\"team_id\"\n\nRef: \"playoff_games\".\"series_id\" > \"playoff_series\".\"series_id\"\n\nRef: \"playoff_games\".\"umpire_id\" > \"umpires\".\"umpire_id\"\n\nRef: \"playoff_games\".\"away_team_id\" > \"teams\".\"team_id\"\n\nRef: \"playoff_series\".\"season_id\" > \"seasons\".\"season_id\"\n\nRef: \"playoff_series\".\"winner_team_id\" > \"teams\".\"team_id\"\n\nRef: \"playoff_series\".\"away_team_id\" > \"teams\".\"team_id\"\n\nRef: \"playoff_series\".\"home_team_id\" > \"teams\".\"team_id\"\n\nRef: \"team_league_division\".\"division_id\" > \"divisions\".\"division_id\"\n\nRef: \"team_league_division\".\"league_id\" > \"leagues\".\"league_id\"\n\nRef: \"team_records\".\"season_id\" > \"seasons\".\"season_id\"\n\nRef: \"team_records\".\"team_id\" > \"teams\".\"team_id\"\n\nRef: \"teams\".\"manager_id\" > \"managers\".\"manager_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\nRef: \"weather_data\".\"game_id\" > \"games\".\"game_id\"\n\n## Table Stats & Sample Values\n\nbatting_stats: 2 rows\n  month: '4', '5'\n  at_bats: '100', '110'\n  hits: '25', '30'\n\ndivisions: 6 rows\n  division_name: 'East', 'Central', 'West'\n  division_id: '0', '1', '2', ...\n  league_id: '1', '2'\n\ngames: 2 rows\n  game_type: 'Regular Season'\n  stadium: 'Fenway Park', 'Yankee Stadium'\n  weather_conditions: 'Sunny', 'Cloudy'\n\nleagues: 2 rows\n  league_name: 'American League', 'National League'\n  division_count: '3'\n  league_id: '0', '1'\n\nmanagers: 2 rows\n  first_name: 'Alex', 'Joe'\n  last_name: 'Rodriguez', 'Girardi'\n  email: 'arod@redsox.com', 'jgirardi@yankees.com'\n\npitching_stats: 2 rows\n  month: '4', '5'\n  wins: '2', '1'\n  losses: '2', '1'\n\nplayer_games: 2 rows\n  position: 'Pitcher', 'Catcher'\n  pitching_outcomes: 'Win'\n  batting_order: '9', '5'\n\nplayer_seasons: 2 rows\n  awards: 'None', 'MVP'\n  total_at_bats: '0', '400'\n  total_hits: '0', '100'\n\nplayers: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  position: 'Pitcher', 'Catcher'\n\nplayoff_games: 2 rows\n  game_type: 'Game 1', 'Game 2'\n  game_date: '2022-10-01', '2022-10-02'\n  home_score: '5', '4'\n\nplayoff_series: 2 rows\n  round: 'World Series', 'Division Series'\n  start_date: '2022-10-01', '2023-09-25'\n  end_date: '2022-10-07', '2023-09-29'\n\nseasons: 2 rows\n  start_date: '2022-03-01', '2023-03-01'\n  end_date: '2022-11-01', '2023-11-01'\n  year: '2022', '2023'\n\nstadiums: 2 rows\n  stadium_name: 'Fenway Park', 'Yankee Stadium'\n  city: 'Boston', 'New York'\n  grass_type: 'Natural'\n\nteam_league_division: 2 rows\n  division_id: '5', '2'\n  league_id: '0', '1'\n  team_id: '0', '1'\n\nteam_records: 2 rows\n  playoff_status: 'qualified'\n  division_rank: '1'\n  wins: '90', '95'\n\nteams: 2 rows\n  team_name: 'Red Sox', 'Yankees'\n  city: 'Boston', 'New York'\n  owner_name: 'John Smith', 'Hal Steinbrenner'\n\numpires: 2 rows\n  first_name: 'Mike', 'Brian'\n  last_name: 'Winters', 'Gorman'\n  experience_level: 'Veteran'\n\nuser_roles: 3 rows\n  role_name: 'Coach', 'Scout', 'Data Analyst'\n  description: 'Responsible for team strategy and player managemen', 'Evaluates player performance and potential recruit', 'Analyzes and reports on player and team performanc'\n  permissions: 'view, edit', 'view', 'view, edit, delete'\n\nusers: 2 rows\n  username: 'jdoe', 'jsmith'\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n\nweather_data: 2 rows\n  wind_direction: 'NE', 'SW'\n  precipitation: 'None', 'Light Rain'\n  conditions: 'Sunny', 'Cloudy'",
+    "stateUrl": null,
+    "tableStats": {
+      "batting_stats": {
+        "rows": 2,
+        "sample_values": {
+          "batting_stat_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "1",
+            "0"
+          ],
+          "month": [
+            "4",
+            "5"
+          ],
+          "at_bats": [
+            "100",
+            "110"
+          ],
+          "hits": [
+            "25",
+            "30"
+          ],
+          "runs": [
+            "10",
+            "12"
+          ],
+          "rbis": [
+            "15",
+            "18"
+          ],
+          "walks": [
+            "10",
+            "12"
+          ],
+          "strikeouts": [
+            "20",
+            "15"
+          ],
+          "home_runs": [
+            "3",
+            "4"
+          ],
+          "batting_average": [
+            "0.25",
+            "0.273"
+          ],
+          "stolen_bases": [
+            "5",
+            "7"
+          ],
+          "on_base_percentage": [
+            "0.35",
+            "0.38"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "divisions": {
+        "rows": 6,
+        "sample_values": {
+          "division_id": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "division_name": [
+            "East",
+            "Central",
+            "West"
+          ],
+          "league_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "games": {
+        "rows": 2,
+        "sample_values": {
+          "game_id": [
+            "0",
+            "1"
+          ],
+          "home_team_id": [
+            "1"
+          ],
+          "away_team_id": [
+            "1",
+            "0"
+          ],
+          "game_date": [
+            "2023-04-01",
+            "2023-04-02"
+          ],
+          "stadium": [
+            "Fenway Park",
+            "Yankee Stadium"
+          ],
+          "attendance": [
+            "35000",
+            "40000"
+          ],
+          "weather_conditions": [
+            "Sunny",
+            "Cloudy"
+          ],
+          "umpire_id": [
+            "0"
+          ],
+          "game_type": [
+            "Regular Season"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "leagues": {
+        "rows": 2,
+        "sample_values": {
+          "league_id": [
+            "0",
+            "1"
+          ],
+          "league_name": [
+            "American League",
+            "National League"
+          ],
+          "division_count": [
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "managers": {
+        "rows": 2,
+        "sample_values": {
+          "manager_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alex",
+            "Joe"
+          ],
+          "last_name": [
+            "Rodriguez",
+            "Girardi"
+          ],
+          "email": [
+            "arod@redsox.com",
+            "jgirardi@yankees.com"
+          ],
+          "start_date": [
+            "2020-01-01",
+            "2018-01-01"
+          ],
+          "experience_years": [
+            "10",
+            "15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "pitching_stats": {
+        "rows": 2,
+        "sample_values": {
+          "pitching_stat_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "1",
+            "0"
+          ],
+          "month": [
+            "4",
+            "5"
+          ],
+          "wins": [
+            "2",
+            "1"
+          ],
+          "losses": [
+            "2",
+            "1"
+          ],
+          "era": [
+            "4.19",
+            "2.88"
+          ],
+          "cg": [
+            "0"
+          ],
+          "ip": [
+            "19.1",
+            "25.0"
+          ],
+          "so": [
+            "30",
+            "33"
+          ],
+          "whip": [
+            "1.09",
+            "1.0"
+          ],
+          "avg": [
+            "0.213"
+          ],
+          "saves": [
+            "0"
+          ],
+          "holds": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_games": {
+        "rows": 2,
+        "sample_values": {
+          "player_game_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0"
+          ],
+          "game_id": [
+            "1"
+          ],
+          "position": [
+            "Pitcher",
+            "Catcher"
+          ],
+          "batting_order": [
+            "9",
+            "5"
+          ],
+          "at_bats": [
+            "0",
+            "3"
+          ],
+          "hits": [
+            "0",
+            "1"
+          ],
+          "runs": [
+            "0",
+            "1"
+          ],
+          "rbis": [
+            "0",
+            "1"
+          ],
+          "walks": [
+            "0",
+            "1"
+          ],
+          "strikeouts": [
+            "0"
+          ],
+          "home_runs": [
+            "0"
+          ],
+          "pitching_outcomes": [
+            "Win"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "player_seasons": {
+        "rows": 2,
+        "sample_values": {
+          "player_season_id": [
+            "0",
+            "1"
+          ],
+          "player_id": [
+            "0"
+          ],
+          "season_id": [
+            "0"
+          ],
+          "total_at_bats": [
+            "0",
+            "400"
+          ],
+          "total_hits": [
+            "0",
+            "100"
+          ],
+          "total_runs": [
+            "0",
+            "60"
+          ],
+          "total_rbis": [
+            "0",
+            "80"
+          ],
+          "total_walks": [
+            "0",
+            "60"
+          ],
+          "total_strikeouts": [
+            "0",
+            "80"
+          ],
+          "total_home_runs": [
+            "0",
+            "15"
+          ],
+          "batting_average": [
+            "0.0",
+            "0.25"
+          ],
+          "total_ip": [
+            "100.0",
+            "0.0"
+          ],
+          "total_wins": [
+            "10",
+            "0"
+          ],
+          "total_losses": [
+            "10",
+            "0"
+          ],
+          "total_era": [
+            "3.5",
+            "0.0"
+          ],
+          "total_whip": [
+            "1.1",
+            "0.0"
+          ],
+          "awards": [
+            "None",
+            "MVP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "players": {
+        "rows": 2,
+        "sample_values": {
+          "player_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "position": [
+            "Pitcher",
+            "Catcher"
+          ],
+          "team_id": [
+            "0"
+          ],
+          "date_of_birth": [
+            "1990-05-15",
+            "1992-08-20"
+          ],
+          "handedness": [
+            "Right",
+            "Left"
+          ],
+          "height": [
+            "74.0",
+            "68.0"
+          ],
+          "weight": [
+            "180",
+            "160"
+          ],
+          "experience_years": [
+            "5",
+            "3"
+          ],
+          "jersey_number": [
+            "12",
+            "22"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "playoff_games": {
+        "rows": 2,
+        "sample_values": {
+          "playoff_game_id": [
+            "0",
+            "1"
+          ],
+          "series_id": [
+            "0",
+            "1"
+          ],
+          "game_date": [
+            "2022-10-01",
+            "2022-10-02"
+          ],
+          "home_team_id": [
+            "1"
+          ],
+          "away_team_id": [
+            "1"
+          ],
+          "home_score": [
+            "5",
+            "4"
+          ],
+          "away_score": [
+            "3",
+            "2"
+          ],
+          "umpire_id": [
+            "0",
+            "1"
+          ],
+          "game_type": [
+            "Game 1",
+            "Game 2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "playoff_series": {
+        "rows": 2,
+        "sample_values": {
+          "series_id": [
+            "0",
+            "1"
+          ],
+          "season_id": [
+            "0"
+          ],
+          "round": [
+            "World Series",
+            "Division Series"
+          ],
+          "home_team_id": [
+            "1"
+          ],
+          "away_team_id": [
+            "1"
+          ],
+          "winner_team_id": [
+            "1"
+          ],
+          "start_date": [
+            "2022-10-01",
+            "2023-09-25"
+          ],
+          "end_date": [
+            "2022-10-07",
+            "2023-09-29"
+          ],
+          "series_mvp": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "seasons": {
+        "rows": 2,
+        "sample_values": {
+          "season_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2022",
+            "2023"
+          ],
+          "start_date": [
+            "2022-03-01",
+            "2023-03-01"
+          ],
+          "end_date": [
+            "2022-11-01",
+            "2023-11-01"
+          ],
+          "champion_team_id": [
+            "101",
+            "102"
+          ],
+          "most_valuable_player": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "stadiums": {
+        "rows": 2,
+        "sample_values": {
+          "stadium_id": [
+            "0",
+            "1"
+          ],
+          "stadium_name": [
+            "Fenway Park",
+            "Yankee Stadium"
+          ],
+          "city": [
+            "Boston",
+            "New York"
+          ],
+          "capacity": [
+            "37000",
+            "50000"
+          ],
+          "built_year": [
+            "1912",
+            "2009"
+          ],
+          "grass_type": [
+            "Natural"
+          ],
+          "field_dimensions": [
+            "LF: 310 ft, CF: 390 ft, RF: 302 ft",
+            "LF: 318 ft, CF: 408 ft, RF: 314 ft"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team_league_division": {
+        "rows": 2,
+        "sample_values": {
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "league_id": [
+            "0",
+            "1"
+          ],
+          "division_id": [
+            "5",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "team_records": {
+        "rows": 2,
+        "sample_values": {
+          "record_id": [
+            "0",
+            "1"
+          ],
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "season_id": [
+            "1"
+          ],
+          "wins": [
+            "90",
+            "95"
+          ],
+          "losses": [
+            "72",
+            "67"
+          ],
+          "ties": [
+            "0"
+          ],
+          "win_percentage": [
+            "0.556",
+            "0.586"
+          ],
+          "playoff_status": [
+            "qualified"
+          ],
+          "division_rank": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teams": {
+        "rows": 2,
+        "sample_values": {
+          "team_id": [
+            "0",
+            "1"
+          ],
+          "team_name": [
+            "Red Sox",
+            "Yankees"
+          ],
+          "city": [
+            "Boston",
+            "New York"
+          ],
+          "stadium": [
+            "Fenway Park",
+            "Yankee Stadium"
+          ],
+          "manager_id": [
+            "0"
+          ],
+          "founded_year": [
+            "1901",
+            "1903"
+          ],
+          "website": [
+            "www.redsox.com",
+            "www.yankees.com"
+          ],
+          "owner_name": [
+            "John Smith",
+            "Hal Steinbrenner"
+          ],
+          "general_manager": [
+            "Brian O'Halloran",
+            "Brian Cashman"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "umpires": {
+        "rows": 2,
+        "sample_values": {
+          "umpire_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Mike",
+            "Brian"
+          ],
+          "last_name": [
+            "Winters",
+            "Gorman"
+          ],
+          "email": [
+            "mwinters@mlb.com",
+            "bgorman@mlb.com"
+          ],
+          "years_of_service": [
+            "15",
+            "20"
+          ],
+          "experience_level": [
+            "Veteran"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 3,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "role_name": [
+            "Coach",
+            "Scout",
+            "Data Analyst"
+          ],
+          "description": [
+            "Responsible for team strategy and player managemen",
+            "Evaluates player performance and potential recruit",
+            "Analyzes and reports on player and team performanc"
+          ],
+          "permissions": [
+            "view, edit",
+            "view",
+            "view, edit, delete"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "jdoe",
+            "jsmith"
+          ],
+          "password": [
+            "password123"
+          ],
+          "email": [
+            "jdoe@redsox.com",
+            "jsmith@yankees.com"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "role_id": [
+            "1",
+            "2"
+          ],
+          "last_login": [
+            "2022-01-01",
+            "2022-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "weather_data": {
+        "rows": 2,
+        "sample_values": {
+          "weather_id": [
+            "0",
+            "1"
+          ],
+          "game_id": [
+            "0"
+          ],
+          "temperature": [
+            "68.5",
+            "72.0"
+          ],
+          "humidity": [
+            "45.0",
+            "50.0"
+          ],
+          "wind_speed": [
+            "10.0",
+            "15.0"
+          ],
+          "wind_direction": [
+            "NE",
+            "SW"
+          ],
+          "precipitation": [
+            "None",
+            "Light Rain"
+          ],
+          "conditions": [
+            "Sunny",
+            "Cloudy"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

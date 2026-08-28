@@ -1,0 +1,490 @@
+{
+  "db_id": "college_2",
+  "source": "sparc",
+  "tables": 11,
+  "total_rows": 34620,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#college_2",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"advisor\" {\n  \"s_ID\" TEXT [pk]\n  \"i_ID\" TEXT\n}\n\nTable \"classroom\" {\n  \"building\" TEXT [pk]\n  \"room_number\" TEXT [pk]\n  \"capacity\" TEXT\n}\n\nTable \"course\" {\n  \"course_id\" TEXT [pk]\n  \"title\" TEXT\n  \"dept_name\" TEXT\n  \"credits\" TEXT\n}\n\nTable \"department\" {\n  \"dept_name\" TEXT [pk]\n  \"building\" TEXT\n  \"budget\" TEXT\n}\n\nTable \"instructor\" {\n  \"ID\" TEXT [pk]\n  \"name\" TEXT [not null]\n  \"dept_name\" TEXT\n  \"salary\" TEXT\n}\n\nTable \"prereq\" {\n  \"course_id\" TEXT [pk]\n  \"prereq_id\" TEXT [pk]\n}\n\nTable \"section\" {\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n  \"building\" TEXT\n  \"room_number\" TEXT\n  \"time_slot_id\" TEXT\n}\n\nTable \"student\" {\n  \"ID\" TEXT [pk]\n  \"name\" TEXT [not null]\n  \"dept_name\" TEXT\n  \"tot_cred\" TEXT\n}\n\nTable \"takes\" {\n  \"ID\" TEXT [pk]\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n  \"grade\" TEXT\n}\n\nTable \"teaches\" {\n  \"ID\" TEXT [pk]\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n}\n\nTable \"time_slot\" {\n  \"time_slot_id\" TEXT [pk]\n  \"day\" TEXT [pk]\n  \"start_hr\" TEXT [pk]\n  \"start_min\" TEXT [pk]\n  \"end_hr\" TEXT\n  \"end_min\" TEXT\n}\n\n\n\nRef: \"course\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"instructor\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"section\".\"building\" > \"classroom\".\"building\"\n\nRef: \"section\".\"room_number\" > \"classroom\".\"room_number\"\n\nRef: \"section\".\"course_id\" > \"course\".\"course_id\"\n\nRef: \"teaches\".\"ID\" > \"instructor\".\"ID\"\n\nRef: \"teaches\".\"course_id\" > \"section\".\"course_id\"\n\nRef: \"teaches\".\"sec_id\" > \"section\".\"sec_id\"\n\nRef: \"teaches\".\"semester\" > \"section\".\"semester\"\n\nRef: \"teaches\".\"year\" > \"section\".\"year\"\n\nRef: \"student\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"takes\".\"ID\" > \"student\".\"ID\"\n\nRef: \"takes\".\"course_id\" > \"section\".\"course_id\"\n\nRef: \"takes\".\"sec_id\" > \"section\".\"sec_id\"\n\nRef: \"takes\".\"semester\" > \"section\".\"semester\"\n\nRef: \"takes\".\"year\" > \"section\".\"year\"\n\nRef: \"advisor\".\"s_ID\" > \"student\".\"ID\"\n\nRef: \"advisor\".\"i_ID\" > \"instructor\".\"ID\"\n\nRef: \"prereq\".\"prereq_id\" > \"course\".\"course_id\"\n\nRef: \"prereq\".\"course_id\" > \"course\".\"course_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"advisor\" {\n  \"s_ID\" TEXT [pk]\n  \"i_ID\" TEXT\n}\n\nTable \"classroom\" {\n  \"building\" TEXT [pk]\n  \"room_number\" TEXT [pk]\n  \"capacity\" TEXT\n}\n\nTable \"course\" {\n  \"course_id\" TEXT [pk]\n  \"title\" TEXT\n  \"dept_name\" TEXT\n  \"credits\" TEXT\n}\n\nTable \"department\" {\n  \"dept_name\" TEXT [pk]\n  \"building\" TEXT\n  \"budget\" TEXT\n}\n\nTable \"instructor\" {\n  \"ID\" TEXT [pk]\n  \"name\" TEXT [not null]\n  \"dept_name\" TEXT\n  \"salary\" TEXT\n}\n\nTable \"prereq\" {\n  \"course_id\" TEXT [pk]\n  \"prereq_id\" TEXT [pk]\n}\n\nTable \"section\" {\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n  \"building\" TEXT\n  \"room_number\" TEXT\n  \"time_slot_id\" TEXT\n}\n\nTable \"student\" {\n  \"ID\" TEXT [pk]\n  \"name\" TEXT [not null]\n  \"dept_name\" TEXT\n  \"tot_cred\" TEXT\n}\n\nTable \"takes\" {\n  \"ID\" TEXT [pk]\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n  \"grade\" TEXT\n}\n\nTable \"teaches\" {\n  \"ID\" TEXT [pk]\n  \"course_id\" TEXT [pk]\n  \"sec_id\" TEXT [pk]\n  \"semester\" TEXT [pk]\n  \"year\" TEXT [pk]\n}\n\nTable \"time_slot\" {\n  \"time_slot_id\" TEXT [pk]\n  \"day\" TEXT [pk]\n  \"start_hr\" TEXT [pk]\n  \"start_min\" TEXT [pk]\n  \"end_hr\" TEXT\n  \"end_min\" TEXT\n}\n\nRef: \"course\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"instructor\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"section\".\"building\" > \"classroom\".\"building\"\n\nRef: \"section\".\"room_number\" > \"classroom\".\"room_number\"\n\nRef: \"section\".\"course_id\" > \"course\".\"course_id\"\n\nRef: \"teaches\".\"ID\" > \"instructor\".\"ID\"\n\nRef: \"teaches\".\"course_id\" > \"section\".\"course_id\"\n\nRef: \"teaches\".\"sec_id\" > \"section\".\"sec_id\"\n\nRef: \"teaches\".\"semester\" > \"section\".\"semester\"\n\nRef: \"teaches\".\"year\" > \"section\".\"year\"\n\nRef: \"student\".\"dept_name\" > \"department\".\"dept_name\"\n\nRef: \"takes\".\"ID\" > \"student\".\"ID\"\n\nRef: \"takes\".\"course_id\" > \"section\".\"course_id\"\n\nRef: \"takes\".\"sec_id\" > \"section\".\"sec_id\"\n\nRef: \"takes\".\"semester\" > \"section\".\"semester\"\n\nRef: \"takes\".\"year\" > \"section\".\"year\"\n\nRef: \"advisor\".\"s_ID\" > \"student\".\"ID\"\n\nRef: \"advisor\".\"i_ID\" > \"instructor\".\"ID\"\n\nRef: \"prereq\".\"prereq_id\" > \"course\".\"course_id\"\n\nRef: \"prereq\".\"course_id\" > \"course\".\"course_id\"\n\n## Table Stats & Sample Values\n\nadvisor: 2000 rows\n  i_ID: '19368', '95030', '22591', ...\n  s_ID: '24746', '79352', '76672', ...\n\nclassroom: 30 rows\n  capacity: '10', '27', '92', ...\n  building: 'Lamberton', 'Chandler', 'Fairchild', ...\n  room_number: '134', '375', '145', ...\n\ncourse: 200 rows\n  title: 'C Programming', 'The Music of Donovan', 'Electron Microscopy', ...\n  dept_name: 'Mech. Eng.', 'Comp. Sci.', 'Statistics', ...\n  credits: '4', '3'\n\ndepartment: 20 rows\n  dept_name: 'Civil Eng.', 'Biology', 'History', ...\n  building: 'Chandler', 'Candlestick', 'Taylor', ...\n  budget: '255041.46', '647610.55', '699140.86', ...\n\ninstructor: 50 rows\n  name: 'McKinnon', 'Pingr', 'Mird', ...\n  dept_name: 'Cybernetics', 'Statistics', 'Marketing', ...\n  salary: '94333.99', '59303.62', '119921.41', ...\n\nprereq: 100 rows\n  course_id: '376', '760', '403', ...\n  prereq_id: '130', '169', '345', ...\n\nsection: 100 rows\n  building: 'Chandler', 'Gates', 'Whitman', ...\n  room_number: '804', '314', '434', ...\n  semester: 'Fall', 'Spring'\n\nstudent: 2000 rows\n  name: 'Schrefl', 'Rumat', 'Miliko', ...\n  dept_name: 'History', 'Finance', 'Statistics', ...\n  tot_cred: '4', '100', '116', ...\n\ntakes: 10000 rows\n  grade: 'C-', 'B-', 'A-', ...\n  semester: 'Fall', 'Spring'\n  year: '2003', '2007', '2004', ...\n\nteaches: 100 rows\n  semester: 'Spring', 'Fall'\n  year: '2004', '2007', '2001', ...\n  ID: '34175', '3199', '6569', ...\n\ntime_slot: 20 rows\n  end_hr: '8', '9', '11', ...\n  end_min: '50', '45', '30'\n  day: 'M', 'W', 'F', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#college_2",
+    "tableStats": {
+      "advisor": {
+        "rows": 2000,
+        "sample_values": {
+          "s_ID": [
+            "24746",
+            "79352",
+            "76672",
+            "14182",
+            "44985",
+            "96052",
+            "35175",
+            "44271"
+          ],
+          "i_ID": [
+            "19368",
+            "95030",
+            "22591",
+            "77346",
+            "31955",
+            "73623",
+            "90643",
+            "58558"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "classroom": {
+        "rows": 30,
+        "sample_values": {
+          "building": [
+            "Lamberton",
+            "Chandler",
+            "Fairchild",
+            "Nassau",
+            "Grace",
+            "Whitman",
+            "Taylor",
+            "Saucon"
+          ],
+          "room_number": [
+            "134",
+            "375",
+            "145",
+            "45",
+            "40",
+            "143",
+            "812",
+            "113"
+          ],
+          "capacity": [
+            "10",
+            "27",
+            "92",
+            "34",
+            "120",
+            "115",
+            "109",
+            "97"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "course": {
+        "rows": 200,
+        "sample_values": {
+          "course_id": [
+            "787",
+            "238",
+            "608",
+            "539",
+            "278",
+            "972",
+            "391",
+            "814"
+          ],
+          "title": [
+            "C Programming",
+            "The Music of Donovan",
+            "Electron Microscopy",
+            "International Finance",
+            "Greek Tragedy",
+            "Virology",
+            "Compiler Design",
+            "Geology"
+          ],
+          "dept_name": [
+            "Mech. Eng.",
+            "Comp. Sci.",
+            "Statistics",
+            "Psychology",
+            "Biology",
+            "Elec. Eng.",
+            "Physics",
+            "Cybernetics"
+          ],
+          "credits": [
+            "4",
+            "3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "department": {
+        "rows": 20,
+        "sample_values": {
+          "dept_name": [
+            "Civil Eng.",
+            "Biology",
+            "History",
+            "Physics",
+            "Marketing",
+            "Pol. Sci.",
+            "English",
+            "Accounting"
+          ],
+          "building": [
+            "Chandler",
+            "Candlestick",
+            "Taylor",
+            "Wrigley",
+            "Lambeau",
+            "Whitman",
+            "Palmer",
+            "Saucon"
+          ],
+          "budget": [
+            "255041.46",
+            "647610.55",
+            "699140.86",
+            "942162.76",
+            "210627.58",
+            "573745.09",
+            "611042.66",
+            "441840.92"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "instructor": {
+        "rows": 50,
+        "sample_values": {
+          "ID": [
+            "63395",
+            "78699",
+            "96895",
+            "4233",
+            "4034",
+            "50885",
+            "79653",
+            "50330"
+          ],
+          "name": [
+            "McKinnon",
+            "Pingr",
+            "Mird",
+            "Luo",
+            "Murata",
+            "Konstantinides",
+            "Levine",
+            "Shuming"
+          ],
+          "dept_name": [
+            "Cybernetics",
+            "Statistics",
+            "Marketing",
+            "English",
+            "Athletics",
+            "Languages",
+            "Elec. Eng.",
+            "Physics"
+          ],
+          "salary": [
+            "94333.99",
+            "59303.62",
+            "119921.41",
+            "88791.45",
+            "61387.56",
+            "32570.5",
+            "89805.83",
+            "108011.81"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "prereq": {
+        "rows": 100,
+        "sample_values": {
+          "course_id": [
+            "376",
+            "760",
+            "403",
+            "353",
+            "629",
+            "608",
+            "158",
+            "496"
+          ],
+          "prereq_id": [
+            "130",
+            "169",
+            "345",
+            "647",
+            "139",
+            "864",
+            "408",
+            "489"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "section": {
+        "rows": 100,
+        "sample_values": {
+          "course_id": [
+            "313",
+            "747",
+            "443",
+            "893",
+            "663",
+            "457",
+            "445",
+            "559"
+          ],
+          "sec_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "semester": [
+            "Fall",
+            "Spring"
+          ],
+          "year": [
+            "2010",
+            "2004",
+            "2007",
+            "2005",
+            "2001",
+            "2002",
+            "2006",
+            "2003"
+          ],
+          "building": [
+            "Chandler",
+            "Gates",
+            "Whitman",
+            "Fairchild",
+            "Saucon",
+            "Alumni",
+            "Lamberton",
+            "Taylor"
+          ],
+          "room_number": [
+            "804",
+            "314",
+            "434",
+            "145",
+            "844",
+            "547",
+            "134",
+            "183"
+          ],
+          "time_slot_id": [
+            "N",
+            "K",
+            "O",
+            "B",
+            "D",
+            "J",
+            "C",
+            "F"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "student": {
+        "rows": 2000,
+        "sample_values": {
+          "ID": [
+            "24746",
+            "79352",
+            "76672",
+            "14182",
+            "44985",
+            "96052",
+            "35175",
+            "44271"
+          ],
+          "name": [
+            "Schrefl",
+            "Rumat",
+            "Miliko",
+            "Moszkowski",
+            "Prieto",
+            "Marcol",
+            "Quimby",
+            "Sowerby"
+          ],
+          "dept_name": [
+            "History",
+            "Finance",
+            "Statistics",
+            "Civil Eng.",
+            "Biology",
+            "Cybernetics",
+            "English",
+            "Math"
+          ],
+          "tot_cred": [
+            "4",
+            "100",
+            "116",
+            "73",
+            "91",
+            "15",
+            "108",
+            "58"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "takes": {
+        "rows": 10000,
+        "sample_values": {
+          "ID": [
+            "65901",
+            "24932",
+            "61332",
+            "73492",
+            "65715",
+            "58300",
+            "760",
+            "69730"
+          ],
+          "course_id": [
+            "401",
+            "802",
+            "200",
+            "760",
+            "843",
+            "408",
+            "571",
+            "313"
+          ],
+          "sec_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "semester": [
+            "Fall",
+            "Spring"
+          ],
+          "year": [
+            "2003",
+            "2007",
+            "2004",
+            "2010",
+            "2006",
+            "2001",
+            "2009",
+            "2002"
+          ],
+          "grade": [
+            "C-",
+            "B-",
+            "A-",
+            "A",
+            "B+",
+            "B",
+            "C+",
+            "A+"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "teaches": {
+        "rows": 100,
+        "sample_values": {
+          "ID": [
+            "34175",
+            "3199",
+            "6569",
+            "28097",
+            "22591",
+            "90376",
+            "79081",
+            "80759"
+          ],
+          "course_id": [
+            "747",
+            "169",
+            "445",
+            "808",
+            "962",
+            "158",
+            "561",
+            "274"
+          ],
+          "sec_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "semester": [
+            "Spring",
+            "Fall"
+          ],
+          "year": [
+            "2004",
+            "2007",
+            "2001",
+            "2003",
+            "2008",
+            "2006",
+            "2002",
+            "2010"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "time_slot": {
+        "rows": 20,
+        "sample_values": {
+          "time_slot_id": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+          ],
+          "day": [
+            "M",
+            "W",
+            "F",
+            "T",
+            "R"
+          ],
+          "start_hr": [
+            "8",
+            "9",
+            "11",
+            "13",
+            "10",
+            "14",
+            "16"
+          ],
+          "start_min": [
+            "0",
+            "30"
+          ],
+          "end_hr": [
+            "8",
+            "9",
+            "11",
+            "13",
+            "15",
+            "16",
+            "12"
+          ],
+          "end_min": [
+            "50",
+            "45",
+            "30"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

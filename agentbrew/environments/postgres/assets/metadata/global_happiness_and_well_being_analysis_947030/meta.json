@@ -1,0 +1,662 @@
+{
+  "db_id": "global_happiness_and_well_being_analysis_947030",
+  "source": "synsql",
+  "tables": 24,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/global_happiness_and_well_being_analysis_947030",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_duration\" INTEGER\n}\n\nTable \"public\".\"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"region\" TEXT\n  \"continent\" TEXT\n  \"iso_code\" TEXT\n  \"capital_city\" TEXT\n  \"population\" INTEGER\n  \"currency\" TEXT\n}\n\nTable \"public\".\"data_files\" {\n  \"file_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n}\n\nTable \"public\".\"dataset_bookmarks\" {\n  \"bookmark_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"bookmark_date\" TEXT\n  \"bookmark_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"category_name\" TEXT\n  \"category_description\" TEXT\n}\n\nTable \"public\".\"dataset_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"comment_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_downloads\" {\n  \"download_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"download_date\" TEXT\n  \"download_count\" INTEGER\n  \"download_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_favorites\" {\n  \"favorite_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"favorite_date\" TEXT\n  \"favorite_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"rating_score\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"request_date\" TEXT\n  \"request_user_id\" INTEGER\n  \"request_status\" TEXT\n}\n\nTable \"public\".\"dataset_shares\" {\n  \"share_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"share_date\" TEXT\n  \"share_count\" INTEGER\n  \"share_user_id\" INTEGER\n}\n\nTable \"public\".\"dataset_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"tag_name\" TEXT\n  \"tag_description\" TEXT\n}\n\nTable \"public\".\"dataset_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version_number\" INTEGER\n  \"update_date\" TEXT\n  \"version_description\" TEXT\n}\n\nTable \"public\".\"dataset_views\" {\n  \"view_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"view_date\" TEXT\n  \"view_count\" INTEGER\n  \"view_user_id\" INTEGER\n}\n\nTable \"public\".\"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"happiness_score\" REAL\n  \"gdp_per_capita\" REAL\n  \"social_support\" REAL\n  \"health\" REAL\n  \"freedom\" REAL\n  \"generosity\" REAL\n  \"perception_of_corruption\" REAL\n  \"data_collection_method\" TEXT\n  \"data_collection_frequency\" TEXT\n}\n\nTable \"public\".\"freedoms\" {\n  \"freedom_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"freedom_index\" REAL\n  \"freedom_rank\" INTEGER\n}\n\nTable \"public\".\"gdp_per_capitas\" {\n  \"gdp_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"gdp_per_capita\" REAL\n  \"gdp_growth_rate\" REAL\n}\n\nTable \"public\".\"generosities\" {\n  \"generosity_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"generosity_index\" REAL\n  \"generosity_rank\" INTEGER\n}\n\nTable \"public\".\"happiness_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"score\" REAL\n  \"rank\" INTEGER\n  \"lower_confidence_interval\" REAL\n  \"upper_confidence_interval\" REAL\n}\n\nTable \"public\".\"healths\" {\n  \"health_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"health_index\" REAL\n  \"life_expectancy\" REAL\n}\n\nTable \"public\".\"perceptions_of_corruption\" {\n  \"corruption_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"perception_of_corruption\" REAL\n  \"corruption_rank\" INTEGER\n}\n\nTable \"public\".\"readme_files\" {\n  \"readme_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n}\n\nTable \"public\".\"social_supports\" {\n  \"support_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"social_support\" REAL\n  \"social_support_rank\" INTEGER\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login_date\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"data_files\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_bookmarks\".\"bookmark_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_bookmarks\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_categories\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_comments\".\"comment_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_comments\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_downloads\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_downloads\".\"download_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_favorites\".\"favorite_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_favorites\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_ratings\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_ratings\".\"rating_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_requests\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_requests\".\"request_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_shares\".\"share_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_shares\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_tags\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_versions\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"dataset_views\".\"view_user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"dataset_views\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"datasets\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"freedoms\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"gdp_per_capitas\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"generosities\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"happiness_scores\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"healths\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"perceptions_of_corruption\".\"country_id\" > \"public\".\"countries\".\"country_id\"\nRef: \"public\".\"readme_files\".\"dataset_id\" > \"public\".\"datasets\".\"dataset_id\"\nRef: \"public\".\"social_supports\".\"country_id\" > \"public\".\"countries\".\"country_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_duration\" INTEGER\n}\n\nTable \"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"region\" TEXT\n  \"continent\" TEXT\n  \"iso_code\" TEXT\n  \"capital_city\" TEXT\n  \"population\" INTEGER\n  \"currency\" TEXT\n}\n\nTable \"data_files\" {\n  \"file_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n}\n\nTable \"dataset_bookmarks\" {\n  \"bookmark_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"bookmark_date\" TEXT\n  \"bookmark_user_id\" INTEGER\n}\n\nTable \"dataset_categories\" {\n  \"category_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"category_name\" TEXT\n  \"category_description\" TEXT\n}\n\nTable \"dataset_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"comment_text\" TEXT\n  \"comment_date\" TEXT\n  \"comment_user_id\" INTEGER\n}\n\nTable \"dataset_downloads\" {\n  \"download_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"download_date\" TEXT\n  \"download_count\" INTEGER\n  \"download_user_id\" INTEGER\n}\n\nTable \"dataset_favorites\" {\n  \"favorite_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"favorite_date\" TEXT\n  \"favorite_user_id\" INTEGER\n}\n\nTable \"dataset_ratings\" {\n  \"rating_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"rating_score\" INTEGER\n  \"rating_date\" TEXT\n  \"rating_user_id\" INTEGER\n}\n\nTable \"dataset_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"request_date\" TEXT\n  \"request_user_id\" INTEGER\n  \"request_status\" TEXT\n}\n\nTable \"dataset_shares\" {\n  \"share_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"share_date\" TEXT\n  \"share_count\" INTEGER\n  \"share_user_id\" INTEGER\n}\n\nTable \"dataset_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"tag_name\" TEXT\n  \"tag_description\" TEXT\n}\n\nTable \"dataset_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"version_number\" INTEGER\n  \"update_date\" TEXT\n  \"version_description\" TEXT\n}\n\nTable \"dataset_views\" {\n  \"view_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"view_date\" TEXT\n  \"view_count\" INTEGER\n  \"view_user_id\" INTEGER\n}\n\nTable \"datasets\" {\n  \"dataset_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"happiness_score\" REAL\n  \"gdp_per_capita\" REAL\n  \"social_support\" REAL\n  \"health\" REAL\n  \"freedom\" REAL\n  \"generosity\" REAL\n  \"perception_of_corruption\" REAL\n  \"data_collection_method\" TEXT\n  \"data_collection_frequency\" TEXT\n}\n\nTable \"freedoms\" {\n  \"freedom_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"freedom_index\" REAL\n  \"freedom_rank\" INTEGER\n}\n\nTable \"gdp_per_capitas\" {\n  \"gdp_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"gdp_per_capita\" REAL\n  \"gdp_growth_rate\" REAL\n}\n\nTable \"generosities\" {\n  \"generosity_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"generosity_index\" REAL\n  \"generosity_rank\" INTEGER\n}\n\nTable \"happiness_scores\" {\n  \"score_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"score\" REAL\n  \"rank\" INTEGER\n  \"lower_confidence_interval\" REAL\n  \"upper_confidence_interval\" REAL\n}\n\nTable \"healths\" {\n  \"health_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"health_index\" REAL\n  \"life_expectancy\" REAL\n}\n\nTable \"perceptions_of_corruption\" {\n  \"corruption_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"perception_of_corruption\" REAL\n  \"corruption_rank\" INTEGER\n}\n\nTable \"readme_files\" {\n  \"readme_id\" INTEGER [pk]\n  \"dataset_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n}\n\nTable \"social_supports\" {\n  \"support_id\" INTEGER [pk]\n  \"country_id\" INTEGER\n  \"year\" INTEGER\n  \"social_support\" REAL\n  \"social_support_rank\" INTEGER\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login_date\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"data_files\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_bookmarks\".\"bookmark_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_bookmarks\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_categories\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_comments\".\"comment_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_comments\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_downloads\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_downloads\".\"download_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_favorites\".\"favorite_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_favorites\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_ratings\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_ratings\".\"rating_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_requests\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_requests\".\"request_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_shares\".\"share_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_shares\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_tags\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_versions\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"dataset_views\".\"view_user_id\" > \"users\".\"user_id\"\n\nRef: \"dataset_views\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"datasets\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"freedoms\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"gdp_per_capitas\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"generosities\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"happiness_scores\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"healths\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"perceptions_of_corruption\".\"country_id\" > \"countries\".\"country_id\"\n\nRef: \"readme_files\".\"dataset_id\" > \"datasets\".\"dataset_id\"\n\nRef: \"social_supports\".\"country_id\" > \"countries\".\"country_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_date: '2023-05-01', '2023-05-02'\n  access_duration: '30', '60'\n\ncountries: 2 rows\n  country_name: 'Switzerland', 'Iceland'\n  capital_city: 'Bern', 'Reykjavik'\n  region: 'Europe'\n\ndata_files: 2 rows\n  file_type: 'csv'\n  file_path: 'data/1.csv', 'data/2.csv'\n  upload_date: '2023-01-01', '2023-01-02'\n\ndataset_bookmarks: 2 rows\n  bookmark_date: '2023-05-01', '2023-05-02'\n  dataset_id: '0', '1'\n  bookmark_user_id: '0', '1'\n\ndataset_categories: 2 rows\n  category_name: 'happiness_score', 'gdp_per_capita'\n  category_description: 'Category for happiness score datasets', 'Category for GDP per capita datasets'\n  category_id: '0', '1'\n\ndataset_comments: 2 rows\n  comment_text: 'Great dataset!', 'Needs more data'\n  comment_date: '2023-05-01', '2023-05-02'\n  dataset_id: '1', '0'\n\ndataset_downloads: 2 rows\n  download_date: '2023-05-01', '2023-05-02'\n  download_count: '10', '20'\n  dataset_id: '0', '1'\n\ndataset_favorites: 2 rows\n  favorite_date: '2023-05-01', '2023-05-02'\n  dataset_id: '0', '1'\n  favorite_user_id: '1', '0'\n\ndataset_ratings: 2 rows\n  rating_date: '2023-05-01', '2023-05-02'\n  rating_score: '5', '4'\n  dataset_id: '1'\n\ndataset_requests: 2 rows\n  request_status: 'pending', 'approved'\n  request_date: '2023-05-01', '2023-05-02'\n  request_user_id: '1', '0'\n\ndataset_shares: 2 rows\n  share_date: '2023-05-01', '2023-05-02'\n  share_count: '5', '10'\n  dataset_id: '1', '0'\n\ndataset_tags: 2 rows\n  tag_name: 'economy', 'health'\n  tag_description: 'Tag for economy-related datasets', 'Tag for health-related datasets'\n  dataset_id: '1'\n\ndataset_versions: 2 rows\n  version_description: 'Initial version', 'Updated version'\n  update_date: '2023-01-01', '2023-01-02'\n  version_number: '1'\n\ndataset_views: 2 rows\n  view_date: '2023-05-01', '2023-05-02'\n  view_count: '50', '100'\n  view_user_id: '1', '0'\n\ndatasets: 2 rows\n  data_collection_frequency: 'Annually', 'Quarterly'\n  data_collection_method: 'Survey'\n  happiness_score: '7.587', '7.561'\n\nfreedoms: 2 rows\n  freedom_index: '0.66557', '0.62877'\n  freedom_rank: '1', '2'\n  year: '2015'\n\ngdp_per_capitas: 2 rows\n  gdp_per_capita: '1.39651', '1.30232'\n  gdp_growth_rate: '0.02', '0.05'\n  country_id: '0', '1'\n\ngenerosities: 2 rows\n  generosity_index: '0.29678', '0.4363'\n  generosity_rank: '1', '2'\n  year: '2015'\n\nhappiness_scores: 2 rows\n  score: '7.587', '7.561'\n  rank: '1', '2'\n  country_id: '0', '1'\n\nhealths: 2 rows\n  health_index: '0.94143', '0.94784'\n  life_expectancy: '82.5', '83.0'\n  country_id: '0', '1'\n\nperceptions_of_corruption: 2 rows\n  perception_of_corruption: '0.41978', '0.14145'\n  corruption_rank: '1', '2'\n  country_id: '0', '1'\n\nreadme_files: 2 rows\n  file_type: 'txt'\n  file_path: 'readme/1.txt', 'readme/2.txt'\n  upload_date: '2023-01-01', '2023-01-02'\n\nsocial_supports: 2 rows\n  social_support: '1.34951', '1.40223'\n  social_support_rank: '1', '2'\n  country_id: '1', '0'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'data analyst'\n  password: 'password123', 'password456'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_duration": [
+            "30",
+            "60"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "countries": {
+        "rows": 2,
+        "sample_values": {
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "country_name": [
+            "Switzerland",
+            "Iceland"
+          ],
+          "region": [
+            "Europe"
+          ],
+          "continent": [
+            "Europe"
+          ],
+          "iso_code": [
+            "CH",
+            "IS"
+          ],
+          "capital_city": [
+            "Bern",
+            "Reykjavik"
+          ],
+          "population": [
+            "8500000",
+            "360000"
+          ],
+          "currency": [
+            "CHF",
+            "ISK"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "data/1.csv",
+            "data/2.csv"
+          ],
+          "file_size": [
+            "1.2",
+            "1.5"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "file_type": [
+            "csv"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_bookmarks": {
+        "rows": 2,
+        "sample_values": {
+          "bookmark_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "bookmark_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "bookmark_user_id": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "category_name": [
+            "happiness_score",
+            "gdp_per_capita"
+          ],
+          "category_description": [
+            "Category for happiness score datasets",
+            "Category for GDP per capita datasets"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "comment_text": [
+            "Great dataset!",
+            "Needs more data"
+          ],
+          "comment_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "comment_user_id": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_downloads": {
+        "rows": 2,
+        "sample_values": {
+          "download_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "download_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "download_count": [
+            "10",
+            "20"
+          ],
+          "download_user_id": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_favorites": {
+        "rows": 2,
+        "sample_values": {
+          "favorite_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "favorite_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "favorite_user_id": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_ratings": {
+        "rows": 2,
+        "sample_values": {
+          "rating_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "rating_score": [
+            "5",
+            "4"
+          ],
+          "rating_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "rating_user_id": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_requests": {
+        "rows": 2,
+        "sample_values": {
+          "request_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0"
+          ],
+          "request_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "request_user_id": [
+            "1",
+            "0"
+          ],
+          "request_status": [
+            "pending",
+            "approved"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_shares": {
+        "rows": 2,
+        "sample_values": {
+          "share_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1",
+            "0"
+          ],
+          "share_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "share_count": [
+            "5",
+            "10"
+          ],
+          "share_user_id": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_tags": {
+        "rows": 2,
+        "sample_values": {
+          "tag_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "1"
+          ],
+          "tag_name": [
+            "economy",
+            "health"
+          ],
+          "tag_description": [
+            "Tag for economy-related datasets",
+            "Tag for health-related datasets"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "version_number": [
+            "1"
+          ],
+          "update_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "version_description": [
+            "Initial version",
+            "Updated version"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "dataset_views": {
+        "rows": 2,
+        "sample_values": {
+          "view_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0"
+          ],
+          "view_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "view_count": [
+            "50",
+            "100"
+          ],
+          "view_user_id": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "datasets": {
+        "rows": 2,
+        "sample_values": {
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "happiness_score": [
+            "7.587",
+            "7.561"
+          ],
+          "gdp_per_capita": [
+            "1.39651",
+            "1.30232"
+          ],
+          "social_support": [
+            "1.34951",
+            "1.40223"
+          ],
+          "health": [
+            "0.94143",
+            "0.94784"
+          ],
+          "freedom": [
+            "0.66557",
+            "0.62877"
+          ],
+          "generosity": [
+            "0.29678",
+            "0.4363"
+          ],
+          "perception_of_corruption": [
+            "0.41978",
+            "0.14145"
+          ],
+          "data_collection_method": [
+            "Survey"
+          ],
+          "data_collection_frequency": [
+            "Annually",
+            "Quarterly"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "freedoms": {
+        "rows": 2,
+        "sample_values": {
+          "freedom_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "freedom_index": [
+            "0.66557",
+            "0.62877"
+          ],
+          "freedom_rank": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gdp_per_capitas": {
+        "rows": 2,
+        "sample_values": {
+          "gdp_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "gdp_per_capita": [
+            "1.39651",
+            "1.30232"
+          ],
+          "gdp_growth_rate": [
+            "0.02",
+            "0.05"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "generosities": {
+        "rows": 2,
+        "sample_values": {
+          "generosity_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "generosity_index": [
+            "0.29678",
+            "0.4363"
+          ],
+          "generosity_rank": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "happiness_scores": {
+        "rows": 2,
+        "sample_values": {
+          "score_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "score": [
+            "7.587",
+            "7.561"
+          ],
+          "rank": [
+            "1",
+            "2"
+          ],
+          "lower_confidence_interval": [
+            "7.4"
+          ],
+          "upper_confidence_interval": [
+            "7.7",
+            "7.6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "healths": {
+        "rows": 2,
+        "sample_values": {
+          "health_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "health_index": [
+            "0.94143",
+            "0.94784"
+          ],
+          "life_expectancy": [
+            "82.5",
+            "83.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "perceptions_of_corruption": {
+        "rows": 2,
+        "sample_values": {
+          "corruption_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2015"
+          ],
+          "perception_of_corruption": [
+            "0.41978",
+            "0.14145"
+          ],
+          "corruption_rank": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "readme_files": {
+        "rows": 2,
+        "sample_values": {
+          "readme_id": [
+            "0",
+            "1"
+          ],
+          "dataset_id": [
+            "0",
+            "1"
+          ],
+          "file_path": [
+            "readme/1.txt",
+            "readme/2.txt"
+          ],
+          "file_size": [
+            "0.1"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "file_type": [
+            "txt"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "social_supports": {
+        "rows": 2,
+        "sample_values": {
+          "support_id": [
+            "0",
+            "1"
+          ],
+          "country_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2015"
+          ],
+          "social_support": [
+            "1.34951",
+            "1.40223"
+          ],
+          "social_support_rank": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "data analyst"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Vendor Visit Schedule Trim",
+  "capability": [
+    "query_and_filter_database",
+    "archive_or_delete_items",
+    "precise_selection"
+  ],
+  "question": "Go to Vendor Visit Planner and remove the visit schedule in DENVER after 6 PM (excluding 6 PM) on Wednesday and Thursday.\n"
+}

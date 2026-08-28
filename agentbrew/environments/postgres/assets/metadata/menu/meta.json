@@ -1,0 +1,439 @@
+{
+  "db_id": "menu",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 1845587,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#menu",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Dish\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"menus_appeared\" INTEGER\n  \"times_appeared\" INTEGER\n  \"first_appeared\" INTEGER\n  \"last_appeared\" INTEGER\n  \"lowest_price\" REAL\n  \"highest_price\" REAL\n}\n\nTable \"Menu\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n  \"sponsor\" TEXT\n  \"event\" TEXT\n  \"venue\" TEXT\n  \"place\" TEXT\n  \"physical_description\" TEXT\n  \"occasion\" TEXT\n  \"notes\" TEXT\n  \"call_number\" TEXT\n  \"keywords\" TEXT\n  \"language\" TEXT\n  \"date\" DATE\n  \"location\" TEXT\n  \"location_type\" TEXT\n  \"currency\" TEXT\n  \"currency_symbol\" TEXT\n  \"status\" TEXT\n  \"page_count\" INTEGER\n  \"dish_count\" INTEGER\n}\n\nTable \"MenuItem\" {\n  \"id\" INTEGER [pk]\n  \"menu_page_id\" INTEGER\n  \"price\" REAL\n  \"high_price\" REAL\n  \"dish_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"xpos\" REAL\n  \"ypos\" REAL\n}\n\nTable \"MenuPage\" {\n  \"id\" INTEGER [pk]\n  \"menu_id\" INTEGER\n  \"page_number\" INTEGER\n  \"image_id\" REAL\n  \"full_height\" INTEGER\n  \"full_width\" INTEGER\n  \"uuid\" TEXT\n}\n\n\n\nRef: \"MenuPage\".\"menu_id\" > \"Menu\".\"id\"\n\nRef: \"MenuItem\".\"menu_page_id\" > \"MenuPage\".\"id\"\n\nRef: \"MenuItem\".\"dish_id\" > \"Dish\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Dish\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n  \"description\" TEXT\n  \"menus_appeared\" INTEGER\n  \"times_appeared\" INTEGER\n  \"first_appeared\" INTEGER\n  \"last_appeared\" INTEGER\n  \"lowest_price\" REAL\n  \"highest_price\" REAL\n}\n\nTable \"Menu\" {\n  \"id\" INTEGER [pk]\n  \"name\" TEXT\n  \"sponsor\" TEXT\n  \"event\" TEXT\n  \"venue\" TEXT\n  \"place\" TEXT\n  \"physical_description\" TEXT\n  \"occasion\" TEXT\n  \"notes\" TEXT\n  \"call_number\" TEXT\n  \"keywords\" TEXT\n  \"language\" TEXT\n  \"date\" DATE\n  \"location\" TEXT\n  \"location_type\" TEXT\n  \"currency\" TEXT\n  \"currency_symbol\" TEXT\n  \"status\" TEXT\n  \"page_count\" INTEGER\n  \"dish_count\" INTEGER\n}\n\nTable \"MenuItem\" {\n  \"id\" INTEGER [pk]\n  \"menu_page_id\" INTEGER\n  \"price\" REAL\n  \"high_price\" REAL\n  \"dish_id\" INTEGER\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n  \"xpos\" REAL\n  \"ypos\" REAL\n}\n\nTable \"MenuPage\" {\n  \"id\" INTEGER [pk]\n  \"menu_id\" INTEGER\n  \"page_number\" INTEGER\n  \"image_id\" REAL\n  \"full_height\" INTEGER\n  \"full_width\" INTEGER\n  \"uuid\" TEXT\n}\n\nRef: \"MenuPage\".\"menu_id\" > \"Menu\".\"id\"\n\nRef: \"MenuItem\".\"menu_page_id\" > \"MenuPage\".\"id\"\n\nRef: \"MenuItem\".\"dish_id\" > \"Dish\".\"id\"\n\n## Table Stats & Sample Values\n\nDish: 10000 rows\n  name: 'Consomme printaniere royal', 'Chicken gumbo', 'Tomato aux croutons', ...\n  menus_appeared: '8', '111', '14', ...\n  first_appeared: '1897', '1895', '1893', ...\n\nMenu: 10000 rows\n  physical_description: 'CARD; 4.75X7.5;', 'CARD; ILLUS; COL; 7.0X9.0;', 'CARD; ILLU; COL; 5.5X8.0;', ...\n  name: 'The Modern'\n  status: 'complete'\n\nMenuItem: 10000 rows\n  created_at: '2011-03-28 15:00:44 UTC', '2011-03-28 15:01:13 UTC', '2011-03-28 15:01:40 UTC', ...\n  updated_at: '2011-04-19 04:33:15 UTC', '2011-04-19 15:00:54 UTC', '2011-04-19 19:10:05 UTC', ...\n  price: '0.4', '0.6', '0.5', ...\n\nMenuPage: 10000 rows\n  uuid: '510d47e4-2955-a3d9-e040-e00a18064a99', '510d47e4-2956-a3d9-e040-e00a18064a99', '510d47e4-2957-a3d9-e040-e00a18064a99', ...\n  page_number: '1', '2', '3', ...\n  full_height: '7230', '5428', '3074', ...",
+    "stateUrl": "https://bird-bench.github.io/#menu",
+    "tableStats": {
+      "Dish": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9"
+          ],
+          "name": [
+            "Consomme printaniere royal",
+            "Chicken gumbo",
+            "Tomato aux croutons",
+            "Onion au gratin",
+            "St. Emilion",
+            "Radishes",
+            "Chicken soup with rice",
+            "Clam broth (cup)"
+          ],
+          "menus_appeared": [
+            "8",
+            "111",
+            "14",
+            "41",
+            "66",
+            "3263",
+            "48",
+            "2"
+          ],
+          "times_appeared": [
+            "8",
+            "117",
+            "14",
+            "41",
+            "68",
+            "3347",
+            "49",
+            "16"
+          ],
+          "first_appeared": [
+            "1897",
+            "1895",
+            "1893",
+            "1900",
+            "1881",
+            "1854",
+            "1899",
+            "1858"
+          ],
+          "last_appeared": [
+            "1927",
+            "1960",
+            "1917",
+            "1971",
+            "1981",
+            "2928",
+            "1961",
+            "1962"
+          ],
+          "lowest_price": [
+            "0.2",
+            "0.1",
+            "0.25",
+            "0.0",
+            "0.15",
+            "1.0",
+            "0.75",
+            "0.3"
+          ],
+          "highest_price": [
+            "0.4",
+            "0.8",
+            "1.0",
+            "18.0",
+            "25.0",
+            "0.6",
+            "0.0",
+            "60.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Menu": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "12463",
+            "12464",
+            "12465",
+            "12466",
+            "12467",
+            "12468",
+            "12469",
+            "12470"
+          ],
+          "name": [
+            "The Modern"
+          ],
+          "sponsor": [
+            "HOTEL EASTMAN",
+            "REPUBLICAN HOUSE",
+            "NORDDEUTSCHER LLOYD BREMEN",
+            "CANADIAN PACIFIC RAILWAY COMPANY",
+            "HOTEL NETHERLAND",
+            "HOTEL MARLBOROUGH",
+            "ALPHA OF ZETA PSI",
+            "MANHATTAN HOTEL"
+          ],
+          "event": [
+            "BREAKFAST",
+            "[DINNER]",
+            "FRUHSTUCK/BREAKFAST;",
+            "LUNCH;",
+            "DINNER;",
+            "SUPPER",
+            "FRUHSTUCK/BREAKFAST",
+            "LUNCH"
+          ],
+          "venue": [
+            "COMMERCIAL",
+            "SOC;",
+            "EDUC;",
+            "MIL;",
+            "GOVT;",
+            "POL;",
+            "?",
+            "RESTAURANT"
+          ],
+          "place": [
+            "HOT SPRINGS, AR",
+            "MILWAUKEE, [WI];",
+            "DAMPFER KAISER WILHELM DER GROSSE;",
+            "R.M.S. EMPRESS OF CHINA",
+            "NEW YORK, [NY];",
+            "SCHNELLDAMPFER KAISER WILHELM DER GROSSE;",
+            "[NEW YORK, NY]",
+            "DELMONICO'S, [NEW YORK, NY];"
+          ],
+          "physical_description": [
+            "CARD; 4.75X7.5;",
+            "CARD; ILLUS; COL; 7.0X9.0;",
+            "CARD; ILLU; COL; 5.5X8.0;",
+            "FOLDER; ILLU; COL; 5.5X7.5;",
+            "CARD; ILLUS; COL; 4.75X7.25;",
+            "CARD; ILLUS; COL; 6.0X8.75;",
+            "BROADSIDE; ILLUS; COL; 5.5X8.50;",
+            "FOLDER; ILLUS; COL; 5.5X7.5;"
+          ],
+          "occasion": [
+            "EASTER;",
+            "ANNIVERSARY;",
+            "DAILY;",
+            "DAILY",
+            "OTHER (COMPLIMENTARY);",
+            "OTHER (DAILY);",
+            "COMPLIMENTARY/TESTIMONIAL",
+            "ANNIVERSARY(?);"
+          ],
+          "notes": [
+            "WEDGEWOOD BLUE CARD; WHITE EMBOSSED GREEK KEY BORD",
+            "MENU IN GERMAN AND ENGLISH; ILLUS, STEAMSHIP AND S",
+            "MENU IN GERMAN AND ENGLISH; ILLUS, HARBOR SCENE WI",
+            "ILLUS, RED AND WHITE CHECKERED FLAG;",
+            "HOTEL CREST IN BLUE; PRICED MENU;",
+            "MENU IN GERMAN AND ENGLISH; ILLUS, LIGHTHOUSE; STE",
+            "MENU IN GERMAN AND ENGLISH; ILLUS, SAILING SHIP/SH",
+            "MENU IN GERMAN AND ENGLISH; ILLUS, HARBOR; LIGHTHO"
+          ],
+          "call_number": [
+            "1900-2822",
+            "1900-2825",
+            "1900-2827",
+            "1900-2828",
+            "1900-2829",
+            "1900-2831",
+            "1900-2838",
+            "1900-2839"
+          ],
+          "date": [
+            "1900-04-15",
+            "1900-04-16",
+            "1900-04-17",
+            "1900-04-18",
+            "1900-04-19",
+            "1900-04-20",
+            "1900-04-21",
+            "1900-04-22"
+          ],
+          "location": [
+            "Hotel Eastman",
+            "Republican House",
+            "Norddeutscher Lloyd Bremen",
+            "Canadian Pacific Railway Company",
+            "Hotel Netherland",
+            "Hotel Marlborough",
+            "Alpha Of Zeta Psi",
+            "Manhattan Hotel"
+          ],
+          "currency": [
+            "Dollars",
+            "Cents",
+            "Francs",
+            "Belgian Francs",
+            "Shillings",
+            "Deutsche Marks",
+            "UK Pounds",
+            "Pence"
+          ],
+          "currency_symbol": [
+            "$",
+            "c",
+            "FF",
+            "BEF",
+            "s",
+            "DM",
+            "£",
+            "p"
+          ],
+          "status": [
+            "complete"
+          ],
+          "page_count": [
+            "2",
+            "4",
+            "12",
+            "6",
+            "10",
+            "8",
+            "3",
+            "7"
+          ],
+          "dish_count": [
+            "67",
+            "34",
+            "84",
+            "63",
+            "33",
+            "37",
+            "144",
+            "80"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "MenuItem": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "menu_page_id": [
+            "1389",
+            "3079",
+            "1388",
+            "12947",
+            "130",
+            "142",
+            "1575",
+            "1029"
+          ],
+          "price": [
+            "0.4",
+            "0.6",
+            "0.5",
+            "0.1",
+            "0.25",
+            "0.75",
+            "0.7",
+            "0.3"
+          ],
+          "high_price": [
+            "1.0",
+            "3.0",
+            "1.5",
+            "4.0",
+            "0.4",
+            "0.5",
+            "0.6",
+            "8.0"
+          ],
+          "dish_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "9",
+            "10"
+          ],
+          "created_at": [
+            "2011-03-28 15:00:44 UTC",
+            "2011-03-28 15:01:13 UTC",
+            "2011-03-28 15:01:40 UTC",
+            "2011-03-28 15:01:51 UTC",
+            "2011-03-28 15:21:26 UTC",
+            "2011-03-28 19:26:07 UTC",
+            "2011-03-28 19:33:37 UTC",
+            "2011-03-28 19:34:15 UTC"
+          ],
+          "updated_at": [
+            "2011-04-19 04:33:15 UTC",
+            "2011-04-19 15:00:54 UTC",
+            "2011-04-19 19:10:05 UTC",
+            "2011-04-19 19:07:01 UTC",
+            "2011-04-13 15:25:27 UTC",
+            "2011-04-19 19:07:41 UTC",
+            "2011-04-19 19:06:08 UTC",
+            "2011-04-19 19:10:15 UTC"
+          ],
+          "xpos": [
+            "0.111429",
+            "0.438571",
+            "0.14",
+            "0.377143",
+            "0.105714",
+            "0.101429",
+            "0.167143",
+            "0.558571"
+          ],
+          "ypos": [
+            "0.254735",
+            "0.261922",
+            "0.26272",
+            "0.313178",
+            "0.30105",
+            "0.273101",
+            "0.265116",
+            "0.274698"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "MenuPage": {
+        "rows": 10000,
+        "sample_values": {
+          "id": [
+            "119",
+            "120",
+            "121",
+            "122",
+            "123",
+            "124",
+            "125",
+            "126"
+          ],
+          "menu_id": [
+            "12460",
+            "12461",
+            "12462",
+            "12463",
+            "12464",
+            "12465",
+            "12466",
+            "12467"
+          ],
+          "page_number": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "image_id": [
+            "1603595.0",
+            "1603596.0",
+            "1603597.0",
+            "1603598.0",
+            "1603591.0",
+            "1603592.0",
+            "1603593.0",
+            "1603594.0"
+          ],
+          "full_height": [
+            "7230",
+            "5428",
+            "3074",
+            "3049",
+            "3690",
+            "3679",
+            "3413",
+            "3411"
+          ],
+          "full_width": [
+            "5428",
+            "7230",
+            "2046",
+            "2004",
+            "2888",
+            "2866",
+            "2307",
+            "2291"
+          ],
+          "uuid": [
+            "510d47e4-2955-a3d9-e040-e00a18064a99",
+            "510d47e4-2956-a3d9-e040-e00a18064a99",
+            "510d47e4-2957-a3d9-e040-e00a18064a99",
+            "510d47e4-2958-a3d9-e040-e00a18064a99",
+            "510d47e4-2959-a3d9-e040-e00a18064a99",
+            "510d47e4-295a-a3d9-e040-e00a18064a99",
+            "510d47e4-295b-a3d9-e040-e00a18064a99",
+            "510d47e4-295c-a3d9-e040-e00a18064a99"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

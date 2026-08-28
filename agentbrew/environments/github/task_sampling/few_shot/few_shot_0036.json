@@ -1,0 +1,4 @@
+{
+  "workflow_pattern": "This is a 'V1_2cand_compare_fork_conditional' style workflow. It requires the following operations, in roughly this order: select repo by comparison metric, fork repository preserving name, append conditional reference link readme. The task should combine these operations into one coherent, realistic request without listing them as separate steps.",
+  "question": "There are two repositories: pallets's flask and django's django. Fork the repository with the fewest open issues, maintaining the same name as the source repository. If flask is forked, add a reference link at the bottom of the README.md file: 'Related project: [django](https://github.com/django/django)'. If django is forked, add a reference link at the bottom of the README.md file: 'Related project: [flask](https://github.com/pallets/flask)'."
+}

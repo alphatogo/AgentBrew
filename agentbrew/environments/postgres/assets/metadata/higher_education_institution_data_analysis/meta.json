@@ -1,0 +1,634 @@
+{
+  "db_id": "higher_education_institution_data_analysis",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/higher_education_institution_data_analysis",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"institution_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"activity\" TEXT\n}\n\nTable \"public\".\"cities\" {\n  \"city_id\" INTEGER [pk]\n  \"city_name\" TEXT\n  \"state_id\" INTEGER\n  \"population\" INTEGER\n  \"median_income\" REAL\n  \"unemployment_rate\" REAL\n}\n\nTable \"public\".\"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"source_name\" TEXT\n  \"source_url\" TEXT\n  \"data_frequency\" TEXT\n  \"last_update\" TEXT\n  \"data_reliability\" INTEGER\n}\n\nTable \"public\".\"degrees\" {\n  \"degree_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"degree_name\" TEXT\n  \"degree_level\" TEXT\n  \"degree_field\" TEXT\n  \"degree_duration\" INTEGER\n  \"degree_cost\" REAL\n  \"job_placement_rate\" REAL\n  \"average_salary\" REAL\n}\n\nTable \"public\".\"enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_enrollment\" INTEGER\n  \"full_time_enrollment\" INTEGER\n  \"part_time_enrollment\" INTEGER\n  \"male_enrollment\" INTEGER\n  \"female_enrollment\" INTEGER\n  \"international_enrollment\" INTEGER\n  \"ethnic_diversity\" REAL\n  \"gender_diversity\" REAL\n}\n\nTable \"public\".\"faculties\" {\n  \"faculty_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_faculty\" INTEGER\n  \"full_time_faculty\" INTEGER\n  \"part_time_faculty\" INTEGER\n  \"male_faculty\" INTEGER\n  \"female_faculty\" INTEGER\n  \"international_faculty\" INTEGER\n  \"average_age\" REAL\n  \"average_experience\" REAL\n  \"phd_percentage\" REAL\n}\n\nTable \"public\".\"graduation_rates\" {\n  \"graduation_rate_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"graduation_rate\" REAL\n  \"male_graduation_rate\" REAL\n  \"female_graduation_rate\" REAL\n  \"international_graduation_rate\" REAL\n}\n\nTable \"public\".\"institution_sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"size_name\" TEXT\n  \"description\" TEXT\n  \"min_students\" INTEGER\n  \"max_students\" INTEGER\n}\n\nTable \"public\".\"institution_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"accreditation_required\" INTEGER\n}\n\nTable \"public\".\"institution_user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"role_description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"public\".\"institutions\" {\n  \"institution_id\" INTEGER [pk]\n  \"unit_id\" INTEGER\n  \"institution_name\" TEXT\n  \"state_id\" INTEGER\n  \"region_id\" INTEGER\n  \"adm_rate\" REAL\n  \"tuition_fee\" REAL\n  \"year\" INTEGER\n  \"pct_change\" REAL\n  \"type_id\" INTEGER\n  \"size_id\" INTEGER\n  \"city_id\" INTEGER\n  \"website\" TEXT\n  \"founding_year\" INTEGER\n  \"public_private\" TEXT\n  \"accreditation_status\" TEXT\n  \"student_faculty_ratio\" REAL\n  \"endowment\" REAL\n  \"research_expenditure\" REAL\n  \"campus_size\" REAL\n  \"total_employees\" INTEGER\n  \"international_students\" INTEGER\n  \"ethnic_diversity_score\" REAL\n  \"gender_diversity_score\" REAL\n}\n\nTable \"public\".\"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"description\" TEXT\n  \"population\" INTEGER\n  \"economic_status\" TEXT\n}\n\nTable \"public\".\"retention_rates\" {\n  \"retention_rate_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"retention_rate\" REAL\n  \"male_retention_rate\" REAL\n  \"female_retention_rate\" REAL\n  \"international_retention_rate\" REAL\n}\n\nTable \"public\".\"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"state_abbreviation\" TEXT\n  \"population\" INTEGER\n  \"education_budget\" REAL\n  \"average_income\" REAL\n  \"unemployment_rate\" REAL\n}\n\nTable \"public\".\"students\" {\n  \"student_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_students\" INTEGER\n  \"full_time_students\" INTEGER\n  \"part_time_students\" INTEGER\n  \"male_students\" INTEGER\n  \"female_students\" INTEGER\n  \"international_students\" INTEGER\n  \"average_age\" REAL\n  \"average_gpa\" REAL\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"last_login\" TEXT\n  \"last_accessed_institution_id\" INTEGER\n  \"last_activity\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"data_sources\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"degrees\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"enrollments\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"faculties\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"graduation_rates\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"institution_user_roles\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"institution_user_roles\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"institutions\".\"type_id\" > \"public\".\"institution_types\".\"type_id\"\nRef: \"public\".\"institutions\".\"size_id\" > \"public\".\"institution_sizes\".\"size_id\"\nRef: \"public\".\"institutions\".\"state_id\" > \"public\".\"states\".\"state_id\"\nRef: \"public\".\"institutions\".\"region_id\" > \"public\".\"regions\".\"region_id\"\nRef: \"public\".\"institutions\".\"city_id\" > \"public\".\"cities\".\"city_id\"\nRef: \"public\".\"retention_rates\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\"\nRef: \"public\".\"students\".\"institution_id\" > \"public\".\"institutions\".\"institution_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"institution_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"activity\" TEXT\n}\n\nTable \"cities\" {\n  \"city_id\" INTEGER [pk]\n  \"city_name\" TEXT\n  \"state_id\" INTEGER\n  \"population\" INTEGER\n  \"median_income\" REAL\n  \"unemployment_rate\" REAL\n}\n\nTable \"data_sources\" {\n  \"source_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"source_name\" TEXT\n  \"source_url\" TEXT\n  \"data_frequency\" TEXT\n  \"last_update\" TEXT\n  \"data_reliability\" INTEGER\n}\n\nTable \"degrees\" {\n  \"degree_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"degree_name\" TEXT\n  \"degree_level\" TEXT\n  \"degree_field\" TEXT\n  \"degree_duration\" INTEGER\n  \"degree_cost\" REAL\n  \"job_placement_rate\" REAL\n  \"average_salary\" REAL\n}\n\nTable \"enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_enrollment\" INTEGER\n  \"full_time_enrollment\" INTEGER\n  \"part_time_enrollment\" INTEGER\n  \"male_enrollment\" INTEGER\n  \"female_enrollment\" INTEGER\n  \"international_enrollment\" INTEGER\n  \"ethnic_diversity\" REAL\n  \"gender_diversity\" REAL\n}\n\nTable \"faculties\" {\n  \"faculty_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_faculty\" INTEGER\n  \"full_time_faculty\" INTEGER\n  \"part_time_faculty\" INTEGER\n  \"male_faculty\" INTEGER\n  \"female_faculty\" INTEGER\n  \"international_faculty\" INTEGER\n  \"average_age\" REAL\n  \"average_experience\" REAL\n  \"phd_percentage\" REAL\n}\n\nTable \"graduation_rates\" {\n  \"graduation_rate_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"graduation_rate\" REAL\n  \"male_graduation_rate\" REAL\n  \"female_graduation_rate\" REAL\n  \"international_graduation_rate\" REAL\n}\n\nTable \"institution_sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"size_name\" TEXT\n  \"description\" TEXT\n  \"min_students\" INTEGER\n  \"max_students\" INTEGER\n}\n\nTable \"institution_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"accreditation_required\" INTEGER\n}\n\nTable \"institution_user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"user_id\" INTEGER\n  \"role\" TEXT\n  \"role_description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"institutions\" {\n  \"institution_id\" INTEGER [pk]\n  \"unit_id\" INTEGER\n  \"institution_name\" TEXT\n  \"state_id\" INTEGER\n  \"region_id\" INTEGER\n  \"adm_rate\" REAL\n  \"tuition_fee\" REAL\n  \"year\" INTEGER\n  \"pct_change\" REAL\n  \"type_id\" INTEGER\n  \"size_id\" INTEGER\n  \"city_id\" INTEGER\n  \"website\" TEXT\n  \"founding_year\" INTEGER\n  \"public_private\" TEXT\n  \"accreditation_status\" TEXT\n  \"student_faculty_ratio\" REAL\n  \"endowment\" REAL\n  \"research_expenditure\" REAL\n  \"campus_size\" REAL\n  \"total_employees\" INTEGER\n  \"international_students\" INTEGER\n  \"ethnic_diversity_score\" REAL\n  \"gender_diversity_score\" REAL\n}\n\nTable \"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"description\" TEXT\n  \"population\" INTEGER\n  \"economic_status\" TEXT\n}\n\nTable \"retention_rates\" {\n  \"retention_rate_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"retention_rate\" REAL\n  \"male_retention_rate\" REAL\n  \"female_retention_rate\" REAL\n  \"international_retention_rate\" REAL\n}\n\nTable \"states\" {\n  \"state_id\" INTEGER [pk]\n  \"state_name\" TEXT\n  \"state_abbreviation\" TEXT\n  \"population\" INTEGER\n  \"education_budget\" REAL\n  \"average_income\" REAL\n  \"unemployment_rate\" REAL\n}\n\nTable \"students\" {\n  \"student_id\" INTEGER [pk]\n  \"institution_id\" INTEGER\n  \"year\" INTEGER\n  \"total_students\" INTEGER\n  \"full_time_students\" INTEGER\n  \"part_time_students\" INTEGER\n  \"male_students\" INTEGER\n  \"female_students\" INTEGER\n  \"international_students\" INTEGER\n  \"average_age\" REAL\n  \"average_gpa\" REAL\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"last_login\" TEXT\n  \"last_accessed_institution_id\" INTEGER\n  \"last_activity\" TEXT\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"data_sources\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"degrees\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"enrollments\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"faculties\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"graduation_rates\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"institution_user_roles\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"institution_user_roles\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"institutions\".\"type_id\" > \"institution_types\".\"type_id\"\n\nRef: \"institutions\".\"size_id\" > \"institution_sizes\".\"size_id\"\n\nRef: \"institutions\".\"state_id\" > \"states\".\"state_id\"\n\nRef: \"institutions\".\"region_id\" > \"regions\".\"region_id\"\n\nRef: \"institutions\".\"city_id\" > \"cities\".\"city_id\"\n\nRef: \"retention_rates\".\"institution_id\" > \"institutions\".\"institution_id\"\n\nRef: \"students\".\"institution_id\" > \"institutions\".\"institution_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.1', '192.168.1.2'\n  activity: 'viewed institution data', 'downloaded enrollment data'\n\ncities: 2 rows\n  city_name: 'Baltimore', 'Los Angeles'\n  median_income: '50000.0', '60000.0'\n  unemployment_rate: '6.5', '5.0'\n\ndata_sources: 2 rows\n  source_name: 'National Center for Education Statistics', 'Institutional Research and Assessment'\n  data_frequency: 'yearly', 'quarterly'\n  source_url: 'https://nces.ed.gov/', 'https://www.umbc.edu/ira/'\n\ndegrees: 2 rows\n  degree_level: 'Bachelor's', 'Master's'\n  degree_name: 'Bachelor of Science in Computer Science', 'Master of Business Administration'\n  degree_field: 'Computer Science', 'Business Administration'\n\nenrollments: 2 rows\n  year: '2001', '2010'\n  total_enrollment: '10000', '12000'\n  male_enrollment: '5500', '6500'\n\nfaculties: 2 rows\n  year: '2001', '2010'\n  total_faculty: '500', '600'\n  male_faculty: '300', '350'\n\ngraduation_rates: 2 rows\n  year: '2001', '2010'\n  graduation_rate: '0.7', '0.8'\n  male_graduation_rate: '0.75', '0.85'\n\ninstitution_sizes: 2 rows\n  size_name: 'Small', 'Medium'\n  description: 'Institutions with fewer than 5,000 students', 'Institutions with 5,000-20,000 students'\n  min_students: '0', '5000'\n\ninstitution_types: 2 rows\n  type_name: 'University', 'College'\n  description: 'Institution that offers bachelor's and advanced de', 'Institution that offers associate's and bachelor's'\n  accreditation_required: '1', '0'\n\ninstitution_user_roles: 2 rows\n  role: 'administrator', 'researcher'\n  role_description: 'Administers the institution's data', 'Conducts research using the institution's data'\n  permissions: '{\"can_edit\": true, \"can_delete\": true, \"can_view\":', '{\"can_edit\": false, \"can_delete\": false, \"can_view'\n\ninstitutions: 2 rows\n  accreditation_status: 'Accredited'\n  institution_name: 'University of Maryland-Baltimore County'\n  website: 'https://www.umbc.edu/'\n\nregions: 2 rows\n  region_name: 'North', 'South'\n  economic_status: 'developed', 'developing'\n  description: 'Institutions located in the northern United States', 'Institutions located in the southern United States'\n\nretention_rates: 2 rows\n  year: '2001', '2010'\n  retention_rate: '0.8', '0.9'\n  male_retention_rate: '0.85', '0.95'\n\nstates: 2 rows\n  state_name: 'Maryland', 'California'\n  state_abbreviation: 'MD', 'CA'\n  education_budget: '1000000000.0', '10000000000.0'\n\nstudents: 2 rows\n  year: '2001', '2010'\n  total_students: '10000', '12000'\n  male_students: '5500', '6500'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'administrator'\n  last_login: '2023-05-01 10:00:00', '2023-05-02 11:00:00'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "user_agent": [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb"
+          ],
+          "activity": [
+            "viewed institution data",
+            "downloaded enrollment data"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "cities": {
+        "rows": 2,
+        "sample_values": {
+          "city_id": [
+            "0",
+            "1"
+          ],
+          "city_name": [
+            "Baltimore",
+            "Los Angeles"
+          ],
+          "state_id": [
+            "1",
+            "2"
+          ],
+          "population": [
+            "600000",
+            "4000000"
+          ],
+          "median_income": [
+            "50000.0",
+            "60000.0"
+          ],
+          "unemployment_rate": [
+            "6.5",
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "data_sources": {
+        "rows": 2,
+        "sample_values": {
+          "source_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "1"
+          ],
+          "source_name": [
+            "National Center for Education Statistics",
+            "Institutional Research and Assessment"
+          ],
+          "source_url": [
+            "https://nces.ed.gov/",
+            "https://www.umbc.edu/ira/"
+          ],
+          "data_frequency": [
+            "yearly",
+            "quarterly"
+          ],
+          "last_update": [
+            "2023-01-01",
+            "2023-03-01"
+          ],
+          "data_reliability": [
+            "5",
+            "4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "degrees": {
+        "rows": 2,
+        "sample_values": {
+          "degree_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "0",
+            "1"
+          ],
+          "degree_name": [
+            "Bachelor of Science in Computer Science",
+            "Master of Business Administration"
+          ],
+          "degree_level": [
+            "Bachelor's",
+            "Master's"
+          ],
+          "degree_field": [
+            "Computer Science",
+            "Business Administration"
+          ],
+          "degree_duration": [
+            "4",
+            "2"
+          ],
+          "degree_cost": [
+            "100000.0",
+            "50000.0"
+          ],
+          "job_placement_rate": [
+            "0.9",
+            "0.85"
+          ],
+          "average_salary": [
+            "60000.0",
+            "80000.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "enrollments": {
+        "rows": 2,
+        "sample_values": {
+          "enrollment_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "total_enrollment": [
+            "10000",
+            "12000"
+          ],
+          "full_time_enrollment": [
+            "5000",
+            "6000"
+          ],
+          "part_time_enrollment": [
+            "5000",
+            "6000"
+          ],
+          "male_enrollment": [
+            "5500",
+            "6500"
+          ],
+          "female_enrollment": [
+            "4500",
+            "5500"
+          ],
+          "international_enrollment": [
+            "1000",
+            "1200"
+          ],
+          "ethnic_diversity": [
+            "0.8"
+          ],
+          "gender_diversity": [
+            "0.5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "faculties": {
+        "rows": 2,
+        "sample_values": {
+          "faculty_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "1",
+            "0"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "total_faculty": [
+            "500",
+            "600"
+          ],
+          "full_time_faculty": [
+            "300",
+            "400"
+          ],
+          "part_time_faculty": [
+            "200"
+          ],
+          "male_faculty": [
+            "300",
+            "350"
+          ],
+          "female_faculty": [
+            "200",
+            "250"
+          ],
+          "international_faculty": [
+            "50",
+            "60"
+          ],
+          "average_age": [
+            "45.0",
+            "46.0"
+          ],
+          "average_experience": [
+            "15.0",
+            "16.0"
+          ],
+          "phd_percentage": [
+            "0.7",
+            "0.75"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "graduation_rates": {
+        "rows": 2,
+        "sample_values": {
+          "graduation_rate_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "0",
+            "1"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "graduation_rate": [
+            "0.7",
+            "0.8"
+          ],
+          "male_graduation_rate": [
+            "0.75",
+            "0.85"
+          ],
+          "female_graduation_rate": [
+            "0.65",
+            "0.75"
+          ],
+          "international_graduation_rate": [
+            "0.8",
+            "0.9"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "institution_sizes": {
+        "rows": 2,
+        "sample_values": {
+          "size_id": [
+            "0",
+            "1"
+          ],
+          "size_name": [
+            "Small",
+            "Medium"
+          ],
+          "description": [
+            "Institutions with fewer than 5,000 students",
+            "Institutions with 5,000-20,000 students"
+          ],
+          "min_students": [
+            "0",
+            "5000"
+          ],
+          "max_students": [
+            "4999",
+            "20000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "institution_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "University",
+            "College"
+          ],
+          "description": [
+            "Institution that offers bachelor's and advanced de",
+            "Institution that offers associate's and bachelor's"
+          ],
+          "accreditation_required": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "institution_user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "role": [
+            "administrator",
+            "researcher"
+          ],
+          "role_description": [
+            "Administers the institution's data",
+            "Conducts research using the institution's data"
+          ],
+          "permissions": [
+            "{\"can_edit\": true, \"can_delete\": true, \"can_view\":",
+            "{\"can_edit\": false, \"can_delete\": false, \"can_view"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "institutions": {
+        "rows": 2,
+        "sample_values": {
+          "institution_id": [
+            "0",
+            "1"
+          ],
+          "unit_id": [
+            "163268"
+          ],
+          "institution_name": [
+            "University of Maryland-Baltimore County"
+          ],
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "region_id": [
+            "1"
+          ],
+          "adm_rate": [
+            "0.6551",
+            "0.6589"
+          ],
+          "tuition_fee": [
+            "5910.0",
+            "9171.0"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "pct_change": [
+            "7.65",
+            "3.37"
+          ],
+          "type_id": [
+            "1",
+            "0"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "city_id": [
+            "1",
+            "0"
+          ],
+          "website": [
+            "https://www.umbc.edu/"
+          ],
+          "founding_year": [
+            "1966"
+          ],
+          "public_private": [
+            "public"
+          ],
+          "accreditation_status": [
+            "Accredited"
+          ],
+          "student_faculty_ratio": [
+            "18.5"
+          ],
+          "endowment": [
+            "500000000.0"
+          ],
+          "research_expenditure": [
+            "100000000.0"
+          ],
+          "campus_size": [
+            "1200.0"
+          ],
+          "total_employees": [
+            "10000"
+          ],
+          "international_students": [
+            "500"
+          ],
+          "ethnic_diversity_score": [
+            "0.8"
+          ],
+          "gender_diversity_score": [
+            "0.5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 2,
+        "sample_values": {
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "region_name": [
+            "North",
+            "South"
+          ],
+          "description": [
+            "Institutions located in the northern United States",
+            "Institutions located in the southern United States"
+          ],
+          "population": [
+            "100000000",
+            "120000000"
+          ],
+          "economic_status": [
+            "developed",
+            "developing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "retention_rates": {
+        "rows": 2,
+        "sample_values": {
+          "retention_rate_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "0"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "retention_rate": [
+            "0.8",
+            "0.9"
+          ],
+          "male_retention_rate": [
+            "0.85",
+            "0.95"
+          ],
+          "female_retention_rate": [
+            "0.75",
+            "0.85"
+          ],
+          "international_retention_rate": [
+            "0.9",
+            "0.95"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "states": {
+        "rows": 2,
+        "sample_values": {
+          "state_id": [
+            "0",
+            "1"
+          ],
+          "state_name": [
+            "Maryland",
+            "California"
+          ],
+          "state_abbreviation": [
+            "MD",
+            "CA"
+          ],
+          "population": [
+            "6000000",
+            "39500000"
+          ],
+          "education_budget": [
+            "1000000000.0",
+            "10000000000.0"
+          ],
+          "average_income": [
+            "75000.0",
+            "65000.0"
+          ],
+          "unemployment_rate": [
+            "4.5",
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "students": {
+        "rows": 2,
+        "sample_values": {
+          "student_id": [
+            "0",
+            "1"
+          ],
+          "institution_id": [
+            "0"
+          ],
+          "year": [
+            "2001",
+            "2010"
+          ],
+          "total_students": [
+            "10000",
+            "12000"
+          ],
+          "full_time_students": [
+            "5000",
+            "6000"
+          ],
+          "part_time_students": [
+            "5000",
+            "6000"
+          ],
+          "male_students": [
+            "5500",
+            "6500"
+          ],
+          "female_students": [
+            "4500",
+            "5500"
+          ],
+          "international_students": [
+            "1000",
+            "1200"
+          ],
+          "average_age": [
+            "20.5",
+            "21.0"
+          ],
+          "average_gpa": [
+            "3.2",
+            "3.3"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "administrator"
+          ],
+          "last_login": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "last_accessed_institution_id": [
+            "1"
+          ],
+          "last_activity": [
+            "view",
+            "download"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

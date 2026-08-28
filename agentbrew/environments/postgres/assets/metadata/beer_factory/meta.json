@@ -1,0 +1,489 @@
+{
+  "db_id": "beer_factory",
+  "source": "bird",
+  "tables": 7,
+  "total_rows": 14039,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#beer_factory",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"First\" TEXT\n  \"Last\" TEXT\n  \"StreetAddress\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"ZipCode\" INTEGER\n  \"Email\" TEXT\n  \"PhoneNumber\" TEXT\n  \"FirstPurchaseDate\" DATE\n  \"SubscribedToEmailList\" TEXT\n  \"Gender\" TEXT\n}\n\nTable \"geolocation\" {\n  \"LocationID\" INTEGER [pk]\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n}\n\nTable \"location\" {\n  \"LocationID\" INTEGER [pk]\n  \"LocationName\" TEXT\n  \"StreetAddress\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"ZipCode\" INTEGER\n}\n\nTable \"rootbeer\" {\n  \"RootBeerID\" INTEGER [pk]\n  \"BrandID\" INTEGER\n  \"ContainerType\" TEXT\n  \"LocationID\" INTEGER\n  \"PurchaseDate\" DATE\n}\n\nTable \"rootbeerbrand\" {\n  \"BrandID\" INTEGER [pk]\n  \"BrandName\" TEXT\n  \"FirstBrewedYear\" INTEGER\n  \"BreweryName\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"Country\" TEXT\n  \"Description\" TEXT\n  \"CaneSugar\" TEXT\n  \"CornSyrup\" TEXT\n  \"Honey\" TEXT\n  \"ArtificialSweetener\" TEXT\n  \"Caffeinated\" TEXT\n  \"Alcoholic\" TEXT\n  \"AvailableInCans\" TEXT\n  \"AvailableInBottles\" TEXT\n  \"AvailableInKegs\" TEXT\n  \"Website\" TEXT\n  \"FacebookPage\" TEXT\n  \"Twitter\" TEXT\n  \"WholesaleCost\" REAL\n  \"CurrentRetailPrice\" REAL\n}\n\nTable \"rootbeerreview\" {\n  \"CustomerID\" INTEGER [pk]\n  \"BrandID\" INTEGER [pk]\n  \"StarRating\" INTEGER\n  \"ReviewDate\" DATE\n  \"Review\" TEXT\n}\n\nTable \"transaction\" {\n  \"TransactionID\" INTEGER [pk]\n  \"CreditCardNumber\" INTEGER\n  \"CustomerID\" INTEGER\n  \"TransactionDate\" DATE\n  \"CreditCardType\" TEXT\n  \"LocationID\" INTEGER\n  \"RootBeerID\" INTEGER\n  \"PurchasePrice\" REAL\n}\n\n\n\nRef: \"geolocation\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"location\".\"LocationID\" > \"geolocation\".\"LocationID\"\n\nRef: \"rootbeer\".\"BrandID\" > \"rootbeerbrand\".\"BrandID\"\n\nRef: \"rootbeer\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"rootbeer\".\"LocationID\" > \"geolocation\".\"LocationID\"\n\nRef: \"rootbeerreview\".\"BrandID\" > \"rootbeerbrand\".\"BrandID\"\n\nRef: \"rootbeerreview\".\"CustomerID\" > \"customers\".\"CustomerID\"\n\nRef: \"transaction\".\"RootBeerID\" > \"rootbeer\".\"RootBeerID\"\n\nRef: \"transaction\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"transaction\".\"CustomerID\" > \"customers\".\"CustomerID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"First\" TEXT\n  \"Last\" TEXT\n  \"StreetAddress\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"ZipCode\" INTEGER\n  \"Email\" TEXT\n  \"PhoneNumber\" TEXT\n  \"FirstPurchaseDate\" DATE\n  \"SubscribedToEmailList\" TEXT\n  \"Gender\" TEXT\n}\n\nTable \"geolocation\" {\n  \"LocationID\" INTEGER [pk]\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n}\n\nTable \"location\" {\n  \"LocationID\" INTEGER [pk]\n  \"LocationName\" TEXT\n  \"StreetAddress\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"ZipCode\" INTEGER\n}\n\nTable \"rootbeer\" {\n  \"RootBeerID\" INTEGER [pk]\n  \"BrandID\" INTEGER\n  \"ContainerType\" TEXT\n  \"LocationID\" INTEGER\n  \"PurchaseDate\" DATE\n}\n\nTable \"rootbeerbrand\" {\n  \"BrandID\" INTEGER [pk]\n  \"BrandName\" TEXT\n  \"FirstBrewedYear\" INTEGER\n  \"BreweryName\" TEXT\n  \"City\" TEXT\n  \"State\" TEXT\n  \"Country\" TEXT\n  \"Description\" TEXT\n  \"CaneSugar\" TEXT\n  \"CornSyrup\" TEXT\n  \"Honey\" TEXT\n  \"ArtificialSweetener\" TEXT\n  \"Caffeinated\" TEXT\n  \"Alcoholic\" TEXT\n  \"AvailableInCans\" TEXT\n  \"AvailableInBottles\" TEXT\n  \"AvailableInKegs\" TEXT\n  \"Website\" TEXT\n  \"FacebookPage\" TEXT\n  \"Twitter\" TEXT\n  \"WholesaleCost\" REAL\n  \"CurrentRetailPrice\" REAL\n}\n\nTable \"rootbeerreview\" {\n  \"CustomerID\" INTEGER [pk]\n  \"BrandID\" INTEGER [pk]\n  \"StarRating\" INTEGER\n  \"ReviewDate\" DATE\n  \"Review\" TEXT\n}\n\nTable \"transaction\" {\n  \"TransactionID\" INTEGER [pk]\n  \"CreditCardNumber\" INTEGER\n  \"CustomerID\" INTEGER\n  \"TransactionDate\" DATE\n  \"CreditCardType\" TEXT\n  \"LocationID\" INTEGER\n  \"RootBeerID\" INTEGER\n  \"PurchasePrice\" REAL\n}\n\nRef: \"geolocation\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"location\".\"LocationID\" > \"geolocation\".\"LocationID\"\n\nRef: \"rootbeer\".\"BrandID\" > \"rootbeerbrand\".\"BrandID\"\n\nRef: \"rootbeer\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"rootbeer\".\"LocationID\" > \"geolocation\".\"LocationID\"\n\nRef: \"rootbeerreview\".\"BrandID\" > \"rootbeerbrand\".\"BrandID\"\n\nRef: \"rootbeerreview\".\"CustomerID\" > \"customers\".\"CustomerID\"\n\nRef: \"transaction\".\"RootBeerID\" > \"rootbeer\".\"RootBeerID\"\n\nRef: \"transaction\".\"LocationID\" > \"location\".\"LocationID\"\n\nRef: \"transaction\".\"CustomerID\" > \"customers\".\"CustomerID\"\n\n## Table Stats & Sample Values\n\ncustomers: 554 rows\n  City: 'Sacramento', 'Orangevale', 'Folsom', ...\n  State: 'CA'\n  First: 'Kenneth', 'Madeleine', 'Damen', ...\n\ngeolocation: 3 rows\n  Latitude: '0.0', '38.566129', '38.559615'\n  Longitude: '0.0', '-121.426432', '-121.42243'\n  LocationID: '0', '1', '2'\n\nlocation: 3 rows\n  LocationName: 'LOST', 'Sac State American River Courtyard', 'Sac State Union'\n  City: 'Sacramento'\n  State: 'CA'\n\nrootbeer: 6430 rows\n  ContainerType: 'Bottle', 'Can'\n  BrandID: '10001', '10002', '10003', ...\n  PurchaseDate: '2015-07-03', '2016-05-09', '2015-05-24', ...\n\nrootbeerbrand: 19 rows\n  BrandName: 'A&W', 'Abita', 'Barq's', ...\n  BreweryName: 'Dr Pepper Snapple Group', 'Abita Brewery', 'Coca-Cola', ...\n  City: 'Lodi', 'Covington', 'New Orleans', ...\n\nrootbeerreview: 713 rows\n  Review: 'You could have done better Sactown.', 'Too much bite, not enough barq.', 'The drink is fine, but the crest on the label is p', ...\n  StarRating: '5', '1', '3', ...\n  ReviewDate: '2013-07-15', '2013-07-08', '2013-07-25', ...\n\ntransaction: 6312 rows\n  CreditCardType: 'Discover', 'Visa', 'MasterCard', ...\n  CreditCardNumber: '6011583832864739', '4716634257568793', '5597608517846968', ...\n  TransactionDate: '2014-07-07', '2014-07-13', '2014-07-17', ...",
+    "stateUrl": "https://bird-bench.github.io/#beer_factory",
+    "tableStats": {
+      "customers": {
+        "rows": 554,
+        "sample_values": {
+          "CustomerID": [
+            "101811",
+            "103508",
+            "104939",
+            "105549",
+            "105771",
+            "108708",
+            "109251",
+            "110363"
+          ],
+          "First": [
+            "Kenneth",
+            "Madeleine",
+            "Damen",
+            "Kevin",
+            "John",
+            "Tommy",
+            "Anna",
+            "Marjorie"
+          ],
+          "Last": [
+            "Walton",
+            "Jones",
+            "Wheeler",
+            "Gilbert",
+            "Young",
+            "Kono",
+            "Himes",
+            "Love"
+          ],
+          "StreetAddress": [
+            "6715 Commonwealth Dr",
+            "3603 Leola Way",
+            "6740 Branwood Way",
+            "3198 Livingston Way",
+            "663 Westward Way",
+            "3179 Camelia River Way",
+            "5507 Chimango Way",
+            "3462 Mellowoods Way"
+          ],
+          "City": [
+            "Sacramento",
+            "Orangevale",
+            "Folsom",
+            "Isleton",
+            "Ryde",
+            "Carmichael",
+            "Courtland",
+            "Citrus Heights"
+          ],
+          "State": [
+            "CA"
+          ],
+          "ZipCode": [
+            "94256",
+            "94258",
+            "95662",
+            "95671",
+            "95899",
+            "95641",
+            "94207",
+            "94299"
+          ],
+          "Email": [
+            "walton.k76@fastmail.com",
+            "j_madeleine@gmail.com",
+            "dwheeler@outlook.com",
+            "kgilbert@fastmail.com",
+            "john.y90@mail.com",
+            "tkono@outlook.com",
+            "h_anna@fastmail.com",
+            "lmarjorie54@icloud.com"
+          ],
+          "PhoneNumber": [
+            "(916) 918-1561",
+            "(916) 186-9423",
+            "(916) 164-1156",
+            "(916) 304-9859",
+            "(916) 730-6109",
+            "(916) 119-3967",
+            "(916) 198-9609",
+            "(916) 736-1033"
+          ],
+          "FirstPurchaseDate": [
+            "2013-05-30",
+            "2013-02-06",
+            "2013-04-11",
+            "2013-02-28",
+            "2013-09-05",
+            "2012-07-01",
+            "2012-10-26",
+            "2013-08-22"
+          ],
+          "SubscribedToEmailList": [
+            "FALSE",
+            "TRUE"
+          ],
+          "Gender": [
+            "M",
+            "F"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "geolocation": {
+        "rows": 3,
+        "sample_values": {
+          "LocationID": [
+            "0",
+            "1",
+            "2"
+          ],
+          "Latitude": [
+            "0.0",
+            "38.566129",
+            "38.559615"
+          ],
+          "Longitude": [
+            "0.0",
+            "-121.426432",
+            "-121.42243"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "location": {
+        "rows": 3,
+        "sample_values": {
+          "LocationID": [
+            "0",
+            "1",
+            "2"
+          ],
+          "LocationName": [
+            "LOST",
+            "Sac State American River Courtyard",
+            "Sac State Union"
+          ],
+          "StreetAddress": [
+            "6000 J St"
+          ],
+          "City": [
+            "Sacramento"
+          ],
+          "State": [
+            "CA"
+          ],
+          "ZipCode": [
+            "95819"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rootbeer": {
+        "rows": 6430,
+        "sample_values": {
+          "RootBeerID": [
+            "100000",
+            "100001",
+            "100002",
+            "100003",
+            "100004",
+            "100005",
+            "100006",
+            "100007"
+          ],
+          "BrandID": [
+            "10001",
+            "10002",
+            "10003",
+            "10004",
+            "10005",
+            "10006",
+            "10007",
+            "10008"
+          ],
+          "ContainerType": [
+            "Bottle",
+            "Can"
+          ],
+          "LocationID": [
+            "1",
+            "2"
+          ],
+          "PurchaseDate": [
+            "2015-07-03",
+            "2016-05-09",
+            "2015-05-24",
+            "2015-08-15",
+            "2015-03-10",
+            "2015-02-25",
+            "2016-07-02",
+            "2016-05-13"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rootbeerbrand": {
+        "rows": 19,
+        "sample_values": {
+          "BrandID": [
+            "10001",
+            "10003",
+            "10004",
+            "10005",
+            "10007",
+            "10008",
+            "10009",
+            "10011"
+          ],
+          "BrandName": [
+            "A&W",
+            "Abita",
+            "Barq's",
+            "Bedfords",
+            "Bundaberg",
+            "Captain Eli's",
+            "Dad's",
+            "Dominion"
+          ],
+          "FirstBrewedYear": [
+            "1919",
+            "1986",
+            "1898",
+            "1984",
+            "1960",
+            "1996",
+            "1937",
+            "1989"
+          ],
+          "BreweryName": [
+            "Dr Pepper Snapple Group",
+            "Abita Brewery",
+            "Coca-Cola",
+            "Northwest Soda Works",
+            "Bundaberg Brewed Drinks",
+            "Shipyard Brewing Company",
+            "The Dad's Root Beer Company",
+            "Fordham & Dominion Brewing Company"
+          ],
+          "City": [
+            "Lodi",
+            "Covington",
+            "New Orleans",
+            "Port Angeles",
+            "Bundaberg",
+            "Portland",
+            "Chicago",
+            "Dover"
+          ],
+          "State": [
+            "CA",
+            "LA",
+            "WA",
+            "QLD",
+            "ME",
+            "IL",
+            "DE",
+            "MO"
+          ],
+          "Country": [
+            "United States",
+            "Australia"
+          ],
+          "Description": [
+            "After setting up the first A&W Root Beer stand in ",
+            "Abita Root Beer is made with a hot mix process usi",
+            "Since 1898 Barq's root beer has had a simple sloga",
+            "Always ice cold, “never with ice”.",
+            "Savour the taste of the past and the excitement of",
+            "Made In Maine Sweetened with natural cane and brow",
+            "Dad’s originated in Chicago in 1937. This old time",
+            "Our Root Beer grew out of original authentic Ameri"
+          ],
+          "CaneSugar": [
+            "FALSE",
+            "TRUE"
+          ],
+          "CornSyrup": [
+            "TRUE",
+            "FALSE"
+          ],
+          "Honey": [
+            "FALSE",
+            "TRUE"
+          ],
+          "ArtificialSweetener": [
+            "FALSE",
+            "TRUE"
+          ],
+          "Caffeinated": [
+            "FALSE",
+            "TRUE"
+          ],
+          "Alcoholic": [
+            "FALSE"
+          ],
+          "AvailableInCans": [
+            "TRUE",
+            "FALSE"
+          ],
+          "AvailableInBottles": [
+            "FALSE",
+            "TRUE"
+          ],
+          "AvailableInKegs": [
+            "FALSE"
+          ],
+          "Website": [
+            "http://www.rootbeer.com/",
+            "https://abita.com/brews/our_brews/abita-root-beer",
+            "http://www.barqs.com/",
+            "http://bedfordssodas.com/products.html",
+            "https://www.bundaberg.com/en-us/brew/root-beer/",
+            "http://www.captneli.com/rootbeer.php",
+            "http://www.dadsrootbeer.com/dads/dads.nsf/vwConten",
+            "http://www.fordhamanddominion.com/sodas"
+          ],
+          "FacebookPage": [
+            "https://www.facebook.com/Dads-Old-Fashioned-Root-B",
+            "https://www.facebook.com/fitzsrootbeer",
+            "https://www.facebook.com/Gales-Root-Beer-207365072",
+            "https://www.facebook.com/MugRootBeer/"
+          ],
+          "Twitter": [
+            "https://twitter.com/ilovedads"
+          ],
+          "WholesaleCost": [
+            "0.42",
+            "1.13",
+            "0.4",
+            "1.1",
+            "1.15",
+            "1.09",
+            "1.26",
+            "1.3"
+          ],
+          "CurrentRetailPrice": [
+            "1.0",
+            "3.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "rootbeerreview": {
+        "rows": 713,
+        "sample_values": {
+          "CustomerID": [
+            "101811",
+            "105549",
+            "105771",
+            "108708",
+            "109251",
+            "110363",
+            "111486",
+            "111991"
+          ],
+          "BrandID": [
+            "10012",
+            "10014",
+            "10015",
+            "10021",
+            "10020",
+            "10003",
+            "10018",
+            "10010"
+          ],
+          "StarRating": [
+            "5",
+            "1",
+            "3",
+            "2",
+            "4"
+          ],
+          "ReviewDate": [
+            "2013-07-15",
+            "2013-07-08",
+            "2013-07-25",
+            "2013-11-15",
+            "2013-08-11",
+            "2013-10-09",
+            "2013-09-10",
+            "2014-03-18"
+          ],
+          "Review": [
+            "You could have done better Sactown.",
+            "Too much bite, not enough barq.",
+            "The drink is fine, but the crest on the label is p",
+            "Fantastic!",
+            "Love stopping by Fitz's in St. Louis.",
+            "Cans? Not a chance.",
+            "Does Wisconsin proud.",
+            "Awww, doggies!"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transaction": {
+        "rows": 6312,
+        "sample_values": {
+          "TransactionID": [
+            "100000",
+            "100001",
+            "100002",
+            "100003",
+            "100004",
+            "100005",
+            "100006",
+            "100007"
+          ],
+          "CreditCardNumber": [
+            "6011583832864739",
+            "4716634257568793",
+            "5597608517846968",
+            "5487443089509478",
+            "4532262424412224",
+            "4485902069298761",
+            "5145374483765149",
+            "342776192610527"
+          ],
+          "CustomerID": [
+            "864896",
+            "610766",
+            "207846",
+            "166612",
+            "482274",
+            "961080",
+            "736500",
+            "714277"
+          ],
+          "TransactionDate": [
+            "2014-07-07",
+            "2014-07-13",
+            "2014-07-17",
+            "2014-07-26",
+            "2014-07-28",
+            "2014-07-31",
+            "2014-08-01",
+            "2014-08-02"
+          ],
+          "CreditCardType": [
+            "Discover",
+            "Visa",
+            "MasterCard",
+            "American Express"
+          ],
+          "LocationID": [
+            "2",
+            "1"
+          ],
+          "RootBeerID": [
+            "105661",
+            "105798",
+            "102514",
+            "105623",
+            "103940",
+            "105809",
+            "106044",
+            "100054"
+          ],
+          "PurchasePrice": [
+            "3.0",
+            "1.0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

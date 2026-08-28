@@ -1,0 +1,261 @@
+{
+  "db_id": "codebase_comments",
+  "source": "bird",
+  "tables": 4,
+  "total_rows": 9119319,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#codebase_comments",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Method\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Name\" TEXT\n  \"FullComment\" TEXT\n  \"Summary\" TEXT\n  \"ApiCalls\" TEXT\n  \"CommentIsXml\" INTEGER\n  \"SampledAt\" INTEGER\n  \"SolutionId\" INTEGER\n  \"Lang\" TEXT\n  \"NameTokenized\" TEXT\n}\n\nTable \"MethodParameter\" {\n  \"Id\" INTEGER [pk, not null]\n  \"MethodId\" TEXT\n  \"Type\" TEXT\n  \"Name\" TEXT\n}\n\nTable \"Repo\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Url\" TEXT\n  \"Stars\" INTEGER\n  \"Forks\" INTEGER\n  \"Watchers\" INTEGER\n  \"ProcessedTime\" INTEGER\n}\n\nTable \"Solution\" {\n  \"Id\" INTEGER [pk, not null]\n  \"RepoId\" INTEGER\n  \"Path\" TEXT\n  \"ProcessedTime\" INTEGER\n  \"WasCompiled\" INTEGER\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Method\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Name\" TEXT\n  \"FullComment\" TEXT\n  \"Summary\" TEXT\n  \"ApiCalls\" TEXT\n  \"CommentIsXml\" INTEGER\n  \"SampledAt\" INTEGER\n  \"SolutionId\" INTEGER\n  \"Lang\" TEXT\n  \"NameTokenized\" TEXT\n}\n\nTable \"MethodParameter\" {\n  \"Id\" INTEGER [pk, not null]\n  \"MethodId\" TEXT\n  \"Type\" TEXT\n  \"Name\" TEXT\n}\n\nTable \"Repo\" {\n  \"Id\" INTEGER [pk, not null]\n  \"Url\" TEXT\n  \"Stars\" INTEGER\n  \"Forks\" INTEGER\n  \"Watchers\" INTEGER\n  \"ProcessedTime\" INTEGER\n}\n\nTable \"Solution\" {\n  \"Id\" INTEGER [pk, not null]\n  \"RepoId\" INTEGER\n  \"Path\" TEXT\n  \"ProcessedTime\" INTEGER\n  \"WasCompiled\" INTEGER\n}\n\n## Table Stats & Sample Values\n\nMethod: 811 rows\n  NameTokenized: 'html parser feed', 'html parser parse doctype element', 'http web request factory test create', ...\n  Name: 'HtmlSharp.HtmlParser.Feed', 'HtmlSharp.HtmlParser.ParseDoctypeElement', 'LinqToDeliciousTest.HttpWebRequestFactoryTest.Crea', ...\n  FullComment: 'Feeds data into the parser', 'interneral -- scan past <!ELEMENT declarations', '#region Additional test attributes You can use the', ...\n\nMethodParameter: 10000 rows\n  Type: 'System.String', 'System.Int32', 'System.Linq.Expressions.Expression', ...\n  Name: 'data', 'i', 'declstartpos', ...\n  MethodId: '1', '2', '3', ...\n\nRepo: 10000 rows\n  Url: 'https://github.com/wallerdev/htmlsharp.git', 'https://github.com/unclebob/nslim.git', 'https://github.com/maravillas/linq-to-delicious.gi', ...\n  Stars: '14', '6', '3', ...\n  Forks: '2', '3', '0', ...\n\nSolution: 10000 rows\n  Path: 'wallerdev_htmlsharp\\HtmlSharp.sln', 'maravillas_linq-to-delicious\\tasty.sln', 'mauriciodeamorim_tdd.encontro2\\Tdd.Encontro2.sln', ...\n  WasCompiled: '1', '0'\n  RepoId: '1', '3', '4', ...",
+    "stateUrl": "https://bird-bench.github.io/#codebase_comments",
+    "tableStats": {
+      "Method": {
+        "rows": 811,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "34",
+            "35",
+            "46",
+            "108",
+            "109",
+            "110"
+          ],
+          "Name": [
+            "HtmlSharp.HtmlParser.Feed",
+            "HtmlSharp.HtmlParser.ParseDoctypeElement",
+            "LinqToDeliciousTest.HttpWebRequestFactoryTest.Crea",
+            "LinqToDeliciousTest.PostTest.Create",
+            "Tdd.Encontro2.Test.HoraTest.Criacao_Hora_Informand",
+            "GitHubRepo.Cli.GitHubClientWrapper.GetNumberOfComm",
+            "GitHubRepo.Cli.GitHubClientWrapper.GetIssues",
+            "GitHubRepo.Cli.GitHubClientWrapper.GetReleases"
+          ],
+          "FullComment": [
+            "Feeds data into the parser",
+            "interneral -- scan past <!ELEMENT declarations",
+            "#region Additional test attributes You can use the",
+            "Commits",
+            "Issues",
+            "Releases",
+            "Milestones",
+            "Title is the forthcomming tagName"
+          ],
+          "ApiCalls": [
+            "System.String.IsNullOrEmpty HtmlSharp.HtmlParser.G",
+            "HtmlSharp.HtmlParser.ScanName System.Collections.G",
+            "LinqToDelicious.HttpWebRequestFactory.new LinqToDe",
+            "LinqToDelicious.Post.new LinqToDelicious.Post.Addr",
+            "Tdd.Encontro2.Hora.new Tdd.Encontro2.Hora.ToString",
+            "System.ArgumentNullException.new Octokit.Milestone",
+            "System.ArgumentNullException.new Octokit.Repositor",
+            "GitHubRepo.Cli.GitHubClientWrapper.GetReleasesHelp"
+          ],
+          "CommentIsXml": [
+            "0",
+            "1"
+          ],
+          "SampledAt": [
+            "636430963695654788",
+            "636430963695709898",
+            "636430963721829500",
+            "636430963735704849",
+            "636430963850949177",
+            "636430963850979226",
+            "636430963850984231",
+            "636430964030601666"
+          ],
+          "SolutionId": [
+            "1",
+            "2",
+            "3",
+            "7",
+            "19",
+            "20",
+            "21",
+            "49"
+          ],
+          "NameTokenized": [
+            "html parser feed",
+            "html parser parse doctype element",
+            "http web request factory test create",
+            "post test create",
+            "hora test criacao_hora_informando_hora_e_minuto",
+            "git hub client wrapper get number of commits since",
+            "git hub client wrapper get issues",
+            "git hub client wrapper get releases"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "MethodParameter": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "MethodId": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Type": [
+            "System.String",
+            "System.Int32",
+            "System.Linq.Expressions.Expression",
+            "IQ.Data.SelectExpression",
+            "IQ.Data.QueryCommand",
+            "System.Object[]",
+            "System.Data.Common.DbDataReader",
+            "System.Func"
+          ],
+          "Name": [
+            "data",
+            "i",
+            "declstartpos",
+            "expression",
+            "s",
+            "query",
+            "paramValues",
+            "reader"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Repo": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Url": [
+            "https://github.com/wallerdev/htmlsharp.git",
+            "https://github.com/unclebob/nslim.git",
+            "https://github.com/maravillas/linq-to-delicious.gi",
+            "https://github.com/mauriciodeamorim/tdd.encontro2.",
+            "https://github.com/aroder/heatmap.git",
+            "https://github.com/managedfusion/managedfusion.git",
+            "https://github.com/maff/se3ue6.git",
+            "https://github.com/maxild/playground.git"
+          ],
+          "Stars": [
+            "14",
+            "6",
+            "3",
+            "1",
+            "5",
+            "2",
+            "63",
+            "19"
+          ],
+          "Forks": [
+            "2",
+            "3",
+            "0",
+            "1",
+            "32",
+            "12",
+            "15",
+            "483"
+          ],
+          "Watchers": [
+            "14",
+            "6",
+            "3",
+            "1",
+            "5",
+            "2",
+            "63",
+            "19"
+          ],
+          "ProcessedTime": [
+            "636430963247108053",
+            "636472436323838240",
+            "636430963280029575",
+            "636430963299356346",
+            "636472436346806990",
+            "636430963347807058",
+            "636472436783681990",
+            "636430963387641677"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Solution": {
+        "rows": 10000,
+        "sample_values": {
+          "Id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "RepoId": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "Path": [
+            "wallerdev_htmlsharp\\HtmlSharp.sln",
+            "maravillas_linq-to-delicious\\tasty.sln",
+            "mauriciodeamorim_tdd.encontro2\\Tdd.Encontro2.sln",
+            "aroder_heatmap\\CenStatsHeatMap.sln",
+            "managedfusion_managedfusion\\ManagedFusion.sln",
+            "maff_se3ue6\\US6.sln",
+            "maxild_playground\\Playground.sln",
+            "jeffdik_tachy\\examples\\Example1\\Example1.sln"
+          ],
+          "ProcessedTime": [
+            "636430963695642191",
+            "636430963721734366",
+            "636430963735704849",
+            "636430963750457674",
+            "636430963775379234",
+            "636430963789706659",
+            "636430963850949177",
+            "636430963858707623"
+          ],
+          "WasCompiled": [
+            "1",
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

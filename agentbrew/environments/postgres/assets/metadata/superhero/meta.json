@@ -1,0 +1,355 @@
+{
+  "db_id": "superhero",
+  "source": "bird_dev",
+  "tables": 10,
+  "total_rows": 10614,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#superhero",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"alignment\" {\n  \"id\" INTEGER [pk, not null]\n  \"alignment\" TEXT\n}\n\nTable \"attribute\" {\n  \"id\" INTEGER [pk, not null]\n  \"attribute_name\" TEXT\n}\n\nTable \"colour\" {\n  \"id\" INTEGER [pk, not null]\n  \"colour\" TEXT\n}\n\nTable \"gender\" {\n  \"id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n}\n\nTable \"hero_attribute\" {\n  \"hero_id\" INTEGER\n  \"attribute_id\" INTEGER\n  \"attribute_value\" INTEGER\n}\n\nTable \"hero_power\" {\n  \"hero_id\" INTEGER\n  \"power_id\" INTEGER\n}\n\nTable \"publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"publisher_name\" TEXT\n}\n\nTable \"race\" {\n  \"id\" INTEGER [pk, not null]\n  \"race\" TEXT\n}\n\nTable \"superhero\" {\n  \"id\" INTEGER [pk, not null]\n  \"superhero_name\" TEXT\n  \"full_name\" TEXT\n  \"gender_id\" INTEGER\n  \"eye_colour_id\" INTEGER\n  \"hair_colour_id\" INTEGER\n  \"skin_colour_id\" INTEGER\n  \"race_id\" INTEGER\n  \"publisher_id\" INTEGER\n  \"alignment_id\" INTEGER\n  \"height_cm\" INTEGER\n  \"weight_kg\" INTEGER\n}\n\nTable \"superpower\" {\n  \"id\" INTEGER [pk, not null]\n  \"power_name\" TEXT\n}\n\n\n\nRef: \"superhero\".\"skin_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"race_id\" > \"race\".\"id\"\n\nRef: \"superhero\".\"publisher_id\" > \"publisher\".\"id\"\n\nRef: \"superhero\".\"hair_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"gender_id\" > \"gender\".\"id\"\n\nRef: \"superhero\".\"eye_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"alignment_id\" > \"alignment\".\"id\"\n\nRef: \"hero_attribute\".\"hero_id\" > \"superhero\".\"id\"\n\nRef: \"hero_attribute\".\"attribute_id\" > \"attribute\".\"id\"\n\nRef: \"hero_power\".\"power_id\" > \"superpower\".\"id\"\n\nRef: \"hero_power\".\"hero_id\" > \"superhero\".\"id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"alignment\" {\n  \"id\" INTEGER [pk, not null]\n  \"alignment\" TEXT\n}\n\nTable \"attribute\" {\n  \"id\" INTEGER [pk, not null]\n  \"attribute_name\" TEXT\n}\n\nTable \"colour\" {\n  \"id\" INTEGER [pk, not null]\n  \"colour\" TEXT\n}\n\nTable \"gender\" {\n  \"id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n}\n\nTable \"hero_attribute\" {\n  \"hero_id\" INTEGER\n  \"attribute_id\" INTEGER\n  \"attribute_value\" INTEGER\n}\n\nTable \"hero_power\" {\n  \"hero_id\" INTEGER\n  \"power_id\" INTEGER\n}\n\nTable \"publisher\" {\n  \"id\" INTEGER [pk, not null]\n  \"publisher_name\" TEXT\n}\n\nTable \"race\" {\n  \"id\" INTEGER [pk, not null]\n  \"race\" TEXT\n}\n\nTable \"superhero\" {\n  \"id\" INTEGER [pk, not null]\n  \"superhero_name\" TEXT\n  \"full_name\" TEXT\n  \"gender_id\" INTEGER\n  \"eye_colour_id\" INTEGER\n  \"hair_colour_id\" INTEGER\n  \"skin_colour_id\" INTEGER\n  \"race_id\" INTEGER\n  \"publisher_id\" INTEGER\n  \"alignment_id\" INTEGER\n  \"height_cm\" INTEGER\n  \"weight_kg\" INTEGER\n}\n\nTable \"superpower\" {\n  \"id\" INTEGER [pk, not null]\n  \"power_name\" TEXT\n}\n\nRef: \"superhero\".\"skin_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"race_id\" > \"race\".\"id\"\n\nRef: \"superhero\".\"publisher_id\" > \"publisher\".\"id\"\n\nRef: \"superhero\".\"hair_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"gender_id\" > \"gender\".\"id\"\n\nRef: \"superhero\".\"eye_colour_id\" > \"colour\".\"id\"\n\nRef: \"superhero\".\"alignment_id\" > \"alignment\".\"id\"\n\nRef: \"hero_attribute\".\"hero_id\" > \"superhero\".\"id\"\n\nRef: \"hero_attribute\".\"attribute_id\" > \"attribute\".\"id\"\n\nRef: \"hero_power\".\"power_id\" > \"superpower\".\"id\"\n\nRef: \"hero_power\".\"hero_id\" > \"superhero\".\"id\"\n\n## Table Stats & Sample Values\n\nalignment: 4 rows\n  alignment: 'Good', 'Bad', 'Neutral', ...\n  id: '1', '2', '3', ...\n\nattribute: 6 rows\n  attribute_name: 'Intelligence', 'Strength', 'Speed', ...\n  id: '1', '2', '3', ...\n\ncolour: 35 rows\n  colour: 'No Colour', 'Amber', 'Auburn', ...\n  id: '1', '2', '3', ...\n\ngender: 3 rows\n  gender: 'Male', 'Female', 'N/A'\n  id: '1', '2', '3'\n\nhero_attribute: 3738 rows\n  attribute_value: '80', '75', '95', ...\n  hero_id: '1', '2', '3', ...\n  attribute_id: '1', '2', '3', ...\n\nhero_power: 5825 rows\n  hero_id: '1', '2', '3', ...\n  power_id: '1', '18', '26', ...\n\npublisher: 25 rows\n  publisher_name: 'ABC Studios', 'Dark Horse Comics', 'DC Comics', ...\n  id: '1', '2', '3', ...\n\nrace: 61 rows\n  race: '-', 'Alien', 'Alpha', ...\n  id: '1', '2', '3', ...\n\nsuperhero: 750 rows\n  superhero_name: '3-D Man', 'A-Bomb', 'Abe Sapien', ...\n  full_name: 'Charles Chandler', 'Richard Milhouse Jones', 'Abraham Sapien', ...\n  height_cm: '188', '203', '191', ...\n\nsuperpower: 167 rows\n  power_name: 'Agility', 'Accelerated Healing', 'Lantern Power Ring', ...\n  id: '1', '2', '3', ...",
+    "stateUrl": "https://bird-bench.github.io/#superhero",
+    "tableStats": {
+      "alignment": {
+        "rows": 4,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "alignment": [
+            "Good",
+            "Bad",
+            "Neutral",
+            "N/A"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "attribute": {
+        "rows": 6,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "attribute_name": [
+            "Intelligence",
+            "Strength",
+            "Speed",
+            "Durability",
+            "Power",
+            "Combat"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "colour": {
+        "rows": 35,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "colour": [
+            "No Colour",
+            "Amber",
+            "Auburn",
+            "Black",
+            "Black/Blue",
+            "Blond",
+            "Blue",
+            "Blue/White"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gender": {
+        "rows": 3,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "gender": [
+            "Male",
+            "Female",
+            "N/A"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "hero_attribute": {
+        "rows": 3738,
+        "sample_values": {
+          "hero_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "attribute_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "attribute_value": [
+            "80",
+            "75",
+            "95",
+            "85",
+            "100",
+            "60",
+            "90",
+            "55"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "hero_power": {
+        "rows": 5825,
+        "sample_values": {
+          "hero_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "power_id": [
+            "1",
+            "18",
+            "26",
+            "31",
+            "2",
+            "6",
+            "16",
+            "51"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "publisher": {
+        "rows": 25,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "publisher_name": [
+            "ABC Studios",
+            "Dark Horse Comics",
+            "DC Comics",
+            "George Lucas",
+            "Hanna-Barbera",
+            "HarperCollins",
+            "Icon Comics",
+            "IDW Publishing"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "race": {
+        "rows": 61,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "race": [
+            "-",
+            "Alien",
+            "Alpha",
+            "Amazon",
+            "Android",
+            "Animal",
+            "Asgardian",
+            "Atlantean"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "superhero": {
+        "rows": 750,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "superhero_name": [
+            "3-D Man",
+            "A-Bomb",
+            "Abe Sapien",
+            "Abin Sur",
+            "Abomination",
+            "Abraxas",
+            "Absorbing Man",
+            "Adam Monroe"
+          ],
+          "full_name": [
+            "Charles Chandler",
+            "Richard Milhouse Jones",
+            "Abraham Sapien",
+            "-",
+            "Emil Blonsky",
+            "Abraxas",
+            "Adam Strange",
+            "Sharon Carter"
+          ],
+          "gender_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "eye_colour_id": [
+            "9",
+            "33",
+            "7",
+            "14",
+            "1",
+            "23",
+            "30",
+            "31"
+          ],
+          "hair_colour_id": [
+            "13",
+            "1",
+            "4",
+            "6",
+            "9",
+            "31",
+            "22",
+            "19"
+          ],
+          "skin_colour_id": [
+            "1",
+            "7",
+            "23",
+            "4",
+            "13",
+            "12",
+            "14",
+            "31"
+          ],
+          "race_id": [
+            "1",
+            "24",
+            "33",
+            "55",
+            "28",
+            "12",
+            "13",
+            "57"
+          ],
+          "publisher_id": [
+            "13",
+            "3",
+            "4",
+            "15",
+            "25",
+            "10",
+            "1",
+            "8"
+          ],
+          "alignment_id": [
+            "1",
+            "2",
+            "3"
+          ],
+          "height_cm": [
+            "188",
+            "203",
+            "191",
+            "185",
+            "0",
+            "193",
+            "173",
+            "178"
+          ],
+          "weight_kg": [
+            "90",
+            "441",
+            "65",
+            "0",
+            "122",
+            "88",
+            "61",
+            "81"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "superpower": {
+        "rows": 167,
+        "sample_values": {
+          "id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "power_name": [
+            "Agility",
+            "Accelerated Healing",
+            "Lantern Power Ring",
+            "Dimensional Awareness",
+            "Cold Resistance",
+            "Durability",
+            "Stealth",
+            "Energy Absorption"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

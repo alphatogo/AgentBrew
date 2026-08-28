@@ -1,0 +1,837 @@
+{
+  "db_id": "address",
+  "source": "bird",
+  "tables": 9,
+  "total_rows": 258473,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#address",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"CBSA\" {\n  \"CBSA\" INTEGER [pk]\n  \"CBSA_name\" TEXT\n  \"CBSA_type\" TEXT\n}\n\nTable \"alias\" {\n  \"zip_code\" INTEGER [pk]\n  \"alias\" TEXT\n}\n\nTable \"area_code\" {\n  \"zip_code\" INTEGER [pk]\n  \"area_code\" INTEGER [pk]\n}\n\nTable \"avoid\" {\n  \"zip_code\" INTEGER [pk]\n  \"bad_alias\" TEXT [pk]\n}\n\nTable \"congress\" {\n  \"cognress_rep_id\" TEXT [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"CID\" TEXT\n  \"party\" TEXT\n  \"state\" TEXT\n  \"abbreviation\" TEXT\n  \"House\" TEXT\n  \"District\" INTEGER\n  \"land_area\" REAL\n}\n\nTable \"country\" {\n  \"zip_code\" INTEGER [pk]\n  \"county\" TEXT [pk]\n  \"state\" TEXT\n}\n\nTable \"state\" {\n  \"abbreviation\" TEXT [pk]\n  \"name\" TEXT\n}\n\nTable \"zip_congress\" {\n  \"zip_code\" INTEGER [pk]\n  \"district\" TEXT [pk]\n}\n\nTable \"zip_data\" {\n  \"zip_code\" INTEGER [pk]\n  \"city\" TEXT\n  \"state\" TEXT\n  \"multi_county\" TEXT\n  \"type\" TEXT\n  \"organization\" TEXT\n  \"time_zone\" TEXT\n  \"daylight_savings\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"state_fips\" INTEGER\n  \"county_fips\" INTEGER\n  \"region\" TEXT\n  \"division\" TEXT\n  \"population_2020\" INTEGER\n  \"population_2010\" INTEGER\n  \"households\" INTEGER\n  \"avg_house_value\" INTEGER\n  \"avg_income_per_household\" INTEGER\n  \"persons_per_household\" REAL\n  \"white_population\" INTEGER\n  \"black_population\" INTEGER\n  \"hispanic_population\" INTEGER\n  \"asian_population\" INTEGER\n  \"american_indian_population\" INTEGER\n  \"hawaiian_population\" INTEGER\n  \"other_population\" INTEGER\n  \"male_population\" INTEGER\n  \"female_population\" INTEGER\n  \"median_age\" REAL\n  \"male_median_age\" REAL\n  \"female_median_age\" REAL\n  \"residential_mailboxes\" INTEGER\n  \"business_mailboxes\" INTEGER\n  \"total_delivery_receptacles\" INTEGER\n  \"businesses\" INTEGER\n  \"1st_quarter_payroll\" INTEGER\n  \"annual_payroll\" INTEGER\n  \"employees\" INTEGER\n  \"water_area\" REAL\n  \"land_area\" REAL\n  \"single_family_delivery_units\" INTEGER\n  \"multi_family_delivery_units\" INTEGER\n  \"total_beneficiaries\" INTEGER\n  \"retired_workers\" INTEGER\n  \"disabled_workers\" INTEGER\n  \"parents_and_widowed\" INTEGER\n  \"spouses\" INTEGER\n  \"children\" INTEGER\n  \"over_65\" INTEGER\n  \"monthly_benefits_all\" INTEGER\n  \"monthly_benefits_retired_workers\" INTEGER\n  \"monthly_benefits_widowed\" INTEGER\n  \"CBSA\" INTEGER\n}\n\n\n\nRef: \"congress\".\"abbreviation\" > \"state\".\"abbreviation\"\n\nRef: \"zip_data\".\"CBSA\" > \"CBSA\".\"CBSA\"\n\nRef: \"zip_data\".\"state\" > \"state\".\"abbreviation\"\n\nRef: \"alias\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"area_code\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"avoid\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"country\".\"state\" > \"state\".\"abbreviation\"\n\nRef: \"country\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"zip_congress\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"zip_congress\".\"district\" > \"congress\".\"cognress_rep_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"CBSA\" {\n  \"CBSA\" INTEGER [pk]\n  \"CBSA_name\" TEXT\n  \"CBSA_type\" TEXT\n}\n\nTable \"alias\" {\n  \"zip_code\" INTEGER [pk]\n  \"alias\" TEXT\n}\n\nTable \"area_code\" {\n  \"zip_code\" INTEGER [pk]\n  \"area_code\" INTEGER [pk]\n}\n\nTable \"avoid\" {\n  \"zip_code\" INTEGER [pk]\n  \"bad_alias\" TEXT [pk]\n}\n\nTable \"congress\" {\n  \"cognress_rep_id\" TEXT [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"CID\" TEXT\n  \"party\" TEXT\n  \"state\" TEXT\n  \"abbreviation\" TEXT\n  \"House\" TEXT\n  \"District\" INTEGER\n  \"land_area\" REAL\n}\n\nTable \"country\" {\n  \"zip_code\" INTEGER [pk]\n  \"county\" TEXT [pk]\n  \"state\" TEXT\n}\n\nTable \"state\" {\n  \"abbreviation\" TEXT [pk]\n  \"name\" TEXT\n}\n\nTable \"zip_congress\" {\n  \"zip_code\" INTEGER [pk]\n  \"district\" TEXT [pk]\n}\n\nTable \"zip_data\" {\n  \"zip_code\" INTEGER [pk]\n  \"city\" TEXT\n  \"state\" TEXT\n  \"multi_county\" TEXT\n  \"type\" TEXT\n  \"organization\" TEXT\n  \"time_zone\" TEXT\n  \"daylight_savings\" TEXT\n  \"latitude\" REAL\n  \"longitude\" REAL\n  \"elevation\" INTEGER\n  \"state_fips\" INTEGER\n  \"county_fips\" INTEGER\n  \"region\" TEXT\n  \"division\" TEXT\n  \"population_2020\" INTEGER\n  \"population_2010\" INTEGER\n  \"households\" INTEGER\n  \"avg_house_value\" INTEGER\n  \"avg_income_per_household\" INTEGER\n  \"persons_per_household\" REAL\n  \"white_population\" INTEGER\n  \"black_population\" INTEGER\n  \"hispanic_population\" INTEGER\n  \"asian_population\" INTEGER\n  \"american_indian_population\" INTEGER\n  \"hawaiian_population\" INTEGER\n  \"other_population\" INTEGER\n  \"male_population\" INTEGER\n  \"female_population\" INTEGER\n  \"median_age\" REAL\n  \"male_median_age\" REAL\n  \"female_median_age\" REAL\n  \"residential_mailboxes\" INTEGER\n  \"business_mailboxes\" INTEGER\n  \"total_delivery_receptacles\" INTEGER\n  \"businesses\" INTEGER\n  \"1st_quarter_payroll\" INTEGER\n  \"annual_payroll\" INTEGER\n  \"employees\" INTEGER\n  \"water_area\" REAL\n  \"land_area\" REAL\n  \"single_family_delivery_units\" INTEGER\n  \"multi_family_delivery_units\" INTEGER\n  \"total_beneficiaries\" INTEGER\n  \"retired_workers\" INTEGER\n  \"disabled_workers\" INTEGER\n  \"parents_and_widowed\" INTEGER\n  \"spouses\" INTEGER\n  \"children\" INTEGER\n  \"over_65\" INTEGER\n  \"monthly_benefits_all\" INTEGER\n  \"monthly_benefits_retired_workers\" INTEGER\n  \"monthly_benefits_widowed\" INTEGER\n  \"CBSA\" INTEGER\n}\n\nRef: \"congress\".\"abbreviation\" > \"state\".\"abbreviation\"\n\nRef: \"zip_data\".\"CBSA\" > \"CBSA\".\"CBSA\"\n\nRef: \"zip_data\".\"state\" > \"state\".\"abbreviation\"\n\nRef: \"alias\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"area_code\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"avoid\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"country\".\"state\" > \"state\".\"abbreviation\"\n\nRef: \"country\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"zip_congress\".\"zip_code\" > \"zip_data\".\"zip_code\"\n\nRef: \"zip_congress\".\"district\" > \"congress\".\"cognress_rep_id\"\n\n## Table Stats & Sample Values\n\nCBSA: 465 rows\n  CBSA_name: 'Adrian, MI', 'Aguadilla-Isabela, PR', 'Akron, OH', ...\n  CBSA_type: 'Micro', 'Metro'\n  CBSA: '10300', '10380', '10420', ...\n\nalias: 10000 rows\n  alias: 'Holtsville', 'Adjuntas', 'Aguada', ...\n  zip_code: '501', '544', '601', ...\n\narea_code: 10000 rows\n  zip_code: '501', '544', '601', ...\n  area_code: '631', '787', '939', ...\n\navoid: 10000 rows\n  bad_alias: 'Internal Revenue Service', 'Colinas Del Gigante', 'Jard De Adjuntas', ...\n  zip_code: '501', '544', '601', ...\n\ncongress: 540 rows\n  first_name: 'Young', 'Begich', 'Murkowski', ...\n  last_name: 'Don', 'Mark', 'Lisa', ...\n  party: 'Republican', 'Democrat', 'Independent'\n\ncountry: 10000 rows\n  state: 'NY', 'PR', 'VI', ...\n  county: 'SUFFOLK', 'ADJUNTAS', 'AGUADA', ...\n  zip_code: '501', '544', '601', ...\n\nstate: 62 rows\n  name: 'Armed Forces Americas', 'Armed Forces Europe', 'Alaska', ...\n  abbreviation: 'AA', 'AE', 'AK', ...\n\nzip_congress: 10000 rows\n  district: 'NY-1', 'PR', 'VI', ...\n  zip_code: '501', '601', '602', ...\n\nzip_data: 10000 rows\n  city: 'Holtsville', 'Adjuntas', 'Aguada', ...\n  state: 'NY', 'PR', 'VI', ...\n  type: 'Unique Post Office', 'Post Office', 'P.O. Box Only', ...",
+    "stateUrl": "https://bird-bench.github.io/#address",
+    "tableStats": {
+      "CBSA": {
+        "rows": 465,
+        "sample_values": {
+          "CBSA": [
+            "10300",
+            "10380",
+            "10420",
+            "10500",
+            "10580",
+            "10620",
+            "10700",
+            "10760"
+          ],
+          "CBSA_name": [
+            "Adrian, MI",
+            "Aguadilla-Isabela, PR",
+            "Akron, OH",
+            "Albany, GA",
+            "Albany-Schenectady-Troy, NY",
+            "Albemarle, NC",
+            "Albertville, AL",
+            "Alexander City, AL"
+          ],
+          "CBSA_type": [
+            "Micro",
+            "Metro"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "alias": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "544",
+            "601",
+            "602",
+            "603",
+            "604",
+            "605",
+            "606"
+          ],
+          "alias": [
+            "Holtsville",
+            "Adjuntas",
+            "Aguada",
+            "Aguadilla",
+            "Maricao",
+            "Anasco",
+            "Angeles",
+            "Arecibo"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "area_code": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "544",
+            "601",
+            "602",
+            "603",
+            "604",
+            "605",
+            "606"
+          ],
+          "area_code": [
+            "631",
+            "787",
+            "939",
+            "340",
+            "413",
+            "978",
+            "508",
+            "774"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "avoid": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "544",
+            "601",
+            "602",
+            "603",
+            "606",
+            "610",
+            "612"
+          ],
+          "bad_alias": [
+            "Internal Revenue Service",
+            "Colinas Del Gigante",
+            "Jard De Adjuntas",
+            "URB San Joaquin",
+            "Alts De Aguada",
+            "Bo Guaniquilla",
+            "Comunidad Las Flores",
+            "Ext Los Robles"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "congress": {
+        "rows": 540,
+        "sample_values": {
+          "cognress_rep_id": [
+            "AK",
+            "AK-S1",
+            "AK-S2",
+            "AL-1",
+            "AL-2",
+            "AL-3",
+            "AL-4",
+            "AL-5"
+          ],
+          "first_name": [
+            "Young",
+            "Begich",
+            "Murkowski",
+            "Byrne",
+            "Roby",
+            "Rogers",
+            "Aderholt",
+            "Brooks"
+          ],
+          "last_name": [
+            "Don",
+            "Mark",
+            "Lisa",
+            "Bradley",
+            "Martha",
+            "Mike D",
+            "Robert B",
+            "Mo"
+          ],
+          "CID": [
+            "N00008091",
+            "N00009585",
+            "N00033101",
+            "N00031938",
+            "N00031177",
+            "N00030980",
+            "N00035451",
+            "N00009888"
+          ],
+          "party": [
+            "Republican",
+            "Democrat",
+            "Independent"
+          ],
+          "state": [
+            "Alaska",
+            "Alabama",
+            "Arkansas",
+            "American Samoa",
+            "Arizona",
+            "California",
+            "Colorado",
+            "Connecticut"
+          ],
+          "abbreviation": [
+            "AK",
+            "AL",
+            "AR",
+            "AS",
+            "AZ",
+            "CA",
+            "CO",
+            "CT"
+          ],
+          "House": [
+            "House of Repsentatives",
+            "Senate"
+          ],
+          "District": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "land_area": [
+            "571951.26",
+            "570641.0",
+            "6066.83",
+            "10141.63",
+            "7543.86",
+            "8888.77",
+            "3677.31",
+            "4170.78"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "country": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "544",
+            "601",
+            "602",
+            "603",
+            "604",
+            "605",
+            "606"
+          ],
+          "county": [
+            "SUFFOLK",
+            "ADJUNTAS",
+            "AGUADA",
+            "AGUADILLA",
+            "MARICAO",
+            "ANASCO",
+            "UTUADO",
+            "ARECIBO"
+          ],
+          "state": [
+            "NY",
+            "PR",
+            "VI",
+            "MA",
+            "RI",
+            "NH",
+            "ME",
+            "VT"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "state": {
+        "rows": 62,
+        "sample_values": {
+          "abbreviation": [
+            "AA",
+            "AE",
+            "AK",
+            "AL",
+            "AP",
+            "AR",
+            "AS",
+            "AZ"
+          ],
+          "name": [
+            "Armed Forces Americas",
+            "Armed Forces Europe",
+            "Alaska",
+            "Alabama",
+            "Armed Forces Pacific",
+            "Arkansas",
+            "American Samoa",
+            "Arizona"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "zip_congress": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "601",
+            "602",
+            "603",
+            "604",
+            "605",
+            "606",
+            "610"
+          ],
+          "district": [
+            "NY-1",
+            "PR",
+            "VI",
+            "MA-1",
+            "MA-2",
+            "MA-3",
+            "MA-5",
+            "MA-4"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "zip_data": {
+        "rows": 10000,
+        "sample_values": {
+          "zip_code": [
+            "501",
+            "544",
+            "601",
+            "602",
+            "603",
+            "604",
+            "605",
+            "606"
+          ],
+          "city": [
+            "Holtsville",
+            "Adjuntas",
+            "Aguada",
+            "Aguadilla",
+            "Maricao",
+            "Anasco",
+            "Angeles",
+            "Arecibo"
+          ],
+          "state": [
+            "NY",
+            "PR",
+            "VI",
+            "MA",
+            "RI",
+            "NH",
+            "ME",
+            "VT"
+          ],
+          "multi_county": [
+            "No",
+            "Yes"
+          ],
+          "type": [
+            "Unique Post Office",
+            "Post Office",
+            "P.O. Box Only",
+            "Branch",
+            "Non Postal Community Name",
+            "Community Post Office",
+            "Branch-Unique",
+            "Non Postal Community Name-Unique"
+          ],
+          "organization": [
+            "I R S Service Center",
+            "Irs Service Center",
+            "Centro Medico Metropolitano",
+            "Unique Brm",
+            "Bureau Of Census",
+            "North Hampton, Smith College",
+            "Mass Mutual Life Ins Co",
+            "Baystate Medical, Spfld"
+          ],
+          "time_zone": [
+            "Eastern",
+            "Atlantic"
+          ],
+          "daylight_savings": [
+            "Yes",
+            "No"
+          ],
+          "latitude": [
+            "40.817923",
+            "40.788827",
+            "18.196747",
+            "18.352927",
+            "18.458585",
+            "18.488773",
+            "18.4289",
+            "18.166734"
+          ],
+          "longitude": [
+            "-73.045317",
+            "-73.039405",
+            "-66.736735",
+            "-67.177532",
+            "-67.129867",
+            "-67.147741",
+            "-67.1538",
+            "-66.939233"
+          ],
+          "elevation": [
+            "25",
+            "0",
+            "70",
+            "140",
+            "475",
+            "1039",
+            "250",
+            "40"
+          ],
+          "state_fips": [
+            "36",
+            "72",
+            "78",
+            "25",
+            "44",
+            "33",
+            "23",
+            "50"
+          ],
+          "county_fips": [
+            "103",
+            "1",
+            "3",
+            "5",
+            "93",
+            "11",
+            "141",
+            "13"
+          ],
+          "region": [
+            "Northeast",
+            "South"
+          ],
+          "division": [
+            "Middle Atlantic",
+            "New England",
+            "South Atlantic"
+          ],
+          "population_2020": [
+            "0",
+            "11737",
+            "24263",
+            "40361",
+            "3454",
+            "15744",
+            "49801",
+            "5154"
+          ],
+          "population_2010": [
+            "0",
+            "18570",
+            "41520",
+            "54689",
+            "6615",
+            "29016",
+            "67010",
+            "11017"
+          ],
+          "households": [
+            "0",
+            "6525",
+            "15002",
+            "21161",
+            "2404",
+            "10836",
+            "26038",
+            "4142"
+          ],
+          "avg_house_value": [
+            "0",
+            "86200",
+            "86300",
+            "122400",
+            "91600",
+            "88600",
+            "97800",
+            "96100"
+          ],
+          "avg_income_per_household": [
+            "0",
+            "13092",
+            "16358",
+            "16603",
+            "12832",
+            "19309",
+            "18171",
+            "16018"
+          ],
+          "persons_per_household": [
+            "0.0",
+            "2.84",
+            "2.76",
+            "2.53",
+            "2.75",
+            "2.67",
+            "2.55",
+            "2.65"
+          ],
+          "white_population": [
+            "0",
+            "17479",
+            "36828",
+            "46501",
+            "5979",
+            "24510",
+            "58332",
+            "9487"
+          ],
+          "black_population": [
+            "0",
+            "663",
+            "2860",
+            "5042",
+            "371",
+            "2654",
+            "5709",
+            "888"
+          ],
+          "hispanic_population": [
+            "0",
+            "18486",
+            "41265",
+            "53877",
+            "6575",
+            "28789",
+            "66435",
+            "10965"
+          ],
+          "asian_population": [
+            "0",
+            "7",
+            "42",
+            "135",
+            "3",
+            "57",
+            "133",
+            "50"
+          ],
+          "american_indian_population": [
+            "0",
+            "113",
+            "291",
+            "313",
+            "35",
+            "200",
+            "551",
+            "53"
+          ],
+          "hawaiian_population": [
+            "0",
+            "10",
+            "32",
+            "35",
+            "9",
+            "31",
+            "54",
+            "4"
+          ],
+          "other_population": [
+            "0",
+            "558",
+            "2634",
+            "4177",
+            "323",
+            "2494",
+            "4620",
+            "771"
+          ],
+          "male_population": [
+            "0",
+            "9078",
+            "20396",
+            "26597",
+            "3268",
+            "14104",
+            "31735",
+            "5318"
+          ],
+          "female_population": [
+            "0",
+            "9492",
+            "21124",
+            "28092",
+            "3347",
+            "14912",
+            "35275",
+            "5699"
+          ],
+          "median_age": [
+            "0.0",
+            "35.9",
+            "37.5",
+            "38.2",
+            "36.2",
+            "38.1",
+            "39.2",
+            "38.7"
+          ],
+          "male_median_age": [
+            "0.0",
+            "34.5",
+            "36.6",
+            "35.7",
+            "36.3",
+            "37.2",
+            "37.6",
+            "34.3"
+          ],
+          "female_median_age": [
+            "0.0",
+            "37.1",
+            "38.5",
+            "39.8",
+            "36.6",
+            "39.5",
+            "41.0",
+            "39.6"
+          ],
+          "residential_mailboxes": [
+            "0",
+            "4133",
+            "8791",
+            "15953",
+            "1256",
+            "5897",
+            "19530",
+            "1945"
+          ],
+          "business_mailboxes": [
+            "1",
+            "0",
+            "221",
+            "519",
+            "764",
+            "44",
+            "207",
+            "1404"
+          ],
+          "total_delivery_receptacles": [
+            "1",
+            "0",
+            "5173",
+            "11302",
+            "19186",
+            "4179",
+            "2718",
+            "1622"
+          ],
+          "businesses": [
+            "2",
+            "0",
+            "472",
+            "564",
+            "21",
+            "14",
+            "95",
+            "229"
+          ],
+          "1st_quarter_payroll": [
+            "0",
+            "88685000",
+            "109167000",
+            "2371000",
+            "1335000",
+            "8439000",
+            "13957000",
+            "823000"
+          ],
+          "annual_payroll": [
+            "0",
+            "376492000",
+            "472633000",
+            "10461000",
+            "5915000",
+            "34815000",
+            "63860000",
+            "3382000"
+          ],
+          "employees": [
+            "0",
+            "9127",
+            "18894",
+            "288",
+            "193",
+            "1089",
+            "1989",
+            "182"
+          ],
+          "water_area": [
+            "0.0",
+            "0.309",
+            "1.71",
+            "0.07",
+            "0.005",
+            "1.611",
+            "3.78",
+            "0.058"
+          ],
+          "land_area": [
+            "0.0",
+            "64.348",
+            "30.621",
+            "31.617",
+            "42.309",
+            "35.913",
+            "67.593",
+            "11.53"
+          ],
+          "single_family_delivery_units": [
+            "0",
+            "2419",
+            "5473",
+            "9621",
+            "948",
+            "4734",
+            "11482",
+            "1485"
+          ],
+          "multi_family_delivery_units": [
+            "0",
+            "1264",
+            "827",
+            "2947",
+            "97",
+            "454",
+            "4680",
+            "390"
+          ],
+          "total_beneficiaries": [
+            "0",
+            "5135",
+            "16805",
+            "6345",
+            "650",
+            "220",
+            "100",
+            "680"
+          ],
+          "retired_workers": [
+            "0",
+            "2940",
+            "12145",
+            "5365",
+            "195",
+            "145",
+            "80",
+            "480"
+          ],
+          "disabled_workers": [
+            "0",
+            "885",
+            "1835",
+            "350",
+            "145",
+            "40",
+            "10",
+            "75"
+          ],
+          "parents_and_widowed": [
+            "0",
+            "155",
+            "1045",
+            "225",
+            "10",
+            "45",
+            "5",
+            "600"
+          ],
+          "spouses": [
+            "0",
+            "145",
+            "1085",
+            "270",
+            "20",
+            "15",
+            "5",
+            "25"
+          ],
+          "children": [
+            "0",
+            "1010",
+            "695",
+            "135",
+            "280",
+            "10",
+            "5",
+            "55"
+          ],
+          "over_65": [
+            "0",
+            "3245",
+            "13260",
+            "5725",
+            "275",
+            "165",
+            "80",
+            "540"
+          ],
+          "monthly_benefits_all": [
+            "0",
+            "6137000",
+            "14602000",
+            "10634000",
+            "745000",
+            "344000",
+            "192000",
+            "961000"
+          ],
+          "monthly_benefits_retired_workers": [
+            "0",
+            "4007000",
+            "10947000",
+            "9421000",
+            "338000",
+            "259000",
+            "161000",
+            "742000"
+          ],
+          "monthly_benefits_widowed": [
+            "0",
+            "185000",
+            "966000",
+            "330000",
+            "18000",
+            "15000",
+            "59000",
+            "6000"
+          ],
+          "CBSA": [
+            "35620",
+            "38660",
+            "10380",
+            "11640",
+            "41980",
+            "41900",
+            "49500",
+            "32420"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

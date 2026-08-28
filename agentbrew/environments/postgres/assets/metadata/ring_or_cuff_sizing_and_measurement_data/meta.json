@@ -1,0 +1,676 @@
+{
+  "db_id": "ring_or_cuff_sizing_and_measurement_data",
+  "source": "synsql",
+  "tables": 20,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/ring_or_cuff_sizing_and_measurement_data",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"public\".\"customer_addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"country\" TEXT\n  \"address_type\" TEXT\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"created_at\" TEXT\n  \"birth_date\" TEXT\n  \"measurement_unit\" TEXT\n}\n\nTable \"public\".\"feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"rating\" INTEGER\n  \"comments\" TEXT\n  \"created_at\" TEXT\n  \"rating_type\" TEXT\n}\n\nTable \"public\".\"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"stock_quantity\" INTEGER\n  \"last_updated\" TEXT\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n}\n\nTable \"public\".\"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"discount\" TEXT\n}\n\nTable \"public\".\"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total_amount\" TEXT\n  \"status\" TEXT\n  \"payment_method\" TEXT\n  \"shipping_address\" TEXT\n}\n\nTable \"public\".\"product_images\" {\n  \"image_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"image_url\" TEXT\n  \"image_type\" TEXT\n}\n\nTable \"public\".\"product_suppliers\" {\n  \"product_supplier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"supplier_id\" INTEGER\n  \"supply_price\" TEXT\n  \"lead_time\" TEXT\n  \"moq\" INTEGER\n}\n\nTable \"public\".\"product_videos\" {\n  \"video_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"video_url\" TEXT\n  \"video_type\" TEXT\n}\n\nTable \"public\".\"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_type\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"sku\" TEXT\n  \"price\" TEXT\n  \"image_url\" TEXT\n  \"material\" TEXT\n  \"color\" TEXT\n  \"style\" TEXT\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"generated_by\" TEXT\n  \"generated_at\" TEXT\n  \"file_path\" TEXT\n  \"format\" TEXT\n}\n\nTable \"public\".\"size_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"preferred_unit\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size\" TEXT\n  \"circumference_inch\" TEXT\n  \"circumference_cm\" TEXT\n  \"inner_diameter_inch\" TEXT\n  \"inner_diameter_cm\" TEXT\n  \"fit_type\" TEXT\n}\n\nTable \"public\".\"sizing_guides\" {\n  \"guide_id\" INTEGER [pk]\n  \"product_type\" TEXT\n  \"image_url\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"contact_name\" TEXT\n  \"phone\" TEXT\n  \"email\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"rating\" TEXT\n}\n\nTable \"public\".\"units_of_measurement\" {\n  \"unit_id\" INTEGER [pk]\n  \"unit_name\" TEXT\n  \"unit_type\" TEXT\n  \"description\" TEXT\n  \"conversion_factor\" TEXT\n}\n\nTable \"public\".\"user_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"details\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n}\n\nTable \"public\".\"wishlists\" {\n  \"wishlist_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"added_at\" TEXT\n}\n\nRef: \"public\".\"customer_addresses\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"feedback\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"feedback\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"feedback\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"inventory\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"inventory\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"order_items\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"order_items\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"order_items\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"orders\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"product_images\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_suppliers\".\"supplier_id\" > \"public\".\"suppliers\".\"supplier_id\"\nRef: \"public\".\"product_suppliers\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_videos\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"products\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"reports\".\"generated_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"size_preferences\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"size_preferences\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"size_preferences\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"sizes\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"user_access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"wishlists\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"wishlists\".\"customer_id\" > \"public\".\"customers\".\"customer_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"customer_addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"country\" TEXT\n  \"address_type\" TEXT\n}\n\nTable \"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"created_at\" TEXT\n  \"birth_date\" TEXT\n  \"measurement_unit\" TEXT\n}\n\nTable \"feedback\" {\n  \"feedback_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"rating\" INTEGER\n  \"comments\" TEXT\n  \"created_at\" TEXT\n  \"rating_type\" TEXT\n}\n\nTable \"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"stock_quantity\" INTEGER\n  \"last_updated\" TEXT\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n}\n\nTable \"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"quantity\" INTEGER\n  \"price_per_unit\" TEXT\n  \"discount\" TEXT\n}\n\nTable \"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total_amount\" TEXT\n  \"status\" TEXT\n  \"payment_method\" TEXT\n  \"shipping_address\" TEXT\n}\n\nTable \"product_images\" {\n  \"image_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"image_url\" TEXT\n  \"image_type\" TEXT\n}\n\nTable \"product_suppliers\" {\n  \"product_supplier_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"supplier_id\" INTEGER\n  \"supply_price\" TEXT\n  \"lead_time\" TEXT\n  \"moq\" INTEGER\n}\n\nTable \"product_videos\" {\n  \"video_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"video_url\" TEXT\n  \"video_type\" TEXT\n}\n\nTable \"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_name\" TEXT\n  \"product_type\" TEXT\n  \"category_id\" INTEGER\n  \"description\" TEXT\n  \"sku\" TEXT\n  \"price\" TEXT\n  \"image_url\" TEXT\n  \"material\" TEXT\n  \"color\" TEXT\n  \"style\" TEXT\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"report_name\" TEXT\n  \"report_type\" TEXT\n  \"generated_by\" TEXT\n  \"generated_at\" TEXT\n  \"file_path\" TEXT\n  \"format\" TEXT\n}\n\nTable \"size_preferences\" {\n  \"preference_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"preferred_unit\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size\" TEXT\n  \"circumference_inch\" TEXT\n  \"circumference_cm\" TEXT\n  \"inner_diameter_inch\" TEXT\n  \"inner_diameter_cm\" TEXT\n  \"fit_type\" TEXT\n}\n\nTable \"sizing_guides\" {\n  \"guide_id\" INTEGER [pk]\n  \"product_type\" TEXT\n  \"image_url\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"suppliers\" {\n  \"supplier_id\" INTEGER [pk]\n  \"supplier_name\" TEXT\n  \"contact_name\" TEXT\n  \"phone\" TEXT\n  \"email\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"rating\" TEXT\n}\n\nTable \"units_of_measurement\" {\n  \"unit_id\" INTEGER [pk]\n  \"unit_name\" TEXT\n  \"unit_type\" TEXT\n  \"description\" TEXT\n  \"conversion_factor\" TEXT\n}\n\nTable \"user_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"details\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n}\n\nTable \"wishlists\" {\n  \"wishlist_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"added_at\" TEXT\n}\n\nRef: \"customer_addresses\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"feedback\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"feedback\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"feedback\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"inventory\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"inventory\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"order_items\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"order_items\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"order_items\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"orders\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"product_images\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_suppliers\".\"supplier_id\" > \"suppliers\".\"supplier_id\"\n\nRef: \"product_suppliers\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_videos\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"products\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"reports\".\"generated_by\" > \"users\".\"user_id\"\n\nRef: \"size_preferences\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"size_preferences\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"size_preferences\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"sizes\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"user_access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"wishlists\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"wishlists\".\"customer_id\" > \"customers\".\"customer_id\"\n\n## Table Stats & Sample Values\n\ncategories: 3 rows\n  category_name: 'Rings', 'Cuffs', 'Wedding Rings'\n  description: 'Various styles of rings', 'Different types of cuffs', 'Rings for weddings and engagements'\n  parent_category_id: '1'\n\ncustomer_addresses: 2 rows\n  city: 'Anytown', 'Othertown'\n  state: 'CA', 'NY'\n  address_type: 'billing', 'shipping'\n\ncustomers: 2 rows\n  first_name: 'Alice', 'Bob'\n  last_name: 'Johnson', 'Williams'\n  city: 'Anytown', 'Othertown'\n\nfeedback: 2 rows\n  rating_type: 'size', 'quality'\n  comments: 'Perfect fit, love the design!', 'Good quality, but a bit large.'\n  created_at: '2023-03-01 12:00:00', '2023-03-02 12:00:00'\n\ninventory: 2 rows\n  reorder_level: '20', '15'\n  last_updated: '2023-03-01 12:00:00', '2023-03-02 12:00:00'\n  stock_quantity: '50', '30'\n\norder_items: 2 rows\n  price_per_unit: '99.99', '49.99'\n  discount: '0.0', '10.0'\n  quantity: '1'\n\norders: 2 rows\n  status: 'shipped', 'pending'\n  total_amount: '149.98', '49.99'\n  payment_method: 'Credit Card', 'PayPal'\n\nproduct_images: 2 rows\n  image_type: 'main', 'thumbnail'\n  image_url: 'images/ring1.jpg', 'images/ring1_thumbnail.jpg'\n  product_id: '0'\n\nproduct_suppliers: 2 rows\n  supply_price: '50.0', '30.0'\n  lead_time: '1 week', '2 weeks'\n  moq: '100', '50'\n\nproduct_videos: 2 rows\n  video_type: 'product demo', 'tutorial'\n  video_url: 'videos/ring_demo.mp4', 'videos/ring_tutorial.mp4'\n  product_id: '1', '0'\n\nproducts: 2 rows\n  product_name: 'Elegant Gold Ring', 'Stainless Steel Cuff'\n  product_type: 'ring', 'cuff'\n  description: 'A beautiful gold ring with a simple yet elegant de', 'A durable stainless steel cuff with a modern look.'\n\nreports: 2 rows\n  report_name: 'Monthly Sales Report', 'Inventory Status Report'\n  report_type: 'sales', 'inventory'\n  generated_by: '1', '0'\n\nsize_preferences: 2 rows\n  preferred_unit: 'inches', 'cm'\n  created_at: '2023-01-01 12:00:00', '2023-01-02 12:00:00'\n  updated_at: '2023-01-01 12:00:00', '2023-01-02 12:00:00'\n\nsizes: 2 rows\n  fit_type: 'Comfort', 'Standard'\n  size: '1.12', '1.14'\n  circumference_inch: '4.7', '5.09'\n\nsizing_guides: 2 rows\n  product_type: 'ring', 'cuff'\n  description: 'How to measure your ring size.', 'How to measure your cuff size.'\n  image_url: 'images/ring_guide.jpg', 'images/cuff_guide.jpg'\n\nsuppliers: 2 rows\n  supplier_name: 'Gold Supplier Inc.', 'Steel Supplier Co.'\n  contact_name: 'John Doe', 'Jane Smith'\n  state: 'CA', 'NY'\n\nunits_of_measurement: 2 rows\n  unit_name: 'inches', 'cm'\n  description: 'Inches as a unit of length', 'Centimeters as a unit of length'\n  unit_type: 'length'\n\nuser_access_logs: 2 rows\n  access_type: 'login', 'view'\n  details: 'User logged in to the system', 'User viewed the inventory report'\n  ip_address: '192.168.1.100', '192.168.1.101'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'admin', 'data analyst'\n  last_login: '2023-03-01 12:00:00', '2023-03-02 12:00:00'\n\nwishlists: 2 rows\n  added_at: '2023-03-01 12:00:00', '2023-03-02 12:00:00'\n  product_id: '0', '1'\n  customer_id: '1'",
+    "stateUrl": null,
+    "tableStats": {
+      "categories": {
+        "rows": 3,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "category_name": [
+            "Rings",
+            "Cuffs",
+            "Wedding Rings"
+          ],
+          "description": [
+            "Various styles of rings",
+            "Different types of cuffs",
+            "Rings for weddings and engagements"
+          ],
+          "parent_category_id": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customer_addresses": {
+        "rows": 2,
+        "sample_values": {
+          "address_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "state": [
+            "CA",
+            "NY"
+          ],
+          "zip_code": [
+            "12345",
+            "67890"
+          ],
+          "country": [
+            "USA"
+          ],
+          "address_type": [
+            "billing",
+            "shipping"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "Alice",
+            "Bob"
+          ],
+          "last_name": [
+            "Johnson",
+            "Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "state": [
+            "CA",
+            "NY"
+          ],
+          "zip_code": [
+            "12345",
+            "67890"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-02-01 12:00:00"
+          ],
+          "birth_date": [
+            "1990-01-01",
+            "1995-01-01"
+          ],
+          "measurement_unit": [
+            "inches",
+            "cm"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "feedback": {
+        "rows": 2,
+        "sample_values": {
+          "feedback_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "product_id": [
+            "1"
+          ],
+          "size_id": [
+            "0",
+            "1"
+          ],
+          "rating": [
+            "5",
+            "4"
+          ],
+          "comments": [
+            "Perfect fit, love the design!",
+            "Good quality, but a bit large."
+          ],
+          "created_at": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ],
+          "rating_type": [
+            "size",
+            "quality"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory": {
+        "rows": 2,
+        "sample_values": {
+          "inventory_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "1"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "stock_quantity": [
+            "50",
+            "30"
+          ],
+          "last_updated": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ],
+          "reorder_level": [
+            "20",
+            "15"
+          ],
+          "reorder_quantity": [
+            "50",
+            "30"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order_items": {
+        "rows": 2,
+        "sample_values": {
+          "order_item_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "1",
+            "0"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "quantity": [
+            "1"
+          ],
+          "price_per_unit": [
+            "99.99",
+            "49.99"
+          ],
+          "discount": [
+            "0.0",
+            "10.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orders": {
+        "rows": 2,
+        "sample_values": {
+          "order_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "order_date": [
+            "2023-03-01",
+            "2023-03-02"
+          ],
+          "total_amount": [
+            "149.98",
+            "49.99"
+          ],
+          "status": [
+            "shipped",
+            "pending"
+          ],
+          "payment_method": [
+            "Credit Card",
+            "PayPal"
+          ],
+          "shipping_address": [
+            "123 Main St, Anytown, CA 12345",
+            "456 Elm St, Othertown, NY 67890"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_images": {
+        "rows": 2,
+        "sample_values": {
+          "image_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "image_url": [
+            "images/ring1.jpg",
+            "images/ring1_thumbnail.jpg"
+          ],
+          "image_type": [
+            "main",
+            "thumbnail"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_suppliers": {
+        "rows": 2,
+        "sample_values": {
+          "product_supplier_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "supplier_id": [
+            "1"
+          ],
+          "supply_price": [
+            "50.0",
+            "30.0"
+          ],
+          "lead_time": [
+            "1 week",
+            "2 weeks"
+          ],
+          "moq": [
+            "100",
+            "50"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_videos": {
+        "rows": 2,
+        "sample_values": {
+          "video_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "video_url": [
+            "videos/ring_demo.mp4",
+            "videos/ring_tutorial.mp4"
+          ],
+          "video_type": [
+            "product demo",
+            "tutorial"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 2,
+        "sample_values": {
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "product_name": [
+            "Elegant Gold Ring",
+            "Stainless Steel Cuff"
+          ],
+          "product_type": [
+            "ring",
+            "cuff"
+          ],
+          "category_id": [
+            "2",
+            "1"
+          ],
+          "description": [
+            "A beautiful gold ring with a simple yet elegant de",
+            "A durable stainless steel cuff with a modern look."
+          ],
+          "sku": [
+            "SKU12345",
+            "SKU67890"
+          ],
+          "price": [
+            "99.99",
+            "49.99"
+          ],
+          "image_url": [
+            "images/ring1.jpg",
+            "images/cuff1.jpg"
+          ],
+          "material": [
+            "Gold",
+            "Stainless Steel"
+          ],
+          "color": [
+            "Yellow",
+            "Silver"
+          ],
+          "style": [
+            "Classic",
+            "Modern"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "report_name": [
+            "Monthly Sales Report",
+            "Inventory Status Report"
+          ],
+          "report_type": [
+            "sales",
+            "inventory"
+          ],
+          "generated_by": [
+            "1",
+            "0"
+          ],
+          "generated_at": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ],
+          "file_path": [
+            "reports/monthly_sales_2023_03.pdf",
+            "reports/inventory_status_2023_03.csv"
+          ],
+          "format": [
+            "PDF",
+            "CSV"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "size_preferences": {
+        "rows": 2,
+        "sample_values": {
+          "preference_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "0"
+          ],
+          "preferred_unit": [
+            "inches",
+            "cm"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sizes": {
+        "rows": 2,
+        "sample_values": {
+          "size_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "size": [
+            "1.12",
+            "1.14"
+          ],
+          "circumference_inch": [
+            "4.7",
+            "5.09"
+          ],
+          "circumference_cm": [
+            "11.93",
+            "12.92"
+          ],
+          "inner_diameter_inch": [
+            "1.16",
+            "1.5"
+          ],
+          "inner_diameter_cm": [
+            "3.81",
+            "2.94"
+          ],
+          "fit_type": [
+            "Comfort",
+            "Standard"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sizing_guides": {
+        "rows": 2,
+        "sample_values": {
+          "guide_id": [
+            "0",
+            "1"
+          ],
+          "product_type": [
+            "ring",
+            "cuff"
+          ],
+          "image_url": [
+            "images/ring_guide.jpg",
+            "images/cuff_guide.jpg"
+          ],
+          "description": [
+            "How to measure your ring size.",
+            "How to measure your cuff size."
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ],
+          "updated_at": [
+            "2023-01-01 12:00:00",
+            "2023-01-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "suppliers": {
+        "rows": 2,
+        "sample_values": {
+          "supplier_id": [
+            "0",
+            "1"
+          ],
+          "supplier_name": [
+            "Gold Supplier Inc.",
+            "Steel Supplier Co."
+          ],
+          "contact_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "phone": [
+            "123-456-7890",
+            "098-765-4321"
+          ],
+          "email": [
+            "info@goldsupplier.com",
+            "info@steelsupplier.com"
+          ],
+          "address": [
+            "123 Supplier St",
+            "456 Supplier St"
+          ],
+          "city": [
+            "Supplier City"
+          ],
+          "state": [
+            "CA",
+            "NY"
+          ],
+          "zip_code": [
+            "12345",
+            "67890"
+          ],
+          "rating": [
+            "4.5",
+            "4.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "units_of_measurement": {
+        "rows": 2,
+        "sample_values": {
+          "unit_id": [
+            "0",
+            "1"
+          ],
+          "unit_name": [
+            "inches",
+            "cm"
+          ],
+          "unit_type": [
+            "length"
+          ],
+          "description": [
+            "Inches as a unit of length",
+            "Centimeters as a unit of length"
+          ],
+          "conversion_factor": [
+            "1.0",
+            "2.54"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "access_date": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ],
+          "access_type": [
+            "login",
+            "view"
+          ],
+          "details": [
+            "User logged in to the system",
+            "User viewed the inventory report"
+          ],
+          "ip_address": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "admin",
+            "data analyst"
+          ],
+          "created_at": [
+            "2023-01-01 12:00:00",
+            "2023-02-01 12:00:00"
+          ],
+          "last_login": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "wishlists": {
+        "rows": 2,
+        "sample_values": {
+          "wishlist_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "added_at": [
+            "2023-03-01 12:00:00",
+            "2023-03-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

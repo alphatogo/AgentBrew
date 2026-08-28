@@ -1,0 +1,142 @@
+{
+  "db_id": "toxicology",
+  "source": "bird_dev",
+  "tables": 4,
+  "total_rows": 49813,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#toxicology",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"atom\" {\n  \"atom_id\" TEXT [pk, not null]\n  \"molecule_id\" TEXT\n  \"element\" TEXT\n}\n\nTable \"bond\" {\n  \"bond_id\" TEXT [pk, not null]\n  \"molecule_id\" TEXT\n  \"bond_type\" TEXT\n}\n\nTable \"connected\" {\n  \"atom_id\" TEXT [pk, not null]\n  \"atom_id2\" TEXT [pk, not null]\n  \"bond_id\" TEXT\n}\n\nTable \"molecule\" {\n  \"molecule_id\" TEXT [pk, not null]\n  \"label\" TEXT\n}\n\n\n\nRef: \"atom\".\"molecule_id\" > \"molecule\".\"molecule_id\"\n\nRef: \"bond\".\"molecule_id\" > \"molecule\".\"molecule_id\"\n\nRef: \"connected\".\"bond_id\" > \"bond\".\"bond_id\"\n\nRef: \"connected\".\"atom_id2\" > \"atom\".\"atom_id\"\n\nRef: \"connected\".\"atom_id\" > \"atom\".\"atom_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"atom\" {\n  \"atom_id\" TEXT [pk, not null]\n  \"molecule_id\" TEXT\n  \"element\" TEXT\n}\n\nTable \"bond\" {\n  \"bond_id\" TEXT [pk, not null]\n  \"molecule_id\" TEXT\n  \"bond_type\" TEXT\n}\n\nTable \"connected\" {\n  \"atom_id\" TEXT [pk, not null]\n  \"atom_id2\" TEXT [pk, not null]\n  \"bond_id\" TEXT\n}\n\nTable \"molecule\" {\n  \"molecule_id\" TEXT [pk, not null]\n  \"label\" TEXT\n}\n\nRef: \"atom\".\"molecule_id\" > \"molecule\".\"molecule_id\"\n\nRef: \"bond\".\"molecule_id\" > \"molecule\".\"molecule_id\"\n\nRef: \"connected\".\"bond_id\" > \"bond\".\"bond_id\"\n\nRef: \"connected\".\"atom_id2\" > \"atom\".\"atom_id\"\n\nRef: \"connected\".\"atom_id\" > \"atom\".\"atom_id\"\n\n## Table Stats & Sample Values\n\natom: 10000 rows\n  element: 'cl', 'c', 'h', ...\n  molecule_id: 'TR000', 'TR001', 'TR002', ...\n  atom_id: 'TR000_1', 'TR000_2', 'TR000_3', ...\n\nbond: 10000 rows\n  bond_type: '-', '=', '#'\n  molecule_id: 'TR000', 'TR001', 'TR002', ...\n  bond_id: 'TR000_1_2', 'TR000_2_3', 'TR000_2_4', ...\n\nconnected: 10000 rows\n  atom_id2: 'TR000_2', 'TR000_1', 'TR000_3', ...\n  bond_id: 'TR000_1_2', 'TR000_2_3', 'TR000_2_4', ...\n  atom_id: 'TR000_1', 'TR000_2', 'TR000_3', ...\n\nmolecule: 343 rows\n  label: '+', '-'\n  molecule_id: 'TR000', 'TR001', 'TR002', ...",
+    "stateUrl": "https://bird-bench.github.io/#toxicology",
+    "tableStats": {
+      "atom": {
+        "rows": 10000,
+        "sample_values": {
+          "atom_id": [
+            "TR000_1",
+            "TR000_2",
+            "TR000_3",
+            "TR000_4",
+            "TR000_5",
+            "TR001_1",
+            "TR001_10",
+            "TR001_11"
+          ],
+          "molecule_id": [
+            "TR000",
+            "TR001",
+            "TR002",
+            "TR003",
+            "TR004",
+            "TR005",
+            "TR006",
+            "TR007"
+          ],
+          "element": [
+            "cl",
+            "c",
+            "h",
+            "o",
+            "s",
+            "n",
+            "p",
+            "na"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "bond": {
+        "rows": 10000,
+        "sample_values": {
+          "bond_id": [
+            "TR000_1_2",
+            "TR000_2_3",
+            "TR000_2_4",
+            "TR000_2_5",
+            "TR001_10_11",
+            "TR001_1_12",
+            "TR001_1_2",
+            "TR001_1_7"
+          ],
+          "molecule_id": [
+            "TR000",
+            "TR001",
+            "TR002",
+            "TR003",
+            "TR004",
+            "TR005",
+            "TR006",
+            "TR007"
+          ],
+          "bond_type": [
+            "-",
+            "=",
+            "#"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "connected": {
+        "rows": 10000,
+        "sample_values": {
+          "atom_id": [
+            "TR000_1",
+            "TR000_2",
+            "TR000_3",
+            "TR000_4",
+            "TR000_5",
+            "TR001_10",
+            "TR001_11",
+            "TR001_1"
+          ],
+          "atom_id2": [
+            "TR000_2",
+            "TR000_1",
+            "TR000_3",
+            "TR000_4",
+            "TR000_5",
+            "TR001_11",
+            "TR001_10",
+            "TR001_12"
+          ],
+          "bond_id": [
+            "TR000_1_2",
+            "TR000_2_3",
+            "TR000_2_4",
+            "TR000_2_5",
+            "TR001_10_11",
+            "TR001_1_12",
+            "TR001_1_2",
+            "TR001_1_7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "molecule": {
+        "rows": 343,
+        "sample_values": {
+          "molecule_id": [
+            "TR000",
+            "TR001",
+            "TR002",
+            "TR004",
+            "TR006",
+            "TR007",
+            "TR008",
+            "TR009"
+          ],
+          "label": [
+            "+",
+            "-"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

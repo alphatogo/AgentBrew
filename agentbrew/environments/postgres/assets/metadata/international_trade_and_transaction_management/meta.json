@@ -1,0 +1,760 @@
+{
+  "db_id": "international_trade_and_transaction_management",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/international_trade_and_transaction_management",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"alerts\" {\n  \"alert_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"alert_message\" TEXT\n  \"alert_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"companies\" {\n  \"company_id\" INTEGER [pk]\n  \"company_name\" TEXT\n  \"city\" TEXT\n  \"country\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"industry\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"iso_code\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"currencies\" {\n  \"currency_id\" INTEGER [pk]\n  \"currency_code\" TEXT\n  \"currency_name\" TEXT\n  \"exchange_rate\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"currency_rates\" {\n  \"rate_id\" INTEGER [pk]\n  \"currency_id\" INTEGER\n  \"rate\" REAL\n  \"rate_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"importers\" {\n  \"importer_id\" INTEGER [pk]\n  \"importer_name\" TEXT\n  \"contact_email\" TEXT\n  \"company_id\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"payment_status\" {\n  \"status_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"payment_status\" TEXT\n  \"payment_date\" TEXT\n  \"payment_amount\" REAL\n  \"payment_method\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type\" TEXT\n  \"description\" TEXT\n  \"unit_price\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"country\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"shipment_tracking\" {\n  \"tracking_id\" INTEGER [pk]\n  \"shipment_id\" INTEGER\n  \"tracking_number\" TEXT\n  \"tracking_url\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"shipping_methods\" {\n  \"shipping_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"transaction_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"document_type\" TEXT\n  \"document_url\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"transaction_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"log_message\" TEXT\n  \"log_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"transaction_shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"shipping_method\" TEXT\n  \"shipment_date\" TEXT\n  \"expected_delivery_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"transaction_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"reference\" TEXT\n  \"company_name\" TEXT\n  \"co_city\" TEXT\n  \"source_company\" TEXT\n  \"source_co_city\" TEXT\n  \"transaction_type\" TEXT\n  \"month\" TEXT\n  \"product_type\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" REAL\n  \"currency\" TEXT\n  \"importer\" TEXT\n  \"country\" TEXT\n  \"shipping_method\" TEXT\n  \"payment_terms\" TEXT\n  \"transaction_status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"user_profiles\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password_hash\" TEXT\n  \"role\" TEXT\n  \"name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"public\".\"audit_trails\".\"transaction_id\" > \"public\".\"transactions\".\"transaction_id\"\nRef: \"public\".\"currency_rates\".\"currency_id\" > \"public\".\"currencies\".\"currency_id\"\nRef: \"public\".\"importers\".\"company_id\" > \"public\".\"companies\".\"company_id\"\nRef: \"public\".\"payment_status\".\"transaction_id\" > \"public\".\"transactions\".\"transaction_id\"\nRef: \"public\".\"shipment_tracking\".\"shipment_id\" > \"public\".\"transaction_shipments\".\"shipment_id\"\nRef: \"public\".\"transaction_documents\".\"transaction_id\" > \"public\".\"transactions\".\"transaction_id\"\nRef: \"public\".\"transaction_logs\".\"transaction_id\" > \"public\".\"transactions\".\"transaction_id\"\nRef: \"public\".\"transaction_shipments\".\"transaction_id\" > \"public\".\"transactions\".\"transaction_id\"\nRef: \"public\".\"transactions\".\"importer\" > \"public\".\"importers\".\"importer_id\"\nRef: \"public\".\"transactions\".\"currency\" > \"public\".\"currencies\".\"currency_id\"\nRef: \"public\".\"transactions\".\"source_company\" > \"public\".\"companies\".\"company_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"alerts\" {\n  \"alert_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"alert_message\" TEXT\n  \"alert_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"action\" TEXT\n  \"action_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"companies\" {\n  \"company_id\" INTEGER [pk]\n  \"company_name\" TEXT\n  \"city\" TEXT\n  \"country\" TEXT\n  \"contact_email\" TEXT\n  \"contact_phone\" TEXT\n  \"industry\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"countries\" {\n  \"country_id\" INTEGER [pk]\n  \"country_name\" TEXT\n  \"iso_code\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"currencies\" {\n  \"currency_id\" INTEGER [pk]\n  \"currency_code\" TEXT\n  \"currency_name\" TEXT\n  \"exchange_rate\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"currency_rates\" {\n  \"rate_id\" INTEGER [pk]\n  \"currency_id\" INTEGER\n  \"rate\" REAL\n  \"rate_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"importers\" {\n  \"importer_id\" INTEGER [pk]\n  \"importer_name\" TEXT\n  \"contact_email\" TEXT\n  \"company_id\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"payment_status\" {\n  \"status_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"payment_status\" TEXT\n  \"payment_date\" TEXT\n  \"payment_amount\" REAL\n  \"payment_method\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"products\" {\n  \"product_id\" INTEGER [pk]\n  \"product_type\" TEXT\n  \"description\" TEXT\n  \"unit_price\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"regions\" {\n  \"region_id\" INTEGER [pk]\n  \"region_name\" TEXT\n  \"country\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"shipment_tracking\" {\n  \"tracking_id\" INTEGER [pk]\n  \"shipment_id\" INTEGER\n  \"tracking_number\" TEXT\n  \"tracking_url\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"shipping_methods\" {\n  \"shipping_id\" INTEGER [pk]\n  \"method_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"transaction_documents\" {\n  \"document_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"document_type\" TEXT\n  \"document_url\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"transaction_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"log_message\" TEXT\n  \"log_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"transaction_shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"transaction_id\" INTEGER\n  \"shipping_method\" TEXT\n  \"shipment_date\" TEXT\n  \"expected_delivery_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"transaction_types\" {\n  \"type_id\" INTEGER [pk]\n  \"type_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"transactions\" {\n  \"transaction_id\" INTEGER [pk]\n  \"reference\" TEXT\n  \"company_name\" TEXT\n  \"co_city\" TEXT\n  \"source_company\" TEXT\n  \"source_co_city\" TEXT\n  \"transaction_type\" TEXT\n  \"month\" TEXT\n  \"product_type\" INTEGER\n  \"transaction_date\" TEXT\n  \"amount\" REAL\n  \"currency\" TEXT\n  \"importer\" TEXT\n  \"country\" TEXT\n  \"shipping_method\" TEXT\n  \"payment_terms\" TEXT\n  \"transaction_status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"user_profiles\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"password_hash\" TEXT\n  \"role\" TEXT\n  \"name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"audit_trails\".\"transaction_id\" > \"transactions\".\"transaction_id\"\n\nRef: \"currency_rates\".\"currency_id\" > \"currencies\".\"currency_id\"\n\nRef: \"importers\".\"company_id\" > \"companies\".\"company_id\"\n\nRef: \"payment_status\".\"transaction_id\" > \"transactions\".\"transaction_id\"\n\nRef: \"shipment_tracking\".\"shipment_id\" > \"transaction_shipments\".\"shipment_id\"\n\nRef: \"transaction_documents\".\"transaction_id\" > \"transactions\".\"transaction_id\"\n\nRef: \"transaction_logs\".\"transaction_id\" > \"transactions\".\"transaction_id\"\n\nRef: \"transaction_shipments\".\"transaction_id\" > \"transactions\".\"transaction_id\"\n\nRef: \"transactions\".\"importer\" > \"importers\".\"importer_id\"\n\nRef: \"transactions\".\"currency\" > \"currencies\".\"currency_id\"\n\nRef: \"transactions\".\"source_company\" > \"companies\".\"company_id\"\n\n## Table Stats & Sample Values\n\nalerts: 2 rows\n  alert_message: 'New transaction recorded', 'Payment status updated'\n  alert_date: '2019-06-12', '2019-06-15'\n  created_by: 'admin_user', 'trader_user'\n\naudit_trails: 2 rows\n  action: 'Updated amount', 'Deleted transaction'\n  action_date: '2019-06-15', '2019-07-01'\n  created_by: 'admin_user', 'trader_user'\n\ncompanies: 2 rows\n  company_name: 'MATTERHORN FZE', 'ANGELMERCY GENERAL TRADING CO'\n  city: 'Sharjah', 'Zhejiang'\n  country: 'U.A.E', 'China'\n\ncountries: 2 rows\n  country_name: 'United Arab Emirates', 'China'\n  iso_code: 'AE', 'CN'\n  created_by: 'admin_user', 'trader_user'\n\ncurrencies: 2 rows\n  currency_name: 'United Arab Emirates Dirham', 'United States Dollar'\n  currency_code: 'AED', 'USD'\n  created_by: 'admin_user', 'trader_user'\n\ncurrency_rates: 2 rows\n  created_by: 'admin_user', 'trader_user'\n  created_date: '2019-01-01', '2019-02-01'\n  updated_by: 'admin_user', 'trader_user'\n\nimporters: 2 rows\n  importer_name: 'AL WAQIA SHOES CO., LLC', 'ASIA EAGLE GLOBAL CO. LIMITED'\n  contact_email: 'info@alwaqia.com', 'contact@asiaeagle.com'\n  created_by: 'admin_user', 'trader_user'\n\npayment_status: 2 rows\n  payment_status: 'Pending', 'Paid'\n  payment_method: 'Bank Transfer', 'Credit Card'\n  payment_date: '2019-06-12', '2019-06-15'\n\nproducts: 2 rows\n  product_type: 'Electronics', 'Apparel'\n  description: 'Consumer electronic goods', 'Clothing and fashion items'\n  created_by: 'admin_user', 'trader_user'\n\nregions: 2 rows\n  region_name: 'Middle East', 'East Asia'\n  country: 'U.A.E', 'China'\n  created_by: 'admin_user', 'trader_user'\n\nshipment_tracking: 2 rows\n  tracking_number: 'ABC123', 'DEF456'\n  created_by: 'admin_user', 'trader_user'\n  created_date: '2019-06-12', '2019-06-15'\n\nshipping_methods: 2 rows\n  method_name: 'Air Freight', 'Sea Freight'\n  description: 'Fast shipping by air', 'Shipping by sea'\n  created_by: 'admin_user', 'trader_user'\n\ntransaction_documents: 2 rows\n  document_type: 'Invoice', 'Packing List'\n  created_by: 'admin_user', 'trader_user'\n  created_date: '2019-06-12', '2019-06-15'\n\ntransaction_logs: 2 rows\n  log_message: 'Transaction created', 'Payment processed'\n  log_date: '2019-06-12', '2019-06-15'\n  created_by: 'admin_user', 'trader_user'\n\ntransaction_shipments: 2 rows\n  shipping_method: 'Air Freight', 'Sea Freight'\n  shipment_date: '2019-06-12', '2019-06-15'\n  expected_delivery_date: '2019-06-18', '2019-07-01'\n\ntransaction_types: 2 rows\n  type_name: 'ADVANCE IN TRUST', 'FULL PAYMENT'\n  description: 'Initial payment before goods are shipped', 'Complete payment at the time of transaction'\n  created_by: 'admin_user', 'trader_user'\n\ntransactions: 2 rows\n  country: 'Seeb, Oman', 'Hong kong, China'\n  transaction_status: 'Pending', 'Paid'\n  company_name: 'MATTERHORN FZE'\n\nuser_profiles: 2 rows\n  username: 'admin_user', 'trader_user'\n  role: 'admin', 'trader'\n  name: 'John Doe', 'Jane Doe'",
+    "stateUrl": null,
+    "tableStats": {
+      "alerts": {
+        "rows": 2,
+        "sample_values": {
+          "alert_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "2"
+          ],
+          "alert_message": [
+            "New transaction recorded",
+            "Payment status updated"
+          ],
+          "alert_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_trails": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "transaction_id": [
+            "1"
+          ],
+          "action": [
+            "Updated amount",
+            "Deleted transaction"
+          ],
+          "action_date": [
+            "2019-06-15",
+            "2019-07-01"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-15",
+            "2019-07-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-15",
+            "2019-07-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "companies": {
+        "rows": 2,
+        "sample_values": {
+          "company_id": [
+            "0",
+            "1"
+          ],
+          "company_name": [
+            "MATTERHORN FZE",
+            "ANGELMERCY GENERAL TRADING CO"
+          ],
+          "city": [
+            "Sharjah",
+            "Zhejiang"
+          ],
+          "country": [
+            "U.A.E",
+            "China"
+          ],
+          "contact_email": [
+            "info@matterhornfze.com",
+            "contact@angelmercy.com"
+          ],
+          "contact_phone": [
+            "+971 6 557 0000",
+            "+86 0571 8777 0000"
+          ],
+          "industry": [
+            "Logistics",
+            "Manufacturing"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "countries": {
+        "rows": 2,
+        "sample_values": {
+          "country_id": [
+            "0",
+            "1"
+          ],
+          "country_name": [
+            "United Arab Emirates",
+            "China"
+          ],
+          "iso_code": [
+            "AE",
+            "CN"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "currencies": {
+        "rows": 2,
+        "sample_values": {
+          "currency_id": [
+            "0",
+            "1"
+          ],
+          "currency_code": [
+            "AED",
+            "USD"
+          ],
+          "currency_name": [
+            "United Arab Emirates Dirham",
+            "United States Dollar"
+          ],
+          "exchange_rate": [
+            "1.0",
+            "3.67"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "currency_rates": {
+        "rows": 2,
+        "sample_values": {
+          "rate_id": [
+            "0",
+            "1"
+          ],
+          "currency_id": [
+            "0"
+          ],
+          "rate": [
+            "1.0",
+            "3.67"
+          ],
+          "rate_date": [
+            "2019-01-01"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "importers": {
+        "rows": 2,
+        "sample_values": {
+          "importer_id": [
+            "0",
+            "1"
+          ],
+          "importer_name": [
+            "AL WAQIA SHOES CO., LLC",
+            "ASIA EAGLE GLOBAL CO. LIMITED"
+          ],
+          "contact_email": [
+            "info@alwaqia.com",
+            "contact@asiaeagle.com"
+          ],
+          "company_id": [
+            "1",
+            "0"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_status": {
+        "rows": 2,
+        "sample_values": {
+          "status_id": [
+            "0",
+            "1"
+          ],
+          "transaction_id": [
+            "1"
+          ],
+          "payment_status": [
+            "Pending",
+            "Paid"
+          ],
+          "payment_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "payment_amount": [
+            "0.0",
+            "1000000.0"
+          ],
+          "payment_method": [
+            "Bank Transfer",
+            "Credit Card"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 2,
+        "sample_values": {
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "product_type": [
+            "Electronics",
+            "Apparel"
+          ],
+          "description": [
+            "Consumer electronic goods",
+            "Clothing and fashion items"
+          ],
+          "unit_price": [
+            "100.0",
+            "50.0"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "regions": {
+        "rows": 2,
+        "sample_values": {
+          "region_id": [
+            "0",
+            "1"
+          ],
+          "region_name": [
+            "Middle East",
+            "East Asia"
+          ],
+          "country": [
+            "U.A.E",
+            "China"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shipment_tracking": {
+        "rows": 2,
+        "sample_values": {
+          "tracking_id": [
+            "0",
+            "1"
+          ],
+          "shipment_id": [
+            "1",
+            "0"
+          ],
+          "tracking_number": [
+            "ABC123",
+            "DEF456"
+          ],
+          "tracking_url": [
+            "https://example.com/track/ABC123",
+            "https://example.com/track/DEF456"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shipping_methods": {
+        "rows": 2,
+        "sample_values": {
+          "shipping_id": [
+            "0",
+            "1"
+          ],
+          "method_name": [
+            "Air Freight",
+            "Sea Freight"
+          ],
+          "description": [
+            "Fast shipping by air",
+            "Shipping by sea"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transaction_documents": {
+        "rows": 2,
+        "sample_values": {
+          "document_id": [
+            "0",
+            "1"
+          ],
+          "transaction_id": [
+            "0"
+          ],
+          "document_type": [
+            "Invoice",
+            "Packing List"
+          ],
+          "document_url": [
+            "https://example.com/invoice/1",
+            "https://example.com/packing-list/2"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transaction_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "transaction_id": [
+            "0"
+          ],
+          "log_message": [
+            "Transaction created",
+            "Payment processed"
+          ],
+          "log_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transaction_shipments": {
+        "rows": 2,
+        "sample_values": {
+          "shipment_id": [
+            "0",
+            "1"
+          ],
+          "transaction_id": [
+            "0"
+          ],
+          "shipping_method": [
+            "Air Freight",
+            "Sea Freight"
+          ],
+          "shipment_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "expected_delivery_date": [
+            "2019-06-18",
+            "2019-07-01"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transaction_types": {
+        "rows": 2,
+        "sample_values": {
+          "type_id": [
+            "0",
+            "1"
+          ],
+          "type_name": [
+            "ADVANCE IN TRUST",
+            "FULL PAYMENT"
+          ],
+          "description": [
+            "Initial payment before goods are shipped",
+            "Complete payment at the time of transaction"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "transactions": {
+        "rows": 2,
+        "sample_values": {
+          "transaction_id": [
+            "0",
+            "1"
+          ],
+          "reference": [
+            "MHF1754",
+            "MHF1755"
+          ],
+          "company_name": [
+            "MATTERHORN FZE"
+          ],
+          "co_city": [
+            "Sharjah, U.A.E"
+          ],
+          "source_company": [
+            "0",
+            "1"
+          ],
+          "source_co_city": [
+            "Zhejiang, China"
+          ],
+          "transaction_type": [
+            "ADVANCE IN TRUST"
+          ],
+          "month": [
+            "JANUARY 2019"
+          ],
+          "product_type": [
+            "2",
+            "1"
+          ],
+          "transaction_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "amount": [
+            "115307.0",
+            "1000000.0"
+          ],
+          "currency": [
+            "0"
+          ],
+          "importer": [
+            "0"
+          ],
+          "country": [
+            "Seeb, Oman",
+            "Hong kong, China"
+          ],
+          "shipping_method": [
+            "Air Freight",
+            "Sea Freight"
+          ],
+          "payment_terms": [
+            "Advance",
+            "Credit"
+          ],
+          "transaction_status": [
+            "Pending",
+            "Paid"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-06-12",
+            "2019-06-15"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_profiles": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "admin_user",
+            "trader_user"
+          ],
+          "password_hash": [
+            "hashed_password_1",
+            "hashed_password_2"
+          ],
+          "role": [
+            "admin",
+            "trader"
+          ],
+          "name": [
+            "John Doe",
+            "Jane Doe"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.doe@example.com"
+          ],
+          "phone": [
+            "+1 123 456 7890",
+            "+1 987 654 3210"
+          ],
+          "created_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "created_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ],
+          "updated_by": [
+            "admin_user",
+            "trader_user"
+          ],
+          "updated_date": [
+            "2019-01-01",
+            "2019-02-01"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

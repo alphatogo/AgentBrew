@@ -1,0 +1,270 @@
+{
+  "db_id": "world_1",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 5302,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#world_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"city\" {\n  \"ID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"CountryCode\" TEXT [not null]\n  \"District\" TEXT [not null]\n  \"Population\" INTEGER [not null]\n}\n\nTable \"country\" {\n  \"Code\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Continent\" TEXT [not null]\n  \"Region\" TEXT [not null]\n  \"SurfaceArea\" TEXT [not null]\n  \"IndepYear\" INTEGER\n  \"Population\" INTEGER [not null]\n  \"LifeExpectancy\" TEXT\n  \"GNP\" TEXT\n  \"GNPOld\" TEXT\n  \"LocalName\" TEXT [not null]\n  \"GovernmentForm\" TEXT [not null]\n  \"HeadOfState\" TEXT\n  \"Capital\" INTEGER\n  \"Code2\" TEXT [not null]\n}\n\nTable \"countrylanguage\" {\n  \"CountryCode\" TEXT [pk, not null]\n  \"Language\" TEXT [pk, not null]\n  \"IsOfficial\" TEXT [not null]\n  \"Percentage\" TEXT [not null]\n}\n\n\n\nRef: \"city\".\"CountryCode\" > \"country\".\"Code\"\n\nRef: \"countrylanguage\".\"CountryCode\" > \"country\".\"Code\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"city\" {\n  \"ID\" INTEGER [pk, not null]\n  \"Name\" TEXT [not null]\n  \"CountryCode\" TEXT [not null]\n  \"District\" TEXT [not null]\n  \"Population\" INTEGER [not null]\n}\n\nTable \"country\" {\n  \"Code\" TEXT [pk, not null]\n  \"Name\" TEXT [not null]\n  \"Continent\" TEXT [not null]\n  \"Region\" TEXT [not null]\n  \"SurfaceArea\" TEXT [not null]\n  \"IndepYear\" INTEGER\n  \"Population\" INTEGER [not null]\n  \"LifeExpectancy\" TEXT\n  \"GNP\" TEXT\n  \"GNPOld\" TEXT\n  \"LocalName\" TEXT [not null]\n  \"GovernmentForm\" TEXT [not null]\n  \"HeadOfState\" TEXT\n  \"Capital\" INTEGER\n  \"Code2\" TEXT [not null]\n}\n\nTable \"countrylanguage\" {\n  \"CountryCode\" TEXT [pk, not null]\n  \"Language\" TEXT [pk, not null]\n  \"IsOfficial\" TEXT [not null]\n  \"Percentage\" TEXT [not null]\n}\n\nRef: \"city\".\"CountryCode\" > \"country\".\"Code\"\n\nRef: \"countrylanguage\".\"CountryCode\" > \"country\".\"Code\"\n\n## Table Stats & Sample Values\n\ncity: 4079 rows\n  Name: 'Kabul', 'Qandahar', 'Herat', ...\n  CountryCode: 'AFG', 'NLD', 'ANT', ...\n  District: 'Kabol', 'Qandahar', 'Herat', ...\n\ncountry: 239 rows\n  Name: 'Aruba', 'Afghanistan', 'Angola', ...\n  Region: 'Caribbean', 'Southern and Central Asia', 'Central Africa', ...\n  LocalName: 'Aruba', 'Afganistan/Afqanestan', 'Angola', ...\n\ncountrylanguage: 984 rows\n  CountryCode: 'ABW', 'AFG', 'AGO', ...\n  IsOfficial: 'T', 'F'\n  Percentage: '5.3', '9.5', '76.7', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#world_1",
+    "tableStats": {
+      "city": {
+        "rows": 4079,
+        "sample_values": {
+          "ID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "Name": [
+            "Kabul",
+            "Qandahar",
+            "Herat",
+            "Mazar-e-Sharif",
+            "Amsterdam",
+            "Rotterdam",
+            "Haag",
+            "Utrecht"
+          ],
+          "CountryCode": [
+            "AFG",
+            "NLD",
+            "ANT",
+            "ALB",
+            "DZA",
+            "ASM",
+            "AND",
+            "AGO"
+          ],
+          "District": [
+            "Kabol",
+            "Qandahar",
+            "Herat",
+            "Balkh",
+            "Noord-Holland",
+            "Zuid-Holland",
+            "Utrecht",
+            "Noord-Brabant"
+          ],
+          "Population": [
+            "1780000",
+            "237500",
+            "186800",
+            "127800",
+            "731200",
+            "593321",
+            "440900",
+            "234323"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "country": {
+        "rows": 239,
+        "sample_values": {
+          "Code": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALB",
+            "AND",
+            "ANT",
+            "ARE"
+          ],
+          "Name": [
+            "Aruba",
+            "Afghanistan",
+            "Angola",
+            "Anguilla",
+            "Albania",
+            "Andorra",
+            "Netherlands Antilles",
+            "United Arab Emirates"
+          ],
+          "Continent": [
+            "North America",
+            "Asia",
+            "Africa",
+            "Europe",
+            "South America",
+            "Oceania",
+            "Antarctica"
+          ],
+          "Region": [
+            "Caribbean",
+            "Southern and Central Asia",
+            "Central Africa",
+            "Southern Europe",
+            "Middle East",
+            "South America",
+            "Polynesia",
+            "Antarctica"
+          ],
+          "SurfaceArea": [
+            "193.0",
+            "652090.0",
+            "1246700.0",
+            "96.0",
+            "28748.0",
+            "468.0",
+            "800.0",
+            "83600.0"
+          ],
+          "IndepYear": [
+            "1919",
+            "1975",
+            "1912",
+            "1278",
+            "1971",
+            "1816",
+            "1991",
+            "1981"
+          ],
+          "Population": [
+            "103000",
+            "22720000",
+            "12878000",
+            "8000",
+            "3401200",
+            "78000",
+            "217000",
+            "2441000"
+          ],
+          "LifeExpectancy": [
+            "78.4",
+            "45.9",
+            "38.3",
+            "76.1",
+            "71.6",
+            "83.5",
+            "74.7",
+            "74.1"
+          ],
+          "GNP": [
+            "828.0",
+            "5976.0",
+            "6648.0",
+            "63.2",
+            "3205.0",
+            "1630.0",
+            "1941.0",
+            "37966.0"
+          ],
+          "GNPOld": [
+            "793.0",
+            "7984.0",
+            "2500.0",
+            "36846.0",
+            "323310.0",
+            "1627.0",
+            "584.0",
+            "392911.0"
+          ],
+          "LocalName": [
+            "Aruba",
+            "Afganistan/Afqanestan",
+            "Angola",
+            "Anguilla",
+            "Shqipëria",
+            "Andorra",
+            "Nederlandse Antillen",
+            "Al-Imarat al-´Arabiya al-Muttahida"
+          ],
+          "GovernmentForm": [
+            "Nonmetropolitan Territory of The Netherlands",
+            "Islamic Emirate",
+            "Republic",
+            "Dependent Territory of the UK",
+            "Parliamentary Coprincipality",
+            "Emirate Federation",
+            "Federal Republic",
+            "US Territory"
+          ],
+          "HeadOfState": [
+            "Beatrix",
+            "Mohammad Omar",
+            "José Eduardo dos Santos",
+            "Elisabeth II",
+            "Rexhep Mejdani",
+            "Zayid bin Sultan al-Nahayan",
+            "Fernando de la Rúa",
+            "Robert Kotšarjan"
+          ],
+          "Capital": [
+            "129",
+            "1",
+            "56",
+            "62",
+            "34",
+            "55",
+            "33",
+            "65"
+          ],
+          "Code2": [
+            "AW",
+            "AF",
+            "AO",
+            "AI",
+            "AL",
+            "AD",
+            "AN",
+            "AE"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "countrylanguage": {
+        "rows": 984,
+        "sample_values": {
+          "CountryCode": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALB",
+            "AND",
+            "ANT",
+            "ARE"
+          ],
+          "Language": [
+            "Dutch",
+            "English",
+            "Papiamento",
+            "Spanish",
+            "Balochi",
+            "Dari",
+            "Pashto",
+            "Turkmenian"
+          ],
+          "IsOfficial": [
+            "T",
+            "F"
+          ],
+          "Percentage": [
+            "5.3",
+            "9.5",
+            "76.7",
+            "7.4",
+            "0.9",
+            "32.1",
+            "52.4",
+            "1.9"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

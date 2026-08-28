@@ -1,0 +1,13 @@
+{
+  "title": "Policy Review Expired Pages",
+  "capability": [
+    "query_and_filter_database",
+    "batch_update_pages",
+    "insert_standard_block",
+    "reference_existing_object",
+    "populate_rows",
+    "query_multiple_sources",
+    "summarize_from_records"
+  ],
+  "question": "**Task Overview**\nMy policy knowledge base contains pages whose review status has expired.\n**Task Requirements:** 1. Locate the database named \"Policy Library\" inside the main page \"Policy\n   Operations Hub\".\n\n2. Within that database, find every page except for \"Legacy Policy Archive\"\n   where the \"Review Status\" property state contains \"expired\".\n\n3. In the \"Policy FAQs\" database, look up any FAQ entries that have the\n   \"Compliance\" tag.\n\n4. For each expired page:\n   - Insert a callout block at the very top as the first child block whose\n     rich-text content is:\n     \"REVIEW EXPIRED - This policy needs review before operational use\"\n   - Set the callout's icon to ⚠️.\n   - Set the callout's colour to red_background.\n\n5. Create a new entry in the \"Policy Requests\" database with:\n   - Title (property \"Task name\") exactly \"Batch Policy Review Required\".\n   - Priority set to High.\n   - Status set to In progress.\n   - Due set to \"2025-04-18\".\n\n6. Replace the usual mention-only bullet list with one bullet per expired\n   policy page in this exact dash format:\n   \"<Policy Page Mention> - <Policy Area> - <Recommendation>\"\n   The page mention must be a Notion mention object, and the recommendation\n   may be any brief action based on the Compliance FAQ entries.\n"
+}

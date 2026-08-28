@@ -1,0 +1,14 @@
+{
+  "title": "Partner Day Plan",
+  "capability": [
+    "query_multiple_sources",
+    "query_and_filter_database",
+    "create_child_page",
+    "insert_ordered_sections",
+    "add_exact_blocks",
+    "compute_aggregates",
+    "query_existing_data",
+    "summarize_from_records"
+  ],
+  "question": "Create a comprehensive partner day planner that analyzes the Partner Event Guide schedule and generates a structured route page. I need you to create a new page called \"Partner Day Route\" as a child of the main Partner Event Guide page.\n\n**Task Requirements:**\n1. Create a new page titled \"Partner Day Route\" as a child page of the main Partner Event Guide page.\n\n2. Query the Event Itinerary database to retrieve all partner-day activities.\n\n3. Query the Venues database to identify all venues that have the \"Demo\" tag.\n\n4. Structure the page with the following specific format:\n   - Add a heading_1 block with text \"📅 Partner Day Route\"\n   - Add a heading_2 block with text \"📊 Route Summary\"\n   - Under Route Summary, add a paragraph with the exact text \"Total visited partner activities (from Day 1 to Day 3): [NUMBER]\" where [NUMBER] is the actual count of visited activities\n   - Create heading_2 blocks for \"🌅 Day 1\", \"🌆 Day 2\", and \"🌃 Day 3\"\n   - Under each day heading, list the activities scheduled for that day in to-do list\n   - Each activity should show: Activity Name - Venue City (if available), for example, \"Executive Demo - Austin\". Check it if it is visited.\n   - Add a heading_2 block with text \"🏢 Demo Venues\"\n   - Under Demo Venues, create a bulleted list with all venues that have the \"Demo\" tag, showing: Name - Map Link (if available)\n\n5. After the Demo Venues list, add a divider block.\n\n6. Finally, add a callout block with the 💡 emoji containing the text: \"Pro tip: Check the Partner Notes database for last-minute venue changes!\"\n\n7. Ensure all headings use the exact emoji and text format specified above."
+}

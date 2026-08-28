@@ -1,0 +1,9 @@
+{
+  "title": "Legacy Meeting Delete",
+  "capability": [
+    "query_and_filter_database",
+    "archive_or_delete_items",
+    "precise_selection"
+  ],
+  "question": "Go to Executive Visit Planner and remove the meetings in AUSTIN after 4:30 PM (excluding 4:30 PM) on Monday and Tuesday.\n"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Focus Sessions Report",
+  "capability": [
+    "query_and_filter_database",
+    "summarize_from_records",
+    "create_child_page",
+    "insert_ordered_sections",
+    "compute_aggregates",
+    "query_multiple_sources",
+    "populate_rows"
+  ],
+  "question": "Go to my \"Personal Productivity Review\" page, and then create a deep work remediation report by analyzing sessions with high completion but significant blockers.\n\n**Task Requirements:**\n1. Create a new page titled \"Deep Work Remediation Report\" as a child of the Personal Productivity Review page. The new page should be located between the \"Why Deep Work Matters\" callout and the following divider line.\n\n2. Query the \"Focus Sessions\" database to find all sessions where:\n   - Completion is greater than 85% (0.85)\n   - At least one blocker is present in the Blockers field\n\n3. At the top of the new page, add a callout block (type: \"info\") titled \"Blocked High-Completion Sessions\" that states the total number of qualifying sessions and names the 2 most frequently used strategies found across those sessions.\n\n4. After the callout, add a heading_2 block titled \"Follow-up Actions\".\n\n5. Under Follow-up Actions, add a bullet-list block that enumerates each qualifying focus session. Each bullet item must follow this exact text format (including the dashes):\n\n   `<Session Date> - <Primary Blocker> - <Recommendation>`\n\n   • `<Session Date>` is the session's date value.\n   • `<Primary Blocker>` is the first blocker listed for the session.\n   • `<Recommendation>` is a brief action you suggest based on the strategies field (any text is acceptable).\n\n**Structure Requirements:**\n- The page must have the exact title \"Deep Work Remediation Report\".\n- The summary callout must appear before the Follow-up Actions section.\n- Every qualifying session must appear exactly once in the bullet list."
+}

@@ -1,0 +1,718 @@
+{
+  "db_id": "document_version_management_and_tracking",
+  "source": "synsql",
+  "tables": 22,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/document_version_management_and_tracking",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"public\".\"authors\" {\n  \"author_id\" INTEGER [pk]\n  \"author_name\" TEXT\n  \"email\" TEXT\n  \"department_id\" INTEGER\n  \"role\" TEXT\n}\n\nTable \"public\".\"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"description\" TEXT\n  \"contact_email\" TEXT\n  \"parent_department_id\" INTEGER\n}\n\nTable \"public\".\"document_access_rights\" {\n  \"access_right_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_level\" TEXT\n  \"assigned_date\" TEXT\n  \"status\" TEXT\n  \"expiration_date\" TEXT\n}\n\nTable \"public\".\"document_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"approval_date\" TEXT\n  \"status\" TEXT\n  \"comments\" TEXT\n  \"approval_type\" TEXT\n}\n\nTable \"public\".\"document_audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"details\" TEXT\n  \"client_ip\" TEXT\n}\n\nTable \"public\".\"document_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"parent_comment_id\" INTEGER\n}\n\nTable \"public\".\"document_files\" {\n  \"file_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_format\" TEXT\n}\n\nTable \"public\".\"document_history\" {\n  \"history_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"user_id\" INTEGER\n  \"details\" TEXT\n  \"action_result\" TEXT\n}\n\nTable \"public\".\"document_integration_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"integration_system\" TEXT\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"status\" TEXT\n  \"details\" TEXT\n  \"error_message\" TEXT\n}\n\nTable \"public\".\"document_integration_systems\" {\n  \"system_id\" INTEGER [pk]\n  \"system_name\" TEXT\n  \"description\" TEXT\n  \"contact_email\" TEXT\n  \"api_endpoint\" TEXT\n}\n\nTable \"public\".\"document_migrations\" {\n  \"migration_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"source_system\" TEXT\n  \"target_system\" TEXT\n  \"migration_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"public\".\"document_notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"notification_date\" TEXT\n  \"status\" TEXT\n  \"notification_text\" TEXT\n}\n\nTable \"public\".\"document_owners\" {\n  \"owner_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"doc_id\" INTEGER\n  \"assigned_date\" TEXT\n  \"status\" TEXT\n  \"ownership_type\" TEXT\n}\n\nTable \"public\".\"document_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"report_format\" TEXT\n}\n\nTable \"public\".\"document_search_logs\" {\n  \"search_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n  \"results_count\" INTEGER\n  \"search_result_ids\" TEXT\n}\n\nTable \"public\".\"document_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"tag_name\" TEXT\n  \"assigned_date\" TEXT\n  \"assigned_by\" INTEGER\n  \"color_code\" TEXT\n}\n\nTable \"public\".\"document_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"version_number\" INTEGER\n  \"modified_date\" TEXT\n  \"size\" REAL\n  \"author\" TEXT\n  \"changes\" TEXT\n  \"change_note\" TEXT\n  \"check_sum\" TEXT\n}\n\nTable \"public\".\"document_versions_files\" {\n  \"file_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_format\" TEXT\n  \"checksum\" TEXT\n}\n\nTable \"public\".\"document_versions_relationships\" {\n  \"relationship_id\" INTEGER [pk]\n  \"parent_version_id\" INTEGER\n  \"child_version_id\" INTEGER\n  \"relationship_type\" TEXT\n  \"description\" TEXT\n  \"relationship_date\" TEXT\n}\n\nTable \"public\".\"documents\" {\n  \"doc_id\" INTEGER [pk]\n  \"doc_name\" TEXT\n  \"doc_type\" TEXT\n  \"doc_description\" TEXT\n  \"created_date\" TEXT\n  \"last_modified_date\" TEXT\n  \"owner_id\" INTEGER\n  \"department_id\" INTEGER\n  \"status\" TEXT\n  \"expiration_date\" TEXT\n  \"review_frequency\" TEXT\n  \"retention_period\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department_id\" INTEGER\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_access_rights\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_access_rights\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_approvals\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_approvals\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_audit_trails\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_audit_trails\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_comments\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_comments\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_files\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_history\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_history\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_integration_logs\".\"integration_system\" > \"public\".\"document_integration_systems\".\"system_id\"\nRef: \"public\".\"document_integration_logs\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_migrations\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_notifications\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_owners\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_owners\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_reports\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_search_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_tags\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_tags\".\"assigned_by\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"document_versions\".\"author\" > \"public\".\"authors\".\"author_id\"\nRef: \"public\".\"document_versions\".\"doc_id\" > \"public\".\"documents\".\"doc_id\"\nRef: \"public\".\"document_versions_files\".\"version_id\" > \"public\".\"document_versions\".\"version_id\"\nRef: \"public\".\"document_versions_relationships\".\"parent_version_id\" > \"public\".\"document_versions\".\"version_id\"\nRef: \"public\".\"document_versions_relationships\".\"child_version_id\" > \"public\".\"document_versions\".\"version_id\"\nRef: \"public\".\"documents\".\"owner_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"documents\".\"department_id\" > \"public\".\"departments\".\"department_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n}\n\nTable \"authors\" {\n  \"author_id\" INTEGER [pk]\n  \"author_name\" TEXT\n  \"email\" TEXT\n  \"department_id\" INTEGER\n  \"role\" TEXT\n}\n\nTable \"departments\" {\n  \"department_id\" INTEGER [pk]\n  \"department_name\" TEXT\n  \"description\" TEXT\n  \"contact_email\" TEXT\n  \"parent_department_id\" INTEGER\n}\n\nTable \"document_access_rights\" {\n  \"access_right_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_level\" TEXT\n  \"assigned_date\" TEXT\n  \"status\" TEXT\n  \"expiration_date\" TEXT\n}\n\nTable \"document_approvals\" {\n  \"approval_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"approval_date\" TEXT\n  \"status\" TEXT\n  \"comments\" TEXT\n  \"approval_type\" TEXT\n}\n\nTable \"document_audit_trails\" {\n  \"audit_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"details\" TEXT\n  \"client_ip\" TEXT\n}\n\nTable \"document_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"comment_date\" TEXT\n  \"comment_text\" TEXT\n  \"parent_comment_id\" INTEGER\n}\n\nTable \"document_files\" {\n  \"file_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_format\" TEXT\n}\n\nTable \"document_history\" {\n  \"history_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"user_id\" INTEGER\n  \"details\" TEXT\n  \"action_result\" TEXT\n}\n\nTable \"document_integration_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"integration_system\" TEXT\n  \"action_type\" TEXT\n  \"action_date\" TEXT\n  \"status\" TEXT\n  \"details\" TEXT\n  \"error_message\" TEXT\n}\n\nTable \"document_integration_systems\" {\n  \"system_id\" INTEGER [pk]\n  \"system_name\" TEXT\n  \"description\" TEXT\n  \"contact_email\" TEXT\n  \"api_endpoint\" TEXT\n}\n\nTable \"document_migrations\" {\n  \"migration_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"source_system\" TEXT\n  \"target_system\" TEXT\n  \"migration_date\" TEXT\n  \"status\" TEXT\n}\n\nTable \"document_notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"notification_date\" TEXT\n  \"status\" TEXT\n  \"notification_text\" TEXT\n}\n\nTable \"document_owners\" {\n  \"owner_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"doc_id\" INTEGER\n  \"assigned_date\" TEXT\n  \"status\" TEXT\n  \"ownership_type\" TEXT\n}\n\nTable \"document_reports\" {\n  \"report_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"report_type\" TEXT\n  \"report_date\" TEXT\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"report_format\" TEXT\n}\n\nTable \"document_search_logs\" {\n  \"search_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"search_query\" TEXT\n  \"search_date\" TEXT\n  \"results_count\" INTEGER\n  \"search_result_ids\" TEXT\n}\n\nTable \"document_tags\" {\n  \"tag_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"tag_name\" TEXT\n  \"assigned_date\" TEXT\n  \"assigned_by\" INTEGER\n  \"color_code\" TEXT\n}\n\nTable \"document_versions\" {\n  \"version_id\" INTEGER [pk]\n  \"doc_id\" INTEGER\n  \"version_number\" INTEGER\n  \"modified_date\" TEXT\n  \"size\" REAL\n  \"author\" TEXT\n  \"changes\" TEXT\n  \"change_note\" TEXT\n  \"check_sum\" TEXT\n}\n\nTable \"document_versions_files\" {\n  \"file_id\" INTEGER [pk]\n  \"version_id\" INTEGER\n  \"file_path\" TEXT\n  \"file_size\" REAL\n  \"upload_date\" TEXT\n  \"file_type\" TEXT\n  \"file_format\" TEXT\n  \"checksum\" TEXT\n}\n\nTable \"document_versions_relationships\" {\n  \"relationship_id\" INTEGER [pk]\n  \"parent_version_id\" INTEGER\n  \"child_version_id\" INTEGER\n  \"relationship_type\" TEXT\n  \"description\" TEXT\n  \"relationship_date\" TEXT\n}\n\nTable \"documents\" {\n  \"doc_id\" INTEGER [pk]\n  \"doc_name\" TEXT\n  \"doc_type\" TEXT\n  \"doc_description\" TEXT\n  \"created_date\" TEXT\n  \"last_modified_date\" TEXT\n  \"owner_id\" INTEGER\n  \"department_id\" INTEGER\n  \"status\" TEXT\n  \"expiration_date\" TEXT\n  \"review_frequency\" TEXT\n  \"retention_period\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"department_id\" INTEGER\n  \"job_title\" TEXT\n  \"phone_number\" TEXT\n}\n\nRef: \"access_logs\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_access_rights\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_access_rights\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_approvals\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_approvals\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_audit_trails\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_audit_trails\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_comments\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_comments\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_files\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_history\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_history\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_integration_logs\".\"integration_system\" > \"document_integration_systems\".\"system_id\"\n\nRef: \"document_integration_logs\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_migrations\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_notifications\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_owners\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_owners\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_reports\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_search_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"document_tags\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_tags\".\"assigned_by\" > \"users\".\"user_id\"\n\nRef: \"document_versions\".\"author\" > \"authors\".\"author_id\"\n\nRef: \"document_versions\".\"doc_id\" > \"documents\".\"doc_id\"\n\nRef: \"document_versions_files\".\"version_id\" > \"document_versions\".\"version_id\"\n\nRef: \"document_versions_relationships\".\"parent_version_id\" > \"document_versions\".\"version_id\"\n\nRef: \"document_versions_relationships\".\"child_version_id\" > \"document_versions\".\"version_id\"\n\nRef: \"documents\".\"owner_id\" > \"users\".\"user_id\"\n\nRef: \"documents\".\"department_id\" > \"departments\".\"department_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  ip_address: '192.168.1.100', '192.168.1.101'\n  access_date: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n\nauthors: 2 rows\n  author_name: 'John Doe', 'Jane Smith'\n  role: 'Owner', 'Editor'\n  email: 'john.doe@example.com', 'jane.smith@example.com'\n\ndepartments: 2 rows\n  department_name: 'Legal', 'IT'\n  description: 'Legal and compliance department', 'Information technology department'\n  contact_email: 'legal@example.com', 'it@example.com'\n\ndocument_access_rights: 2 rows\n  access_level: 'Edit', 'View'\n  status: 'Active'\n  assigned_date: '2023-01-01', '2023-02-01'\n\ndocument_approvals: 2 rows\n  status: 'Approved', 'Pending'\n  approval_type: 'Formal', 'Informal'\n  comments: 'All changes are acceptable.', 'Waiting for additional information.'\n\ndocument_audit_trails: 2 rows\n  action_type: 'View', 'Edit'\n  details: 'Viewed the contract.', 'Edited the policy.'\n  client_ip: '192.168.1.100', '192.168.1.101'\n\ndocument_comments: 2 rows\n  comment_text: 'This contract needs a legal review.', 'The policy is well-written but needs more examples'\n  comment_date: '2023-05-01 10:05:00', '2023-05-02 11:05:00'\n  doc_id: '1', '0'\n\ndocument_files: 2 rows\n  file_type: 'PDF', 'DOCX'\n  file_path: 'documents/contract_a_v1.pdf', 'documents/policy_b_v1.docx'\n  file_format: 'A4', 'Letter'\n\ndocument_history: 2 rows\n  action_type: 'Create', 'Edit'\n  details: 'Initial creation of the contract.', 'Added new clauses to the policy.'\n  action_date: '2023-01-01 09:00:00', '2023-02-01 10:00:00'\n\ndocument_integration_logs: 2 rows\n  action_type: 'Sync', 'Update'\n  status: 'Success', 'Failed'\n  details: 'Synced contract details to CRM.', 'Failed to update policy in ERP due to validation e'\n\ndocument_integration_systems: 2 rows\n  system_name: 'CRM', 'ERP'\n  description: 'Customer Relationship Management system', 'Enterprise Resource Planning system'\n  api_endpoint: 'https://example.com/crm/api', 'https://example.com/erp/api'\n\ndocument_migrations: 2 rows\n  status: 'Success', 'Failed'\n  source_system: 'Old System', 'Legacy System'\n  target_system: 'New System', 'Current System'\n\ndocument_notifications: 2 rows\n  notification_type: 'Approval Required', 'New Version Available'\n  status: 'Sent', 'Unread'\n  notification_text: 'Please approve the contract.', 'A new version of the policy is available.'\n\ndocument_owners: 2 rows\n  ownership_type: 'Primary', 'Secondary'\n  status: 'Active'\n  assigned_date: '2023-01-01', '2023-02-01'\n\ndocument_reports: 2 rows\n  report_type: 'Usage Report', 'Version History'\n  file_path: 'reports/contract_a_usage.pdf', 'reports/policy_b_versions.csv'\n  report_format: 'PDF', 'CSV'\n\ndocument_search_logs: 2 rows\n  search_query: 'contract', 'policy'\n  search_date: '2023-05-01 10:00:00', '2023-05-02 11:00:00'\n  search_result_ids: '1, 2, 3, 4, 5', '6, 7, 8, 9, 10'\n\ndocument_tags: 2 rows\n  tag_name: 'Contract', 'Policy'\n  color_code: '#ff0000', '#00ff00'\n  assigned_date: '2023-01-01', '2023-02-01'\n\ndocument_versions: 2 rows\n  change_note: 'Restoring', 'to last oYZzNjeCPTidfL'\n  check_sum: '1234567890abcdef', 'fedcba9876543210'\n  modified_date: '2008-04-03 16:35:00', '2008-04-03 03:05:00'\n\ndocument_versions_files: 2 rows\n  file_type: 'PDF', 'DOCX'\n  file_path: 'documents/contract_a_v1.pdf', 'documents/policy_b_v1.docx'\n  file_format: 'A4', 'Letter'\n\ndocument_versions_relationships: 2 rows\n  description: 'Minor changes to the contract.', 'Major update to the policy.'\n  relationship_type: 'Revision', 'Update'\n  relationship_date: '2023-05-01', '2023-05-02'\n\ndocuments: 2 rows\n  doc_name: 'Contract A', 'Policy B'\n  doc_type: 'Contract', 'Policy'\n  status: 'Approved', 'Draft'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'Admin', 'Editor'\n  job_title: 'Legal Counsel', 'IT Manager'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "0"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "ip_address": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "authors": {
+        "rows": 2,
+        "sample_values": {
+          "author_id": [
+            "0",
+            "1"
+          ],
+          "author_name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "department_id": [
+            "2001",
+            "2002"
+          ],
+          "role": [
+            "Owner",
+            "Editor"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "departments": {
+        "rows": 2,
+        "sample_values": {
+          "department_id": [
+            "0",
+            "1"
+          ],
+          "department_name": [
+            "Legal",
+            "IT"
+          ],
+          "description": [
+            "Legal and compliance department",
+            "Information technology department"
+          ],
+          "contact_email": [
+            "legal@example.com",
+            "it@example.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_access_rights": {
+        "rows": 2,
+        "sample_values": {
+          "access_right_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "access_level": [
+            "Edit",
+            "View"
+          ],
+          "assigned_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "status": [
+            "Active"
+          ],
+          "expiration_date": [
+            "2025-01-01"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_approvals": {
+        "rows": 2,
+        "sample_values": {
+          "approval_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "approval_date": [
+            "2023-05-01 12:00:00",
+            "2023-05-02 13:00:00"
+          ],
+          "status": [
+            "Approved",
+            "Pending"
+          ],
+          "comments": [
+            "All changes are acceptable.",
+            "Waiting for additional information."
+          ],
+          "approval_type": [
+            "Formal",
+            "Informal"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_audit_trails": {
+        "rows": 2,
+        "sample_values": {
+          "audit_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "0"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "action_type": [
+            "View",
+            "Edit"
+          ],
+          "action_date": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "details": [
+            "Viewed the contract.",
+            "Edited the policy."
+          ],
+          "client_ip": [
+            "192.168.1.100",
+            "192.168.1.101"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1",
+            "0"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "comment_date": [
+            "2023-05-01 10:05:00",
+            "2023-05-02 11:05:00"
+          ],
+          "comment_text": [
+            "This contract needs a legal review.",
+            "The policy is well-written but needs more examples"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1",
+            "0"
+          ],
+          "file_path": [
+            "documents/contract_a_v1.pdf",
+            "documents/policy_b_v1.docx"
+          ],
+          "file_size": [
+            "1.2",
+            "1.5"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "file_type": [
+            "PDF",
+            "DOCX"
+          ],
+          "file_format": [
+            "A4",
+            "Letter"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_history": {
+        "rows": 2,
+        "sample_values": {
+          "history_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "0",
+            "1"
+          ],
+          "action_type": [
+            "Create",
+            "Edit"
+          ],
+          "action_date": [
+            "2023-01-01 09:00:00",
+            "2023-02-01 10:00:00"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "details": [
+            "Initial creation of the contract.",
+            "Added new clauses to the policy."
+          ],
+          "action_result": [
+            "Success"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_integration_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "0"
+          ],
+          "integration_system": [
+            "0"
+          ],
+          "action_type": [
+            "Sync",
+            "Update"
+          ],
+          "action_date": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "status": [
+            "Success",
+            "Failed"
+          ],
+          "details": [
+            "Synced contract details to CRM.",
+            "Failed to update policy in ERP due to validation e"
+          ],
+          "error_message": [
+            "Validation error: invalid data format"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_integration_systems": {
+        "rows": 2,
+        "sample_values": {
+          "system_id": [
+            "0",
+            "1"
+          ],
+          "system_name": [
+            "CRM",
+            "ERP"
+          ],
+          "description": [
+            "Customer Relationship Management system",
+            "Enterprise Resource Planning system"
+          ],
+          "contact_email": [
+            "crm@example.com",
+            "erp@example.com"
+          ],
+          "api_endpoint": [
+            "https://example.com/crm/api",
+            "https://example.com/erp/api"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_migrations": {
+        "rows": 2,
+        "sample_values": {
+          "migration_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "0",
+            "1"
+          ],
+          "source_system": [
+            "Old System",
+            "Legacy System"
+          ],
+          "target_system": [
+            "New System",
+            "Current System"
+          ],
+          "migration_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "Success",
+            "Failed"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "notification_type": [
+            "Approval Required",
+            "New Version Available"
+          ],
+          "notification_date": [
+            "2023-05-01 15:00:00",
+            "2023-05-02 16:00:00"
+          ],
+          "status": [
+            "Sent",
+            "Unread"
+          ],
+          "notification_text": [
+            "Please approve the contract.",
+            "A new version of the policy is available."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_owners": {
+        "rows": 2,
+        "sample_values": {
+          "owner_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "doc_id": [
+            "1"
+          ],
+          "assigned_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "status": [
+            "Active"
+          ],
+          "ownership_type": [
+            "Primary",
+            "Secondary"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1",
+            "0"
+          ],
+          "report_type": [
+            "Usage Report",
+            "Version History"
+          ],
+          "report_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "file_path": [
+            "reports/contract_a_usage.pdf",
+            "reports/policy_b_versions.csv"
+          ],
+          "file_size": [
+            "0.5",
+            "0.7"
+          ],
+          "report_format": [
+            "PDF",
+            "CSV"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_search_logs": {
+        "rows": 2,
+        "sample_values": {
+          "search_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "search_query": [
+            "contract",
+            "policy"
+          ],
+          "search_date": [
+            "2023-05-01 10:00:00",
+            "2023-05-02 11:00:00"
+          ],
+          "results_count": [
+            "5",
+            "10"
+          ],
+          "search_result_ids": [
+            "1, 2, 3, 4, 5",
+            "6, 7, 8, 9, 10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_tags": {
+        "rows": 2,
+        "sample_values": {
+          "tag_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1"
+          ],
+          "tag_name": [
+            "Contract",
+            "Policy"
+          ],
+          "assigned_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "assigned_by": [
+            "1",
+            "0"
+          ],
+          "color_code": [
+            "#ff0000",
+            "#00ff00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_versions": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "doc_id": [
+            "1",
+            "0"
+          ],
+          "version_number": [
+            "36",
+            "35"
+          ],
+          "modified_date": [
+            "2008-04-03 16:35:00",
+            "2008-04-03 03:05:00"
+          ],
+          "size": [
+            "0.542",
+            "0.189"
+          ],
+          "author": [
+            "1"
+          ],
+          "changes": [
+            "to previous"
+          ],
+          "change_note": [
+            "Restoring",
+            "to last oYZzNjeCPTidfL"
+          ],
+          "check_sum": [
+            "1234567890abcdef",
+            "fedcba9876543210"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_versions_files": {
+        "rows": 2,
+        "sample_values": {
+          "file_id": [
+            "0",
+            "1"
+          ],
+          "version_id": [
+            "1",
+            "0"
+          ],
+          "file_path": [
+            "documents/contract_a_v1.pdf",
+            "documents/policy_b_v1.docx"
+          ],
+          "file_size": [
+            "1.2",
+            "1.5"
+          ],
+          "upload_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "file_type": [
+            "PDF",
+            "DOCX"
+          ],
+          "file_format": [
+            "A4",
+            "Letter"
+          ],
+          "checksum": [
+            "1234567890abcdef",
+            "fedcba9876543210"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "document_versions_relationships": {
+        "rows": 2,
+        "sample_values": {
+          "relationship_id": [
+            "0",
+            "1"
+          ],
+          "parent_version_id": [
+            "0"
+          ],
+          "child_version_id": [
+            "1"
+          ],
+          "relationship_type": [
+            "Revision",
+            "Update"
+          ],
+          "description": [
+            "Minor changes to the contract.",
+            "Major update to the policy."
+          ],
+          "relationship_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "documents": {
+        "rows": 2,
+        "sample_values": {
+          "doc_id": [
+            "0",
+            "1"
+          ],
+          "doc_name": [
+            "Contract A",
+            "Policy B"
+          ],
+          "doc_type": [
+            "Contract",
+            "Policy"
+          ],
+          "doc_description": [
+            "Sample contract for vendor agreements",
+            "Internal policy for data handling"
+          ],
+          "created_date": [
+            "2023-01-01",
+            "2023-02-01"
+          ],
+          "last_modified_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "owner_id": [
+            "0",
+            "1"
+          ],
+          "department_id": [
+            "1",
+            "0"
+          ],
+          "status": [
+            "Approved",
+            "Draft"
+          ],
+          "expiration_date": [
+            "2025-01-01"
+          ],
+          "review_frequency": [
+            "Quarterly",
+            "Monthly"
+          ],
+          "retention_period": [
+            "3 years",
+            "5 years"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "Admin",
+            "Editor"
+          ],
+          "department_id": [
+            "2001",
+            "2002"
+          ],
+          "job_title": [
+            "Legal Counsel",
+            "IT Manager"
+          ],
+          "phone_number": [
+            "123-456-7890",
+            "987-654-3210"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

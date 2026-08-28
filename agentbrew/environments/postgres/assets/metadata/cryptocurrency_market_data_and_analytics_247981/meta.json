@@ -1,0 +1,708 @@
+{
+  "db_id": "cryptocurrency_market_data_and_analytics_247981",
+  "source": "synsql",
+  "tables": 19,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/cryptocurrency_market_data_and_analytics_247981",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"api_access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"api_key_id\" INTEGER\n  \"access_time\" TEXT\n  \"api_method\" TEXT\n  \"api_endpoint\" TEXT\n  \"status_code\" INTEGER\n  \"request_body\" TEXT\n  \"response_body\" TEXT\n}\n\nTable \"public\".\"api_keys\" {\n  \"api_key_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"api_key\" TEXT\n  \"secret_key\" TEXT\n  \"created_at\" TEXT\n  \"last_used\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"public\".\"api_limits\" {\n  \"limit_id\" INTEGER [pk]\n  \"api_key_id\" INTEGER\n  \"request_limit\" INTEGER\n  \"time_window\" TEXT\n  \"reset_time\" TEXT\n  \"remaining_requests\" INTEGER\n}\n\nTable \"public\".\"cryptocurrencies\" {\n  \"crypto_id\" INTEGER [pk]\n  \"crypto_symbol\" TEXT\n  \"crypto_name\" TEXT\n  \"blockchain\" TEXT\n  \"description\" TEXT\n  \"website\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"deposit_addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"address\" TEXT\n  \"currency\" TEXT\n  \"created_at\" TEXT\n}\n\nTable \"public\".\"exchanges\" {\n  \"exchange_id\" INTEGER [pk]\n  \"exchange_name\" TEXT\n  \"api_url\" TEXT\n  \"contact_email\" TEXT\n  \"fees\" TEXT\n  \"withdrawal_limits\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"market_data\" {\n  \"data_id\" INTEGER [pk]\n  \"pair_id\" INTEGER\n  \"timestamp\" TEXT\n  \"open_price\" REAL\n  \"high_price\" REAL\n  \"low_price\" REAL\n  \"close_price\" REAL\n  \"volume\" REAL\n  \"close_time\" TEXT\n  \"quote_asset_volume\" REAL\n  \"number_of_trades\" INTEGER\n  \"taker_buy_base_asset_volume\" REAL\n  \"taker_buy_quote_asset_volume\" REAL\n  \"ignore\" INTEGER\n  \"candlestick_pattern\" TEXT\n  \"technical_indicators\" TEXT\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"message\" TEXT\n  \"sent_time\" TEXT\n  \"status\" TEXT\n  \"read\" INTEGER\n}\n\nTable \"public\".\"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_type\" TEXT\n  \"generation_time\" TEXT\n  \"file_path\" TEXT\n  \"status\" TEXT\n  \"parameters\" TEXT\n}\n\nTable \"public\".\"strategies\" {\n  \"strategy_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"strategy_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"last_updated\" TEXT\n  \"backtest_results\" TEXT\n}\n\nTable \"public\".\"strategy_executions\" {\n  \"execution_id\" INTEGER [pk]\n  \"strategy_id\" INTEGER\n  \"execution_time\" TEXT\n  \"status\" TEXT\n  \"profit_loss\" REAL\n  \"trade_ids\" TEXT\n}\n\nTable \"public\".\"strategy_parameters\" {\n  \"param_id\" INTEGER [pk]\n  \"strategy_id\" INTEGER\n  \"param_name\" TEXT\n  \"param_value\" TEXT\n  \"param_type\" TEXT\n  \"description\" TEXT\n}\n\nTable \"public\".\"strategy_trades\" {\n  \"trade_id\" INTEGER [pk]\n  \"execution_id\" INTEGER\n  \"pair_id\" INTEGER\n  \"trade_time\" TEXT\n  \"price\" REAL\n  \"quantity\" REAL\n  \"trade_type\" TEXT\n  \"maker_taker\" TEXT\n  \"trade_source\" TEXT\n  \"fee\" REAL\n  \"slippage\" REAL\n}\n\nTable \"public\".\"support_tickets\" {\n  \"ticket_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"subject\" TEXT\n  \"message\" TEXT\n  \"status\" TEXT\n  \"created_at\" TEXT\n}\n\nTable \"public\".\"trades\" {\n  \"trade_id\" INTEGER [pk]\n  \"pair_id\" INTEGER\n  \"trade_time\" TEXT\n  \"price\" REAL\n  \"quantity\" REAL\n  \"trade_type\" TEXT\n  \"maker_taker\" TEXT\n  \"trade_source\" TEXT\n  \"fee\" REAL\n  \"slippage\" REAL\n}\n\nTable \"public\".\"trading_pairs\" {\n  \"pair_id\" INTEGER [pk]\n  \"base_crypto_id\" INTEGER\n  \"quote_crypto_id\" INTEGER\n  \"exchange_id\" INTEGER\n  \"min_order_size\" REAL\n  \"max_order_size\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"public\".\"user_access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_time\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"referral_code\" TEXT\n  \"affiliate_id\" INTEGER\n}\n\nTable \"public\".\"withdrawal_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"address\" TEXT\n  \"currency\" TEXT\n  \"amount\" REAL\n  \"fee\" REAL\n  \"status\" TEXT\n  \"created_at\" TEXT\n}\n\nRef: \"public\".\"api_access_logs\".\"api_key_id\" > \"public\".\"api_keys\".\"api_key_id\"\nRef: \"public\".\"api_keys\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"api_limits\".\"api_key_id\" > \"public\".\"api_keys\".\"api_key_id\"\nRef: \"public\".\"deposit_addresses\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"market_data\".\"pair_id\" > \"public\".\"trading_pairs\".\"pair_id\"\nRef: \"public\".\"notifications\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"reports\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"strategies\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"strategy_executions\".\"strategy_id\" > \"public\".\"strategies\".\"strategy_id\"\nRef: \"public\".\"strategy_parameters\".\"strategy_id\" > \"public\".\"strategies\".\"strategy_id\"\nRef: \"public\".\"strategy_trades\".\"execution_id\" > \"public\".\"strategy_executions\".\"execution_id\"\nRef: \"public\".\"strategy_trades\".\"pair_id\" > \"public\".\"trading_pairs\".\"pair_id\"\nRef: \"public\".\"support_tickets\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"trades\".\"pair_id\" > \"public\".\"trading_pairs\".\"pair_id\"\nRef: \"public\".\"trading_pairs\".\"base_crypto_id\" > \"public\".\"cryptocurrencies\".\"crypto_id\"\nRef: \"public\".\"trading_pairs\".\"quote_crypto_id\" > \"public\".\"cryptocurrencies\".\"crypto_id\"\nRef: \"public\".\"trading_pairs\".\"exchange_id\" > \"public\".\"exchanges\".\"exchange_id\"\nRef: \"public\".\"user_access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"withdrawal_requests\".\"user_id\" > \"public\".\"users\".\"user_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"api_access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"api_key_id\" INTEGER\n  \"access_time\" TEXT\n  \"api_method\" TEXT\n  \"api_endpoint\" TEXT\n  \"status_code\" INTEGER\n  \"request_body\" TEXT\n  \"response_body\" TEXT\n}\n\nTable \"api_keys\" {\n  \"api_key_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"api_key\" TEXT\n  \"secret_key\" TEXT\n  \"created_at\" TEXT\n  \"last_used\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"api_limits\" {\n  \"limit_id\" INTEGER [pk]\n  \"api_key_id\" INTEGER\n  \"request_limit\" INTEGER\n  \"time_window\" TEXT\n  \"reset_time\" TEXT\n  \"remaining_requests\" INTEGER\n}\n\nTable \"cryptocurrencies\" {\n  \"crypto_id\" INTEGER [pk]\n  \"crypto_symbol\" TEXT\n  \"crypto_name\" TEXT\n  \"blockchain\" TEXT\n  \"description\" TEXT\n  \"website\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"deposit_addresses\" {\n  \"address_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"address\" TEXT\n  \"currency\" TEXT\n  \"created_at\" TEXT\n}\n\nTable \"exchanges\" {\n  \"exchange_id\" INTEGER [pk]\n  \"exchange_name\" TEXT\n  \"api_url\" TEXT\n  \"contact_email\" TEXT\n  \"fees\" TEXT\n  \"withdrawal_limits\" TEXT\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"market_data\" {\n  \"data_id\" INTEGER [pk]\n  \"pair_id\" INTEGER\n  \"timestamp\" TEXT\n  \"open_price\" REAL\n  \"high_price\" REAL\n  \"low_price\" REAL\n  \"close_price\" REAL\n  \"volume\" REAL\n  \"close_time\" TEXT\n  \"quote_asset_volume\" REAL\n  \"number_of_trades\" INTEGER\n  \"taker_buy_base_asset_volume\" REAL\n  \"taker_buy_quote_asset_volume\" REAL\n  \"ignore\" INTEGER\n  \"candlestick_pattern\" TEXT\n  \"technical_indicators\" TEXT\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"notification_type\" TEXT\n  \"message\" TEXT\n  \"sent_time\" TEXT\n  \"status\" TEXT\n  \"read\" INTEGER\n}\n\nTable \"reports\" {\n  \"report_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"report_type\" TEXT\n  \"generation_time\" TEXT\n  \"file_path\" TEXT\n  \"status\" TEXT\n  \"parameters\" TEXT\n}\n\nTable \"strategies\" {\n  \"strategy_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"strategy_name\" TEXT\n  \"description\" TEXT\n  \"created_at\" TEXT\n  \"last_updated\" TEXT\n  \"backtest_results\" TEXT\n}\n\nTable \"strategy_executions\" {\n  \"execution_id\" INTEGER [pk]\n  \"strategy_id\" INTEGER\n  \"execution_time\" TEXT\n  \"status\" TEXT\n  \"profit_loss\" REAL\n  \"trade_ids\" TEXT\n}\n\nTable \"strategy_parameters\" {\n  \"param_id\" INTEGER [pk]\n  \"strategy_id\" INTEGER\n  \"param_name\" TEXT\n  \"param_value\" TEXT\n  \"param_type\" TEXT\n  \"description\" TEXT\n}\n\nTable \"strategy_trades\" {\n  \"trade_id\" INTEGER [pk]\n  \"execution_id\" INTEGER\n  \"pair_id\" INTEGER\n  \"trade_time\" TEXT\n  \"price\" REAL\n  \"quantity\" REAL\n  \"trade_type\" TEXT\n  \"maker_taker\" TEXT\n  \"trade_source\" TEXT\n  \"fee\" REAL\n  \"slippage\" REAL\n}\n\nTable \"support_tickets\" {\n  \"ticket_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"subject\" TEXT\n  \"message\" TEXT\n  \"status\" TEXT\n  \"created_at\" TEXT\n}\n\nTable \"trades\" {\n  \"trade_id\" INTEGER [pk]\n  \"pair_id\" INTEGER\n  \"trade_time\" TEXT\n  \"price\" REAL\n  \"quantity\" REAL\n  \"trade_type\" TEXT\n  \"maker_taker\" TEXT\n  \"trade_source\" TEXT\n  \"fee\" REAL\n  \"slippage\" REAL\n}\n\nTable \"trading_pairs\" {\n  \"pair_id\" INTEGER [pk]\n  \"base_crypto_id\" INTEGER\n  \"quote_crypto_id\" INTEGER\n  \"exchange_id\" INTEGER\n  \"min_order_size\" REAL\n  \"max_order_size\" REAL\n  \"created_at\" TEXT\n  \"updated_at\" TEXT\n}\n\nTable \"user_access_logs\" {\n  \"log_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_time\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"user_agent\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"created_at\" TEXT\n  \"last_login\" TEXT\n  \"referral_code\" TEXT\n  \"affiliate_id\" INTEGER\n}\n\nTable \"withdrawal_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"address\" TEXT\n  \"currency\" TEXT\n  \"amount\" REAL\n  \"fee\" REAL\n  \"status\" TEXT\n  \"created_at\" TEXT\n}\n\nRef: \"api_access_logs\".\"api_key_id\" > \"api_keys\".\"api_key_id\"\n\nRef: \"api_keys\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"api_limits\".\"api_key_id\" > \"api_keys\".\"api_key_id\"\n\nRef: \"deposit_addresses\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"market_data\".\"pair_id\" > \"trading_pairs\".\"pair_id\"\n\nRef: \"notifications\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"reports\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"strategies\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"strategy_executions\".\"strategy_id\" > \"strategies\".\"strategy_id\"\n\nRef: \"strategy_parameters\".\"strategy_id\" > \"strategies\".\"strategy_id\"\n\nRef: \"strategy_trades\".\"execution_id\" > \"strategy_executions\".\"execution_id\"\n\nRef: \"strategy_trades\".\"pair_id\" > \"trading_pairs\".\"pair_id\"\n\nRef: \"support_tickets\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"trades\".\"pair_id\" > \"trading_pairs\".\"pair_id\"\n\nRef: \"trading_pairs\".\"base_crypto_id\" > \"cryptocurrencies\".\"crypto_id\"\n\nRef: \"trading_pairs\".\"quote_crypto_id\" > \"cryptocurrencies\".\"crypto_id\"\n\nRef: \"trading_pairs\".\"exchange_id\" > \"exchanges\".\"exchange_id\"\n\nRef: \"user_access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"withdrawal_requests\".\"user_id\" > \"users\".\"user_id\"\n\n## Table Stats & Sample Values\n\napi_access_logs: 2 rows\n  status_code: '200', '201'\n  api_method: 'GET', 'POST'\n  api_endpoint: '/api/v1/market_data', '/api/v1/trades'\n\napi_keys: 2 rows\n  api_key: 'abc123', 'def456'\n  secret_key: 'secret123', 'secret456'\n  last_used: '2023-10-01 12:00:00', '2023-10-02 12:00:00'\n\napi_limits: 2 rows\n  time_window: '1 minute', '1 hour'\n  request_limit: '1000', '10000'\n  remaining_requests: '500', '5000'\n\ncryptocurrencies: 2 rows\n  crypto_name: 'Bitcoin', 'Ethereum'\n  description: 'The first decentralized cryptocurrency', 'A decentralized platform for building smart contra'\n  crypto_symbol: 'BTC', 'ETH'\n\ndeposit_addresses: 2 rows\n  address: '0x1234567890abcdef', '0x9876543210fedcba'\n  currency: 'BTC', 'ETH'\n  created_at: '2022-05-01 00:00:00', '2022-05-02 00:00:00'\n\nexchanges: 2 rows\n  exchange_name: 'Binance', 'Coinbase'\n  withdrawal_limits: '{\"BTC\": 100, \"ETH\": 500}', '{\"BTC\": 50, \"ETH\": 200}'\n  fees: '{\"trading_fee\": 0.1, \"withdrawal_fee\": 0.01}', '{\"trading_fee\": 0.15, \"withdrawal_fee\": 0.02}'\n\nmarket_data: 2 rows\n  candlestick_pattern: 'hammer', 'engulfing'\n  technical_indicators: '{\"moving_average\": 0.165, \"rsi\": 55}', '{\"moving_average\": 0.157, \"rsi\": 60}'\n  timestamp: '2022-05-27 00:00:00', '2022-05-28 00:00:00'\n\nnotifications: 2 rows\n  notification_type: 'email', 'SMS'\n  status: 'sent'\n  message: 'Your report is ready.', 'Your trade has been executed.'\n\nreports: 2 rows\n  report_type: 'daily', 'weekly'\n  status: 'completed', 'pending'\n  file_path: 'reports/2023-10-01-daily.pdf', 'reports/2023-10-01-weekly.pdf'\n\nstrategies: 2 rows\n  strategy_name: 'Momentum Trading', 'Mean Reversion'\n  description: 'A strategy based on price momentum', 'A strategy based on mean reversion'\n  backtest_results: '{\"profit\": 100, \"sharpe_ratio\": 2.5}', '{\"profit\": 50, \"sharpe_ratio\": 1.5}'\n\nstrategy_executions: 2 rows\n  status: 'completed', 'running'\n  execution_time: '2023-10-01 12:00:00', '2023-10-02 12:00:00'\n  trade_ids: '[1, 2, 3]', '[4, 5, 6]'\n\nstrategy_parameters: 2 rows\n  param_name: 'Lookback Period', 'Threshold'\n  description: 'The number of days to look back for the momentum c', 'The threshold for the momentum indicator'\n  param_type: 'numeric'\n\nstrategy_trades: 2 rows\n  trade_type: 'buy', 'sell'\n  maker_taker: 'taker', 'maker'\n  trade_source: 'API', 'web'\n\nsupport_tickets: 2 rows\n  status: 'open', 'in progress'\n  subject: 'Issue with withdrawal', 'Question about API'\n  message: 'I'm having trouble withdrawing my funds.', 'How do I use the API to trade?'\n\ntrades: 2 rows\n  trade_type: 'buy', 'sell'\n  maker_taker: 'taker', 'maker'\n  trade_source: 'API', 'web'\n\ntrading_pairs: 2 rows\n  created_at: '2022-05-01 00:00:00', '2022-05-02 00:00:00'\n  updated_at: '2023-10-01 12:00:00', '2023-10-02 12:00:00'\n  min_order_size: '0.01', '0.1'\n\nuser_access_logs: 2 rows\n  access_type: 'login', 'view'\n  device_type: 'desktop', 'mobile'\n  access_time: '2023-10-01 12:00:00', '2023-10-01 12:05:00'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'trader', 'analyst'\n  last_login: '2023-10-01 12:00:00', '2023-10-02 12:00:00'\n\nwithdrawal_requests: 2 rows\n  status: 'pending', 'processed'\n  address: '0x1234567890abcdef', '0x9876543210fedcba'\n  currency: 'BTC', 'ETH'",
+    "stateUrl": null,
+    "tableStats": {
+      "api_access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "api_key_id": [
+            "0",
+            "1"
+          ],
+          "access_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 12:01:00"
+          ],
+          "api_method": [
+            "GET",
+            "POST"
+          ],
+          "api_endpoint": [
+            "/api/v1/market_data",
+            "/api/v1/trades"
+          ],
+          "status_code": [
+            "200",
+            "201"
+          ],
+          "request_body": [
+            "{\"symbol\": \"BTCUSDT\"}",
+            "{\"symbol\": \"BTCUSDT\", \"side\": \"buy\", \"quantity\": 0"
+          ],
+          "response_body": [
+            "{\"price\": 10000.0}",
+            "{\"trade_id\": 1}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "api_keys": {
+        "rows": 2,
+        "sample_values": {
+          "api_key_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "api_key": [
+            "abc123",
+            "def456"
+          ],
+          "secret_key": [
+            "secret123",
+            "secret456"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "last_used": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ],
+          "permissions": [
+            "{\"permissions\": [\"read-only\", \"trade\"]}",
+            "{\"permissions\": [\"read-only\"]}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "api_limits": {
+        "rows": 2,
+        "sample_values": {
+          "limit_id": [
+            "0",
+            "1"
+          ],
+          "api_key_id": [
+            "0",
+            "1"
+          ],
+          "request_limit": [
+            "1000",
+            "10000"
+          ],
+          "time_window": [
+            "1 minute",
+            "1 hour"
+          ],
+          "reset_time": [
+            "2023-10-01 13:00:00"
+          ],
+          "remaining_requests": [
+            "500",
+            "5000"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "cryptocurrencies": {
+        "rows": 2,
+        "sample_values": {
+          "crypto_id": [
+            "0",
+            "1"
+          ],
+          "crypto_symbol": [
+            "BTC",
+            "ETH"
+          ],
+          "crypto_name": [
+            "Bitcoin",
+            "Ethereum"
+          ],
+          "blockchain": [
+            "Bitcoin",
+            "Ethereum"
+          ],
+          "description": [
+            "The first decentralized cryptocurrency",
+            "A decentralized platform for building smart contra"
+          ],
+          "website": [
+            "https://bitcoin.org",
+            "https://ethereum.org"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "updated_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "deposit_addresses": {
+        "rows": 2,
+        "sample_values": {
+          "address_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "address": [
+            "0x1234567890abcdef",
+            "0x9876543210fedcba"
+          ],
+          "currency": [
+            "BTC",
+            "ETH"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "exchanges": {
+        "rows": 2,
+        "sample_values": {
+          "exchange_id": [
+            "0",
+            "1"
+          ],
+          "exchange_name": [
+            "Binance",
+            "Coinbase"
+          ],
+          "api_url": [
+            "https://api.binance.com",
+            "https://api.coinbase.com"
+          ],
+          "contact_email": [
+            "support@binance.com",
+            "support@coinbase.com"
+          ],
+          "fees": [
+            "{\"trading_fee\": 0.1, \"withdrawal_fee\": 0.01}",
+            "{\"trading_fee\": 0.15, \"withdrawal_fee\": 0.02}"
+          ],
+          "withdrawal_limits": [
+            "{\"BTC\": 100, \"ETH\": 500}",
+            "{\"BTC\": 50, \"ETH\": 200}"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "updated_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "market_data": {
+        "rows": 2,
+        "sample_values": {
+          "data_id": [
+            "0",
+            "1"
+          ],
+          "pair_id": [
+            "1"
+          ],
+          "timestamp": [
+            "2022-05-27 00:00:00",
+            "2022-05-28 00:00:00"
+          ],
+          "open_price": [
+            "0.1638",
+            "0.1552"
+          ],
+          "high_price": [
+            "0.1937",
+            "0.1606"
+          ],
+          "low_price": [
+            "0.152",
+            "0.1514"
+          ],
+          "close_price": [
+            "0.1552",
+            "0.1567"
+          ],
+          "volume": [
+            "3182510.0",
+            "251483.0"
+          ],
+          "close_time": [
+            "2022-05-27 23:59:59.999",
+            "2022-05-28 23:59:59.999"
+          ],
+          "quote_asset_volume": [
+            "556221.0",
+            "39333.4"
+          ],
+          "number_of_trades": [
+            "3084",
+            "367"
+          ],
+          "taker_buy_base_asset_volume": [
+            "1431540.0",
+            "86588.0"
+          ],
+          "taker_buy_quote_asset_volume": [
+            "251519.0",
+            "13579.3"
+          ],
+          "ignore": [
+            "0"
+          ],
+          "candlestick_pattern": [
+            "hammer",
+            "engulfing"
+          ],
+          "technical_indicators": [
+            "{\"moving_average\": 0.165, \"rsi\": 55}",
+            "{\"moving_average\": 0.157, \"rsi\": 60}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "notification_type": [
+            "email",
+            "SMS"
+          ],
+          "message": [
+            "Your report is ready.",
+            "Your trade has been executed."
+          ],
+          "sent_time": [
+            "2023-10-01 12:00:00"
+          ],
+          "status": [
+            "sent"
+          ],
+          "read": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "reports": {
+        "rows": 2,
+        "sample_values": {
+          "report_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "report_type": [
+            "daily",
+            "weekly"
+          ],
+          "generation_time": [
+            "2023-10-01 00:00:00"
+          ],
+          "file_path": [
+            "reports/2023-10-01-daily.pdf",
+            "reports/2023-10-01-weekly.pdf"
+          ],
+          "status": [
+            "completed",
+            "pending"
+          ],
+          "parameters": [
+            "{\"start_date\": \"2023-09-01\", \"end_date\": \"2023-09-",
+            "{\"start_date\": \"2023-09-04\", \"end_date\": \"2023-09-"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "strategies": {
+        "rows": 2,
+        "sample_values": {
+          "strategy_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1",
+            "0"
+          ],
+          "strategy_name": [
+            "Momentum Trading",
+            "Mean Reversion"
+          ],
+          "description": [
+            "A strategy based on price momentum",
+            "A strategy based on mean reversion"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "last_updated": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ],
+          "backtest_results": [
+            "{\"profit\": 100, \"sharpe_ratio\": 2.5}",
+            "{\"profit\": 50, \"sharpe_ratio\": 1.5}"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "strategy_executions": {
+        "rows": 2,
+        "sample_values": {
+          "execution_id": [
+            "0",
+            "1"
+          ],
+          "strategy_id": [
+            "0"
+          ],
+          "execution_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ],
+          "status": [
+            "completed",
+            "running"
+          ],
+          "profit_loss": [
+            "100.5",
+            "0.0"
+          ],
+          "trade_ids": [
+            "[1, 2, 3]",
+            "[4, 5, 6]"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "strategy_parameters": {
+        "rows": 2,
+        "sample_values": {
+          "param_id": [
+            "0",
+            "1"
+          ],
+          "strategy_id": [
+            "0"
+          ],
+          "param_name": [
+            "Lookback Period",
+            "Threshold"
+          ],
+          "param_value": [
+            "14",
+            "0.05"
+          ],
+          "param_type": [
+            "numeric"
+          ],
+          "description": [
+            "The number of days to look back for the momentum c",
+            "The threshold for the momentum indicator"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "strategy_trades": {
+        "rows": 2,
+        "sample_values": {
+          "trade_id": [
+            "0",
+            "1"
+          ],
+          "execution_id": [
+            "0"
+          ],
+          "pair_id": [
+            "0"
+          ],
+          "trade_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 12:01:00"
+          ],
+          "price": [
+            "0.165",
+            "0.166"
+          ],
+          "quantity": [
+            "1000.0",
+            "500.0"
+          ],
+          "trade_type": [
+            "buy",
+            "sell"
+          ],
+          "maker_taker": [
+            "taker",
+            "maker"
+          ],
+          "trade_source": [
+            "API",
+            "web"
+          ],
+          "fee": [
+            "0.01",
+            "0.005"
+          ],
+          "slippage": [
+            "0.001",
+            "0.0005"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "support_tickets": {
+        "rows": 2,
+        "sample_values": {
+          "ticket_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "subject": [
+            "Issue with withdrawal",
+            "Question about API"
+          ],
+          "message": [
+            "I'm having trouble withdrawing my funds.",
+            "How do I use the API to trade?"
+          ],
+          "status": [
+            "open",
+            "in progress"
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "trades": {
+        "rows": 2,
+        "sample_values": {
+          "trade_id": [
+            "0",
+            "1"
+          ],
+          "pair_id": [
+            "1"
+          ],
+          "trade_time": [
+            "2022-05-27 12:00:00",
+            "2022-05-27 12:01:00"
+          ],
+          "price": [
+            "0.165",
+            "0.166"
+          ],
+          "quantity": [
+            "1000.0",
+            "500.0"
+          ],
+          "trade_type": [
+            "buy",
+            "sell"
+          ],
+          "maker_taker": [
+            "taker",
+            "maker"
+          ],
+          "trade_source": [
+            "API",
+            "web"
+          ],
+          "fee": [
+            "0.01",
+            "0.005"
+          ],
+          "slippage": [
+            "0.001",
+            "0.0005"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "trading_pairs": {
+        "rows": 2,
+        "sample_values": {
+          "pair_id": [
+            "0",
+            "1"
+          ],
+          "base_crypto_id": [
+            "0",
+            "1"
+          ],
+          "quote_crypto_id": [
+            "1",
+            "0"
+          ],
+          "exchange_id": [
+            "1",
+            "0"
+          ],
+          "min_order_size": [
+            "0.01",
+            "0.1"
+          ],
+          "max_order_size": [
+            "1000.0",
+            "5000.0"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "updated_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "log_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_time": [
+            "2023-10-01 12:00:00",
+            "2023-10-01 12:05:00"
+          ],
+          "access_type": [
+            "login",
+            "view"
+          ],
+          "ip_address": [
+            "192.168.1.1"
+          ],
+          "user_agent": [
+            "Mozilla/5.0"
+          ],
+          "device_type": [
+            "desktop",
+            "mobile"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "trader",
+            "analyst"
+          ],
+          "created_at": [
+            "2022-05-01 00:00:00",
+            "2022-05-02 00:00:00"
+          ],
+          "last_login": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ],
+          "referral_code": [
+            "REF123",
+            "REF456"
+          ],
+          "affiliate_id": [
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "withdrawal_requests": {
+        "rows": 2,
+        "sample_values": {
+          "request_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "address": [
+            "0x1234567890abcdef",
+            "0x9876543210fedcba"
+          ],
+          "currency": [
+            "BTC",
+            "ETH"
+          ],
+          "amount": [
+            "100.0",
+            "50.0"
+          ],
+          "fee": [
+            "0.01",
+            "0.005"
+          ],
+          "status": [
+            "pending",
+            "processed"
+          ],
+          "created_at": [
+            "2023-10-01 12:00:00",
+            "2023-10-02 12:00:00"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

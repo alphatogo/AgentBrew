@@ -1,0 +1,613 @@
+{
+  "db_id": "movies_4",
+  "source": "bird",
+  "tables": 17,
+  "total_rows": 393358,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#movies_4",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"country\" {\n  \"country_id\" INTEGER [pk, not null]\n  \"country_iso_code\" TEXT\n  \"country_name\" TEXT\n}\n\nTable \"department\" {\n  \"department_id\" INTEGER [pk, not null]\n  \"department_name\" TEXT\n}\n\nTable \"gender\" {\n  \"gender_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n}\n\nTable \"genre\" {\n  \"genre_id\" INTEGER [pk, not null]\n  \"genre_name\" TEXT\n}\n\nTable \"keyword\" {\n  \"keyword_id\" INTEGER [pk, not null]\n  \"keyword_name\" TEXT\n}\n\nTable \"language\" {\n  \"language_id\" INTEGER [pk, not null]\n  \"language_code\" TEXT\n  \"language_name\" TEXT\n}\n\nTable \"language_role\" {\n  \"role_id\" INTEGER [pk, not null]\n  \"language_role\" TEXT\n}\n\nTable \"movie\" {\n  \"movie_id\" INTEGER [pk, not null]\n  \"title\" TEXT\n  \"budget\" INTEGER\n  \"homepage\" TEXT\n  \"overview\" TEXT\n  \"popularity\" REAL\n  \"release_date\" DATE\n  \"revenue\" INTEGER\n  \"runtime\" INTEGER\n  \"movie_status\" TEXT\n  \"tagline\" TEXT\n  \"vote_average\" REAL\n  \"vote_count\" INTEGER\n}\n\nTable \"movie_cast\" {\n  \"movie_id\" INTEGER\n  \"person_id\" INTEGER\n  \"character_name\" TEXT\n  \"gender_id\" INTEGER\n  \"cast_order\" INTEGER\n}\n\nTable \"movie_company\" {\n  \"movie_id\" INTEGER\n  \"company_id\" INTEGER\n}\n\nTable \"movie_crew\" {\n  \"movie_id\" INTEGER\n  \"person_id\" INTEGER\n  \"department_id\" INTEGER\n  \"job\" TEXT\n}\n\nTable \"movie_genres\" {\n  \"movie_id\" INTEGER\n  \"genre_id\" INTEGER\n}\n\nTable \"movie_keywords\" {\n  \"movie_id\" INTEGER\n  \"keyword_id\" INTEGER\n}\n\nTable \"movie_languages\" {\n  \"movie_id\" INTEGER\n  \"language_id\" INTEGER\n  \"language_role_id\" INTEGER\n}\n\nTable \"person\" {\n  \"person_id\" INTEGER [pk, not null]\n  \"person_name\" TEXT\n}\n\nTable \"production_company\" {\n  \"company_id\" INTEGER [pk, not null]\n  \"company_name\" TEXT\n}\n\nTable \"production_country\" {\n  \"movie_id\" INTEGER\n  \"country_id\" INTEGER\n}\n\n\n\nRef: \"movie_genres\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_genres\".\"genre_id\" > \"genre\".\"genre_id\"\n\nRef: \"movie_languages\".\"language_role_id\" > \"language_role\".\"role_id\"\n\nRef: \"movie_languages\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_languages\".\"language_id\" > \"language\".\"language_id\"\n\nRef: \"movie_crew\".\"person_id\" > \"person\".\"person_id\"\n\nRef: \"movie_crew\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_crew\".\"department_id\" > \"department\".\"department_id\"\n\nRef: \"production_country\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"production_country\".\"country_id\" > \"country\".\"country_id\"\n\nRef: \"movie_cast\".\"person_id\" > \"person\".\"person_id\"\n\nRef: \"movie_cast\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_cast\".\"gender_id\" > \"gender\".\"gender_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"country\" {\n  \"country_id\" INTEGER [pk, not null]\n  \"country_iso_code\" TEXT\n  \"country_name\" TEXT\n}\n\nTable \"department\" {\n  \"department_id\" INTEGER [pk, not null]\n  \"department_name\" TEXT\n}\n\nTable \"gender\" {\n  \"gender_id\" INTEGER [pk, not null]\n  \"gender\" TEXT\n}\n\nTable \"genre\" {\n  \"genre_id\" INTEGER [pk, not null]\n  \"genre_name\" TEXT\n}\n\nTable \"keyword\" {\n  \"keyword_id\" INTEGER [pk, not null]\n  \"keyword_name\" TEXT\n}\n\nTable \"language\" {\n  \"language_id\" INTEGER [pk, not null]\n  \"language_code\" TEXT\n  \"language_name\" TEXT\n}\n\nTable \"language_role\" {\n  \"role_id\" INTEGER [pk, not null]\n  \"language_role\" TEXT\n}\n\nTable \"movie\" {\n  \"movie_id\" INTEGER [pk, not null]\n  \"title\" TEXT\n  \"budget\" INTEGER\n  \"homepage\" TEXT\n  \"overview\" TEXT\n  \"popularity\" REAL\n  \"release_date\" DATE\n  \"revenue\" INTEGER\n  \"runtime\" INTEGER\n  \"movie_status\" TEXT\n  \"tagline\" TEXT\n  \"vote_average\" REAL\n  \"vote_count\" INTEGER\n}\n\nTable \"movie_cast\" {\n  \"movie_id\" INTEGER\n  \"person_id\" INTEGER\n  \"character_name\" TEXT\n  \"gender_id\" INTEGER\n  \"cast_order\" INTEGER\n}\n\nTable \"movie_company\" {\n  \"movie_id\" INTEGER\n  \"company_id\" INTEGER\n}\n\nTable \"movie_crew\" {\n  \"movie_id\" INTEGER\n  \"person_id\" INTEGER\n  \"department_id\" INTEGER\n  \"job\" TEXT\n}\n\nTable \"movie_genres\" {\n  \"movie_id\" INTEGER\n  \"genre_id\" INTEGER\n}\n\nTable \"movie_keywords\" {\n  \"movie_id\" INTEGER\n  \"keyword_id\" INTEGER\n}\n\nTable \"movie_languages\" {\n  \"movie_id\" INTEGER\n  \"language_id\" INTEGER\n  \"language_role_id\" INTEGER\n}\n\nTable \"person\" {\n  \"person_id\" INTEGER [pk, not null]\n  \"person_name\" TEXT\n}\n\nTable \"production_company\" {\n  \"company_id\" INTEGER [pk, not null]\n  \"company_name\" TEXT\n}\n\nTable \"production_country\" {\n  \"movie_id\" INTEGER\n  \"country_id\" INTEGER\n}\n\nRef: \"movie_genres\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_genres\".\"genre_id\" > \"genre\".\"genre_id\"\n\nRef: \"movie_languages\".\"language_role_id\" > \"language_role\".\"role_id\"\n\nRef: \"movie_languages\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_languages\".\"language_id\" > \"language\".\"language_id\"\n\nRef: \"movie_crew\".\"person_id\" > \"person\".\"person_id\"\n\nRef: \"movie_crew\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_crew\".\"department_id\" > \"department\".\"department_id\"\n\nRef: \"production_country\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"production_country\".\"country_id\" > \"country\".\"country_id\"\n\nRef: \"movie_cast\".\"person_id\" > \"person\".\"person_id\"\n\nRef: \"movie_cast\".\"movie_id\" > \"movie\".\"movie_id\"\n\nRef: \"movie_cast\".\"gender_id\" > \"gender\".\"gender_id\"\n\n## Table Stats & Sample Values\n\ncountry: 88 rows\n  country_iso_code: 'AE', 'AF', 'AO', ...\n  country_name: 'United Arab Emirates', 'Afghanistan', 'Angola', ...\n  country_id: '128', '129', '130', ...\n\ndepartment: 12 rows\n  department_name: 'Camera', 'Directing', 'Production', ...\n  department_id: '1', '2', '3', ...\n\ngender: 3 rows\n  gender: 'Unspecified', 'Female', 'Male'\n  gender_id: '0', '1', '2'\n\ngenre: 20 rows\n  genre_name: 'Adventure', 'Fantasy', 'Animation', ...\n  genre_id: '12', '14', '16', ...\n\nkeyword: 9794 rows\n  keyword_name: 'individual', 'holiday', 'germany', ...\n  keyword_id: '30', '65', '74', ...\n\nlanguage: 88 rows\n  language_name: 'English', 'svenska', 'Deutsch', ...\n  language_code: 'en', 'sv', 'de', ...\n  language_id: '24574', '24575', '24576', ...\n\nlanguage_role: 2 rows\n  language_role: 'Original', 'Spoken'\n  role_id: '1', '2'\n\nmovie: 4625 rows\n  title: 'Four Rooms', 'Star Wars', 'Finding Nemo', ...\n  movie_status: 'Released', 'Rumored', 'Post Production'\n  homepage: 'http://www.starwars.com/films/star-wars-episode-iv', 'http://movies.disney.com/finding-nemo', 'http://www.dreamworks.com/ab/', ...\n\nmovie_cast: 10000 rows\n  character_name: 'Captain Jack Sparrow', 'Will Turner', 'Elizabeth Swann', ...\n  cast_order: '0', '1', '2', ...\n  movie_id: '285', '559', '767', ...\n\nmovie_company: 10000 rows\n  movie_id: '5', '11', '12', ...\n  company_id: '14', '59', '1', ...\n\nmovie_crew: 10000 rows\n  job: 'Director of Photography', 'Director', 'Producer', ...\n  movie_id: '285', '559', '767', ...\n  person_id: '120', '1704', '770', ...\n\nmovie_genres: 10000 rows\n  genre_id: '35', '80', '12', ...\n  movie_id: '5', '11', '12', ...\n\nmovie_keywords: 10000 rows\n  movie_id: '5', '11', '12', ...\n  keyword_id: '612', '613', '616', ...\n\nmovie_languages: 10000 rows\n  language_role_id: '2', '1'\n  movie_id: '5', '11', '12', ...\n  language_id: '24574', '24575', '24576', ...\n\nperson: 10000 rows\n  person_name: 'George Lucas', 'Mark Hamill', 'Harrison Ford', ...\n  person_id: '1', '2', '3', ...\n\nproduction_company: 5047 rows\n  company_name: 'Lucasfilm', 'Walt Disney Pictures', 'Pixar Animation Studios', ...\n  company_id: '1', '2', '3', ...\n\nproduction_country: 6436 rows\n  country_id: '214', '131', '152', ...\n  movie_id: '5', '11', '12', ...",
+    "stateUrl": "https://bird-bench.github.io/#movies_4",
+    "tableStats": {
+      "country": {
+        "rows": 88,
+        "sample_values": {
+          "country_id": [
+            "128",
+            "129",
+            "130",
+            "131",
+            "132",
+            "133",
+            "134",
+            "135"
+          ],
+          "country_iso_code": [
+            "AE",
+            "AF",
+            "AO",
+            "AR",
+            "AT",
+            "AU",
+            "AW",
+            "BA"
+          ],
+          "country_name": [
+            "United Arab Emirates",
+            "Afghanistan",
+            "Angola",
+            "Argentina",
+            "Austria",
+            "Australia",
+            "Aruba",
+            "Bosnia and Herzegovina"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "department": {
+        "rows": 12,
+        "sample_values": {
+          "department_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "department_name": [
+            "Camera",
+            "Directing",
+            "Production",
+            "Writing",
+            "Editing",
+            "Sound",
+            "Art",
+            "Costume & Make-Up"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "gender": {
+        "rows": 3,
+        "sample_values": {
+          "gender_id": [
+            "0",
+            "1",
+            "2"
+          ],
+          "gender": [
+            "Unspecified",
+            "Female",
+            "Male"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "genre": {
+        "rows": 20,
+        "sample_values": {
+          "genre_id": [
+            "12",
+            "14",
+            "16",
+            "18",
+            "27",
+            "28",
+            "35",
+            "36"
+          ],
+          "genre_name": [
+            "Adventure",
+            "Fantasy",
+            "Animation",
+            "Drama",
+            "Horror",
+            "Action",
+            "Comedy",
+            "History"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "keyword": {
+        "rows": 9794,
+        "sample_values": {
+          "keyword_id": [
+            "30",
+            "65",
+            "74",
+            "75",
+            "83",
+            "90",
+            "100",
+            "107"
+          ],
+          "keyword_name": [
+            "individual",
+            "holiday",
+            "germany",
+            "gunslinger",
+            "saving the world",
+            "paris",
+            "slum",
+            "barcelona spain"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "language": {
+        "rows": 88,
+        "sample_values": {
+          "language_id": [
+            "24574",
+            "24575",
+            "24576",
+            "24577",
+            "24578",
+            "24579",
+            "24580",
+            "24581"
+          ],
+          "language_code": [
+            "en",
+            "sv",
+            "de",
+            "xx",
+            "ja",
+            "fr",
+            "es",
+            "ar"
+          ],
+          "language_name": [
+            "English",
+            "svenska",
+            "Deutsch",
+            "No Language",
+            "u65e5u672cu8a9e",
+            "Franu00e7ais",
+            "Espau00f1ol",
+            "u0627u0644u0639u0631u0628u064au0629"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "language_role": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "1",
+            "2"
+          ],
+          "language_role": [
+            "Original",
+            "Spoken"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie": {
+        "rows": 4625,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "19"
+          ],
+          "title": [
+            "Four Rooms",
+            "Star Wars",
+            "Finding Nemo",
+            "Forrest Gump",
+            "American Beauty",
+            "Dancer in the Dark",
+            "The Fifth Element",
+            "Metropolis"
+          ],
+          "budget": [
+            "4000000",
+            "11000000",
+            "94000000",
+            "55000000",
+            "15000000",
+            "12800000",
+            "90000000",
+            "92620000"
+          ],
+          "homepage": [
+            "http://www.starwars.com/films/star-wars-episode-iv",
+            "http://movies.disney.com/finding-nemo",
+            "http://www.dreamworks.com/ab/",
+            "http://www.clubcultura.com/clubcine/clubcineastas/",
+            "http://disney.go.com/disneyvideos/liveaction/pirat",
+            "http://www.miramax.com/movie/kill-bill-volume-1/",
+            "http://www.apocalypsenow.com",
+            "http://www.simpsonsmovie.com/"
+          ],
+          "overview": [
+            "It's Ted the Bellhop's first night on the job...an",
+            "Princess Leia is captured and held hostage by the ",
+            "Nemo, an adventurous young clownfish, is unexpecte",
+            "A man with a low IQ has accomplished great things ",
+            "Lester Burnham, a depressed suburban father in a m",
+            "Selma, a Czech immigrant on the verge of blindness",
+            "In 2257, a taxi driver is unintentionally given th",
+            "In a futuristic city sharply divided between the w"
+          ],
+          "popularity": [
+            "22.87623",
+            "126.393695",
+            "85.688789",
+            "138.133331",
+            "80.878605",
+            "22.022228",
+            "109.528572",
+            "32.351527"
+          ],
+          "release_date": [
+            "1995-12-09",
+            "1977-05-25",
+            "2003-05-30",
+            "1994-07-06",
+            "1999-09-15",
+            "2000-05-17",
+            "1997-05-07",
+            "1927-01-10"
+          ],
+          "revenue": [
+            "4300000",
+            "775398007",
+            "940335536",
+            "677945399",
+            "356296601",
+            "40031879",
+            "263920180",
+            "650422"
+          ],
+          "runtime": [
+            "98",
+            "121",
+            "100",
+            "142",
+            "122",
+            "140",
+            "126",
+            "153"
+          ],
+          "movie_status": [
+            "Released",
+            "Rumored",
+            "Post Production"
+          ],
+          "tagline": [
+            "Twelve outrageous guests. Four scandalous requests",
+            "A long time ago in a galaxy far, far away...",
+            "There are 3.7 trillion fish in the ocean, they're ",
+            "The world will never be the same, once you've seen",
+            "Look closer.",
+            "You don't need eyes to see.",
+            "There is no future without it.",
+            "There can be no understanding between the hands an"
+          ],
+          "vote_average": [
+            "6.5",
+            "8.1",
+            "7.6",
+            "8.2",
+            "7.9",
+            "7.3",
+            "8.0",
+            "7.2"
+          ],
+          "vote_count": [
+            "530",
+            "6624",
+            "6122",
+            "7927",
+            "3313",
+            "377",
+            "3885",
+            "657"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_cast": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "285",
+            "559",
+            "767",
+            "1452",
+            "58",
+            "2454",
+            "1865",
+            "1930"
+          ],
+          "person_id": [
+            "85",
+            "114",
+            "116",
+            "1640",
+            "1619",
+            "2440",
+            "118",
+            "1709"
+          ],
+          "character_name": [
+            "Captain Jack Sparrow",
+            "Will Turner",
+            "Elizabeth Swann",
+            "William Bootstrap Bill Turner",
+            "Captain Sao Feng",
+            "Captain Davy Jones",
+            "Captain Hector Barbossa",
+            "Admiral James Norrington"
+          ],
+          "gender_id": [
+            "2",
+            "1",
+            "0"
+          ],
+          "cast_order": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_company": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "19"
+          ],
+          "company_id": [
+            "14",
+            "59",
+            "1",
+            "306",
+            "3",
+            "4",
+            "27",
+            "2721"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_crew": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "285",
+            "559",
+            "767",
+            "1452",
+            "58",
+            "2454",
+            "1865",
+            "1930"
+          ],
+          "person_id": [
+            "120",
+            "1704",
+            "770",
+            "1705",
+            "1706",
+            "1721",
+            "1722",
+            "947"
+          ],
+          "department_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "job": [
+            "Director of Photography",
+            "Director",
+            "Producer",
+            "Screenplay",
+            "Editor",
+            "Original Music Composer",
+            "Executive Producer",
+            "Casting"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_genres": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "19"
+          ],
+          "genre_id": [
+            "35",
+            "80",
+            "12",
+            "28",
+            "878",
+            "16",
+            "10751",
+            "18"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_keywords": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "19"
+          ],
+          "keyword_id": [
+            "612",
+            "613",
+            "616",
+            "622",
+            "922",
+            "2700",
+            "12670",
+            "160488"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movie_languages": {
+        "rows": 10000,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "20"
+          ],
+          "language_id": [
+            "24574",
+            "24575",
+            "24576",
+            "24577",
+            "24578",
+            "24579",
+            "24580",
+            "24581"
+          ],
+          "language_role_id": [
+            "2",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "person": {
+        "rows": 10000,
+        "sample_values": {
+          "person_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "person_name": [
+            "George Lucas",
+            "Mark Hamill",
+            "Harrison Ford",
+            "Carrie Fisher",
+            "Peter Cushing",
+            "Anthony Daniels",
+            "Andrew Stanton",
+            "Lee Unkrich"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "production_company": {
+        "rows": 5047,
+        "sample_values": {
+          "company_id": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "company_name": [
+            "Lucasfilm",
+            "Walt Disney Pictures",
+            "Pixar Animation Studios",
+            "Paramount Pictures",
+            "Columbia Pictures",
+            "RKO Radio Pictures",
+            "DreamWorks",
+            "Fine Line Features"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "production_country": {
+        "rows": 6436,
+        "sample_values": {
+          "movie_id": [
+            "5",
+            "11",
+            "12",
+            "13",
+            "14",
+            "16",
+            "18",
+            "19"
+          ],
+          "country_id": [
+            "214",
+            "131",
+            "152",
+            "159",
+            "161",
+            "151",
+            "173",
+            "174"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

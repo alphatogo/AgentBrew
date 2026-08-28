@@ -1,0 +1,264 @@
+{
+  "db_id": "flight_4",
+  "source": "sparc",
+  "tables": 3,
+  "total_rows": 80586,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#flight_4",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"airlines\" {\n  \"alid\" INTEGER [pk]\n  \"name\" TEXT\n  \"iata\" TEXT\n  \"icao\" TEXT\n  \"callsign\" TEXT\n  \"country\" TEXT\n  \"active\" TEXT\n}\n\nTable \"airports\" {\n  \"apid\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"city\" TEXT\n  \"country\" TEXT\n  \"x\" REAL\n  \"y\" REAL\n  \"elevation\" INTEGER\n  \"iata\" TEXT\n  \"icao\" TEXT\n}\n\nTable \"routes\" {\n  \"rid\" INTEGER [pk]\n  \"dst_apid\" INTEGER\n  \"dst_ap\" TEXT\n  \"src_apid\" INTEGER\n  \"src_ap\" TEXT\n  \"alid\" INTEGER\n  \"airline\" TEXT\n  \"codeshare\" TEXT\n}\n\n\n\nRef: \"routes\".\"alid\" > \"airlines\".\"alid\"\n\nRef: \"routes\".\"src_apid\" > \"airports\".\"apid\"\n\nRef: \"routes\".\"dst_apid\" > \"airports\".\"apid\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"airlines\" {\n  \"alid\" INTEGER [pk]\n  \"name\" TEXT\n  \"iata\" TEXT\n  \"icao\" TEXT\n  \"callsign\" TEXT\n  \"country\" TEXT\n  \"active\" TEXT\n}\n\nTable \"airports\" {\n  \"apid\" INTEGER [pk]\n  \"name\" TEXT [not null]\n  \"city\" TEXT\n  \"country\" TEXT\n  \"x\" REAL\n  \"y\" REAL\n  \"elevation\" INTEGER\n  \"iata\" TEXT\n  \"icao\" TEXT\n}\n\nTable \"routes\" {\n  \"rid\" INTEGER [pk]\n  \"dst_apid\" INTEGER\n  \"dst_ap\" TEXT\n  \"src_apid\" INTEGER\n  \"src_ap\" TEXT\n  \"alid\" INTEGER\n  \"airline\" TEXT\n  \"codeshare\" TEXT\n}\n\nRef: \"routes\".\"alid\" > \"airlines\".\"alid\"\n\nRef: \"routes\".\"src_apid\" > \"airports\".\"apid\"\n\nRef: \"routes\".\"dst_apid\" > \"airports\".\"apid\"\n\n## Table Stats & Sample Values\n\nairlines: 6162 rows\n  name: 'Unknown', 'Private flight', '135 Airways', ...\n  country: 'United States', 'South Africa', 'United Kingdom', ...\n  iata: '-', '1T', 'Q5', ...\n\nairports: 7184 rows\n  name: 'Goroka Airport', 'Madang Airport', 'Mount Hagen Kagamuga Airport', ...\n  city: 'Goroka', 'Madang', 'Mount Hagen', ...\n  country: 'Papua New Guinea', 'Greenland', 'Iceland', ...\n\nroutes: 10000 rows\n  dst_ap: 'KZ', 'MRV', 'OVB', ...\n  src_ap: 'AER', 'ASF', 'CEK', ...\n  airline: '2B', '2G', '2I', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#flight_4",
+    "tableStats": {
+      "airlines": {
+        "rows": 6162,
+        "sample_values": {
+          "alid": [
+            "-1",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "name": [
+            "Unknown",
+            "Private flight",
+            "135 Airways",
+            "1Time Airline",
+            "2 Sqn No 1 Elementary Flying Training School",
+            "213 Flight Unit",
+            "223 Flight Unit State Airline",
+            "224th Flight Unit"
+          ],
+          "iata": [
+            "-",
+            "1T",
+            "Q5",
+            "AN",
+            "1B",
+            "W9",
+            "ZI",
+            "AQ"
+          ],
+          "icao": [
+            "N/A",
+            "GNL",
+            "RNX",
+            "WYT",
+            "TFU",
+            "CHD",
+            "TTF",
+            "TWF"
+          ],
+          "callsign": [
+            "GENERAL",
+            "NEXTIME",
+            "CHKALOVSK-AVIA",
+            "CARGO UNIT",
+            "CLOUD RUNNER",
+            "SECUREX",
+            "MILE-AIR",
+            "QUARTET"
+          ],
+          "country": [
+            "United States",
+            "South Africa",
+            "United Kingdom",
+            "Russia",
+            "Thailand",
+            "Canada",
+            "Australia",
+            "Singapore"
+          ],
+          "active": [
+            "Y",
+            "N"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "airports": {
+        "rows": 7184,
+        "sample_values": {
+          "apid": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Goroka Airport",
+            "Madang Airport",
+            "Mount Hagen Kagamuga Airport",
+            "Nadzab Airport",
+            "Port Moresby Jacksons International Airport",
+            "Wewak International Airport",
+            "Narsarsuaq Airport",
+            "Godthaab / Nuuk Airport"
+          ],
+          "city": [
+            "Goroka",
+            "Madang",
+            "Mount Hagen",
+            "Nadzab",
+            "Port Moresby",
+            "Wewak",
+            "Narssarssuaq",
+            "Godthaab"
+          ],
+          "country": [
+            "Papua New Guinea",
+            "Greenland",
+            "Iceland",
+            "Canada",
+            "Algeria",
+            "Benin",
+            "Burkina Faso",
+            "Ghana"
+          ],
+          "x": [
+            "145.391998291",
+            "145.789001465",
+            "144.29600524902344",
+            "146.725977",
+            "147.22000122070312",
+            "143.669006348",
+            "-45.4259986877",
+            "-51.6781005859"
+          ],
+          "y": [
+            "-6.081689834590001",
+            "-5.20707988739",
+            "-5.826789855957031",
+            "-6.569803",
+            "-9.443380355834961",
+            "-3.58383011818",
+            "61.1604995728",
+            "64.19090271"
+          ],
+          "elevation": [
+            "5282",
+            "20",
+            "5388",
+            "239",
+            "146",
+            "19",
+            "112",
+            "283"
+          ],
+          "iata": [
+            "GKA",
+            "MAG",
+            "HGU",
+            "LAE",
+            "POM",
+            "WWK",
+            "UAK",
+            "GOH"
+          ],
+          "icao": [
+            "AYGA",
+            "AYMD",
+            "AYMH",
+            "AYNZ",
+            "AYPY",
+            "AYWK",
+            "BGBW",
+            "BGGH"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "routes": {
+        "rows": 10000,
+        "sample_values": {
+          "rid": [
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "45"
+          ],
+          "dst_apid": [
+            "2990",
+            "2962",
+            "4078",
+            "6969",
+            "6160",
+            "2952",
+            "6156",
+            "2965"
+          ],
+          "dst_ap": [
+            "KZ",
+            "MRV",
+            "OVB",
+            "BC",
+            "A",
+            "KGD",
+            "EGO",
+            "AER"
+          ],
+          "src_apid": [
+            "2965",
+            "2966",
+            "2968",
+            "4029",
+            "6156",
+            "2922",
+            "2952",
+            "2990"
+          ],
+          "src_ap": [
+            "AER",
+            "ASF",
+            "CEK",
+            "DME",
+            "EGO",
+            "GYD",
+            "KGD",
+            "KZ"
+          ],
+          "alid": [
+            "410",
+            "1654",
+            "8359",
+            "470",
+            "1338",
+            "2750",
+            "3652",
+            "146"
+          ],
+          "airline": [
+            "2B",
+            "2G",
+            "2I",
+            "2J",
+            "2K",
+            "2",
+            "2O",
+            "2P"
+          ],
+          "codeshare": [
+            "Y"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

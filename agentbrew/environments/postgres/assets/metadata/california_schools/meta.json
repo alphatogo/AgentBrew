@@ -1,0 +1,847 @@
+{
+  "db_id": "california_schools",
+  "source": "bird_dev",
+  "tables": 3,
+  "total_rows": 29941,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#california_schools",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"frpm\" {\n  \"CDSCode\" TEXT [pk, not null]\n  \"Academic Year\" TEXT\n  \"County Code\" TEXT\n  \"District Code\" INTEGER\n  \"School Code\" TEXT\n  \"County Name\" TEXT\n  \"District Name\" TEXT\n  \"School Name\" TEXT\n  \"District Type\" TEXT\n  \"School Type\" TEXT\n  \"Educational Option Type\" TEXT\n  \"NSLP Provision Status\" TEXT\n  \"Charter School (Y/N)\" INTEGER\n  \"Charter School Number\" TEXT\n  \"Charter Funding Type\" TEXT\n  \"IRC\" INTEGER\n  \"Low Grade\" TEXT\n  \"High Grade\" TEXT\n  \"Enrollment (K-12)\" REAL\n  \"Free Meal Count (K-12)\" REAL\n  \"Percent (%) Eligible Free (K-12)\" REAL\n  \"FRPM Count (K-12)\" REAL\n  \"Percent (%) Eligible FRPM (K-12)\" REAL\n  \"Enrollment (Ages 5-17)\" REAL\n  \"Free Meal Count (Ages 5-17)\" REAL\n  \"Percent (%) Eligible Free (Ages 5-17)\" REAL\n  \"FRPM Count (Ages 5-17)\" REAL\n  \"Percent (%) Eligible FRPM (Ages 5-17)\" REAL\n  \"2013-14 CALPADS Fall 1 Certification Status\" INTEGER\n}\n\nTable \"satscores\" {\n  \"cds\" TEXT [pk, not null]\n  \"rtype\" TEXT [not null]\n  \"sname\" TEXT\n  \"dname\" TEXT\n  \"cname\" TEXT\n  \"enroll12\" INTEGER [not null]\n  \"NumTstTakr\" INTEGER [not null]\n  \"AvgScrRead\" INTEGER\n  \"AvgScrMath\" INTEGER\n  \"AvgScrWrite\" INTEGER\n  \"NumGE1500\" INTEGER\n}\n\nTable \"schools\" {\n  \"CDSCode\" TEXT [pk, not null]\n  \"NCESDist\" TEXT\n  \"NCESSchool\" TEXT\n  \"StatusType\" TEXT [not null]\n  \"County\" TEXT [not null]\n  \"District\" TEXT [not null]\n  \"School\" TEXT\n  \"Street\" TEXT\n  \"StreetAbr\" TEXT\n  \"City\" TEXT\n  \"Zip\" TEXT\n  \"State\" TEXT\n  \"MailStreet\" TEXT\n  \"MailStrAbr\" TEXT\n  \"MailCity\" TEXT\n  \"MailZip\" TEXT\n  \"MailState\" TEXT\n  \"Phone\" TEXT\n  \"Ext\" TEXT\n  \"Website\" TEXT\n  \"OpenDate\" DATE\n  \"ClosedDate\" DATE\n  \"Charter\" INTEGER\n  \"CharterNum\" TEXT\n  \"FundingType\" TEXT\n  \"DOC\" TEXT [not null]\n  \"DOCType\" TEXT [not null]\n  \"SOC\" TEXT\n  \"SOCType\" TEXT\n  \"EdOpsCode\" TEXT\n  \"EdOpsName\" TEXT\n  \"EILCode\" TEXT\n  \"EILName\" TEXT\n  \"GSoffered\" TEXT\n  \"GSserved\" TEXT\n  \"Virtual\" TEXT\n  \"Magnet\" INTEGER\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n  \"AdmFName1\" TEXT\n  \"AdmLName1\" TEXT\n  \"AdmEmail1\" TEXT\n  \"AdmFName2\" TEXT\n  \"AdmLName2\" TEXT\n  \"AdmEmail2\" TEXT\n  \"AdmFName3\" TEXT\n  \"AdmLName3\" TEXT\n  \"AdmEmail3\" TEXT\n  \"LastUpdate\" DATE [not null]\n}\n\n\n\nRef: \"frpm\".\"CDSCode\" > \"schools\".\"CDSCode\"\n\nRef: \"satscores\".\"cds\" > \"schools\".\"CDSCode\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"frpm\" {\n  \"CDSCode\" TEXT [pk, not null]\n  \"Academic Year\" TEXT\n  \"County Code\" TEXT\n  \"District Code\" INTEGER\n  \"School Code\" TEXT\n  \"County Name\" TEXT\n  \"District Name\" TEXT\n  \"School Name\" TEXT\n  \"District Type\" TEXT\n  \"School Type\" TEXT\n  \"Educational Option Type\" TEXT\n  \"NSLP Provision Status\" TEXT\n  \"Charter School (Y/N)\" INTEGER\n  \"Charter School Number\" TEXT\n  \"Charter Funding Type\" TEXT\n  \"IRC\" INTEGER\n  \"Low Grade\" TEXT\n  \"High Grade\" TEXT\n  \"Enrollment (K-12)\" REAL\n  \"Free Meal Count (K-12)\" REAL\n  \"Percent (%) Eligible Free (K-12)\" REAL\n  \"FRPM Count (K-12)\" REAL\n  \"Percent (%) Eligible FRPM (K-12)\" REAL\n  \"Enrollment (Ages 5-17)\" REAL\n  \"Free Meal Count (Ages 5-17)\" REAL\n  \"Percent (%) Eligible Free (Ages 5-17)\" REAL\n  \"FRPM Count (Ages 5-17)\" REAL\n  \"Percent (%) Eligible FRPM (Ages 5-17)\" REAL\n  \"2013-14 CALPADS Fall 1 Certification Status\" INTEGER\n}\n\nTable \"satscores\" {\n  \"cds\" TEXT [pk, not null]\n  \"rtype\" TEXT [not null]\n  \"sname\" TEXT\n  \"dname\" TEXT\n  \"cname\" TEXT\n  \"enroll12\" INTEGER [not null]\n  \"NumTstTakr\" INTEGER [not null]\n  \"AvgScrRead\" INTEGER\n  \"AvgScrMath\" INTEGER\n  \"AvgScrWrite\" INTEGER\n  \"NumGE1500\" INTEGER\n}\n\nTable \"schools\" {\n  \"CDSCode\" TEXT [pk, not null]\n  \"NCESDist\" TEXT\n  \"NCESSchool\" TEXT\n  \"StatusType\" TEXT [not null]\n  \"County\" TEXT [not null]\n  \"District\" TEXT [not null]\n  \"School\" TEXT\n  \"Street\" TEXT\n  \"StreetAbr\" TEXT\n  \"City\" TEXT\n  \"Zip\" TEXT\n  \"State\" TEXT\n  \"MailStreet\" TEXT\n  \"MailStrAbr\" TEXT\n  \"MailCity\" TEXT\n  \"MailZip\" TEXT\n  \"MailState\" TEXT\n  \"Phone\" TEXT\n  \"Ext\" TEXT\n  \"Website\" TEXT\n  \"OpenDate\" DATE\n  \"ClosedDate\" DATE\n  \"Charter\" INTEGER\n  \"CharterNum\" TEXT\n  \"FundingType\" TEXT\n  \"DOC\" TEXT [not null]\n  \"DOCType\" TEXT [not null]\n  \"SOC\" TEXT\n  \"SOCType\" TEXT\n  \"EdOpsCode\" TEXT\n  \"EdOpsName\" TEXT\n  \"EILCode\" TEXT\n  \"EILName\" TEXT\n  \"GSoffered\" TEXT\n  \"GSserved\" TEXT\n  \"Virtual\" TEXT\n  \"Magnet\" INTEGER\n  \"Latitude\" REAL\n  \"Longitude\" REAL\n  \"AdmFName1\" TEXT\n  \"AdmLName1\" TEXT\n  \"AdmEmail1\" TEXT\n  \"AdmFName2\" TEXT\n  \"AdmLName2\" TEXT\n  \"AdmEmail2\" TEXT\n  \"AdmFName3\" TEXT\n  \"AdmLName3\" TEXT\n  \"AdmEmail3\" TEXT\n  \"LastUpdate\" DATE [not null]\n}\n\nRef: \"frpm\".\"CDSCode\" > \"schools\".\"CDSCode\"\n\nRef: \"satscores\".\"cds\" > \"schools\".\"CDSCode\"\n\n## Table Stats & Sample Values\n\nfrpm: 9986 rows\n  County Name: 'Alameda', 'Alpine', 'Amador', ...\n  District Type: 'County Office of Education (COE)', 'State Special Schools', 'Unified School District', ...\n  School Type: 'K-12 Schools (Public)', 'High Schools (Public)', 'Elementary Schools (Public)', ...\n\nsatscores: 2269 rows\n  rtype: 'D', 'S'\n  dname: 'Alameda County Office of Education', 'Alameda Unified', 'Albany City Unified', ...\n  cname: 'Alameda', 'Amador', 'Butte', ...\n\nschools: 10000 rows\n  StatusType: 'Active', 'Closed', 'Merged', ...\n  City: 'Hayward', 'Newark', 'Oakland', ...\n  MailCity: 'Hayward', 'Newark', 'Oakland', ...",
+    "stateUrl": "https://bird-bench.github.io/#california_schools",
+    "tableStats": {
+      "frpm": {
+        "rows": 9986,
+        "sample_values": {
+          "CDSCode": [
+            "01100170109835",
+            "01100170112607",
+            "01100170118489",
+            "01100170123968",
+            "01100170124172",
+            "01100170125567",
+            "01100170130401",
+            "01100170130419"
+          ],
+          "Academic Year": [
+            "2014-2015"
+          ],
+          "County Code": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08"
+          ],
+          "District Code": [
+            "10017",
+            "31609",
+            "31617",
+            "61119",
+            "61127",
+            "61143",
+            "61150",
+            "61168"
+          ],
+          "School Code": [
+            "0109835",
+            "0112607",
+            "0118489",
+            "0123968",
+            "0124172",
+            "0125567",
+            "0130401",
+            "0130419"
+          ],
+          "County Name": [
+            "Alameda",
+            "Alpine",
+            "Amador",
+            "Butte",
+            "Calaveras",
+            "Colusa",
+            "Contra Costa",
+            "Del Norte"
+          ],
+          "District Name": [
+            "Alameda County Office of Education",
+            "California School for the Blind (State Special Sch",
+            "California School for the Deaf-Fremont (State Spec",
+            "Alameda Unified",
+            "Albany City Unified",
+            "Berkeley Unified",
+            "Castro Valley Unified",
+            "Emery Unified"
+          ],
+          "School Name": [
+            "FAME Public Charter",
+            "Envision Academy for Arts & Technology",
+            "Aspire California College Preparatory Academy",
+            "Community School for Creative Education",
+            "Yu Ming Charter",
+            "Urban Montessori Charter",
+            "Alameda County Juvenile Hall/Court",
+            "Alameda County Community"
+          ],
+          "District Type": [
+            "County Office of Education (COE)",
+            "State Special Schools",
+            "Unified School District",
+            "Elementary School District",
+            "High School District",
+            "State Board of Education",
+            "Non-School Locations",
+            "Statewide Benefit Charter"
+          ],
+          "School Type": [
+            "K-12 Schools (Public)",
+            "High Schools (Public)",
+            "Elementary Schools (Public)",
+            "Juvenile Court Schools",
+            "County Community",
+            "State Special Schools",
+            "Alternative Schools of Choice",
+            "Intermediate/Middle Schools (Public)"
+          ],
+          "Educational Option Type": [
+            "Traditional",
+            "Juvenile Court School",
+            "County Community School",
+            "State Special School",
+            "Alternative School of Choice",
+            "Continuation School",
+            "Special Education School",
+            "Community Day School"
+          ],
+          "NSLP Provision Status": [
+            "Breakfast Provision 2",
+            "Provision 2",
+            "CEP",
+            "Lunch Provision 2",
+            "Provision 1",
+            "Multiple Provision Types",
+            "Provision 3"
+          ],
+          "Charter School (Y/N)": [
+            "1",
+            "0"
+          ],
+          "Charter School Number": [
+            "0728",
+            "0811",
+            "1049",
+            "1284",
+            "1296",
+            "1383",
+            "0740",
+            "1464"
+          ],
+          "Charter Funding Type": [
+            "Directly funded",
+            "Locally funded",
+            "Not in CS funding model"
+          ],
+          "IRC": [
+            "1",
+            "0"
+          ],
+          "Low Grade": [
+            "K",
+            "9",
+            "1",
+            "P",
+            "6",
+            "10",
+            "7",
+            "3"
+          ],
+          "High Grade": [
+            "12",
+            "8",
+            "5",
+            "Adult",
+            "6",
+            "3",
+            "P",
+            "7"
+          ],
+          "Enrollment (K-12)": [
+            "1087.0",
+            "395.0",
+            "244.0",
+            "191.0",
+            "257.0",
+            "279.0",
+            "181.0",
+            "277.0"
+          ],
+          "Free Meal Count (K-12)": [
+            "565.0",
+            "186.0",
+            "134.0",
+            "113.0",
+            "14.0",
+            "81.0",
+            "71.0",
+            "190.0"
+          ],
+          "Percent (%) Eligible Free (K-12)": [
+            "0.519779208831647",
+            "0.470886075949367",
+            "0.549180327868853",
+            "0.591623036649215",
+            "0.0544747081712062",
+            "0.290322580645161",
+            "0.392265193370166",
+            "0.685920577617328"
+          ],
+          "FRPM Count (K-12)": [
+            "715.0",
+            "186.0",
+            "175.0",
+            "139.0",
+            "21.0",
+            "101.0",
+            "73.0",
+            "223.0"
+          ],
+          "Percent (%) Eligible FRPM (K-12)": [
+            "0.657773689052438",
+            "0.470886075949367",
+            "0.717213114754098",
+            "0.727748691099476",
+            "0.0817120622568093",
+            "0.362007168458781",
+            "0.403314917127072",
+            "0.805054151624549"
+          ],
+          "Enrollment (Ages 5-17)": [
+            "1070.0",
+            "376.0",
+            "230.0",
+            "190.0",
+            "257.0",
+            "273.0",
+            "160.0",
+            "221.0"
+          ],
+          "Free Meal Count (Ages 5-17)": [
+            "553.0",
+            "182.0",
+            "128.0",
+            "113.0",
+            "14.0",
+            "78.0",
+            "66.0",
+            "145.0"
+          ],
+          "Percent (%) Eligible Free (Ages 5-17)": [
+            "0.516822429906542",
+            "0.484042553191489",
+            "0.556521739130435",
+            "0.594736842105263",
+            "0.0544747081712062",
+            "0.285714285714286",
+            "0.4125",
+            "0.656108597285068"
+          ],
+          "FRPM Count (Ages 5-17)": [
+            "702.0",
+            "182.0",
+            "168.0",
+            "139.0",
+            "21.0",
+            "98.0",
+            "68.0",
+            "172.0"
+          ],
+          "Percent (%) Eligible FRPM (Ages 5-17)": [
+            "0.65607476635514",
+            "0.484042553191489",
+            "0.730434782608696",
+            "0.731578947368421",
+            "0.0817120622568093",
+            "0.358974358974359",
+            "0.425",
+            "0.778280542986425"
+          ],
+          "2013-14 CALPADS Fall 1 Certification Status": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "satscores": {
+        "rows": 2269,
+        "sample_values": {
+          "cds": [
+            "1100170000000",
+            "1100170109835",
+            "1100170112607",
+            "1100170118489",
+            "1611190000000",
+            "1611190106401",
+            "1611190119222",
+            "1611190130229"
+          ],
+          "rtype": [
+            "D",
+            "S"
+          ],
+          "sname": [
+            "FAME Public Charter",
+            "Envision Academy for Arts & Technology",
+            "Aspire California College Preparatory Academy",
+            "Alameda Science and Technology Institute",
+            "Nea Community Learning Center",
+            "Alameda High",
+            "Alameda Community Learning Center",
+            "Alternatives in Action"
+          ],
+          "dname": [
+            "Alameda County Office of Education",
+            "Alameda Unified",
+            "Albany City Unified",
+            "Berkeley Unified",
+            "Castro Valley Unified",
+            "Emery Unified",
+            "Fremont Unified",
+            "Hayward Unified"
+          ],
+          "cname": [
+            "Alameda",
+            "Amador",
+            "Butte",
+            "Calaveras",
+            "Colusa",
+            "Contra Costa",
+            "Del Norte",
+            "El Dorado"
+          ],
+          "enroll12": [
+            "398",
+            "62",
+            "75",
+            "61",
+            "922",
+            "36",
+            "12",
+            "465"
+          ],
+          "NumTstTakr": [
+            "88",
+            "17",
+            "71",
+            "0",
+            "544",
+            "36",
+            "6",
+            "325"
+          ],
+          "AvgScrRead": [
+            "418",
+            "503",
+            "397",
+            "521",
+            "562",
+            "543",
+            "575",
+            "352"
+          ],
+          "AvgScrMath": [
+            "418",
+            "546",
+            "387",
+            "590",
+            "573",
+            "593",
+            "350",
+            "504"
+          ],
+          "AvgScrWrite": [
+            "417",
+            "505",
+            "395",
+            "519",
+            "555",
+            "543",
+            "581",
+            "343"
+          ],
+          "NumGE1500": [
+            "14",
+            "9",
+            "5",
+            "333",
+            "29",
+            "229",
+            "16",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "schools": {
+        "rows": 10000,
+        "sample_values": {
+          "CDSCode": [
+            "01100170000000",
+            "01100170109835",
+            "01100170112607",
+            "01100170118489",
+            "01100170123968",
+            "01100170124172",
+            "01100170125567",
+            "01100170130302"
+          ],
+          "NCESDist": [
+            "0691051",
+            "0600002",
+            "0600003",
+            "0601397",
+            "0601770",
+            "0601860",
+            "0604740",
+            "0607800"
+          ],
+          "NCESSchool": [
+            "10546",
+            "10947",
+            "12283",
+            "12844",
+            "12901",
+            "13008",
+            "09264",
+            "06830"
+          ],
+          "StatusType": [
+            "Active",
+            "Closed",
+            "Merged",
+            "Pending"
+          ],
+          "County": [
+            "Alameda",
+            "Alpine",
+            "Amador",
+            "Butte",
+            "Calaveras",
+            "Colusa",
+            "Contra Costa",
+            "Del Norte"
+          ],
+          "District": [
+            "Alameda County Office of Education",
+            "California School for the Blind (State Special Sch",
+            "California School for the Deaf-Fremont (State Spec",
+            "California Community College, Chancellors",
+            "Mission Valley ROC/P",
+            "Alameda Unified",
+            "Albany City Unified",
+            "Amador Valley Joint Union High"
+          ],
+          "School": [
+            "FAME Public Charter",
+            "Envision Academy for Arts & Technology",
+            "Aspire California College Preparatory Academy",
+            "Community School for Creative Education",
+            "Yu Ming Charter",
+            "Urban Montessori Charter",
+            "Technical, Agricultural & Nat.",
+            "Alameda County Juvenile Hall/Court"
+          ],
+          "Street": [
+            "313 West Winton Avenue",
+            "39899 Balentine Drive, Suite 335",
+            "1515 Webster Street",
+            "2125 Jefferson Avenue",
+            "2111 International Boulevard",
+            "1086 Alcatraz Avenue",
+            "5328 Brann Street",
+            "597 C Street"
+          ],
+          "StreetAbr": [
+            "313 West Winton Ave.",
+            "39899 Balentine Dr., Ste. 335",
+            "1515 Webster St.",
+            "2125 Jefferson Ave.",
+            "2111 International Blvd.",
+            "1086 Alcatraz Ave.",
+            "5328 Brann St.",
+            "597 C St."
+          ],
+          "City": [
+            "Hayward",
+            "Newark",
+            "Oakland",
+            "Berkeley",
+            "San Leandro",
+            "Dublin",
+            "Fremont",
+            "Sacramento"
+          ],
+          "Zip": [
+            "94544-1136",
+            "94560-5359",
+            "94612-3355",
+            "94703-1414",
+            "94606-4903",
+            "94608-1265",
+            "94619-3312",
+            "94541"
+          ],
+          "State": [
+            "CA"
+          ],
+          "MailStreet": [
+            "313 West Winton Avenue",
+            "39899 Balentine Drive, Suite 335",
+            "1515 Webster Street",
+            "1001 22nd Avenue, Suite 100",
+            "2111 International Boulevard",
+            "1086 Alcatraz Avenue",
+            "5328 Brann Street",
+            "597 C Street"
+          ],
+          "MailStrAbr": [
+            "313 West Winton Ave.",
+            "39899 Balentine Dr., Ste. 335",
+            "1515 Webster St.",
+            "1001 22nd Ave., Ste. 100",
+            "2111 International Blvd.",
+            "1086 Alcatraz Ave.",
+            "5328 Brann St.",
+            "597 C St."
+          ],
+          "MailCity": [
+            "Hayward",
+            "Newark",
+            "Oakland",
+            "San Leandro",
+            "Dublin",
+            "Fremont",
+            "Berkeley",
+            "Sacramento"
+          ],
+          "MailZip": [
+            "94544-1136",
+            "94560-5359",
+            "94612",
+            "94606",
+            "94606-4903",
+            "94608-1265",
+            "94619-3312",
+            "94541"
+          ],
+          "MailState": [
+            "CA"
+          ],
+          "Phone": [
+            "(510) 887-0152",
+            "(510) 596-8901",
+            "(510) 686-4131",
+            "(510) 452-2063",
+            "(510) 842-1181",
+            "(510) 667-7435",
+            "(510) 670-4590",
+            "(510) 969-5302"
+          ],
+          "Ext": [
+            "130",
+            "1240",
+            "1200",
+            "1311",
+            "39117",
+            "2050",
+            "470",
+            "8002"
+          ],
+          "Website": [
+            "www.acoe.org",
+            "www.envisionacademy.org/",
+            "www.aspirepublicschools.org",
+            "www.communityschoolforcreativeeducation.org",
+            "www.yumingschool.org",
+            "www.urbanmontessori.org",
+            "www.unitymiddle.org",
+            "www.efcps.org"
+          ],
+          "OpenDate": [
+            "2005-08-29",
+            "2006-08-28",
+            "2008-08-21",
+            "2011-08-22",
+            "2011-08-09",
+            "2012-08-27",
+            "1980-07-01",
+            "2015-08-23"
+          ],
+          "ClosedDate": [
+            "2015-07-31",
+            "2015-06-30",
+            "1989-06-30",
+            "2013-06-30",
+            "1987-06-22",
+            "1984-07-24",
+            "2000-06-30",
+            "2004-07-01"
+          ],
+          "Charter": [
+            "1",
+            "0"
+          ],
+          "CharterNum": [
+            "0728",
+            "0811",
+            "1049",
+            "1284",
+            "1296",
+            "1383",
+            "1707",
+            "0740"
+          ],
+          "FundingType": [
+            "Directly funded",
+            "Locally funded",
+            "Not in CS funding model"
+          ],
+          "DOC": [
+            "00",
+            "31",
+            "34",
+            "42",
+            "54",
+            "56",
+            "52",
+            "58"
+          ],
+          "DOCType": [
+            "County Office of Education (COE)",
+            "State Special Schools",
+            "Non-School Locations",
+            "Joint Powers Authority (JPA)",
+            "Unified School District",
+            "High School District",
+            "Elementary School District",
+            "Community College District"
+          ],
+          "SOC": [
+            "65",
+            "66",
+            "60",
+            "10",
+            "14",
+            "13",
+            "62",
+            "70"
+          ],
+          "SOCType": [
+            "K-12 Schools (Public)",
+            "High Schools (Public)",
+            "Elementary Schools (Public)",
+            "County Community",
+            "Juvenile Court Schools",
+            "Opportunity Schools",
+            "Intermediate/Middle Schools (Public)",
+            "Adult Education Centers"
+          ],
+          "EdOpsCode": [
+            "TRAD",
+            "JUV",
+            "COMM",
+            "OPP",
+            "SPEC",
+            "SSS",
+            "ALTSOC",
+            "CON"
+          ],
+          "EdOpsName": [
+            "Traditional",
+            "Juvenile Court School",
+            "County Community School",
+            "Opportunity School",
+            "Special Education School",
+            "State Special School",
+            "Alternative School of Choice",
+            "Continuation School"
+          ],
+          "EILCode": [
+            "ELEMHIGH",
+            "HS",
+            "ELEM",
+            "UG",
+            "INTMIDJR",
+            "PS",
+            "A"
+          ],
+          "EILName": [
+            "Elementary-High Combination",
+            "High School",
+            "Elementary",
+            "Ungraded",
+            "Intermediate/Middle/Junior High",
+            "Preschool",
+            "Adult"
+          ],
+          "GSoffered": [
+            "K-12",
+            "9-12",
+            "K-8",
+            "7-12",
+            "6-8",
+            "P-5",
+            "5-12",
+            "P"
+          ],
+          "GSserved": [
+            "K-12",
+            "9-12",
+            "K-7",
+            "K-5",
+            "8-12",
+            "7-12",
+            "6-7",
+            "K-8"
+          ],
+          "Virtual": [
+            "P",
+            "N",
+            "F"
+          ],
+          "Magnet": [
+            "0",
+            "1"
+          ],
+          "Latitude": [
+            "37.658212",
+            "37.521436",
+            "37.80452",
+            "37.868991",
+            "37.784648",
+            "37.847375",
+            "37.778352",
+            "37.712878"
+          ],
+          "Longitude": [
+            "-122.09713",
+            "-121.99391",
+            "-122.26815",
+            "-122.27844",
+            "-122.23863",
+            "-122.28356",
+            "-122.1895",
+            "-122.11173"
+          ],
+          "AdmFName1": [
+            "L Karen",
+            "Laura",
+            "Clifford",
+            "Sue",
+            "David",
+            "Michael",
+            "Carolyn",
+            "Damon"
+          ],
+          "AdmLName1": [
+            "Monroe",
+            "Robell",
+            "Thompson",
+            "Park",
+            "Castillo",
+            "Hermosillo",
+            "Hobbs",
+            "Grant"
+          ],
+          "AdmEmail1": [
+            "lkmonroe@acoe.org",
+            "laura@envisionacademy.org",
+            "cliffordt@communityschoolforcreativeeducation.org",
+            "spark@yumingschool.org",
+            "davidc@urbanmontessori.org",
+            "mhermosillo@acoe.org",
+            "chobbs@acoe.org",
+            "dgrant@unitymiddle.org"
+          ],
+          "AdmFName2": [
+            "Sau-Lim (Lance)",
+            "Jennifer",
+            "Annalisa",
+            "Woo",
+            "David",
+            "Sam",
+            "Brandon",
+            "Jarod"
+          ],
+          "AdmLName2": [
+            "Tsang",
+            "Koelling",
+            "Moore",
+            "Williams",
+            "Hoopes",
+            "Pasarow",
+            "Paige",
+            "Scott"
+          ],
+          "AdmEmail2": [
+            "stsang@unityhigh.org",
+            "jkoelling@efcps.net",
+            "annalisa.moore@neaclc.org",
+            "wwilliams@aoaschools.org",
+            "david.hoopes@alamedaclc.org",
+            "sampasarow@berkeley.net",
+            "brandon.paige@lighthousecharter.org",
+            "jarod.scott@ousd.org"
+          ],
+          "AdmFName3": [
+            "Drew",
+            "Irma",
+            "Vickie",
+            "Barbara",
+            "Kelly",
+            "Patsy",
+            "Dustin",
+            "Joy"
+          ],
+          "AdmLName3": [
+            "Sarratore",
+            "Munoz",
+            "Chang",
+            "Mandelbaum",
+            "Kriss",
+            "Oxford",
+            "Kerns",
+            "DeBoer"
+          ],
+          "AdmEmail3": [
+            "dsarratore@vincentacademy.org",
+            "gmunoz@piedmont.k12.ca.us",
+            "vickiechang@acoe.org",
+            "bmandelbaum@bcoe.org",
+            "kkriss@pusdk12.org",
+            "poxford@puesd.org",
+            "dustin.kerns@imagineschools.com",
+            "jdeboer@learn4life.org"
+          ],
+          "LastUpdate": [
+            "2015-06-23",
+            "2015-09-01",
+            "2015-06-18",
+            "2015-07-01",
+            "2016-07-18",
+            "2016-05-10",
+            "2015-10-09",
+            "1999-06-24"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

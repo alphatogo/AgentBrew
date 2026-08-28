@@ -1,0 +1,18 @@
+{
+  "title": "Vendor Contract Retirement Sync",
+  "capability": [
+    "query_and_filter_database",
+    "create_database",
+    "define_schema",
+    "migrate_rows",
+    "archive_or_delete_items",
+    "create_child_page",
+    "cross_database_sync",
+    "populate_rows",
+    "field_mapping",
+    "batch_update_pages",
+    "insert_standard_block",
+    "reference_existing_object"
+  ],
+  "question": "Please restructure the \"Vendor Contracts\" database as described below. Your automation will be checked by an automated script, so follow every detail exactly.\n--- Task Steps 1. Inside the \"Procurement Operations Hub\" page, locate the database named \"Vendor Contracts\".\n2. Query this database and collect every page whose \"Lifecycle Status\" property is \"Expired\" or \"Pending Termination\".\n3. Create a new full-page database directly under the same Procurement Operations Hub page called \"Contract Retirement Queue\".\n4. Configure this new database so that it contains exactly the following properties (spellings and types must match):\n   - Contract ID - title\n   - Service Tags - multi_select\n   - Lifecycle Status - select\n   - Vendor Owner - select\n   - Termination Date - date\n   - Retirement Reason - select with option set { Contract Ended,\n     Duplicate Service, Security Review, Department Offboarding }\n   - Review Cost - number\n   - Review Category - select\n   - Migration Comment - rich text\n\n5. For every vendor contract gathered in step 2:\n   a. Create a corresponding page in Contract Retirement Queue and copy over\n   the values of the Contract ID, Service Tags, Lifecycle Status, Vendor\n   Owner, and Termination Date properties.\n   b. Set Retirement Reason to one of the four options above (choose the\n      most appropriate).\n   c. Set Review Cost uniformly to 250.\n   d. Set Review Category uniformly to Contract Cleanup.\n   e. For Migration Comment, use the Notes value from the corresponding\n   Vendor Contracts page.\n   f. Leave other properties empty.\n   g. Archive the original vendor contract page after the new page has been\n   created.\n\n6. After all items are migrated:\n   a. Update the description of the Contract Retirement Queue database so it\n   is exactly AUTO-GENERATED CONTRACT MIGRATION COMPLETED (no additional\n   text).\n   b. Create a new page under Procurement Operations Hub titled Contract\n   Retirement Migration Log. Inside this page, add a callout block whose\n   text follows the exact pattern:\n\n   Successfully migrated <N> contracts to the retirement queue on\n   2025-04-18.\n\n   <N> is the total number of items moved.\n\n7. Create a new entry in the \"Procurement Requests\" database with:\n   - Title (property \"Task name\") exactly \"Batch Contract Retirement Review\"\n   - Priority set to High\n   - Status set to In progress\n   - In the page body add a bulleted list where each bullet is a mention of\n     one vendor contract page processed in step 5 (i.e., use the Notion\n     mention object linking to that page).\n"
+}

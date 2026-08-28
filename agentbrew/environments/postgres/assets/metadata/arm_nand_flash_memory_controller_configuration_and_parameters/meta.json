@@ -1,0 +1,756 @@
+{
+  "db_id": "arm_nand_flash_memory_controller_configuration_and_parameters",
+  "source": "synsql",
+  "tables": 18,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/arm_nand_flash_memory_controller_configuration_and_parameters",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"audit_trails\" {\n  \"trail_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"event_type\" TEXT\n  \"event_description\" TEXT\n  \"event_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"bus_modes\" {\n  \"mode_id\" INTEGER [pk]\n  \"mode_name\" TEXT\n  \"description\" TEXT\n  \"default_timing_mode\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"capabilities\" {\n  \"capability_id\" INTEGER [pk]\n  \"capability_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"change_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"request_text\" TEXT\n  \"requested_by\" TEXT\n  \"date_requested\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"controller_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"mode_id\" INTEGER\n  \"capability_id\" INTEGER\n  \"sdr_timing_mode\" INTEGER\n  \"ddr_timing_mode\" INTEGER\n  \"ddr2_timing_mode\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"documents\" {\n  \"doc_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"title\" TEXT\n  \"file_path\" TEXT\n  \"upload_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"issue_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"issue_id\" INTEGER\n  \"comment_text\" TEXT\n  \"commented_by\" TEXT\n  \"date_commented\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"issue_resolutions\" {\n  \"resolution_id\" INTEGER [pk]\n  \"issue_id\" INTEGER\n  \"resolution_text\" TEXT\n  \"resolved_by\" TEXT\n  \"date_resolved\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"issues\" {\n  \"issue_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"description\" TEXT\n  \"reported_by\" TEXT\n  \"date_reported\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"notification_text\" TEXT\n  \"notification_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"performance_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"metric_name\" TEXT\n  \"value\" REAL\n  \"unit\" TEXT\n  \"date_recorded\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"simulation_results\" {\n  \"result_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"simulation_name\" TEXT\n  \"outcome\" TEXT\n  \"date_simulated\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"system_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"requirement_text\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"test_results\" {\n  \"test_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"test_name\" TEXT\n  \"outcome\" TEXT\n  \"date_tested\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"timing_modes\" {\n  \"timing_mode_id\" INTEGER [pk]\n  \"mode_id\" INTEGER\n  \"bit_range\" TEXT\n  \"description\" TEXT\n  \"frequency\" REAL\n  \"voltage\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"public\".\"version_history\" {\n  \"version_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"date_created\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"public\".\"access_logs\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"audit_trails\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"change_requests\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"controller_configurations\".\"mode_id\" > \"public\".\"bus_modes\".\"mode_id\"\nRef: \"public\".\"controller_configurations\".\"capability_id\" > \"public\".\"capabilities\".\"capability_id\"\nRef: \"public\".\"documents\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"issue_comments\".\"issue_id\" > \"public\".\"issues\".\"issue_id\"\nRef: \"public\".\"issue_resolutions\".\"issue_id\" > \"public\".\"issues\".\"issue_id\"\nRef: \"public\".\"issues\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"notifications\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"performance_metrics\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"simulation_results\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"system_requirements\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"test_results\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\"\nRef: \"public\".\"timing_modes\".\"mode_id\" > \"public\".\"bus_modes\".\"mode_id\"\nRef: \"public\".\"version_history\".\"config_id\" > \"public\".\"controller_configurations\".\"config_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"audit_trails\" {\n  \"trail_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"event_type\" TEXT\n  \"event_description\" TEXT\n  \"event_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"bus_modes\" {\n  \"mode_id\" INTEGER [pk]\n  \"mode_name\" TEXT\n  \"description\" TEXT\n  \"default_timing_mode\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"capabilities\" {\n  \"capability_id\" INTEGER [pk]\n  \"capability_name\" TEXT\n  \"description\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"change_requests\" {\n  \"request_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"request_text\" TEXT\n  \"requested_by\" TEXT\n  \"date_requested\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"controller_configurations\" {\n  \"config_id\" INTEGER [pk]\n  \"mode_id\" INTEGER\n  \"capability_id\" INTEGER\n  \"sdr_timing_mode\" INTEGER\n  \"ddr_timing_mode\" INTEGER\n  \"ddr2_timing_mode\" INTEGER\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"documents\" {\n  \"doc_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"title\" TEXT\n  \"file_path\" TEXT\n  \"upload_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"issue_comments\" {\n  \"comment_id\" INTEGER [pk]\n  \"issue_id\" INTEGER\n  \"comment_text\" TEXT\n  \"commented_by\" TEXT\n  \"date_commented\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"issue_resolutions\" {\n  \"resolution_id\" INTEGER [pk]\n  \"issue_id\" INTEGER\n  \"resolution_text\" TEXT\n  \"resolved_by\" TEXT\n  \"date_resolved\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"issues\" {\n  \"issue_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"description\" TEXT\n  \"reported_by\" TEXT\n  \"date_reported\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"notifications\" {\n  \"notification_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"notification_text\" TEXT\n  \"notification_date\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"performance_metrics\" {\n  \"metric_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"metric_name\" TEXT\n  \"value\" REAL\n  \"unit\" TEXT\n  \"date_recorded\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"simulation_results\" {\n  \"result_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"simulation_name\" TEXT\n  \"outcome\" TEXT\n  \"date_simulated\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"system_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"requirement_text\" TEXT\n  \"status\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"test_results\" {\n  \"test_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"test_name\" TEXT\n  \"outcome\" TEXT\n  \"date_tested\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"timing_modes\" {\n  \"timing_mode_id\" INTEGER [pk]\n  \"mode_id\" INTEGER\n  \"bit_range\" TEXT\n  \"description\" TEXT\n  \"frequency\" REAL\n  \"voltage\" REAL\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nTable \"version_history\" {\n  \"version_id\" INTEGER [pk]\n  \"config_id\" INTEGER\n  \"version_number\" INTEGER\n  \"description\" TEXT\n  \"date_created\" TEXT\n  \"created_by\" TEXT\n  \"created_date\" TEXT\n  \"updated_by\" TEXT\n  \"updated_date\" TEXT\n}\n\nRef: \"access_logs\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"audit_trails\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"change_requests\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"controller_configurations\".\"mode_id\" > \"bus_modes\".\"mode_id\"\n\nRef: \"controller_configurations\".\"capability_id\" > \"capabilities\".\"capability_id\"\n\nRef: \"documents\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"issue_comments\".\"issue_id\" > \"issues\".\"issue_id\"\n\nRef: \"issue_resolutions\".\"issue_id\" > \"issues\".\"issue_id\"\n\nRef: \"issues\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"notifications\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"performance_metrics\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"simulation_results\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"system_requirements\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"test_results\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\nRef: \"timing_modes\".\"mode_id\" > \"bus_modes\".\"mode_id\"\n\nRef: \"version_history\".\"config_id\" > \"controller_configurations\".\"config_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'modify'\n  access_date: '2023-05-01', '2023-05-02'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\naudit_trails: 2 rows\n  event_type: 'update', 'delete'\n  event_description: 'Updated timing mode settings', 'Deleted configuration'\n  event_date: '2023-05-01', '2023-05-02'\n\nbus_modes: 2 rows\n  mode_name: 'ARM_NAND_BUS_TIMING_MODE_0', 'ARM_NAND_BUS_TIMING_MODE_1'\n  description: 'Default bus timing mode', 'Bus timing mode 1'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\ncapabilities: 2 rows\n  capability_name: 'SDR', 'NV-DDR'\n  description: 'Single Data Rate capability', 'Narrow Voltage Double Data Rate capability'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\nchange_requests: 2 rows\n  status: 'approved', 'denied'\n  request_text: 'Increase read speed', 'Reduce power consumption'\n  requested_by: 'Alice Johnson', 'Bob Williams'\n\ncontroller_configurations: 2 rows\n  created_by: 'Alice Johnson', 'Bob Williams'\n  created_date: '2023-05-01', '2023-05-02'\n  updated_by: 'Alice Johnson', 'Bob Williams'\n\ndocuments: 2 rows\n  title: 'Configuration Guide', 'Simulation Guide'\n  file_path: 'docs/config_guide.pdf', 'docs/simulation_guide.pdf'\n  upload_date: '2023-05-01', '2023-05-02'\n\nissue_comments: 2 rows\n  comment_text: 'Investigating the issue', 'Will be fixed in the next version'\n  commented_by: 'Alice Johnson', 'Bob Williams'\n  date_commented: '2023-05-01', '2023-05-02'\n\nissue_resolutions: 2 rows\n  resolution_text: 'Updated timing mode settings', 'Optimized controller settings'\n  resolved_by: 'Alice Johnson', 'Bob Williams'\n  date_resolved: '2023-05-01', '2023-05-02'\n\nissues: 2 rows\n  description: 'Read performance issue', 'Write performance issue'\n  status: 'open'\n  reported_by: 'Alice Johnson', 'Bob Williams'\n\nnotifications: 2 rows\n  notification_text: 'Configuration updated', 'Configuration deleted'\n  notification_date: '2023-05-01', '2023-05-02'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\nperformance_metrics: 2 rows\n  metric_name: 'Read Speed', 'Write Speed'\n  date_recorded: '2023-05-01', '2023-05-02'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\nsimulation_results: 2 rows\n  simulation_name: 'Read Simulation', 'Write Simulation'\n  date_simulated: '2023-05-01', '2023-05-02'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\nsystem_requirements: 2 rows\n  status: 'met', 'unmet'\n  requirement_text: 'Minimum read speed of 100 MB/s', 'Maximum power consumption of 2W'\n  created_by: 'Alice Johnson', 'Bob Williams'\n\ntest_results: 2 rows\n  test_name: 'Read Test', 'Write Test'\n  outcome: 'Pass', 'Fail'\n  date_tested: '2023-05-01', '2023-05-02'\n\ntiming_modes: 2 rows\n  description: 'Timing mode 0, default', 'Timing mode 1'\n  created_by: 'Alice Johnson', 'Bob Williams'\n  created_date: '2023-05-01', '2023-05-02'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'engineer', 'administrator'\n  password: 'password123', 'password456'\n\nversion_history: 2 rows\n  description: 'Initial version', 'Updated timing modes'\n  date_created: '2023-05-01', '2023-05-02'\n  created_by: 'Alice Johnson', 'Bob Williams'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "modify"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "audit_trails": {
+        "rows": 2,
+        "sample_values": {
+          "trail_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "1",
+            "0"
+          ],
+          "event_type": [
+            "update",
+            "delete"
+          ],
+          "event_description": [
+            "Updated timing mode settings",
+            "Deleted configuration"
+          ],
+          "event_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "bus_modes": {
+        "rows": 2,
+        "sample_values": {
+          "mode_id": [
+            "0",
+            "1"
+          ],
+          "mode_name": [
+            "ARM_NAND_BUS_TIMING_MODE_0",
+            "ARM_NAND_BUS_TIMING_MODE_1"
+          ],
+          "description": [
+            "Default bus timing mode",
+            "Bus timing mode 1"
+          ],
+          "default_timing_mode": [
+            "1",
+            "2"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "capabilities": {
+        "rows": 2,
+        "sample_values": {
+          "capability_id": [
+            "0",
+            "1"
+          ],
+          "capability_name": [
+            "SDR",
+            "NV-DDR"
+          ],
+          "description": [
+            "Single Data Rate capability",
+            "Narrow Voltage Double Data Rate capability"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "change_requests": {
+        "rows": 2,
+        "sample_values": {
+          "request_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0"
+          ],
+          "request_text": [
+            "Increase read speed",
+            "Reduce power consumption"
+          ],
+          "requested_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "date_requested": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "approved",
+            "denied"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "controller_configurations": {
+        "rows": 2,
+        "sample_values": {
+          "config_id": [
+            "0",
+            "1"
+          ],
+          "mode_id": [
+            "1"
+          ],
+          "capability_id": [
+            "1"
+          ],
+          "sdr_timing_mode": [
+            "0",
+            "1"
+          ],
+          "ddr_timing_mode": [
+            "0",
+            "1"
+          ],
+          "ddr2_timing_mode": [
+            "0",
+            "1"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "documents": {
+        "rows": 2,
+        "sample_values": {
+          "doc_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0"
+          ],
+          "title": [
+            "Configuration Guide",
+            "Simulation Guide"
+          ],
+          "file_path": [
+            "docs/config_guide.pdf",
+            "docs/simulation_guide.pdf"
+          ],
+          "upload_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "issue_comments": {
+        "rows": 2,
+        "sample_values": {
+          "comment_id": [
+            "0",
+            "1"
+          ],
+          "issue_id": [
+            "0"
+          ],
+          "comment_text": [
+            "Investigating the issue",
+            "Will be fixed in the next version"
+          ],
+          "commented_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "date_commented": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "issue_resolutions": {
+        "rows": 2,
+        "sample_values": {
+          "resolution_id": [
+            "0",
+            "1"
+          ],
+          "issue_id": [
+            "0"
+          ],
+          "resolution_text": [
+            "Updated timing mode settings",
+            "Optimized controller settings"
+          ],
+          "resolved_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "date_resolved": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "issues": {
+        "rows": 2,
+        "sample_values": {
+          "issue_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "1"
+          ],
+          "description": [
+            "Read performance issue",
+            "Write performance issue"
+          ],
+          "reported_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "date_reported": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "status": [
+            "open"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "notifications": {
+        "rows": 2,
+        "sample_values": {
+          "notification_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0",
+            "1"
+          ],
+          "notification_text": [
+            "Configuration updated",
+            "Configuration deleted"
+          ],
+          "notification_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "performance_metrics": {
+        "rows": 2,
+        "sample_values": {
+          "metric_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0",
+            "1"
+          ],
+          "metric_name": [
+            "Read Speed",
+            "Write Speed"
+          ],
+          "value": [
+            "100.0",
+            "150.0"
+          ],
+          "unit": [
+            "MB/s"
+          ],
+          "date_recorded": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "simulation_results": {
+        "rows": 2,
+        "sample_values": {
+          "result_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0"
+          ],
+          "simulation_name": [
+            "Read Simulation",
+            "Write Simulation"
+          ],
+          "outcome": [
+            "Success"
+          ],
+          "date_simulated": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "system_requirements": {
+        "rows": 2,
+        "sample_values": {
+          "requirement_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "1"
+          ],
+          "requirement_text": [
+            "Minimum read speed of 100 MB/s",
+            "Maximum power consumption of 2W"
+          ],
+          "status": [
+            "met",
+            "unmet"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "test_results": {
+        "rows": 2,
+        "sample_values": {
+          "test_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "0"
+          ],
+          "test_name": [
+            "Read Test",
+            "Write Test"
+          ],
+          "outcome": [
+            "Pass",
+            "Fail"
+          ],
+          "date_tested": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "timing_modes": {
+        "rows": 2,
+        "sample_values": {
+          "timing_mode_id": [
+            "0",
+            "1"
+          ],
+          "mode_id": [
+            "1"
+          ],
+          "bit_range": [
+            "0..3"
+          ],
+          "description": [
+            "Timing mode 0, default",
+            "Timing mode 1"
+          ],
+          "frequency": [
+            "500.0",
+            "750.0"
+          ],
+          "voltage": [
+            "1.2",
+            "1.1"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "engineer",
+            "administrator"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "version_history": {
+        "rows": 2,
+        "sample_values": {
+          "version_id": [
+            "0",
+            "1"
+          ],
+          "config_id": [
+            "1"
+          ],
+          "version_number": [
+            "1",
+            "2"
+          ],
+          "description": [
+            "Initial version",
+            "Updated timing modes"
+          ],
+          "date_created": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "created_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "created_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "updated_by": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "updated_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

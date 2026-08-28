@@ -1,0 +1,582 @@
+{
+  "db_id": "educational_outcomes_and_career_analytics",
+  "source": "synsql",
+  "tables": 16,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/educational_outcomes_and_career_analytics",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"cohort_data\" {\n  \"cohort_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"cohort_size\" INTEGER\n  \"gender_distribution\" TEXT\n  \"age_distribution\" TEXT\n  \"ethnicity_distribution\" TEXT\n  \"international_students_count\" INTEGER\n}\n\nTable \"public\".\"course_enrollments\" {\n  \"course_enrollment_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"course_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"grade\" TEXT\n  \"attendance_percentage\" TEXT\n  \"final_exam_score\" TEXT\n}\n\nTable \"public\".\"credentials\" {\n  \"credential_id\" INTEGER [pk]\n  \"credential_name\" TEXT\n  \"description\" TEXT\n  \"duration_years\" INTEGER\n  \"accreditation_status\" TEXT\n}\n\nTable \"public\".\"employment_outcomes\" {\n  \"outcome_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"median_income\" TEXT\n  \"employment_status\" TEXT\n  \"job_title\" TEXT\n  \"employer\" TEXT\n  \"job_location_city\" TEXT\n  \"job_location_state\" TEXT\n  \"job_location_country\" TEXT\n  \"is_full_time\" INTEGER\n  \"is_part_time\" INTEGER\n  \"is_self_employed\" INTEGER\n  \"job_description\" TEXT\n  \"job_industry\" TEXT\n  \"job_satisfaction\" INTEGER\n}\n\nTable \"public\".\"fields_of_study_2digit\" {\n  \"field_id_2digit\" INTEGER [pk]\n  \"field_name_2digit\" TEXT\n  \"description\" TEXT\n  \"parent_field_id_2digit\" INTEGER\n}\n\nTable \"public\".\"fields_of_study_4digit\" {\n  \"field_id_4digit\" INTEGER [pk]\n  \"field_id_2digit\" INTEGER\n  \"field_name_4digit\" TEXT\n  \"description\" TEXT\n  \"parent_field_id_4digit\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"public\".\"graduates\" {\n  \"graduate_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"graduation_year\" INTEGER\n  \"name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"gender\" TEXT\n  \"age_at_graduation\" INTEGER\n  \"ethnicity\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"country\" TEXT\n  \"is_international\" INTEGER\n}\n\nTable \"public\".\"income_data\" {\n  \"income_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"median_income\" TEXT\n  \"income_distribution\" TEXT\n  \"income_growth_rate\" TEXT\n}\n\nTable \"public\".\"program_courses\" {\n  \"course_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"course_name\" TEXT\n  \"course_code\" TEXT\n  \"description\" TEXT\n  \"credit_hours\" INTEGER\n  \"prerequisites\" TEXT\n  \"instructor_name\" TEXT\n  \"instructor_email\" TEXT\n}\n\nTable \"public\".\"program_enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"program_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"status\" TEXT\n  \"enrollment_type\" TEXT\n  \"tuition_fee_paid\" TEXT\n  \"financial_aid_received\" TEXT\n}\n\nTable \"public\".\"program_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"requirement_name\" TEXT\n  \"description\" TEXT\n  \"credit_hours\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"public\".\"program_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"program_id\" INTEGER\n  \"review_date\" TEXT\n  \"review_text\" TEXT\n  \"rating\" INTEGER\n  \"recommendation\" INTEGER\n  \"improvement_suggestions\" TEXT\n}\n\nTable \"public\".\"programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"program_description\" TEXT\n  \"duration_years\" INTEGER\n  \"tuition_fee\" TEXT\n  \"admission_requirements\" TEXT\n  \"program_start_date\" TEXT\n  \"program_end_date\" TEXT\n}\n\nTable \"public\".\"user_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"public\".\"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"created_date\" TEXT\n  \"is_active\" INTEGER\n  \"last_login_date\" TEXT\n}\n\nRef: \"public\".\"cohort_data\".\"credential_id\" > \"public\".\"credentials\".\"credential_id\"\nRef: \"public\".\"cohort_data\".\"field_id_4digit\" > \"public\".\"fields_of_study_4digit\".\"field_id_4digit\"\nRef: \"public\".\"course_enrollments\".\"graduate_id\" > \"public\".\"graduates\".\"graduate_id\"\nRef: \"public\".\"course_enrollments\".\"course_id\" > \"public\".\"program_courses\".\"course_id\"\nRef: \"public\".\"employment_outcomes\".\"graduate_id\" > \"public\".\"graduates\".\"graduate_id\"\nRef: \"public\".\"fields_of_study_4digit\".\"field_id_2digit\" > \"public\".\"fields_of_study_2digit\".\"field_id_2digit\"\nRef: \"public\".\"fields_of_study_4digit\".\"parent_field_id_4digit\" > \"public\".\"fields_of_study_4digit\".\"field_id_4digit\"\nRef: \"public\".\"graduates\".\"credential_id\" > \"public\".\"credentials\".\"credential_id\"\nRef: \"public\".\"graduates\".\"field_id_4digit\" > \"public\".\"fields_of_study_4digit\".\"field_id_4digit\"\nRef: \"public\".\"income_data\".\"credential_id\" > \"public\".\"credentials\".\"credential_id\"\nRef: \"public\".\"income_data\".\"field_id_4digit\" > \"public\".\"fields_of_study_4digit\".\"field_id_4digit\"\nRef: \"public\".\"program_courses\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"program_enrollments\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"program_enrollments\".\"graduate_id\" > \"public\".\"graduates\".\"graduate_id\"\nRef: \"public\".\"program_requirements\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"program_reviews\".\"graduate_id\" > \"public\".\"graduates\".\"graduate_id\"\nRef: \"public\".\"program_reviews\".\"program_id\" > \"public\".\"programs\".\"program_id\"\nRef: \"public\".\"programs\".\"field_id_4digit\" > \"public\".\"fields_of_study_4digit\".\"field_id_4digit\"\nRef: \"public\".\"programs\".\"credential_id\" > \"public\".\"credentials\".\"credential_id\"\nRef: \"public\".\"user_access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"users\".\"role_id\" > \"public\".\"user_roles\".\"role_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"cohort_data\" {\n  \"cohort_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"cohort_size\" INTEGER\n  \"gender_distribution\" TEXT\n  \"age_distribution\" TEXT\n  \"ethnicity_distribution\" TEXT\n  \"international_students_count\" INTEGER\n}\n\nTable \"course_enrollments\" {\n  \"course_enrollment_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"course_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"grade\" TEXT\n  \"attendance_percentage\" TEXT\n  \"final_exam_score\" TEXT\n}\n\nTable \"credentials\" {\n  \"credential_id\" INTEGER [pk]\n  \"credential_name\" TEXT\n  \"description\" TEXT\n  \"duration_years\" INTEGER\n  \"accreditation_status\" TEXT\n}\n\nTable \"employment_outcomes\" {\n  \"outcome_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"median_income\" TEXT\n  \"employment_status\" TEXT\n  \"job_title\" TEXT\n  \"employer\" TEXT\n  \"job_location_city\" TEXT\n  \"job_location_state\" TEXT\n  \"job_location_country\" TEXT\n  \"is_full_time\" INTEGER\n  \"is_part_time\" INTEGER\n  \"is_self_employed\" INTEGER\n  \"job_description\" TEXT\n  \"job_industry\" TEXT\n  \"job_satisfaction\" INTEGER\n}\n\nTable \"fields_of_study_2digit\" {\n  \"field_id_2digit\" INTEGER [pk]\n  \"field_name_2digit\" TEXT\n  \"description\" TEXT\n  \"parent_field_id_2digit\" INTEGER\n}\n\nTable \"fields_of_study_4digit\" {\n  \"field_id_4digit\" INTEGER [pk]\n  \"field_id_2digit\" INTEGER\n  \"field_name_4digit\" TEXT\n  \"description\" TEXT\n  \"parent_field_id_4digit\" INTEGER\n  \"is_active\" INTEGER\n}\n\nTable \"graduates\" {\n  \"graduate_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"graduation_year\" INTEGER\n  \"name\" TEXT\n  \"email\" TEXT\n  \"phone\" TEXT\n  \"gender\" TEXT\n  \"age_at_graduation\" INTEGER\n  \"ethnicity\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip_code\" TEXT\n  \"country\" TEXT\n  \"is_international\" INTEGER\n}\n\nTable \"income_data\" {\n  \"income_id\" INTEGER [pk]\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"years_after_graduation\" INTEGER\n  \"median_income\" TEXT\n  \"income_distribution\" TEXT\n  \"income_growth_rate\" TEXT\n}\n\nTable \"program_courses\" {\n  \"course_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"course_name\" TEXT\n  \"course_code\" TEXT\n  \"description\" TEXT\n  \"credit_hours\" INTEGER\n  \"prerequisites\" TEXT\n  \"instructor_name\" TEXT\n  \"instructor_email\" TEXT\n}\n\nTable \"program_enrollments\" {\n  \"enrollment_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"program_id\" INTEGER\n  \"enrollment_date\" TEXT\n  \"status\" TEXT\n  \"enrollment_type\" TEXT\n  \"tuition_fee_paid\" TEXT\n  \"financial_aid_received\" TEXT\n}\n\nTable \"program_requirements\" {\n  \"requirement_id\" INTEGER [pk]\n  \"program_id\" INTEGER\n  \"requirement_name\" TEXT\n  \"description\" TEXT\n  \"credit_hours\" INTEGER\n  \"prerequisites\" TEXT\n}\n\nTable \"program_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"graduate_id\" INTEGER\n  \"program_id\" INTEGER\n  \"review_date\" TEXT\n  \"review_text\" TEXT\n  \"rating\" INTEGER\n  \"recommendation\" INTEGER\n  \"improvement_suggestions\" TEXT\n}\n\nTable \"programs\" {\n  \"program_id\" INTEGER [pk]\n  \"program_name\" TEXT\n  \"credential_id\" INTEGER\n  \"field_id_4digit\" INTEGER\n  \"program_description\" TEXT\n  \"duration_years\" INTEGER\n  \"tuition_fee\" TEXT\n  \"admission_requirements\" TEXT\n  \"program_start_date\" TEXT\n  \"program_end_date\" TEXT\n}\n\nTable \"user_access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"ip_address\" TEXT\n  \"device_type\" TEXT\n}\n\nTable \"user_roles\" {\n  \"role_id\" INTEGER [pk]\n  \"role_name\" TEXT\n  \"description\" TEXT\n  \"permissions\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role_id\" INTEGER\n  \"created_date\" TEXT\n  \"is_active\" INTEGER\n  \"last_login_date\" TEXT\n}\n\nRef: \"cohort_data\".\"credential_id\" > \"credentials\".\"credential_id\"\n\nRef: \"cohort_data\".\"field_id_4digit\" > \"fields_of_study_4digit\".\"field_id_4digit\"\n\nRef: \"course_enrollments\".\"graduate_id\" > \"graduates\".\"graduate_id\"\n\nRef: \"course_enrollments\".\"course_id\" > \"program_courses\".\"course_id\"\n\nRef: \"employment_outcomes\".\"graduate_id\" > \"graduates\".\"graduate_id\"\n\nRef: \"fields_of_study_4digit\".\"field_id_2digit\" > \"fields_of_study_2digit\".\"field_id_2digit\"\n\nRef: \"fields_of_study_4digit\".\"parent_field_id_4digit\" > \"fields_of_study_4digit\".\"field_id_4digit\"\n\nRef: \"graduates\".\"credential_id\" > \"credentials\".\"credential_id\"\n\nRef: \"graduates\".\"field_id_4digit\" > \"fields_of_study_4digit\".\"field_id_4digit\"\n\nRef: \"income_data\".\"credential_id\" > \"credentials\".\"credential_id\"\n\nRef: \"income_data\".\"field_id_4digit\" > \"fields_of_study_4digit\".\"field_id_4digit\"\n\nRef: \"program_courses\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"program_enrollments\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"program_enrollments\".\"graduate_id\" > \"graduates\".\"graduate_id\"\n\nRef: \"program_requirements\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"program_reviews\".\"graduate_id\" > \"graduates\".\"graduate_id\"\n\nRef: \"program_reviews\".\"program_id\" > \"programs\".\"program_id\"\n\nRef: \"programs\".\"field_id_4digit\" > \"fields_of_study_4digit\".\"field_id_4digit\"\n\nRef: \"programs\".\"credential_id\" > \"credentials\".\"credential_id\"\n\nRef: \"user_access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"users\".\"role_id\" > \"user_roles\".\"role_id\"\n\n## Table Stats & Sample Values\n\ncohort_data: 2 rows\n  ethnicity_distribution: 'Caucasian: 60%, Asian: 20%, Other: 20%', 'Caucasian: 70%, Asian: 15%, Other: 15%'\n  gender_distribution: '50% male, 50% female', '45% male, 55% female'\n  age_distribution: '20-25: 30%, 26-30: 70%', '20-25: 40%, 26-30: 60%'\n\ncourse_enrollments: 2 rows\n  grade: 'A', 'B'\n  attendance_percentage: '95%', '88%'\n  final_exam_score: '92', '85'\n\ncredentials: 2 rows\n  credential_name: 'Certificate', 'Associate'\n  description: 'Short-term program leading to a certificate', 'Two-year degree program'\n  accreditation_status: 'Accredited'\n\nemployment_outcomes: 2 rows\n  job_title: 'Agricultural Manager', 'Agricultural Mechanic'\n  job_location_city: 'Anytown', 'Othertown'\n  job_location_state: 'CA', 'NY'\n\nfields_of_study_2digit: 2 rows\n  field_name_2digit: '01', '02'\n  description: 'Agriculture, agriculture operations and related sc', 'Agricultural sciences and natural resources'\n  field_id_2digit: '0', '1'\n\nfields_of_study_4digit: 2 rows\n  field_name_4digit: '01.00', '01.01'\n  description: 'Agriculture, general', 'Agricultural business and management'\n  is_active: '1'\n\ngraduates: 2 rows\n  name: 'John Doe', 'Jane Smith'\n  ethnicity: 'Caucasian', 'Asian'\n  city: 'Anytown', 'Othertown'\n\nincome_data: 2 rows\n  median_income: '$34,000', '$39,700'\n  income_distribution: '25-30k: 30%, 30-40k: 70%', '30-40k: 50%, 40-50k: 50%'\n  income_growth_rate: '2%', '3%'\n\nprogram_courses: 2 rows\n  instructor_name: 'Dr. John Doe', 'Dr. Jane Smith'\n  course_name: 'Agricultural Business and Finance', 'Agricultural Machinery and Equipment'\n  description: 'Course on business and finance in agriculture', 'Course on agricultural machinery and equipment'\n\nprogram_enrollments: 2 rows\n  status: 'completed'\n  enrollment_type: 'regular'\n  tuition_fee_paid: '$10,000', '$12,000'\n\nprogram_requirements: 2 rows\n  requirement_name: 'Agricultural Economics', 'Farm Management'\n  description: 'Course in agricultural economics', 'Course in farm management'\n  prerequisites: 'None', 'Agricultural Economics'\n\nprogram_reviews: 2 rows\n  improvement_suggestions: 'Add more real-world projects', 'Increase the number of labs'\n  review_text: 'Great program, very practical.', 'Could use more hands-on experience.'\n  review_date: '2023-05-01', '2023-05-02'\n\nprograms: 2 rows\n  program_name: 'Agricultural Business Management', 'Agricultural Mechanization'\n  program_description: 'Program focusing on business and management in the', 'Program focusing on the technical aspects of agric'\n  tuition_fee: '$10,000', '$12,000'\n\nuser_access_logs: 2 rows\n  access_type: 'login', 'view report'\n  device_type: 'desktop', 'mobile'\n  ip_address: '192.168.1.1', '192.168.1.2'\n\nuser_roles: 2 rows\n  role_name: 'admin', 'researcher'\n  description: 'System administrator with full access', 'User with access to analytics and reporting tools'\n  permissions: 'read, write, delete', 'read, write'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  email: 'alice.johnson@example.com', 'bob.williams@example.com'\n  created_date: '2023-01-01', '2023-01-02'",
+    "stateUrl": null,
+    "tableStats": {
+      "cohort_data": {
+        "rows": 2,
+        "sample_values": {
+          "cohort_id": [
+            "0",
+            "1"
+          ],
+          "credential_id": [
+            "0",
+            "1"
+          ],
+          "field_id_4digit": [
+            "1"
+          ],
+          "years_after_graduation": [
+            "1"
+          ],
+          "cohort_size": [
+            "40",
+            "90"
+          ],
+          "gender_distribution": [
+            "50% male, 50% female",
+            "45% male, 55% female"
+          ],
+          "age_distribution": [
+            "20-25: 30%, 26-30: 70%",
+            "20-25: 40%, 26-30: 60%"
+          ],
+          "ethnicity_distribution": [
+            "Caucasian: 60%, Asian: 20%, Other: 20%",
+            "Caucasian: 70%, Asian: 15%, Other: 15%"
+          ],
+          "international_students_count": [
+            "5",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "course_enrollments": {
+        "rows": 2,
+        "sample_values": {
+          "course_enrollment_id": [
+            "0",
+            "1"
+          ],
+          "graduate_id": [
+            "0",
+            "1"
+          ],
+          "course_id": [
+            "0"
+          ],
+          "enrollment_date": [
+            "2022-01-01"
+          ],
+          "grade": [
+            "A",
+            "B"
+          ],
+          "attendance_percentage": [
+            "95%",
+            "88%"
+          ],
+          "final_exam_score": [
+            "92",
+            "85"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "credentials": {
+        "rows": 2,
+        "sample_values": {
+          "credential_id": [
+            "0",
+            "1"
+          ],
+          "credential_name": [
+            "Certificate",
+            "Associate"
+          ],
+          "description": [
+            "Short-term program leading to a certificate",
+            "Two-year degree program"
+          ],
+          "duration_years": [
+            "1",
+            "2"
+          ],
+          "accreditation_status": [
+            "Accredited"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employment_outcomes": {
+        "rows": 2,
+        "sample_values": {
+          "outcome_id": [
+            "0",
+            "1"
+          ],
+          "graduate_id": [
+            "0"
+          ],
+          "years_after_graduation": [
+            "1"
+          ],
+          "median_income": [
+            "$34,000",
+            "$39,700"
+          ],
+          "employment_status": [
+            "employed"
+          ],
+          "job_title": [
+            "Agricultural Manager",
+            "Agricultural Mechanic"
+          ],
+          "employer": [
+            "ABC Farm",
+            "XYZ Equipment"
+          ],
+          "job_location_city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "job_location_state": [
+            "CA",
+            "NY"
+          ],
+          "job_location_country": [
+            "USA"
+          ],
+          "is_full_time": [
+            "1"
+          ],
+          "is_part_time": [
+            "0"
+          ],
+          "is_self_employed": [
+            "0"
+          ],
+          "job_description": [
+            "Manage agricultural operations",
+            "Maintain and repair agricultural machinery"
+          ],
+          "job_industry": [
+            "Agriculture"
+          ],
+          "job_satisfaction": [
+            "4",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fields_of_study_2digit": {
+        "rows": 2,
+        "sample_values": {
+          "field_id_2digit": [
+            "0",
+            "1"
+          ],
+          "field_name_2digit": [
+            "01",
+            "02"
+          ],
+          "description": [
+            "Agriculture, agriculture operations and related sc",
+            "Agricultural sciences and natural resources"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "fields_of_study_4digit": {
+        "rows": 2,
+        "sample_values": {
+          "field_id_4digit": [
+            "0",
+            "1"
+          ],
+          "field_id_2digit": [
+            "0",
+            "1"
+          ],
+          "field_name_4digit": [
+            "01.00",
+            "01.01"
+          ],
+          "description": [
+            "Agriculture, general",
+            "Agricultural business and management"
+          ],
+          "parent_field_id_4digit": [
+            "1",
+            "0"
+          ],
+          "is_active": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "graduates": {
+        "rows": 2,
+        "sample_values": {
+          "graduate_id": [
+            "0",
+            "1"
+          ],
+          "credential_id": [
+            "1",
+            "0"
+          ],
+          "field_id_4digit": [
+            "0",
+            "1"
+          ],
+          "graduation_year": [
+            "2022"
+          ],
+          "name": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "phone": [
+            "123-456-7890",
+            "123-456-7891"
+          ],
+          "gender": [
+            "Male",
+            "Female"
+          ],
+          "age_at_graduation": [
+            "22",
+            "23"
+          ],
+          "ethnicity": [
+            "Caucasian",
+            "Asian"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "state": [
+            "CA",
+            "NY"
+          ],
+          "zip_code": [
+            "12345",
+            "67890"
+          ],
+          "country": [
+            "USA"
+          ],
+          "is_international": [
+            "0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "income_data": {
+        "rows": 2,
+        "sample_values": {
+          "income_id": [
+            "0",
+            "1"
+          ],
+          "credential_id": [
+            "0"
+          ],
+          "field_id_4digit": [
+            "0"
+          ],
+          "years_after_graduation": [
+            "1"
+          ],
+          "median_income": [
+            "$34,000",
+            "$39,700"
+          ],
+          "income_distribution": [
+            "25-30k: 30%, 30-40k: 70%",
+            "30-40k: 50%, 40-50k: 50%"
+          ],
+          "income_growth_rate": [
+            "2%",
+            "3%"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "program_courses": {
+        "rows": 2,
+        "sample_values": {
+          "course_id": [
+            "0",
+            "1"
+          ],
+          "program_id": [
+            "0"
+          ],
+          "course_name": [
+            "Agricultural Business and Finance",
+            "Agricultural Machinery and Equipment"
+          ],
+          "course_code": [
+            "AGBU201",
+            "AGME201"
+          ],
+          "description": [
+            "Course on business and finance in agriculture",
+            "Course on agricultural machinery and equipment"
+          ],
+          "credit_hours": [
+            "3"
+          ],
+          "prerequisites": [
+            "None"
+          ],
+          "instructor_name": [
+            "Dr. John Doe",
+            "Dr. Jane Smith"
+          ],
+          "instructor_email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "program_enrollments": {
+        "rows": 2,
+        "sample_values": {
+          "enrollment_id": [
+            "0",
+            "1"
+          ],
+          "graduate_id": [
+            "0"
+          ],
+          "program_id": [
+            "1",
+            "0"
+          ],
+          "enrollment_date": [
+            "2022-01-01"
+          ],
+          "status": [
+            "completed"
+          ],
+          "enrollment_type": [
+            "regular"
+          ],
+          "tuition_fee_paid": [
+            "$10,000",
+            "$12,000"
+          ],
+          "financial_aid_received": [
+            "None",
+            "Partial"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "program_requirements": {
+        "rows": 2,
+        "sample_values": {
+          "requirement_id": [
+            "0",
+            "1"
+          ],
+          "program_id": [
+            "1"
+          ],
+          "requirement_name": [
+            "Agricultural Economics",
+            "Farm Management"
+          ],
+          "description": [
+            "Course in agricultural economics",
+            "Course in farm management"
+          ],
+          "credit_hours": [
+            "3"
+          ],
+          "prerequisites": [
+            "None",
+            "Agricultural Economics"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "program_reviews": {
+        "rows": 2,
+        "sample_values": {
+          "review_id": [
+            "0",
+            "1"
+          ],
+          "graduate_id": [
+            "0"
+          ],
+          "program_id": [
+            "1"
+          ],
+          "review_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "review_text": [
+            "Great program, very practical.",
+            "Could use more hands-on experience."
+          ],
+          "rating": [
+            "5",
+            "4"
+          ],
+          "recommendation": [
+            "1"
+          ],
+          "improvement_suggestions": [
+            "Add more real-world projects",
+            "Increase the number of labs"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "programs": {
+        "rows": 2,
+        "sample_values": {
+          "program_id": [
+            "0",
+            "1"
+          ],
+          "program_name": [
+            "Agricultural Business Management",
+            "Agricultural Mechanization"
+          ],
+          "credential_id": [
+            "1"
+          ],
+          "field_id_4digit": [
+            "1"
+          ],
+          "program_description": [
+            "Program focusing on business and management in the",
+            "Program focusing on the technical aspects of agric"
+          ],
+          "duration_years": [
+            "2"
+          ],
+          "tuition_fee": [
+            "$10,000",
+            "$12,000"
+          ],
+          "admission_requirements": [
+            "High school diploma or equivalent"
+          ],
+          "program_start_date": [
+            "2022-01-01"
+          ],
+          "program_end_date": [
+            "2023-12-31"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "login",
+            "view report"
+          ],
+          "ip_address": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "device_type": [
+            "desktop",
+            "mobile"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_roles": {
+        "rows": 2,
+        "sample_values": {
+          "role_id": [
+            "0",
+            "1"
+          ],
+          "role_name": [
+            "admin",
+            "researcher"
+          ],
+          "description": [
+            "System administrator with full access",
+            "User with access to analytics and reporting tools"
+          ],
+          "permissions": [
+            "read, write, delete",
+            "read, write"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role_id": [
+            "1",
+            "0"
+          ],
+          "created_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "is_active": [
+            "1"
+          ],
+          "last_login_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

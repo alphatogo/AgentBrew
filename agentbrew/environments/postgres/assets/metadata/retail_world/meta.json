@@ -1,0 +1,467 @@
+{
+  "db_id": "retail_world",
+  "source": "bird",
+  "tables": 8,
+  "total_rows": 932,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#retail_world",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"Categories\" {\n  \"CategoryID\" INTEGER [pk]\n  \"CategoryName\" TEXT\n  \"Description\" TEXT\n}\n\nTable \"Customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"CustomerName\" TEXT\n  \"ContactName\" TEXT\n  \"Address\" TEXT\n  \"City\" TEXT\n  \"PostalCode\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"Employees\" {\n  \"EmployeeID\" INTEGER [pk]\n  \"LastName\" TEXT\n  \"FirstName\" TEXT\n  \"BirthDate\" DATE\n  \"Photo\" TEXT\n  \"Notes\" TEXT\n}\n\nTable \"OrderDetails\" {\n  \"OrderDetailID\" INTEGER [pk]\n  \"OrderID\" INTEGER\n  \"ProductID\" INTEGER\n  \"Quantity\" INTEGER\n}\n\nTable \"Orders\" {\n  \"OrderID\" INTEGER [pk]\n  \"CustomerID\" INTEGER\n  \"EmployeeID\" INTEGER\n  \"OrderDate\" TIMESTAMP\n  \"ShipperID\" INTEGER\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk]\n  \"ProductName\" TEXT\n  \"SupplierID\" INTEGER\n  \"CategoryID\" INTEGER\n  \"Unit\" TEXT\n  \"Price\" REAL\n}\n\nTable \"Shippers\" {\n  \"ShipperID\" INTEGER [pk]\n  \"ShipperName\" TEXT\n  \"Phone\" TEXT\n}\n\nTable \"Suppliers\" {\n  \"SupplierID\" INTEGER [pk]\n  \"SupplierName\" TEXT\n  \"ContactName\" TEXT\n  \"Address\" TEXT\n  \"City\" TEXT\n  \"PostalCode\" TEXT\n  \"Country\" TEXT\n  \"Phone\" TEXT\n}\n\n\n\nRef: \"Products\".\"SupplierID\" > \"Suppliers\".\"SupplierID\"\n\nRef: \"Products\".\"CategoryID\" > \"Categories\".\"CategoryID\"\n\nRef: \"Orders\".\"ShipperID\" > \"Shippers\".\"ShipperID\"\n\nRef: \"Orders\".\"CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Orders\".\"EmployeeID\" > \"Employees\".\"EmployeeID\"\n\nRef: \"OrderDetails\".\"ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"OrderDetails\".\"OrderID\" > \"Orders\".\"OrderID\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"Categories\" {\n  \"CategoryID\" INTEGER [pk]\n  \"CategoryName\" TEXT\n  \"Description\" TEXT\n}\n\nTable \"Customers\" {\n  \"CustomerID\" INTEGER [pk]\n  \"CustomerName\" TEXT\n  \"ContactName\" TEXT\n  \"Address\" TEXT\n  \"City\" TEXT\n  \"PostalCode\" TEXT\n  \"Country\" TEXT\n}\n\nTable \"Employees\" {\n  \"EmployeeID\" INTEGER [pk]\n  \"LastName\" TEXT\n  \"FirstName\" TEXT\n  \"BirthDate\" DATE\n  \"Photo\" TEXT\n  \"Notes\" TEXT\n}\n\nTable \"OrderDetails\" {\n  \"OrderDetailID\" INTEGER [pk]\n  \"OrderID\" INTEGER\n  \"ProductID\" INTEGER\n  \"Quantity\" INTEGER\n}\n\nTable \"Orders\" {\n  \"OrderID\" INTEGER [pk]\n  \"CustomerID\" INTEGER\n  \"EmployeeID\" INTEGER\n  \"OrderDate\" TIMESTAMP\n  \"ShipperID\" INTEGER\n}\n\nTable \"Products\" {\n  \"ProductID\" INTEGER [pk]\n  \"ProductName\" TEXT\n  \"SupplierID\" INTEGER\n  \"CategoryID\" INTEGER\n  \"Unit\" TEXT\n  \"Price\" REAL\n}\n\nTable \"Shippers\" {\n  \"ShipperID\" INTEGER [pk]\n  \"ShipperName\" TEXT\n  \"Phone\" TEXT\n}\n\nTable \"Suppliers\" {\n  \"SupplierID\" INTEGER [pk]\n  \"SupplierName\" TEXT\n  \"ContactName\" TEXT\n  \"Address\" TEXT\n  \"City\" TEXT\n  \"PostalCode\" TEXT\n  \"Country\" TEXT\n  \"Phone\" TEXT\n}\n\nRef: \"Products\".\"SupplierID\" > \"Suppliers\".\"SupplierID\"\n\nRef: \"Products\".\"CategoryID\" > \"Categories\".\"CategoryID\"\n\nRef: \"Orders\".\"ShipperID\" > \"Shippers\".\"ShipperID\"\n\nRef: \"Orders\".\"CustomerID\" > \"Customers\".\"CustomerID\"\n\nRef: \"Orders\".\"EmployeeID\" > \"Employees\".\"EmployeeID\"\n\nRef: \"OrderDetails\".\"ProductID\" > \"Products\".\"ProductID\"\n\nRef: \"OrderDetails\".\"OrderID\" > \"Orders\".\"OrderID\"\n\n## Table Stats & Sample Values\n\nCategories: 8 rows\n  CategoryName: 'Beverages', 'Condiments', 'Confections', ...\n  Description: 'Soft drinks, coffees, teas, beers, and ales', 'Sweet and savory sauces, relishes, spreads, and se', 'Desserts, candies, and sweet breads', ...\n  CategoryID: '1', '2', '3', ...\n\nCustomers: 91 rows\n  CustomerName: 'Alfreds Futterkiste', 'Ana Trujillo Emparedados y helados', 'Antonio Moreno Taquería', ...\n  ContactName: 'Maria Anders', 'Ana Trujillo', 'Antonio Moreno', ...\n  City: 'Berlin', 'México D.F.', 'London', ...\n\nEmployees: 10 rows\n  LastName: 'Davolio', 'Fuller', 'Leverling', ...\n  FirstName: 'Nancy', 'Andrew', 'Janet', ...\n  Photo: 'EmpID1.pic', 'EmpID2.pic', 'EmpID3.pic', ...\n\nOrderDetails: 518 rows\n  Quantity: '12', '10', '5', ...\n  OrderID: '10248', '10249', '10250', ...\n  ProductID: '11', '42', '72', ...\n\nOrders: 196 rows\n  OrderDate: '1996-07-04', '1996-07-05', '1996-07-08', ...\n  CustomerID: '90', '81', '34', ...\n  EmployeeID: '5', '6', '4', ...\n\nProducts: 77 rows\n  ProductName: 'Chais', 'Chang', 'Aniseed Syrup', ...\n  Unit: '10 boxes x 20 bags', '24 - 12 oz bottles', '12 - 550 ml bottles', ...\n  CategoryID: '1', '2', '7', ...\n\nShippers: 3 rows\n  ShipperName: 'Speedy Express', 'United Package', 'Federal Shipping'\n  Phone: '(503) 555-9831', '(503) 555-3199', '(503) 555-9931'\n  ShipperID: '1', '2', '3'\n\nSuppliers: 29 rows\n  SupplierName: 'Exotic Liquid', 'New Orleans Cajun Delights', 'Grandma Kelly's Homestead', ...\n  ContactName: 'Charlotte Cooper', 'Shelley Burke', 'Regina Murphy', ...\n  City: 'Londona', 'New Orleans', 'Ann Arbor', ...",
+    "stateUrl": "https://bird-bench.github.io/#retail_world",
+    "tableStats": {
+      "Categories": {
+        "rows": 8,
+        "sample_values": {
+          "CategoryID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CategoryName": [
+            "Beverages",
+            "Condiments",
+            "Confections",
+            "Dairy Products",
+            "Grains/Cereals",
+            "Meat/Poultry",
+            "Produce",
+            "Seafood"
+          ],
+          "Description": [
+            "Soft drinks, coffees, teas, beers, and ales",
+            "Sweet and savory sauces, relishes, spreads, and se",
+            "Desserts, candies, and sweet breads",
+            "Cheeses",
+            "Breads, crackers, pasta, and cereal",
+            "Prepared meats",
+            "Dried fruit and bean curd",
+            "Seaweed and fish"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Customers": {
+        "rows": 91,
+        "sample_values": {
+          "CustomerID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CustomerName": [
+            "Alfreds Futterkiste",
+            "Ana Trujillo Emparedados y helados",
+            "Antonio Moreno Taquería",
+            "Around the Horn",
+            "Berglunds snabbköp",
+            "Blauer See Delikatessen",
+            "Blondel père et fils",
+            "Bólido Comidas preparadas"
+          ],
+          "ContactName": [
+            "Maria Anders",
+            "Ana Trujillo",
+            "Antonio Moreno",
+            "Thomas Hardy",
+            "Christina Berglund",
+            "Hanna Moos",
+            "Frédérique Citeaux",
+            "Martín Sommer"
+          ],
+          "Address": [
+            "Obere Str. 57",
+            "Avda. de la Constitución 2222",
+            "Mataderos 2312",
+            "120 Hanover Sq.",
+            "Berguvsvägen 8",
+            "Forsterstr. 57",
+            "24, place Kléber",
+            "C/ Araquil, 67"
+          ],
+          "City": [
+            "Berlin",
+            "México D.F.",
+            "London",
+            "Luleå",
+            "Mannheim",
+            "Strasbourg",
+            "Madrid",
+            "Marseille"
+          ],
+          "PostalCode": [
+            "12209",
+            "5021",
+            "5023",
+            "WA1 1DP",
+            "S-958 22",
+            "68306",
+            "67000",
+            "28023"
+          ],
+          "Country": [
+            "Germany",
+            "Mexico",
+            "UK",
+            "Sweden",
+            "France",
+            "Spain",
+            "Canada",
+            "Argentina"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Employees": {
+        "rows": 10,
+        "sample_values": {
+          "EmployeeID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "LastName": [
+            "Davolio",
+            "Fuller",
+            "Leverling",
+            "Peacock",
+            "Buchanan",
+            "Suyama",
+            "King",
+            "Callahan"
+          ],
+          "FirstName": [
+            "Nancy",
+            "Andrew",
+            "Janet",
+            "Margaret",
+            "Steven",
+            "Michael",
+            "Robert",
+            "Laura"
+          ],
+          "BirthDate": [
+            "1968-12-08",
+            "1952-02-19",
+            "1963-08-30",
+            "1958-09-19",
+            "1955-03-04",
+            "1963-07-02",
+            "1960-05-29",
+            "1958-01-09"
+          ],
+          "Photo": [
+            "EmpID1.pic",
+            "EmpID2.pic",
+            "EmpID3.pic",
+            "EmpID4.pic",
+            "EmpID5.pic",
+            "EmpID6.pic",
+            "EmpID7.pic",
+            "EmpID8.pic"
+          ],
+          "Notes": [
+            "Education includes a BA in psychology from Colorad",
+            "Andrew received his BTS commercial and a Ph.D. in ",
+            "Janet has a BS degree in chemistry from Boston Col",
+            "Margaret holds a BA in English literature from Con",
+            "Steven Buchanan graduated from St. Andrews Univers",
+            "Michael is a graduate of Sussex University (MA, ec",
+            "Robert King served in the Peace Corps and traveled",
+            "Laura received a BA in psychology from the Univers"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "OrderDetails": {
+        "rows": 518,
+        "sample_values": {
+          "OrderDetailID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "OrderID": [
+            "10248",
+            "10249",
+            "10250",
+            "10251",
+            "10252",
+            "10253",
+            "10254",
+            "10255"
+          ],
+          "ProductID": [
+            "11",
+            "42",
+            "72",
+            "14",
+            "51",
+            "41",
+            "65",
+            "22"
+          ],
+          "Quantity": [
+            "12",
+            "10",
+            "5",
+            "9",
+            "40",
+            "35",
+            "15",
+            "6"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Orders": {
+        "rows": 196,
+        "sample_values": {
+          "OrderID": [
+            "10248",
+            "10249",
+            "10250",
+            "10251",
+            "10252",
+            "10253",
+            "10254",
+            "10255"
+          ],
+          "CustomerID": [
+            "90",
+            "81",
+            "34",
+            "84",
+            "76",
+            "14",
+            "68",
+            "88"
+          ],
+          "EmployeeID": [
+            "5",
+            "6",
+            "4",
+            "3",
+            "9",
+            "1",
+            "8",
+            "2"
+          ],
+          "OrderDate": [
+            "1996-07-04",
+            "1996-07-05",
+            "1996-07-08",
+            "1996-07-09",
+            "1996-07-10",
+            "1996-07-11",
+            "1996-07-12",
+            "1996-07-15"
+          ],
+          "ShipperID": [
+            "3",
+            "1",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Products": {
+        "rows": 77,
+        "sample_values": {
+          "ProductID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "ProductName": [
+            "Chais",
+            "Chang",
+            "Aniseed Syrup",
+            "Chef Anton's Cajun Seasoning",
+            "Chef Anton's Gumbo Mix",
+            "Grandma's Boysenberry Spread",
+            "Uncle Bob's Organic Dried Pears",
+            "Northwoods Cranberry Sauce"
+          ],
+          "SupplierID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "CategoryID": [
+            "1",
+            "2",
+            "7",
+            "6",
+            "8",
+            "4",
+            "3",
+            "5"
+          ],
+          "Unit": [
+            "10 boxes x 20 bags",
+            "24 - 12 oz bottles",
+            "12 - 550 ml bottles",
+            "48 - 6 oz jars",
+            "36 boxes",
+            "12 - 8 oz jars",
+            "12 - 1 lb pkgs.",
+            "12 - 12 oz jars"
+          ],
+          "Price": [
+            "18.0",
+            "19.0",
+            "10.0",
+            "22.0",
+            "21.35",
+            "25.0",
+            "30.0",
+            "40.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Shippers": {
+        "rows": 3,
+        "sample_values": {
+          "ShipperID": [
+            "1",
+            "2",
+            "3"
+          ],
+          "ShipperName": [
+            "Speedy Express",
+            "United Package",
+            "Federal Shipping"
+          ],
+          "Phone": [
+            "(503) 555-9831",
+            "(503) 555-3199",
+            "(503) 555-9931"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "Suppliers": {
+        "rows": 29,
+        "sample_values": {
+          "SupplierID": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "SupplierName": [
+            "Exotic Liquid",
+            "New Orleans Cajun Delights",
+            "Grandma Kelly's Homestead",
+            "Tokyo Traders",
+            "Cooperativa de Quesos 'Las Cabras'",
+            "Mayumi's",
+            "Pavlova, Ltd.",
+            "Specialty Biscuits, Ltd."
+          ],
+          "ContactName": [
+            "Charlotte Cooper",
+            "Shelley Burke",
+            "Regina Murphy",
+            "Yoshi Nagase",
+            "Antonio del Valle Saavedra",
+            "Mayumi Ohno",
+            "Ian Devling",
+            "Peter Wilson"
+          ],
+          "Address": [
+            "49 Gilbert St.",
+            "P.O. Box 78934",
+            "707 Oxford Rd.",
+            "9-8 Sekimai Musashino-shi",
+            "Calle del Rosal 4",
+            "92 Setsuko Chuo-ku",
+            "74 Rose St. Moonie Ponds",
+            "29 King's Way"
+          ],
+          "City": [
+            "Londona",
+            "New Orleans",
+            "Ann Arbor",
+            "Tokyo",
+            "Oviedo",
+            "Osaka",
+            "Melbourne",
+            "Manchester"
+          ],
+          "PostalCode": [
+            "EC1 4SD",
+            "70117",
+            "48104",
+            "100",
+            "33007",
+            "545",
+            "3058",
+            "M14 GSD"
+          ],
+          "Country": [
+            "UK",
+            "USA",
+            "Japan",
+            "Spain",
+            "Australia",
+            "Sweden",
+            "Brazil",
+            "Germany"
+          ],
+          "Phone": [
+            "(171) 555-2222",
+            "(100) 555-4822",
+            "(313) 555-5735",
+            "(03) 3555-5011",
+            "(98) 598 76 54",
+            "(06) 431-7877",
+            "(03) 444-2343",
+            "(161) 555-4448"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

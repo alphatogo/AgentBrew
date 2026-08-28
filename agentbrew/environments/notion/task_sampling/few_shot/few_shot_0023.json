@@ -1,0 +1,13 @@
+{
+  "title": "Operations Playbook Layout Rebuild",
+  "capability": [
+    "reorganize_layout",
+    "convert_block_type",
+    "move_existing_blocks",
+    "preserve_content_order",
+    "create_columns",
+    "preserve_format",
+    "reference_existing_object"
+  ],
+  "question": "# Task: Reorganize Operations Playbook Page Sections\n## Objective Modify the structure of the Operations Playbook page in Notion by swapping two sections, then replacing the usual related-resources column layout with a toggle-based initiative and FAQ cleanup.\n## Requirements\n### Step 1: Swap Sections - Navigate to the Operations Playbook page - Swap the positions of the \"Escalation Paths\" and \"Owner\n  Responsibilities\" sections\n- Preserve all content within each section exactly as is - Maintain the original formatting and structure of each section\n### Step 2: Rebuild the Current Initiatives Section Replace the original Tools/Terminologies column layout step with this initiative cleanup: - Add a new heading_3 block titled \"🔁 Support Automation Rollout\". - Convert the three existing initiative headings plus the new heading into\n  toggles in the same order.\n- Move each initiative description inside its corresponding toggle, while\n  preserving the text, formatting, and order of existing descriptions.\n\n### Step 3: Reorganize the Support FAQ Toggle Inside the Support FAQ toggle, create a two-column layout: move the first two Q&A pairs left, move the third Q&A pair right, and add one matching Q&A pair so both columns have exactly 2 Q&A pairs. Keep heading_3 questions and paragraph answers.\n"
+}

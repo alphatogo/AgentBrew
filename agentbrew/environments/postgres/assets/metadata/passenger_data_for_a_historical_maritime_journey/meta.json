@@ -1,0 +1,659 @@
+{
+  "db_id": "passenger_data_for_a_historical_maritime_journey",
+  "source": "synsql",
+  "tables": 22,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/passenger_data_for_a_historical_maritime_journey",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"data_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_status\" TEXT\n}\n\nTable \"public\".\"cabins\" {\n  \"cabin_id\" INTEGER [pk]\n  \"cabin_number\" TEXT\n  \"deck\" TEXT\n  \"cabin_type\" TEXT\n  \"passenger_id\" INTEGER\n  \"cabin_location\" TEXT\n  \"cabin_size\" REAL\n  \"cabin_amenities\" TEXT\n}\n\nTable \"public\".\"crew\" {\n  \"crew_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"role\" TEXT\n  \"age\" INTEGER\n  \"sex\" INTEGER\n  \"embarked\" TEXT\n  \"disembarked\" TEXT\n  \"crew_position\" TEXT\n  \"crew_department\" TEXT\n}\n\nTable \"public\".\"disembarkation_dates\" {\n  \"disembarkation_id\" INTEGER [pk]\n  \"port_id\" INTEGER\n  \"disembarkation_date\" TEXT\n  \"disembarkation_time\" TEXT\n}\n\nTable \"public\".\"documents\" {\n  \"document_id\" INTEGER [pk]\n  \"document_title\" TEXT\n  \"document_type\" TEXT\n  \"file_path\" TEXT\n  \"upload_date\" TEXT\n  \"document_format\" TEXT\n  \"document_size\" REAL\n}\n\nTable \"public\".\"embarkation_dates\" {\n  \"embarkation_id\" INTEGER [pk]\n  \"port_id\" INTEGER\n  \"embarkation_date\" TEXT\n  \"embarkation_time\" TEXT\n}\n\nTable \"public\".\"families\" {\n  \"family_id\" INTEGER [pk]\n  \"head_of_family_id\" INTEGER\n  \"family_size\" INTEGER\n  \"relation_type\" TEXT\n  \"family_income\" REAL\n  \"family_ occupation\" TEXT\n}\n\nTable \"public\".\"fares\" {\n  \"fare_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"fare_amount\" REAL\n  \"discount\" REAL\n  \"surcharge\" REAL\n  \"payment_method\" TEXT\n  \"payment_date\" TEXT\n  \"payment_status\" TEXT\n}\n\nTable \"public\".\"medical_records\" {\n  \"record_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"medical_conditions\" TEXT\n  \"treatment_received\" TEXT\n  \"onboard_treatment\" TEXT\n  \"medical_history\" TEXT\n  \"allergies\" TEXT\n  \"medications\" TEXT\n}\n\nTable \"public\".\"passenger_cabins\" {\n  \"pc_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"cabin_id\" INTEGER\n  \"cabin_number\" TEXT\n  \"cabin_deck\" TEXT\n}\n\nTable \"public\".\"passenger_documents\" {\n  \"pd_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"document_id\" INTEGER\n  \"document_type\" TEXT\n}\n\nTable \"public\".\"passenger_fares\" {\n  \"pf_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"fare_id\" INTEGER\n  \"fare_amount\" REAL\n  \"fare_currency\" TEXT\n}\n\nTable \"public\".\"passenger_ports\" {\n  \"passenger_port_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"embarkation_id\" INTEGER\n  \"disembarkation_id\" INTEGER\n  \"port_code\" TEXT\n}\n\nTable \"public\".\"passenger_survival_factors\" {\n  \"psf_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"factor_id\" INTEGER\n  \"factor_value\" TEXT\n  \"factor_unit\" TEXT\n}\n\nTable \"public\".\"passengers\" {\n  \"passenger_id\" INTEGER [pk]\n  \"pclass\" INTEGER\n  \"sex\" INTEGER\n  \"age\" REAL\n  \"fare\" REAL\n  \"family_cnt\" INTEGER\n  \"cabin_ind\" INTEGER\n  \"survived\" INTEGER\n  \"embarked\" TEXT\n  \"disembarked\" TEXT\n  \"medical_conditions\" TEXT\n  \"height\" REAL\n  \"weight\" REAL\n  \"hair_color\" TEXT\n  \"eye_color\" TEXT\n  \"nationality\" TEXT\n  \"occupation\" TEXT\n  \"destination\" TEXT\n}\n\nTable \"public\".\"ports\" {\n  \"port_id\" INTEGER [pk]\n  \"port_name\" TEXT\n  \"location\" TEXT\n  \"country\" TEXT\n  \"port_code\" TEXT\n  \"port_type\" TEXT\n}\n\nTable \"public\".\"ship_info\" {\n  \"ship_id\" INTEGER [pk]\n  \"ship_name\" TEXT\n  \"ship_type\" TEXT\n  \"ship_length\" REAL\n  \"ship_beam\" REAL\n  \"ship_draft\" REAL\n  \"ship_gross_tonnage\" REAL\n  \"ship_speed\" REAL\n  \"ship_capacity\" INTEGER\n}\n\nTable \"public\".\"survival_analysis\" {\n  \"analysis_id\" INTEGER [pk]\n  \"factor_id\" INTEGER\n  \"survival_rate\" REAL\n  \"sample_size\" INTEGER\n  \"analysis_date\" TEXT\n  \"confidence_interval\" REAL\n}\n\nTable \"public\".\"survival_factors\" {\n  \"factor_id\" INTEGER [pk]\n  \"factor_name\" TEXT\n  \"description\" TEXT\n  \"factor_type\" TEXT\n}\n\nTable \"public\".\"survivor_accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"account_text\" TEXT\n  \"interview_date\" TEXT\n  \"interviewer\" TEXT\n  \"account_type\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login\" TEXT\n}\n\nTable \"public\".\"voyage_info\" {\n  \"voyage_id\" INTEGER [pk]\n  \"ship_id\" INTEGER\n  \"departure_date\" TEXT\n  \"arrival_date\" TEXT\n  \"departure_port\" TEXT\n  \"arrival_port\" TEXT\n  \"voyage_distance\" REAL\n  \"voyage_duration\" REAL\n}\n\nRef: \"public\".\"access_logs\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"access_logs\".\"data_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"cabins\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"disembarkation_dates\".\"port_id\" > \"public\".\"ports\".\"port_id\"\nRef: \"public\".\"embarkation_dates\".\"port_id\" > \"public\".\"ports\".\"port_id\"\nRef: \"public\".\"families\".\"head_of_family_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"fares\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"medical_records\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_cabins\".\"cabin_id\" > \"public\".\"cabins\".\"cabin_id\"\nRef: \"public\".\"passenger_cabins\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_documents\".\"document_id\" > \"public\".\"documents\".\"document_id\"\nRef: \"public\".\"passenger_documents\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_fares\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_fares\".\"fare_id\" > \"public\".\"fares\".\"fare_id\"\nRef: \"public\".\"passenger_ports\".\"embarkation_id\" > \"public\".\"embarkation_dates\".\"embarkation_id\"\nRef: \"public\".\"passenger_ports\".\"disembarkation_id\" > \"public\".\"disembarkation_dates\".\"disembarkation_id\"\nRef: \"public\".\"passenger_ports\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_survival_factors\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"passenger_survival_factors\".\"factor_id\" > \"public\".\"survival_factors\".\"factor_id\"\nRef: \"public\".\"survival_analysis\".\"factor_id\" > \"public\".\"survival_factors\".\"factor_id\"\nRef: \"public\".\"survivor_accounts\".\"passenger_id\" > \"public\".\"passengers\".\"passenger_id\"\nRef: \"public\".\"voyage_info\".\"ship_id\" > \"public\".\"ship_info\".\"ship_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"access_logs\" {\n  \"access_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"data_id\" INTEGER\n  \"access_date\" TEXT\n  \"access_type\" TEXT\n  \"access_status\" TEXT\n}\n\nTable \"cabins\" {\n  \"cabin_id\" INTEGER [pk]\n  \"cabin_number\" TEXT\n  \"deck\" TEXT\n  \"cabin_type\" TEXT\n  \"passenger_id\" INTEGER\n  \"cabin_location\" TEXT\n  \"cabin_size\" REAL\n  \"cabin_amenities\" TEXT\n}\n\nTable \"crew\" {\n  \"crew_id\" INTEGER [pk]\n  \"name\" TEXT\n  \"role\" TEXT\n  \"age\" INTEGER\n  \"sex\" INTEGER\n  \"embarked\" TEXT\n  \"disembarked\" TEXT\n  \"crew_position\" TEXT\n  \"crew_department\" TEXT\n}\n\nTable \"disembarkation_dates\" {\n  \"disembarkation_id\" INTEGER [pk]\n  \"port_id\" INTEGER\n  \"disembarkation_date\" TEXT\n  \"disembarkation_time\" TEXT\n}\n\nTable \"documents\" {\n  \"document_id\" INTEGER [pk]\n  \"document_title\" TEXT\n  \"document_type\" TEXT\n  \"file_path\" TEXT\n  \"upload_date\" TEXT\n  \"document_format\" TEXT\n  \"document_size\" REAL\n}\n\nTable \"embarkation_dates\" {\n  \"embarkation_id\" INTEGER [pk]\n  \"port_id\" INTEGER\n  \"embarkation_date\" TEXT\n  \"embarkation_time\" TEXT\n}\n\nTable \"families\" {\n  \"family_id\" INTEGER [pk]\n  \"head_of_family_id\" INTEGER\n  \"family_size\" INTEGER\n  \"relation_type\" TEXT\n  \"family_income\" REAL\n  \"family_ occupation\" TEXT\n}\n\nTable \"fares\" {\n  \"fare_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"fare_amount\" REAL\n  \"discount\" REAL\n  \"surcharge\" REAL\n  \"payment_method\" TEXT\n  \"payment_date\" TEXT\n  \"payment_status\" TEXT\n}\n\nTable \"medical_records\" {\n  \"record_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"medical_conditions\" TEXT\n  \"treatment_received\" TEXT\n  \"onboard_treatment\" TEXT\n  \"medical_history\" TEXT\n  \"allergies\" TEXT\n  \"medications\" TEXT\n}\n\nTable \"passenger_cabins\" {\n  \"pc_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"cabin_id\" INTEGER\n  \"cabin_number\" TEXT\n  \"cabin_deck\" TEXT\n}\n\nTable \"passenger_documents\" {\n  \"pd_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"document_id\" INTEGER\n  \"document_type\" TEXT\n}\n\nTable \"passenger_fares\" {\n  \"pf_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"fare_id\" INTEGER\n  \"fare_amount\" REAL\n  \"fare_currency\" TEXT\n}\n\nTable \"passenger_ports\" {\n  \"passenger_port_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"embarkation_id\" INTEGER\n  \"disembarkation_id\" INTEGER\n  \"port_code\" TEXT\n}\n\nTable \"passenger_survival_factors\" {\n  \"psf_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"factor_id\" INTEGER\n  \"factor_value\" TEXT\n  \"factor_unit\" TEXT\n}\n\nTable \"passengers\" {\n  \"passenger_id\" INTEGER [pk]\n  \"pclass\" INTEGER\n  \"sex\" INTEGER\n  \"age\" REAL\n  \"fare\" REAL\n  \"family_cnt\" INTEGER\n  \"cabin_ind\" INTEGER\n  \"survived\" INTEGER\n  \"embarked\" TEXT\n  \"disembarked\" TEXT\n  \"medical_conditions\" TEXT\n  \"height\" REAL\n  \"weight\" REAL\n  \"hair_color\" TEXT\n  \"eye_color\" TEXT\n  \"nationality\" TEXT\n  \"occupation\" TEXT\n  \"destination\" TEXT\n}\n\nTable \"ports\" {\n  \"port_id\" INTEGER [pk]\n  \"port_name\" TEXT\n  \"location\" TEXT\n  \"country\" TEXT\n  \"port_code\" TEXT\n  \"port_type\" TEXT\n}\n\nTable \"ship_info\" {\n  \"ship_id\" INTEGER [pk]\n  \"ship_name\" TEXT\n  \"ship_type\" TEXT\n  \"ship_length\" REAL\n  \"ship_beam\" REAL\n  \"ship_draft\" REAL\n  \"ship_gross_tonnage\" REAL\n  \"ship_speed\" REAL\n  \"ship_capacity\" INTEGER\n}\n\nTable \"survival_analysis\" {\n  \"analysis_id\" INTEGER [pk]\n  \"factor_id\" INTEGER\n  \"survival_rate\" REAL\n  \"sample_size\" INTEGER\n  \"analysis_date\" TEXT\n  \"confidence_interval\" REAL\n}\n\nTable \"survival_factors\" {\n  \"factor_id\" INTEGER [pk]\n  \"factor_name\" TEXT\n  \"description\" TEXT\n  \"factor_type\" TEXT\n}\n\nTable \"survivor_accounts\" {\n  \"account_id\" INTEGER [pk]\n  \"passenger_id\" INTEGER\n  \"account_text\" TEXT\n  \"interview_date\" TEXT\n  \"interviewer\" TEXT\n  \"account_type\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"user_name\" TEXT\n  \"email\" TEXT\n  \"role\" TEXT\n  \"password\" TEXT\n  \"last_login\" TEXT\n}\n\nTable \"voyage_info\" {\n  \"voyage_id\" INTEGER [pk]\n  \"ship_id\" INTEGER\n  \"departure_date\" TEXT\n  \"arrival_date\" TEXT\n  \"departure_port\" TEXT\n  \"arrival_port\" TEXT\n  \"voyage_distance\" REAL\n  \"voyage_duration\" REAL\n}\n\nRef: \"access_logs\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"access_logs\".\"data_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"cabins\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"disembarkation_dates\".\"port_id\" > \"ports\".\"port_id\"\n\nRef: \"embarkation_dates\".\"port_id\" > \"ports\".\"port_id\"\n\nRef: \"families\".\"head_of_family_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"fares\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"medical_records\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_cabins\".\"cabin_id\" > \"cabins\".\"cabin_id\"\n\nRef: \"passenger_cabins\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_documents\".\"document_id\" > \"documents\".\"document_id\"\n\nRef: \"passenger_documents\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_fares\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_fares\".\"fare_id\" > \"fares\".\"fare_id\"\n\nRef: \"passenger_ports\".\"embarkation_id\" > \"embarkation_dates\".\"embarkation_id\"\n\nRef: \"passenger_ports\".\"disembarkation_id\" > \"disembarkation_dates\".\"disembarkation_id\"\n\nRef: \"passenger_ports\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_survival_factors\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"passenger_survival_factors\".\"factor_id\" > \"survival_factors\".\"factor_id\"\n\nRef: \"survival_analysis\".\"factor_id\" > \"survival_factors\".\"factor_id\"\n\nRef: \"survivor_accounts\".\"passenger_id\" > \"passengers\".\"passenger_id\"\n\nRef: \"voyage_info\".\"ship_id\" > \"ship_info\".\"ship_id\"\n\n## Table Stats & Sample Values\n\naccess_logs: 2 rows\n  access_type: 'view', 'download'\n  access_status: 'success'\n  access_date: '2023-05-01', '2023-05-02'\n\ncabins: 2 rows\n  cabin_type: 'single', 'double'\n  cabin_number: 'A10', 'B20'\n  deck: 'A', 'B'\n\ncrew: 2 rows\n  name: 'John Smith', 'Jane Doe'\n  role: 'Captain', 'Steward'\n  disembarked: 'Cherbourg', 'Queenstown'\n\ndisembarkation_dates: 2 rows\n  disembarkation_time: '12:00:00', '13:00:00'\n  disembarkation_date: '1912-04-15'\n  port_id: '1'\n\ndocuments: 2 rows\n  document_title: 'Passenger List', 'Ship Manifest'\n  document_type: 'List', 'Manifest'\n  file_path: 'documents/passenger_list.csv', 'documents/ship_manifest.pdf'\n\nembarkation_dates: 2 rows\n  embarkation_time: '10:00:00', '11:00:00'\n  embarkation_date: '1912-04-10'\n  port_id: '0', '1'\n\nfamilies: 0 rows\n\nfares: 2 rows\n  payment_status: 'paid'\n  payment_method: 'cash'\n  fare_amount: '20.2125', '8.05'\n\nmedical_records: 2 rows\n  medical_conditions: 'None'\n  treatment_received: 'None'\n  onboard_treatment: 'None'\n\npassenger_cabins: 2 rows\n  cabin_number: 'A10', 'B20'\n  cabin_deck: 'A', 'B'\n  passenger_id: '1', '0'\n\npassenger_documents: 2 rows\n  document_type: 'Passenger List', 'Ship Manifest'\n  passenger_id: '0', '1'\n  document_id: '1', '0'\n\npassenger_fares: 2 rows\n  fare_currency: 'GBP'\n  fare_amount: '20.2125', '8.05'\n  passenger_id: '0', '1'\n\npassenger_ports: 2 rows\n  port_code: 'SOU', 'CHB'\n  passenger_id: '1'\n  embarkation_id: '0'\n\npassenger_survival_factors: 2 rows\n  factor_value: '3', '29.6991'\n  factor_unit: 'class', 'years'\n  passenger_id: '0'\n\npassengers: 2 rows\n  disembarked: 'Cherbourg', 'Queenstown'\n  hair_color: 'Brown', 'Black'\n  eye_color: 'Blue', 'Brown'\n\nports: 2 rows\n  port_name: 'Southampton', 'Cherbourg'\n  country: 'United Kingdom', 'France'\n  port_type: 'embarkation', 'disembarkation'\n\nship_info: 1 rows\n  ship_name: 'RMS Titanic'\n  ship_type: 'passenger'\n  ship_capacity: '3300'\n\nsurvival_analysis: 2 rows\n  analysis_date: '2023-01-01', '2023-01-02'\n  survival_rate: '0.6', '0.8'\n  sample_size: '300', '200'\n\nsurvival_factors: 2 rows\n  factor_name: 'Class', 'Age'\n  description: 'Passenger class (1, 2, 3)', 'Age of the passenger'\n  factor_type: 'demographic'\n\nsurvivor_accounts: 2 rows\n  account_type: 'written', 'oral'\n  interviewer: 'John Doe', 'Jane Smith'\n  account_text: 'I was on deck when the ship hit the iceberg. We we', 'I was in the dining room when the ship began to li'\n\nusers: 2 rows\n  user_name: 'Alice Johnson', 'Bob Williams'\n  role: 'researcher', 'historian'\n  password: 'password123', 'password456'\n\nvoyage_info: 1 rows\n  departure_port: 'Southampton'\n  arrival_port: 'New York'\n  departure_date: '1912-04-10'",
+    "stateUrl": null,
+    "tableStats": {
+      "access_logs": {
+        "rows": 2,
+        "sample_values": {
+          "access_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "data_id": [
+            "1"
+          ],
+          "access_date": [
+            "2023-05-01",
+            "2023-05-02"
+          ],
+          "access_type": [
+            "view",
+            "download"
+          ],
+          "access_status": [
+            "success"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "cabins": {
+        "rows": 2,
+        "sample_values": {
+          "cabin_id": [
+            "0",
+            "1"
+          ],
+          "cabin_number": [
+            "A10",
+            "B20"
+          ],
+          "deck": [
+            "A",
+            "B"
+          ],
+          "cabin_type": [
+            "single",
+            "double"
+          ],
+          "passenger_id": [
+            "1"
+          ],
+          "cabin_location": [
+            "midship",
+            "aft"
+          ],
+          "cabin_size": [
+            "100.0",
+            "150.0"
+          ],
+          "cabin_amenities": [
+            "bathroom, shower",
+            "bathroom, shower, balcony"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "crew": {
+        "rows": 2,
+        "sample_values": {
+          "crew_id": [
+            "0",
+            "1"
+          ],
+          "name": [
+            "John Smith",
+            "Jane Doe"
+          ],
+          "role": [
+            "Captain",
+            "Steward"
+          ],
+          "age": [
+            "45",
+            "30"
+          ],
+          "sex": [
+            "0",
+            "1"
+          ],
+          "embarked": [
+            "Southampton"
+          ],
+          "disembarked": [
+            "Cherbourg",
+            "Queenstown"
+          ],
+          "crew_position": [
+            "Master",
+            "Purser"
+          ],
+          "crew_department": [
+            "Deck",
+            "Service"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "disembarkation_dates": {
+        "rows": 2,
+        "sample_values": {
+          "disembarkation_id": [
+            "0",
+            "1"
+          ],
+          "port_id": [
+            "1"
+          ],
+          "disembarkation_date": [
+            "1912-04-15"
+          ],
+          "disembarkation_time": [
+            "12:00:00",
+            "13:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "documents": {
+        "rows": 2,
+        "sample_values": {
+          "document_id": [
+            "0",
+            "1"
+          ],
+          "document_title": [
+            "Passenger List",
+            "Ship Manifest"
+          ],
+          "document_type": [
+            "List",
+            "Manifest"
+          ],
+          "file_path": [
+            "documents/passenger_list.csv",
+            "documents/ship_manifest.pdf"
+          ],
+          "upload_date": [
+            "1912-04-10"
+          ],
+          "document_format": [
+            "CSV",
+            "PDF"
+          ],
+          "document_size": [
+            "1024.0",
+            "2048.0"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "embarkation_dates": {
+        "rows": 2,
+        "sample_values": {
+          "embarkation_id": [
+            "0",
+            "1"
+          ],
+          "port_id": [
+            "0",
+            "1"
+          ],
+          "embarkation_date": [
+            "1912-04-10"
+          ],
+          "embarkation_time": [
+            "10:00:00",
+            "11:00:00"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "families": {
+        "rows": 0,
+        "sample_values": {},
+        "value_ranges": {}
+      },
+      "fares": {
+        "rows": 2,
+        "sample_values": {
+          "fare_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "1",
+            "0"
+          ],
+          "fare_amount": [
+            "20.2125",
+            "8.05"
+          ],
+          "discount": [
+            "0.0"
+          ],
+          "surcharge": [
+            "0.0"
+          ],
+          "payment_method": [
+            "cash"
+          ],
+          "payment_date": [
+            "1912-04-10"
+          ],
+          "payment_status": [
+            "paid"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "medical_records": {
+        "rows": 2,
+        "sample_values": {
+          "record_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "0"
+          ],
+          "medical_conditions": [
+            "None"
+          ],
+          "treatment_received": [
+            "None"
+          ],
+          "onboard_treatment": [
+            "None"
+          ],
+          "medical_history": [
+            "No medical history"
+          ],
+          "allergies": [
+            "No allergies"
+          ],
+          "medications": [
+            "No medications"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passenger_cabins": {
+        "rows": 2,
+        "sample_values": {
+          "pc_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "1",
+            "0"
+          ],
+          "cabin_id": [
+            "1"
+          ],
+          "cabin_number": [
+            "A10",
+            "B20"
+          ],
+          "cabin_deck": [
+            "A",
+            "B"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passenger_documents": {
+        "rows": 2,
+        "sample_values": {
+          "pd_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "0",
+            "1"
+          ],
+          "document_id": [
+            "1",
+            "0"
+          ],
+          "document_type": [
+            "Passenger List",
+            "Ship Manifest"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passenger_fares": {
+        "rows": 2,
+        "sample_values": {
+          "pf_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "0",
+            "1"
+          ],
+          "fare_id": [
+            "1",
+            "0"
+          ],
+          "fare_amount": [
+            "20.2125",
+            "8.05"
+          ],
+          "fare_currency": [
+            "GBP"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passenger_ports": {
+        "rows": 2,
+        "sample_values": {
+          "passenger_port_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "1"
+          ],
+          "embarkation_id": [
+            "0"
+          ],
+          "disembarkation_id": [
+            "0"
+          ],
+          "port_code": [
+            "SOU",
+            "CHB"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passenger_survival_factors": {
+        "rows": 2,
+        "sample_values": {
+          "psf_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "0"
+          ],
+          "factor_id": [
+            "1"
+          ],
+          "factor_value": [
+            "3",
+            "29.6991"
+          ],
+          "factor_unit": [
+            "class",
+            "years"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "passengers": {
+        "rows": 2,
+        "sample_values": {
+          "passenger_id": [
+            "0",
+            "1"
+          ],
+          "pclass": [
+            "3"
+          ],
+          "sex": [
+            "0"
+          ],
+          "age": [
+            "18.0",
+            "29.6991"
+          ],
+          "fare": [
+            "20.2125",
+            "8.05"
+          ],
+          "family_cnt": [
+            "2",
+            "0"
+          ],
+          "cabin_ind": [
+            "0"
+          ],
+          "survived": [
+            "0"
+          ],
+          "embarked": [
+            "Southampton"
+          ],
+          "disembarked": [
+            "Cherbourg",
+            "Queenstown"
+          ],
+          "medical_conditions": [
+            "None"
+          ],
+          "height": [
+            "175.5",
+            "180.0"
+          ],
+          "weight": [
+            "65.0",
+            "70.0"
+          ],
+          "hair_color": [
+            "Brown",
+            "Black"
+          ],
+          "eye_color": [
+            "Blue",
+            "Brown"
+          ],
+          "nationality": [
+            "British",
+            "American"
+          ],
+          "occupation": [
+            "Student",
+            "Engineer"
+          ],
+          "destination": [
+            "New York"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ports": {
+        "rows": 2,
+        "sample_values": {
+          "port_id": [
+            "0",
+            "1"
+          ],
+          "port_name": [
+            "Southampton",
+            "Cherbourg"
+          ],
+          "location": [
+            "Hampshire, England",
+            "Cherbourg-Octeville, France"
+          ],
+          "country": [
+            "United Kingdom",
+            "France"
+          ],
+          "port_code": [
+            "SOU",
+            "CHB"
+          ],
+          "port_type": [
+            "embarkation",
+            "disembarkation"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "ship_info": {
+        "rows": 1,
+        "sample_values": {
+          "ship_id": [
+            "0"
+          ],
+          "ship_name": [
+            "RMS Titanic"
+          ],
+          "ship_type": [
+            "passenger"
+          ],
+          "ship_length": [
+            "269.0"
+          ],
+          "ship_beam": [
+            "32.0"
+          ],
+          "ship_draft": [
+            "10.5"
+          ],
+          "ship_gross_tonnage": [
+            "46231.0"
+          ],
+          "ship_speed": [
+            "21.0"
+          ],
+          "ship_capacity": [
+            "3300"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survival_analysis": {
+        "rows": 2,
+        "sample_values": {
+          "analysis_id": [
+            "0",
+            "1"
+          ],
+          "factor_id": [
+            "0",
+            "1"
+          ],
+          "survival_rate": [
+            "0.6",
+            "0.8"
+          ],
+          "sample_size": [
+            "300",
+            "200"
+          ],
+          "analysis_date": [
+            "2023-01-01",
+            "2023-01-02"
+          ],
+          "confidence_interval": [
+            "0.05"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survival_factors": {
+        "rows": 2,
+        "sample_values": {
+          "factor_id": [
+            "0",
+            "1"
+          ],
+          "factor_name": [
+            "Class",
+            "Age"
+          ],
+          "description": [
+            "Passenger class (1, 2, 3)",
+            "Age of the passenger"
+          ],
+          "factor_type": [
+            "demographic"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "survivor_accounts": {
+        "rows": 2,
+        "sample_values": {
+          "account_id": [
+            "0",
+            "1"
+          ],
+          "passenger_id": [
+            "1"
+          ],
+          "account_text": [
+            "I was on deck when the ship hit the iceberg. We we",
+            "I was in the dining room when the ship began to li"
+          ],
+          "interview_date": [
+            "1912-05-01",
+            "1912-05-02"
+          ],
+          "interviewer": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "account_type": [
+            "written",
+            "oral"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "user_name": [
+            "Alice Johnson",
+            "Bob Williams"
+          ],
+          "email": [
+            "alice.johnson@example.com",
+            "bob.williams@example.com"
+          ],
+          "role": [
+            "researcher",
+            "historian"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "last_login": [
+            "2023-05-01",
+            "2023-05-02"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "voyage_info": {
+        "rows": 1,
+        "sample_values": {
+          "voyage_id": [
+            "0"
+          ],
+          "ship_id": [
+            "0"
+          ],
+          "departure_date": [
+            "1912-04-10"
+          ],
+          "arrival_date": [
+            "1912-04-15"
+          ],
+          "departure_port": [
+            "Southampton"
+          ],
+          "arrival_port": [
+            "New York"
+          ],
+          "voyage_distance": [
+            "3500.0"
+          ],
+          "voyage_duration": [
+            "5.0"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

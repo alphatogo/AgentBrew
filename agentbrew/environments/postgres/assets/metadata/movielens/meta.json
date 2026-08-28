@@ -1,0 +1,246 @@
+{
+  "db_id": "movielens",
+  "source": "bird",
+  "tables": 7,
+  "total_rows": 1249411,
+  "created_at": "2026-04-18",
+  "db_url": "https://bird-bench.github.io/#movielens",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"actors\" {\n  \"actorid\" INTEGER [pk, not null]\n  \"a_gender\" TEXT [not null]\n  \"a_quality\" INTEGER [not null]\n}\n\nTable \"directors\" {\n  \"directorid\" INTEGER [pk, not null]\n  \"d_quality\" INTEGER [not null]\n  \"avg_revenue\" INTEGER [not null]\n}\n\nTable \"movies\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"year\" INTEGER [not null]\n  \"isEnglish\" TEXT [not null]\n  \"country\" TEXT [not null]\n  \"runningtime\" INTEGER [not null]\n}\n\nTable \"movies2actors\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"actorid\" INTEGER [pk, not null]\n  \"cast_num\" INTEGER [not null]\n}\n\nTable \"movies2directors\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"directorid\" INTEGER [pk, not null]\n  \"genre\" TEXT [not null]\n}\n\nTable \"u2base\" {\n  \"userid\" INTEGER [pk, not null]\n  \"movieid\" INTEGER [pk, not null]\n  \"rating\" TEXT [not null]\n}\n\nTable \"users\" {\n  \"userid\" INTEGER [pk, not null]\n  \"age\" TEXT [not null]\n  \"u_gender\" TEXT [not null]\n  \"occupation\" TEXT [not null]\n}"
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"actors\" {\n  \"actorid\" INTEGER [pk, not null]\n  \"a_gender\" TEXT [not null]\n  \"a_quality\" INTEGER [not null]\n}\n\nTable \"directors\" {\n  \"directorid\" INTEGER [pk, not null]\n  \"d_quality\" INTEGER [not null]\n  \"avg_revenue\" INTEGER [not null]\n}\n\nTable \"movies\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"year\" INTEGER [not null]\n  \"isEnglish\" TEXT [not null]\n  \"country\" TEXT [not null]\n  \"runningtime\" INTEGER [not null]\n}\n\nTable \"movies2actors\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"actorid\" INTEGER [pk, not null]\n  \"cast_num\" INTEGER [not null]\n}\n\nTable \"movies2directors\" {\n  \"movieid\" INTEGER [pk, not null]\n  \"directorid\" INTEGER [pk, not null]\n  \"genre\" TEXT [not null]\n}\n\nTable \"u2base\" {\n  \"userid\" INTEGER [pk, not null]\n  \"movieid\" INTEGER [pk, not null]\n  \"rating\" TEXT [not null]\n}\n\nTable \"users\" {\n  \"userid\" INTEGER [pk, not null]\n  \"age\" TEXT [not null]\n  \"u_gender\" TEXT [not null]\n  \"occupation\" TEXT [not null]\n}\n\n## Table Stats & Sample Values\n\nactors: 10000 rows\n  a_gender: 'M'\n  a_quality: '4', '0', '3', ...\n  actorid: '4', '16', '28', ...\n\ndirectors: 2201 rows\n  d_quality: '4', '2', '3', ...\n  avg_revenue: '1', '3', '0', ...\n  directorid: '67', '92', '284', ...\n\nmovies: 3832 rows\n  country: 'other', 'USA', 'France', ...\n  isEnglish: 'T', 'F'\n  year: '3', '4', '1', ...\n\nmovies2actors: 10000 rows\n  cast_num: '0', '1'\n  movieid: '1672580', '1672946', '1673647', ...\n  actorid: '981535', '1094968', '149985', ...\n\nmovies2directors: 4141 rows\n  genre: 'Action', 'Adventure', 'Animation', ...\n  movieid: '1672111', '1672946', '1679461', ...\n  directorid: '54934', '188940', '179783', ...\n\nu2base: 10000 rows\n  rating: '1'\n  userid: '2', '3', '4', ...\n  movieid: '1964242', '2219779', '1856939', ...\n\nusers: 6039 rows\n  age: '1', '56', '25', ...\n  u_gender: 'F', 'M'\n  occupation: '2', '3', '4', ...",
+    "stateUrl": "https://bird-bench.github.io/#movielens",
+    "tableStats": {
+      "actors": {
+        "rows": 10000,
+        "sample_values": {
+          "actorid": [
+            "4",
+            "16",
+            "28",
+            "566",
+            "580",
+            "636",
+            "769",
+            "797"
+          ],
+          "a_gender": [
+            "M"
+          ],
+          "a_quality": [
+            "4",
+            "0",
+            "3",
+            "2",
+            "5",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "directors": {
+        "rows": 2201,
+        "sample_values": {
+          "directorid": [
+            "67",
+            "92",
+            "284",
+            "708",
+            "746",
+            "836",
+            "947",
+            "1151"
+          ],
+          "d_quality": [
+            "4",
+            "2",
+            "3",
+            "0",
+            "1",
+            "5"
+          ],
+          "avg_revenue": [
+            "1",
+            "3",
+            "0",
+            "4",
+            "2"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movies": {
+        "rows": 3832,
+        "sample_values": {
+          "movieid": [
+            "1672052",
+            "1672111",
+            "1672580",
+            "1672716",
+            "1672946",
+            "1673647",
+            "1673658",
+            "1673848"
+          ],
+          "year": [
+            "3",
+            "4",
+            "1",
+            "2"
+          ],
+          "isEnglish": [
+            "T",
+            "F"
+          ],
+          "country": [
+            "other",
+            "USA",
+            "France",
+            "UK"
+          ],
+          "runningtime": [
+            "2",
+            "3",
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movies2actors": {
+        "rows": 10000,
+        "sample_values": {
+          "movieid": [
+            "1672580",
+            "1672946",
+            "1673647",
+            "1673658",
+            "1674388",
+            "1677258",
+            "1677346",
+            "1677516"
+          ],
+          "actorid": [
+            "981535",
+            "1094968",
+            "149985",
+            "261595",
+            "781357",
+            "893869",
+            "1806262",
+            "1944214"
+          ],
+          "cast_num": [
+            "0",
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "movies2directors": {
+        "rows": 4141,
+        "sample_values": {
+          "movieid": [
+            "1672111",
+            "1672946",
+            "1679461",
+            "1691387",
+            "1693305",
+            "1698667",
+            "1704645",
+            "1705417"
+          ],
+          "directorid": [
+            "54934",
+            "188940",
+            "179783",
+            "291700",
+            "14663",
+            "98630",
+            "19141",
+            "221541"
+          ],
+          "genre": [
+            "Action",
+            "Adventure",
+            "Animation",
+            "Comedy",
+            "Crime",
+            "Documentary",
+            "Drama",
+            "Horror"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "u2base": {
+        "rows": 10000,
+        "sample_values": {
+          "userid": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "11",
+            "12",
+            "13"
+          ],
+          "movieid": [
+            "1964242",
+            "2219779",
+            "1856939",
+            "2273044",
+            "1681655",
+            "1695219",
+            "1915498",
+            "1929431"
+          ],
+          "rating": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 6039,
+        "sample_values": {
+          "userid": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "age": [
+            "1",
+            "56",
+            "25",
+            "45",
+            "50",
+            "35",
+            "18"
+          ],
+          "u_gender": [
+            "F",
+            "M"
+          ],
+          "occupation": [
+            "2",
+            "3",
+            "4",
+            "1",
+            "5"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

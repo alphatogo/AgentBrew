@@ -1,0 +1,645 @@
+{
+  "db_id": "clothing_size_and_fit_management_189479",
+  "source": "synsql",
+  "tables": 24,
+  "created_at": "2026-04-18",
+  "db_url": "https://huggingface.co/datasets/seeklhy/SynSQL-2.5M/tree/main/databases/clothing_size_and_fit_management_189479",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"public\".\"bust_sizes\" {\n  \"bust_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_bust\" TEXT\n  \"max_bust\" TEXT\n  \"bust_measurement_unit\" TEXT\n}\n\nTable \"public\".\"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"public\".\"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n}\n\nTable \"public\".\"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"quantity\" INTEGER\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n}\n\nTable \"public\".\"inventory_warehouse\" {\n  \"inventory_warehouse_id\" INTEGER [pk]\n  \"inventory_id\" INTEGER\n  \"warehouse_id\" INTEGER\n  \"quantity\" INTEGER\n}\n\nTable \"public\".\"low_hip_sizes\" {\n  \"low_hip_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_low_hip\" TEXT\n  \"max_low_hip\" TEXT\n  \"low_hip_measurement_unit\" TEXT\n}\n\nTable \"public\".\"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" TEXT\n}\n\nTable \"public\".\"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total\" TEXT\n  \"order_status\" TEXT\n}\n\nTable \"public\".\"payment_gateways\" {\n  \"payment_gateway_id\" INTEGER [pk]\n  \"payment_gateway_name\" TEXT\n  \"payment_gateway_url\" TEXT\n  \"payment_gateway_type\" TEXT\n}\n\nTable \"public\".\"payments\" {\n  \"payment_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"payment_gateway_id\" INTEGER\n  \"payment_date\" TEXT\n  \"payment_amount\" TEXT\n  \"payment_status\" TEXT\n}\n\nTable \"public\".\"product_answers\" {\n  \"answer_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"user_id\" INTEGER\n  \"answer_date\" TEXT\n  \"answer_text\" TEXT\n}\n\nTable \"public\".\"product_images\" {\n  \"image_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"image_url\" TEXT\n  \"image_type\" TEXT\n  \"image_description\" TEXT\n}\n\nTable \"public\".\"product_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"question_date\" TEXT\n  \"question_text\" TEXT\n}\n\nTable \"public\".\"product_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"review_date\" TEXT\n  \"review_rating\" INTEGER\n  \"review_text\" TEXT\n}\n\nTable \"public\".\"products\" {\n  \"product_id\" INTEGER [pk]\n  \"category_id\" INTEGER\n  \"style_id\" INTEGER\n  \"size_id\" INTEGER\n  \"product_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"product_status\" TEXT\n  \"product_rating\" TEXT\n}\n\nTable \"public\".\"recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"recommendation_reason\" TEXT\n}\n\nTable \"public\".\"shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"shipping_provider_id\" INTEGER\n  \"shipment_date\" TEXT\n  \"tracking_number\" TEXT\n  \"shipment_status\" TEXT\n}\n\nTable \"public\".\"shipping_providers\" {\n  \"shipping_provider_id\" INTEGER [pk]\n  \"shipping_provider_name\" TEXT\n  \"shipping_provider_url\" TEXT\n  \"shipping_provider_type\" TEXT\n}\n\nTable \"public\".\"sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"size_name\" TEXT\n  \"equiv_size\" TEXT\n  \"size_description\" TEXT\n  \"size_type\" TEXT\n}\n\nTable \"public\".\"styles\" {\n  \"style_id\" INTEGER [pk]\n  \"style_name\" TEXT\n  \"description\" TEXT\n  \"style_type\" TEXT\n}\n\nTable \"public\".\"user_permissions\" {\n  \"user_permission_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"permission_name\" TEXT\n}\n\nTable \"public\".\"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n}\n\nTable \"public\".\"waist_sizes\" {\n  \"waist_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_waist\" TEXT\n  \"max_waist\" TEXT\n  \"waist_measurement_unit\" TEXT\n}\n\nTable \"public\".\"warehouses\" {\n  \"warehouse_id\" INTEGER [pk]\n  \"warehouse_name\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" TEXT\n  \"warehouse_phone\" TEXT\n  \"warehouse_email\" TEXT\n}\n\nRef: \"public\".\"bust_sizes\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"inventory\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"inventory\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"inventory_warehouse\".\"inventory_id\" > \"public\".\"inventory\".\"inventory_id\"\nRef: \"public\".\"inventory_warehouse\".\"warehouse_id\" > \"public\".\"warehouses\".\"warehouse_id\"\nRef: \"public\".\"low_hip_sizes\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"order_items\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"order_items\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"orders\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"payments\".\"payment_gateway_id\" > \"public\".\"payment_gateways\".\"payment_gateway_id\"\nRef: \"public\".\"payments\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"product_answers\".\"question_id\" > \"public\".\"product_questions\".\"question_id\"\nRef: \"public\".\"product_answers\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"product_images\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_questions\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_questions\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"product_reviews\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"product_reviews\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"products\".\"style_id\" > \"public\".\"styles\".\"style_id\"\nRef: \"public\".\"products\".\"size_id\" > \"public\".\"sizes\".\"size_id\"\nRef: \"public\".\"products\".\"category_id\" > \"public\".\"categories\".\"category_id\"\nRef: \"public\".\"recommendations\".\"product_id\" > \"public\".\"products\".\"product_id\"\nRef: \"public\".\"recommendations\".\"customer_id\" > \"public\".\"customers\".\"customer_id\"\nRef: \"public\".\"shipments\".\"shipping_provider_id\" > \"public\".\"shipping_providers\".\"shipping_provider_id\"\nRef: \"public\".\"shipments\".\"order_id\" > \"public\".\"orders\".\"order_id\"\nRef: \"public\".\"user_permissions\".\"user_id\" > \"public\".\"users\".\"user_id\"\nRef: \"public\".\"waist_sizes\".\"size_id\" > \"public\".\"sizes\".\"size_id\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"bust_sizes\" {\n  \"bust_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_bust\" TEXT\n  \"max_bust\" TEXT\n  \"bust_measurement_unit\" TEXT\n}\n\nTable \"categories\" {\n  \"category_id\" INTEGER [pk]\n  \"category_name\" TEXT\n  \"description\" TEXT\n  \"parent_category_id\" INTEGER\n}\n\nTable \"customers\" {\n  \"customer_id\" INTEGER [pk]\n  \"first_name\" TEXT\n  \"last_name\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"phone\" TEXT\n  \"address\" TEXT\n}\n\nTable \"inventory\" {\n  \"inventory_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"size_id\" INTEGER\n  \"quantity\" INTEGER\n  \"reorder_level\" INTEGER\n  \"reorder_quantity\" INTEGER\n}\n\nTable \"inventory_warehouse\" {\n  \"inventory_warehouse_id\" INTEGER [pk]\n  \"inventory_id\" INTEGER\n  \"warehouse_id\" INTEGER\n  \"quantity\" INTEGER\n}\n\nTable \"low_hip_sizes\" {\n  \"low_hip_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_low_hip\" TEXT\n  \"max_low_hip\" TEXT\n  \"low_hip_measurement_unit\" TEXT\n}\n\nTable \"order_items\" {\n  \"order_item_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"product_id\" INTEGER\n  \"quantity\" INTEGER\n  \"unit_price\" TEXT\n}\n\nTable \"orders\" {\n  \"order_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"order_date\" TEXT\n  \"total\" TEXT\n  \"order_status\" TEXT\n}\n\nTable \"payment_gateways\" {\n  \"payment_gateway_id\" INTEGER [pk]\n  \"payment_gateway_name\" TEXT\n  \"payment_gateway_url\" TEXT\n  \"payment_gateway_type\" TEXT\n}\n\nTable \"payments\" {\n  \"payment_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"payment_gateway_id\" INTEGER\n  \"payment_date\" TEXT\n  \"payment_amount\" TEXT\n  \"payment_status\" TEXT\n}\n\nTable \"product_answers\" {\n  \"answer_id\" INTEGER [pk]\n  \"question_id\" INTEGER\n  \"user_id\" INTEGER\n  \"answer_date\" TEXT\n  \"answer_text\" TEXT\n}\n\nTable \"product_images\" {\n  \"image_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"image_url\" TEXT\n  \"image_type\" TEXT\n  \"image_description\" TEXT\n}\n\nTable \"product_questions\" {\n  \"question_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"question_date\" TEXT\n  \"question_text\" TEXT\n}\n\nTable \"product_reviews\" {\n  \"review_id\" INTEGER [pk]\n  \"product_id\" INTEGER\n  \"customer_id\" INTEGER\n  \"review_date\" TEXT\n  \"review_rating\" INTEGER\n  \"review_text\" TEXT\n}\n\nTable \"products\" {\n  \"product_id\" INTEGER [pk]\n  \"category_id\" INTEGER\n  \"style_id\" INTEGER\n  \"size_id\" INTEGER\n  \"product_name\" TEXT\n  \"description\" TEXT\n  \"price\" TEXT\n  \"product_status\" TEXT\n  \"product_rating\" TEXT\n}\n\nTable \"recommendations\" {\n  \"recommendation_id\" INTEGER [pk]\n  \"customer_id\" INTEGER\n  \"product_id\" INTEGER\n  \"recommendation_reason\" TEXT\n}\n\nTable \"shipments\" {\n  \"shipment_id\" INTEGER [pk]\n  \"order_id\" INTEGER\n  \"shipping_provider_id\" INTEGER\n  \"shipment_date\" TEXT\n  \"tracking_number\" TEXT\n  \"shipment_status\" TEXT\n}\n\nTable \"shipping_providers\" {\n  \"shipping_provider_id\" INTEGER [pk]\n  \"shipping_provider_name\" TEXT\n  \"shipping_provider_url\" TEXT\n  \"shipping_provider_type\" TEXT\n}\n\nTable \"sizes\" {\n  \"size_id\" INTEGER [pk]\n  \"size_name\" TEXT\n  \"equiv_size\" TEXT\n  \"size_description\" TEXT\n  \"size_type\" TEXT\n}\n\nTable \"styles\" {\n  \"style_id\" INTEGER [pk]\n  \"style_name\" TEXT\n  \"description\" TEXT\n  \"style_type\" TEXT\n}\n\nTable \"user_permissions\" {\n  \"user_permission_id\" INTEGER [pk]\n  \"user_id\" INTEGER\n  \"permission_name\" TEXT\n}\n\nTable \"users\" {\n  \"user_id\" INTEGER [pk]\n  \"username\" TEXT\n  \"email\" TEXT\n  \"password\" TEXT\n  \"role\" TEXT\n  \"department\" TEXT\n}\n\nTable \"waist_sizes\" {\n  \"waist_id\" INTEGER [pk]\n  \"size_id\" INTEGER\n  \"min_waist\" TEXT\n  \"max_waist\" TEXT\n  \"waist_measurement_unit\" TEXT\n}\n\nTable \"warehouses\" {\n  \"warehouse_id\" INTEGER [pk]\n  \"warehouse_name\" TEXT\n  \"address\" TEXT\n  \"city\" TEXT\n  \"state\" TEXT\n  \"zip\" TEXT\n  \"warehouse_phone\" TEXT\n  \"warehouse_email\" TEXT\n}\n\nRef: \"bust_sizes\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"inventory\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"inventory\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"inventory_warehouse\".\"inventory_id\" > \"inventory\".\"inventory_id\"\n\nRef: \"inventory_warehouse\".\"warehouse_id\" > \"warehouses\".\"warehouse_id\"\n\nRef: \"low_hip_sizes\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"order_items\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"order_items\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"orders\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"payments\".\"payment_gateway_id\" > \"payment_gateways\".\"payment_gateway_id\"\n\nRef: \"payments\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"product_answers\".\"question_id\" > \"product_questions\".\"question_id\"\n\nRef: \"product_answers\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"product_images\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_questions\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_questions\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"product_reviews\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"product_reviews\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"products\".\"style_id\" > \"styles\".\"style_id\"\n\nRef: \"products\".\"size_id\" > \"sizes\".\"size_id\"\n\nRef: \"products\".\"category_id\" > \"categories\".\"category_id\"\n\nRef: \"recommendations\".\"product_id\" > \"products\".\"product_id\"\n\nRef: \"recommendations\".\"customer_id\" > \"customers\".\"customer_id\"\n\nRef: \"shipments\".\"shipping_provider_id\" > \"shipping_providers\".\"shipping_provider_id\"\n\nRef: \"shipments\".\"order_id\" > \"orders\".\"order_id\"\n\nRef: \"user_permissions\".\"user_id\" > \"users\".\"user_id\"\n\nRef: \"waist_sizes\".\"size_id\" > \"sizes\".\"size_id\"\n\n## Table Stats & Sample Values\n\nbust_sizes: 2 rows\n  min_bust: '34.0', '38.0'\n  max_bust: '38.0', '42.0'\n  bust_measurement_unit: 'inches'\n\ncategories: 2 rows\n  category_name: 'Tops', 'Shirts'\n  description: 'Short-sleeve and long-sleeve tops', 'Dress shirts and casual shirts'\n  parent_category_id: '1'\n\ncustomers: 2 rows\n  first_name: 'John', 'Jane'\n  last_name: 'Doe', 'Smith'\n  password: 'password123', 'password456'\n\ninventory: 2 rows\n  reorder_level: '50', '25'\n  quantity: '100', '50'\n  reorder_quantity: '20', '10'\n\ninventory_warehouse: 2 rows\n  quantity: '50', '25'\n  warehouse_id: '0'\n  inventory_warehouse_id: '0', '1'\n\nlow_hip_sizes: 2 rows\n  min_low_hip: '36.0', '41.0'\n  max_low_hip: '40.0', '45.0'\n  low_hip_measurement_unit: 'inches'\n\norder_items: 2 rows\n  unit_price: '19.99', '49.99'\n  quantity: '2', '1'\n  product_id: '1', '0'\n\norders: 2 rows\n  order_status: 'pending', 'shipped'\n  total: '100.0', '200.0'\n  order_date: '2022-01-01', '2022-01-15'\n\npayment_gateways: 2 rows\n  payment_gateway_name: 'PayPal', 'Stripe'\n  payment_gateway_type: 'paypal', 'credit card'\n  payment_gateway_url: 'https://www.paypal.com', 'https://stripe.com'\n\npayments: 2 rows\n  payment_status: 'processed', 'pending'\n  payment_amount: '100.0', '200.0'\n  payment_date: '2022-01-01', '2022-01-15'\n\nproduct_answers: 2 rows\n  answer_text: 'This product is made of cotton.', 'You can wash this product in cold water.'\n  answer_date: '2022-01-01', '2022-01-15'\n  user_id: '0', '1'\n\nproduct_images: 2 rows\n  image_type: 'front', 'back'\n  image_description: 'Front view of casual top', 'Back view of formal pants'\n  image_url: 'https://example.com/image1.jpg', 'https://example.com/image2.jpg'\n\nproduct_questions: 2 rows\n  question_text: 'What is the material of this product?', 'How do I care for this product?'\n  question_date: '2022-01-01', '2022-01-15'\n  customer_id: '1', '0'\n\nproduct_reviews: 2 rows\n  review_text: 'This product is great!', 'This product is okay.'\n  review_date: '2022-01-01', '2022-01-15'\n  review_rating: '5', '4'\n\nproducts: 2 rows\n  product_name: 'Casual Top', 'Formal Pants'\n  description: 'Short-sleeve casual top', 'Dress pants for formal occasions'\n  product_status: 'active'\n\nrecommendations: 2 rows\n  recommendation_reason: 'based on past purchases', 'based on search history'\n  product_id: '1', '0'\n  customer_id: '1'\n\nshipments: 2 rows\n  shipment_status: 'shipped', 'delivered'\n  tracking_number: '1234567890', '0987654321'\n  shipment_date: '2022-01-01', '2022-01-15'\n\nshipping_providers: 2 rows\n  shipping_provider_name: 'USPS', 'UPS'\n  shipping_provider_type: 'ground', 'air'\n  shipping_provider_url: 'https://www.usps.com', 'https://www.ups.com'\n\nsizes: 2 rows\n  size_name: '2/4', '6/8'\n  size_description: 'Women's Small', 'Women's Medium'\n  size_type: 'Women's'\n\nstyles: 2 rows\n  style_name: 'Casual', 'Formal'\n  description: 'Everyday wear', 'Dressy occasions'\n  style_type: 'Unisex', 'Men's'\n\nuser_permissions: 2 rows\n  permission_name: 'view orders', 'edit products'\n  user_id: '0'\n  user_permission_id: '0', '1'\n\nusers: 2 rows\n  username: 'admin', 'customer_service'\n  role: 'admin', 'customer service'\n  password: 'password123', 'password456'\n\nwaist_sizes: 2 rows\n  min_waist: '27.0', '31.0'\n  max_waist: '30.0', '35.0'\n  waist_measurement_unit: 'inches'\n\nwarehouses: 2 rows\n  warehouse_name: 'Warehouse 1', 'Warehouse 2'\n  city: 'Anytown', 'Othertown'\n  state: 'CA', 'NY'",
+    "stateUrl": null,
+    "tableStats": {
+      "bust_sizes": {
+        "rows": 2,
+        "sample_values": {
+          "bust_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "min_bust": [
+            "34.0",
+            "38.0"
+          ],
+          "max_bust": [
+            "38.0",
+            "42.0"
+          ],
+          "bust_measurement_unit": [
+            "inches"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "categories": {
+        "rows": 2,
+        "sample_values": {
+          "category_id": [
+            "0",
+            "1"
+          ],
+          "category_name": [
+            "Tops",
+            "Shirts"
+          ],
+          "description": [
+            "Short-sleeve and long-sleeve tops",
+            "Dress shirts and casual shirts"
+          ],
+          "parent_category_id": [
+            "1"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "customers": {
+        "rows": 2,
+        "sample_values": {
+          "customer_id": [
+            "0",
+            "1"
+          ],
+          "first_name": [
+            "John",
+            "Jane"
+          ],
+          "last_name": [
+            "Doe",
+            "Smith"
+          ],
+          "email": [
+            "john.doe@example.com",
+            "jane.smith@example.com"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "phone": [
+            "555-1234",
+            "555-5678"
+          ],
+          "address": [
+            "123 Main St, Anytown, CA 12345",
+            "456 Elm St, Othertown, NY 67890"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory": {
+        "rows": 2,
+        "sample_values": {
+          "inventory_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "0"
+          ],
+          "quantity": [
+            "100",
+            "50"
+          ],
+          "reorder_level": [
+            "50",
+            "25"
+          ],
+          "reorder_quantity": [
+            "20",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "inventory_warehouse": {
+        "rows": 2,
+        "sample_values": {
+          "inventory_warehouse_id": [
+            "0",
+            "1"
+          ],
+          "inventory_id": [
+            "0",
+            "1"
+          ],
+          "warehouse_id": [
+            "0"
+          ],
+          "quantity": [
+            "50",
+            "25"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "low_hip_sizes": {
+        "rows": 2,
+        "sample_values": {
+          "low_hip_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "min_low_hip": [
+            "36.0",
+            "41.0"
+          ],
+          "max_low_hip": [
+            "40.0",
+            "45.0"
+          ],
+          "low_hip_measurement_unit": [
+            "inches"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "order_items": {
+        "rows": 2,
+        "sample_values": {
+          "order_item_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "quantity": [
+            "2",
+            "1"
+          ],
+          "unit_price": [
+            "19.99",
+            "49.99"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "orders": {
+        "rows": 2,
+        "sample_values": {
+          "order_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "order_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "total": [
+            "100.0",
+            "200.0"
+          ],
+          "order_status": [
+            "pending",
+            "shipped"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payment_gateways": {
+        "rows": 2,
+        "sample_values": {
+          "payment_gateway_id": [
+            "0",
+            "1"
+          ],
+          "payment_gateway_name": [
+            "PayPal",
+            "Stripe"
+          ],
+          "payment_gateway_url": [
+            "https://www.paypal.com",
+            "https://stripe.com"
+          ],
+          "payment_gateway_type": [
+            "paypal",
+            "credit card"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "payments": {
+        "rows": 2,
+        "sample_values": {
+          "payment_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "0"
+          ],
+          "payment_gateway_id": [
+            "1"
+          ],
+          "payment_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "payment_amount": [
+            "100.0",
+            "200.0"
+          ],
+          "payment_status": [
+            "processed",
+            "pending"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_answers": {
+        "rows": 2,
+        "sample_values": {
+          "answer_id": [
+            "0",
+            "1"
+          ],
+          "question_id": [
+            "1"
+          ],
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "answer_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "answer_text": [
+            "This product is made of cotton.",
+            "You can wash this product in cold water."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_images": {
+        "rows": 2,
+        "sample_values": {
+          "image_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "image_url": [
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg"
+          ],
+          "image_type": [
+            "front",
+            "back"
+          ],
+          "image_description": [
+            "Front view of casual top",
+            "Back view of formal pants"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_questions": {
+        "rows": 2,
+        "sample_values": {
+          "question_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0"
+          ],
+          "customer_id": [
+            "1",
+            "0"
+          ],
+          "question_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "question_text": [
+            "What is the material of this product?",
+            "How do I care for this product?"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "product_reviews": {
+        "rows": 2,
+        "sample_values": {
+          "review_id": [
+            "0",
+            "1"
+          ],
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "0"
+          ],
+          "review_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "review_rating": [
+            "5",
+            "4"
+          ],
+          "review_text": [
+            "This product is great!",
+            "This product is okay."
+          ]
+        },
+        "value_ranges": {}
+      },
+      "products": {
+        "rows": 2,
+        "sample_values": {
+          "product_id": [
+            "0",
+            "1"
+          ],
+          "category_id": [
+            "1"
+          ],
+          "style_id": [
+            "0"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "product_name": [
+            "Casual Top",
+            "Formal Pants"
+          ],
+          "description": [
+            "Short-sleeve casual top",
+            "Dress pants for formal occasions"
+          ],
+          "price": [
+            "19.99",
+            "49.99"
+          ],
+          "product_status": [
+            "active"
+          ],
+          "product_rating": [
+            "4.5",
+            "4.8"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "recommendations": {
+        "rows": 2,
+        "sample_values": {
+          "recommendation_id": [
+            "0",
+            "1"
+          ],
+          "customer_id": [
+            "1"
+          ],
+          "product_id": [
+            "1",
+            "0"
+          ],
+          "recommendation_reason": [
+            "based on past purchases",
+            "based on search history"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shipments": {
+        "rows": 2,
+        "sample_values": {
+          "shipment_id": [
+            "0",
+            "1"
+          ],
+          "order_id": [
+            "0"
+          ],
+          "shipping_provider_id": [
+            "1",
+            "0"
+          ],
+          "shipment_date": [
+            "2022-01-01",
+            "2022-01-15"
+          ],
+          "tracking_number": [
+            "1234567890",
+            "0987654321"
+          ],
+          "shipment_status": [
+            "shipped",
+            "delivered"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "shipping_providers": {
+        "rows": 2,
+        "sample_values": {
+          "shipping_provider_id": [
+            "0",
+            "1"
+          ],
+          "shipping_provider_name": [
+            "USPS",
+            "UPS"
+          ],
+          "shipping_provider_url": [
+            "https://www.usps.com",
+            "https://www.ups.com"
+          ],
+          "shipping_provider_type": [
+            "ground",
+            "air"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "sizes": {
+        "rows": 2,
+        "sample_values": {
+          "size_id": [
+            "0",
+            "1"
+          ],
+          "size_name": [
+            "2/4",
+            "6/8"
+          ],
+          "equiv_size": [
+            "S/M",
+            "M/L"
+          ],
+          "size_description": [
+            "Women's Small",
+            "Women's Medium"
+          ],
+          "size_type": [
+            "Women's"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "styles": {
+        "rows": 2,
+        "sample_values": {
+          "style_id": [
+            "0",
+            "1"
+          ],
+          "style_name": [
+            "Casual",
+            "Formal"
+          ],
+          "description": [
+            "Everyday wear",
+            "Dressy occasions"
+          ],
+          "style_type": [
+            "Unisex",
+            "Men's"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "user_permissions": {
+        "rows": 2,
+        "sample_values": {
+          "user_permission_id": [
+            "0",
+            "1"
+          ],
+          "user_id": [
+            "0"
+          ],
+          "permission_name": [
+            "view orders",
+            "edit products"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "users": {
+        "rows": 2,
+        "sample_values": {
+          "user_id": [
+            "0",
+            "1"
+          ],
+          "username": [
+            "admin",
+            "customer_service"
+          ],
+          "email": [
+            "admin@example.com",
+            "customer.service@example.com"
+          ],
+          "password": [
+            "password123",
+            "password456"
+          ],
+          "role": [
+            "admin",
+            "customer service"
+          ],
+          "department": [
+            "sales",
+            "customer service"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "waist_sizes": {
+        "rows": 2,
+        "sample_values": {
+          "waist_id": [
+            "0",
+            "1"
+          ],
+          "size_id": [
+            "1",
+            "0"
+          ],
+          "min_waist": [
+            "27.0",
+            "31.0"
+          ],
+          "max_waist": [
+            "30.0",
+            "35.0"
+          ],
+          "waist_measurement_unit": [
+            "inches"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "warehouses": {
+        "rows": 2,
+        "sample_values": {
+          "warehouse_id": [
+            "0",
+            "1"
+          ],
+          "warehouse_name": [
+            "Warehouse 1",
+            "Warehouse 2"
+          ],
+          "address": [
+            "123 Main St",
+            "456 Elm St"
+          ],
+          "city": [
+            "Anytown",
+            "Othertown"
+          ],
+          "state": [
+            "CA",
+            "NY"
+          ],
+          "zip": [
+            "12345",
+            "67890"
+          ],
+          "warehouse_phone": [
+            "555-1234",
+            "555-5678"
+          ],
+          "warehouse_email": [
+            "warehouse1@example.com",
+            "warehouse2@example.com"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+github:
+  stdio:
+    command: docker
+    args:
+      - run
+      - -i
+      - --rm
+      - -e
+      - GITHUB_PERSONAL_ACCESS_TOKEN
+      - ghcr.io/github/github-mcp-server:0.28.1
+  env:
+    GITHUB_PERSONAL_ACCESS_TOKEN: "{{ GITHUB_PERSONAL_ACCESS_TOKEN }}"
+
+_github:
+  benchmark:
+    account: ""
+    token: ""
+  sampling:
+    workers:
+      "1":
+        account: ""
+        token: ""
+      "2":
+        account: ""
+        token: ""
+      "3":
+        account: ""
+        token: ""
+      "4":
+        account: ""
+        token: ""
+      "5":
+        account: ""
+        token: ""
+      "6":
+        account: ""
+        token: ""
+      "7":
+        account: ""
+        token: ""
+      "8":
+        account: ""
+        token: ""
+      "9":
+        account: ""
+        token: ""

@@ -1,0 +1,197 @@
+{
+  "db_id": "flight_1",
+  "source": "sparc",
+  "tables": 4,
+  "total_rows": 126,
+  "created_at": "2026-04-18",
+  "db_url": "https://github.com/taoyds/sparc#flight_1",
+  "schema": {
+    "format": "dbml",
+    "content": "Table \"aircraft\" {\n  \"aid\" TEXT [pk]\n  \"name\" TEXT\n  \"distance\" TEXT\n}\n\nTable \"certificate\" {\n  \"eid\" TEXT [pk]\n  \"aid\" TEXT [pk]\n}\n\nTable \"employee\" {\n  \"eid\" TEXT [pk]\n  \"name\" TEXT\n  \"salary\" TEXT\n}\n\nTable \"flight\" {\n  \"flno\" TEXT [pk]\n  \"origin\" TEXT\n  \"destination\" TEXT\n  \"distance\" TEXT\n  \"departure_date\" DATE\n  \"arrival_date\" DATE\n  \"price\" TEXT\n  \"aid\" TEXT\n}\n\n\n\nRef: \"flight\".\"aid\" > \"aircraft\".\"aid\"\n\nRef: \"certificate\".\"aid\" > \"aircraft\".\"aid\"\n\nRef: \"certificate\".\"eid\" > \"employee\".\"eid\""
+  },
+  "meta_data": {
+    "stateType": "text",
+    "stateContent": "Table \"aircraft\" {\n  \"aid\" TEXT [pk]\n  \"name\" TEXT\n  \"distance\" TEXT\n}\n\nTable \"certificate\" {\n  \"eid\" TEXT [pk]\n  \"aid\" TEXT [pk]\n}\n\nTable \"employee\" {\n  \"eid\" TEXT [pk]\n  \"name\" TEXT\n  \"salary\" TEXT\n}\n\nTable \"flight\" {\n  \"flno\" TEXT [pk]\n  \"origin\" TEXT\n  \"destination\" TEXT\n  \"distance\" TEXT\n  \"departure_date\" DATE\n  \"arrival_date\" DATE\n  \"price\" TEXT\n  \"aid\" TEXT\n}\n\nRef: \"flight\".\"aid\" > \"aircraft\".\"aid\"\n\nRef: \"certificate\".\"aid\" > \"aircraft\".\"aid\"\n\nRef: \"certificate\".\"eid\" > \"employee\".\"eid\"\n\n## Table Stats & Sample Values\n\naircraft: 16 rows\n  name: 'Boeing 747-400', 'Boeing 737-800', 'Airbus A340-300', ...\n  distance: '8430', '3383', '7120', ...\n  aid: '1', '2', '3', ...\n\ncertificate: 69 rows\n  eid: '11564812', '90873519', '141582651', ...\n  aid: '2', '10', '6', ...\n\nemployee: 31 rows\n  name: 'James Smith', 'Mary Johnson', 'John Williams', ...\n  salary: '120433', '178345', '153972', ...\n  eid: '242518965', '141582651', '11564812', ...\n\nflight: 10 rows\n  origin: 'Los Angeles', 'Chicago'\n  destination: 'Washington D.C.', 'Chicago', 'Dallas', ...\n  distance: '2308', '1749', '1251', ...",
+    "stateUrl": "https://github.com/taoyds/sparc#flight_1",
+    "tableStats": {
+      "aircraft": {
+        "rows": 16,
+        "sample_values": {
+          "aid": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "name": [
+            "Boeing 747-400",
+            "Boeing 737-800",
+            "Airbus A340-300",
+            "British Aerospace Jetstream 41",
+            "Embraer ERJ-145",
+            "SAAB 340",
+            "Piper Archer III",
+            "Tupolev 154"
+          ],
+          "distance": [
+            "8430",
+            "3383",
+            "7120",
+            "1502",
+            "1530",
+            "2128",
+            "520",
+            "4103"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "certificate": {
+        "rows": 69,
+        "sample_values": {
+          "eid": [
+            "11564812",
+            "90873519",
+            "141582651",
+            "142519864",
+            "159542516",
+            "242518965",
+            "269734834",
+            "274878974"
+          ],
+          "aid": [
+            "2",
+            "10",
+            "6",
+            "12",
+            "1",
+            "3",
+            "7",
+            "11"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "employee": {
+        "rows": 31,
+        "sample_values": {
+          "eid": [
+            "242518965",
+            "141582651",
+            "11564812",
+            "567354612",
+            "552455318",
+            "550156548",
+            "390487451",
+            "274878974"
+          ],
+          "name": [
+            "James Smith",
+            "Mary Johnson",
+            "John Williams",
+            "Lisa Walker",
+            "Larry West",
+            "Karen Scott",
+            "Lawrence Sperry",
+            "Michael Miller"
+          ],
+          "salary": [
+            "120433",
+            "178345",
+            "153972",
+            "256481",
+            "101745",
+            "205187",
+            "212156",
+            "99890"
+          ]
+        },
+        "value_ranges": {}
+      },
+      "flight": {
+        "rows": 10,
+        "sample_values": {
+          "flno": [
+            "99",
+            "13",
+            "346",
+            "387",
+            "7",
+            "2",
+            "33",
+            "34"
+          ],
+          "origin": [
+            "Los Angeles",
+            "Chicago"
+          ],
+          "destination": [
+            "Washington D.C.",
+            "Chicago",
+            "Dallas",
+            "Boston",
+            "Sydney",
+            "Tokyo",
+            "Honolulu",
+            "Los Angeles"
+          ],
+          "distance": [
+            "2308",
+            "1749",
+            "1251",
+            "2606",
+            "7487",
+            "5478",
+            "2551",
+            "802"
+          ],
+          "departure_date": [
+            "04/12/2005 09:30",
+            "04/12/2005 08:45",
+            "04/12/2005 11:50",
+            "04/12/2005 07:03",
+            "04/12/2005 05:30",
+            "04/12/2005 06:30",
+            "04/12/2005 09:15",
+            "04/12/2005 12:45"
+          ],
+          "arrival_date": [
+            "04/12/2005 09:40",
+            "04/12/2005 08:45",
+            "04/12/2005 07:05",
+            "04/12/2005 05:03",
+            "04/12/2005 11:10",
+            "04/12/2005 03:55",
+            "04/12/2005 11:15",
+            "04/12/2005 03:18"
+          ],
+          "price": [
+            "235.98",
+            "220.98",
+            "182",
+            "261.56",
+            "278.56",
+            "780.99",
+            "375.23",
+            "425.98"
+          ],
+          "aid": [
+            "1",
+            "3",
+            "2",
+            "6",
+            "9",
+            "7",
+            "5",
+            "10"
+          ]
+        },
+        "value_ranges": {}
+      }
+    }
+  }
+}
